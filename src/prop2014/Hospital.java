@@ -4,12 +4,21 @@ import java.util.Scanner;
 
 public class Hospital {
 	
+	/* Atributos */
+
 	private int id_hospital;
 	private String nombre;
 	private ArrayList<Doctor> doctors;
 	private Scanner teclado;
-	
-	public void inicializar() {
+
+
+	/* Constructora */	
+
+	public Hospital() {}
+
+
+	/* Metodos públicos */
+	public incicializar() {
 		int n, i;
 		teclado = new Scanner(System.in);
 		System.out.print("Ingrese el codigo del hospital: ");
