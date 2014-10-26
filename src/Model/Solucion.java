@@ -1,16 +1,17 @@
-package prop2014;
+package Model;
 
-public class Turno {
+public class Solucion {
 
 	/* Atributos */
 
 	/* Constructora */
 
-	public Turno() {}
+	public Solucion() {}
 
 	
 
 	/* Metodos públicos */
+
 
 	
 	

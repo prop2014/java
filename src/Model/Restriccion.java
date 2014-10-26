@@ -1,17 +1,16 @@
-package prop2014;
+package Model;
 
-public class Solucion {
+public class Restriccion {
 
 	/* Atributos */
 
 	/* Constructora */
 
-	public Solucion() {}
+	public Restriccion() {}
 
 	
 
 	/* Metodos públicos */
-
 
 	
 	

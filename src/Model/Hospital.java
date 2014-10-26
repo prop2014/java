@@ -1,4 +1,4 @@
-package prop2014;
+package Model;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -18,7 +18,7 @@ public class Hospital {
 
 
 	/* Metodos públicos */
-	public incicializar() {
+	public void incicializar() {
 		int n, i;
 		teclado = new Scanner(System.in);
 		System.out.print("Ingrese el codigo del hospital: ");

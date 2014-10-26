@@ -1,12 +1,12 @@
-package prop2014;
+package Model;
 
-public class Restriccion {
+public class Turno {
 
 	/* Atributos */
 
 	/* Constructora */
 
-	public Restriccion() {}
+	public Turno() {}
 
 	
 

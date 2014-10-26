@@ -1,4 +1,4 @@
-package prop2014;
+package Model;
 
 public class Doctor {
 
