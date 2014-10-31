@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import Domain.FordFulkerson;
 import Domain.Graf;
 
-public class EdmondKarp {
+public class EdmondKarp extends FordFulkerson{
 	/*Creadora:
 	    Pre: -
 	    Post: Crea una instància d’Edmond karp buida.*/
