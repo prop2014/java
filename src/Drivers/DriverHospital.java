@@ -14,21 +14,22 @@ public class DriverHospital {
 		double ft;
 		double fn;
 		
+		
 		teclado = new Scanner(System.in);
 		System.out.print("Ingrese el codigo del hospital: ");
 		id = teclado.nextInt();
 		System.out.print("Ingrese el nombre del hospital: ");
 		n = teclado.next();
-		System.out.print("Ingrese el factorM: ");
+		System.out.print("Ingrese el factorMañana: ");
 		fm = teclado.nextDouble();
-		System.out.print("Ingrese el factorT: ");
+		System.out.print("Ingrese el factorTarde: ");
 		ft = teclado.nextDouble();
-		System.out.print("Ingrese el factorN: ");
+		System.out.print("Ingrese el factorNoche: ");
 		fn = teclado.nextDouble();
 		
 		
 		Hospital husp = new Hospital(id,n,fm,ft,fn);
 	System.out.printf("ID Hospital %d, Nom Hospital: %s\n", husp.getId(), husp.getNombre());
-	System.out.printf("ID 1 %d", hosp.getId());
+	System.out.printf("ID %d", hosp.getId());
 	}
 }
