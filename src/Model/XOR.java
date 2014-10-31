@@ -1,33 +1,20 @@
-
 // Autor: Axel's Copyright 
 package Model;
 import java.util.*;
 
-public class Restriccion {
+public class XOR {
 
 	/* Atributos */
 	
-	private int id_Restriccion;
-	private String Tipo;
-
+	//Vector de Fechas
+	Vector<Date> vector_XOR = new Vector<Date>();
+	
 	/* Constructora */
 
-	public Restriccion() {}
+	public XOR() {}
 
 	
 
 	/* Metodos públicos */
 
-	
-	
 }
-
-
-
-
-
-
-
-
-
-
