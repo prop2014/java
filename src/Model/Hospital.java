@@ -53,7 +53,9 @@ public class Hospital {
 	public double getFactorN(){
 		return factorN;
 	}
-
+	
+	
+	
 	/* Metodos públicos */
 /*	public void incicializar() {
 		int n, i;
@@ -73,13 +75,25 @@ public class Hospital {
 		}
 	}*/
 	/////////////////MMMMMMOOOOODIIIFICADORASSSSSS/////////
+	public void setNombre(String nom){
+		this.nombre=nom;
+	}
+	
+	public void setFactorM(double factor){
+		this.factorM=factor;
+	}
+	
+	public void setFactorT(double factor){
+		this.factorT=factor;
+	}
+	
+	public void setFactorN(double factor){
+		this.factorN=factor;
+	}
 	
 	
 	
 	///////////////MMMMMMEEEETTOOOODOOOOS/////////////////
-	public static void main(String[] args) {
-		
-
-	}
+	
 
 }
