@@ -8,19 +8,60 @@ public class Hospital {
 	
 	/* Atributos */
 
-	private int id_hospital;
+	private int idHospital;
 	private String nombre;
+	private double factorM;
+	private double factorT;
+	private double factorN;
+	
 	private ArrayList<Doctor> doctors;
+	
 	private Scanner teclado;
 
 
-	/* Constructora */	
+	////////////////COOOOOOONSSTRUUUCTOOORAS////////////
 
 	public Hospital() {}
+	
+	//creadora amb id, nombre y factores
+	public Hospital (int id, String nom, double fm, double ft, double fn){
+		idHospital=id;
+		nombre=nom;
+		factorM=fm;
+		factorT=ft;
+		factorN=fn;
+	}
+	
+	//////////////COOOOONSULTORASSSSS//////////////////
+	
+	// consultora de la id
+	public int getId(){
+		return idHospital;
+	}
+	
+	// consultora del Nombre
+	public String getNombre(){
+		return nombre;
+	}
+	
+	// consultora del factorM
+	public double getFactorM(){
+		return factorM;
+	}
+	
+	// consultor del factorT
+	public double getFactorT(){
+		return factorT;
+	}
+	
+	// consultora del factorN
+	public double getFactorN(){
+		return factorN;
+	}
 
-
+	
 	/* Metodos públicos */
-	public void incicializar() {
+/*	public void incicializar() {
 		int n, i;
 		teclado = new Scanner(System.in);
 		System.out.print("Ingrese el codigo del hospital: ");
@@ -36,17 +77,14 @@ public class Hospital {
 			doctor.inicializarDoctor(i);
 			doctors.add(doctor);
 		}
-	}
+	}*/
 		
-	public void consultar_doctor() {
-		int id;
-		teclado = new Scanner(System.in);
-		System.out.print("Id del doctor que quieres consultar: ");
-		id = teclado.nextInt();
-		Doctor doctor;
-        doctor = new Doctor();
-		doctor.imprimirDoctor(doctors.get(id));
-	}
+	
+	/////////////////MMMMMMOOOOODIIIFICADORASSSSSS/////////
+	
+	
+	
+	///////////////MMMMMMEEEETTOOOODOOOOS/////////////////
 	
 	public static void main(String[] args) {
 		
