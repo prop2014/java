@@ -58,7 +58,7 @@ public class Doctor {
 		    this.SueldoTurno = sueldo;
 		}
 		
-		public void añadirRestriccion(Restriccion r) {
+		public void addRestriccion(Restriccion r) {
 		}
 		
 		public void eliminarRestriccion(Restriccion r) {
