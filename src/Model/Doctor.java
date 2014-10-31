@@ -5,17 +5,25 @@ import java.util.*;
 public class Doctor {
 
 	/* Atributos */
-	private int id_doctor;
+	private int idDoctor;
 	private String nombre;
-	private int num_max_turnos;
+	private int numMaxTurnos;
 	private double SueldoTurno;
-	private Scanner teclado;
+		
+	//private Scanner teclado;
 
 	
 	
 	/* Constructora */
 
 		public Doctor() {}
+		
+		public Doctor (int id, String nombre, int numMaxTurnos, double sueldoTurno){
+			idDoctor=id;
+			this.nombre = nombre;
+			this.numMaxTurnos = numMaxTurnos;
+			SueldoTurno = sueldoTurno;
+		}
 
 	
 
@@ -23,10 +31,8 @@ public class Doctor {
 
 		public void inicializarDoctor(int i) {}
 		
-		public void imprimirDoctor(Doctor d) {}
-		
 		public int getId() {
-			return id_doctor;
+			return idDoctor;
 		}
 
 		    
@@ -34,8 +40,8 @@ public class Doctor {
 		    return nombre;
 		}
 		    
-		public int getNum_max_turnos() {
-			return num_max_turnos;
+		public int getNumMaxTurnos() {
+			return numMaxTurnos;
 		}
 		    
 		public double getSueldoTurno() {
@@ -43,18 +49,18 @@ public class Doctor {
 		}
 		    
 	    public void setId(int id) {
-		    this.id_doctor = id;
+		    this.idDoctor = id;
 		}
 		    
 		public void setNombre(String nombre) {
 		    this.nombre = nombre;
 		}
 		    
-		public void setNum_max_turnos(int num) {
-		    this.num_max_turnos= num;
+		public void setNumMaxTurnos(int num) {
+		    this.numMaxTurnos= num;
 		}
 		    
-		public void setSueldoTurno(float sueldo) {
+		public void setSueldoTurno(double sueldo) {
 		    this.SueldoTurno = sueldo;
 		}
 		
