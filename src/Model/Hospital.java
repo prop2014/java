@@ -1,8 +1,6 @@
 /*Autor: Oscar */
 
 package Model;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Hospital {
 	
@@ -13,10 +11,7 @@ public class Hospital {
 	private double factorM;
 	private double factorT;
 	private double factorN;
-	
-	private ArrayList<Doctor> doctors;
-	
-	private Scanner teclado;
+		
 
 
 	////////////////COOOOOOONSSTRUUUCTOOORAS////////////
@@ -59,7 +54,6 @@ public class Hospital {
 		return factorN;
 	}
 
-	
 	/* Metodos públicos */
 /*	public void incicializar() {
 		int n, i;
@@ -78,14 +72,11 @@ public class Hospital {
 			doctors.add(doctor);
 		}
 	}*/
-		
-	
 	/////////////////MMMMMMOOOOODIIIFICADORASSSSSS/////////
 	
 	
 	
 	///////////////MMMMMMEEEETTOOOODOOOOS/////////////////
-	
 	public static void main(String[] args) {
 		
 
