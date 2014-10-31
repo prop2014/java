@@ -19,7 +19,7 @@ public class Hospital {
 	private Scanner teclado;
 
 
-	/* Constructora */	
+	////////////////COOOOOOONSSTRUUUCTOOORAS////////////
 
 	public Hospital() {}
 	
@@ -35,27 +35,27 @@ public class Hospital {
 	//////////////COOOOONSULTORASSSSS//////////////////
 	
 	// consultora de la id
-	public int consultarId(){
+	public int getId(){
 		return idHospital;
 	}
 	
 	// consultora del Nombre
-	public String consultarNombre(){
+	public String getNombre(){
 		return nombre;
 	}
 	
 	// consultora del factorM
-	public double consultarFactorM(){
+	public double getFactorM(){
 		return factorM;
 	}
 	
 	// consultor del factorT
-	public double consultarFactorT(){
+	public double getFactorT(){
 		return factorT;
 	}
 	
 	// consultora del factorN
-	public double consultarFactorN(){
+	public double getFactorN(){
 		return factorN;
 	}
 
@@ -79,15 +79,6 @@ public class Hospital {
 		}
 	}*/
 		
-	public void consultar_doctor() {
-		int id;
-		teclado = new Scanner(System.in);
-		System.out.print("Id del doctor que quieres consultar: ");
-		id = teclado.nextInt();
-		Doctor doctor;
-        doctor = new Doctor();
-		doctor.imprimirDoctor(doctors.get(id));
-	}
 	
 	/////////////////MMMMMMOOOOODIIIFICADORASSSSSS/////////
 	
