@@ -6,8 +6,8 @@ public class DriverDoctor {
 	
 	public static void main(String args[]) {
 		Doctor doc = new Doctor();
-		doc.setid(100);
-		int idDoc = doc.getid();
+		doc.setId(100);
+		int idDoc = doc.getId();
 		System.out.printf("ID Doctor %d", idDoc);
 	}
 
