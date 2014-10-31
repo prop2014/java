@@ -1,5 +1,6 @@
 //Autor Sergi Orra
 package Model;
+import java.util.*;
 
 public class Doctor {
 
@@ -18,7 +19,7 @@ public class Doctor {
 
 	
 
-	/* Metodos pÃºblicos */
+	/* Metodos publicos */
 
 		public void inicializarDoctor(int i) {}
 		
@@ -56,5 +57,12 @@ public class Doctor {
 		public void setSueldoTurno(float sueldo) {
 		    this.SueldoTurno = sueldo;
 		}
+		
+		public void añadirRestriccion(Restriccion r) {
+		}
+		
+		public void eliminarRestriccion(Restriccion r) {
+		}
+
 	
 }
