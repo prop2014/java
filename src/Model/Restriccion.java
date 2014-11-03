@@ -7,18 +7,33 @@ public class Restriccion {
 
 	/* Atributos */
 	
-	private int id_Restriccion;
-	private String Tipo;
+	protected int id_Restriccion;
+	
+	// Tipo solo puede ser: 
+	protected String Tipo;
 
 	/* Constructora */
 
 	public Restriccion() {}
+	
+	/*public Restriccion(int Id; String Tipo){
 
+	}*/
 	
 
 	/* Metodos públicos */
 
 	
+//----> Consultoras 
+	
+	public String getTipo() {
+	    return Tipo;
+	}
+	
+	public int getId() {
+	    return id_Restriccion;
+	}
+	    
 	
 }
 

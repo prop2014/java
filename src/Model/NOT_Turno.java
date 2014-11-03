@@ -25,13 +25,14 @@ public class NOT_Turno extends Restriccion {
 	public int getId() {
 	    return id_Restriccion ;
 	}
-	public String getTipoTurno(){
-		return TipoTurno;
-	}
+
 	public String getTipo(){
 		return Tipo;
 	}
 	
+	public String getTipoTurno(){
+		return TipoTurno;
+	}
 
 	
 	
