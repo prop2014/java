@@ -1,4 +1,5 @@
 package Model;
+import java.util.*;
 
 /**
  *
@@ -8,7 +9,7 @@ public class Turno {
 
 	/* Atributos */
   private Date fecha;
-  private TipoTurno turno;
+  private String tipoTurno;
   private String especial;
   private int numDoctores;
 
@@ -20,7 +21,7 @@ public class Turno {
    */
 	public Turno() {
     fecha = null;
-    turno = null;
+    tipoTurno = null;
     especial = null;
     numDoctores = 0;
   }
