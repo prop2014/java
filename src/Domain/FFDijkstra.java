@@ -79,5 +79,20 @@ public class FFDijkstra extends FordFulkerson {
 		G.afegirNode(1.0);
 		
 	}
+	//pasos a seguir 
+	/*
+	1.meter nodo inicial en la p.q
+	2.crear vector dist infinitas de tamaño grafo.
+	3. dist[s]=0;
+	4. 
+	
+	
+	
+	
+	
+	
+	*/
+	
+	
 
 }
