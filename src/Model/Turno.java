@@ -8,61 +8,69 @@ import java.util.*;
 public class Turno {
 
 	/* Atributos */
-  private Date fecha;
-  private String tipoTurno;
-  private String especial;
-  private int numDoctores;
+	private Date fecha;
+	private String tipoTurno;
+	private String especial;
+	private int numDoctores;
 
 	/* Constructoras */
 
-  /**
-   *
-   * Constructora por defecto
-   */
+	/**
+	 *
+	 * Constructora por defecto
+	 */
 	public Turno() {
-    fecha = null;
-    tipoTurno = null;
-    especial = null;
-    numDoctores = 0;
-  }
+		fecha = null;
+		tipoTurno = null;
+		especial = null;
+		numDoctores = 0;
+	}
 
-	
-
+	/**
+	 *
+	 * Constructora con parámetros
+	 */
+	public Turno(Date f, String tt, String de, int nd) {
+		fecha = f;
+		tipoTurno = tt;
+		especial = de;
+		numDoctores = nd;
+	}
 	/* Metodos públicos */
 
 	/* Modificadoras */
-  
-  public void setFecha(Date d){
-    fecha = d;
-  }
-  
-  public void setTipoTurno(TipoTurno tt){
-    turno = tt;
-  }
-  
-  public void setEspecial(String esp){
-    especial = esp;
-  }
-  
-  public void setNumDoctores(int n){
-    numDoctores = n;
-  }
-  
-  /* Consultoras */
-  
-  public Date getFecha(){
-    return fecha;
-  }
-	
-  public String getTipoTurno(){
-    return turno;
-  }
-  
-  public String getEspecial(){
-    return especial;
-  }
-  
-  public int getNumDoctores(){
-    return numDoctores;
-  }
+
+	public void setFecha(Date d){
+		fecha = d;
+	}
+
+	public void setTipoTurno(TipoTurno tt){
+		turno = tt;
+	}
+
+	public void setEspecial(String esp){
+		especial = esp;
+	}
+
+	public void setNumDoctores(int n){
+		numDoctores = n;
+	}
+
+	/* Consultoras */
+
+	public Date getFecha(){
+		return fecha;
+	}
+
+	public String getTipoTurno(){
+		return turno;
+	}
+
+	public String getEspecial(){
+		return especial;
+	}
+
+	public int getNumDoctores(){
+		return numDoctores;
+	}
 }
