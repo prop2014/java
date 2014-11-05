@@ -30,8 +30,8 @@ public class Turno {
 	 *
 	 * Constructora con parámetros
 	 */
-	public Turno(Date f, String tt, String de, int nd) {
-		fecha = f;
+	public Turno(Date d, String tt, String de, int nd) {
+		fecha = d;
 		tipoTurno = tt;
 		especial = de;
 		numDoctores = nd;
@@ -44,12 +44,12 @@ public class Turno {
 		fecha = d;
 	}
 
-	public void setTipoTurno(TipoTurno tt){
-		turno = tt;
+	public void setTipoTurno(String tt){
+		tipoTurno = tt;
 	}
 
-	public void setEspecial(String esp){
-		especial = esp;
+	public void setEspecial(String de){
+		especial = de;
 	}
 
 	public void setNumDoctores(int n){
@@ -63,7 +63,7 @@ public class Turno {
 	}
 
 	public String getTipoTurno(){
-		return turno;
+		return tipoTurno;
 	}
 
 	public String getEspecial(){
