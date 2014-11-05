@@ -122,8 +122,10 @@ public class Hospital {
 		
 		
 	}
+	
+	/*public void afegirDoctores()*/
 		//borra el doctor d del hospital
-	public void borarDoctor(Doctor d){
+	public void borrarDoctor(Doctor d){
 		
 		
 	}
