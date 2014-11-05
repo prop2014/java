@@ -1,8 +1,9 @@
 //Autor: Axel's Copyright 
 package Model;
 import java.util.*;
+import Model.Restriccion;
 
-public class  MAX_Turnos_por_Dia{
+public class  MAX_Turnos_por_Dia extends Restriccion{
 
 	/* Atributos */
 	
@@ -11,12 +12,29 @@ public class  MAX_Turnos_por_Dia{
 
 	/* Constructora */
 
-	public MAX_Turnos_por_Dia() {}
+	public MAX_Turnos_por_Dia(int id, int Num_T) {
+		id_Restriccion = id;
+		Tipo = "MAX_Turnos_por_Dia";
+		Num_Turnos = Num_T;
+	}
 
 	
 
 	/* Metodos públicos */
+	
+//--> Consultoras
+	
+	public int getId() {
+	    return id_Restriccion ;
+	}
 
+	public String getTipo(){
+		return Tipo;
+	}
+	
+	public int getDia_Num_Turnos(){
+		return Num_Turnos;
+	}
 	
 	
 }

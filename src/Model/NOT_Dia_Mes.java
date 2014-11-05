@@ -1,8 +1,9 @@
 //Autor: Axel's Copyright 
 package Model;
 import java.util.*;
+import Model.Restriccion;
 
-public class NOT_Dia_Mes {
+public class NOT_Dia_Mes extends Restriccion{
 
 	/* Atributos */
 	private int Dia_Mes;
@@ -10,12 +11,28 @@ public class NOT_Dia_Mes {
 
 	/* Constructora */
 
-	public NOT_Dia_Mes() {}
+	public NOT_Dia_Mes(int id, int Dia_M) {
+		id_Restriccion = id;
+		Tipo = "NOT_Dia_Mes";
+		Dia_Mes= Dia_M;
+	}
 
 	
 
 	/* Metodos públicos */
-
 	
+//--> Consultoras
+	public int getId() {
+	    return id_Restriccion ;
+	}
+
+	public String getTipo(){
+		return Tipo;
+	}
+	
+	public int getDia_Mes(){
+		return Dia_Mes;
+	}
+
 	
 }

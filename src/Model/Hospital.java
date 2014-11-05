@@ -1,6 +1,8 @@
 /*Autor: Oscar */
 
 package Model;
+import java.util.*;
+import Model.Doctor;
 
 public class Hospital {
 	
@@ -11,7 +13,8 @@ public class Hospital {
 	private double factorM;
 	private double factorT;
 	private double factorN;
-		
+	private Map <Integer , Doctor> doctors;
+	
 
 
 	////////////////COOOOOOONSSTRUUUCTOOORAS////////////
@@ -25,6 +28,7 @@ public class Hospital {
 		factorM=fm;
 		factorT=ft;
 		factorN=fn;
+		doctors = new TreeMap<Integer , Doctor>();
 	}
 	
 	//////////////COOOOONSULTORASSSSS//////////////////
@@ -44,7 +48,7 @@ public class Hospital {
 		return factorM;
 	}
 	
-	// consultor del factorT
+	// consultora del factorT
 	public double getFactorT(){
 		return factorT;
 	}
@@ -52,6 +56,23 @@ public class Hospital {
 	// consultora del factorN
 	public double getFactorN(){
 		return factorN;
+	}
+	//consultora que devuelve un vector con los factores(M,T,N);
+	public double[] getFactors(){
+		double[] fac;  //a de ser privat=?
+		fac=new double[3];
+		fac[0]=factorM;
+		fac[1]=factorT;
+		fac[2]=factorN;
+		return fac;
+	}
+	//doctors buit?
+	public boolean isDEmpty(){
+		return doctors.isEmpty();
+	}
+	 //consultora del numero de doctors
+	public int Dsize(){
+		return doctors.size();
 	}
 	
 	
@@ -75,18 +96,19 @@ public class Hospital {
 		}
 	}*/
 	/////////////////MMMMMMOOOOODIIIFICADORASSSSSS/////////
+		//modificadora del nombre
 	public void setNombre(String nom){
 		this.nombre=nom;
 	}
-	
+		//modificadora del factorMañana
 	public void setFactorM(double factor){
 		this.factorM=factor;
 	}
-	
+		//modificadora del factorTarde
 	public void setFactorT(double factor){
 		this.factorT=factor;
 	}
-	
+		//modificadora del factorNoche
 	public void setFactorN(double factor){
 		this.factorN=factor;
 	}
@@ -95,5 +117,20 @@ public class Hospital {
 	
 	///////////////MMMMMMEEEETTOOOODOOOOS/////////////////
 	
-
-}
+		//afegeix un doctor d al hospital
+	public void afegirDoctor(Doctor d){
+		
+		
+	}
+		//borra el doctor d del hospital
+	public void borarDoctor(Doctor d){
+		
+		
+	}
+	
+	// borra todos los doctores del hospital (alert!);
+		public void cleardoctors(){
+			doctors.clear();
+		}
+	
+}//ficlass
