@@ -16,9 +16,7 @@ public class Restriccion {
 
 	public Restriccion() {}
 	
-	/*public Restriccion(int Id; String Tipo){
-
-	}*/
+	
 	
 
 	/* Metodos públicos */
