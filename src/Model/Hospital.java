@@ -33,14 +33,20 @@ public class Hospital {
 		doctors = new TreeMap<Integer , Doctor>();
 		calendari = new Calendari();
 	}
+	
 	// creadora con id, nombre, factores, doctores y calendario. //full
-	public Hospital (int id, String nom, double fm, double ft, double fn, Doctor[] doc, Calendari cal){
+	public Hospital (int id, String nom, double fm, double ft, double fn, Doctor[] vdoc, Calendari cal){
 		idHospital=id;
 		nombre=nom;
 		factorM=fm;
 		factorT=ft;
 		factorN=fn;
 		doctors = new TreeMap<Integer , Doctor>();
+		for(int i = 0; i < vdoc.size(); ++i){
+			if(doctors.containsKey(vdoc[i].getId())==false){
+				doctors.put(vdoc[i].getId(), vdoc[i]);
+			}
+		}
 		calendari = new Calendari(cal);
 	}
 	
@@ -72,75 +78,90 @@ public class Hospital {
 	}
 	//consultora que devuelve un vector con los factores(M,T,N);
 	public double[] getFactors(){
-		double[] fac;  //a de ser privat=?
+		double[] fac;  
 		fac=new double[3];
 		fac[0]=factorM;
 		fac[1]=factorT;
 		fac[2]=factorN;
 		return fac;
 	}
-	//doctors buit?
+	
+		//indica si existeix algun doctor
 	public boolean isDEmpty(){
 		return doctors.isEmpty();
 	}
+	
+		//indica si existeix un doctor amb identificador = id;
+	public boolean existeixdoctor(int id){
+		
+		return doctors.containsKey(id);
+	}
+	
 	 //consultora del numero de doctors
 	public int Dsize(){
 		return doctors.size();
 	}
 	
 	
-	
-	/* Metodos públicos */
-/*	public void incicializar() {
-		int n, i;
-		teclado = new Scanner(System.in);
-		System.out.print("Ingrese el codigo del hospital: ");
-		id_hospital = teclado.nextInt();
-		System.out.print("Ingrese el nombre del hospital: ");
-		nombre = teclado.next();
-		System.out.print("Ingrese el nombre de doctores del hospital: ");
-		n = teclado.nextInt();
-		doctors = new ArrayList<Doctor>(n);
-		for (i = 0; i < n; ++i) {
-			Doctor doctor;
-	        doctor = new Doctor();
-			doctor.inicializarDoctor(i);
-			doctors.add(doctor);
-		}
-	}*/
+
 	/////////////////MMMMMMOOOOODIIIFICADORASSSSSS/////////
+	
 		//modificadora del nombre   //
 	public void setNombre(String nom){
 		this.nombre=nom;
 	}
+	
 		//modificadora del factorMañana
 	public void setFactorM(double factor){
 		this.factorM=factor;
 	}
+	
 		//modificadora del factorTarde
 	public void setFactorT(double factor){
 		this.factorT=factor;
 	}
+	
 		//modificadora del factorNoche
 	public void setFactorN(double factor){
 		this.factorN=factor;
 	}
 	
+		//Modifica un doctor d
+	public void setDoctor(Doctor d){
+		if(doctors.containsKey(d.getId())==true){
+			doctors.remove(d.getId());
+			doctors.put(d.getId(), d);
+		}	
+	}
 	
 	
 	///////////////MMMMMMEEEETTOOOODOOOOS/////////////////
 	
-		//afegeix un doctor d al hospital
+		//afegeix un nou doctor d al hospital si no existeix 
 	public void afegirDoctor(Doctor d){
-		
+		if(doctors.containsKey(d.getId())==false){
+			doctors.put(d.getId(), d);
+		}
 		
 	}
+		//afegeix un vector de doctors al hospital. el sobreescriu si existeix
+	public void afegirDoctors(Doctor[] vdoc){
+		for(int i = 0; i < vdoc.size(); ++i){
+			if(doctors.containsKey(vdoc[i].getId())==false){
+				doctors.put(vdoc[i].getId(), vdoc[i]);
+			}
+			else {
+				doctors.remove(vdoc[i].getId());
+				doctors.put(vdoc[i].getId(), vdoc[i]);
+			}
+		}
+	}
 	
-	/*public void afegirDoctores()*/
 		//borra el doctor d del hospital
 	public void borrarDoctor(Doctor d){
-		
-		
+		if(doctors.containsKey(d.getId())){
+			doctors.remove(d.getId());
+		}
 	}
 	
 	// borra todos los doctores del hospital (alert!);
