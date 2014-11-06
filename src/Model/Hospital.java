@@ -2,6 +2,7 @@
 
 package Model;
 import java.util.*;
+
 import Model.Doctor;
 import Model.Restriccion;
 import Model.Calendari;
@@ -34,7 +35,7 @@ public class Hospital {
 		calendari = new Calendari();
 	}
 	
-	// creadora con id, nombre, factores, doctores y calendario. //full
+	// creadora con id, nombre, factores,vector de doctores y calendario. //full
 	public Hospital (int id, String nom, double fm, double ft, double fn, Doctor[] vdoc, Calendari cal){
 		idHospital=id;
 		nombre=nom;
@@ -49,6 +50,22 @@ public class Hospital {
 		}
 		//calendari = new Calendari(cal);
 	}
+	
+	// creadora con id, nombre, factores, arraylist de doctores y calendario. //full
+		public Hospital (int id, String nom, double fm, double ft, double fn, ArrayList<Doctor> aldoc, Calendari cal){
+			idHospital=id;
+			nombre=nom;
+			factorM=fm;
+			factorT=ft;
+			factorN=fn;
+			doctors = new TreeMap<Integer , Doctor>();
+			for(int i = 0; i < aldoc.size(); ++i){
+				if(doctors.containsKey(aldoc.get(i).getId())==false){
+					doctors.put(aldoc.get(i).getId(), aldoc.get(i));
+				}
+			}
+			//calendari = new Calendari(cal);
+		}
 	
 	//////////////COOOOONSULTORASSSSS//////////////////
 	
@@ -144,7 +161,7 @@ public class Hospital {
 		}
 		
 	}
-		//afegeix un vector de doctors al hospital. el sobreescriu si existeix
+		//afegeix un vector de doctors al hospital, el sobreescriu si existeix
 	public void afegirDoctors(Doctor[] vdoc){
 		for(int i = 0; i < vdoc.length; ++i){
 			if(doctors.containsKey(vdoc[i].getId())==false){
@@ -153,6 +170,20 @@ public class Hospital {
 			else {
 				doctors.remove(vdoc[i].getId());
 				doctors.put(vdoc[i].getId(), vdoc[i]);
+			}
+		}
+	}
+	
+	//afegeix un arraylist de doctors al hospital, el sobreescriu si existeix
+	public void afegirDoctors(ArrayList<Doctor> aldoc){
+
+		for(int i=0; i < aldoc.size();++i){
+			if(doctors.containsKey(aldoc.get(i).getId())==false){
+				doctors.put(aldoc.get(i).getId(), aldoc.get(i));
+			}
+			else {
+				doctors.remove(aldoc.get(i).getId());
+				doctors.put(aldoc.get(i).getId(), aldoc.get(i));
 			}
 		}
 	}
