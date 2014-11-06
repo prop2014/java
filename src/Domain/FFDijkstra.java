@@ -43,6 +43,22 @@ public class FFDijkstra extends FordFulkerson {
 		return camino;
 	}
 		
+	/*
+	 * 1. Crear Vector dist con infinito
+	 * 2. Poner dist del nodo inicial a 0
+	 * 3. Meter nodo inicial en p.q. con dist = 0
+	 * 4. while(!pq.isEmpty())
+	 * 5. Tratar nodo X de p.q. y quitarlo
+	 * 6. Obtener nodos adyacentes de X
+	 * 7. Tratar nodo vecino Y
+	 * 8. Obtener arista de X a Y. idArista = getArista(X,Y)
+	 * 9. Obttener Capacidad y flujo de arista getCapacidadArista(idArista) y getFlujoArista(idArista)
+	 * 10. Obtenre coste arista getCosteArista(idArista)
+	 * 11. Si costeArista + dist[X] es menor a dist[Y], actualiza dist[Y] y añade a p.q.
+	 */
+	
+	
+	
 	/* VERSIÓN C++
 	typedef pair<double,int> arcP; //<pes,vertex>
 	typedef vector<vector<arcP> > grafP;
