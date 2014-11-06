@@ -5,6 +5,13 @@ import java.io.IOException;
 import Domain.FordFulkerson;
 import Domain.Graf;
 
+
+class arcP
+{
+    public double coste;
+    public int id;
+}
+
 public class FFDijkstra extends FordFulkerson {
 
 	//s id origen
@@ -18,10 +25,17 @@ public class FFDijkstra extends FordFulkerson {
 	*/
 	@Override
 	public ArrayList<Integer> dameCamino(Graf<Object> g){
+		//dist[u] : la longitud del cami mes curt des de s fins a u
+		//pred[u] predecesor de u en aquest cami
 		ArrayList<Integer> camino = new ArrayList<Integer>(0);
-		/*double[] dist = new double[g.getNSize()];							//Vector de distancias/costes a nodos
-		PriorityQueue<Integer> vertexQueue = new PriorityQueue<Integer>(); 	//Necesitamos un comparador de Nodos
-		vertexQueue.add(s); 												//Añadimos el primer nodo
+		double[] dist = new double[g.getNSize()];							//Vector de distancias/costes a nodos
+		for(int k = 0; k < g.getNSize(); k++){
+		        dist[k] = Double.POSITIVE_INFINITY;
+		}
+		
+		PriorityQueue<arcP> vertexQueue = new PriorityQueue<arcP>(); 	//Necesitamos un comparador de Nodos
+		
+		/*vertexQueue.add(s); 												//Añadimos el primer nodo
 		dist[s] = 0.0;
 		while (!vertexQueue.isEmpty()) {
 			int nodo = vertexQueue.poll(); 									//Actuamos con el nodo
@@ -84,6 +98,7 @@ public class FFDijkstra extends FordFulkerson {
 					if (d[v] > (d[u]+c)) {
 						d[v] = d[u]+c;
 						p[v] = u;
+						
 						Q.push(arcP(d[v],v));
 					}
 				}
@@ -92,12 +107,49 @@ public class FFDijkstra extends FordFulkerson {
 	}*/
 
 	public static void main(String[] args) throws IOException {
-		Graf<Double> G = new Graf<Double>();
+		/*Graf<Double> G = new Graf<Double>();
 		try {
 			G.afegirNode(1.0);
 		}
 		catch (IOException e) {
 		    throw new IOException(e);
+		}*/
+		
+		PriorityQueue<arcP> vertexQueue = new PriorityQueue<arcP>(5,new Comparator<arcP>()
+	            { public int compare(arcP p, arcP q)
+            {
+	            if(p.coste > q.coste) return 1;
+	            if(p.coste < q.coste) return -1;
+                return 0;
+            }
+        } );
+		arcP p = new arcP();
+		p.coste = 2.0;
+		p.id = 4;
+		vertexQueue.offer(p);
+		p = new arcP();
+		p.coste = 3.0;
+		p.id = 3;
+		vertexQueue.offer(p);
+		p = new arcP();
+		p.coste = 3.5;
+		p.id = 2;
+		vertexQueue.offer(p);
+		p = new arcP();
+		p.coste = 1.0;
+		p.id = 1;
+		vertexQueue.offer(p);
+		p = new arcP();
+		p.coste = 6.0;
+		p.id = 5;
+		vertexQueue.offer(p);
+		p = new arcP();
+		p.coste = 2.0;
+		p.id = 6;
+		vertexQueue.offer(p);
+		while(!vertexQueue.isEmpty()){
+			p = vertexQueue.poll();
+			System.out.printf("id: %d coste: %f \n", p.id, p.coste);
 		}
 		
 	}
