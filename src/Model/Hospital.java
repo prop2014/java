@@ -3,6 +3,8 @@
 package Model;
 import java.util.*;
 import Model.Doctor;
+import Model.Restriccion;
+import Model.Calendari;
 
 public class Hospital {
 	
@@ -14,7 +16,7 @@ public class Hospital {
 	private double factorT;
 	private double factorN;
 	private Map <Integer , Doctor> doctors;
-	
+	private Calendari calendari;
 
 
 	////////////////COOOOOOONSSTRUUUCTOOORAS////////////
@@ -29,6 +31,17 @@ public class Hospital {
 		factorT=ft;
 		factorN=fn;
 		doctors = new TreeMap<Integer , Doctor>();
+		calendari = new Calendari();
+	}
+	// creadora con id, nombre, factores, doctores y calendario. //full
+	public Hospital (int id, String nom, double fm, double ft, double fn, Doctor[] doc, Calendari cal){
+		idHospital=id;
+		nombre=nom;
+		factorM=fm;
+		factorT=ft;
+		factorN=fn;
+		doctors = new TreeMap<Integer , Doctor>();
+		calendari = new Calendari(cal);
 	}
 	
 	//////////////COOOOONSULTORASSSSS//////////////////
@@ -96,7 +109,7 @@ public class Hospital {
 		}
 	}*/
 	/////////////////MMMMMMOOOOODIIIFICADORASSSSSS/////////
-		//modificadora del nombre
+		//modificadora del nombre   //
 	public void setNombre(String nom){
 		this.nombre=nom;
 	}
