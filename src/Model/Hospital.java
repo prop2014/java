@@ -42,12 +42,12 @@ public class Hospital {
 		factorT=ft;
 		factorN=fn;
 		doctors = new TreeMap<Integer , Doctor>();
-		for(int i = 0; i < vdoc.size(); ++i){
+		for(int i = 0; i < vdoc.length; ++i){
 			if(doctors.containsKey(vdoc[i].getId())==false){
 				doctors.put(vdoc[i].getId(), vdoc[i]);
 			}
 		}
-		calendari = new Calendari(cal);
+		//calendari = new Calendari(cal);
 	}
 	
 	//////////////COOOOONSULTORASSSSS//////////////////
@@ -146,7 +146,7 @@ public class Hospital {
 	}
 		//afegeix un vector de doctors al hospital. el sobreescriu si existeix
 	public void afegirDoctors(Doctor[] vdoc){
-		for(int i = 0; i < vdoc.size(); ++i){
+		for(int i = 0; i < vdoc.length; ++i){
 			if(doctors.containsKey(vdoc[i].getId())==false){
 				doctors.put(vdoc[i].getId(), vdoc[i]);
 			}
