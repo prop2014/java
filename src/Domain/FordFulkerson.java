@@ -30,8 +30,8 @@ public class FordFulkerson {
 		//El node destí
 
 		// Algoritme MaxFlow de FordFoulkerson
-		public Graf<Object> findMaxFlow(Graf<Object> g, int s, int t){
-			Graf<Object> graf = new Graf(2);
+		public Graf<Integer> findMaxFlow(Graf<Object> g, int s, int t){
+			Graf<Integer> graf = new Graf<Integer>();
 			return graf;
 		}
 		 
@@ -54,8 +54,8 @@ public class FordFulkerson {
 		public int setNodeOrigen(int origen){
 			return 0;
 		}
-		public Graf<Object> getGrafInicial(){
-			Graf<Object> graf = new Graf(2);
+		public Graf<Integer> getGrafInicial(){
+			Graf<Integer> graf = new Graf<Integer>();
 			return graf;
 		}
 		public int setGrafInicial(Graf<Object> gInicial){

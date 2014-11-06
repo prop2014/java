@@ -1,5 +1,6 @@
 package Domain; 
 import java.util.*;
+import java.io.IOException;
 
 import Domain.FordFulkerson;
 import Domain.Graf;
@@ -18,7 +19,7 @@ public class FFDijkstra extends FordFulkerson {
 	@Override
 	public ArrayList<Integer> dameCamino(Graf<Object> g){
 		ArrayList<Integer> camino = new ArrayList<Integer>(0);
-		double[] dist = new double[g.getNSize()];							//Vector de distancias/costes a nodos
+		/*double[] dist = new double[g.getNSize()];							//Vector de distancias/costes a nodos
 		PriorityQueue<Integer> vertexQueue = new PriorityQueue<Integer>(); 	//Necesitamos un comparador de Nodos
 		vertexQueue.add(s); 												//Añadimos el primer nodo
 		dist[s] = 0.0;
@@ -38,7 +39,7 @@ public class FFDijkstra extends FordFulkerson {
 			}
 			
 		
-		}
+		}*/
 		return camino;
 	}
 		
@@ -74,9 +75,14 @@ public class FFDijkstra extends FordFulkerson {
 		}
 	}*/
 
-	public static void main(String[] args) {
-		Graf<Double> G = new Graf<Double>(2);
-		G.afegirNode(1.0);
+	public static void main(String[] args) throws IOException {
+		Graf<Double> G = new Graf<Double>();
+		try {
+			G.afegirNode(1.0);
+		}
+		catch (IOException e) {
+		    throw new IOException(e);
+		}
 		
 	}
 	//pasos a seguir 
