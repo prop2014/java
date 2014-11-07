@@ -139,6 +139,15 @@ public class Hospital {
 		return doctors.containsKey(id);
 	}
 	
+	
+	public ArrayList<Turno> getTorns(){
+		
+		ArrayList<Turno> altorns = new ArrayList<Turno>();
+		altorns = calendari.getTorns();
+		return altorns;
+	}
+		
+	
 	//////private//////////MMMMMMOOOOODIIIFICADORASSSSSS/////////
 	private void sets_____________(){};
 	
