@@ -20,8 +20,11 @@ public class Hospital {
 	private Calendari calendari;
 
 
-	////////////////COOOOOOONSSTRUUUCTOOORAS////////////
 
+	
+	private void Constructoras____(){}
+	
+	
 	public Hospital() {}
 	
 	//creadora amb id, nombre y factores
@@ -35,8 +38,9 @@ public class Hospital {
 		calendari = new Calendari();
 	}
 	
-	// creadora con id, nombre, factores,vector de doctores y calendario. //full
-	public Hospital (int id, String nom, double fm, double ft, double fn, Doctor[] vdoc, Calendari cal){
+	// creadora con id, nombre, factores,vector de doctores y calendario.//full
+	public Hospital (int id, String nom, double fm, double ft, double fn,
+			Doctor[] vdoc, Calendari cal){
 		idHospital=id;
 		nombre=nom;
 		factorM=fm;
@@ -51,8 +55,9 @@ public class Hospital {
 		//calendari = new Calendari(cal);
 	}
 	
-	// creadora con id, nombre, factores, arraylist de doctores y calendario. //full
-		public Hospital (int id, String nom, double fm, double ft, double fn, ArrayList<Doctor> aldoc, Calendari cal){
+// creadora con id, nombre, factores, arraylist de doctores y calendario. //full
+		public Hospital (int id, String nom, double fm, double ft, double fn,
+				ArrayList<Doctor> aldoc, Calendari cal){
 			idHospital=id;
 			nombre=nom;
 			factorM=fm;
@@ -67,7 +72,10 @@ public class Hospital {
 			//calendari = new Calendari(cal);
 		}
 	
-	//////////////COOOOONSULTORASSSSS//////////////////
+	
+	private void gets__________(){};
+	
+	
 	
 	// consultora de la id
 	public int getId(){
@@ -103,25 +111,35 @@ public class Hospital {
 		return fac;
 	}
 	
-		//indica si existeix algun doctor
-	public boolean isDEmpty(){
+	//consulta tots els doctors
+	public ArrayList<Doctor> getDoctors(){
+		ArrayList<Doctor> aldoc = new ArrayList<Doctor>(doctors.size());
+		Iterator<Integer> itr = doctors.keySet().iterator();
+		while(itr.hasNext()) {
+		    Integer key = itr.next();
+		    aldoc.add(doctors.get(key));
+		}
+		return aldoc;
+	}
+	
+		//indica si l'hospital conte algun doctor
+	public boolean isDocEmpty(){
 		return doctors.isEmpty();
 	}
 	
+	 //consultora del numero de doctors
+		public int Docsize(){
+			return doctors.size();
+		}
+	
 		//indica si existeix un doctor amb identificador = id;
-	public boolean existeixdoctor(int id){
+	public boolean existsDoctor(int id){
 		
 		return doctors.containsKey(id);
 	}
 	
-	 //consultora del numero de doctors
-	public int Dsize(){
-		return doctors.size();
-	}
-	
-	
-
-	/////////////////MMMMMMOOOOODIIIFICADORASSSSSS/////////
+	//////private//////////MMMMMMOOOOODIIIFICADORASSSSSS/////////
+	private void sets_____________(){};
 	
 		//modificadora del nombre   //
 	public void setNombre(String nom){
@@ -151,8 +169,9 @@ public class Hospital {
 		}	
 	}
 	
+	private void metodos__________(){};
 	
-	///////////////MMMMMMEEEETTOOOODOOOOS/////////////////
+	
 	
 		//afegeix un nou doctor d al hospital si no existeix 
 	public void afegirDoctor(Doctor d){
