@@ -16,5 +16,7 @@ public class Calendari {
 	// modifica el turno t de la fecha data
 	public void modificarTurno(Date data,Turno t){}
 	
+	//añade un turno al calendario en la fecha t
+	public void afegirTorn(Date data, Turno t){}
 	
 }

@@ -222,8 +222,13 @@ public class Hospital {
 	}
 	
 	// borra todos los doctores del hospital (alert!);
-		public void cleardoctors(){
-			doctors.clear();
-		}
+	public void cleardoctors(){
+		doctors.clear();
+	}
+	
+		//añade un turno t a la fecha data
+	public void addTurno(Date data, Turno t){
+		calendari.afegirTorn(data,t);
+	}
 	
 }//ficlass
