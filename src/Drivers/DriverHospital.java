@@ -1,5 +1,6 @@
 package Drivers;
 import java.util.*;
+
 import Model.Hospital;
 import Model.Doctor;
 
@@ -7,14 +8,26 @@ public class DriverHospital {
 
 	
 	
-	void MostrarHosp(Hospital hosp){
+	static void MostrarHosp(Hospital hosp){
+		ArrayList<Doctor> aldoc;
+		Doctor[] vdoc;
 		
 		System.out.printf("ID Hospital: %d\n",hosp.getId());
 		System.out.printf("Nombre: %s\n",hosp.getNombre());
 		System.out.printf("Factor Mati: %f\n",hosp.getFactorM());
 		System.out.printf("Factor Tarda: %f\n",hosp.getFactorT());
 		System.out.printf("Factor Nit: %f\n",hosp.getFactorN());
-		System.out.print("Factors en un vector: ");
+		System.out.printf("LLista de Doctors:\n");
+		aldoc=hosp.getDoctors();
+		Iterator<Doctor> itr = aldoc.iterator();
+		while(itr.hasNext()){
+			Doctor d = itr.next();
+			System.out.print(elemento+" / ");
+		}
+		
+		System.out.printf("LLista de Torns:\n");
+		
+		System.out.printf("______________________________\n");
 		
 	}
 	/*public static void main(String[] args) {
@@ -74,23 +87,23 @@ public class DriverHospital {
 			
 			System.out.print("¿Que desea hacer?\n");
 			
-			System.out.print("NOP 1: Crear Restriccion tipo XOR\n");
-			System.out.print("2: Crear Restriccion tipo NOT_Dia_Mes\n");
-			System.out.print("3: Crear Restriccion tipo NOT_Dia_Semana\n");
-			System.out.print("4: Crear Restriccion tipo NOT_Especial\n");
-			System.out.print("NOP 5: Crear Restriccion tipo NOT_Fecha\n");
-			System.out.print("6: Crear Restriccion tipo NOT_Turno\n");
-			System.out.print("7: Crear Restriccion tipo MAX_Turnos_por_Dia\n");
-			System.out.print("8: Crear Restriccion tipo MAX_Turnos_Consecutivos\n");
-			System.out.print("NOP 9: Crear Restriccion tipo MAX_Dias_Rango\n");
-			System.out.print("10: Ver Restriccion ya creada\n");
+			System.out.print("1:\n");
+			System.out.print("2:\n");
+			System.out.print("3: \n");
+			System.out.print("4: \n");
+			System.out.print("5:\n");
+			System.out.print("6:\n");
+			System.out.print("7:\n");
+			System.out.print("8:\n");
+			System.out.print("9:\n");
+			System.out.print("10:\n");
 		
 			
 			opcion = teclado.nextInt(); //leemos opcion
 			
 			
 			
-			Restriccion RES = new Restriccion(); 
+			Hospital HOSP = new Hospital(); 
 			
 			
 			switch(opcion){
@@ -98,31 +111,31 @@ public class DriverHospital {
 					
 					break;
 				}
-				case 2: { //NOT_Dia_Mes
+				case 2: { //
 					++id;
 					int Dia;
-					System.out.print("Introduce el dia del mes(1-30) que no quieras trabajar\n");
+					System.out.print("\n");
 					Dia = teclado.nextInt();
-					RES = new NOT_Dia_Mes(id, Dia);
+					//HOSP =...
 					
 					
 					break;
 				}
-				case 3:{ //NOT_Dia_Semana
+				case 3:{ //
 					++id;
 					String Dia;
-					System.out.print("Introduce el dia de la semana(Lunes-Domingo) que no quieras trabajar\n");
+					System.out.print("\n");
 					Dia = teclado.next();
-					RES = new NOT_Dia_Semana(id, Dia);
+					//HOSP... 
 					
 					break;
 				}
-				case 4:{ //NOT_Especial
+				case 4:{ //
 					++id;
 					String Dia;
-					System.out.print("Introduce el dia Especial(Navidad,SantGervasi,...) que no quieras trabajar\n");
+					System.out.print("\n");
 					Dia = teclado.next();
-					RES = new NOT_Especial( id, Dia);
+					//HOSP=..
 					
 					break;
 				}
@@ -148,10 +161,9 @@ public class DriverHospital {
 				case 10:{
 					
 					if(id != -1) {
-						
-						MostrarRestriccion(RES);
+						MostrarHosp(HOSP);
 					}
-					else System.out.print("Aun No hay ninguna Restriccion!\n\n");
+					else System.out.print("No existe Hosp!\n\n");
 					
 					break;
 				}
