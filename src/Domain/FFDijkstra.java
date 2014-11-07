@@ -24,37 +24,69 @@ public class FFDijkstra extends FordFulkerson {
 	 * del camino que será de coste mínimo aplicando el algoritmo de Dijkstra.
 	*/
 	@Override
-	public ArrayList<Integer> dameCamino(Graf<Object> g){
+	public ArrayList<Integer> dameCamino(Graf<?> g) throws IOException{
 		//dist[u] : la longitud del cami mes curt des de s fins a u
 		//pred[u] predecesor de u en aquest cami
-		ArrayList<Integer> camino = new ArrayList<Integer>(0);
-		double[] dist = new double[g.getNSize()];							//Vector de distancias/costes a nodos
-		for(int k = 0; k < g.getNSize(); k++){
-		        dist[k] = Double.POSITIVE_INFINITY;
-		}
-		
-		PriorityQueue<arcP> vertexQueue = new PriorityQueue<arcP>(); 	//Necesitamos un comparador de Nodos
-		
-		/*vertexQueue.add(s); 												//Añadimos el primer nodo
-		dist[s] = 0.0;
-		while (!vertexQueue.isEmpty()) {
-			int nodo = vertexQueue.poll(); 									//Actuamos con el nodo
-			ArrayList<Integer> neighbours = g.getOutNodes(nodo); 			//Obtenemos los vecinos del nodo con id "nodo"
-			for(int neighbour : neighbours){								//Para todos los nodos vecinos
-				int arista = g.getIDAresta(nodo, neighbour);				//Obtenemos la arista y sus datos
-				int capacidadArista = g.getCapacidadAresta(arista);
-				double costeArista = g.getCosteAresta(arista);
-				int flujoArista = g.getFlujoAresta(arista);
-				double coste = dist[s]+costeArista;
-				if(coste < dist[neighbour]){
-					dist[neighbour] = coste;
-					vertexQueue.add(neighbour);
-				}
+		try {
+			ArrayList<Integer> camino = new ArrayList<Integer>(0);
+			int[] pred = new int[g.getNSize()];
+			double[] dist = new double[g.getNSize()];							//Vector de distancias/costes a nodos
+			for(int k = 0; k < g.getNSize(); k++){
+			        dist[k] = Double.POSITIVE_INFINITY;
 			}
 			
-		
-		}*/
-		return camino;
+			PriorityQueue<arcP> vertexQueue = new PriorityQueue<arcP>(1,new Comparator<arcP>() //Necesitamos un comparador de Nodos
+		            { public int compare(arcP p, arcP q)
+	            {
+		            if(p.coste > q.coste) return 1;
+		            if(p.coste < q.coste) return -1;
+	                return 0;
+	            }
+	        } ); 
+			arcP p = new arcP();
+			p.id = s;
+			p.coste = 0.0;
+			dist[s] = 0.0;
+			vertexQueue.add(p); 												//Añadimos el primer nodo
+			while (!vertexQueue.isEmpty()) {
+				p = vertexQueue.poll();		 									//Actuamos con el nodo
+				ArrayList<Integer> neighbours = g.getOutNodes(p.id); 			//Obtenemos los vecinos del nodo con id "nodo"
+				for(int neighbour : neighbours){								//Para todos los nodos vecinos
+					int arista = g.getIDAresta(p.id, neighbour);				//Obtenemos la arista y sus datos
+					System.out.printf("Nodo Princ: %d , Nodo vecino: %d, ID Arista: %d\n", p.id, neighbour, arista);
+					int capacidadArista = g.getCapacidadAresta(arista);
+					double costeArista = g.getCosteAresta(arista);
+					int flujoArista = g.getFlujoAresta(arista);
+					if(capacidadArista > 0 && flujoArista < capacidadArista) {
+						double coste = dist[p.id]+costeArista;
+						if(coste < dist[neighbour]){
+							dist[neighbour] = coste;
+							pred[neighbour] = p.id;
+							arcP q = new arcP();
+							q.id = neighbour;
+							q.coste = coste;
+							vertexQueue.add(q);
+						}
+					}
+				}
+			
+			}
+			
+			Stack<Integer> cam = new Stack<Integer>();
+			int sig = g.getNSize() - 1;
+			while(sig != 0) {
+				cam.push(sig);
+				sig = pred[sig];
+			}
+			cam.push(0);
+			while(!cam.isEmpty()) {
+				camino.add(cam.pop());
+			}
+			return camino;
+		}
+		catch (IOException e) {
+		    throw new IOException(e);
+		}
 	}
 		
 	/*
@@ -106,14 +138,14 @@ public class FFDijkstra extends FordFulkerson {
 		}
 	}*/
 
-	public static void main(String[] args) throws IOException {
+	/*public static void main(String[] args) throws IOException {
 		/*Graf<Double> G = new Graf<Double>();
 		try {
 			G.afegirNode(1.0);
 		}
 		catch (IOException e) {
 		    throw new IOException(e);
-		}*/
+		}
 		
 		PriorityQueue<arcP> vertexQueue = new PriorityQueue<arcP>(5,new Comparator<arcP>()
 	            { public int compare(arcP p, arcP q)
@@ -151,8 +183,9 @@ public class FFDijkstra extends FordFulkerson {
 			p = vertexQueue.poll();
 			System.out.printf("id: %d coste: %f \n", p.id, p.coste);
 		}
+		System.out.printf("Infinito: %f", Double.POSITIVE_INFINITY);
 		
-	}
+	}*/
 	//pasos a seguir 
 	/*
 	1.meter nodo inicial en la p.q

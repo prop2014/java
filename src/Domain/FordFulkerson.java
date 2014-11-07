@@ -1,4 +1,5 @@
 package Domain;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import Domain.Graf;
@@ -30,13 +31,13 @@ public class FordFulkerson {
 		//El node destí
 
 		// Algoritme MaxFlow de FordFoulkerson
-		public Graf<Integer> findMaxFlow(Graf<Object> g, int s, int t){
+		public Graf<Integer> findMaxFlow(Graf<?> g, int s, int t){
 			Graf<Integer> graf = new Graf<Integer>();
 			return graf;
 		}
 		 
 		//Mètode helper de cerca que implementa el DFS. Aquest mètode es heredat per //les classes i que es cridat desde el mètode findMaxFlow();
-		public ArrayList<Integer> dameCamino(Graf<Object> g){
+		public ArrayList<Integer> dameCamino(Graf<?> g) throws IOException{
 			ArrayList<Integer>camino = new ArrayList<Integer>(0);
 	    	return camino;
 		}
