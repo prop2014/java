@@ -30,6 +30,9 @@ public class FFDijkstra extends FordFulkerson {
 		try {
 			ArrayList<Integer> camino = new ArrayList<Integer>(0);
 			int[] pred = new int[g.getNSize()];
+			for(int k = 0; k < g.getNSize(); k++){
+		        pred[k] = -1;
+			}
 			double[] dist = new double[g.getNSize()];							//Vector de distancias/costes a nodos
 			for(int k = 0; k < g.getNSize(); k++){
 			        dist[k] = Double.POSITIVE_INFINITY;
@@ -73,7 +76,8 @@ public class FFDijkstra extends FordFulkerson {
 			}
 			
 			Stack<Integer> cam = new Stack<Integer>();
-			int sig = g.getNSize() - 1;
+			int sig = t;
+			if(pred[sig] == -1) throw new IOException("No existe camino");
 			while(sig != 0) {
 				cam.push(sig);
 				sig = pred[sig];
