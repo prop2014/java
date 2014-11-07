@@ -6,6 +6,7 @@ import java.util.*;
 import Model.Doctor;
 import Model.Restriccion;
 import Model.Calendari;
+import Model.Turno;
 
 public class Hospital {
 	
@@ -52,7 +53,7 @@ public class Hospital {
 				doctors.put(vdoc[i].getId(), vdoc[i]);
 			}
 		}
-		//calendari = new Calendari(cal);
+		calendari = new Calendari(cal);
 	}
 	
 // creadora con id, nombre, factores, arraylist de doctores y calendario. //full
@@ -169,18 +170,24 @@ public class Hospital {
 		}	
 	}
 	
+		//modifica el torn de la fecha data
+	public void setTorn(Date data,Turno t){
+		calendari.modificarTurno(data,t);
+	}
+	
+	
 	private void metodos__________(){};
 	
 	
 	
-		//afegeix un nou doctor d al hospital si no existeix 
+		//afegeix un nou doctor d al hospital si no el contenia ja.
 	public void afegirDoctor(Doctor d){
 		if(doctors.containsKey(d.getId())==false){
 			doctors.put(d.getId(), d);
 		}
 		
 	}
-		//afegeix un vector de doctors al hospital, el sobreescriu si existeix
+		//afegeix un conjunt de  doctors al hospital,sobreescriu si ja existia doctor
 	public void afegirDoctors(Doctor[] vdoc){
 		for(int i = 0; i < vdoc.length; ++i){
 			if(doctors.containsKey(vdoc[i].getId())==false){
@@ -193,7 +200,7 @@ public class Hospital {
 		}
 	}
 	
-	//afegeix un arraylist de doctors al hospital, el sobreescriu si existeix
+	//afegeix un arraylist de doctors al hospital, sobreescriu si ja existia doctor
 	public void afegirDoctors(ArrayList<Doctor> aldoc){
 
 		for(int i=0; i < aldoc.size();++i){
