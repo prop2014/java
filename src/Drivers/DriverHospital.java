@@ -10,19 +10,33 @@ public class DriverHospital {
 	
 	static void MostrarHosp(Hospital hosp){
 		ArrayList<Doctor> aldoc;
-		Doctor[] vdoc;
 		
 		System.out.printf("ID Hospital: %d\n",hosp.getId());
 		System.out.printf("Nombre: %s\n",hosp.getNombre());
 		System.out.printf("Factor Mati: %f\n",hosp.getFactorM());
 		System.out.printf("Factor Tarda: %f\n",hosp.getFactorT());
 		System.out.printf("Factor Nit: %f\n",hosp.getFactorN());
-		System.out.printf("LLista de Doctors:\n");
-		aldoc=hosp.getDoctors();
-		Iterator<Doctor> itr = aldoc.iterator();
-		while(itr.hasNext()){
-			Doctor d = itr.next();
-			System.out.print(elemento+" / ");
+		if(hosp.isDocEmpty()) {
+			System.out.printf("No hi ha doctors\n");
+		}
+		else {
+			System.out.printf("LLista de Doctors:\n");
+			System.out.printf("Hi ha %d Doctors\n",hosp.Docsize());
+			aldoc=hosp.getDoctors();
+			Iterator<Doctor> itr = aldoc.iterator();
+			int i = 0;
+			while(itr.hasNext()){
+				Doctor d = new Doctor();
+				d=itr.next();
+				System.out.printf("%d.\n",i);
+				System.out.printf("ID: %d\n",d.getId());
+				System.out.printf("Nom: %s\n",d.getNombre());
+				System.out.printf("Num Max turnos: %d\n",d.getNumMaxTurnos());
+				System.out.printf("Sueldo Por turno: %s\n",d.getSueldoTurno());
+				if(d.isREmpty()) System.out.printf("No te restriccions: \n");
+				else System.out.printf("Te restriccions\n");
+				++i;
+			}
 		}
 		
 		System.out.printf("LLista de Torns:\n");
@@ -87,16 +101,22 @@ public class DriverHospital {
 			
 			System.out.print("¿Que desea hacer?\n");
 			
-			System.out.print("1:\n");
-			System.out.print("2:\n");
-			System.out.print("3: \n");
-			System.out.print("4: \n");
-			System.out.print("5:\n");
-			System.out.print("6:\n");
-			System.out.print("7:\n");
-			System.out.print("8:\n");
-			System.out.print("9:\n");
-			System.out.print("10:\n");
+			System.out.print("1: Crea Hospital vacio\n");
+			System.out.print("2: Crea Hospital con id, nombre y factores\n");
+			System.out.print("3:No OPERATIVA Crea Hospital con id, nombre, factores, arraylist de doctores y calendario.\n");
+			System.out.print("4: Canviali el nom al hospital\n");
+			System.out.print("5: Canviali el factor Mati\n");
+			System.out.print("6: Canviali el factor Tarda\n");
+			System.out.print("7: Canviali el factor Nit\n");
+			System.out.print("8: Canviali els 3 factors de cop\n");
+			System.out.print("9: Afegiex un doctor\n");
+			System.out.print("10: Afegeix un Vector de doctors\n");
+			System.out.print("11: Afegeix un Arraylist de doctors\n");
+			System.out.print("12: Borra un doctor\n");
+			System.out.print("13: Borra tots els Doctors\n");
+			System.out.print("14:No Operativa Afegeix un torn\n");
+			System.out.print("15: Mostra l'hospital\n");
+			
 		
 			
 			opcion = teclado.nextInt(); //leemos opcion
@@ -107,15 +127,14 @@ public class DriverHospital {
 			
 			
 			switch(opcion){
-				case 1:{ 
+				case 1:{ //
 					
 					break;
 				}
 				case 2: { //
 					++id;
-					int Dia;
+					
 					System.out.print("\n");
-					Dia = teclado.nextInt();
 					//HOSP =...
 					
 					
@@ -123,18 +142,16 @@ public class DriverHospital {
 				}
 				case 3:{ //
 					++id;
-					String Dia;
 					System.out.print("\n");
-					Dia = teclado.next();
+
 					//HOSP... 
 					
 					break;
 				}
 				case 4:{ //
 					++id;
-					String Dia;
+
 					System.out.print("\n");
-					Dia = teclado.next();
 					//HOSP=..
 					
 					break;
@@ -158,7 +175,27 @@ public class DriverHospital {
 					break;
 					
 				}
-				case 10:{
+				case 10:{ 
+					break;
+					
+				}
+				case 11:{ 
+					break;
+					
+				}
+				case 12:{ 
+					break;
+					
+				}
+				case 13:{ 
+					break;
+					
+				}
+				case 14:{ 
+					break;
+					
+				}
+				case 15:{
 					
 					if(id != -1) {
 						MostrarHosp(HOSP);

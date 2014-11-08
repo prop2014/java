@@ -148,7 +148,7 @@ public class Hospital {
 	}
 		
 	
-	//////private//////////MMMMMMOOOOODIIIFICADORASSSSSS/////////
+
 	private void sets_____________(){};
 	
 		//modificadora del nombre   //
