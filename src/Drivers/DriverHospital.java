@@ -39,7 +39,7 @@ public class DriverHospital {
 			}
 		}
 		
-		System.out.printf("LLista de Torns:\n");
+		System.out.printf("Actualment no te calendari\n");
 		
 		System.out.printf("______________________________\n");
 		
@@ -123,16 +123,17 @@ public class DriverHospital {
 			
 			
 			
-			Hospital HOSP = new Hospital(); 
+			Hospital HOSP = new Hospital();
 			
 			
 			switch(opcion){
 				case 1:{ //
-					
+					Hospital h = new Hospital();
+					MostrarHosp(h);
 					break;
 				}
 				case 2: { //
-					++id;
+					id=1;
 					
 					System.out.print("\n");
 					//HOSP =...
