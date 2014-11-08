@@ -1,3 +1,5 @@
+//autor: Oscar Urgelles
+
 package Drivers;
 import java.util.*;
 
@@ -24,10 +26,11 @@ public class DriverHospital {
 			System.out.printf("Hi ha %d Doctors\n",hosp.Docsize());
 			aldoc=hosp.getDoctors();
 			Iterator<Doctor> itr = aldoc.iterator();
-			int i = 0;
+			int i = 1;
 			while(itr.hasNext()){
 				Doctor d = new Doctor();
 				d=itr.next();
+				System.out.printf("--------------------.\n");
 				System.out.printf("%d.\n",i);
 				System.out.printf("ID: %d\n",d.getId());
 				System.out.printf("Nom: %s\n",d.getNombre());
@@ -36,10 +39,11 @@ public class DriverHospital {
 				if(d.isREmpty()) System.out.printf("No te restriccions: \n");
 				else System.out.printf("Te restriccions\n");
 				++i;
+				System.out.printf("--------------------.\n");
 			}
 		}
 		
-		System.out.printf("Actualment no te calendari\n");
+		System.out.printf("Actualment l'Hospital no te calendari\n");
 		
 		System.out.printf("______________________________\n");
 		
@@ -108,13 +112,12 @@ public class DriverHospital {
 			System.out.print("5: Canviali el factor Mati\n");
 			System.out.print("6: Canviali el factor Tarda\n");
 			System.out.print("7: Canviali el factor Nit\n");
-			System.out.print("8: \n");
-			System.out.print("9: Afegiex un doctor\n");
-			System.out.print("10: Afegeix un Vector de doctors\n");
-			System.out.print("11: Afegeix un Arraylist de doctors\n");
-			System.out.print("12: Borra un doctor\n");
-			System.out.print("13: Borra tots els Doctors\n");
-			System.out.print("14:No Operativa Afegeix un torn\n");
+			System.out.print("8: Afegiex un doctor\n");
+			System.out.print("9: Afegeix un Vector de doctors\n");
+			System.out.print("10: Afegeix un Arraylist de doctors\n");
+			System.out.print("11: Borra un doctor\n");
+			System.out.print("12: Borra tots els Doctors\n");
+			System.out.print("13:No Operativa Afegeix un torn\n");
 			System.out.print("15: Mostra l'hospital\n");
 			
 		
@@ -199,7 +202,25 @@ public class DriverHospital {
 					else System.out.print("Hospital No creat\n");
 					break;
 				}
-				case 8:{
+				case 8:{ //afegir doctor
+					if(id!=-1){
+						System.out.print("Ingrese el Id, Nombre, Numero maximo de turnos y Sueldo del Doctor\n");
+						int Id, numMax;
+						String nombre;
+						Double sueldo;
+						Id = teclado.nextInt();
+						nombre = teclado.next();
+						numMax = teclado.nextInt();	
+						sueldo = teclado.nextDouble();
+						Doctor doc = new Doctor(Id, nombre, numMax, sueldo);
+						if(HOSP.existsDoctor(Id)) System.out.print("Et recordo que ja existeix aquest identificador\n");
+						else{
+							HOSP.afegirDoctor(doc);
+							System.out.print("\n Doctor Afegit! (prova opcio 15 despres de continuar) \n");
+						}
+					}
+					else System.out.print("Hospital No creat\n");
+					
 					break;
 				}
 				case 9:{ 
