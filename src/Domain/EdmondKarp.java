@@ -19,7 +19,7 @@ public class EdmondKarp extends FordFulkerson{
 	    Pre: El mateix que la funció a la classe FordFulkerson
 	Post: Retorna un camí del graf g amb inici al node nodeInicial i destí al nodeDesti. Si no existeix un camí retorna un ArrayList buit.
 	@Override*/
-	public ArrayList<Integer> dameCamino(Graf<Object> g){
+	public ArrayList<Integer> dameCamino(Graf<?> g){
 		ArrayList<Integer> camino = new ArrayList<Integer>(0);
 		return camino;
 	}
