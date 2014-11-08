@@ -92,7 +92,7 @@ public class DriverHospital {
 		
 		Scanner teclado;
 		teclado = new Scanner(System.in);
-		
+		Hospital HOSP = new Hospital();
 		int id = -1;
 		int opcion = -1;
 		
@@ -108,7 +108,7 @@ public class DriverHospital {
 			System.out.print("5: Canviali el factor Mati\n");
 			System.out.print("6: Canviali el factor Tarda\n");
 			System.out.print("7: Canviali el factor Nit\n");
-			System.out.print("8: Canviali els 3 factors de cop\n");
+			System.out.print("8: \n");
 			System.out.print("9: Afegiex un doctor\n");
 			System.out.print("10: Afegeix un Vector de doctors\n");
 			System.out.print("11: Afegeix un Arraylist de doctors\n");
@@ -120,56 +120,86 @@ public class DriverHospital {
 		
 			
 			opcion = teclado.nextInt(); //leemos opcion
-			
-			
-			
-			Hospital HOSP = new Hospital();
-			
-			
+						
 			switch(opcion){
 				case 1:{ //
-					Hospital h = new Hospital();
-					MostrarHosp(h);
+					id=1;
+					System.out.print("Hospital Creat Correctament (prova opcio 15 despres de continuar)\n");
 					break;
 				}
-				case 2: { //
+				case 2: { //Crea Hospital con id, nombre y factores
 					id=1;
+					int codigo;
+					String n;
+					double fm;
+					double ft;
+					double fn;
+					System.out.print("Ingrese el id del hospital: ");
+					codigo = teclado.nextInt();
+					System.out.print("Ingrese el nombre del hospital: ");
+					n = teclado.next();
+					System.out.print("Ingrese el factorMañana: ");
+					fm = teclado.nextDouble();
+					System.out.print("Ingrese el factorTarde: ");
+					ft = teclado.nextDouble();
+					System.out.print("Ingrese el factorNoche: ");
+					fn = teclado.nextDouble();
 					
-					System.out.print("\n");
-					//HOSP =...
-					
-					
+					HOSP = new Hospital(codigo,n,fm,ft,fn);
+					System.out.print("Hospital Creat Correctament (prova opcio 15 despres de continuar)\n");		
 					break;
 				}
 				case 3:{ //
-					++id;
-					System.out.print("\n");
-
-					//HOSP... 
+					id=-1;
+					System.out.print("No OPERATIVA\n");
 					
 					break;
 				}
-				case 4:{ //
-					++id;
-
-					System.out.print("\n");
-					//HOSP=..
-					
+				case 4:{ //Canviali el nom al hospital
+					if(id!=-1){
+						String n;
+						System.out.print("Ingrese el nuevo nombre del hospital: ");
+						n = teclado.next();
+						HOSP.setNombre(n);
+						System.out.print("Nom Canviat!\n");
+					}
+					else System.out.print("Hospital No creat\n");
 					break;
 				}
 				case 5:{ 
-				}
-					
+					if(id!=-1){
+						double fm;
+						System.out.print("Ingrese el nuevo factorMañana: ");
+						fm = teclado.nextDouble();
+						HOSP.setFactorM(fm);
+						System.out.print("\n Factor Mati canviat! (prova opcio 15 despres de continuar) \n");
+					}	
+					else System.out.print("Hospital No creat\n");	
 					break;
-					
+				}
 				case 6:{ 
+					if(id!=-1){
+						double ft;
+						System.out.print("Ingrese el nuevo factorTarde: ");
+						ft = teclado.nextDouble();
+						HOSP.setFactorT(ft);
+						System.out.print("\n Factor Tarda canviat! (prova opcio 15 despres de continuar) \n");
+					}
+					else System.out.print("Hospital No creat\n");
 					break;
 				}
 				case 7:{ 
+					if(id!=-1){
+						double fn;
+						System.out.print("Ingrese el nuevo factorNoche: ");
+						fn = teclado.nextDouble();
+						HOSP.setFactorN(fn);
+						System.out.print("\n Factor Nit canviat! (prova opcio 15 despres de continuar) \n");
+					}
+					else System.out.print("Hospital No creat\n");
 					break;
 				}
 				case 8:{
-					
 					break;
 				}
 				case 9:{ 
@@ -197,12 +227,8 @@ public class DriverHospital {
 					
 				}
 				case 15:{
-					
-					if(id != -1) {
-						MostrarHosp(HOSP);
-					}
-					else System.out.print("No existe Hosp!\n\n");
-					
+					if(id!=-1)	MostrarHosp(HOSP);
+					else System.out.print("L'hospital no esta creat\n");
 					break;
 				}
 				default: break;
