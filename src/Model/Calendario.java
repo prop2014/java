@@ -6,13 +6,13 @@ import java.util.*;
 
 import Model.Turno;
 
-public class Calendari {
+public class Calendario {
 
 	private Map <Date, Turno[]> cale;
 	
-	public Calendari(){}
+	public Calendario(){}
 		//constructora copia
-	public Calendari(Calendari cal){}
+	public Calendario(Calendario cal){}
 	
 	// modifica el turno t de la fecha data
 	public void modificarTurno(Date data,Turno t){}
