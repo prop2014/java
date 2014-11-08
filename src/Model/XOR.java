@@ -1,6 +1,8 @@
 // Autor: Axel's Copyright 
 package Model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import Model.Restriccion;
@@ -38,6 +40,16 @@ public class XOR extends Restriccion {
 	
 	public List<Date> getListDates(){
 		return Lista_XOR; 
+	}
+	
+	public void anadirFecha(String newFecha) throws ParseException{
+		
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		Date Fecha = formato.parse(newFecha);
+		
+		Lista_XOR.add(Fecha);
+		
+		
 	}
 
 }
