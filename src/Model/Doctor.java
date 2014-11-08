@@ -1,4 +1,5 @@
-//Autor Sergi Orra
+/* Autor: Sergi Orra */
+
 package Model;
 import java.util.*;
 import java.io.IOException;
@@ -104,24 +105,29 @@ public class Doctor {
 		}
 		
 		
-		/*añadir una restriccion r al Doctor */
+		/*True si se ha podido añadir la restriccion
+		  False si no se ha podido añadir la resticcion en el map */
 		
-		public void addRestriccion(Restriccion r) throws IOException {
+		public boolean addRestriccion(Restriccion r) {
 			if (Restricciones.containsKey(r.getId())) {
-				throw new IOException("Esta restriccion ya existe");
+				return false;
 			}
 			else {
-				
+				Restricciones.put(r.getId(), r);
+				return true;
 			}
 		}
 		
-		/* Eliminar una Restriccion r al Doctor */
+		/*True si se ha podido eliminar la restriccion
+		  False si no se ha podido eliminar la restriccion del map */
 		
-		public void eliminarRestriccion(Restriccion r) throws IOException {
+		public boolean eliminarRestriccion(Restriccion r) {
 			if (!Restricciones.containsKey(r.getId())) {
-				throw new IOException("Esta restriccion no existe");
+				return false;
 			}
 			else {
+				Restricciones.remove(r.getId());
+				return true;
 			}
 		}
 		
