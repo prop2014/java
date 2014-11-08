@@ -35,7 +35,9 @@ public class DriverHospital {
 				System.out.printf("ID: %d\n",d.getId());
 				System.out.printf("Nom: %s\n",d.getNombre());
 				System.out.printf("Num Max turnos: %d\n",d.getNumMaxTurnos());
-				System.out.printf("Sueldo Por turno: %s\n",d.getSueldoTurno());
+				System.out.printf("Sueldo Por turno: %s €",d.getSueldoTurno());
+				if(d.getSueldoTurno()< 1000.0) System.out.printf(" si ke pasa no soi ni mileurista\n");
+				else System.out.printf(" i Like Money Bitches\n");
 				if(d.isREmpty()) System.out.printf("No te restriccions: \n");
 				else System.out.printf("Te restriccions\n");
 				++i;
@@ -113,8 +115,8 @@ public class DriverHospital {
 			System.out.print("6: Canviali el factor Tarda\n");
 			System.out.print("7: Canviali el factor Nit\n");
 			System.out.print("8: Afegiex un doctor\n");
-			System.out.print("9: Afegeix un Vector de doctors\n");
-			System.out.print("10: Afegeix un Arraylist de doctors\n");
+			System.out.print("9: Afegeix un Vector de doctors (vector de doctors creat per defecte)\n");
+			System.out.print("10: Afegeix un Arraylist de doctors (arraylist de doctors creat per defecte) \n");
 			System.out.print("11: Borra un doctor\n");
 			System.out.print("12: Borra tots els Doctors\n");
 			System.out.print("13:No Operativa Afegeix un torn\n");
