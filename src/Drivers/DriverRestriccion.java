@@ -149,7 +149,7 @@ public class DriverRestriccion {
 			System.out.print("-----------------------------------------------------\n");
 			System.out.print("|               ¿Que desea hacer?                   |\n");
 			System.out.print("|---------------------------------------------------|\n");
-			System.out.print("| NOP 1: Crear Restriccion tipo XOR                 |\n");
+			System.out.print("| 1: Crear Restriccion tipo XOR                     |\n");
 			System.out.print("| 2: Crear Restriccion tipo NOT_Dia_Mes             |\n");
 			System.out.print("| 3: Crear Restriccion tipo NOT_Dia_Semana          |\n");
 			System.out.print("| 4: Crear Restriccion tipo NOT_Especial            |\n");
