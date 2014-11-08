@@ -1,6 +1,6 @@
 //Autor: Axel's Copyright 
 package Model;
-import java.util.*;
+//import java.util.*;
 import Model.Restriccion;
 
 public class NOT_Turno extends Restriccion {
@@ -12,8 +12,8 @@ public class NOT_Turno extends Restriccion {
 	/* Constructora */
 	
 	public NOT_Turno(int id, String T_Turno) {
-		id_Restriccion = id;
-		Tipo = "NOT_Turno"; 
+		
+		super(id,"NOT_Turno");
 		TipoTurno = T_Turno; 
 		
 	}

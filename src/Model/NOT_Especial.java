@@ -1,6 +1,6 @@
 //Autor: Axel's Copyright 
 package Model;
-import java.util.*;
+//import java.util.*;
 import Model.Restriccion;
 
 public class  NOT_Especial extends Restriccion{
@@ -12,8 +12,8 @@ public class  NOT_Especial extends Restriccion{
 	/* Constructora */
 
 	public NOT_Especial(int id, String Esp) {
-		id_Restriccion = id;
-		Tipo = "NOT_Especial";
+		
+		super(id,"NOT_Especial");
 		Especial = Esp;
 		
 	}

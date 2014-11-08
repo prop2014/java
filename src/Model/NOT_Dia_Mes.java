@@ -1,6 +1,6 @@
 //Autor: Axel's Copyright 
 package Model;
-import java.util.*;
+//import java.util.*;
 import Model.Restriccion;
 
 public class NOT_Dia_Mes extends Restriccion{
@@ -9,11 +9,12 @@ public class NOT_Dia_Mes extends Restriccion{
 	private int Dia_Mes;
 
 
-	/* Constructora */
-
+	/* Constructora */	
+	
+	
 	public NOT_Dia_Mes(int id, int Dia_M) {
-		id_Restriccion = id;
-		Tipo = "NOT_Dia_Mes";
+		
+		super(id,"NOT_Dia_Mes");
 		Dia_Mes= Dia_M;
 	}
 

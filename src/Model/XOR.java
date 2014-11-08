@@ -1,21 +1,25 @@
 // Autor: Axel's Copyright 
 package Model;
+
 import java.util.*;
+
 import Model.Restriccion;
 
 public class XOR extends Restriccion {
 
 	/* Atributos */
 	
-	//Vector de Fechas
-	Vector<Date> vector_XOR = new Vector<Date>();
+	//array de Fechas
+	
+	
+	List<Date> Lista_XOR = new ArrayList<Date>();
 	
 	/* Constructora */
 
-	public XOR(int id, Vector<Date> vector_X) {
-		id_Restriccion = id;
-		Tipo = "XOR";
-		vector_XOR = vector_X;
+	public XOR(int id, List<Date> Lista_X) {
+		
+		super(id,"XOR");
+		 Lista_XOR  = Lista_X;
 	}
 
 	
@@ -32,8 +36,8 @@ public class XOR extends Restriccion {
 		return Tipo;
 	}
 	
-	public Vector<Date> getVecDates(){
-		return vector_XOR; 
+	public List<Date> getListDates(){
+		return Lista_XOR; 
 	}
 
 }

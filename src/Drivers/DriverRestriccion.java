@@ -1,5 +1,6 @@
 package Drivers;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import Model.Doctor;
@@ -25,6 +26,27 @@ public class DriverRestriccion {
 		
 		switch(TIPO){
 		case "XOR":{//XOR
+			
+			//Especificamos el formato
+			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+			
+			XOR N = (XOR)RES;
+			String a = N.getTipo();
+			System.out.print("Los dias de la restriccion " + a + " son: \n");
+			
+			List<Date> L_XOR = N.getListDates();
+			
+			
+			for (Date Fecha : L_XOR){//Para cada elemento de la lista
+				
+				//Parseo
+				String Dia = formato.format(Fecha);
+				
+				System.out.print("String: " + Dia + "\n");
+				System.out.print("Full info Date: " + Fecha + "\n");
+				
+			}
+			
 			
 			break;
 		}
@@ -144,7 +166,43 @@ public class DriverRestriccion {
 				
 			switch(opcion){
 				case 1:{ //XOR
-					System.out.print("ESTA RESTRICCION NO ESTA OPERATIVA \n");
+					++id;
+					
+					SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+					
+					//Gestionar el bucle interno
+					boolean next = true;
+					String seguir;
+					
+					List<Date> L_XOR = new ArrayList<Date>();
+					
+					//Leer fecha y parsearla
+					System.out.print("Introduce una fecha (dd/MM/aaaa) \n");
+					String Dia = teclado.next();
+					Date Fecha = formato.parse(Dia);
+					
+					L_XOR.add(Fecha);
+					
+					
+					do {
+						//Leer fecha y parsearla
+						System.out.print("Introduce otra fecha (dd/MM/aaaa) \n");
+						Dia = teclado.next();
+						Fecha = formato.parse(Dia);
+						
+						L_XOR.add(Fecha);
+						
+						System.out.print("Seguir añadiendo fechas? (Si/No) \n");
+						seguir = teclado.next();
+						// Si seleccionamos "No" o sus variantes saldremos del bucle
+						if(seguir.equals("No") || seguir.equals("no") || seguir.equals("N") || seguir.equals("NO") || seguir.equals("n")) next = false; 
+						
+					} while(next);
+					
+					RES = new XOR(id, L_XOR);
+					System.out.print("DONE\n");
+					
+					
 					break;
 				}
 				case 2: { //NOT_Dia_Mes

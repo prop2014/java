@@ -1,6 +1,6 @@
 //Autor: Axel's Copyright 
 package Model;
-import java.util.*;
+//import java.util.*;
 import Model.Restriccion;
 
 public class  MAX_Turnos_por_Dia extends Restriccion{
@@ -13,8 +13,8 @@ public class  MAX_Turnos_por_Dia extends Restriccion{
 	/* Constructora */
 
 	public MAX_Turnos_por_Dia(int id, int Num_T) {
-		id_Restriccion = id;
-		Tipo = "MAX_Turnos_por_Dia";
+		
+		super(id,"MAX_Turnos_por_Dia");
 		Num_Turnos = Num_T;
 	}
 

@@ -1,6 +1,6 @@
 //Autor: Axel's Copyright 
 package Model;
-import java.util.*;
+//import java.util.*;
 import Model.Restriccion;
 
 public class  MAX_Turnos_Consecutivos extends Restriccion {
@@ -12,8 +12,8 @@ public class  MAX_Turnos_Consecutivos extends Restriccion {
 	/* Constructora */
 
 	public MAX_Turnos_Consecutivos (int id, int Num_T) {
-		id_Restriccion = id;
-		Tipo = "MAX_Turnos_Consecutivos";
+		
+		super(id, "MAX_Turnos_Consecutivos");
 		Num_Turnos = Num_T;
 	}
 

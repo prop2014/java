@@ -1,7 +1,7 @@
 
 //Autor: Axel's Copyright 
 package Model;
-import java.util.*;
+//import java.util.*;
 import Model.Restriccion;
 
 public class NOT_Dia_Semana extends Restriccion{
@@ -13,8 +13,8 @@ public class NOT_Dia_Semana extends Restriccion{
 	/* Constructora */
 
 	public NOT_Dia_Semana(int id, String Dia_Se) {
-		id_Restriccion = id;
-		Tipo = "NOT_Dia_Semana";
+		
+		super(id,"NOT_Dia_Semana");
 		Dia_Semana = Dia_Se;
 	}
 
