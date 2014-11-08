@@ -1,6 +1,7 @@
 //Autor Sergi Orra
 package Model;
 import java.util.*;
+import java.io.IOException;
 
 public class Doctor {
 
@@ -54,6 +55,17 @@ public class Doctor {
 		    return SueldoTurno;
 		}
 		
+		/* Devuelve un ArrayList con todas las retricciones del Doctor */
+		public ArrayList<Restriccion> getRestriccions(){
+			ArrayList<Restriccion> restr = new ArrayList<Restriccion>(Restricciones.size());
+			Iterator<Integer> it = Restricciones.keySet().iterator();
+			while(it.hasNext()) {
+			    Integer key = it.next();
+			    restr.add(Restricciones.get(key));
+			}
+			return restr;
+		}
+		
 		/* True si el Doctor del parametro implicito no tiene ninguna restriccion */
 		
 		public boolean isREmpty(){
@@ -94,12 +106,23 @@ public class Doctor {
 		
 		/*añadir una restriccion r al Doctor */
 		
-		public void addRestriccion(Restriccion r) {
+		public void addRestriccion(Restriccion r) throws IOException {
+			if (Restricciones.containsKey(r.getId())) {
+				throw new IOException("Esta restriccion ya existe");
+			}
+			else {
+				
+			}
 		}
 		
 		/* Eliminar una Restriccion r al Doctor */
 		
-		public void eliminarRestriccion(Restriccion r) {
+		public void eliminarRestriccion(Restriccion r) throws IOException {
+			if (!Restricciones.containsKey(r.getId())) {
+				throw new IOException("Esta restriccion no existe");
+			}
+			else {
+			}
 		}
 		
 		/* Borrar todas las restricciones de un Doctor (¿Necesario?) */
