@@ -5,7 +5,7 @@ import java.util.*;
 
 import Model.Doctor;
 import Model.Restriccion;
-import Model.Calendari;
+import Model.Calendario;
 import Model.Turno;
 
 public class Hospital {
@@ -18,7 +18,7 @@ public class Hospital {
 	private double factorT;
 	private double factorN;
 	private Map <Integer , Doctor> doctors;
-	private Calendari calendari;
+	private Calendario calendari;
 
 
 
@@ -36,12 +36,12 @@ public class Hospital {
 		factorT=ft;
 		factorN=fn;
 		doctors = new TreeMap<Integer , Doctor>();
-		calendari = new Calendari();
+		calendari = new Calendario();
 	}
 	
 	// creadora con id, nombre, factores,vector de doctores y calendario.//full
 	public Hospital (int id, String nom, double fm, double ft, double fn,
-			Doctor[] vdoc, Calendari cal){
+			Doctor[] vdoc, Calendario cal){
 		idHospital=id;
 		nombre=nom;
 		factorM=fm;
@@ -53,12 +53,12 @@ public class Hospital {
 				doctors.put(vdoc[i].getId(), vdoc[i]);
 			}
 		}
-		calendari = new Calendari(cal);
+		calendari = new Calendario(cal);
 	}
 	
 // creadora con id, nombre, factores, arraylist de doctores y calendario. //full
 		public Hospital (int id, String nom, double fm, double ft, double fn,
-				ArrayList<Doctor> aldoc, Calendari cal){
+				ArrayList<Doctor> aldoc, Calendario cal){
 			idHospital=id;
 			nombre=nom;
 			factorM=fm;
