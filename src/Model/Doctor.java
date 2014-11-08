@@ -57,7 +57,7 @@ public class Doctor {
 		}
 		
 		/* Devuelve un ArrayList con todas las retricciones del Doctor */
-		public ArrayList<Restriccion> getRestriccions(){
+		public ArrayList<Restriccion> getRestricciones(){
 			ArrayList<Restriccion> restr = new ArrayList<Restriccion>(Restricciones.size());
 			Iterator<Integer> it = Restricciones.keySet().iterator();
 			while(it.hasNext()) {
@@ -121,12 +121,12 @@ public class Doctor {
 		/*True si se ha podido eliminar la restriccion
 		  False si no se ha podido eliminar la restriccion del map */
 		
-		public boolean eliminarRestriccion(Restriccion r) {
-			if (!Restricciones.containsKey(r.getId())) {
+		public boolean eliminarRestriccion(int id) {
+			if (!Restricciones.containsKey(id)) {
 				return false;
 			}
 			else {
-				Restricciones.remove(r.getId());
+				Restricciones.remove(id);
 				return true;
 			}
 		}
