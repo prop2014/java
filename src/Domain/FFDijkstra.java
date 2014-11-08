@@ -73,12 +73,13 @@ public class FFDijkstra extends FordFulkerson {
 			}
 			
 			Stack<Integer> cam = new Stack<Integer>();
-			int sig = t;
+			//int sig = t; Cuando esté hecho FordFulkerson
+			int sig = size - 1;
 			if(pred[sig] == -1) throw new IOException("No existe camino");
 			else { 
 				while(sig != 0) {
-				cam.push(sig);
-				sig = pred[sig];
+					cam.push(sig);
+					sig = pred[sig];
 				}
 				cam.push(s);
 				while(!cam.isEmpty()) {
