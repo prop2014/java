@@ -127,8 +127,13 @@ public class Calendario {
 	}
 	
 	
-	// devuelve si existeel dia vacacional
-	public boolean existDiaVacacional(GregorianCalendar d){
+	/**
+	 * Comprueba si existe en el calendario un día vacacional con fecha d.
+	 *  
+	 * @param d Fecha del día vacacional
+	 * @return True si existe un día vacacional con fecha d, False en caso contrario.
+	 */
+	public boolean existsDiaVacacional(GregorianCalendar d){
 		return cal.containsKey(d);
 	}
 	
