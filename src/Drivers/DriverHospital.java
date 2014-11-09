@@ -44,9 +44,10 @@ public class DriverHospital {
 				System.out.printf("--------------------.\n");
 			}
 		}
-		
-		System.out.printf("Actualment l'Hospital no te calendari\n");
-		
+		if(hosp.getNumDias()==0) System.out.printf("Actualment l'Hospital no te calendari\n");
+		else {
+			System.out.printf("El calendari te %d Dies Vacacionals\n",hosp.getNumDias());	
+		}
 		System.out.printf("______________________________\n");
 		
 	}
@@ -87,30 +88,40 @@ public class DriverHospital {
 						
 			switch(opcion){
 				case 1:{ //
-					id=1;
-					System.out.print("Hospital Creat Correctament (prova opcio 15 despres de continuar)\n");
+					if(id!=1){
+						id=1;
+						System.out.print("Hospital Creat Correctament (prova opcio 15 despres de continuar)\n");
+					}
+					else {
+						System.out.print("Ja havies creat un hospital\n");
+					}
 					break;
 				}
 				case 2: { //Crea Hospital con id, nombre y factores
-					id=1;
-					int codigo;
-					String n;
-					double fm;
-					double ft;
-					double fn;
-					System.out.print("Ingrese el id del hospital: ");
-					codigo = teclado.nextInt();
-					System.out.print("Ingrese el nombre del hospital: ");
-					n = teclado.next();
-					System.out.print("Ingrese el factorMañana: ");
-					fm = teclado.nextDouble();
-					System.out.print("Ingrese el factorTarde: ");
-					ft = teclado.nextDouble();
-					System.out.print("Ingrese el factorNoche: ");
-					fn = teclado.nextDouble();
-					
-					HOSP = new Hospital(codigo,n,fm,ft,fn);
-					System.out.print("Hospital Creat Correctament (prova opcio 15 despres de continuar)\n");		
+					if(id!=1){
+						id=1;
+						int codigo;
+						String n;
+						double fm;
+						double ft;
+						double fn;
+						System.out.print("Ingrese el id del hospital: ");
+						codigo = teclado.nextInt();
+						System.out.print("Ingrese el nombre del hospital: ");
+						n = teclado.next();
+						System.out.print("Ingrese el factorMañana: ");
+						fm = teclado.nextDouble();
+						System.out.print("Ingrese el factorTarde: ");
+						ft = teclado.nextDouble();
+						System.out.print("Ingrese el factorNoche: ");
+						fn = teclado.nextDouble();
+						
+						HOSP = new Hospital(codigo,n,fm,ft,fn);
+						System.out.print("Hospital Creat Correctament (prova opcio 15 despres de continuar)\n");		
+					}
+					else {
+						System.out.print("Ja havies creat un hospital\n");
+					}
 					break;
 				}
 				case 3:{ //
@@ -228,11 +239,13 @@ public class DriverHospital {
 				}
 				case 13:{ //afegeix dia vacacional
 					if(id!=-1){
-						GregorianCalendar d;
-						d=teclado.next();
-						System.out.print("introdueix el dia vacacional: \n");
-						if(HOSP.existDiaVacacional(d)==false){ //no existeix
-							
+						System.out.print("introdueix el dia vacacional: (dd/mm/yyyy) \n");
+						int dia = teclado.nextInt();
+						int mes = teclado.nextInt();
+						int year = teclado.nextInt();
+						GregorianCalendar d= new GregorianCalendar(dia,mes,year);
+						if(HOSP.existsDiaVacacional(d)==true){ //ya existeix
+							System.out.print("ya existeix aquest dia vacacional\n");
 						}
 						else {
 							HOSP.addDiaVacacional(d);
@@ -242,7 +255,22 @@ public class DriverHospital {
 					else System.out.print("Hospital No creat\n");
 					break;
 				}
-				case 14:{ 
+				case 14:{ //borra dia vacacional
+					if(id!=-1){
+						System.out.print("introdueix el dia vacacional a eliminar: (dd/mm/yyyy) \n");
+						int dia = teclado.nextInt();
+						int mes = teclado.nextInt();
+						int year = teclado.nextInt();
+						GregorianCalendar d= new GregorianCalendar(dia,mes,year);
+						if(HOSP.existsDiaVacacional(d)==true){ //ya existeix
+							HOSP.deleteDiaVacacional(d);
+							System.out.print("DiaVacacional borrat (prova opcio 15) \n");
+						}
+						else {
+							System.out.print("Aquest dia no pertany al calendari\n");
+						}
+					}
+					else System.out.print("Hospital No creat\n");
 					break;
 					
 				}

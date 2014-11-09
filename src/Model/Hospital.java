@@ -164,11 +164,18 @@ public class Hospital {
 */	
 	private void gets_de_Calendari__________(){};
 	
-    public boolean existDiaVacacional(GregorianCalendar d){
-    	return calendari.existDiaVacacional(d);
+    public boolean existsDiaVacacional(GregorianCalendar d){
+    	return calendari.existsDiaVacacional(d);
     }
+    
+    public int getNumDias(){
+		return calendari.getNumDias();
+	}
+
+	public int getNumTurnos(){
+		return calendari.getNumTurnos();
 	
-	
+	}
 
 	private void sets_de_hospital_____________(){};
 	
