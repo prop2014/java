@@ -164,7 +164,9 @@ public class Hospital {
 */	
 	private void gets_de_Calendari__________(){};
 	
- // no necsito gets	
+    public boolean existDiaVacacional(GregorianCalendar d){
+    	return calendari.existDiaVacacional(d);
+    }
 	
 	
 

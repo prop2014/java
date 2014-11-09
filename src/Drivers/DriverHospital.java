@@ -77,7 +77,8 @@ public class DriverHospital {
 			System.out.print("10: Afegeix un Arraylist de doctors (arraylist de doctors creat per defecte) \n");
 			System.out.print("11: Borra un doctor\n");
 			System.out.print("12: Borra tots els Doctors\n");
-			System.out.print("13:No Operativa Afegeix un torn\n");
+			System.out.print("13: Afegeix un Dia Vacacional\n");
+			System.out.print("14: Elimina un Dia Vacacional\n");
 			System.out.print("15: Mostra l'hospital\n");
 			
 		
@@ -225,9 +226,21 @@ public class DriverHospital {
 					break;
 					
 				}
-				case 13:{ 
+				case 13:{ //afegeix dia vacacional
+					if(id!=-1){
+						GregorianCalendar d;
+						d=teclado.next();
+						System.out.print("introdueix el dia vacacional: \n");
+						if(HOSP.existDiaVacacional(d)==false){ //no existeix
+							
+						}
+						else {
+							HOSP.addDiaVacacional(d);
+							System.out.print("DiaVacacional introduit (prova opcio 15) \n");
+						}
+					}
+					else System.out.print("Hospital No creat\n");
 					break;
-					
 				}
 				case 14:{ 
 					break;

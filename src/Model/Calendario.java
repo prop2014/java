@@ -125,6 +125,13 @@ public class Calendario {
 		t = cal.get(d).get(i);
 		return t;
 	}
+	
+	
+	// devuelve si existeel dia vacacional
+	public boolean existDiaVacacional(GregorianCalendar d){
+		return cal.containsKey(d);
+	}
+	
 
 	/**
 	 * Consultora del número total de días vacacionales.
