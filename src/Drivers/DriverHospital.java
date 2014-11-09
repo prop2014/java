@@ -13,9 +13,7 @@ public class DriverHospital {
 		System.out.printf("ID: %d\n",doc.getId());
 		System.out.printf("Nom: %s\n",doc.getNombre());
 		System.out.printf("Num Max turnos: %d\n",doc.getNumMaxTurnos());
-		System.out.printf("Sueldo Por turno: %s €",doc.getSueldoTurno());
-		if(doc.getSueldoTurno()< 1000.0) System.out.printf(" si ke pasa no soi ni mileurista\n");
-		else System.out.printf(" i Like Money Bitches\n");
+		System.out.printf("Sueldo Por turno: %s €\n",doc.getSueldoTurno());
 		if(doc.isREmpty()) System.out.printf("No te restriccions: \n");
 		else System.out.printf("Te restriccions\n");
 		System.out.printf("--------------------.\n");
@@ -88,7 +86,6 @@ public class DriverHospital {
 			System.out.print("15: Elimina un Dia Vacacional\n");
 			System.out.print("16: Mostra l'hospital\n");
 			System.out.print("17: Borra totes les dades de l'hospital\n");
-			
 			System.out.print("\n");
 			
 		
@@ -204,15 +201,57 @@ public class DriverHospital {
 					
 					break;
 				}
-				case 9:{ 
+				case 9:{ //Afegeix un Vector de doctors (vector de doctors creat per defecte)
+					if(id!=-1){
+						Doctor[] vdoc = new Doctor[5];
+						
+						vdoc[0]= new Doctor(1,"PRIMERO",1,1.0);
+						vdoc[1]= new Doctor(2,"SEGUNDO",2,2.0);
+						vdoc[2]= new Doctor(3,"TERCERO",3,3.0);	
+						vdoc[3]= new Doctor(4,"QUARTO",4,4.0);	
+						vdoc[4]= new Doctor(5,"QUINTO",5,5.0);
+						System.out.print("vdoc[0]=Doctor(1,PRIMERO,1,1.0)\n");
+						System.out.print("vdoc[1]=Doctor(2,SEGUNDO,2,2.0)\n");
+						System.out.print("vdoc[2]=Doctor(3,TERCERO,3,3.0)\n");
+						System.out.print("vdoc[3]=Doctor(4,QUARTO,4,4.0)\n");
+						System.out.print("vdoc[4]=Doctor(5,QUINTO,5,5.0)\n");
+						HOSP.afegirDoctors(vdoc);
+						System.out.print("S'han afegit els 5 doctors al Hospital. +" +
+								"Recorda que aquesta funcio sobreescriu els doctors\n");
+					}
+					else System.out.print("Hospital No creat\n");
 					break;
 					
 				}
-				case 10:{ 
+				
+				case 10:{ //afegeix un arraylist de doctors al hospital
+					if(id!=-1){
+						Doctor doc1= new Doctor(1,"PRIMERO",1,1.0);
+						Doctor doc2= new Doctor(2,"SEGUNDO",2,2.0);
+						Doctor doc3= new Doctor(3,"TERCERO",3,3.0);	
+						Doctor doc4= new Doctor(4,"QUARTO",4,4.0);	
+						Doctor doc5= new Doctor(5,"QUINTO",5,5.0);
+						ArrayList<Doctor> aldoc = new ArrayList<Doctor>();
+						aldoc.add(doc1);
+						aldoc.add(doc2);
+						aldoc.add(doc3);
+						aldoc.add(doc4);
+						aldoc.add(doc5);
+						System.out.print("doc1=Doctor(1,PRIMERO,1,1.0)\n");
+						System.out.print("doc2=Doctor(2,SEGUNDO,2,2.0)\n");
+						System.out.print("doc3=Doctor(3,TERCERO,3,3.0)\n");
+						System.out.print("doc4=Doctor(4,QUARTO,4,4.0)\n");
+						System.out.print("doc5=Doctor(5,QUINTO,5,5.0)\n");
+						HOSP.afegirDoctors(aldoc);
+						System.out.print("S'han afegit els 5 doctors al Hospital. +" +
+								"Recorda que aquesta funcio sobreescriu els doctors\n");
+					}
+					else System.out.print("Hospital No creat\n");
 					break;
 					
 				}
-				case 11:{ 
+					
+				case 11:{ //mostra un doctor
 					if(id!=-1){
 						System.out.print("ID de los doctores del hospital: \n");
 						ArrayList<Doctor> aldoc;
@@ -273,7 +312,7 @@ public class DriverHospital {
 				}
 				case 14:{ //afegeix dia vacacional
 					if(id!=-1){
-						System.out.print("introdueix el dia vacacional: (dd/mm/yyyy) \n");
+						System.out.print("introdueix el dia vacacional: (dd mm yyyy) \n");
 						int dia = teclado.nextInt();
 						int mes = teclado.nextInt();
 						int year = teclado.nextInt();
@@ -291,7 +330,7 @@ public class DriverHospital {
 				}
 				case 15:{ //borra dia vacacional
 					if(id!=-1){
-						System.out.print("introdueix el dia vacacional a eliminar: (dd/mm/yyyy) \n");
+						System.out.print("introdueix el dia vacacional a eliminar: (dd mm yyyy) \n");
 						int dia = teclado.nextInt();
 						int mes = teclado.nextInt();
 						int year = teclado.nextInt();
