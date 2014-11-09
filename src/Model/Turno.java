@@ -1,5 +1,5 @@
 package Model;
-import java.util.*;
+import java.util.Calendar;
 
 /**
  *
@@ -8,7 +8,7 @@ import java.util.*;
 public class Turno {
 
 	/* Atributos */
-	private Date fecha;
+	private Calendar fecha;
 	private String tipoTurno;
 	private String especial;
 	private int numDoctores;
@@ -19,7 +19,7 @@ public class Turno {
 	 *
 	 * Constructora por defecto
 	 */
-	public Turno() {
+	public Turno(){
 		fecha = null;
 		tipoTurno = null;
 		especial = null;
@@ -30,7 +30,7 @@ public class Turno {
 	 *
 	 * Constructora con parámetros
 	 */
-	public Turno(Date d, String tt, String de, int nd) {
+	public Turno(Calendar d, String tt, String de, int nd){
 		fecha = d;
 		tipoTurno = tt;
 		especial = de;
@@ -40,7 +40,7 @@ public class Turno {
 
 	/* Modificadoras */
 
-	public void setFecha(Date d){
+	public void setFecha(Calendar d){
 		fecha = d;
 	}
 
@@ -58,7 +58,7 @@ public class Turno {
 
 	/* Consultoras */
 
-	public Date getFecha(){
+	public Calendar getFecha(){
 		return fecha;
 	}
 
