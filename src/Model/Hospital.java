@@ -26,7 +26,15 @@ public class Hospital {
 	private void Constructoras____(){}
 	
 	
-	public Hospital() {}
+	public Hospital() {
+		idHospital=0;
+		nombre=null;
+		factorM=0.0;
+		factorT=0.0;
+		factorN=0.0;
+		doctors = new TreeMap<Integer , Doctor>();
+		calendari = new Calendario();
+	}
 	
 	//creadora amb id, nombre y factores
 	public Hospital (int id, String nom, double fm, double ft, double fn){
@@ -72,11 +80,9 @@ public class Hospital {
 			}
 			//calendari = new Calendari(cal);
 		}
+		
 	
-	
-	private void gets__________(){};
-	
-	
+	private void gets_de_hospital__________(){}
 	
 	// consultora de la id
 	public int getId(){
@@ -102,6 +108,7 @@ public class Hospital {
 	public double getFactorN(){
 		return factorN;
 	}
+	
 	//consultora que devuelve un vector con los factores(M,T,N);
 	public double[] getFactors(){
 		double[] fac;  
@@ -112,7 +119,16 @@ public class Hospital {
 		return fac;
 	}
 	
+	private void gets_de_doctor__________(){};
+	
+	//pre existe un doctor con identificador = id;
+	//devuelve el doctor con identificador = id.
+	public Doctor getDoctor(int id){
+		return doctors.get(id);
+	}
+	
 	//consulta tots els doctors
+	
 	public ArrayList<Doctor> getDoctors(){
 		ArrayList<Doctor> aldoc = new ArrayList<Doctor>(doctors.size());
 		Iterator<Integer> itr = doctors.keySet().iterator();
@@ -129,9 +145,9 @@ public class Hospital {
 	}
 	
 	 //consultora del numero de doctors
-		public int Docsize(){
-			return doctors.size();
-		}
+	public int Docsize(){
+		return doctors.size();
+	}
 	
 		//indica si existeix un doctor amb identificador = id;
 	public boolean existsDoctor(int id){
@@ -140,16 +156,30 @@ public class Hospital {
 	}
 	
 	
-	public ArrayList<Turno> getTorns(){
+/*	public ArrayList<Turno> getTorns(){
 		
 		ArrayList<Turno> altorns = new ArrayList<Turno>();
-		altorns = calendari.getTorns();
+	//	altorns = calendari.getTorns();
 		return altorns;
 	}
 		
+*/	
+	private void gets_de_Calendari__________(){};
+	
+	//devuelve el numero de dias Vacacionales del hospital
+	public int Calsize(){
+		return calendari.getNumDias();
+	}
+	
+	//devuelve el numero de Turnos Vacacionales del hospital
+	public int numTurnos(){
+		return calendari.getNumTurnos();
+	}
+	
+	
 	
 
-	private void sets_____________(){};
+	private void sets_de_hospital_____________(){};
 	
 		//modificadora del nombre   //
 	public void setNombre(String nom){
@@ -171,7 +201,9 @@ public class Hospital {
 		this.factorN=factor;
 	}
 	
-		//Modifica un doctor d
+	private void set_de_doctor_____________(){};
+	
+		//Sobreescrive un doctor presente en el hospital
 	public void setDoctor(Doctor d){
 		if(doctors.containsKey(d.getId())==true){
 			doctors.remove(d.getId());
@@ -179,14 +211,16 @@ public class Hospital {
 		}	
 	}
 	
-		//modifica el torn de la fecha data
-	public void setTorn(Date data,Turno t){
-		calendari.modificarTurno(data,t);
+	private void set_de_Calendario_____________(){};
+	
+		//modifica el turno tt de la fecha d
+	public void setTurno(GregorianCalendar d, String tt){
+		calendari.setTurno(d,tt);
 	}
 	
 	
-	private void metodos__________(){};
 	
+	private void metodos_de_doctor_________(){};
 	
 	
 		//afegeix un nou doctor d al hospital si no el contenia ja.
@@ -196,7 +230,7 @@ public class Hospital {
 		}
 		
 	}
-		//afegeix un conjunt de  doctors al hospital,sobreescriu si ja existia doctor
+		//afegeix un conjunt de  doctors al hospital,SOBREESCRIU si ja existia doctor
 	public void afegirDoctors(Doctor[] vdoc){
 		for(int i = 0; i < vdoc.length; ++i){
 			if(doctors.containsKey(vdoc[i].getId())==false){
@@ -209,7 +243,7 @@ public class Hospital {
 		}
 	}
 	
-	//afegeix un arraylist de doctors al hospital, sobreescriu si ja existia doctor
+	//afegeix un arraylist de doctors al hospital,  si ja existia doctor
 	public void afegirDoctors(ArrayList<Doctor> aldoc){
 
 		for(int i=0; i < aldoc.size();++i){
@@ -235,9 +269,20 @@ public class Hospital {
 		doctors.clear();
 	}
 	
-		//añade un turno t a la fecha data
-	public void addTurno(Date data, Turno t){
-		calendari.afegirTorn(data,t);
+	
+	private void metodos_de_calendari________(){};
+	
+		//Añade un nuevo día vacacional al calendario (si éste no existe),
+	 //* y sus 3 turnos de guardias correspondientes.
+	public void addDiaVacacional(GregorianCalendar d){
+		calendari.addDiaVacacional(d);
 	}
+	
+	//Elimina un día vacacional del calendario (si éste ya existe),
+	 //* y sus 3 turnos de guardias correspondientes.
+	public void deleteDiaVacacional(GregorianCalendar d){
+		calendari.deleteDiaVacacional(d);
+	}
+	
 	
 }//ficlass
