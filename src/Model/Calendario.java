@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.TreeMap;
 import java.util.Vector;
 import java.util.Collection;
+import java.io.IOException;
 
 /**
  *
@@ -14,8 +15,6 @@ public class Calendario {
 
 	private TreeMap <GregorianCalendar, Vector<Turno>> cal;
 
-	private SimpleDateFormat sdf;
-
 	/* Constructoras */
 
 	/**
@@ -24,7 +23,6 @@ public class Calendario {
 	 */
 	public Calendario(){
 		cal = new TreeMap <GregorianCalendar, Vector<Turno>>();
-		sdf = new SimpleDateFormat("dd/M/yyyy");
 	}
 
 	/**
@@ -45,12 +43,10 @@ public class Calendario {
 	 *
 	 * @param d Fecha del día vacacional que se añadirá al calendario.
 	 */
-	public void addDiaVacacional(GregorianCalendar d){
+	public void addDiaVacacional(GregorianCalendar d) throws IllegalArgumentException{
 		if(cal.containsKey(d)){			
-			String date = sdf.format(d); 
-			throw new IllegalArgumentException("Error al añadir el dia vacacional: el dia vacacional " + date + " ya existe.\n");
+			throw new IllegalArgumentException("Error al añadir el dia vacacional: el dia vacacional ya existe.\n");
 		}
-
 		else{
 			Vector<Turno> v = new Vector<Turno>(3);
 			for(int i=0; i<3; ++i){
@@ -73,10 +69,9 @@ public class Calendario {
 	 *
 	 * @param d Fecha del día vacacional que se eliminará del calendario.
 	 */
-	public void deleteDiaVacacional(GregorianCalendar d){
-		if(!cal.containsKey(d)){			
-			String date = sdf.format(d); 
-			throw new IllegalArgumentException("Error al eliminar el dia vacacional: el dia vacacional " + date + " NO existe.\n");
+	public void deleteDiaVacacional(GregorianCalendar d) throws IllegalArgumentException{
+		if(!cal.containsKey(d)){			 
+			throw new IllegalArgumentException("Error al eliminar el dia vacacional: el dia vacacional NO existe.\n");
 		}
 		else{
 			cal.remove(d);
