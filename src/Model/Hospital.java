@@ -4,9 +4,8 @@ package Model;
 import java.util.*;
 
 import Model.Doctor;
-import Model.Restriccion;
 import Model.Calendario;
-import Model.Turno;
+
 
 public class Hospital {
 	
@@ -151,7 +150,6 @@ public class Hospital {
 	
 		//indica si existeix un doctor amb identificador = id;
 	public boolean existsDoctor(int id){
-		
 		return doctors.containsKey(id);
 	}
 	
@@ -166,16 +164,7 @@ public class Hospital {
 */	
 	private void gets_de_Calendari__________(){};
 	
-	//devuelve el numero de dias Vacacionales del hospital
-	public int Calsize(){
-		return calendari.getNumDias();
-	}
-	
-	//devuelve el numero de Turnos Vacacionales del hospital
-	public int numTurnos(){
-		return calendari.getNumTurnos();
-	}
-	
+ // no necsito gets	
 	
 	
 
@@ -218,8 +207,6 @@ public class Hospital {
 		calendari.setTurno(d,tt);
 	}
 	
-	
-	
 	private void metodos_de_doctor_________(){};
 	
 	
@@ -257,10 +244,10 @@ public class Hospital {
 		}
 	}
 	
-		//borra el doctor d del hospital
-	public void borrarDoctor(Doctor d){
-		if(doctors.containsKey(d.getId())){
-			doctors.remove(d.getId());
+		//borra el doctor amb identificador id del hospital
+	public void borrarDoctor(int id){
+		if(doctors.containsKey(id)){
+			doctors.remove(id);
 		}
 	}
 	

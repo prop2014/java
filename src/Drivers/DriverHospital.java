@@ -50,48 +50,6 @@ public class DriverHospital {
 		System.out.printf("______________________________\n");
 		
 	}
-	/*public static void main(String[] args) {
-		Scanner teclado;
-		Hospital hosp = new Hospital();
-		int id;
-		String n;
-		double fm;
-		double ft;
-		double fn;
-		
-		teclado = new Scanner(System.in);
-		System.out.print("Ingrese el codigo del hospital: ");
-		id = teclado.nextInt();
-		System.out.print("Ingrese el nombre del hospital: ");
-		n = teclado.next();
-		System.out.print("Ingrese el factorMañana: ");
-		fm = teclado.nextDouble();
-		System.out.print("Ingrese el factorTarde: ");
-		ft = teclado.nextDouble();
-		System.out.print("Ingrese el factorNoche: ");
-		fn = teclado.nextDouble();
-		
-		Hospital husp = new Hospital(id,n,fm,ft,fn);
-		System.out.printf("ID Hospital %d, Nom Hospital: %s\n", husp.getId(), husp.getNombre());
-	
-		System.out.print("cambiali el nom: ");
-		n = teclado.next();
-		husp.setNombre(n);
-		System.out.printf("ID Hospital %d, Nom Hospital: %s\n FM: %f, FT: %f, FN: %f\n", husp.getId(), husp.getNombre(), husp.getFactorM(),
-			husp.getFactorT(), husp.getFactorN());
-		System.out.print("cambiale factorMañana: ");
-		fm = teclado.nextDouble();
-		husp.setFactorM(fm);
-		System.out.print("Ingrese el factorTarde: ");
-		ft = teclado.nextDouble();
-		husp.setFactorT(ft);
-		System.out.print("Ingrese el factorNoche: ");
-		fn = teclado.nextDouble();
-		husp.setFactorN(fn);
-		
-		System.out.printf("ID Hospital %d, Nom Hospital: %s\n FM: %f, FT: %f, FN: %f\n", husp.getId(), husp.getNombre(), husp.getFactorM(),
-				husp.getFactorT(), husp.getFactorN());
-	}*/
 	
 	
 	public static void main(String[] args) {
@@ -233,11 +191,37 @@ public class DriverHospital {
 					break;
 					
 				}
-				case 11:{ 
+				case 11:{ //Borra un doctor
+					if(id!=-1){
+						int iden;
+						ArrayList<Doctor> aldoc;
+						aldoc=HOSP.getDoctors();
+						Iterator<Doctor> itr = aldoc.iterator();
+						while(itr.hasNext()){
+							Doctor d = new Doctor();
+							d=itr.next();
+							System.out.printf("ID: %d\n",d.getId());
+						}
+						System.out.print("Ingrese el Id del Doctor a borrar\n");
+						
+						iden = teclado.nextInt();
+						if(HOSP.existsDoctor(iden)== false) System.out.print("Et recordo que no existeix aquest identificador\n");
+						else{
+							HOSP.borrarDoctor(iden);
+							System.out.print("\n Doctor Borrat! (prova opcio 15 despres de continuar) \n");
+						}
+					}
+					else System.out.print("Hospital No creat\n");
 					break;
 					
 				}
-				case 12:{ 
+				case 12:{ //Borra tots els Doctors
+					
+					if(id!=-1){
+						if(HOSP.Docsize()>0)HOSP.cleardoctors();
+						System.out.print("L'hospital ja no te doctors\n");
+					}
+					else System.out.print("Hospital No creat\n");
 					break;
 					
 				}
