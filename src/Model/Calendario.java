@@ -4,6 +4,8 @@ import java.util.GregorianCalendar;
 import java.text.SimpleDateFormat;
 import java.util.TreeMap;
 import java.util.Vector;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Collection;
 import java.io.IOException;
 
@@ -150,4 +152,15 @@ public class Calendario {
 	public int getNumTurnos(){
 		return cal.size()*3;
 	}
+	
+	public ArrayList<Vector<Turno>> getTurnos(){
+		ArrayList<Vector<Turno>> alturno = new ArrayList<Vector<Turno>>(cal.size());
+		Iterator<GregorianCalendar> itr = cal.keySet().iterator();
+		while(itr.hasNext()) {
+			GregorianCalendar key = itr.next();
+			alturno.add(cal.get(key));
+		}
+		return alturno;
+	}
+
 }

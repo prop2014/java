@@ -1,14 +1,37 @@
+
 //autor: Oscar Urgelles
 
 package Drivers;
 import java.util.*;
+import java.io.*;
 
 import Model.Hospital;
 import Model.Doctor;
 import Model.Calendario;
+import Model.Turno;
 
 public class DriverHospital {
+	
+		//provando
+	static void MostrarTurno(Turno t){
+		//GregorianCalendar getFecha()
+		System.out.printf("--------------------.\n");
+		Calendar c1 = t.getFecha();
+		System.out.printf("fecha:\n"+c1.getTime().toLocaleString());
+		System.out.printf("\n");
+		System.out.printf("tipoturno: %s\n",t.getTipoTurno());
+		System.out.printf("especial: %s\n",t.getEspecial());
+		System.out.printf("numDoctores: %d\n",t.getNumDoctores());
+		System.out.printf("--------------------.\n");
 
+	}
+	//provando
+	static void MostrarCalendario(Vector<Turno> vt){
+		for(int i=0; i<vt.size();++i){
+			MostrarTurno(vt.get(i));
+		}
+	}
+	
 	static void MostrarDoc(Doctor doc){
 		System.out.printf("--------------------.\n");
 		System.out.printf("ID: %d\n",doc.getId());
@@ -47,7 +70,11 @@ public class DriverHospital {
 		}
 		if(hosp.getNumDias()==0) System.out.printf("Actualment l'Hospital no te calendari\n");
 		else {
-			System.out.printf("El calendari te %d Dies Vacacionals\n",hosp.getNumDias());	
+			System.out.printf("El calendari te %d Dies Vacacionals\n",hosp.getNumDias());
+			ArrayList<Vector<Turno>> alturno = hosp.getTurnos();
+			for(int i=0;i<alturno.size();++i){
+				MostrarCalendario(alturno.get(i));
+			}
 		}
 		System.out.printf("______________________________\n");
 		

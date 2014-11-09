@@ -188,6 +188,9 @@ public class Hospital {
 		return calendari.getNumTurnos();
 	
 	}
+	public ArrayList<Vector<Turno>> getTurnos(){
+		return calendari.getTurnos();
+	}
 
 	private void sets_de_hospital_____________(){};
 	
