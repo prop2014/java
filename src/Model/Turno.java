@@ -1,5 +1,5 @@
 package Model;
-import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -8,7 +8,7 @@ import java.util.Calendar;
 public class Turno {
 
 	/* Atributos */
-	private Calendar fecha;
+	private GregorianCalendar fecha;
 	private String tipoTurno;
 	private String especial;
 	private int numDoctores;
@@ -30,7 +30,7 @@ public class Turno {
 	 *
 	 * Constructora con parámetros
 	 */
-	public Turno(Calendar d, String tt, String de, int nd){
+	public Turno(GregorianCalendar d, String tt, String de, int nd){
 		fecha = d;
 		tipoTurno = tt;
 		especial = de;
@@ -40,7 +40,7 @@ public class Turno {
 
 	/* Modificadoras */
 
-	public void setFecha(Calendar d){
+	public void setFecha(GregorianCalendar d){
 		fecha = d;
 	}
 
@@ -58,7 +58,7 @@ public class Turno {
 
 	/* Consultoras */
 
-	public Calendar getFecha(){
+	public GregorianCalendar getFecha(){
 		return fecha;
 	}
 
