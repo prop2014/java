@@ -8,7 +8,18 @@ import Model.Doctor;
 
 public class DriverHospital {
 
-	
+	static void MostrarDoc(Doctor doc){
+		System.out.printf("--------------------.\n");
+		System.out.printf("ID: %d\n",doc.getId());
+		System.out.printf("Nom: %s\n",doc.getNombre());
+		System.out.printf("Num Max turnos: %d\n",doc.getNumMaxTurnos());
+		System.out.printf("Sueldo Por turno: %s €",doc.getSueldoTurno());
+		if(doc.getSueldoTurno()< 1000.0) System.out.printf(" si ke pasa no soi ni mileurista\n");
+		else System.out.printf(" i Like Money Bitches\n");
+		if(doc.isREmpty()) System.out.printf("No te restriccions: \n");
+		else System.out.printf("Te restriccions\n");
+		System.out.printf("--------------------.\n");
+	}
 	
 	static void MostrarHosp(Hospital hosp){
 		ArrayList<Doctor> aldoc;
@@ -30,18 +41,9 @@ public class DriverHospital {
 			while(itr.hasNext()){
 				Doctor d = new Doctor();
 				d=itr.next();
-				System.out.printf("--------------------.\n");
 				System.out.printf("%d.\n",i);
-				System.out.printf("ID: %d\n",d.getId());
-				System.out.printf("Nom: %s\n",d.getNombre());
-				System.out.printf("Num Max turnos: %d\n",d.getNumMaxTurnos());
-				System.out.printf("Sueldo Por turno: %s €",d.getSueldoTurno());
-				if(d.getSueldoTurno()< 1000.0) System.out.printf(" si ke pasa no soi ni mileurista\n");
-				else System.out.printf(" i Like Money Bitches\n");
-				if(d.isREmpty()) System.out.printf("No te restriccions: \n");
-				else System.out.printf("Te restriccions\n");
+				MostrarDoc(d);
 				++i;
-				System.out.printf("--------------------.\n");
 			}
 		}
 		if(hosp.getNumDias()==0) System.out.printf("Actualment l'Hospital no te calendari\n");
@@ -54,6 +56,9 @@ public class DriverHospital {
 	
 	
 	public static void main(String[] args) {
+		
+		System.out.print("¿Has iniciat el driver d'hospital!!\n");
+		System.out.print("\n\n\n");
 		
 		Scanner teclado;
 		teclado = new Scanner(System.in);
@@ -76,11 +81,15 @@ public class DriverHospital {
 			System.out.print("8: Afegiex un doctor\n");
 			System.out.print("9: Afegeix un Vector de doctors (vector de doctors creat per defecte)\n");
 			System.out.print("10: Afegeix un Arraylist de doctors (arraylist de doctors creat per defecte) \n");
-			System.out.print("11: Borra un doctor\n");
-			System.out.print("12: Borra tots els Doctors\n");
-			System.out.print("13: Afegeix un Dia Vacacional\n");
-			System.out.print("14: Elimina un Dia Vacacional\n");
-			System.out.print("15: Mostra l'hospital\n");
+			System.out.print("11: mostra doctor\n");
+			System.out.print("12: Borra un doctor\n");
+			System.out.print("13: Borra tots els Doctors\n");
+			System.out.print("14: Afegeix un Dia Vacacional\n");
+			System.out.print("15: Elimina un Dia Vacacional\n");
+			System.out.print("16: Mostra l'hospital\n");
+			System.out.print("17: Borra totes les dades de l'hospital\n");
+			
+			System.out.print("\n");
 			
 		
 			
@@ -203,7 +212,32 @@ public class DriverHospital {
 					break;
 					
 				}
-				case 11:{ //Borra un doctor
+				case 11:{ 
+					if(id!=-1){
+						System.out.print("ID de los doctores del hospital: \n");
+						ArrayList<Doctor> aldoc;
+						aldoc=HOSP.getDoctors();
+						Iterator<Doctor> itr = aldoc.iterator();
+						Doctor doc;
+						while(itr.hasNext()){
+							doc=itr.next();
+							System.out.printf("ID: %d\n",doc.getId());
+						}
+						System.out.print("Ingrese el id del doctor a mostrar \n");
+						int d=teclado.nextInt();
+						if(HOSP.existsDoctor(d)) {
+							doc=HOSP.getDoctor(d);
+							MostrarDoc(doc);
+						}
+						else{
+							System.out.print("No existia aquest doctor al hospital\n");
+						}
+						
+					}
+					else System.out.print("Hospital No creat\n");
+					break;	
+				}
+				case 12:{ //Borra un doctor
 					if(id!=-1){
 						int iden;
 						ArrayList<Doctor> aldoc;
@@ -227,7 +261,7 @@ public class DriverHospital {
 					break;
 					
 				}
-				case 12:{ //Borra tots els Doctors
+				case 13:{ //Borra tots els Doctors
 					
 					if(id!=-1){
 						if(HOSP.Docsize()>0)HOSP.cleardoctors();
@@ -237,7 +271,7 @@ public class DriverHospital {
 					break;
 					
 				}
-				case 13:{ //afegeix dia vacacional
+				case 14:{ //afegeix dia vacacional
 					if(id!=-1){
 						System.out.print("introdueix el dia vacacional: (dd/mm/yyyy) \n");
 						int dia = teclado.nextInt();
@@ -255,7 +289,7 @@ public class DriverHospital {
 					else System.out.print("Hospital No creat\n");
 					break;
 				}
-				case 14:{ //borra dia vacacional
+				case 15:{ //borra dia vacacional
 					if(id!=-1){
 						System.out.print("introdueix el dia vacacional a eliminar: (dd/mm/yyyy) \n");
 						int dia = teclado.nextInt();
@@ -271,13 +305,23 @@ public class DriverHospital {
 						}
 					}
 					else System.out.print("Hospital No creat\n");
+					System.out.print("\n");
 					break;
 					
 				}
-				case 15:{
+				case 16:{
 					if(id!=-1)	MostrarHosp(HOSP);
 					else System.out.print("L'hospital no esta creat\n");
 					break;
+				}
+				case 17:{ //borra dades Hosp
+					if(id!=-1){
+						HOSP.borraHosp();
+						System.out.print("Les dades del hospital han estat resetejades\n");
+					}
+					else System.out.print("Hospital No creat\n");
+					break;
+					
 				}
 				default: break;
 			
@@ -286,11 +330,11 @@ public class DriverHospital {
 			// GESTION DE SALIDA DEL BUCLE
 			String s;
 			System.out.print("Desea Continuar? (Si/No)\n");
-			
+			System.out.print("\n");
 			s = teclado.next();
 			// Si seleccionamos "No" o sus variantes saldremos del bucle
 			if(s.equals("No") || s.equals("no") || s.equals("N") || s.equals("NO") || s.equals("n")) opcion = 0; 
-			
+			System.out.print("\n");
 			
 		}
 		System.out.print("PROGRAM EXIT");
