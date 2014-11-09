@@ -5,6 +5,7 @@ import java.util.*;
 
 import Model.Hospital;
 import Model.Doctor;
+import Model.Calendario;
 
 public class DriverHospital {
 
@@ -71,7 +72,7 @@ public class DriverHospital {
 			
 			System.out.print("1: Crea Hospital vacio\n");
 			System.out.print("2: Crea Hospital con id, nombre y factores\n");
-			System.out.print("3:No OPERATIVA Crea Hospital con id, nombre, factores, arraylist de doctores y calendario.\n");
+			System.out.print("3: Crea Hospital con id, nombre, factores, arraylist de doctores y calendario.\n");
 			System.out.print("4: Canviali el nom al hospital\n");
 			System.out.print("5: Canviali el factor Mati\n");
 			System.out.print("6: Canviali el factor Tarda\n");
@@ -121,7 +122,6 @@ public class DriverHospital {
 						ft = teclado.nextDouble();
 						System.out.print("Ingrese el factorNoche: ");
 						fn = teclado.nextDouble();
-						
 						HOSP = new Hospital(codigo,n,fm,ft,fn);
 						System.out.print("Hospital Creat Correctament (prova opcio 15 despres de continuar)\n");		
 					}
@@ -130,11 +130,51 @@ public class DriverHospital {
 					}
 					break;
 				}
-				case 3:{ //
-					id=-1;
-					System.out.print("No OPERATIVA\n");
-					
-					break;
+				case 3:{ 
+					if(id!=1){
+					id=1;
+					int codigo;
+					String n;
+					double fm;
+					double ft;
+					double fn;
+					System.out.print("Ingrese el id del hospital: ");
+					codigo = teclado.nextInt();
+					System.out.print("Ingrese el nombre del hospital: ");
+					n = teclado.next();
+					System.out.print("Ingrese el factorMañana: ");
+					fm = teclado.nextDouble();
+					System.out.print("Ingrese el factorTarde: ");
+					ft = teclado.nextDouble();
+					System.out.print("Ingrese el factorNoche: ");
+					fn = teclado.nextDouble();
+					Doctor doc1= new Doctor(1,"PRIMERO",1,1.0);
+					Doctor doc2= new Doctor(2,"SEGUNDO",2,2.0);
+					Doctor doc3= new Doctor(3,"TERCERO",3,3.0);	
+					Doctor doc4= new Doctor(4,"QUARTO",4,4.0);	
+					Doctor doc5= new Doctor(5,"QUINTO",5,5.0);
+					ArrayList<Doctor> aldoc = new ArrayList<Doctor>();
+					aldoc.add(doc1);
+					aldoc.add(doc2);
+					aldoc.add(doc3);
+					aldoc.add(doc4);
+					aldoc.add(doc5);
+					System.out.print("S'ha Creat un Arraylist amb 5 doctors per simular l'entrada\n");
+					Calendario cale = new Calendario();
+					GregorianCalendar gc1= new GregorianCalendar(1,1,1);
+					GregorianCalendar gc2= new GregorianCalendar(2,2,2);
+					cale.addDiaVacacional(gc1);
+					cale.addDiaVacacional(gc2);
+					System.out.print("S'ha Creat un calendari amb els dies 1 1 1 y 2 2 2 per " +
+							"simular l'entrada\n");
+					HOSP = new Hospital(codigo,n,fm,ft,fn,aldoc,cale);
+					System.out.print("Hospital Creat Correctament (prova opcio 15 despres de continuar)\n");		
+				}
+				else {
+					System.out.print("Ja havies creat un hospital\n");
+				}
+				break;
+			
 				}
 				case 4:{ //Canviali el nom al hospital
 					if(id!=-1){
