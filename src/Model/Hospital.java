@@ -166,14 +166,7 @@ public class Hospital {
 	}
 	
 	
-/*	public ArrayList<Turno> getTorns(){
-		
-		ArrayList<Turno> altorns = new ArrayList<Turno>();
-	//	altorns = calendari.getTorns();
-		return altorns;
-	}
-		
-*/	
+
 	private void gets_de_Calendari__________(){};
 	
     public boolean existsDiaVacacional(GregorianCalendar d){
@@ -188,6 +181,7 @@ public class Hospital {
 		return calendari.getNumTurnos();
 	
 	}
+	//devuelve un arraylist de vectores de turnos cada uno un dia
 	public ArrayList<Vector<Turno>> getTurnos(){
 		return calendari.getTurnos();
 	}
