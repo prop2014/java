@@ -99,7 +99,7 @@ public class DriverHospital {
 			
 			System.out.print("1: Crea Hospital vacio\n");
 			System.out.print("2: Crea Hospital con id, nombre y factores\n");
-			System.out.print("3: Crea Hospital con id, nombre, factores, arraylist de doctores y calendario.\n");
+			System.out.print("3: No va Crea Hospital con id, nombre, factores, arraylist de doctores y calendario.\n");
 			System.out.print("4: Canviali el nom al hospital\n");
 			System.out.print("5: Canviali el factor Mati\n");
 			System.out.print("6: Canviali el factor Tarda\n");
