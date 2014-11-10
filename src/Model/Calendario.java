@@ -80,7 +80,7 @@ public class Calendario {
 		}
 	}
 	
-	public void setTurno(GregorianCalendar d, String tt){
+	public void replaceTurno(GregorianCalendar d, String tt){
 		/* en construcción */
 	}
 
