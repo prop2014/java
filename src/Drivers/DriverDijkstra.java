@@ -77,7 +77,7 @@ public class DriverDijkstra {
 					break;
 				
 				case 3:
-					FFDijkstra dijk = new FFDijkstra();
+					FFDijkstra dijk = new FFDijkstra(0, g.getNSize()-1, g);
 					ArrayList<Integer> camino = new ArrayList<Integer>();
 					try {
 						camino = dijk.dameCamino(g);

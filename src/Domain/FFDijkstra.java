@@ -5,6 +5,11 @@ import java.io.IOException;
 import Domain.FordFulkerson;
 import Domain.Graf;
 
+/**
+*
+* @author alexmorral 
+*/
+
 
 class arcP {
     public double coste;
@@ -12,7 +17,16 @@ class arcP {
 }
 
 public class FFDijkstra extends FordFulkerson {
-
+	
+	public FFDijkstra(){}
+	
+	
+	public FFDijkstra(Integer nodeInicial, Integer nodeDesti, Graf graf)
+ 	{
+ 		s = nodeInicial;
+ 		t = nodeDesti;
+ 		g = graf;
+ 	}
 		
 	/**
 	 * Pre: g es un grafo dirigido no vacío con pesos en las aristas.
@@ -73,10 +87,8 @@ public class FFDijkstra extends FordFulkerson {
 			}
 			
 			Stack<Integer> cam = new Stack<Integer>();
-			//int sig = t; Cuando esté hecho FordFulkerson
-			int sig = size - 1;
-			if(pred[sig] == -1) throw new IOException("No existe camino");
-			else { 
+			int sig = t;
+			if(pred[sig] != -1) { 
 				while(sig != 0) {
 					cam.push(sig);
 					sig = pred[sig];
