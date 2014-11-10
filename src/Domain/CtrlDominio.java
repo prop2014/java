@@ -77,12 +77,13 @@ public class CtrlDominio {
 	
 	public void eliminarDoctor(int id) throws IOException {
 		//try {
+		
 		Doctor doc = new Doctor();// = hosp.getDoctor(id);
 		//}
 		/*catch IOException(e) { //Que devuelva que no existe doctor con ID = id
 			throw new IOException(e);
 		} */
-		hosp.borrarDoctor(doc);
+		hosp.borrarDoctor(id);
 		//deleteDoctorData(id)?
 	}
 	
@@ -107,12 +108,13 @@ public class CtrlDominio {
 	}
 	
 	public void eliminarRestriccion(Doctor doc, Restriccion res) {
-		doc.eliminarRestriccion(res);
+		//doc.eliminarRestriccion(res);
+		
 		//updateDoctorData()?
 	}
 	
 	public ArrayList<Restriccion> getRestricciones(Doctor doc) {
-		return doc.getRestriccions();
+		return doc.getRestricciones();
 	}
 	
 	public void asignarCalendario(Calendario cal) {
