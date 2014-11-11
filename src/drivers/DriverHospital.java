@@ -50,7 +50,7 @@ public class DriverHospital {
 		}
 		else {
 			System.out.printf("LLista de Doctors:\n");
-			System.out.printf("Hi ha %d Doctors\n",hosp.Docsize());
+			System.out.printf("Hi ha %d Doctors\n",hosp.docSize());
 			aldoc=hosp.getDoctors();
 			Iterator<Doctor> itr = aldoc.iterator();
 			int i = 1;
@@ -364,7 +364,7 @@ public class DriverHospital {
 				case 13:{ //Borra tots els Doctors
 					
 					if(id!=-1){
-						if(HOSP.Docsize()>0)HOSP.cleardoctors();
+						if(HOSP.docSize()>0)HOSP.cleardoctors();
 						System.out.print("L'hospital ja no te doctors\n");
 					}
 					else System.out.print("Hospital No creat\n");
@@ -434,3 +434,336 @@ public class DriverHospital {
 		System.out.print("PROGRAM EXIT");
 	}
 }
+
+/*
+ 
+ 
+package drivers;
+import java.util.*;
+
+import model.Calendario;
+import model.Doctor;
+import model.Hospital;
+import model.Turno;
+
+public class DriverHospital {
+
+
+public static void main(String[] args) {
+		
+		System.out.print("¿Has iniciat el driver d'hospital!!\n");
+		System.out.print("\n\n\n");
+		
+		Scanner teclado;
+		teclado = new Scanner(System.in);
+		Hospital HOSP = new Hospital();
+		int id = -1;
+		int opcion = -1;
+		while(opcion != 35){
+		
+			System.out.print("\n¿Que desea hacer?\n");
+			System.out.print("0: Mostra Opcions\n");
+			System.out.print("1-34: Opcions\n");
+			System.out.print("35: Fi de l'aplicatiu\n");
+			opcion = teclado.nextInt();
+			switch(opcion){
+			
+				case 0:{
+					System.out.print("0: Mostra opcions\n")
+					System.out.print("1: Hospital()\n");
+					System.out.print("2: Hospital (id,nom,fm,ft,fn)\n");
+					System.out.print("3: Hospital (id,nom,fm,ft,fn,vdoc,cal)\n");
+					System.out.print("4: Hospital (id,nom,fm,ft,fn,aldoc,cal)\n");
+					System.out.print("5: getId()\n");
+					System.out.print("6: getNombre()\n");
+					System.out.print("7: getFactorM()\n");
+					System.out.print("8: getFactorT()\n");
+					System.out.print("9: getFactorN()\n");
+					System.out.print("10: getFactors()\n");
+					System.out.print("11: getDoctor(id)\n");
+					System.out.print("12: getDoctors()\n");
+					System.out.print("13: isDocEmpty()\n");
+					System.out.print("14: docSize()\n");
+					System.out.print("15: existsDoctor(id)\n");
+					System.out.print("16: existsDiaVacacional(d)\n");
+					System.out.print("17: getNumDias()\n");
+					System.out.print("18: getNumTurnos()\n");
+					System.out.print("19: getTurno(d,tt)\n");
+					System.out.print("20: getAllTurnos()\n");
+					System.out.print("21: setNombre(nom)\n");
+					System.out.print("22: setFactorM(factor)\n");
+					System.out.print("23: setFactorT(factor)\n");
+					System.out.print("24: setFactorN(factor)\n");
+					System.out.print("25: setDoctor(d)\n");
+					System.out.print("26: replaceTurno(t)\n");
+					System.out.print("27: addDoctor(d)\n");
+					System.out.print("28: addDoctors(vdoc)\n");
+					System.out.print("29: addDoctors(aldoc)\n");
+					System.out.print("30: deleteDoctor(id)\n");
+					System.out.print("31: cleardoctors()\n");
+					System.out.print("32: addDiaVacacional(d)\n");
+					System.out.print("33: deleteDiaVacacional(d)\n");
+					System.out.print("34: resetHosp()\n");
+					System.out.print("35: Fi de l'aplicatiu\n");
+					System.out.print("\n");
+					break;
+				}
+				case 1:{
+					if(id!=1){
+						id=1;
+						System.out.print("Hospital Creat Correctament\n\n");
+						MostraHospital(HOSP);
+					}
+					else {
+						System.out.print("Ja havies creat un hospital\n");
+					}
+					break;
+				}
+				case 2: { //
+					if(id!=1){
+						id=1;
+						int codigo;
+						String n;
+						double fm;
+						double ft;
+						double fn;
+						System.out.print("Ingrese el id del hospital: ");
+						codigo = teclado.nextInt();
+						System.out.print("Ingrese el nombre del hospital: ");
+						n = teclado.next();
+						System.out.print("Ingrese el factorMañana: ");
+						fm = teclado.nextDouble();
+						System.out.print("Ingrese el factorTarde: ");
+						ft = teclado.nextDouble();
+						System.out.print("Ingrese el factorNoche: ");
+						fn = teclado.nextDouble();
+						HOSP = new Hospital(codigo,n,fm,ft,fn);
+						System.out.print("Hospital Creat Correctament \n");
+						MostraHospital(HOSP);
+					}
+					else {
+						System.out.print("Ja havies creat un hospital\n");
+					}
+					break;
+				}
+				case 3:{ //amb vector
+					if(id!=1){
+					id=1;
+					int codigo;
+					String n;
+					double fm;
+					double ft;
+					double fn;
+					System.out.print("Ingrese el id del hospital: ");
+					codigo = teclado.nextInt();
+					System.out.print("Ingrese el nombre del hospital: ");
+					n = teclado.next();
+					System.out.print("Ingrese el factorMañana: ");
+					fm = teclado.nextDouble();
+					System.out.print("Ingrese el factorTarde: ");
+					ft = teclado.nextDouble();
+					System.out.print("Ingrese el factorNoche: ");
+					fn = teclado.nextDouble();
+					
+					Doctor[] vdoc = new Doctor[5];
+					vdoc[0]= new Doctor(1,"PRIMERO",1,1.0);
+					vdoc[1]= new Doctor(2,"SEGUNDO",2,2.0);
+					vdoc[2]= new Doctor(3,"TERCERO",3,3.0);	
+					vdoc[3]= new Doctor(4,"QUARTO",4,4.0);	
+					vdoc[4]= new Doctor(5,"QUINTO",5,5.0);
+					System.out.print("vdoc[0]=Doctor(1,PRIMERO,1,1.0)\n");
+					System.out.print("vdoc[1]=Doctor(2,SEGUNDO,2,2.0)\n");
+					System.out.print("vdoc[2]=Doctor(3,TERCERO,3,3.0)\n");
+					System.out.print("vdoc[3]=Doctor(4,QUARTO,4,4.0)\n");
+					System.out.print("vdoc[4]=Doctor(5,QUINTO,5,5.0)\n");
+					System.out.print("S'ha Creat un vector amb 5 doctors per simular l'entrada\n");
+					GregorianCalendar gc1= new GregorianCalendar(1,1,1);
+					GregorianCalendar gc2= new GregorianCalendar(2,2,2);
+					Calendario cale = new Calendario();
+					cale.addDiaVacacional(gc1);
+					cale.addDiaVacacional(gc2);
+					System.out.print("S'ha Creat un calendari amb els dies 1 1 1 y 2 2 2 per " +
+							"simular l'entrada\n");
+					HOSP = new Hospital(codigo,n,fm,ft,fn,vdoc,cale);
+					System.out.print("Hospital Creat Correctament\n");	
+					MostraHospital(HOSP);
+				}
+				else {
+					System.out.print("Ja havies creat un hospital\n");
+				}
+				break;
+			
+				}
+				
+				case 4:{ //amb array
+					if(id!=1){
+					id=1;
+					int codigo;
+					String n;
+					double fm;
+					double ft;
+					double fn;
+					System.out.print("Ingrese el id del hospital: ");
+					codigo = teclado.nextInt();
+					System.out.print("Ingrese el nombre del hospital: ");
+					n = teclado.next();
+					System.out.print("Ingrese el factorMañana: ");
+					fm = teclado.nextDouble();
+					System.out.print("Ingrese el factorTarde: ");
+					ft = teclado.nextDouble();
+					System.out.print("Ingrese el factorNoche: ");
+					fn = teclado.nextDouble();
+					Doctor doc1= new Doctor(1,"PRIMERO",1,1.0);
+					Doctor doc2= new Doctor(2,"SEGUNDO",2,2.0);
+					Doctor doc3= new Doctor(3,"TERCERO",3,3.0);	
+					Doctor doc4= new Doctor(4,"QUARTO",4,4.0);	
+					Doctor doc5= new Doctor(5,"QUINTO",5,5.0);
+					ArrayList<Doctor> aldoc = new ArrayList<Doctor>();
+					aldoc.add(doc1);
+					aldoc.add(doc2);
+					aldoc.add(doc3);
+					aldoc.add(doc4);
+					aldoc.add(doc5);
+					System.out.print("S'ha Creat un Arraylist amb 5 doctors per simular l'entrada\n");
+					GregorianCalendar gc1= new GregorianCalendar(1,1,1);
+					GregorianCalendar gc2= new GregorianCalendar(2,2,2);
+					Calendario cale = new Calendario();
+					cale.addDiaVacacional(gc1);
+					cale.addDiaVacacional(gc2);
+					System.out.print("S'ha Creat un calendari amb els dies 1 1 1 y 2 2 2 per " +
+							"simular l'entrada\n");
+					HOSP = new Hospital(codigo,n,fm,ft,fn,aldoc,cale);
+					System.out.print("Hospital Creat Correctament\n");
+					MostraHospital(HOSP);
+				}
+				else {
+					System.out.print("Ja havies creat un hospital\n");
+				}
+				break;
+				
+				}
+				
+				case 5:{ //getid
+					if(id!=-1){
+						System.out.print("ID Hospital: %d\n",HOSP.getId());
+					}
+					else System.out.print("Hospital No creat!!\n");
+					break;
+				}
+				
+				case 6:{ //getNombre()
+					if(id!=-1){
+						System.out.print("Nombre Hospital: %s\n",HOSP.getNombre());
+					}
+					else System.out.print("Hospital No creat!!\n");
+					break;
+				}
+				case 7:{
+					if(id!=-1){
+						System.out.print("Factor Mati: %f\n",HOSP.getFactorM());
+					}
+					else System.out.print("Hospital No creat!!\n");
+					break;
+				}
+				case 8:{
+					if(id!=-1){
+						System.out.print("Factor Tarde: %f\n",HOSP.getFactorT());
+					}
+					else System.out.print("Hospital No creat!!\n");
+					break;
+				}
+				case 9:{
+					if(id!=-1){
+						System.out.print("Factor Noche: %f\n",HOSP.getFactorN());
+					}
+					else System.out.print("Hospital No creat!!\n");
+					break;
+				}
+					System.out.print("11: getDoctor(id)\n");
+					System.out.print("12: getDoctors()\n");
+					
+				case 10:{
+					if(id!=-1){
+						double[] factors = HOSP.getFactors();
+						System.out.print("Factor Mati: %f\n",factors[0]);
+						System.out.print("Factor Tarda: %f\n",factors[1]);
+						System.out.print("Factor Nit: %f\n",factors[2]);
+					}
+					else System.out.print("Hospital No creat!!\n");
+					break;
+					
+				}
+				case 11:{
+					if(id!=-1){
+						int codigo;
+						System.out.print("Introdueix el id del doctor a consultar: ");
+						codigo = teclado.nextInt();
+						if(HOSP.existsDoc(codigo){
+							Doctor d = HOSP.getDoctor(codigo);
+							MostrarDoctor(d);
+						}
+						else System.out.print("L'Hospital no contenia aquest doctor\n");
+					}
+					else System.out.print("Hospital No creat!!\n");
+					break;
+				
+				}
+				case 12:{
+				}
+				case 13:{
+				}
+				case 14:{
+				}
+				case 15:{
+				}
+				case 16:{
+				}
+				case 17:{
+				}
+				case 18:{
+				}
+				case 19:{
+				}
+				case 20:{
+				}
+				case 21:{
+				}
+				case 22:{
+				}
+				case 23:{
+				}
+				case 24:{
+				}
+				case 25:{
+				}
+				case 26:{
+				}
+				case 27:{
+				}
+				case 28:{
+				}
+				case 29:{
+				}
+				case 30:{
+				}
+				case 31:{
+				}
+				case 32:{
+				}
+				case 33:{
+				}
+				case 34:{
+				}
+				case 35:{ fi aplicatiu
+					opcion = 0;
+				}
+				default: break;
+			}
+		}
+		teclado.close();
+		System.out.print("PROGRAM EXIT");
+	}
+}
+	
+
+*/

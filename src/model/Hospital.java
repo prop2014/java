@@ -163,7 +163,7 @@ public class Hospital {
 	 * Consultora del numero de Doctores del Hospital
 	 * @return el numero de Doctores del Hospital
 	 */
-	public int Docsize(){
+	public int docSize(){
 		return doctors.size();
 	}
 	
