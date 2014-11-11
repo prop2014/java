@@ -65,7 +65,7 @@ public class Hospital {
 	
 // creadora con id, nombre, factores, arraylist de doctores y calendario. //full
 		public Hospital (int id, String nom, double fm, double ft, double fn,
-				ArrayList<Doctor> aldoc, Calendario cal){
+			ArrayList<Doctor> aldoc, Calendario cal){
 			idHospital=id;
 			nombre=nom;
 			factorM=fm;
@@ -80,8 +80,11 @@ public class Hospital {
 			//calendari = new Calendario(cal);
 		}
 		
-		//Elimina todos los datos de un hospital
-		public void borraHosp(){
+		  /** 
+		   * Elimina todos los datos de un hospital
+		   * 
+		   */
+		public void deleteHospital(){
 			idHospital=0;
 			nombre=null;
 			factorM=0.0;
@@ -95,32 +98,50 @@ public class Hospital {
 	
 	private void gets_de_hospital__________(){}
 	
-	// consultora de la id
+	/**
+	 *  Consultora de la id del Hospital
+	 *  @return la id del Hospital
+	 */
 	public int getId(){
 		return idHospital;
 	}
 	
-	// consultora del Nombre
+	/** 
+	 * Consultora del Nombre del Hospital
+	 * @return el Nombre del Hospital
+	 */
 	public String getNombre(){
 		return nombre;
 	}
 	
-	// consultora del factorM
+	/** 
+	 * Consultora del factor mañana
+	 * @return el factor mañana
+	 */
 	public double getFactorM(){
 		return factorM;
 	}
 	
-	// consultora del factorT
+	/** 
+	 * Consultora del factor tarde
+	 * @return el factor tarde
+	 */
 	public double getFactorT(){
 		return factorT;
 	}
 	
-	// consultora del factorN
+	/** 
+	 * Consultora del factor noche
+	 * @return el factor noche
+	 */
 	public double getFactorN(){
 		return factorN;
 	}
 	
-	//consultora que devuelve un vector con los factores(M,T,N);
+	/** 
+	 * Consultora de los factores del Hospital
+	 * @return el vector double con los tres factores(M,T,N).
+	 */
 	public double[] getFactors(){
 		double[] fac;  
 		fac=new double[3];
@@ -132,14 +153,20 @@ public class Hospital {
 	
 	private void gets_de_doctor__________(){};
 	
-	//pre existe un doctor con identificador = id;
-	//devuelve el doctor con identificador = id.
+	/** 
+	 * Consultora de un Doctor del Hospital con su Id.
+	 * pre: el Hospital contiene ese doctor.
+	 * @param id 	es la id del doctor
+	 * @return el doctor con identificador = id.
+	 */
 	public Doctor getDoctor(int id){
 		return doctors.get(id);
 	}
 	
-	//consulta tots els doctors
-	
+	/** 
+	 * Consultora de todos los doctores del Hospital
+	 * @return el Arraylist<Doctor> con todos los doctores del Hospital
+	 */
 	public ArrayList<Doctor> getDoctors(){
 		ArrayList<Doctor> aldoc = new ArrayList<Doctor>(doctors.size());
 		Iterator<Integer> itr = doctors.keySet().iterator();
@@ -150,67 +177,109 @@ public class Hospital {
 		return aldoc;
 	}
 	
-		//indica si l'hospital conte algun doctor
+	/** 
+	 * Indica si hay algun Doctor en el Hospital
+	 * @return un boolean que indica si esta vacio.
+	 */
 	public boolean isDocEmpty(){
 		return doctors.isEmpty();
 	}
 	
-	 //consultora del numero de doctors
+	/** 
+	 * Consultora del numero de Doctores del Hospital
+	 * @return el numero de Doctores del Hospital
+	 */
 	public int Docsize(){
 		return doctors.size();
 	}
 	
-		//indica si existeix un doctor amb identificador = id;
+	/** 
+	 * Consultora de la existencia de un doctor con identificador = id
+	 * @param id	es el identificador del doctor.
+	 * @return un boolean que indica si existe ese doctor
+	 */
 	public boolean existsDoctor(int id){
 		return doctors.containsKey(id);
 	}
 	
-	
-
 	private void gets_de_Calendari__________(){};
 	
+	/** 
+	 * Consultora de la existencia de un dia vacacional = d
+	 * @param d		es la fecha del dia Vacacional
+	 * @return un boolean que indica si el dia Vacacional existe.
+	 */
     public boolean existsDiaVacacional(GregorianCalendar d){
     	return calendari.existsDiaVacacional(d);
     }
     
+    /** 
+	 * Consultora del numero de dias contenidos en el Calendario del Hospital
+	 * @return el numero de dias Vacacionales
+	 */
     public int getNumDias(){
 		return calendari.getNumDias();
 	}
-
+    
+    /** 
+	 * Consultora del numero de turnos contenidos en el Calendario del Hospital
+	 * @return el numero de turnos Vacacionales del Hospital
+	 */
 	public int getNumTurnos(){
 		return calendari.getNumTurnos();
 	
 	}
-	//devuelve un arraylist de vectores de turnos cada uno un dia
+	
+	/** 
+	 * Consultora de todos los turnos del Hospital
+	 * @return un ArrayList<Vector<Turno>> con todos los Turnos del Hospital
+	 */
 	public ArrayList<Vector<Turno>> getTurnos(){
 		return calendari.getTurnos();
 	}
 
 	private void sets_de_hospital_____________(){};
 	
-		//modificadora del nombre   //
+	/** 
+	 * Modificadora del Nombre del Hospital
+	 * @param nom	es el nuevo Nombre del Hospital
+	 */
 	public void setNombre(String nom){
 		this.nombre=nom;
 	}
 	
 		//modificadora del factorMañana
+	/** 
+	 * Modificadora del factor Mañana del Hospital
+	 * @param factor	es el nuevo factorMañana del Hospital
+	 */
 	public void setFactorM(double factor){
 		this.factorM=factor;
 	}
 	
-		//modificadora del factorTarde
+	/** 
+	 * Modificadora del factor Tarde del Hospital
+	 * @param factor	es el nuevo factorTarde del Hospital
+	 */
 	public void setFactorT(double factor){
 		this.factorT=factor;
 	}
 	
-		//modificadora del factorNoche
+	/** 
+	 * Modificadora del factor Noche del Hospital
+	 * @param factor	es el nuevo factorNoche del Hospital
+	 */
 	public void setFactorN(double factor){
 		this.factorN=factor;
 	}
 	
 	private void set_de_doctor_____________(){};
 	
-		//Sobreescrive un doctor presente en el hospital
+	/** 
+	 * Modificadora de un Doctor del Hospital
+	 * 	Esta funcion sobreescirbe el doctor existente.
+	 * @param d		es el doctor ya modificado
+	 */
 	public void setDoctor(Doctor d){
 		if(doctors.containsKey(d.getId())==true){
 			doctors.remove(d.getId());
@@ -220,22 +289,37 @@ public class Hospital {
 	
 	private void set_de_Calendario_____________(){};
 	
-		//modifica el turno tt de la fecha d
-	public void setTurno(GregorianCalendar d, String tt){
-		calendari.setTurno(d,tt);
+	/** 
+	 * Modificadora de un Turno del Hospital
+	 * @param d		es la fecha del Turno
+	 * @param tt 	es el tipoturno("m","t","n")
+	 * faltara el Turno t modificado
+	 */
+	public void replaceTurno(GregorianCalendar d, String tt){
+		calendari.replaceTurno(d,tt);
 	}
 	
 	private void metodos_de_doctor_________(){};
 	
 	
-		//afegeix un nou doctor d al hospital si no el contenia ja.
-	public void afegirDoctor(Doctor d){
+	/** 
+	 * Metodo que inserta un doctor nuevo en el Hospital
+	 * 	pre - El Hospital no contiene el Doctor d. 
+	 * @param d		es el nuevo doctor del Hospital
+	 */
+	public void addDoctor(Doctor d){
 		if(doctors.containsKey(d.getId())==false){
 			doctors.put(d.getId(), d);
 		}
 		
 	}
-		//afegeix un conjunt de  doctors al hospital,SOBREESCRIU si ja existia doctor
+	
+	/** 
+	 * Metodo que inserta un vector de doctores en el Hospital
+	 * 	post- se ha insertado el vector de doctores en el Hospital
+	 * 		  Si algun doctor ia existia se ha remplazado por el nuevo.
+	 * @param vdoc		es un vector de Doctores
+	 */
 	public void afegirDoctors(Doctor[] vdoc){
 		for(int i = 0; i < vdoc.length; ++i){
 			if(doctors.containsKey(vdoc[i].getId())==false){
@@ -248,7 +332,12 @@ public class Hospital {
 		}
 	}
 	
-	//afegeix un arraylist de doctors al hospital,  si ja existia doctor
+	/** 
+	 * Metodo que inserta un ArrayList de doctores en el Hospital
+	 * 	post- se ha insertado el ArayList de doctores en el Hospital
+	 * 		  Si algun doctor ia existia se ha remplazado por el nuevo.
+	 * @param aldoc		es un ArrayList de Doctores
+	 */
 	public void afegirDoctors(ArrayList<Doctor> aldoc){
 
 		for(int i=0; i < aldoc.size();++i){
