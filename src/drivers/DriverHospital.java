@@ -449,7 +449,7 @@ public class DriverHospital {
 	static void MostrarTurno(Turno t){
 		//GregorianCalendar getFecha()
 		System.out.printf("--------------------.\n");
-		Calendar c1 = t.getFecha();
+		GregorianCalendar c1 = t.getFecha();
 		System.out.printf("fecha:\n"+c1.getTime());
 		System.out.printf("\n");
 		System.out.printf("tipoturno: %s\n",t.getTipoTurno());
@@ -672,7 +672,6 @@ public class DriverHospital {
 					}
 				}
 				break;
-			
 				}
 				
 				case 4:{ //amb array
@@ -727,7 +726,6 @@ public class DriverHospital {
 					}
 				}
 				break;
-				
 				}
 				
 				case 5:{ //getid
@@ -737,7 +735,6 @@ public class DriverHospital {
 					else System.out.print("Hospital No creat!!\n");
 					break;
 				}
-				
 				case 6:{ //getNombre()
 					if(id!=-1){
 						System.out.printf("Nombre Hospital: %s\n",HOSP.getNombre());
@@ -882,7 +879,25 @@ public class DriverHospital {
 					break;
 				}
 				case 19:{
-					System.out.print("19: getTurno(d,tt)\n");
+					if(id!=-1){
+						if(HOSP.getNumTurnos()==0) System.out.print("L'hospital no te torns!!\n");
+						else {
+							int dia, mes ,any;
+							System.out.print("Introdueix el dia del mes(0-30): \n");
+							dia = teclado.nextInt();
+							System.out.print("Introdueix el mes del any(0-11):\n");
+							mes = teclado.nextInt();
+							System.out.print("Introdueix l'any: \n");
+							any = teclado.nextInt();
+							GregorianCalendar gc1= new GregorianCalendar(dia,mes,any);
+							System.out.print("el tipus de torn (m,t,n) \n");
+							String tt;
+							tt=teclado.next();
+							Turno t = HOSP.getTurno(gc1,tt);
+							MostrarTurno(t);
+						}
+					}
+					else System.out.print("Hospital No creat!!\n");
 					break;
 				}
 				case 20:{
@@ -956,9 +971,24 @@ public class DriverHospital {
 					else System.out.print("Hospital No creat!!\n");
 					break;
 				}
-				case 26:{
-				System.out.print("26: replaceTurno(t)\n");
-				break;
+				case 26:{ //System.out.print("26: replaceTurno(t)\n");
+					if(id!=-1){
+						System.out.print("Per aquest driver canviarem el torn modificant el numeroDedoctors d'un dels turns\n");
+						if(HOSP.getNumDias()==0) System.out.printf("L'hospital no te turns prova d'afegir-ne (Opcio 32)\n");
+						else {
+							ArrayList<Turno> alturno = HOSP.getAllTurnos();
+							int i = 0;
+							Turno t = alturno.get(i);
+							System.out.printf("introdueix el numero de doctors que vulguis:\n");
+							int num=teclado.nextInt();
+							t.setNumDoctores(num);
+							HOSP.replaceTurno(t);
+							System.out.printf("Torn reemplaçat correctament!\n");
+							MostrarHospital(HOSP);
+						}						
+					}
+					else System.out.print("Hospital No creat!!\n");
+					break;
 				}
 				case 27:{
 					if(id!=-1){
