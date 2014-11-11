@@ -89,7 +89,7 @@ public class DriverHospital {
 		while(opcion != 0){
 			
 			
-			System.out.print("¿Que desea hacer?\n");
+			System.out.print("\n¿Que desea hacer?\n");
 			System.out.print("1: Crea Hospital vacio\n");
 			System.out.print("2: Crea Hospital con id, nombre y factores\n");
 			System.out.print("3: No va Crea Hospital con id, nombre, factores, arraylist de doctores y calendario.\n");
@@ -107,6 +107,7 @@ public class DriverHospital {
 			System.out.print("15: Elimina un Dia Vacacional\n");
 			System.out.print("16: Mostra l'hospital\n");
 			System.out.print("17: Borra totes les dades de l'hospital\n");
+			System.out.print("18: Finalitza el programa\n");
 			System.out.print("\n");
 			
 		
@@ -180,9 +181,9 @@ public class DriverHospital {
 					aldoc.add(doc4);
 					aldoc.add(doc5);
 					System.out.print("S'ha Creat un Arraylist amb 5 doctors per simular l'entrada\n");
-					Calendario cale = new Calendario();
 					GregorianCalendar gc1= new GregorianCalendar(1,1,1);
 					GregorianCalendar gc2= new GregorianCalendar(2,2,2);
+					Calendario cale = new Calendario();
 					cale.addDiaVacacional(gc1);
 					cale.addDiaVacacional(gc2);
 					System.out.print("S'ha Creat un calendari amb els dies 1 1 1 y 2 2 2 per " +
@@ -422,19 +423,12 @@ public class DriverHospital {
 					break;
 					
 				}
+				case 18:{ //Fi programa
+					opcion = 0;
+				}
 				default: break;
 			
-			}
-			
-			// GESTION DE SALIDA DEL BUCLE
-			String s;
-			System.out.print("Desea Continuar? (Si/No)\n");
-			System.out.print("\n");
-			s = teclado.next();
-			// Si seleccionamos "No" o sus variantes saldremos del bucle
-			if(s.equals("No") || s.equals("no") || s.equals("N") || s.equals("NO") || s.equals("n")) opcion = 0; 
-			System.out.print("\n");
-			
+			}			
 		}
 		teclado.close();
 		System.out.print("PROGRAM EXIT");
