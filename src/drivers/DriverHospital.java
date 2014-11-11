@@ -3,7 +3,6 @@
 
 package drivers;
 import java.util.*;
-import java.io.*;
 
 import model.Calendario;
 import model.Doctor;
@@ -437,6 +436,7 @@ public class DriverHospital {
 			System.out.print("\n");
 			
 		}
+		teclado.close();
 		System.out.print("PROGRAM EXIT");
 	}
 }

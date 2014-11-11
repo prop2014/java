@@ -1,28 +1,22 @@
-/*Autor: Oscar */
-
 package model;
 import java.util.*;
 
 import model.Calendario;
 import model.Doctor;
 
-
+/**
+* Representa un Hospital
+* @author oscar.urgelles
+*/
 public class Hospital {
 	
-	/* Atributos */
-
 	private int idHospital;
 	private String nombre;
 	private double factorM;
 	private double factorT;
 	private double factorN;
 	private Map <Integer , Doctor> doctors;
-	private Calendario calendari;
-
-
-
-	
-	private void Constructoras____(){}
+	private Calendario calendari;	
 	
 	
 	public Hospital() {
@@ -64,40 +58,22 @@ public class Hospital {
 	}
 	
 // creadora con id, nombre, factores, arraylist de doctores y calendario. //full
-		public Hospital (int id, String nom, double fm, double ft, double fn,
-			ArrayList<Doctor> aldoc, Calendario cal){
-			idHospital=id;
-			nombre=nom;
-			factorM=fm;
-			factorT=ft;
-			factorN=fn;
-			doctors = new TreeMap<Integer , Doctor>();
-			for(int i = 0; i < aldoc.size(); ++i){
-				if(doctors.containsKey(aldoc.get(i).getId())==false){
-					doctors.put(aldoc.get(i).getId(), aldoc.get(i));
-				}
+	public Hospital (int id, String nom, double fm, double ft, double fn,
+		ArrayList<Doctor> aldoc, Calendario cal){
+		idHospital=id;
+		nombre=nom;
+		factorM=fm;
+		factorT=ft;
+		factorN=fn;
+		doctors = new TreeMap<Integer , Doctor>();
+		for(int i = 0; i < aldoc.size(); ++i){
+			if(doctors.containsKey(aldoc.get(i).getId())==false){
+				doctors.put(aldoc.get(i).getId(), aldoc.get(i));
 			}
-			//calendari = new Calendario(cal);
 		}
-		
-		  /** 
-		   * Elimina todos los datos de un hospital
-		   * 
-		   */
-		public void deleteHospital(){
-			idHospital=0;
-			nombre=null;
-			factorM=0.0;
-			factorT=0.0;
-			factorN=0.0;
-			doctors = new TreeMap<Integer , Doctor>();
-			calendari = new Calendario();
+		//calendari = new Calendario(cal);
+	}
 			
-		}
-	
-	
-	private void gets_de_hospital__________(){}
-	
 	/**
 	 *  Consultora de la id del Hospital
 	 *  @return la id del Hospital
@@ -151,8 +127,6 @@ public class Hospital {
 		return fac;
 	}
 	
-	private void gets_de_doctor__________(){};
-	
 	/** 
 	 * Consultora de un Doctor del Hospital con su Id.
 	 * pre: el Hospital contiene ese doctor.
@@ -202,8 +176,6 @@ public class Hospital {
 		return doctors.containsKey(id);
 	}
 	
-	private void gets_de_Calendari__________(){};
-	
 	/** 
 	 * Consultora de la existencia de un dia vacacional = d
 	 * @param d		es la fecha del dia Vacacional
@@ -249,8 +221,6 @@ public class Hospital {
 		return calendari.getAllTurnos();
 	}
 
-	private void sets_de_hospital_____________(){};
-	
 	/** 
 	 * Modificadora del Nombre del Hospital
 	 * @param nom	es el nuevo Nombre del Hospital
@@ -283,9 +253,7 @@ public class Hospital {
 	public void setFactorN(double factor){
 		this.factorN=factor;
 	}
-	
-	private void set_de_doctor_____________(){};
-	
+
 	/** 
 	 * Modificadora de un Doctor del Hospital
 	 * 	Esta funcion sobreescirbe el doctor existente.
@@ -297,9 +265,7 @@ public class Hospital {
 			doctors.put(d.getId(), d);
 		}	
 	}
-	
-	private void set_de_Calendario_____________(){};
-	
+
 	/** 
 	 * Modificadora de un Turno del Hospital
 	 * @param t 	es el turno modificado
@@ -308,9 +274,6 @@ public class Hospital {
 	public void replaceTurno(Turno t){
 		calendari.replaceTurno(t);
 	}
-	
-	private void metodos_de_doctor_________(){};
-	
 	
 	/** 
 	 * Metodo que inserta un doctor nuevo en el Hospital
@@ -379,9 +342,6 @@ public class Hospital {
 		doctors.clear();
 	}
 	
-	private void metodos_de_calendari________(){};
-	
-
 	/** 
 	 * Metodo que inserta un diaVacacional con sus tres turnos en el Hospital
 	 * pre - la fecha d NO existe en el Calendario
