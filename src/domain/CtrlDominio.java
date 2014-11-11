@@ -56,7 +56,7 @@ public class CtrlDominio {
 		if(sueldo < 0) throw new IOException("Sueldo incorrecto");
 		Doctor doc = new Doctor(id, nombre, numMax, sueldo);
 		if(hosp.existsDoctor(id)) throw new IOException("Ya existe un doctor con este identificador");
-		else hosp.afegirDoctor(doc);
+		else hosp.addDoctor(doc);
 		//createDoctorData()?
 	}
 	
