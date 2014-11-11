@@ -320,7 +320,7 @@ public class Hospital {
 	 * 		  Si algun doctor ia existia se ha remplazado por el nuevo.
 	 * @param vdoc		es un vector de Doctores
 	 */
-	public void afegirDoctors(Doctor[] vdoc){
+	public void addDoctors(Doctor[] vdoc){
 		for(int i = 0; i < vdoc.length; ++i){
 			if(doctors.containsKey(vdoc[i].getId())==false){
 				doctors.put(vdoc[i].getId(), vdoc[i]);
@@ -338,7 +338,7 @@ public class Hospital {
 	 * 		  Si algun doctor ia existia se ha remplazado por el nuevo.
 	 * @param aldoc		es un ArrayList de Doctores
 	 */
-	public void afegirDoctors(ArrayList<Doctor> aldoc){
+	public void addDoctors(ArrayList<Doctor> aldoc){
 
 		for(int i=0; i < aldoc.size();++i){
 			if(doctors.containsKey(aldoc.get(i).getId())==false){
@@ -351,8 +351,12 @@ public class Hospital {
 		}
 	}
 	
-		//borra el doctor amb identificador id del hospital
-	public void borrarDoctor(int id){
+	/** 
+	 * Metodo que elimina un doctor del Hospital
+	 * 
+	 * @param id 	es el identificador del doctor a borrar
+	 */
+	public void deleteDoctor(int id){
 		if(doctors.containsKey(id)){
 			doctors.remove(id);
 		}

@@ -83,7 +83,7 @@ public class CtrlDominio {
 		/*catch IOException(e) { //Que devuelva que no existe doctor con ID = id
 			throw new IOException(e);
 		} */
-		hosp.borrarDoctor(id);
+		hosp.deleteDoctor(id);
 		//deleteDoctorData(id)?
 	}
 	
@@ -98,7 +98,7 @@ public class CtrlDominio {
 	}
 	
 	public void asignarDoctores(ArrayList<Doctor> arrayDoc) {
-		hosp.afegirDoctors(arrayDoc);
+		hosp.addDoctors(arrayDoc);
 		//updateHospitalData()?
 	}
 	
