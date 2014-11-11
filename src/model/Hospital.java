@@ -231,11 +231,22 @@ public class Hospital {
 	}
 	
 	/** 
+	 * Consultora de un turno contenidos en el Calendario del Hospital
+	 * @param d 	es lafehca del turno
+	 * @param tt	es el tipo de turno ("m", "t", "n");
+	 * @return el turno tipoturno tt y fecha d.
+	 */
+	public Turno getTurno(GregorianCalendar d, String tt){
+		Turno t = calendari.getTurno(d, tt);
+		return t;
+	}
+	
+	/** 
 	 * Consultora de todos los turnos del Hospital
 	 * @return un ArrayList<Vector<Turno>> con todos los Turnos del Hospital
 	 */
-	public ArrayList<Vector<Turno>> getTurnos(){
-		return calendari.getTurnos();
+	public ArrayList<Turno> getAllTurnos(){
+		return calendari.getAllTurnos();
 	}
 
 	private void sets_de_hospital_____________(){};
@@ -291,12 +302,11 @@ public class Hospital {
 	
 	/** 
 	 * Modificadora de un Turno del Hospital
-	 * @param d		es la fecha del Turno
-	 * @param tt 	es el tipoturno("m","t","n")
-	 * faltara el Turno t modificado
+	 * @param t 	es el turno modificado
+	 * 
 	 */
-	public void replaceTurno(GregorianCalendar d, String tt){
-		calendari.replaceTurno(d,tt);
+	public void replaceTurno(Turno t){
+		calendari.replaceTurno(t);
 	}
 	
 	private void metodos_de_doctor_________(){};
