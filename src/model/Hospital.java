@@ -362,25 +362,42 @@ public class Hospital {
 		}
 	}
 	
-	// borra todos los doctores del hospital (alert!);
+	/** 
+	 * Metodo que elimina todos los doctores del Hospital
+	 */
 	public void cleardoctors(){
 		doctors.clear();
 	}
 	
-	
 	private void metodos_de_calendari________(){};
 	
-		//Añade un nuevo día vacacional al calendario (si éste no existe),
-	 //* y sus 3 turnos de guardias correspondientes.
+
+	/** 
+	 * Metodo que inserta un diaVacacional con sus tres turnos en el Hospital
+	 * pre - la fecha d NO existe en el Calendario
+	 * @param d 	es la fecha del diaVacacional
+	 */
 	public void addDiaVacacional(GregorianCalendar d){
 		calendari.addDiaVacacional(d);
 	}
 	
-	//Elimina un día vacacional del calendario (si éste ya existe),
-	 //* y sus 3 turnos de guardias correspondientes.
+	/** 
+	 * Metodo que elimina un diaVacacional con sus tres turnos del Hospital
+	 * pre- la fecha d existe en el Calendario
+	 * @param d 	es la fecha del diaVacacional
+	 */
 	public void deleteDiaVacacional(GregorianCalendar d){
 		calendari.deleteDiaVacacional(d);
 	}
 	
+	public void resetHosp(){
+		idHospital=0;
+		nombre=null;
+		factorM=0.0;
+		factorT=0.0;
+		factorN=0.0;
+		doctors = new TreeMap<Integer , Doctor>();
+		calendari = new Calendario();
+	}
 	
 }//ficlass

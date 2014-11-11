@@ -260,7 +260,7 @@ public class DriverHospital {
 						Doctor doc = new Doctor(Id, nombre, numMax, sueldo);
 						if(HOSP.existsDoctor(Id)) System.out.print("Et recordo que ja existeix aquest identificador\n");
 						else{
-							HOSP.afegirDoctor(doc);
+							HOSP.addDoctor(doc);
 							System.out.print("\n Doctor Afegit! (prova opcio 15 despres de continuar) \n");
 						}
 					}
@@ -282,7 +282,7 @@ public class DriverHospital {
 						System.out.print("vdoc[2]=Doctor(3,TERCERO,3,3.0)\n");
 						System.out.print("vdoc[3]=Doctor(4,QUARTO,4,4.0)\n");
 						System.out.print("vdoc[4]=Doctor(5,QUINTO,5,5.0)\n");
-						HOSP.afegirDoctors(vdoc);
+						HOSP.addDoctors(vdoc);
 						System.out.print("S'han afegit els 5 doctors al Hospital. +" +
 								"Recorda que aquesta funcio sobreescriu els doctors\n");
 					}
@@ -309,7 +309,7 @@ public class DriverHospital {
 						System.out.print("doc3=Doctor(3,TERCERO,3,3.0)\n");
 						System.out.print("doc4=Doctor(4,QUARTO,4,4.0)\n");
 						System.out.print("doc5=Doctor(5,QUINTO,5,5.0)\n");
-						HOSP.afegirDoctors(aldoc);
+						HOSP.addDoctors(aldoc);
 						System.out.print("S'han afegit els 5 doctors al Hospital. +" +
 								"Recorda que aquesta funcio sobreescriu els doctors\n");
 					}
@@ -359,7 +359,7 @@ public class DriverHospital {
 						iden = teclado.nextInt();
 						if(HOSP.existsDoctor(iden)== false) System.out.print("Et recordo que no existeix aquest identificador\n");
 						else{
-							HOSP.borrarDoctor(iden);
+							HOSP.deleteDoctor(iden);
 							System.out.print("\n Doctor Borrat! (prova opcio 15 despres de continuar) \n");
 						}
 					}
@@ -422,7 +422,7 @@ public class DriverHospital {
 				}
 				case 17:{ //borra dades Hosp
 					if(id!=-1){
-						HOSP.borraHosp();
+						HOSP.resetHosp();
 						System.out.print("Les dades del hospital han estat resetejades\n");
 					}
 					else System.out.print("Hospital No creat\n");
