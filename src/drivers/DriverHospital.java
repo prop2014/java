@@ -711,12 +711,10 @@ public static void main(String[] args) {
 						else{
 							System.out.print("No existia aquest doctor al hospital\n");
 						}
-						
 					}
 					else System.out.print("Hospital No creat\n");
 					break;			
 				}
-					System.out.print("12: getDoctors()\n");
 				case 12:{
 					if(id!=-1){
 						ArrayList<Doctor> aldoc;
@@ -725,60 +723,164 @@ public static void main(String[] args) {
 						Doctor doc;
 						while(itr.hasNext()){
 							doc=itr.next();
-							MostrarDoc(doc.getId());
-						}
-						else{
-							System.out.print("No existia aquest doctor al hospital\n");
-						}
-						
+							MostrarDoc(doc);
+						}						
 					}
 					else System.out.print("Hospital No creat\n");
 					break;	
-					
 				}
 				case 13:{
+					if(id!=-1){
+						if(HOSP.isDocEmpty()) System.out.print("L'hospital es buit\n");
+						else System.out.print("L'hospital conte doctors\n");
+					}
+					else System.out.print("Hospital No creat!!\n");
+					break;
 				}
 				case 14:{
+					if(id!=-1){
+						System.out.print("L'hospital conte %d Doctors\n",HOSP.docSize());
+					}
+					else System.out.print("Hospital No creat!!\n");
+					break;
 				}
 				case 15:{
+					if(id!=-1){
+						System.out.print("ID dels doctors de l'Hospital: \n");
+						ArrayList<Doctor> aldoc;
+						aldoc=HOSP.getDoctors();
+						Iterator<Doctor> itr = aldoc.iterator();
+						Doctor doc;
+						while(itr.hasNext()){
+							doc=itr.next();
+							System.out.printf("ID: %d\n",doc.getId());
+						}
+						System.out.print("Itrodueix una id de doctor per comprovar si hi es o no \n");
+						int d=teclado.nextInt();
+						if(HOSP.existsDoctor(d)) System.out.print("Aquest doctor si que existeix al hospital\n");
+						else System.out.print("No existia aquest doctor al hospital\n");
+					}
+					else System.out.print("Hospital No creat\n");
+					break;
 				}
 				case 16:{
+					if(id!=-1){
+						System.out.print("aquesta funcio no fa comprovacions de dates correctes\n");
+						int dia, mes, any;
+						System.out.print("Introdueix el dia del mes(0-30): \n");
+						dia = teclado.nextInt();
+						System.out.print("Introdueix el mes del any(0-11):\n");
+						mes = teclado.nextInt();
+						System.out.print("Introdueix l'any: \n");
+						any = teclado.nextInt();
+						GregorianCalendar gc1= new GregorianCalendar(dia,mes,any);
+						if(HOSP.existsDiaVacacional(gc1)) System.out.print("Si que existeix aquest Dia Vacacional\n");
+						else System.out.print("No existeix aquest Dia Vacacional\n");
+					}
+					else System.out.print("Hospital No creat!!\n");
+					break;
 				}
 				case 17:{
+					if(id!=-1){
+						System.out.print("L'Hospital te %d Dies Vacacionals\n",HOSP.getNumDias());
+					}
+					else System.out.print("Hospital No creat!!\n");
+					break;
 				}
 				case 18:{
+					if(id!=-1){
+						System.out.print("L'Hospital te %d Turns Vacacionals\n",HOSP.getNumTurnos());
+					}
+					else System.out.print("Hospital No creat!!\n");
+					break;
 				}
 				case 19:{
+					System.out.print("19: getTurno(d,tt)\n");
 				}
 				case 20:{
+					System.out.print("20: getAllTurnos()\n");
 				}
 				case 21:{
+					if(id!=-1){
+						System.out.print("Introdueix el nou nom de l'hospital:");
+						String nom = teclado.next();
+						HOSP.setNombre(nom);
+						System.out.print("Nom de l'Hospital cambiat correctament!\n");
+						MostraHospital(HOSP);
+					}
+					else System.out.print("Hospital No creat!!\n");
+					break;
 				}
 				case 22:{
+					if(id!=-1){
+						System.out.print("Introdueix el nou factorMati de l'hospital:");
+						Double fact = teclado.nextDouble();
+						HOSP.setFactorM(fact);
+						System.out.print("Factor Mati cambiat correctament!\n");
+						MostraHospital(HOSP);
+					}
+					else System.out.print("Hospital No creat!!\n");
+					break;
 				}
 				case 23:{
+					if(id!=-1){
+						System.out.print("Introdueix el nou factorTarda de l'hospital:");
+						Double fact = teclado.nextDouble();
+						HOSP.setFactorT(fact);
+						System.out.print("Factor Tarda cambiat correctament!\n");
+						MostraHospital(HOSP);
+					}
+					else System.out.print("Hospital No creat!!\n");
+					break;
 				}
 				case 24:{
+					if(id!=-1){
+						System.out.print("Introdueix el nou factorNit de l'hospital:");
+						Double fact = teclado.nextDouble();
+						HOSP.setFactorN(fact);
+						System.out.print("Factor Nit cambiat correctament!\n");
+						MostraHospital(HOSP);
+					}
+					else System.out.print("Hospital No creat!!\n");
+					break;
 				}
-				case 25:{
+				case 25:{ //System.out.print("25: setDoctor(d)\n");
+					if(id!=-1){
+						int Id;
+						System.out.print("Introdueix el id del doctor a modificar:");
+						Id = teclado.nextInt();
+						
+						Doctor d = new Doctor(Id,"setdoctor",0,sou);
+					}
+					else System.out.print("Hospital No creat!!\n");
+					break;
 				}
 				case 26:{
+				System.out.print("26: replaceTurno(t)\n");
 				}
 				case 27:{
+				System.out.print("27: addDoctor(d)\n");
 				}
 				case 28:{
+				System.out.print("28: addDoctors(vdoc)\n");
 				}
 				case 29:{
+				System.out.print("29: addDoctors(aldoc)\n");
 				}
 				case 30:{
+					System.out.print("30: deleteDoctor(id)\n");
 				}
 				case 31:{
+				System.out.print("31: cleardoctors()\n");
 				}
 				case 32:{
+				System.out.print("32: addDiaVacacional(d)\n");
 				}
 				case 33:{
+				System.out.print("33: deleteDiaVacacional(d)\n");
 				}
 				case 34:{
+				System.out.print("34: resetHosp()\n");
 				}
 				case 35:{ fi aplicatiu
 					opcion = 0;
