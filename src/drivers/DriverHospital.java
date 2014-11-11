@@ -96,7 +96,6 @@ public class DriverHospital {
 			
 			
 			System.out.print("¿Que desea hacer?\n");
-			
 			System.out.print("1: Crea Hospital vacio\n");
 			System.out.print("2: Crea Hospital con id, nombre y factores\n");
 			System.out.print("3: No va Crea Hospital con id, nombre, factores, arraylist de doctores y calendario.\n");
@@ -124,7 +123,7 @@ public class DriverHospital {
 				case 1:{ //
 					if(id!=1){
 						id=1;
-						System.out.print("Hospital Creat Correctament (prova opcio 15 despres de continuar)\n");
+						System.out.print("Hospital Creat Correctament (prova opcio 16 despres de continuar)\n");
 					}
 					else {
 						System.out.print("Ja havies creat un hospital\n");
@@ -150,7 +149,7 @@ public class DriverHospital {
 						System.out.print("Ingrese el factorNoche: ");
 						fn = teclado.nextDouble();
 						HOSP = new Hospital(codigo,n,fm,ft,fn);
-						System.out.print("Hospital Creat Correctament (prova opcio 15 despres de continuar)\n");		
+						System.out.print("Hospital Creat Correctament (prova opcio 16 despres de continuar)\n");		
 					}
 					else {
 						System.out.print("Ja havies creat un hospital\n");
@@ -195,7 +194,7 @@ public class DriverHospital {
 					System.out.print("S'ha Creat un calendari amb els dies 1 1 1 y 2 2 2 per " +
 							"simular l'entrada\n");
 					HOSP = new Hospital(codigo,n,fm,ft,fn,aldoc,cale);
-					System.out.print("Hospital Creat Correctament (prova opcio 15 despres de continuar)\n");		
+					System.out.print("Hospital Creat Correctament (prova opcio 16 despres de continuar)\n");		
 				}
 				else {
 					System.out.print("Ja havies creat un hospital\n");
@@ -220,7 +219,7 @@ public class DriverHospital {
 						System.out.print("Ingrese el nuevo factorMañana: ");
 						fm = teclado.nextDouble();
 						HOSP.setFactorM(fm);
-						System.out.print("\n Factor Mati canviat! (prova opcio 15 despres de continuar) \n");
+						System.out.print("\n Factor Mati canviat! (prova opcio 16 despres de continuar) \n");
 					}	
 					else System.out.print("Hospital No creat\n");	
 					break;
@@ -231,7 +230,7 @@ public class DriverHospital {
 						System.out.print("Ingrese el nuevo factorTarde: ");
 						ft = teclado.nextDouble();
 						HOSP.setFactorT(ft);
-						System.out.print("\n Factor Tarda canviat! (prova opcio 15 despres de continuar) \n");
+						System.out.print("\n Factor Tarda canviat! (prova opcio 16 despres de continuar) \n");
 					}
 					else System.out.print("Hospital No creat\n");
 					break;
@@ -242,7 +241,7 @@ public class DriverHospital {
 						System.out.print("Ingrese el nuevo factorNoche: ");
 						fn = teclado.nextDouble();
 						HOSP.setFactorN(fn);
-						System.out.print("\n Factor Nit canviat! (prova opcio 15 despres de continuar) \n");
+						System.out.print("\n Factor Nit canviat! (prova opcio 16 despres de continuar) \n");
 					}
 					else System.out.print("Hospital No creat\n");
 					break;
@@ -261,7 +260,7 @@ public class DriverHospital {
 						if(HOSP.existsDoctor(Id)) System.out.print("Et recordo que ja existeix aquest identificador\n");
 						else{
 							HOSP.addDoctor(doc);
-							System.out.print("\n Doctor Afegit! (prova opcio 15 despres de continuar) \n");
+							System.out.print("\n Doctor Afegit! (prova opcio 16 despres de continuar) \n");
 						}
 					}
 					else System.out.print("Hospital No creat\n");
@@ -360,7 +359,7 @@ public class DriverHospital {
 						if(HOSP.existsDoctor(iden)== false) System.out.print("Et recordo que no existeix aquest identificador\n");
 						else{
 							HOSP.deleteDoctor(iden);
-							System.out.print("\n Doctor Borrat! (prova opcio 15 despres de continuar) \n");
+							System.out.print("\n Doctor Borrat! (prova opcio 16 despres de continuar) \n");
 						}
 					}
 					else System.out.print("Hospital No creat\n");
@@ -389,7 +388,7 @@ public class DriverHospital {
 						}
 						else {
 							HOSP.addDiaVacacional(d);
-							System.out.print("DiaVacacional introduit (prova opcio 15) \n");
+							System.out.print("DiaVacacional introduit (prova opcio 16) \n");
 						}
 					}
 					else System.out.print("Hospital No creat\n");
@@ -404,7 +403,7 @@ public class DriverHospital {
 						GregorianCalendar d= new GregorianCalendar(dia,mes,year);
 						if(HOSP.existsDiaVacacional(d)==true){ //ya existeix
 							HOSP.deleteDiaVacacional(d);
-							System.out.print("DiaVacacional borrat (prova opcio 15) \n");
+							System.out.print("DiaVacacional borrat (prova opcio 16) \n");
 						}
 						else {
 							System.out.print("Aquest dia no pertany al calendari\n");
