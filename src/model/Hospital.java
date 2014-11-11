@@ -390,6 +390,11 @@ public class Hospital {
 		calendari.deleteDiaVacacional(d);
 	}
 	
+	/** 
+	 * Metodo que elimina un diaVacacional con sus tres turnos del Hospital
+	 * pre- la fecha d existe en el Calendario
+	 * @param d 	es la fecha del diaVacacional
+	 */
 	public void resetHosp(){
 		idHospital=0;
 		nombre=null;
