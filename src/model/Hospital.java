@@ -391,9 +391,7 @@ public class Hospital {
 	}
 	
 	/** 
-	 * Metodo que elimina un diaVacacional con sus tres turnos del Hospital
-	 * pre- la fecha d existe en el Calendario
-	 * @param d 	es la fecha del diaVacacional
+	 * Metodo que reseta todos los datos del Hospital
 	 */
 	public void resetHosp(){
 		idHospital=0;
