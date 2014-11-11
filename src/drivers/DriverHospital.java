@@ -575,6 +575,13 @@ public class DriverHospital {
 					}
 					else {
 						System.out.print("Ja havies creat un hospital\n");
+						System.out.print("Vols eliminar-lo per poder crear un de nou?\n");
+						System.out.print("(si o no)\n");
+						String resposta;
+						resposta=teclado.next();
+						if(resposta.equals("si")|resposta.equals("s")|resposta.equals("SI")|resposta.equals("S")) {
+							id=0;
+						}
 					}
 					break;
 				}
@@ -602,6 +609,13 @@ public class DriverHospital {
 					}
 					else {
 						System.out.print("Ja havies creat un hospital\n");
+						System.out.print("Vols eliminar-lo per poder crear un de nou?\n");
+						System.out.print("(si o no)\n");
+						String resposta;
+						resposta=teclado.next();
+						if(resposta.equals("si")|resposta.equals("s")|resposta.equals("SI")|resposta.equals("S")) {
+							id=0;
+						}
 					}
 					break;
 				}
@@ -649,6 +663,13 @@ public class DriverHospital {
 				}
 				else {
 					System.out.print("Ja havies creat un hospital\n");
+					System.out.print("Vols eliminar-lo per poder crear un de nou?\n");
+					System.out.print("(si o no)\n");
+					String resposta;
+					resposta=teclado.next();
+					if(resposta.equals("si")|resposta.equals("s")|resposta.equals("S")|resposta.equals("SI")) {
+						id=0;
+					}
 				}
 				break;
 			
@@ -697,6 +718,13 @@ public class DriverHospital {
 				}
 				else {
 					System.out.print("Ja havies creat un hospital\n");
+					System.out.print("Vols eliminar-lo per poder crear un de nou?\n");
+					System.out.print("(si o no)\n");
+					String resposta;
+					resposta=teclado.next();
+					if(resposta.equals("si")|resposta.equals("s")|resposta.equals("SI")|resposta.equals("S")) {
+						id=0;
+					}
 				}
 				break;
 				
@@ -855,9 +883,11 @@ public class DriverHospital {
 				}
 				case 19:{
 					System.out.print("19: getTurno(d,tt)\n");
+					break;
 				}
 				case 20:{
 					System.out.print("20: getAllTurnos()\n");
+					break;
 				}
 				case 21:{
 					if(id!=-1){
@@ -928,15 +958,75 @@ public class DriverHospital {
 				}
 				case 26:{
 				System.out.print("26: replaceTurno(t)\n");
+				break;
 				}
 				case 27:{
-				System.out.print("27: addDoctor(d)\n");
+					if(id!=-1){
+						System.out.print("Introdueix l'id, el nom, el numeroMaxideTorns i el sou per Torn del doctor \n");
+						int Id, numMax;
+						String nombre;
+						Double sueldo;
+						Id = teclado.nextInt();
+						nombre = teclado.next();
+						numMax = teclado.nextInt();
+						sueldo = teclado.nextDouble();
+						Doctor doc = new Doctor(Id, nombre, numMax, sueldo);
+						if(HOSP.existsDoctor(Id)) System.out.print("Et recordo que ja existeix aquest identificador\n");
+						else{
+							HOSP.addDoctor(doc);
+							System.out.print("\n Doctor Afegit!\n");
+							MostrarHospital(HOSP);
+						}
+					}
+					else System.out.print("Hospital No creat\n");
+					break;
 				}
 				case 28:{
-				System.out.print("28: addDoctors(vdoc)\n");
+					if(id!=-1){
+						Doctor[] vdoc = new Doctor[5];
+						vdoc[0]= new Doctor(1,"PRIMERO",1,1.0);
+						vdoc[1]= new Doctor(2,"SEGUNDO",2,2.0);
+						vdoc[2]= new Doctor(3,"TERCERO",3,3.0);
+						vdoc[3]= new Doctor(4,"QUARTO",4,4.0);
+						vdoc[4]= new Doctor(5,"QUINTO",5,5.0);
+						System.out.print("vdoc[0]=Doctor(1,PRIMERO,1,11.0)\n");
+						System.out.print("vdoc[1]=Doctor(2,SEGUNDO,2,22.0)\n");
+						System.out.print("vdoc[2]=Doctor(3,TERCERO,3,33.0)\n");
+						System.out.print("vdoc[3]=Doctor(4,QUARTO,4,44.0)\n");
+						System.out.print("vdoc[4]=Doctor(5,QUINTO,5,55.0)\n");
+						HOSP.addDoctors(vdoc);
+						System.out.print("S'han afegit els 5 doctors al Hospital. +" +
+						"Recorda que aquesta funcio sobreescriu els doctors\n");
+						MostrarHospital(HOSP);
+						}
+					else System.out.print("Hospital No creat\n");
+					break;
 				}
 				case 29:{
-				System.out.print("29: addDoctors(aldoc)\n");
+					if(id!=-1){
+						Doctor doc1= new Doctor(1,"PRIMERO",1,1.0);
+						Doctor doc2= new Doctor(2,"SEGUNDO",2,2.0);
+						Doctor doc3= new Doctor(3,"TERCERO",3,3.0);
+						Doctor doc4= new Doctor(4,"QUARTO",4,4.0);
+						Doctor doc5= new Doctor(5,"QUINTO",5,5.0);
+						ArrayList<Doctor> aldoc = new ArrayList<Doctor>();
+						aldoc.add(doc1);
+						aldoc.add(doc2);
+						aldoc.add(doc3);
+						aldoc.add(doc4);
+						aldoc.add(doc5);
+						System.out.print("doc1=Doctor(1,PRIMERO,1,1.0)\n");
+						System.out.print("doc2=Doctor(2,SEGUNDO,2,2.0)\n");
+						System.out.print("doc3=Doctor(3,TERCERO,3,3.0)\n");
+						System.out.print("doc4=Doctor(4,QUARTO,4,4.0)\n");
+						System.out.print("doc5=Doctor(5,QUINTO,5,5.0)\n");
+						HOSP.addDoctors(aldoc);
+						System.out.print("S'han afegit els 5 doctors al Hospital. +" +
+						"Recorda que aquesta funcio sobreescriu els doctors\n");
+						MostrarHospital(HOSP);
+					}
+					else System.out.print("Hospital No creat\n");
+					break;
 				}
 				case 30:{
 					if(id!=-1){
@@ -1019,7 +1109,7 @@ public class DriverHospital {
 					break;
 				}
 				case 35:{ //fiaplicatiu
-					opcion = 0;
+					opcion = 35;
 				}
 				default: break;
 			}

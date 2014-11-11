@@ -54,7 +54,7 @@ public class Hospital {
 				doctors.put(vdoc[i].getId(), vdoc[i]);
 			}
 		}
-		calendari = new Calendario(cal);
+		calendari = cal;
 	}
 	
 // creadora con id, nombre, factores, arraylist de doctores y calendario. //full
@@ -71,7 +71,7 @@ public class Hospital {
 				doctors.put(aldoc.get(i).getId(), aldoc.get(i));
 			}
 		}
-		calendari = new Calendario(cal);
+		calendari = cal;
 	}
 			
 	/**
