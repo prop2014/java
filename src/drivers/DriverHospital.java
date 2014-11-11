@@ -679,8 +679,6 @@ public static void main(String[] args) {
 					else System.out.print("Hospital No creat!!\n");
 					break;
 				}
-					System.out.print("11: getDoctor(id)\n");
-					System.out.print("12: getDoctors()\n");
 					
 				case 10:{
 					if(id!=-1){
@@ -695,20 +693,48 @@ public static void main(String[] args) {
 				}
 				case 11:{
 					if(id!=-1){
-						int codigo;
-						System.out.print("Introdueix el id del doctor a consultar: ");
-						codigo = teclado.nextInt();
-						if(HOSP.existsDoc(codigo){
-							Doctor d = HOSP.getDoctor(codigo);
-							MostrarDoctor(d);
+						System.out.print("ID dels doctors de l'Hospital: \n");
+						ArrayList<Doctor> aldoc;
+						aldoc=HOSP.getDoctors();
+						Iterator<Doctor> itr = aldoc.iterator();
+						Doctor doc;
+						while(itr.hasNext()){
+							doc=itr.next();
+							System.out.printf("ID: %d\n",doc.getId());
 						}
-						else System.out.print("L'Hospital no contenia aquest doctor\n");
+						System.out.print("introdueix la ID del doctor a mostrar \n");
+						int d=teclado.nextInt();
+						if(HOSP.existsDoctor(d)) {
+							doc=HOSP.getDoctor(d);
+							MostrarDoc(doc);
+						}
+						else{
+							System.out.print("No existia aquest doctor al hospital\n");
+						}
+						
 					}
-					else System.out.print("Hospital No creat!!\n");
-					break;
-				
+					else System.out.print("Hospital No creat\n");
+					break;			
 				}
+					System.out.print("12: getDoctors()\n");
 				case 12:{
+					if(id!=-1){
+						ArrayList<Doctor> aldoc;
+						aldoc=HOSP.getDoctors();
+						Iterator<Doctor> itr = aldoc.iterator();
+						Doctor doc;
+						while(itr.hasNext()){
+							doc=itr.next();
+							MostrarDoc(doc.getId());
+						}
+						else{
+							System.out.print("No existia aquest doctor al hospital\n");
+						}
+						
+					}
+					else System.out.print("Hospital No creat\n");
+					break;	
+					
 				}
 				case 13:{
 				}
