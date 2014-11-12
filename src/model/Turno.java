@@ -1,76 +1,122 @@
 package model;
+
 import java.util.GregorianCalendar;
 
 /**
- *
+ * Representa un turno de guardia
  * @author Felix Fernando Ramos Velázquez
  */
 public class Turno {
+	//-- Atributos privados --//
+	private GregorianCalendar date;
+	private String shiftType;
+	private String specialDate;
+	private int numberOfDoctors;
 
-	/* Atributos */
-	private GregorianCalendar fecha;
-	private String tipoTurno;
-	private String especial;
-	private int numDoctores;
-
-	/* Constructoras */
-
+	
+	//-- Constructoras --//
 	/**
-	 *
 	 * Constructora por defecto
 	 */
-	public Turno(){
-		fecha = null;
-		tipoTurno = null;
-		especial = null;
-		numDoctores = 0;
+	public Turno() {
+		date = null;
+		shiftType = null;
+		specialDate = null;
+		numberOfDoctors = 0;
 	}
 
 	/**
-	 *
-	 * Constructora con parámetros
+	 * Constructora copia
+	 * @param T Turno que se copiará
 	 */
-	public Turno(GregorianCalendar d, String tt, String de, int nd){
-		fecha = d;
-		tipoTurno = tt;
-		especial = de;
-		numDoctores = nd;
+	public Turno(Turno T) {
+		date = T.date;
+		shiftType = T.shiftType;
+		specialDate = T.specialDate;
+		numberOfDoctors = T.numberOfDoctors;
 	}
+	
+	/**
+	 * Constructora completa
+	 * @param date Fecha del turno
+	 * @param shiftType Tipo del turno
+	 * @param specialDate Fecha especial
+	 * @param numberOfDoctors Número de doctores del turno
+	 */
+	public Turno (GregorianCalendar date, String shiftType, String specialDate, int numberOfDoctors) {
+		this.date = date;
+		this.shiftType = shiftType;
+		this.specialDate = specialDate;
+		this.numberOfDoctors = numberOfDoctors;
+	}
+	
+	
 	/* Metodos públicos */
-
-	/* Modificadoras */
-
-	public void setFecha(GregorianCalendar d){
-		fecha = d;
+	
+	//-- Modificadoras --//
+	/**
+	 * Modifica la fecha del turno
+	 * @param date Fecha del turno
+	 */
+	public void setDate(GregorianCalendar date) {
+		this.date = date;
 	}
 
-	public void setTipoTurno(String tt){
-		tipoTurno = tt;
+	/**
+	 * Modifica el tipo del turno
+	 * @param shiftType Tipo del turno
+	 */
+	public void setShiftType(String shiftType) {
+		this.shiftType = shiftType;
 	}
 
-	public void setEspecial(String de){
-		especial = de;
+	/**
+	 * Modifica el tipo de fecha especial del turno
+	 * @param specialDate Tipo de fecha especial
+	 */
+	public void setSpecialDate(String specialDate) {
+		this.specialDate = specialDate;
 	}
 
-	public void setNumDoctores(int n){
-		numDoctores = n;
+	/**
+	 * Modifica el número de doctores del turno
+	 * @param numberOfDoctors Número de doctores
+	 */
+	public void setNumberOfDoctors(int numberOfDoctors) {
+		this.numberOfDoctors = numberOfDoctors;
 	}
 
-	/* Consultoras */
-
-	public GregorianCalendar getFecha(){
-		return fecha;
+	
+	//-- Consultoras --//
+	/**
+	 * Consultora de la fecha del turno
+	 * @return La fecha del turno
+	 */
+	public GregorianCalendar getDate() {
+		return date;
 	}
 
-	public String getTipoTurno(){
-		return tipoTurno;
+	/**
+	 * Consultora del tipo del turno
+	 * @return El tipo del turno
+	 */
+	public String getShiftType() {
+		return shiftType;
 	}
 
-	public String getEspecial(){
-		return especial;
+	/**
+	 * Consultora del tipo de fecha especial del turno
+	 * @return El tipo de fecha especial
+	 */
+	public String getSpecialDate() {
+		return specialDate;
 	}
 
-	public int getNumDoctores(){
-		return numDoctores;
+	/**
+	 * Consultora del número de doctores del turno
+	 * @return El número de doctores
+	 */
+	public int getNumberOfDoctors() {
+		return numberOfDoctors;
 	}
 }
