@@ -708,9 +708,9 @@ public class DriverHospital {
 					aldoc.add(doc4);
 					aldoc.add(doc5);
 					System.out.print("S'ha Creat un Arraylist amb 5 doctors per simular l'entrada\n");
-					GregorianCalendar gc1= new GregorianCalendar(1,1,1);
-					GregorianCalendar gc2= new GregorianCalendar(2,2,1);
-					Calendario cale = new Calendario(1);
+					GregorianCalendar gc1= new GregorianCalendar(2,1,2);
+					GregorianCalendar gc2= new GregorianCalendar(2,2,2);
+					Calendario cale = new Calendario(2);
 					cale.addHoliday(gc1);
 					cale.addHoliday(gc2);
 					System.out.print("S'ha Creat un calendari amb els dies 1 1 1 y 2 2 1 per " +

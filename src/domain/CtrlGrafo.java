@@ -93,10 +93,16 @@ public class CtrlGrafo {
 						}
 					}
 					else if(restipe.equals("NOT_Fecha")){
+						
+						
+						
 						for(int m=0;m<alturnos.size();++m){
+							
 						}
 					}
 					else if(restipe.equals("NOT_Especial")){
+						NOT_Especial N = (NOT_Especial)res;
+						
 						
 					}
 					else if(restipe.equals("NOT_Dia_Semana")){
