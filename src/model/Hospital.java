@@ -40,22 +40,6 @@ public class Hospital {
 		calendari = new Calendario(0);
 	}
 	
-	// creadora con id, nombre, factores,vector de doctores y calendario.//full
-	public Hospital (int id, String nom, double fm, double ft, double fn,
-			Doctor[] vdoc, Calendario cal){
-		idHospital=id;
-		name=nom;
-		factorM=fm;
-		factorT=ft;
-		factorN=fn;
-		doctors = new TreeMap<Integer , Doctor>();
-		for(int i = 0; i < vdoc.length; ++i){
-			if(doctors.containsKey(vdoc[i].getId())==false){
-				doctors.put(vdoc[i].getId(), vdoc[i]);
-			}
-		}
-		calendari = new Calendario(cal);
-	}
 	
 // creadora con id, nombre, factores, arraylist de doctores y calendario. //full
 	public Hospital (int id, String nom, double fm, double ft, double fn,
@@ -114,18 +98,6 @@ public class Hospital {
 		return factorN;
 	}
 	
-	/** 
-	 * Consultora de los factores del Hospital
-	 * @return el vector double con los tres factores(M,T,N).
-	 */
-	public double[] getFactors(){
-		double[] fac;  
-		fac=new double[3];
-		fac[0]=factorM;
-		fac[1]=factorT;
-		fac[2]=factorN;
-		return fac;
-	}
 	
 	/** 
 	 * Consultora de un Doctor del Hospital con su Id.
@@ -149,6 +121,14 @@ public class Hospital {
 		    aldoc.add(doctors.get(key));
 		}
 		return aldoc;
+	}
+	
+	/**
+	 * Devuelve el calendario
+	 */
+	
+	public Calendario getCalendario(){
+		return calendari;
 	}
 	
 	/** 
@@ -175,60 +155,6 @@ public class Hospital {
 	public boolean existsDoctor(int id){
 		return doctors.containsKey(id);
 	}
-	
-	/** 
-	 * Consultora de la existencia de un dia vacacional = d
-	 * @param d		es la fecha del dia Vacacional
-	 * @return un boolean que indica si el dia Vacacional existe.
-	 */
-    public boolean existsDiaVacacional(GregorianCalendar d){ //borrar
-    	return calendari.existsHoliday(d);
-    }
-    
-    /** 
-	 * Consultora del numero de dias contenidos en el Calendario del Hospital
-	 * @return el numero de dias Vacacionales
-	 */
-    public int getNumDias(){ //borrar
-		return calendari.getNumberOfDays();
-	}
-    
-    /** 
-	 * Consultora del numero de turnos contenidos en el Calendario del Hospital
-	 * @return el numero de turnos Vacacionales del Hospital
-	 */
-	public int getNumTurnos(){ //borrar
-		return calendari.getNumberOfShifts();
-	
-	}
-	
-	/** 
-	 * Consultora de un turno contenidos en el Calendario del Hospital
-	 * @param d 	es la fehca del turno
-	 * @param tt	es el tipo de turno ("m", "t", "n");
-	 * @return el turno tipoturno tt y fecha d.
-	 */
-	public Turno getTurno(GregorianCalendar d, String tt){ //BORRAR
-		Turno t = calendari.getShift(d, tt);
-		return t;
-	}
-	
-	/** 
-	 * Consultora de todos los turnos del Hospital
-	 * @return un ArrayList<Vector<Turno>> con todos los Turnos del Hospital
-	 */
-	public ArrayList<Turno> getAllTurnos(){ //borrar
-		return calendari.getAllShifts();
-	}
-	
-	/**
-	 * Devuelve el calendario
-	 */
-	
-	public Calendario getCalendario(){
-		return calendari;
-	}
-	
 	
 	/** 
 	 * Modificadora del Nombre del Hospital
@@ -273,15 +199,6 @@ public class Hospital {
 			doctors.remove(d.getId());
 			doctors.put(d.getId(), d);
 		}	
-	}
-
-	/** 
-	 * Modificadora de un Turno del Hospital
-	 * @param t 	es el turno modificado
-	 * 
-	 */
-	public void replaceTurno(Turno t){ //borrar
-		calendari.replaceShift(t);
 	}
 	
 	/** 
@@ -351,23 +268,6 @@ public class Hospital {
 		doctors.clear();
 	}
 	
-	/** 
-	 * Metodo que inserta un diaVacacional con sus tres turnos en el Hospital
-	 * pre - la fecha d NO existe en el Calendario
-	 * @param d 	es la fecha del diaVacacional
-	 */
-	public void addDiaVacacional(GregorianCalendar d){ //borrar
-		calendari.addHoliday(d);
-	}
-	
-	/** 
-	 * Metodo que elimina un diaVacacional con sus tres turnos del Hospital
-	 * pre- la fecha d existe en el Calendario
-	 * @param d 	es la fecha del diaVacacional
-	 */
-	public void deleteDiaVacacional(GregorianCalendar d){ //borrar
-		calendari.deleteHoliday(d);
-	}
 	
 	/** 
 	 * Metodo que reseta todos los datos del Hospital

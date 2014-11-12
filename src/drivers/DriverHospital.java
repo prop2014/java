@@ -447,7 +447,6 @@ import model.Turno;
 public class DriverHospital {
 
 	static void MostrarTurno(Turno t){
-		//GregorianCalendar getFecha()
 		System.out.printf("--------------------.\n");
 		GregorianCalendar c1 = t.getDate();
 		System.out.printf("fecha:\n"+c1.getTime());
@@ -458,14 +457,19 @@ public class DriverHospital {
 		System.out.printf("--------------------.\n");
 
 	}
-	//provando
+	static void MostrarCal(Calendario cal){
+		
+		System.out.printf("Calendari del any %d\n",cal.getCalendarYear());
+		System.out.printf("Esta format per: %d turns vacacionals\n",cal.getNumberOfShifts());	
+	}
+
 	
 	static void MostrarDoc(Doctor doc){
 		System.out.printf("--------------------.\n");
 		System.out.printf("ID: %d\n",doc.getId());
-		System.out.printf("Nom: %s\n",doc.getNombre());
-		System.out.printf("Num Max turnos: %d\n",doc.getNumMaxTurnos());
-		System.out.printf("Sueldo Por turno: %s €\n",doc.getSueldoTurno());
+		System.out.printf("Nom: %s\n",doc.getName());
+		System.out.printf("Num Max turnos: %d\n",doc.getNumMaxTurn());
+		System.out.printf("Sueldo Por turno: %s €\n",doc.getSalaryTurn());
 		if(doc.isREmpty()) System.out.printf("No te restriccions: \n");
 		else System.out.printf("Te restriccions\n");
 		System.out.printf("--------------------.\n");
@@ -496,10 +500,11 @@ public class DriverHospital {
 				++i;
 			}
 		}
-		if(hosp.getNumDias()==0) System.out.printf("Actualment l'Hospital no te calendari\n");
+		Calendario cal = hosp.getCalendario();
+		if(cal.getNumberOfDays()==0) System.out.printf("Actualment l'Hospital no te calendari\n");
 		else {
-			System.out.printf("El calendari te %d Turns Vacacionals\n",hosp.getNumTurnos());
-			ArrayList<Turno> alturno = hosp.getAllTurnos();
+			System.out.printf("El calendari te %d Turns Vacacionals\n",cal.getNumberOfShifts());
+			ArrayList<Turno> alturno = cal.getAllShifts();
 			for(int i=0;i<alturno.size();++i){
 				MostrarTurno(alturno.get(i));
 			}
@@ -518,12 +523,12 @@ public class DriverHospital {
 		Hospital HOSP = new Hospital();
 		int id = -1;
 		int opcion = -1;
-		while(opcion != 35){
+		while(opcion != 25){
 		
 			System.out.print("\n¿Que vols fer?\n");
 			System.out.print("0: Mostra Opcions\n");
-			System.out.print("1-34: Opcions\n");
-			System.out.print("35: Fi de l'aplicatiu\n");
+			System.out.print("1-24: Opcions\n");
+			System.out.print("25: Fi de l'aplicatiu\n");
 			opcion = teclado.nextInt();
 			switch(opcion){
 			
@@ -531,39 +536,29 @@ public class DriverHospital {
 					System.out.print("0: Mostra opcions\n");
 					System.out.print("1: Hospital()\n");
 					System.out.print("2: Hospital (id,nom,fm,ft,fn)\n");
-					System.out.print("3: Hospital (id,nom,fm,ft,fn,vdoc,cal)\n");
-					System.out.print("4: Hospital (id,nom,fm,ft,fn,aldoc,cal)\n");
-					System.out.print("5: getId()\n");
-					System.out.print("6: getNombre()\n");
-					System.out.print("7: getFactorM()\n");
-					System.out.print("8: getFactorT()\n");
-					System.out.print("9: getFactorN()\n");
-					System.out.print("10: getFactors()\n");
-					System.out.print("11: getDoctor(id)\n");
-					System.out.print("12: getDoctors()\n");
-					System.out.print("13: isDocEmpty()\n");
-					System.out.print("14: docSize()\n");
-					System.out.print("15: existsDoctor(id)\n");
-					System.out.print("16: existsDiaVacacional(d)\n");
-					System.out.print("17: getNumDias()\n");
-					System.out.print("18: getNumTurnos()\n");
-					System.out.print("19: getTurno(d,tt)\n");
-					System.out.print("20: getAllTurnos()\n");
-					System.out.print("21: setNombre(nom)\n");
-					System.out.print("22: setFactorM(factor)\n");
-					System.out.print("23: setFactorT(factor)\n");
-					System.out.print("24: setFactorN(factor)\n");
-					System.out.print("25: setDoctor(d)\n");
-					System.out.print("26: no va bien replaceTurno(t)\n");
-					System.out.print("27: addDoctor(d)\n");
-					System.out.print("28: addDoctors(vdoc)\n");
-					System.out.print("29: addDoctors(aldoc)\n");
-					System.out.print("30: deleteDoctor(id)\n");
-					System.out.print("31: cleardoctors()\n");
-					System.out.print("32: addDiaVacacional(d)\n");
-					System.out.print("33: deleteDiaVacacional(d)\n");
-					System.out.print("34: resetHosp()\n");
-					System.out.print("35: Fi de l'aplicatiu\n");
+					System.out.print("3: Hospital (id,nom,fm,ft,fn,aldoc,cal)\n");
+					System.out.print("4: getId()\n");
+					System.out.print("5: getNombre()\n");
+					System.out.print("6: getFactorM()\n");
+					System.out.print("7: getFactorT()\n");
+					System.out.print("8: getFactorN()\n");
+					System.out.print("9: getDoctor(id)\n");
+					System.out.print("10: getDoctors()\n");
+					System.out.print("11: isDocEmpty()\n");
+					System.out.print("12: docSize()\n");
+					System.out.print("13: existsDoctor(id)\n");
+					System.out.print("14: setNombre(nom)\n");
+					System.out.print("15: setFactorM(factor)\n");
+					System.out.print("16: setFactorT(factor)\n");
+					System.out.print("17: setFactorN(factor)\n");
+					System.out.print("18: setDoctor(d)\n");
+					System.out.print("19: addDoctor(d)\n");
+					System.out.print("20: addDoctors(aldoc)\n");
+					System.out.print("21: deleteDoctor(id)\n");
+					System.out.print("22: cleardoctors()\n");
+					System.out.print("23: resetHosp()\n");
+					System.out.print("24: getCalendario()\n");
+					System.out.print("25: Fi de l'aplicatiu\n");
 					System.out.print("\n");
 					break;
 				}
@@ -619,66 +614,7 @@ public class DriverHospital {
 					}
 					break;
 				}
-				case 3:{ //amb vector
-					if(id!=1){
-					id=1;
-					int codigo;
-					String n;
-					double fm;
-					double ft;
-					double fn;
-					System.out.print("Ingrese el id del hospital: ");
-					codigo = teclado.nextInt();
-					System.out.print("Ingrese el nombre del hospital: ");
-					n = teclado.next();
-					System.out.print("Ingrese el factorMañana: ");
-					fm = teclado.nextDouble();
-					System.out.print("Ingrese el factorTarde: ");
-					ft = teclado.nextDouble();
-					System.out.print("Ingrese el factorNoche: ");
-					fn = teclado.nextDouble();
-					
-					Doctor[] vdoc = new Doctor[5];
-					vdoc[0]= new Doctor(1,"PRIMERO",1,1.0);
-					vdoc[1]= new Doctor(2,"SEGUNDO",2,2.0);
-					vdoc[2]= new Doctor(3,"TERCERO",3,3.0);	
-					vdoc[3]= new Doctor(4,"QUARTO",4,4.0);	
-					vdoc[4]= new Doctor(5,"QUINTO",5,5.0);
-					System.out.print("vdoc[0]=Doctor(1,PRIMERO,1,1.0)\n");
-					System.out.print("vdoc[1]=Doctor(2,SEGUNDO,2,2.0)\n");
-					System.out.print("vdoc[2]=Doctor(3,TERCERO,3,3.0)\n");
-					System.out.print("vdoc[3]=Doctor(4,QUARTO,4,4.0)\n");
-					System.out.print("vdoc[4]=Doctor(5,QUINTO,5,5.0)\n");
-					System.out.print("S'ha Creat un vector amb 5 doctors per simular l'entrada\n");
-					int day = 1;
-					int month = 1;
-					int year = 1;
-					
-					GregorianCalendar gc1= new GregorianCalendar(day,month-1,year);
-					GregorianCalendar gc2= new GregorianCalendar(day+1,month-1,year);
-					Calendario cale = new Calendario(year);
-					cale.addHoliday(gc1);
-					cale.addHoliday(gc2);
-					System.out.print("S'ha Creat un calendari amb els dies 1 1 1 y 2 1 1 per " +
-							"simular l'entrada\n");
-					HOSP = new Hospital(codigo,n,fm,ft,fn,vdoc,cale);
-					System.out.print("Hospital Creat Correctament\n");	
-					MostrarHospital(HOSP);
-				}
-				else {
-					System.out.print("Ja havies creat un hospital\n");
-					System.out.print("Vols eliminar-lo per poder crear un de nou?\n");
-					System.out.print("(si o no)\n");
-					String resposta;
-					resposta=teclado.next();
-					if(resposta.equals("si")|resposta.equals("s")|resposta.equals("S")|resposta.equals("SI")) {
-						id=-1;
-					}
-				}
-				break;
-				}
-				
-				case 4:{ //amb array
+				case 3:{ //amb array
 					if(id!=1){
 					id=1;
 					int codigo;
@@ -713,7 +649,7 @@ public class DriverHospital {
 					Calendario cale = new Calendario(2);
 					cale.addHoliday(gc1);
 					cale.addHoliday(gc2);
-					System.out.print("S'ha Creat un calendari amb els dies 1 1 1 y 2 2 1 per " +
+					System.out.print("S'ha Creat un calendari amb els dies 2 1 2 y 2 2 2 per " +
 							"simular l'entrada\n");
 					HOSP = new Hospital(codigo,n,fm,ft,fn,aldoc,cale);
 					System.out.print("Hospital Creat Correctament\n");
@@ -732,54 +668,42 @@ public class DriverHospital {
 				break;
 				}
 				
-				case 5:{ //getid
+				case 4:{ //getid
 					if(id!=-1){
 						System.out.printf("ID Hospital: %d\n",HOSP.getId());
 					}
 					else System.out.print("Hospital No creat!!\n");
 					break;
 				}
-				case 6:{ //getNombre()
+				case 5:{ //getNombre()
 					if(id!=-1){
 						System.out.printf("Nombre Hospital: %s\n",HOSP.getNombre());
 					}
 					else System.out.print("Hospital No creat!!\n");
 					break;
 				}
-				case 7:{
+				case 6:{
 					if(id!=-1){
 						System.out.printf("Factor Mati: %f\n",HOSP.getFactorM());
 					}
 					else System.out.print("Hospital No creat!!\n");
 					break;
 				}
-				case 8:{
+				case 7:{
 					if(id!=-1){
 						System.out.printf("Factor Tarde: %f\n",HOSP.getFactorT());
 					}
 					else System.out.print("Hospital No creat!!\n");
 					break;
 				}
-				case 9:{
+				case 8:{
 					if(id!=-1){
 						System.out.printf("Factor Noche: %f\n",HOSP.getFactorN());
 					}
 					else System.out.print("Hospital No creat!!\n");
 					break;
 				}
-					
-				case 10:{
-					if(id!=-1){
-						double[] factors = HOSP.getFactors();
-						System.out.printf("Factor Mati: %f\n",factors[0]);
-						System.out.printf("Factor Tarda: %f\n",factors[1]);
-						System.out.printf("Factor Nit: %f\n",factors[2]);
-					}
-					else System.out.print("Hospital No creat!!\n");
-					break;
-					
-				}
-				case 11:{
+				case 9:{
 					if(id!=-1){
 						System.out.print("ID dels doctors de l'Hospital: \n");
 						ArrayList<Doctor> aldoc;
@@ -803,7 +727,7 @@ public class DriverHospital {
 					else System.out.print("Hospital No creat\n");
 					break;			
 				}
-				case 12:{
+				case 10:{
 					if(id!=-1){
 						ArrayList<Doctor> aldoc;
 						aldoc=HOSP.getDoctors();
@@ -818,7 +742,7 @@ public class DriverHospital {
 					else System.out.print("Hospital No creat\n");
 					break;	
 				}
-				case 13:{
+				case 11:{
 					if(id!=-1){
 						if(HOSP.isDocEmpty()) System.out.print("L'hospital es buit\n");
 						else System.out.print("L'hospital conte doctors\n");
@@ -826,14 +750,14 @@ public class DriverHospital {
 					else System.out.print("Hospital No creat!!\n");
 					break;
 				}
-				case 14:{
+				case 12:{
 					if(id!=-1){
 						System.out.printf("L'hospital conte: %d Doctors\n",HOSP.docSize());
 					}
 					else System.out.print("Hospital No creat!!\n");
 					break;
 				}
-				case 15:{
+				case 13:{
 					if(id!=-1){
 						System.out.print("ID dels doctors de l'Hospital: \n");
 						ArrayList<Doctor> aldoc;
@@ -852,73 +776,7 @@ public class DriverHospital {
 					else System.out.print("Hospital No creat\n");
 					break;
 				}
-				case 16:{
-					if(id!=-1){
-						System.out.print("aquesta funcio no fa comprovacions de dates correctes\n");
-						int dia, mes, any;
-						System.out.print("Introdueix el dia del mes(0-30): \n");
-						dia = teclado.nextInt();
-						System.out.print("Introdueix el mes del any(0-11):\n");
-						mes = teclado.nextInt();
-						System.out.print("Introdueix l'any: \n");
-						any = teclado.nextInt();
-						GregorianCalendar gc1= new GregorianCalendar(dia,mes,any);
-						if(HOSP.existsDiaVacacional(gc1)) System.out.print("Si que existeix aquest Dia Vacacional\n");
-						else System.out.print("No existeix aquest Dia Vacacional\n");
-					}
-					else System.out.print("Hospital No creat!!\n");
-					break;
-				}
-				case 17:{
-					if(id!=-1){
-						System.out.printf("L'Hospital te %d Dies Vacacionals\n",HOSP.getNumDias());
-					}
-					else System.out.print("Hospital No creat!!\n");
-					break;
-				}
-				case 18:{
-					if(id!=-1){
-						System.out.printf("L'Hospital te %d Turns Vacacionals\n",HOSP.getNumTurnos());
-					}
-					else System.out.print("Hospital No creat!!\n");
-					break;
-				}
-				case 19:{
-					if(id!=-1){
-						if(HOSP.getNumTurnos()==0) System.out.print("L'hospital no te torns!!\n");
-						else {
-							int dia, mes ,any;
-							System.out.print("Introdueix el dia del mes(0-30): \n");
-							dia = teclado.nextInt();
-							System.out.print("Introdueix el mes del any(0-11):\n");
-							mes = teclado.nextInt();
-							System.out.print("Introdueix l'any: \n");
-							any = teclado.nextInt();
-							GregorianCalendar gc1= new GregorianCalendar(dia,mes,any);
-							System.out.print("el tipus de torn (m,t,n) \n");
-							String tt;
-							tt=teclado.next();
-							Turno t = HOSP.getTurno(gc1,tt);
-							MostrarTurno(t);
-						}
-					}
-					else System.out.print("Hospital No creat!!\n");
-					break;
-				}
-				case 20:{
-					if(id!=-1){
-						if(HOSP.getNumTurnos()==0) System.out.print("L'hospital no te torns!!\n");
-						else {
-							ArrayList<Turno> alturno = HOSP.getAllTurnos();
-							for(int i=0;i<alturno.size();++i){
-								MostrarTurno(alturno.get(i));
-							}
-						}
-					}
-					else System.out.print("Hospital No creat!!\n");
-					break;
-				}
-				case 21:{
+				case 14:{
 					if(id!=-1){
 						System.out.print("Introdueix el nou nom de l'hospital:");
 						String nom = teclado.next();
@@ -929,7 +787,7 @@ public class DriverHospital {
 					else System.out.print("Hospital No creat!!\n");
 					break;
 				}
-				case 22:{
+				case 15:{
 					if(id!=-1){
 						System.out.print("Introdueix el nou factorMati de l'hospital:");
 						Double fact = teclado.nextDouble();
@@ -940,7 +798,7 @@ public class DriverHospital {
 					else System.out.print("Hospital No creat!!\n");
 					break;
 				}
-				case 23:{
+				case 16:{
 					if(id!=-1){
 						System.out.print("Introdueix el nou factorTarda de l'hospital:");
 						Double fact = teclado.nextDouble();
@@ -951,7 +809,7 @@ public class DriverHospital {
 					else System.out.print("Hospital No creat!!\n");
 					break;
 				}
-				case 24:{
+				case 17:{
 					if(id!=-1){
 						System.out.print("Introdueix el nou factorNit de l'hospital:");
 						Double fact = teclado.nextDouble();
@@ -962,7 +820,7 @@ public class DriverHospital {
 					else System.out.print("Hospital No creat!!\n");
 					break;
 				}
-				case 25:{
+				case 18:{
 					if(id!=-1){
 						int Id;
 						System.out.print("Per aquesta opcio s'ha modificat internament el doctor\n");
@@ -973,9 +831,9 @@ public class DriverHospital {
 							Doctor d = HOSP.getDoctor(Id);
 							MostrarDoc(d);
 							double sueldo;
-							sueldo=d.getSueldoTurno();
+							sueldo=d.getSalaryTurn();
 							sueldo=sueldo+1000;
-							d.setSueldoTurno(sueldo);
+							d.setSalaryTurn(sueldo);
 							HOSP.setDoctor(d);
 							System.out.print("S'ha modificat el doctor d!\n");
 							MostrarDoc(HOSP.getDoctor(Id));
@@ -985,26 +843,7 @@ public class DriverHospital {
 					else System.out.print("Hospital No creat!!\n");
 					break;
 				}
-				case 26:{ //System.out.print("26: replaceTurno(t)\n");
-					if(id!=-1){
-						System.out.print("Per aquest driver canviare el torn modificant el numeroDedoctors d'un dels turns\n");
-						if(HOSP.getNumDias()==0) System.out.printf("L'hospital no te turns prova d'afegir-ne (Opcio 32)\n");
-						else {
-							ArrayList<Turno> alturno = HOSP.getAllTurnos();
-							int i = 0;
-							Turno t = alturno.get(i);
-							System.out.printf("introdueix el numero de doctors que vulguis:\n");
-							int num=teclado.nextInt();
-							t.setNumberOfDoctors(num);
-							HOSP.replaceTurno(t);
-							System.out.printf("Torn reemplaçat correctament!\n");
-							MostrarHospital(HOSP);
-						}						
-					}
-					else System.out.print("Hospital No creat!!\n");
-					break;
-				}
-				case 27:{
+				case 19:{
 					if(id!=-1){
 						System.out.print("Introdueix l'id, el nom, el numeroMaxideTorns i el sou per Torn del doctor \n");
 						int Id, numMax;
@@ -1025,28 +864,7 @@ public class DriverHospital {
 					else System.out.print("Hospital No creat\n");
 					break;
 				}
-				case 28:{
-					if(id!=-1){
-						Doctor[] vdoc = new Doctor[5];
-						vdoc[0]= new Doctor(1,"PRIMERO",1,1.0);
-						vdoc[1]= new Doctor(2,"SEGUNDO",2,2.0);
-						vdoc[2]= new Doctor(3,"TERCERO",3,3.0);
-						vdoc[3]= new Doctor(4,"QUARTO",4,4.0);
-						vdoc[4]= new Doctor(5,"QUINTO",5,5.0);
-						System.out.print("vdoc[0]=Doctor(1,PRIMERO,1,11.0)\n");
-						System.out.print("vdoc[1]=Doctor(2,SEGUNDO,2,22.0)\n");
-						System.out.print("vdoc[2]=Doctor(3,TERCERO,3,33.0)\n");
-						System.out.print("vdoc[3]=Doctor(4,QUARTO,4,44.0)\n");
-						System.out.print("vdoc[4]=Doctor(5,QUINTO,5,55.0)\n");
-						HOSP.addDoctors(vdoc);
-						System.out.print("S'han afegit els 5 doctors al Hospital. +" +
-						"Recorda que aquesta funcio sobreescriu els doctors\n");
-						MostrarHospital(HOSP);
-						}
-					else System.out.print("Hospital No creat\n");
-					break;
-				}
-				case 29:{
+				case 20:{
 					if(id!=-1){
 						Doctor doc1= new Doctor(1,"PRIMERO",1,1.0);
 						Doctor doc2= new Doctor(2,"SEGUNDO",2,2.0);
@@ -1072,7 +890,7 @@ public class DriverHospital {
 					else System.out.print("Hospital No creat\n");
 					break;
 				}
-				case 30:{
+				case 21:{
 					if(id!=-1){
 						int iden;
 						ArrayList<Doctor> aldoc;
@@ -1096,7 +914,7 @@ public class DriverHospital {
 					else System.out.print("Hospital No creat\n");
 					break;
 				}
-				case 31:{
+				case 22:{
 					if(id!=-1){
 						if(HOSP.docSize()>0) HOSP.cleardoctors();
 						System.out.print("L'hospital ja no te doctors\n");
@@ -1104,46 +922,7 @@ public class DriverHospital {
 					else System.out.print("Hospital No creat\n");
 					break;
 				}
-				case 32:{
-					if(id!=-1){
-						System.out.print("introdueix el dia vacacional: (dd mm yyyy) \n");
-						int dia = teclado.nextInt();
-						int mes = teclado.nextInt();
-						int year = teclado.nextInt();
-						GregorianCalendar d= new GregorianCalendar(dia,mes,year);
-						if(HOSP.existsDiaVacacional(d)==true){ //ya existeix
-							System.out.print("ya existeix aquest dia vacacional\n");
-						}
-						else {
-							HOSP.addDiaVacacional(d);
-							System.out.print("DiaVacacional introduit\n");
-							MostrarHospital(HOSP);
-						}
-					}
-					else System.out.print("Hospital No creat\n");
-					break;
-				}
-				case 33:{
-					if(id!=-1){
-						System.out.print("introdueix el dia vacacional a eliminar: (dd mm yyyy) \n");
-						int dia = teclado.nextInt();
-						int mes = teclado.nextInt();
-						int year = teclado.nextInt();
-						GregorianCalendar d= new GregorianCalendar(dia,mes,year);
-						if(HOSP.existsDiaVacacional(d)==true){ //ya existeix
-							HOSP.deleteDiaVacacional(d);
-							System.out.print("DiaVacacional borrat!\n");
-							MostrarHospital(HOSP);
-						}
-						else {
-							System.out.print("Aquest dia no pertany al calendari vacacional\n");
-						}
-					}
-					else System.out.print("Hospital No creat\n");
-					System.out.print("\n");
-					break;
-				}
-				case 34:{
+				case 23:{
 					if(id!=-1){
 						HOSP.resetHosp();
 						System.out.print("Les dades del hospital han estat resetejades\n");
@@ -1152,8 +931,17 @@ public class DriverHospital {
 					else System.out.print("Hospital No creat\n");
 					break;
 				}
-				case 35:{ //fiaplicatiu
-					opcion = 35;
+				case 24:{
+					if(id!=-1){
+						Calendario cal = HOSP.getCalendario();
+						MostrarCal(cal);
+					}
+					else System.out.print("Hospital No creat\n");
+					break;
+				}
+				
+				case 25:{ //fiaplicatiu
+					opcion = 25;
 				}
 				default: break;
 			}

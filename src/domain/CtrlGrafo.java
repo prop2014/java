@@ -119,8 +119,8 @@ public class CtrlGrafo {
 						NOT_Dia_Semana N = (NOT_Dia_Semana)res;
 						String t = N.getDiaSemana();
 						for(int m=0;m<alturnos.size();++m){
-							String tipot=alturnos.get(m).getSpecialDate();
-							if(t.equals(tipot)){
+							GregorianCalendar gc1=alturnos.get(m).getDate();
+							if(){
 								Turnos[m]=false;
 							}
 						}
