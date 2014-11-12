@@ -52,7 +52,7 @@ public class Doctor {
 		*Consultora del nombre del Doctor
 		* @return El nombre del Doctor
 		*/
-		public String getNombre() {
+		public String getName() {
 		    return nombre;
 		}
 		
@@ -60,7 +60,7 @@ public class Doctor {
 		*Consultora del numero maximo de turnos del Doctor
 		* @return numero maximo de turnos
 		*/ 
-		public int getNumMaxTurnos() {
+		public int getNumMaxTurn() {
 			return numMaxTurnos;
 		}
 		
@@ -68,7 +68,7 @@ public class Doctor {
 		*Consultora del sueldo por turno del Doctor
 		* @return sueldo por turno del Doctor
 		*/ 
-		public double getSueldoTurno() {
+		public double getSalaryTurn() {
 		    return SueldoTurno;
 		}
 		
@@ -76,7 +76,7 @@ public class Doctor {
 		*Consultora del conjunto de restricciones del Doctor
 		* @return el ArrayList<Restriccion> de las restricciones del Doctor
 		*/
-		public ArrayList<Restriccion> getRestricciones(){
+		public ArrayList<Restriccion> getRestrictions(){
 			ArrayList<Restriccion> restr = new ArrayList<Restriccion>(Restricciones.size());
 			Iterator<Integer> it = Restricciones.keySet().iterator();
 			while(it.hasNext()) {
@@ -117,7 +117,7 @@ public class Doctor {
 		* Modificadora del nombre del Doctor
 		* @param nombre: es el nuevo nombre del Doctor
 		*/ 
-		public void setNombre(String nombre) {
+		public void setName(String nombre) {
 		    this.nombre = nombre;
 		}
 		
@@ -125,7 +125,7 @@ public class Doctor {
 		* Modificadora del numero maximo de turnos del Doctor
 		* @param num: es el nuevo numero maximo de turnos del Doctor
 		*/ 
-		public void setNumMaxTurnos(int num) {
+		public void setNumMaxTurn(int num) {
 		    this.numMaxTurnos= num;
 		}
 		
@@ -133,7 +133,7 @@ public class Doctor {
 		* Modificadora del sueldo por turno del Doctor
 		* @param sueldo: es el nuevo sueldo por turno del Doctor
 		*/ 
-		public void setSueldoTurno(double sueldo) {
+		public void setSalaryTurn(double sueldo) {
 		    this.SueldoTurno = sueldo;
 		}
 		
@@ -143,7 +143,7 @@ public class Doctor {
 		 * @param r: es la nueva restriccion que se quiere añadir al Doctor
 		 * @return True si se ha podido insertar la restriccion, False en caso contrario
 		 */
-		public boolean addRestriccion(Restriccion r) {
+		public boolean addRestriction(Restriccion r) {
 			if (Restricciones.containsKey(r.getIdRestriccion())) {
 				return false;
 			}
@@ -158,7 +158,7 @@ public class Doctor {
 		 * @param id: id de la restriccion que se quiere eliminar del Doctor
 		 * @return True si se ha podido eliminar la restriccion, False en caso contrario
 		 */
-		public boolean eliminarRestriccion(int id) {
+		public boolean deleteRestriction(int id) {
 			if (!Restricciones.containsKey(id)) {
 				return false;
 			}
@@ -171,7 +171,7 @@ public class Doctor {
 		/** 
 		* Metodo que elimina todas las restricciones del Doctor
 		*/
-		public void clearRestricciones(){
+		public void clearRestrictions(){
 			Restricciones.clear();
 		}
 
