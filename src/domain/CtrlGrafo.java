@@ -32,7 +32,7 @@ public class CtrlGrafo {
 			if(i==0) firstdoc = id;
 			nodoDoctor nDoc = new nodoDoctor(id, "Doctor", aldoc.get(i).getId());
 			grafo.afegirNode(nDoc);
-			grafo.conectarNodes(0, id, aldoc.get(i).getNumMaxTurnos(), 0.0);
+			grafo.conectarNodes(0, id, aldoc.get(i).getNumMaxTurn(), 0.0);
 		}
 		lastdoc = id;
 		Nodo Sink = new Nodo(lastdoc+1, "Sink");
@@ -41,7 +41,8 @@ public class CtrlGrafo {
 		//nodos de doctores añadidos
 		//añadimos todos los turnos al grafo
 		ArrayList<Turno> alturnos = new ArrayList<Turno> ();
-		alturnos = h.getAllTurnos();
+		Calendario cal = h.getCalendario();
+		alturnos = cal.getAllShifts();
 		
 		for (int i = 0; i < alturnos.size(); ++i) {
 			++id;
@@ -64,7 +65,7 @@ public class CtrlGrafo {
 					int capacidad=1; //
 					double coste =0;
 					String tt = alturnos.get(j-firsttorn).getShiftType();
-					double sueldo = aldoc.get(i-firstdoc).getSueldoTurno();
+					double sueldo = aldoc.get(i-firstdoc).getSalaryTurn();
 					if(tt.equals("morning")) coste=fm*sueldo;
 					else if(tt.equals("afternoon")) coste=ft*sueldo;
 					else if(tt.equals("night")) coste=fn*sueldo;
@@ -77,7 +78,7 @@ public class CtrlGrafo {
 			//caso donde si hay restricciones
 				boolean Turnos[] = new boolean[alturnos.size()];
 				for(int k=0;k<alturnos.size();++k) Turnos[k]=true;
-				ArrayList<Restriccion> alRest = aldoc.get(i-firstdoc).getRestricciones();
+				ArrayList<Restriccion> alRest = aldoc.get(i-firstdoc).getRestrictions();
 				for(int k=0;k<alRest.size();++k){
 					Restriccion res = alRest.get(k); //tengo la restriccion
 					String restipe =res.getTipo(); // tengo el tipo
@@ -120,9 +121,7 @@ public class CtrlGrafo {
 						String t = N.getDiaSemana();
 						for(int m=0;m<alturnos.size();++m){
 							GregorianCalendar gc1=alturnos.get(m).getDate();
-							if(){
-								Turnos[m]=false;
-							}
+							
 						}
 						
 					}

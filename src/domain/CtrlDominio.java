@@ -69,9 +69,9 @@ public class CtrlDominio {
 		/*catch IOException(e) { // Que devuelva que no existe doctor con ID = id
 			throw new IOException(e);
 		} */
-		doc.setNombre(nombre);
-		doc.setNumMaxTurnos(numMax);
-		doc.setSueldoTurno(sueldo);
+		doc.setName(nombre);
+		doc.setNumMaxTurn(numMax);
+		doc.setSalaryTurn(sueldo);
 		//updateDoctorData(id)?
 	}
 	
@@ -103,7 +103,7 @@ public class CtrlDominio {
 	}
 	
 	public void anadirRestriccion(Doctor doc, Restriccion res) {
-		doc.addRestriccion(res);
+		doc.addRestriction(res);
 		//updateDoctorData()?
 	}
 	
@@ -114,7 +114,7 @@ public class CtrlDominio {
 	}
 	
 	public ArrayList<Restriccion> getRestricciones(Doctor doc) {
-		return doc.getRestricciones();
+		return doc.getRestrictions();
 	}
 	
 	public void asignarCalendario(Calendario cal) {
