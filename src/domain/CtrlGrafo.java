@@ -93,17 +93,27 @@ public class CtrlGrafo {
 						}
 					}
 					else if(restipe.equals("NOT_Fecha")){
-						
-						
-						
+						NOT_Fecha N = (NOT_Fecha)res;
+						GregorianCalendar gc = N.getFecha();
+						int cont=0;
 						for(int m=0;m<alturnos.size();++m){
-							
+							GregorianCalendar gc1 = alturnos.get(m).getDate();
+							if(gc1==gc){
+								Turnos[m]=false;
+								++cont;
+							}
+							if (cont==3) break;
 						}
 					}
 					else if(restipe.equals("NOT_Especial")){
 						NOT_Especial N = (NOT_Especial)res;
-						
-						
+						String t =N.getEspecial();
+						for(int m=0;m<alturnos.size();++m){
+							String tipot=alturnos.get(m).getSpecialDate();
+							if(t.equals(tipot)){
+								Turnos[m]=false;
+							}
+						}
 					}
 					else if(restipe.equals("NOT_Dia_Semana")){
 						
