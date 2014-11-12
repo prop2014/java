@@ -5,9 +5,12 @@ public class nodoDoctor extends Nodo {
 	
 	public nodoDoctor() {}
 	
-	public nodoDoctor(int id, String tipo, int idDoctor) {}
+	public nodoDoctor(int id, String tipo, int idDoctor) {
+		super(id,tipo);
+		this.idDoctor=idDoctor;
+	}
 	
-	public int getId() {
+	public int getIdDoc() {
 		return idDoctor;
 	}
 	

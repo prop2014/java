@@ -7,7 +7,11 @@ public class nodoTurno extends Nodo {
 	
 	public nodoTurno() {}
 	
-	public nodoTurno(int id, String tipo, Date fecha, String tipoTurno) {}
+	public nodoTurno(int id, String tipo, Date fecha, String tipoTurno) {
+		super(id,tipo);
+		this.fecha=fecha;
+		this.tipoTurno=tipoTurno;
+	}
 	
 	public Date getFecha() {
 		return fecha;
