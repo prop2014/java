@@ -1,73 +1,94 @@
-
-//Autor: Axel's Copyright 
 package model;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
 
+import java.util.GregorianCalendar;
 import model.Restriccion;
 
+
+
+/**
+* Representa una Restriccion 
+* @author Axel Pelaez
+*/
 public class  MAX_Dias_Rango extends Restriccion {
-
-	/* Atributos */
 	
-	private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-	private Date Fecha_INI;
-	private Date Fecha_FIN;
-	
-	
-	private int Num_Dias;
+	private GregorianCalendar fechaIni = new GregorianCalendar();
+	private GregorianCalendar fechaFin = new GregorianCalendar();
+	private int numDias;
 
-
-	/* Constructora */
-
-	public MAX_Dias_Rango (int id, String Fecha_I, String Fecha_F, int Num_D) throws ParseException {
-		
+	/**
+	* Crea una Restriccion del tipo MAX_Dias_Rango con entrada de las fechas en enteros
+	*  @param id: identificador de la restriccion, 
+	* 		  d1, m1, a1, d2, m2, a2: fecha inicial y fecha final del rango de dias
+	* 		  numD: numero de dias que se quiere trabajar como maximo
+	* @override Restriccion
+	*/
+	public MAX_Dias_Rango (int id, int d1,int m1, int a1, int d2,int m2, int a2, int numD){
 		super(id,"MAX_Dias_Rango");
-		
-		Fecha_INI = formato.parse(Fecha_I);
-		Fecha_FIN = formato.parse(Fecha_F);
-
-		Num_Dias = Num_D;
+		fechaIni = new GregorianCalendar(a1,m1-1,d1);
+		fechaFin = new GregorianCalendar(a2,m2-1,d2);
+		numDias = numD;
 	}
 
+	/**
+	* Crea una Restriccion del tipo MAX_Dias_Rango con entrada de las fechas en GregorianCalendar
+	*  @param id: identificador de la restriccion, 
+	* 		  fechaI,fechaF: fecha inicial y fecha final del rango de dias
+	* 		  numD: numero de dias que se quiere trabajar como maximo
+	* @override Restriccion
+	*/
+	public MAX_Dias_Rango (int id, GregorianCalendar fechaI, GregorianCalendar fechaF, int numD) {
+		super(id,"MAX_Dias_Rango");
+		fechaIni = fechaI;
+		fechaFin = fechaF;
+		numDias = numD;
+	}
 	
 
 	/* Metodos públicos */
 	
-//--> Consultoras
-
-	public int getId() {
-	    return id_Restriccion ;
+	//Consultoras
+	
+	/**
+	*Consultora del identificador de la restriccion
+	* @return La id de la restriccion
+	* @override Restriccion
+	*/
+	public int getIdRestriccion() {
+	    return idRestriccion ;
 	}
 	
-	
+	/**
+	*Consultora del tipo de restriccion
+	* @return El tipo de restriccion
+	* @override Restriccion
+	*/
 	public String getTipo(){
-		return Tipo;
+		return tipo;
 	}
-	//OBTENER LA FECHAS EN FORMATO STRING
-	public String getStringFechaINI(){
-		return formato.format(Fecha_INI);
+
+	/**
+	*Consultora de fecha inicial
+	* @return La fecha inicial del rango de dias
+	*/
+	public GregorianCalendar getDateFechaIni(){
+		return fechaIni;
 		
 	}
-	public String getStringFechaFIN(){
-		return formato.format(Fecha_FIN);
-		
+	
+	/**
+	*Consultora de fecha final
+	* @return La fecha final del rango de dias
+	*/
+	public GregorianCalendar getDateFechaFin(){
+		return fechaFin;
 	}
 	
-	
-	
-	//OBTENER LA FECHA EN FORMATO DATE
-	public Date getDateFechaINI(){
-		return Fecha_INI;
-	}
-	public Date getDateFechaFIN(){
-		return Fecha_FIN;
-	}
-	
-	
+	/**
+	*Consultora del numero de dias que se quiere trabajar como maximo
+	* @return El numero de dias que se quiere trabajar como maximo
+	*/
 	public int getNumDias(){
-		return Num_Dias;
+		return numDias;
 	}
 	
 	

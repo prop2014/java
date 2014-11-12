@@ -1,38 +1,57 @@
-
-//Autor: Axel's Copyright 
 package model;
 //import java.util.*;
 import model.Restriccion;
 
+/**
+* Representa una Restriccion 
+* @author Axel Pelaez
+*/
 public class NOT_Dia_Semana extends Restriccion{
+	
+	private String diaSemana;
 
-	/* Atributos */
-	private String Dia_Semana;
-
-
-	/* Constructora */
-
-	public NOT_Dia_Semana(int id, String Dia_Se) {
-		
-		super(id,"NOT_Dia_Semana");
-		Dia_Semana = Dia_Se;
-	}
 
 	
+	/**
+	* Crea una Restriccion del tipo NOT_Dia_Semana
+	*  @param id: identificador de la restriccion, 
+	* 		  diaSe: dia de la semana el cual no se quiere trabajar (Lunes-Domingo)
+	* @override Restriccion
+	*/
+	public NOT_Dia_Semana(int id, String diaSe) {
+		super(id,"NOT_Dia_Semana");
+		diaSemana = diaSe;
+	}
+
 
 	/* Metodos públicos */
 	
-//--> Consultoras
-	public int getId() {
-	    return id_Restriccion ;
+	//Consultoras
+	
+	/**
+	*Consultora del identificador de la restriccion
+	* @return La id de la restriccion
+	* @override Restriccion
+	*/
+	public int getIdRestriccion() {
+	    return idRestriccion ;
 	}
 
+	/**
+	*Consultora del tipo de restriccion
+	* @return El tipo de restriccion
+	* @override Restriccion
+	*/
 	public String getTipo(){
-		return Tipo;
+		return tipo;
 	}
 	
-	public String getDia_Semana(){
-		return Dia_Semana;
+	/**
+	*Consultora del dia de la semana el cual no se quiere trabajar (Lunes-Domingo)
+	* @return El dia de la semana
+	*/
+	public String getDiaSemana(){
+		return diaSemana;
 	}
 	
 }

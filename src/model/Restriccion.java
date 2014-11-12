@@ -1,45 +1,60 @@
-
-// Autor: Axel's Copyright 
-package model;
+ package model;
 //import java.util.*;
 
+	/**
+	* 
+	* @param 
+	* @return 
+	* @throws 
+	*/
+ 
+ 
+/**
+* Representa una Restriccion generica
+* @author Axel Pelaez
+*/
 public class Restriccion {
 
-	/* Atributos */
+	protected int idRestriccion;
+	protected String tipo;
 	
-	protected int id_Restriccion;
+	/**
+	* Crea una Restriccion generica sin atributos
+	*/
+	public Restriccion() {
+	}
 	
-	// Tipo solo puede ser: 
-	protected String Tipo;
-
-	
-	
-	/* Constructora */
-	public Restriccion() {}
-
-	public Restriccion(int id, String T) {
-		id_Restriccion = id;
-		Tipo = T; 
-		
+	/**
+	* Crea una Restriccion generica con atributos
+	* @param id: identificador de la restriccion,
+	* 		 t: tipo de restriccion.
+	*/
+	public Restriccion(int id, String t) {
+		idRestriccion = id;
+		tipo = t; 
 	}
 	
 	
-	
-
 	/* Metodos públicos */
-
 	
-//----> Consultoras 
+	// Consultoras 
 	
+	/**
+	*Consultora del identificador de la restriccion
+	* @return La id de la restriccion
+	*/
+	public int getIdRestriccion() {
+	    return idRestriccion;
+	}
+	
+	/**
+	*Consultora del tipo de restriccion
+	* @return El tipo de restriccion
+	*/
 	public String getTipo() {
-	    return Tipo;
+	    return tipo;
 	}
-	
-	public int getId() {
-	    return id_Restriccion;
-	}
-	    
-	
+		
 }
 
 

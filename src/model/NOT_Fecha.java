@@ -1,51 +1,73 @@
 //Autor: Axel's Copyright 
 package model;
-import java.util.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
+import java.util.GregorianCalendar;
 import model.Restriccion;
+
+
+/**
+* Representa una restriccion de tipo XOR
+* @author Axel Pelaez
+*/
 public class  NOT_Fecha extends Restriccion{
 
-	/* Atributos */
 	
-	private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-	private Date Fecha;
+	private GregorianCalendar fecha;
 
-	/* Constructora */
-
-	public NOT_Fecha(int id, String Fecha1) throws ParseException {
-		
+	
+	/**
+	* Crea una Restriccion del tipo NOT_Fecha con entrada de la fecha en enteros
+	*  @param id: identificador de la restriccion, 
+	* 		  d,m,a: dia, mes y año de la fecha que no se desea trabajar
+	* @override Restriccion
+	*/
+	public NOT_Fecha(int id, int d, int m, int a) {
 		super(id,"NOT_Fecha");
-		
-		Fecha = formato.parse(Fecha1);
-		
-		
+		fecha = new GregorianCalendar(a,m-1,d);
+	}
+	
+	/**
+	* Crea una Restriccion del tipo NOT_Fecha con entrada de la fecha en GregorianCalendar
+	*  @param id: identificador de la restriccion, 
+	* 		  gc: fecha en forma generica de la clase GregorianCalendar que no se desea trabajar
+	* @override Restriccion
+	*/
+	public NOT_Fecha(int id, GregorianCalendar gc) {
+		super(id,"NOT_Fecha");
+		fecha = gc;
 	}
 
-	
 
 	/* Metodos públicos */
 	
-//--> Consultoras
-
+	//Consultoras
+	
+	/**
+	*Consultora del identificador de la restriccion
+	* @return La id de la restriccion
+	* @override Restriccion
+	*/
 	public int getId() {
-	    return id_Restriccion ;
+	    return idRestriccion ;
 	}
 
+	/**
+	*Consultora del tipo de restriccion
+	* @return El tipo de restriccion
+	* @override Restriccion
+	*/
 	public String getTipo(){
-		return Tipo;
+		return tipo;
 	}
 	
-	//OBTENER LA FECHA EN FORMATO STRING
-	public String getStringFecha(){
-		return formato.format(Fecha);
+	/**
+	*Consultora de fecha
+	* @return La fecha que no se desa trabajar
+	*/
+	public GregorianCalendar getFecha(){
+		return fecha;
 		
 	}	
-	//OBTENER LA FECHA EN FORMATO DATE
-	public Date getDateFecha(){
-		return Fecha;
-	}
+	
 	
 	
 }
