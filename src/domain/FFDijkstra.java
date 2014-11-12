@@ -2,7 +2,7 @@ package domain;
 import java.util.*;
 import java.io.IOException;
 
-import domain.FordFulkerson;
+import domain.FordFoulkerson;
 import domain.Graf;
 
 /**
@@ -16,16 +16,13 @@ class arcP {
     public int id;
 }
 
-public class FFDijkstra extends FordFulkerson {
+public class FFDijkstra<T> extends FordFoulkerson<T> {
 	
-	public FFDijkstra(){}
 	
 	
 	public FFDijkstra(Integer nodeInicial, Integer nodeDesti, Graf graf)
  	{
- 		s = nodeInicial;
- 		t = nodeDesti;
- 		g = graf;
+		super(nodeInicial, nodeDesti, graf);
  	}
 		
 	/**
@@ -34,11 +31,11 @@ public class FFDijkstra extends FordFulkerson {
 	 * del camino que será de coste mínimo aplicando el algoritmo de Dijkstra.
 	*/
 	@Override
-	public ArrayList<Integer> dameCamino(Graf<?> g) throws IOException{
+	public ArrayList<Integer> dameCamino(Graf<T> graf) throws IOException {	
 		//dist[u] : la longitud del camino más corto desde s hasta t
 		//pred[u] predecesor de u en este camino
 		try {
-			int size = g.getNSize();
+			int size = graf.getNSize();
 			ArrayList<Integer> camino = new ArrayList<Integer>(0);
 			int[] pred = new int[size];
 			for(int k = 0; k < size; k++){
@@ -64,13 +61,13 @@ public class FFDijkstra extends FordFulkerson {
 			vertexQueue.add(p); 												
 			while (!vertexQueue.isEmpty()) {
 				p = vertexQueue.poll();		 									
-				ArrayList<Integer> neighbours = g.getOutNodes(p.id); 			
+				ArrayList<Integer> neighbours = graf.getOutNodes(p.id); 			
 				for(int neighbour : neighbours){								
-					int arista = g.getIDAresta(p.id, neighbour);				
+					int arista = graf.getIDAresta(p.id, neighbour);				
 					//System.out.printf("Nodo Princ: %d , Nodo vecino: %d, ID Arista: %d\n", p.id, neighbour, arista);
-					int capacidadArista = g.getCapacidadAresta(arista);
-					double costeArista = g.getCosteAresta(arista);
-					int flujoArista = g.getFlujoAresta(arista);
+					int capacidadArista = graf.getCapacidadAresta(arista);
+					double costeArista = graf.getCosteAresta(arista);
+					int flujoArista = graf.getFlujoAresta(arista);
 					if(capacidadArista > 0 && flujoArista < capacidadArista) {
 						double coste = dist[p.id]+costeArista;
 						if(coste < dist[neighbour]){
