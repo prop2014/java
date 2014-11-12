@@ -650,11 +650,12 @@ public class DriverHospital {
 					System.out.print("vdoc[3]=Doctor(4,QUARTO,4,4.0)\n");
 					System.out.print("vdoc[4]=Doctor(5,QUINTO,5,5.0)\n");
 					System.out.print("S'ha Creat un vector amb 5 doctors per simular l'entrada\n");
-					int day=1;
-					int month=1;
+					int day = 1;
+					int month = 1;
 					int year = 1;
-					GregorianCalendar gc1= new GregorianCalendar(day,month,year);
-					GregorianCalendar gc2= new GregorianCalendar(day+1,month,year);
+					
+					GregorianCalendar gc1= new GregorianCalendar(day,month-1,year);
+					GregorianCalendar gc2= new GregorianCalendar(day+1,month-1,year);
 					Calendario cale = new Calendario(year);
 					cale.addHoliday(gc1);
 					cale.addHoliday(gc2);

@@ -2,18 +2,18 @@ package domain;
 import java.util.*;
 
 public class nodoTurno extends Nodo {
-	private Date fecha;
+	private GregorianCalendar fecha;
 	private String tipoTurno;
 	
 	public nodoTurno() {}
 	
-	public nodoTurno(int id, String tipo, Date fecha, String tipoTurno) {
+	public nodoTurno(int id, String tipo, GregorianCalendar fecha, String tipoTurno) {
 		super(id,tipo);
 		this.fecha=fecha;
 		this.tipoTurno=tipoTurno;
 	}
 	
-	public Date getFecha() {
+	public GregorianCalendar getFecha() {
 		return fecha;
 	}
 	
@@ -21,7 +21,7 @@ public class nodoTurno extends Nodo {
 		return tipoTurno;
 	}
 	
-	public void setFecha(Date fecha) {
+	public void setFecha(GregorianCalendar fecha) {
 		this.fecha = fecha;
 	}
 	

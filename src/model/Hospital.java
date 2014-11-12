@@ -11,7 +11,7 @@ import model.Doctor;
 public class Hospital {
 	
 	private int idHospital;
-	private String nombre;
+	private String name;
 	private double factorM;
 	private double factorT;
 	private double factorN;
@@ -21,7 +21,7 @@ public class Hospital {
 	
 	public Hospital() {
 		idHospital=0;
-		nombre=null;
+		name=null;
 		factorM=0.0;
 		factorT=0.0;
 		factorN=0.0;
@@ -32,7 +32,7 @@ public class Hospital {
 	//creadora amb id, nombre y factores
 	public Hospital (int id, String nom, double fm, double ft, double fn){
 		idHospital=id;
-		nombre=nom;
+		name=nom;
 		factorM=fm;
 		factorT=ft;
 		factorN=fn;
@@ -44,7 +44,7 @@ public class Hospital {
 	public Hospital (int id, String nom, double fm, double ft, double fn,
 			Doctor[] vdoc, Calendario cal){
 		idHospital=id;
-		nombre=nom;
+		name=nom;
 		factorM=fm;
 		factorT=ft;
 		factorN=fn;
@@ -61,7 +61,7 @@ public class Hospital {
 	public Hospital (int id, String nom, double fm, double ft, double fn,
 		ArrayList<Doctor> aldoc, Calendario cal){
 		idHospital=id;
-		nombre=nom;
+		name=nom;
 		factorM=fm;
 		factorT=ft;
 		factorN=fn;
@@ -87,7 +87,7 @@ public class Hospital {
 	 * @return el Nombre del Hospital
 	 */
 	public String getNombre(){
-		return nombre;
+		return name;
 	}
 	
 	/** 
@@ -181,7 +181,7 @@ public class Hospital {
 	 * @param d		es la fecha del dia Vacacional
 	 * @return un boolean que indica si el dia Vacacional existe.
 	 */
-    public boolean existsDiaVacacional(GregorianCalendar d){
+    public boolean existsDiaVacacional(GregorianCalendar d){ //borrar
     	return calendari.existsHoliday(d);
     }
     
@@ -189,7 +189,7 @@ public class Hospital {
 	 * Consultora del numero de dias contenidos en el Calendario del Hospital
 	 * @return el numero de dias Vacacionales
 	 */
-    public int getNumDias(){
+    public int getNumDias(){ //borrar
 		return calendari.getNumberOfDays();
 	}
     
@@ -197,7 +197,7 @@ public class Hospital {
 	 * Consultora del numero de turnos contenidos en el Calendario del Hospital
 	 * @return el numero de turnos Vacacionales del Hospital
 	 */
-	public int getNumTurnos(){
+	public int getNumTurnos(){ //borrar
 		return calendari.getNumberOfShifts();
 	
 	}
@@ -208,7 +208,7 @@ public class Hospital {
 	 * @param tt	es el tipo de turno ("m", "t", "n");
 	 * @return el turno tipoturno tt y fecha d.
 	 */
-	public Turno getTurno(GregorianCalendar d, String tt){
+	public Turno getTurno(GregorianCalendar d, String tt){ //BORRAR
 		Turno t = calendari.getShift(d, tt);
 		return t;
 	}
@@ -217,16 +217,25 @@ public class Hospital {
 	 * Consultora de todos los turnos del Hospital
 	 * @return un ArrayList<Vector<Turno>> con todos los Turnos del Hospital
 	 */
-	public ArrayList<Turno> getAllTurnos(){
+	public ArrayList<Turno> getAllTurnos(){ //borrar
 		return calendari.getAllShifts();
 	}
-
+	
+	/**
+	 * Devuelve el calendario
+	 */
+	
+	public Calendario getCalendario(){
+		return calendari;
+	}
+	
+	
 	/** 
 	 * Modificadora del Nombre del Hospital
 	 * @param nom	es el nuevo Nombre del Hospital
 	 */
 	public void setNombre(String nom){
-		this.nombre=nom;
+		this.name=nom;
 	}
 	
 		//modificadora del factorMañana
@@ -271,7 +280,7 @@ public class Hospital {
 	 * @param t 	es el turno modificado
 	 * 
 	 */
-	public void replaceTurno(Turno t){
+	public void replaceTurno(Turno t){ //borrar
 		calendari.replaceShift(t);
 	}
 	
@@ -347,7 +356,7 @@ public class Hospital {
 	 * pre - la fecha d NO existe en el Calendario
 	 * @param d 	es la fecha del diaVacacional
 	 */
-	public void addDiaVacacional(GregorianCalendar d){
+	public void addDiaVacacional(GregorianCalendar d){ //borrar
 		calendari.addHoliday(d);
 	}
 	
@@ -356,7 +365,7 @@ public class Hospital {
 	 * pre- la fecha d existe en el Calendario
 	 * @param d 	es la fecha del diaVacacional
 	 */
-	public void deleteDiaVacacional(GregorianCalendar d){
+	public void deleteDiaVacacional(GregorianCalendar d){ //borrar
 		calendari.deleteHoliday(d);
 	}
 	
@@ -365,7 +374,7 @@ public class Hospital {
 	 */
 	public void resetHosp(){
 		idHospital=0;
-		nombre=null;
+		name=null;
 		factorM=0.0;
 		factorT=0.0;
 		factorN=0.0;
