@@ -130,7 +130,7 @@ public class DriverDoctor {
 						rescorrecta = false;
 					}
 					if (rescorrecta) {
-						boolean c = doc.addRestriccion(res);
+						boolean c = doc.addRestriction(res);
 						if (c) System.out.printf("Restriccion añadida.\n");	
 						else System.out.printf("Ya existe una restriccion con este Id.\n");
 					}
@@ -143,7 +143,7 @@ public class DriverDoctor {
 					else {
 						System.out.printf("Ingrese la id de la restriccion que quieras eliminar\n");
 						int idRestriccion = teclado.nextInt();
-						boolean d = doc.eliminarRestriccion(idRestriccion);
+						boolean d = doc.deleteRestriction(idRestriccion);
 						if (d) System.out.printf("Restriccion eliminada.\n");	
 						else System.out.printf("Esta Id de restriccion no existe.\n");
 					}
@@ -156,7 +156,7 @@ public class DriverDoctor {
 					else {
 						System.out.printf("El Doctor contiene %d restriccion/es:\n\n", doc.Rsize());
 						ArrayList<Restriccion> restr = new ArrayList<Restriccion>();
-						restr = doc.getRestricciones();
+						restr = doc.getRestrictions();
 						for (int i = 0; i < restr.size(); ++i) {
 							System.out.printf("Id: %d\nTipo: %s\n\n", restr.get(i).getIdRestriccion(), restr.get(i).getTipo());
 						}
@@ -167,7 +167,7 @@ public class DriverDoctor {
 				if (id == -1) System.out.printf("El Doctor aun no esta creado.\n");
 				else {
 					System.out.printf("Atributos del Doctor:\n");
-					System.out.printf("Id: %d\nNombre: %s\nnumMaxTurnos: %d\nsueldoTurno: %f\n", doc.getId(), doc.getNombre(), doc.getNumMaxTurnos(), doc.getSueldoTurno());
+					System.out.printf("Id: %d\nNombre: %s\nnumMaxTurnos: %d\nsueldoTurno: %f\n", doc.getId(), doc.getName(), doc.getNumMaxTurn(), doc.getSalaryTurn());
 				}
 			}
 			else if (opcion == 6) {
@@ -179,16 +179,16 @@ public class DriverDoctor {
 					int nummaxturnos = teclado.nextInt();
 					double sueldoturno = teclado.nextDouble();
 					doc.setId(idd);
-					doc.setNombre(nombre);
-					doc.setNumMaxTurnos(nummaxturnos);
-					doc.setSueldoTurno(sueldoturno);
+					doc.setName(nombre);
+					doc.setNumMaxTurn(nummaxturnos);
+					doc.setSalaryTurn(sueldoturno);
 					System.out.printf("Atributos modificados correctamente");
 				}	
 			}
 			else if (opcion == 7) {
 				if (id == -1) System.out.printf("El Doctor aun no esta creado.\n");
 				else {
-					doc.clearRestricciones();
+					doc.clearRestrictions();
 					System.out.printf("Restricciones eliminadas");			
 				}
 			}
