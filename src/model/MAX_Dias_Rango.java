@@ -70,16 +70,15 @@ public class  MAX_Dias_Rango extends Restriccion {
 	*Consultora de fecha inicial
 	* @return La fecha inicial del rango de dias
 	*/
-	public GregorianCalendar getDateFechaIni(){
+	public GregorianCalendar getFechaIni(){
 		return fechaIni;
-		
 	}
 	
 	/**
 	*Consultora de fecha final
 	* @return La fecha final del rango de dias
 	*/
-	public GregorianCalendar getDateFechaFin(){
+	public GregorianCalendar getFechaFin(){
 		return fechaFin;
 	}
 	

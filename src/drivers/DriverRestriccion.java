@@ -1,7 +1,8 @@
 package drivers;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 import model.Doctor;
 import model.Hospital;
@@ -21,111 +22,96 @@ public class DriverRestriccion {
 	
 	
 	static void MostrarRestriccion(Restriccion RES){
-		
 		String TIPO = RES.getTipo(); 
 		
 		switch(TIPO){
 		case "XOR":{//XOR
+			List<GregorianCalendar> listaXOR = ((XOR) RES).getListDates();
+			System.out.print("Los dias de la restriccion " + TIPO + " son: \n");
 			
-			//Especificamos el formato
-			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-			
-			XOR N = (XOR)RES;
-			String a = N.getTipo();
-			System.out.print("Los dias de la restriccion " + a + " son: \n");
-			
-			List<Date> L_XOR = N.getListDates();
-			
-			
-			for (Date Fecha : L_XOR){//Para cada elemento de la lista
-				
-				//Parseo
-				String Dia = formato.format(Fecha);
-				
-				System.out.print("String: " + Dia + "\n");
-				System.out.print("Full info Date: " + Fecha + "\n");
-				
+			for (GregorianCalendar fecha : listaXOR){//Para cada elemento de la lista
+				System.out.print(fecha.get(fecha.DAY_OF_MONTH));
+				System.out.print("/" + (fecha.get(fecha.MONTH)+ 1) + "/");
+				System.out.print(fecha.get(fecha.YEAR)+ "\n\n");
+				//System.out.print("Full info: " + fecha + "\n");
 			}
-			
-			
 			break;
 		}
 		
 		case "NOT_Dia_Mes" :{ //NOT_Dia_Mes
-			
 			NOT_Dia_Mes N = (NOT_Dia_Mes)RES;
-			int  t = N.getDia_Mes(); 
-			String a = N.getTipo();
-			System.out.print("El dia del mes de la restriccion " + a + " es " + t + "\n");
+			int  dia = ((NOT_Dia_Mes) RES).getDiaMes(); 
+			
+			System.out.print("El dia del mes de la restriccion " + TIPO + " es " + dia + "\n");
 			
 			break;
 		}
 		case "NOT_Dia_Semana" :{ //NOT_Dia_Semana
-			
-			NOT_Dia_Semana N = (NOT_Dia_Semana)RES;
-			String  t = N.getDia_Semana(); 
-			String a = N.getTipo();
-			System.out.print("El dia de la semana de la restriccion " + a + " es " + t + "\n");
+			String  dia = ((NOT_Dia_Semana)RES).getDiaSemana(); 
+			System.out.print("El dia de la semana de la restriccion " + TIPO + " es " + dia + "\n");
 			
 			break;
 		}
+		
 		case "NOT_Especial" :{// NOT_Especial
-			
-			NOT_Especial N = (NOT_Especial)RES;
-			String  t = N.getEspecial(); 
-			String a = N.getTipo();
-			System.out.print("El dia Especial de la restriccion " + a + " es " + t + "\n");;
+			String  especial = ((NOT_Especial)RES).getEspecial(); 
+			System.out.print("El dia Especial de la restriccion " + TIPO + " es " + especial + "\n");;
 			
 			break;
 		}
+		
 		case "NOT_Fecha" :{ //NOT_Fecha
-			
-			NOT_Fecha N = (NOT_Fecha)RES;
-			String  t = N.getStringFecha(); 
-			Date d = N.getDateFecha();
-			String a = N.getTipo();
-			System.out.print("El Dia de la restriccion " + a + " es " + t + "\n");
-			System.out.print("Como variables Date: " + d + "\n");
-			
+			GregorianCalendar fecha = ((NOT_Fecha)RES).getFecha();
+		
+			System.out.print("El Dia de la restriccion " + TIPO + " es: ");
+			System.out.print(fecha.get(fecha.DAY_OF_MONTH));
+			System.out.print( "/" + (fecha.get(fecha.MONTH) + 1) + "/");
+			System.out.print(  fecha.get(fecha.YEAR)+ "\n\n");
+			//System.out.print("Full info: " + fecha + "\n");
 			break;
 		}
+		
 		case "NOT_Turno" :{ //NOT_Turno
+			String  turno = ((NOT_Turno)RES).getTipoTurno(); 
 			
-			NOT_Turno N = (NOT_Turno)RES;
-			String  t = N.getTipoTurno(); 
-			String a = N.getTipo();
-			System.out.print("El turno de la restriccion " + a + " es " + t + "\n");
+			System.out.print("El turno de la restriccion " + TIPO + " es " + turno + "\n");
 			break;
 		}
+		
 		case "MAX_Turnos_por_Dia" :{ //MAX_Turnos_por_Dia
+			int  numt = ((MAX_Turnos_por_Dia)RES).getNumTurnos(); 
 			
-			MAX_Turnos_por_Dia N = (MAX_Turnos_por_Dia)RES;
-			int  t = N.getDia_Num_Turnos(); 
-			String a = N.getTipo();
-			System.out.print("El maximo de turnos de la restriccion " + a + " es " + t + "\n");
-			
+			System.out.print("El maximo de turnos de la restriccion " + TIPO + " es " + numt + "\n");
 			break;
 		}
+		
 		case "MAX_Turnos_Consecutivos"  :{ //MAX_Turnos_Consecutivos
+			int  numt = ((MAX_Turnos_Consecutivos)RES).getDia_Num_Turnos(); 
 			
-			MAX_Turnos_Consecutivos N = (MAX_Turnos_Consecutivos)RES;
-			int  t = N.getDia_Num_Turnos(); 
-			String a = N.getTipo();
-			System.out.print("El el maximo de turnos consecutivos de la restriccion " + a + " es " + t + "\n");
-			
+			System.out.print("El el maximo de turnos consecutivos de la restriccion " + TIPO + " es " + numt + "\n");
 			break;
 		}
 		
 		case "MAX_Dias_Rango"  :{ //MAX_Dias_Rango
 			
-			MAX_Dias_Rango N = (MAX_Dias_Rango)RES;
-			int  t = N.getNumDias(); 
-			String a = N.getTipo();
-			String fi = N.getStringFechaINI();
-			String ff = N.getStringFechaFIN();
-			System.out.print("La fecha inicial de la restriccion" + a + " es " + fi + "\n");
-			System.out.print("La fecha final es " + ff + "\n");
-			System.out.print("El numero maximo de dias a trabajar es " + t + "\n");
+			MAX_Dias_Rango N = ((MAX_Dias_Rango)RES);
+			GregorianCalendar fechaIni = ((MAX_Dias_Rango)RES).getFechaIni();
+			GregorianCalendar fechaFin = ((MAX_Dias_Rango)RES).getFechaFin();
+			int  numDias = ((MAX_Dias_Rango)RES).getNumDias();
+			
+			System.out.print("La fecha inicial de la restriccion" + TIPO + " es ");
+			System.out.print(fechaIni.get(fechaIni.DAY_OF_MONTH));
+			System.out.print("/" + (fechaIni.get(fechaIni.MONTH) + 1) + "/");
+			System.out.print(fechaIni.get(fechaIni.YEAR)+ "\n\n");
+			//System.out.print("Full info: " + fechaIni + "\n\n");
+			
+			System.out.print("La fecha final es ");
+			System.out.print(fechaFin.get(fechaFin.DAY_OF_MONTH));
+			System.out.print("/" + (fechaFin.get(fechaFin.MONTH) + 1) + "/");
+			System.out.print(fechaFin.get(fechaFin.YEAR)+ "\n\n");
+			//System.out.print("Full info: " + fechaFin + "\n\n");
+			
+			System.out.print("El numero maximo de dias a trabajar es " + numDias + "\n");
 			break;
 		}
 		
@@ -134,14 +120,14 @@ public class DriverRestriccion {
 	}
 	
 
-	public static void main(String[] args) throws ParseException {
+	public static void main(String[] args) {
 		
 		Scanner teclado;
 		teclado = new Scanner(System.in);
 		
 		int id = -1;
 		int opcion = -1;
-		
+		String seguir;
 		Restriccion RES = new Restriccion(); 
 		
 		while(opcion != 0){
@@ -167,87 +153,89 @@ public class DriverRestriccion {
 			switch(opcion){
 				case 1:{ //XOR
 					++id;
+					int next;//Gestionar el bucle interno
+					List<GregorianCalendar> listaXOR = new ArrayList<GregorianCalendar>();
+					int dia, mes, anio;
 					
-					SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+					System.out.print("Introduce una fecha (dd MM aaaa) \n");
+					dia = teclado.nextInt();
+					mes = teclado.nextInt();
+					anio = teclado.nextInt();
+					RES = new XOR(id, listaXOR );
 					
-					//Gestionar el bucle interno
-					boolean next = true;
-					String seguir;
-					
-					List<Date> L_XOR = new ArrayList<Date>();
-					
-					//Leer fecha y parsearla
-					System.out.print("Introduce una fecha (dd/MM/aaaa) \n");
-					String Dia = teclado.next();
-					Date Fecha = formato.parse(Dia);
-					
-					L_XOR.add(Fecha);
-					
+					((XOR) RES).AddFecha(dia, mes, anio);
 					
 					do {
-						//Leer fecha y parsearla
-						System.out.print("Introduce otra fecha (dd/MM/aaaa) \n");
-						Dia = teclado.next();
-						Fecha = formato.parse(Dia);
+						next = -1;
 						
-						L_XOR.add(Fecha);
+						System.out.print("Introduce otra fecha (dd MM aaaa) \n");
+						dia = teclado.nextInt();
+						mes = teclado.nextInt();
+						anio = teclado.nextInt();
 						
-						System.out.print("Seguir añadiendo fechas? (Si/No) \n");
-						seguir = teclado.next();
-						// Si seleccionamos "No" o sus variantes saldremos del bucle
-						if(seguir.equals("No") || seguir.equals("no") || seguir.equals("N") || seguir.equals("NO") || seguir.equals("n")) next = false; 
+						((XOR) RES).AddFecha(dia, mes, anio);
+												
+						while(next == -1){//GESTION DE SEGUIR AÑADIENDO FECHAS
+							System.out.print("Seguir añadiendo fechas? (Si/No) \n");
+							seguir = teclado.next();
+	
+							if(seguir.equals("No") || seguir.equals("no") || seguir.equals("NO")
+									|| seguir.equals("N") || seguir.equals("n"))next = 0;
+							
+							else if(seguir.equals("Si") || seguir.equals("si") || seguir.equals("SI")
+									|| seguir.equals("S") || seguir.equals("s")) next = 1;
+							else System.out.print("WRONG ANSWER \n");
+								
+						}
 						
-					} while(next);
+						
+					} while(next == 1);
 					
-					RES = new XOR(id, L_XOR);
 					System.out.print("DONE\n");
-					
-					
 					break;
 				}
 				case 2: { //NOT_Dia_Mes
 					++id;
-					int Dia;
+					int dia;
 					System.out.print("Introduce el dia del mes(1-31) que no quieras trabajar\n");
-					Dia = teclado.nextInt();
-					RES = new NOT_Dia_Mes(id, Dia);
+					dia = teclado.nextInt();
+					RES = new NOT_Dia_Mes(id, dia);
 					System.out.print("DONE\n");
-
-					
 					break;
 					
 				}
 				case 3:{ //NOT_Dia_Semana
 					++id;
-					String Dia;
+					String dia;
 					System.out.print("Introduce el dia de la semana(Lunes-Domingo) que no quieras trabajar\n");
-					Dia = teclado.next();
-					RES = new NOT_Dia_Semana(id, Dia);
+					dia = teclado.next();
+					RES = new NOT_Dia_Semana(id, dia);
 					System.out.print("DONE\n");
-					
 					break;
 				}
 				case 4:{ //NOT_Especial
 					++id;
-					String Dia;
+					String dia;
 					System.out.print("Introduce el dia Especial(Navidad,SantGervasi,...) que no quieras trabajar\n");
-					Dia = teclado.next();
-					RES = new NOT_Especial( id, Dia);
+					dia = teclado.next();
+					RES = new NOT_Especial(id, dia);
 					System.out.print("DONE\n");
-					
 					break;
 				}
 				case 5:{ //NOT_Fecha
-					System.out.print("Introduce una fecha (dd/MM/aaaa) que no quieras trabajar\n");
-					++id;
-					String Fecha;
-					Fecha = teclado.next();
 					
-					RES = new NOT_Fecha( id, Fecha);
+					++id;
+					int dia, mes, anio;
+					System.out.print("Introduce una fecha (dd/MM/aaaa) que no quieras trabajar\n");
+					dia = teclado.nextInt();
+					mes = teclado.nextInt();
+					anio = teclado.nextInt();
+					RES = new NOT_Fecha(id, dia, mes, anio);
 					System.out.print("DONE\n");
+					break;
 				}
 					
-					break;
+					
 					
 				case 6:{ //NOT_Turno
 					++id;
@@ -256,65 +244,71 @@ public class DriverRestriccion {
 					Turno = teclado.next();
 					RES = new NOT_Especial( id, Turno);
 					System.out.print("DONE\n");
-					
 					break;
 				}
 				case 7:{ //MAX_Turnos_por_Dia
 					++id;
-					int Dias;
+					int dias;
 					System.out.print("Introduce el maximo de turnos por dia que quieras trabajar (1 o 2)\n");
-					Dias = teclado.nextInt();
-					RES = new MAX_Turnos_por_Dia(id, Dias);
+					dias = teclado.nextInt();
+					RES = new MAX_Turnos_por_Dia(id, dias);
 					System.out.print("DONE\n");
 					break;
 				}
+				
 				case 8:{//MAX_Turnos_Consecutivos
 					++id;
-					int Dias;
+					int dias;
 					System.out.print("Introduce el maximo de turnos consecutivos que quieras trabajar\n");
-					Dias = teclado.nextInt();
-					RES = new MAX_Turnos_Consecutivos(id, Dias);
+					dias = teclado.nextInt();
+					RES = new MAX_Turnos_Consecutivos(id, dias);
 					System.out.print("DONE\n");
 					break;
 					
 				}
-				case 9:{ //MAX_Dias_Rango
-					
-					++id;
-					String FechaINI, FechaFIN;
-					int Dias;
-					System.out.print("Introduce la fecha inicial (dd/MM/aaaa) del rango de dias\n");
-					FechaINI = teclado.next();
-					System.out.print("Introduce la fecha final (dd/MM/aaaa) del rango de dias\n");
-					FechaFIN = teclado.next();
-					System.out.print("Introduce el numero de dias\n");
-					Dias = teclado.nextInt();
-					
-					RES = new MAX_Dias_Rango( id,FechaINI,FechaFIN, Dias);
-					System.out.print("DONE\n");
 				
+				case 9:{ //MAX_Dias_Rango
+					++id;
+					int diaI,diaF,mesI,mesF,anioI,anioF,dias;
+					System.out.print("Introduce la fecha inicial (dd MM aaaa) del rango de dias\n");
+					diaI = teclado.nextInt();
+					mesI = teclado.nextInt();
+					anioI = teclado.nextInt();
+					System.out.print("Introduce la fecha final (dd MM aaaa) del rango de dias\n");
+					diaF = teclado.nextInt();
+					mesF = teclado.nextInt();
+					anioF = teclado.nextInt();
+					System.out.print("Introduce el numero de dias\n");
+					dias = teclado.nextInt();
 					
+					RES = new MAX_Dias_Rango(id, diaI, diaF, mesI, mesF, anioI, anioF, dias);
+					System.out.print("DONE\n");
 					break;
 					
 				}
+				
 				case 10:{
-					
 					if(id != -1) MostrarRestriccion(RES);
 					else System.out.print("Aun no hay ninguna Restriccion!\n\n");
-					
 					break;
 				}
+				
 				default: break;
 			
 			}
 			
 			// GESTION DE SALIDA DEL BUCLE
-			String s;
-			System.out.print("\n Desea Continuar? (Si/No)\n");
+			opcion = -1;
 			
-			s = teclado.next();
-			// Si seleccionamos "No" o sus variantes saldremos del bucle
-			if(s.equals("No") || s.equals("no") || s.equals("N") || s.equals("NO") || s.equals("n")) opcion = 0; 
+			while(opcion == -1){
+				System.out.print("\n Desea Continuar? (Si/No)\n");
+				seguir = teclado.next();
+				if(seguir.equals("No") || seguir.equals("no") || seguir.equals("N")
+					|| seguir.equals("NO") || seguir.equals("n")) opcion = 0; 
+				else if(seguir.equals("Si") || seguir.equals("si") || seguir.equals("S")
+							|| seguir.equals("SI") || seguir.equals("s")) opcion = 99; 
+				else System.out.print("WRONG ANSWER \n");
+			}
 			
 			
 		}
