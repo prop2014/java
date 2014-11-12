@@ -554,7 +554,7 @@ public class DriverHospital {
 					System.out.print("23: setFactorT(factor)\n");
 					System.out.print("24: setFactorN(factor)\n");
 					System.out.print("25: setDoctor(d)\n");
-					System.out.print("26: replaceTurno(t)\n");
+					System.out.print("26: no va bien replaceTurno(t)\n");
 					System.out.print("27: addDoctor(d)\n");
 					System.out.print("28: addDoctors(vdoc)\n");
 					System.out.print("29: addDoctors(aldoc)\n");
@@ -580,7 +580,7 @@ public class DriverHospital {
 						String resposta;
 						resposta=teclado.next();
 						if(resposta.equals("si")|resposta.equals("s")|resposta.equals("SI")|resposta.equals("S")) {
-							id=0;
+							id=-1;
 						}
 					}
 					break;
@@ -614,7 +614,7 @@ public class DriverHospital {
 						String resposta;
 						resposta=teclado.next();
 						if(resposta.equals("si")|resposta.equals("s")|resposta.equals("SI")|resposta.equals("S")) {
-							id=0;
+							id=-1;
 						}
 					}
 					break;
@@ -668,7 +668,7 @@ public class DriverHospital {
 					String resposta;
 					resposta=teclado.next();
 					if(resposta.equals("si")|resposta.equals("s")|resposta.equals("S")|resposta.equals("SI")) {
-						id=0;
+						id=-1;
 					}
 				}
 				break;
@@ -722,7 +722,7 @@ public class DriverHospital {
 					String resposta;
 					resposta=teclado.next();
 					if(resposta.equals("si")|resposta.equals("s")|resposta.equals("SI")|resposta.equals("S")) {
-						id=0;
+						id=-1;
 					}
 				}
 				break;
@@ -808,7 +808,8 @@ public class DriverHospital {
 						while(itr.hasNext()){
 							doc=itr.next();
 							MostrarDoc(doc);
-						}						
+						}
+						if(HOSP.docSize()==0)System.out.print("No hi ha doctors..\n");
 					}
 					else System.out.print("Hospital No creat\n");
 					break;	
@@ -901,7 +902,16 @@ public class DriverHospital {
 					break;
 				}
 				case 20:{
-					System.out.print("20: getAllTurnos()\n");
+					if(id!=-1){
+						if(HOSP.getNumTurnos()==0) System.out.print("L'hospital no te torns!!\n");
+						else {
+							ArrayList<Turno> alturno = HOSP.getAllTurnos();
+							for(int i=0;i<alturno.size();++i){
+								MostrarTurno(alturno.get(i));
+							}
+						}
+					}
+					else System.out.print("Hospital No creat!!\n");
 					break;
 				}
 				case 21:{
@@ -973,7 +983,7 @@ public class DriverHospital {
 				}
 				case 26:{ //System.out.print("26: replaceTurno(t)\n");
 					if(id!=-1){
-						System.out.print("Per aquest driver canviarem el torn modificant el numeroDedoctors d'un dels turns\n");
+						System.out.print("Per aquest driver canviare el torn modificant el numeroDedoctors d'un dels turns\n");
 						if(HOSP.getNumDias()==0) System.out.printf("L'hospital no te turns prova d'afegir-ne (Opcio 32)\n");
 						else {
 							ArrayList<Turno> alturno = HOSP.getAllTurnos();
