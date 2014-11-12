@@ -26,7 +26,7 @@ public class Hospital {
 		factorT=0.0;
 		factorN=0.0;
 		doctors = new TreeMap<Integer , Doctor>();
-		calendari = new Calendario();
+		calendari = new Calendario(0);
 	}
 	
 	//creadora amb id, nombre y factores
@@ -37,7 +37,7 @@ public class Hospital {
 		factorT=ft;
 		factorN=fn;
 		doctors = new TreeMap<Integer , Doctor>();
-		calendari = new Calendario();
+		calendari = new Calendario(0);
 	}
 	
 	// creadora con id, nombre, factores,vector de doctores y calendario.//full
@@ -54,7 +54,7 @@ public class Hospital {
 				doctors.put(vdoc[i].getId(), vdoc[i]);
 			}
 		}
-		calendari = cal;
+		calendari = new Calendario(cal);
 	}
 	
 // creadora con id, nombre, factores, arraylist de doctores y calendario. //full
@@ -71,7 +71,7 @@ public class Hospital {
 				doctors.put(aldoc.get(i).getId(), aldoc.get(i));
 			}
 		}
-		calendari = cal;
+		calendari = new Calendario(cal);
 	}
 			
 	/**
@@ -182,7 +182,7 @@ public class Hospital {
 	 * @return un boolean que indica si el dia Vacacional existe.
 	 */
     public boolean existsDiaVacacional(GregorianCalendar d){
-    	return calendari.existsDiaVacacional(d);
+    	return calendari.existsHoliday(d);
     }
     
     /** 
@@ -190,7 +190,7 @@ public class Hospital {
 	 * @return el numero de dias Vacacionales
 	 */
     public int getNumDias(){
-		return calendari.getNumDias();
+		return calendari.getNumberOfDays();
 	}
     
     /** 
@@ -198,18 +198,18 @@ public class Hospital {
 	 * @return el numero de turnos Vacacionales del Hospital
 	 */
 	public int getNumTurnos(){
-		return calendari.getNumTurnos();
+		return calendari.getNumberOfShifts();
 	
 	}
 	
 	/** 
 	 * Consultora de un turno contenidos en el Calendario del Hospital
-	 * @param d 	es lafehca del turno
+	 * @param d 	es la fehca del turno
 	 * @param tt	es el tipo de turno ("m", "t", "n");
 	 * @return el turno tipoturno tt y fecha d.
 	 */
 	public Turno getTurno(GregorianCalendar d, String tt){
-		Turno t = calendari.getTurno(d, tt);
+		Turno t = calendari.getShift(d, tt);
 		return t;
 	}
 	
@@ -218,7 +218,7 @@ public class Hospital {
 	 * @return un ArrayList<Vector<Turno>> con todos los Turnos del Hospital
 	 */
 	public ArrayList<Turno> getAllTurnos(){
-		return calendari.getAllTurnos();
+		return calendari.getAllShifts();
 	}
 
 	/** 
@@ -272,7 +272,7 @@ public class Hospital {
 	 * 
 	 */
 	public void replaceTurno(Turno t){
-		calendari.replaceTurno(t);
+		calendari.replaceShift(t);
 	}
 	
 	/** 
@@ -348,7 +348,7 @@ public class Hospital {
 	 * @param d 	es la fecha del diaVacacional
 	 */
 	public void addDiaVacacional(GregorianCalendar d){
-		calendari.addDiaVacacional(d);
+		calendari.addHoliday(d);
 	}
 	
 	/** 
@@ -357,7 +357,7 @@ public class Hospital {
 	 * @param d 	es la fecha del diaVacacional
 	 */
 	public void deleteDiaVacacional(GregorianCalendar d){
-		calendari.deleteDiaVacacional(d);
+		calendari.deleteHoliday(d);
 	}
 	
 	/** 
@@ -370,7 +370,7 @@ public class Hospital {
 		factorT=0.0;
 		factorN=0.0;
 		doctors = new TreeMap<Integer , Doctor>();
-		calendari = new Calendario();
+		calendari = new Calendario(0);
 	}
 	
 }//ficlass

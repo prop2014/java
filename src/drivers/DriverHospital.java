@@ -449,12 +449,12 @@ public class DriverHospital {
 	static void MostrarTurno(Turno t){
 		//GregorianCalendar getFecha()
 		System.out.printf("--------------------.\n");
-		GregorianCalendar c1 = t.getFecha();
+		GregorianCalendar c1 = t.getDate();
 		System.out.printf("fecha:\n"+c1.getTime());
 		System.out.printf("\n");
-		System.out.printf("tipoturno: %s\n",t.getTipoTurno());
-		System.out.printf("especial: %s\n",t.getEspecial());
-		System.out.printf("numDoctores: %d\n",t.getNumDoctores());
+		System.out.printf("tipoturno: %s\n",t.getShiftType());
+		System.out.printf("especial: %s\n",t.getSpecialDate());
+		System.out.printf("numDoctores: %d\n",t.getNumberOfDoctors());
 		System.out.printf("--------------------.\n");
 
 	}
@@ -498,7 +498,7 @@ public class DriverHospital {
 		}
 		if(hosp.getNumDias()==0) System.out.printf("Actualment l'Hospital no te calendari\n");
 		else {
-			System.out.printf("El calendari te %d Dies Vacacionals\n",hosp.getNumDias());
+			System.out.printf("El calendari te %d Turns Vacacionals\n",hosp.getNumTurnos());
 			ArrayList<Turno> alturno = hosp.getAllTurnos();
 			for(int i=0;i<alturno.size();++i){
 				MostrarTurno(alturno.get(i));
@@ -650,12 +650,15 @@ public class DriverHospital {
 					System.out.print("vdoc[3]=Doctor(4,QUARTO,4,4.0)\n");
 					System.out.print("vdoc[4]=Doctor(5,QUINTO,5,5.0)\n");
 					System.out.print("S'ha Creat un vector amb 5 doctors per simular l'entrada\n");
-					GregorianCalendar gc1= new GregorianCalendar(1,1,1);
-					GregorianCalendar gc2= new GregorianCalendar(2,2,2);
-					Calendario cale = new Calendario();
-					cale.addDiaVacacional(gc1);
-					cale.addDiaVacacional(gc2);
-					System.out.print("S'ha Creat un calendari amb els dies 1 1 1 y 2 2 2 per " +
+					int day=1;
+					int month=1;
+					int year = 1;
+					GregorianCalendar gc1= new GregorianCalendar(day,month,year);
+					GregorianCalendar gc2= new GregorianCalendar(day+1,month,year);
+					Calendario cale = new Calendario(year);
+					cale.addHoliday(gc1);
+					cale.addHoliday(gc2);
+					System.out.print("S'ha Creat un calendari amb els dies 1 1 1 y 2 1 1 per " +
 							"simular l'entrada\n");
 					HOSP = new Hospital(codigo,n,fm,ft,fn,vdoc,cale);
 					System.out.print("Hospital Creat Correctament\n");	
@@ -705,11 +708,11 @@ public class DriverHospital {
 					aldoc.add(doc5);
 					System.out.print("S'ha Creat un Arraylist amb 5 doctors per simular l'entrada\n");
 					GregorianCalendar gc1= new GregorianCalendar(1,1,1);
-					GregorianCalendar gc2= new GregorianCalendar(2,2,2);
-					Calendario cale = new Calendario();
-					cale.addDiaVacacional(gc1);
-					cale.addDiaVacacional(gc2);
-					System.out.print("S'ha Creat un calendari amb els dies 1 1 1 y 2 2 2 per " +
+					GregorianCalendar gc2= new GregorianCalendar(2,2,1);
+					Calendario cale = new Calendario(1);
+					cale.addHoliday(gc1);
+					cale.addHoliday(gc2);
+					System.out.print("S'ha Creat un calendari amb els dies 1 1 1 y 2 2 1 per " +
 							"simular l'entrada\n");
 					HOSP = new Hospital(codigo,n,fm,ft,fn,aldoc,cale);
 					System.out.print("Hospital Creat Correctament\n");
@@ -991,7 +994,7 @@ public class DriverHospital {
 							Turno t = alturno.get(i);
 							System.out.printf("introdueix el numero de doctors que vulguis:\n");
 							int num=teclado.nextInt();
-							t.setNumDoctores(num);
+							t.setNumberOfDoctors(num);
 							HOSP.replaceTurno(t);
 							System.out.printf("Torn reemplaçat correctament!\n");
 							MostrarHospital(HOSP);
