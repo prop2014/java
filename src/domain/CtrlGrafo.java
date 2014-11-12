@@ -10,6 +10,7 @@ public class CtrlGrafo {
 	private int lastdoc;
 	private int firsttorn;
 	private int lasttorn;
+	private int sink;
 	
 	
 	
@@ -36,6 +37,7 @@ public class CtrlGrafo {
 		lastdoc = id;
 		Nodo Sink = new Nodo(lastdoc+1, "Sink");
 		grafo.afegirNode(Sink);
+		sink = lastdoc+1;
 		//nodos de doctores añadidos
 		//añadimos todos los turnos al grafo
 		ArrayList<Turno> alturnos = new ArrayList<Turno> ();
@@ -46,7 +48,7 @@ public class CtrlGrafo {
 			if(i==0) firsttorn = id;
 			nodoTurno nturn = new nodoTurno(id,"Turno", alturnos.get(i).getDate(),alturnos.get(i).getShiftType());
 			grafo.afegirNode(nturn);
-			grafo.conectarNodes(id, lastdoc+1, alturnos.get(i).getNumberOfDoctors(),0.0); 
+			grafo.conectarNodes(id, sink, alturnos.get(i).getNumberOfDoctors(),0.0); 
 		}
 		lasttorn=id;
 				
@@ -73,9 +75,49 @@ public class CtrlGrafo {
 			}
 			else {
 			//caso donde si hay restricciones
-				
-				
-				
+				boolean Turnos[] = new boolean[alturnos.size()];
+				for(int k=0;k<alturnos.size();++k) Turnos[k]=true;
+				ArrayList<Restriccion> alRest = aldoc.get(i-firstdoc).getRestricciones();
+				for(int k=0;k<alRest.size();++k){
+					Restriccion res = alRest.get(k); //tengo la restriccion
+					String restipe =res.getTipo(); // tengo el tipo
+					
+					if(restipe.equals("NOT_Turno")){
+						NOT_Turno N = (NOT_Turno)res;
+						String t = N.getTipoTurno();  
+						for(int m=0;m<alturnos.size();++m){
+							String tipot=alturnos.get(m).getShiftType(); //tipo de turno;
+							if(t.equals(tipot)){
+								Turnos[m]=false;
+							}
+						}
+					}
+					else if(restipe.equals("NOT_Fecha")){
+						for(int m=0;m<alturnos.size();++m){
+						}
+					}
+					else if(restipe.equals("NOT_Especial")){
+						
+					}
+					else if(restipe.equals("NOT_Dia_Semana")){
+						
+					}
+					else if (restipe.equals("NOT_Dia_Mes")){
+						
+					}
+					else if (restipe.equals("XOR")){
+						
+					}
+					else if (restipe.equals("MAX_Turnos_por_Dia")){
+						
+					}
+					else if (restipe.equals("MAX_Dias_Rango")){
+						
+					}
+					/*else if (restipe.equals("MAX_Turnos_Consecutivos")){
+						
+					}*/					
+				}
 				
 			}//fin de restricciones //los doctores ia han puesto todas sus restricciones
 			
