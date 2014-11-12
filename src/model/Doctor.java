@@ -1,12 +1,12 @@
-/* Autor: Sergi Orra */
-
 package model;
 import java.util.*;
-import java.io.IOException;
+
+/**
+* Representa un Doctor de l'hospital
+* @author sergi.orra
+*/
 
 public class Doctor {
-
-		/* Atributos */
 	
 		private int idDoctor;
 		private String nombre;
@@ -14,13 +14,21 @@ public class Doctor {
 		private double SueldoTurno;
 		private Map <Integer , Restriccion> Restricciones;
 		
-
 /*  CONSTRUCTORAS  */
-	
-	    /* Constructoras de Doctor */
-
-		public Doctor() {}
 		
+		/**
+		* Crea un Doctor generico sin atributos
+		*/
+		public Doctor() {
+		}
+		
+		/**
+		* Crea un Doctor generico con atributos
+		* @param id: identificador del Doctor,
+		* 		 nombre: nombre del Doctor,
+		* 		 numMaxTurnos: numero maximo de turnos que quiere trabajar un doctor
+		* 		 sueldoTurno: sueldo base que cobra el doctor por turno
+		*/
 		public Doctor (int id, String nombre, int numMaxTurnos, double sueldoTurno){
 			idDoctor=id;
 			this.nombre = nombre;
@@ -29,34 +37,45 @@ public class Doctor {
 			Restricciones = new TreeMap<Integer , Restriccion>();
 		}
 
+		
 /*  CONSULTORAS  */
-
-		
-		/* Consultora Id del Doctor */
-		
+	
+		/**
+		*Consultora del identificador del Doctor
+		* @return La id del Doctor
+		*/
 		public int getId() {
 			return idDoctor;
 		}
 		
-		/* Consultora Nombre del Doctor */
-		    
+		/**
+		*Consultora del nombre del Doctor
+		* @return El nombre del Doctor
+		*/
 		public String getNombre() {
 		    return nombre;
 		}
 		
-		/* Consultora Numero Maximo de Dias que trabajo un doctor */
-		    
+		/**
+		*Consultora del numero maximo de turnos del Doctor
+		* @return numero maximo de turnos
+		*/ 
 		public int getNumMaxTurnos() {
 			return numMaxTurnos;
 		}
 		
-		/* Consultora Sueldo del Doctor */
-		    
+		/**
+		*Consultora del sueldo por turno del Doctor
+		* @return sueldo por turno del Doctor
+		*/ 
 		public double getSueldoTurno() {
 		    return SueldoTurno;
 		}
 		
-		/* Devuelve un ArrayList con todas las retricciones del Doctor */
+		/**
+		*Consultora del conjunto de restricciones del Doctor
+		* @return el ArrayList<Restriccion> de las restricciones del Doctor
+		*/
 		public ArrayList<Restriccion> getRestricciones(){
 			ArrayList<Restriccion> restr = new ArrayList<Restriccion>(Restricciones.size());
 			Iterator<Integer> it = Restricciones.keySet().iterator();
@@ -67,12 +86,18 @@ public class Doctor {
 			return restr;
 		}
 		
-		/* True si el Doctor del parametro implicito no tiene ninguna restriccion */
-		
+		/**
+		 * Consulta si el Doctor tiene restricciones
+		 * @return True si el Doctor no tiene restricciones, False si tiene minimo una
+		 */
 		public boolean isREmpty(){
 			return Restricciones.isEmpty();
 		}
-		 //consultora del numero de doctors
+		
+		/**
+		*Consultora del numero de restricciones del Doctor
+		* @return cantidad de restricciones del Doctor
+		*/
 		public int Rsize(){
 			return Restricciones.size();
 		}
@@ -80,47 +105,59 @@ public class Doctor {
 		
 /*  MODIFICADORAS  */
 		
-		/* Modificadora Id del Doctor */
-		    
+		/** 
+		* Modificadora del identificador del Doctor
+		* @param id: es el nuevo identificador del Doctor
+		*/
 	    public void setId(int id) {
 		    this.idDoctor = id;
 		}
 	    
-	    /* Modificadora Nombre del Doctor */
-		    
+	    /** 
+		* Modificadora del nombre del Doctor
+		* @param nombre: es el nuevo nombre del Doctor
+		*/ 
 		public void setNombre(String nombre) {
 		    this.nombre = nombre;
 		}
 		
-		/* Modificadora Numero Maximo de Dias que trabajo un doctor */
-		    
+		/** 
+		* Modificadora del numero maximo de turnos del Doctor
+		* @param num: es el nuevo numero maximo de turnos del Doctor
+		*/ 
 		public void setNumMaxTurnos(int num) {
 		    this.numMaxTurnos= num;
 		}
 		
-		/* Modificadora Sueldo del Doctor */
-		    
+		/** 
+		* Modificadora del sueldo por turno del Doctor
+		* @param sueldo: es el nuevo sueldo por turno del Doctor
+		*/ 
 		public void setSueldoTurno(double sueldo) {
 		    this.SueldoTurno = sueldo;
 		}
 		
-		
-		/*True si se ha podido aï¿½adir la restriccion
-		  False si no se ha podido aï¿½adir la resticcion en el map */
-		
+		/** 
+		 * Metodo que inserta una restriccion nueva en el Doctor
+		 * pre: El Doctor no contiene la restriccion r. 
+		 * @param r: es la nueva restriccion que se quiere añadir al Doctor
+		 * @return True si se ha podido insertar la restriccion, False en caso contrario
+		 */
 		public boolean addRestriccion(Restriccion r) {
-			if (Restricciones.containsKey(r.getId())) {
+			if (Restricciones.containsKey(r.getIdRestriccion())) {
 				return false;
 			}
 			else {
-				Restricciones.put(r.getId(), r);
+				Restricciones.put(r.getIdRestriccion(), r);
 				return true;
 			}
 		}
 		
-		/*True si se ha podido eliminar la restriccion
-		  False si no se ha podido eliminar la restriccion del map */
-		
+		/** 
+		 * Metodo que elimina una restriccion en el Doctor
+		 * @param id: id de la restriccion que se quiere eliminar del Doctor
+		 * @return True si se ha podido eliminar la restriccion, False en caso contrario
+		 */
 		public boolean eliminarRestriccion(int id) {
 			if (!Restricciones.containsKey(id)) {
 				return false;
@@ -131,8 +168,9 @@ public class Doctor {
 			}
 		}
 		
-		/* Borrar todas las restricciones de un Doctor (ï¿½Necesario?) */
-		
+		/** 
+		* Metodo que elimina todas las restricciones del Doctor
+		*/
 		public void clearRestricciones(){
 			Restricciones.clear();
 		}
