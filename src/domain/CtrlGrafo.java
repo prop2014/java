@@ -116,6 +116,14 @@ public class CtrlGrafo {
 						}
 					}
 					else if(restipe.equals("NOT_Dia_Semana")){
+						NOT_Dia_Semana N = (NOT_Dia_Semana)res;
+						String t = N.getDiaSemana();
+						for(int m=0;m<alturnos.size();++m){
+							String tipot=alturnos.get(m).getSpecialDate();
+							if(t.equals(tipot)){
+								Turnos[m]=false;
+							}
+						}
 						
 					}
 					else if (restipe.equals("NOT_Dia_Mes")){
@@ -134,6 +142,7 @@ public class CtrlGrafo {
 						
 					}*/					
 				}
+				
 				
 			}//fin de restricciones //los doctores ia han puesto todas sus restricciones
 			
