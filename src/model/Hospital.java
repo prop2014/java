@@ -16,7 +16,7 @@ public class Hospital {
 	private double factorT;
 	private double factorN;
 	private Map <Integer , Doctor> doctors;
-	private Calendario calendari;	
+	private Calendario calendari;
 	
 	
 	public Hospital() {
@@ -128,8 +128,8 @@ public class Hospital {
 	 */
 	
 	public Calendario getCalendario(){
-		Calendario c = new Calendario(calendari);
-		return c;
+		
+		return calendari;
 	}
 	
 	/** 

@@ -86,7 +86,12 @@ public class CtrlGrafo {
 			else {
 			//caso donde si hay restricciones
 				boolean Turnos[] = new boolean[alturnos.size()];
-				for(int k=0;k<alturnos.size();++k) Turnos[k]=true;
+				boolean Xor[] = new boolean[alturnos.size()];
+				boolean Max[] = new boolean[alturnos.size()];
+				for(int k=0;k<alturnos.size();++k) {
+					Turnos[k]=true;
+					Xor[k]=true;
+				}
 				ArrayList<Restriccion> alRest = aldoc.get(i-firstdoc).getRestrictions();
 				
 				for(int k=0;k<alRest.size();++k){
@@ -205,14 +210,14 @@ public class CtrlGrafo {
 						
 						
 					}
-					else if (restipe.equals("MAX_Turnos_Consecutivos")){
+					/*else if (restipe.equals("MAX_Turnos_Consecutivos")){
 						//posible implementacion
 						//se busca el primer Turno[m] en false
 						//de mientras si ++m >= MaxTurnosconsecutivos se pone ese dia en False
 						// al encontrar el primero en true cada MaxTurnosConsecutivos pones uno en false
 						//cumples especificafion? si // es la unica solucion ? nop ia que puede variar a partir de
 						//maxturnosconsecutivos >=3
-					}
+					}*/
 					
 				} //fi else de restricciones
 				//biieen hEmos llegado al punto donde solo falta tirar cables
