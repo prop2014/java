@@ -79,8 +79,6 @@ public class CtrlGrafo {
 					if(tt.equals("morning")) coste=fm*sueldo;
 					else if(tt.equals("afternoon")) coste=ft*sueldo;
 					else if(tt.equals("night")) coste=fn*sueldo;
-					 //se tiene que calcular //sueldodoctor
-						//los doctores empiezan en firstdoc hasta lastdoc
 					grafo.conectarNodes(i, j, capacidad, coste);
 				}
 			}
@@ -153,7 +151,7 @@ public class CtrlGrafo {
 				for(int k=0;k<alRest.size();++k){
 					Restriccion res = alRest.get(k); //tengo la restriccion
 					String restipe =res.getTipo(); // tengo el tipo
-					
+					//leerse linia 196 antes de empezar a pikar codigo
 					if (restipe.equals("XOR")){ 
 						//se crea un nodo XOR
 						//se conecta el doctor al nodo XOR con capacidad 1
@@ -193,9 +191,16 @@ public class CtrlGrafo {
 					
 				} //fi else de restricciones
 				//biieen hEmos llegado al punto donde solo falta tirar cables
-				//for(m) compruevas si turnos[m]==true 
+				//for(m) compruevas si turnos[m]==true
 				//i le metes capacidad 1 i coste
-			
+				//IMPORTANTE
+				//para encontrar todas las id de turnos hacer
+				//for(int j=firsttorn;j<=lasttorn;++j){
+				//Turnos[m] es equivalente a alturnos.get(j-firsttorn)
+				//IMPORTANTE referenciamos un doctor con
+				//aldoc.get(i-firstdoc) en todo el bucle
+				// la i es la id del nodo doctor
+				// j es la id del nodo turno
 				
 			}//fin de restricciones de un doctor
 			//pasamos al siguiente doctor
