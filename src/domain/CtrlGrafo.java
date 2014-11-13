@@ -52,7 +52,7 @@ public class CtrlGrafo {
 		//añadimos todos los turnos al grafo
 		ArrayList<Turno> alturnos = new ArrayList<Turno> ();
 		Calendario cal = h.getCalendario();
-		alturnos = cal.getAllShifts();
+		alturnos = cal.getALLShifts();
 		
 		for (int i = 0; i < alturnos.size(); ++i) {
 			++id;
@@ -193,6 +193,7 @@ public class CtrlGrafo {
 				//biieen hEmos llegado al punto donde solo falta tirar cables
 				//for(m) compruevas si turnos[m]==true
 				//i le metes capacidad 1 i coste
+				
 				//IMPORTANTE
 				//para encontrar todas las id de turnos hacer
 				//for(int j=firsttorn;j<=lasttorn;++j){

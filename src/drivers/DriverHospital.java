@@ -448,8 +448,8 @@ public class DriverHospital {
 
 	static void MostrarTurno(Turno t){
 		System.out.printf("--------------------.\n");
-		GregorianCalendar c1 = t.getDate();
-		System.out.printf("fecha:\n"+c1.getTime());
+		//GregorianCalendar c1 = t.getDate();
+		System.out.printf("fecha:\n"+t.getDate());
 		System.out.printf("\n");
 		System.out.printf("tipoturno: %s\n",t.getShiftType());
 		System.out.printf("especial: %s\n",t.getSpecialDate());
@@ -460,7 +460,7 @@ public class DriverHospital {
 	static void MostrarCal(Calendario cal){
 		
 		System.out.printf("Calendari del any %d\n",cal.getCalendarYear());
-		System.out.printf("Esta format per: %d turns vacacionals\n",cal.getNumberOfShifts());	
+		System.out.printf("Esta format per: %d turns vacacionals\n",cal.getTotalShifts());	
 	}
 
 	
@@ -501,10 +501,10 @@ public class DriverHospital {
 			}
 		}
 		Calendario cal = hosp.getCalendario();
-		if(cal.getNumberOfDays()==0) System.out.printf("Actualment l'Hospital no te calendari\n");
+		if(cal.getTotalHolidays()==0) System.out.printf("Actualment l'Hospital no te calendari\n");
 		else {
-			System.out.printf("El calendari te %d Turns Vacacionals\n",cal.getNumberOfShifts());
-			ArrayList<Turno> alturno = cal.getAllShifts();
+			System.out.printf("El calendari te %d Turns Vacacionals\n",cal.getTotalShifts());
+			ArrayList<Turno> alturno = cal.getALLShifts();
 			for(int i=0;i<alturno.size();++i){
 				MostrarTurno(alturno.get(i));
 			}
@@ -644,6 +644,10 @@ public class DriverHospital {
 					aldoc.add(doc4);
 					aldoc.add(doc5);
 					System.out.print("S'ha Creat un Arraylist amb 5 doctors per simular l'entrada\n");
+					int year, month, day;
+					year = 2;
+					month = 2;
+					day = 2;
 					GregorianCalendar gc1= new GregorianCalendar(2,1,2);
 					GregorianCalendar gc2= new GregorianCalendar(2,2,2);
 					Calendario cale = new Calendario(2);

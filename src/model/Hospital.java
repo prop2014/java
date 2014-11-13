@@ -128,7 +128,8 @@ public class Hospital {
 	 */
 	
 	public Calendario getCalendario(){
-		return calendari;
+		Calendario c = new Calendario(calendari);
+		return c;
 	}
 	
 	/** 

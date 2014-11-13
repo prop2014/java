@@ -40,8 +40,25 @@ public class Calendario {
 	 * @param C Calendario que se copiará
 	 */
 	public Calendario(Calendario C) {
-		//		calendarYear = C.calendarYear;
-		//		int calendarSize = C.calendar.length;
+		//mirate esto felix
+		/*this.calendarYear = C.getCalendarYear();
+		int calendarSize;
+		GregorianCalendar gc = new GregorianCalendar();
+		if (gc.isLeapYear(calendarYear)) calendarSize = 366; // comprueba si el año es bisiesto
+		else calendarSize = 365;
+		calendar = Arrays.copyOf(C.calendar, calendarSize);
+		Arrays.fill(calendar, false);
+		
+		shifts = new Turno[calendarSize][];
+		for (int i = 0; i < calendarSize; ++i) {
+					if (C.calendar[i]) {
+						holidays[i] = C.getShiftsOfDay(i);
+						}
+					}
+		*/
+		
+		//		calendarYear = C.getCalendarYear();
+		//		int calendarSize = C.getCalendarSize();
 		//		calendar = Arrays.copyOf(C.calendar, calendarSize);
 		//		for (int i = 0; i < calendarSize; ++i) {
 		//			if (C.calendar[i]) {
