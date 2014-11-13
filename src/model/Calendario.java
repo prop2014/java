@@ -16,7 +16,7 @@ public class Calendario {
 	private boolean[] calendar;
 	private TreeSet<Integer> holidays;
 	private Turno[][] shifts;
-	private static final String[] shiftsType = {"morning","afternoon","evening"};
+	private static final String[] typesOfShifts = {"morning","afternoon","evening"};
 
 	//-- Constructoras --//
 	/**
@@ -86,7 +86,7 @@ public class Calendario {
 		for (int i = 0; i < 3; ++i) {
 			T[i] = new Turno();
 			T[i].setDate(date);
-			T[i].setSpecialDate(shiftsType[i]);;
+			T[i].setShiftType(typesOfShifts[i]);
 		}
 		shifts[index] = T;
 		holidays.add(index);
@@ -116,9 +116,9 @@ public class Calendario {
 					throw new IllegalArgumentException("Error al reemplazar el turno: la fecha del turno no corresponde a ningun dia vacacional\n");
 		
 				String shiftType = T.getShiftType();
-				if (shiftType.equals(shiftsType[0]))
+				if (shiftType.equals(typesOfShifts[0]))
 					shifts[index][0] = T;
-				else if (shiftType.equals(shiftsType[1]))
+				else if (shiftType.equals(typesOfShifts[1]))
 					shifts[index][1] = T;
 				else
 					shifts[index][2] = T;
@@ -153,8 +153,8 @@ public class Calendario {
 		if (!calendar[index])		
 			throw new IllegalArgumentException("Error al consultar el turno: el turno no existe\n");
 
-		if (shiftType.equals(shiftsType[0])) return shifts[index][0];
-		if (shiftType.equals(shiftsType[1])) return shifts[index][1];
+		if (shiftType.equals(typesOfShifts[0])) return shifts[index][0];
+		if (shiftType.equals(typesOfShifts[1])) return shifts[index][1];
 		return shifts[index][2];
 	}
 
