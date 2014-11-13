@@ -44,7 +44,7 @@ public class FordFoulkersonDriver {
 		graf.conectarNodes(4, 5, 2, 5.0);
 		
 		//Es crea l'objecte FordFoulkerson
-		FordFoulkerson<String> algoritme = new FordFoulkerson<String>();		
+		FordFoulkerson<String> algoritme = new FordFoulkerson<String>(0,4,graf);		
 		
 		// S'executa el algoritme de MaxFlow que retorna el graf residual
 		Graf<String> grafResidual = algoritme.findMaxFlow(graf,0,5);
@@ -87,7 +87,7 @@ public class FordFoulkersonDriver {
 		}
 		
 		//Executem l'algoritme
-		algoritme = new FordFoulkerson<String>();
+		algoritme = new FordFoulkerson<String>(0,4,graf);
 		grafResidual = algoritme.findMaxFlow(graf,0,5);
 		//Just despr�s d'executar l'algoritme si es crida al m�tode getMaxFlow() retornar�
 		//el MaxFlow de la �ltima execuci� del algoritme. 
