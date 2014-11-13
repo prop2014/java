@@ -438,7 +438,7 @@ public class DriverHospital {
 
 package drivers;
 import java.util.*;
-
+import java.io.IOException;
 import model.Calendario;
 import model.Doctor;
 import model.Hospital;
@@ -648,8 +648,8 @@ public class DriverHospital {
 					year = 2;
 					month = 2;
 					day = 2;
-					GregorianCalendar gc1= new GregorianCalendar(2,1,2);
-					GregorianCalendar gc2= new GregorianCalendar(2,2,2);
+					GregorianCalendar gc1= new GregorianCalendar();
+					GregorianCalendar gc2= new GregorianCalendar();
 					Calendario cale = new Calendario(2);
 					cale.addHoliday(gc1);
 					cale.addHoliday(gc2);

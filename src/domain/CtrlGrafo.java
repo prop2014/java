@@ -62,6 +62,7 @@ public class CtrlGrafo {
 			grafo.conectarNodes(id, sink, alturnos.get(i).getNumberOfDoctors(),0.0); 
 		}
 		lasttorn=id;
+		++id; //id nodo reestriccion actualizado!!!!!!!!!!!!!!!!!
 				
 		
 		//nodos de turnos añadidos	
@@ -152,12 +153,33 @@ public class CtrlGrafo {
 					Restriccion res = alRest.get(k); //tengo la restriccion
 					String restipe =res.getTipo(); // tengo el tipo
 					//leerse linia 196 antes de empezar a pikar codigo
-					if (restipe.equals("XOR")){ 
+					if (restipe.equals("XOR")){
+						
+						Nodo XOR = new Nodo(id, "XOR");
+						grafo.afegirNode(XOR);
+						grafo.conectarNodes(i, id ,1, 0.0);
+						List<GregorianCalendar> listaXOR = ((XOR)res).getListDates();
+						for (GregorianCalendar fecha : listaXOR){ //Para cada elemento de la lista
+							for(int m=0;m<alturnos.size();++m){
+								if(alturnos.get(m).getDate()==fecha){
+									if(Turnos[m]==true){
+										int capacidad=1; 
+										double coste =0;
+										String tt = alturnos.get(m).getShiftType();
+										double sueldo = aldoc.get(i-firstdoc).getSalaryTurn();
+										if(tt.equals("morning")) coste=fm*sueldo;
+										else if(tt.equals("afternoon")) coste=ft*sueldo;
+										else if(tt.equals("night")) coste=fn*sueldo;
+										grafo.conectarNodes(id, m+firsttorn, capacidad, coste);
+									}
+								}
+							}
+							//System.out.print("Full info: " + fecha + "\n");
+						}
 						//se crea un nodo XOR
 						//se conecta el doctor al nodo XOR con capacidad 1
-						//se une con los turnos con capacidad 1
+						//se une con los turnos (conectanodes(id,turno,con capacidad 1, coste)
 						//se ha comprovado que el Turno esta en true;
-						//se ha añadido coste desde nodo XOR a turno
 						
 					}
 					else if (restipe.equals("MAX_Turnos_por_Dia")){
@@ -194,14 +216,7 @@ public class CtrlGrafo {
 				//for(m) compruevas si turnos[m]==true
 				//i le metes capacidad 1 i coste
 				
-				//IMPORTANTE
-				//para encontrar todas las id de turnos hacer
-				//for(int j=firsttorn;j<=lasttorn;++j){
-				//Turnos[m] es equivalente a alturnos.get(j-firsttorn)
-				//IMPORTANTE referenciamos un doctor con
-				//aldoc.get(i-firstdoc) en todo el bucle
-				// la i es la id del nodo doctor
-				// j es la id del nodo turno
+				
 				
 			}//fin de restricciones de un doctor
 			//pasamos al siguiente doctor
