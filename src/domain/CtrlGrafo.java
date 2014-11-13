@@ -152,9 +152,7 @@ public class CtrlGrafo {
 				for(int k=0;k<alRest.size();++k){
 					Restriccion res = alRest.get(k); //tengo la restriccion
 					String restipe =res.getTipo(); // tengo el tipo
-					//leerse linia 196 antes de empezar a pikar codigo
 					if (restipe.equals("XOR")){
-						
 						Nodo XOR = new Nodo(id, "XOR");
 						grafo.afegirNode(XOR);
 						grafo.conectarNodes(i, id ,1, 0.0);
@@ -174,13 +172,9 @@ public class CtrlGrafo {
 									}
 								}
 							}
-							//System.out.print("Full info: " + fecha + "\n");
-						}
-						//se crea un nodo XOR
-						//se conecta el doctor al nodo XOR con capacidad 1
-						//se une con los turnos (conectanodes(id,turno,con capacidad 1, coste)
-						//se ha comprovado que el Turno esta en true;
 						
+						}
+						++id;
 					}
 					else if (restipe.equals("MAX_Turnos_por_Dia")){
 						//se obtiene el numMaxTurnosxdia
@@ -190,7 +184,14 @@ public class CtrlGrafo {
 						// comprovar si el dia esta en true;
 						// se le pone (capacidad MaxTurnosxdia) 
 						// se le pone coste i avanti
-						
+						MAX_Turnos_por_Dia N = (MAX_Turnos_por_Dia)res;
+						int max = N.getNumTurnos();
+						if(max==0) for(int m=0;i<alturnos.size();++m) Turnos[m]=false;
+						else if(max == 1 | max ==2){
+							for(int m=0;m<alturnos.size();++m){
+								
+							}
+						}
 					}
 					else if (restipe.equals("MAX_Dias_Rango")){
 						//se obtiene el MaxDIASenRango
@@ -201,6 +202,8 @@ public class CtrlGrafo {
 						//se comprueva que Turnos[m]==true 
 						//se conecta el nodo con el turno con capacidad 1
 						//se añade coste i avanti
+						
+						
 					}
 					else if (restipe.equals("MAX_Turnos_Consecutivos")){
 						//posible implementacion
