@@ -12,7 +12,17 @@ public class CtrlGrafo {
 	private int lasttorn;
 	private int sink;
 	
-	
+	static String warrada3 (int warrada){
+		String t;
+		if(warrada==0) t="monday";
+		else if(warrada==1) t = "tuesday";
+		else if(warrada==2) t = "wednesday";
+		else if(warrada==3) t = "thursday";
+		else if(warrada==4) t = "friday";
+		else if(warrada==5) t = "saturday";
+		else t = "sunday";
+		return t; 
+	}
 	
 	public Graf<Nodo> llenarGrafo(Hospital h) throws IOException {
 		
@@ -79,6 +89,7 @@ public class CtrlGrafo {
 				boolean Turnos[] = new boolean[alturnos.size()];
 				for(int k=0;k<alturnos.size();++k) Turnos[k]=true;
 				ArrayList<Restriccion> alRest = aldoc.get(i-firstdoc).getRestrictions();
+				
 				for(int k=0;k<alRest.size();++k){
 					Restriccion res = alRest.get(k); //tengo la restriccion
 					String restipe =res.getTipo(); // tengo el tipo
@@ -121,33 +132,75 @@ public class CtrlGrafo {
 						String t = N.getDiaSemana();
 						for(int m=0;m<alturnos.size();++m){
 							GregorianCalendar gc1=alturnos.get(m).getDate();
-							
+							int warrada = gc1.get(GregorianCalendar.DAY_OF_WEEK);
+							String warrada2=warrada3(warrada);
+							if(t.equals(warrada2))Turnos[m]=false;
 						}
 						
 					}
 					else if (restipe.equals("NOT_Dia_Mes")){
+						NOT_Dia_Mes N = (NOT_Dia_Mes)res;
+						int  dia = N.getDiaMes();
+						for(int m=0;m<alturnos.size();++m){
+							GregorianCalendar gc1=alturnos.get(m).getDate();
+							int day = gc1.get(GregorianCalendar.DAY_OF_MONTH);
+							if(dia==day)Turnos[m]=false;
+						}
 						
-					}
-					else if (restipe.equals("XOR")){
+					}				
+				}
+				//hemos tratado las NOT vamos a tratar las demas
+				for(int k=0;k<alRest.size();++k){
+					Restriccion res = alRest.get(k); //tengo la restriccion
+					String restipe =res.getTipo(); // tengo el tipo
+					
+					if (restipe.equals("XOR")){ 
+						//se crea un nodo XOR
+						//se conecta el doctor al nodo XOR con capacidad 1
+						//se une con los turnos con capacidad 1
+						//se ha comprovado que el Turno esta en true;
+						//se ha añadido coste desde nodo XOR a turno
 						
 					}
 					else if (restipe.equals("MAX_Turnos_por_Dia")){
+						//se obtiene el numMaxTurnosxdia
+						//si es 0 se pone TURNOS[] a false;
+						//si es 3 no se hace nada;
+						//else se crea 1 nodo para cada 3 iteraciones del for(m)
+						// comprovar si el dia esta en true;
+						// se le pone (capacidad MaxTurnosxdia) 
+						// se le pone coste i avanti
 						
 					}
 					else if (restipe.equals("MAX_Dias_Rango")){
-						
+						//se obtiene el MaxDIASenRango
+						//se crea Nodo MaxDiasRango
+						//se une el doctor con el nodo con capacidad MaxDiasenRango
+						//en el for(m) se comprueva que la fecha sea >=minRango
+						// & <=maxRango si la fecha es > break?
+						//se comprueva que Turnos[m]==true 
+						//se conecta el nodo con el turno con capacidad 1
+						//se añade coste i avanti
 					}
-					/*else if (restipe.equals("MAX_Turnos_Consecutivos")){
-						
-					}*/					
-				}
-				
-				
-			}//fin de restricciones //los doctores ia han puesto todas sus restricciones
+					else if (restipe.equals("MAX_Turnos_Consecutivos")){
+						//posible implementacion
+						//se busca el primer Turno[m] en false
+						//de mientras si ++m >= MaxTurnosconsecutivos se pone ese dia en False
+						// al encontrar el primero en true cada MaxTurnosConsecutivos pones uno en false
+						//cumples especificafion? si // es la unica solucion ? nop ia que puede variar a partir de
+						//maxturnosconsecutivos >=3
+					}
+					
+				} //fi else de restricciones
+				//biieen hEmos llegado al punto donde solo falta tirar cables
+				//for(m) compruevas si turnos[m]==true 
+				//i le metes capacidad 1 i coste
 			
-			//?quedan por conectar los dias sin restricciones
-		
-		}//fi for de llenar restricciones
+				
+			}//fin de restricciones de un doctor
+			//pasamos al siguiente doctor
+			
+		}//fi for de llenar restricciones para todos los doctores
 		return grafo;
-	}//fillenagrafo
+	}//fin de llenagrafo
 }//ficlas
