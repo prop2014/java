@@ -2,7 +2,9 @@ package model;
 
 import java.util.GregorianCalendar;
 import java.util.ArrayList;
-
+import java.util.TreeSet;
+import java.util.Iterator;
+import java.util.Arrays;
 
 /**
  * Representa un calendario
@@ -10,10 +12,11 @@ import java.util.ArrayList;
  */
 public class Calendario {
 	//-- Atributos privados --//
-	private int calYear; // año al que corresponde el calendario
-	private ArrayList<ArrayList<Turno>> calendar;
-	private int totalHolidays; // num. total de días vacacionales
-	private static final String[] shifts = {"morning","afternoon","evening"};
+	private int calendarYear; // año al que corresponde el calendario
+	private boolean[] calendar;
+	private TreeSet<Integer> holidays;
+	private Turno[][] shifts;
+	private static final String[] shiftsType = {"morning","afternoon","evening"};
 
 	//-- Constructoras --//
 	/**
@@ -21,13 +24,15 @@ public class Calendario {
 	 * @param year Año al que corresponderá el calendario
 	 */
 	public Calendario(int calendarYear) {
-		calYear = calendarYear;
+		this.calendarYear = calendarYear;
+		int calendarSize;
 		GregorianCalendar gc = new GregorianCalendar();
-		if (gc.isLeapYear(calYear)) // comprueba si el año es bisiesto
-			calendar  = new ArrayList<ArrayList<Turno>>(366);
-		else
-			calendar  = new ArrayList<ArrayList<Turno>>(365);
-		totalHolidays = 0;
+		if (gc.isLeapYear(calendarYear)) calendarSize = 366; // comprueba si el año es bisiesto
+		else calendarSize = 365;
+		calendar = new boolean[calendarSize];
+		Arrays.fill(calendar, false);
+		holidays = new TreeSet<Integer>();
+		shifts = new Turno[calendarSize][];
 	}
 
 	/**
@@ -35,16 +40,15 @@ public class Calendario {
 	 * @param C Calendario que se copiará
 	 */
 	public Calendario(Calendario C) {
-		calYear = C.calYear;
-		calendar  = new ArrayList<ArrayList<Turno>>(C.calendar.size());
-		int calSize = calendar.size();
-		for (int i = 0; i < calSize; ++i) {
-			if (C.calendar.get(i) != null)
-				calendar.add(i, new ArrayList<Turno>(3));
-			for (int j = 0; j < 3; ++j)
-				calendar.get(i).add(j, C.calendar.get(i).get(j));
-		}
-		totalHolidays = C.totalHolidays;
+		//		calendarYear = C.calendarYear;
+		//		int calendarSize = C.calendar.length;
+		//		calendar = Arrays.copyOf(C.calendar, calendarSize);
+		//		for (int i = 0; i < calendarSize; ++i) {
+		//			if (C.calendar[i]) {
+		//				holidays[i] = Arrays.copyOf(C.holidays[i], C.holidays[i].length);
+		//			}
+		//		}
+		//		totalHolidays = C.totalHolidays;
 	}
 
 
@@ -57,15 +61,18 @@ public class Calendario {
 	 */
 	public void addHoliday(GregorianCalendar date) throws IllegalArgumentException {
 		int index = date.get(GregorianCalendar.DAY_OF_YEAR) - 1;
-		if (calendar.get(index) != null)		
+		if (calendar[index])		
 			throw new IllegalArgumentException("Error al añadir el dia vacacional: el dia vacacional ya existe\n");
 
-		calendar.add(index, new ArrayList<Turno>(3));
+		calendar[index] = true;
+		Turno[] T = new Turno[3];		
 		for (int i = 0; i < 3; ++i) {
-			calendar.get(index).get(i).setDate(date);
-			calendar.get(index).get(i).setSpecialDate(shifts[i]);
+			T[i] = new Turno();
+			T[i].setDate(date);
+			T[i].setSpecialDate(shiftsType[i]);;
 		}
-		++totalHolidays;
+		shifts[index] = T;
+		holidays.add(index);
 	}
 
 	/**
@@ -73,12 +80,13 @@ public class Calendario {
 	 * @param date Fecha del día vacacional que se eliminirá
 	 */
 	public void deleteHoliday(GregorianCalendar date) throws IllegalArgumentException {
-		int index = date.get(GregorianCalendar.DAY_OF_YEAR) - 1;
-		if (calendar.get(index) == null)		
-			throw new IllegalArgumentException("Error al eliminar el dia vacacional: el dia vacacional no existe\n");
-
-		calendar.add(index, null);
-		--totalHolidays;
+				int index = date.get(GregorianCalendar.DAY_OF_YEAR) - 1;
+				if (!calendar[index])		
+					throw new IllegalArgumentException("Error al eliminar el dia vacacional: el dia vacacional no existe\n");
+		
+				calendar[index] = false;
+				shifts[index] = null;
+				holidays.remove(index);
 	}
 
 	/**
@@ -86,17 +94,17 @@ public class Calendario {
 	 * @param T Turno que reemplazará al turno existente
 	 */
 	public void replaceShift(Turno T) throws IllegalArgumentException {
-		int index = T.getDate().get(GregorianCalendar.DAY_OF_YEAR) - 1;
-		if (calendar.get(index) == null)		
-			throw new IllegalArgumentException("Error al reemplazar el turno: la fecha del turno no corresponde a ningun dia vacacional\n");
-
-		String shiftType = T.getShiftType();
-		if (shiftType == "morning")
-			calendar.get(index).add(0, T);
-		else if (shiftType == "afternoon")
-			calendar.get(index).add(1, T);
-		else if (shiftType == "evening")
-			calendar.get(index).add(2, T);
+				int index = T.getDate().get(GregorianCalendar.DAY_OF_YEAR) - 1;
+				if (!calendar[index])		
+					throw new IllegalArgumentException("Error al reemplazar el turno: la fecha del turno no corresponde a ningun dia vacacional\n");
+		
+				String shiftType = T.getShiftType();
+				if (shiftType.equals(shiftsType[0]))
+					shifts[index][0] = T;
+				else if (shiftType.equals(shiftsType[1]))
+					shifts[index][1] = T;
+				else
+					shifts[index][2] = T;
 	}
 
 
@@ -106,7 +114,15 @@ public class Calendario {
 	 * @return Año del calendario
 	 */
 	public int getCalendarYear() {
-		return calYear;
+		return calendarYear;
+	}
+
+	/**
+	 * Consultora del tamaño (num. de días) del calendario
+	 * @return Tamaño del calendario
+	 */
+	public int getCalendarSize() {
+		return calendar.length;
 	}
 
 	/**
@@ -117,12 +133,12 @@ public class Calendario {
 	 */
 	public Turno getShift(GregorianCalendar date, String shiftType) throws IllegalArgumentException {
 		int index = date.get(GregorianCalendar.DAY_OF_YEAR) - 1;
-		if (calendar.get(index) == null)		
+		if (!calendar[index])		
 			throw new IllegalArgumentException("Error al consultar el turno: el turno no existe\n");
 
-		if (shiftType == "morning") return calendar.get(index).get(0);
-		else if (shiftType == "afternoon") return calendar.get(index).get(1);
-		else return calendar.get(index).get(2);
+		if (shiftType.equals(shiftsType[0])) return shifts[index][0];
+		if (shiftType.equals(shiftsType[1])) return shifts[index][1];
+		return shifts[index][2];
 	}
 
 	/**
@@ -132,71 +148,77 @@ public class Calendario {
 	 */
 	public ArrayList<Turno> getShiftsOfDay(GregorianCalendar date) throws IllegalArgumentException {
 		int index = date.get(GregorianCalendar.DAY_OF_YEAR) - 1;
-		if (calendar.get(index) == null)		
+		if (calendar[index])		
 			throw new IllegalArgumentException("Error al consultar los turnos: el dia vacacional no existe.\n");
 
-		ArrayList<Turno> arrayList = new ArrayList<Turno>(3);
+		ArrayList<Turno> Shifts = new ArrayList<Turno>(3);
 		for (int i = 0; i < 3; ++i)
-			arrayList.add(i, calendar.get(index).get(i));
-		
-		return arrayList;
+			Shifts.add(shifts[index][i]);
+
+		return Shifts;
 	}
 
 	/**
-	 * Consultora de TODOS los turnos del calendario
-	 * @return Los turnos correspondientes a cada uno de los días vacacionales
+	 * Consultora de TODOS los turnos
+	 * @return Todos los turnos de días vacacionales
 	 */
-	public ArrayList<Turno> getAllShifts() {
-		ArrayList<Turno> arrayList = new ArrayList<Turno>();
-		int calSize = calendar.size();
-		for (int i = 0; i < calSize; ++i) {
-			if (calendar.get(i) != null) {
-				for (int j = 0; j < 3; ++j)
-					arrayList.add(calendar.get(i).get(j));
+	public ArrayList<Turno> getALLShifts() {
+		ArrayList<Turno> Shifts = new ArrayList<Turno>();
+		Iterator<Integer> it = holidays.iterator();		
+		while (it.hasNext()) {
+			int index = it.next();
+			for (int i = 0; i < 3; ++i) {
+				Shifts.add(shifts[index][i]);
 			}
 		}
-		
-		return arrayList;
+		return Shifts;
 	}
 
 	/**
-	 * Consulta si existe un determinado día vacacional
-	 * @param date Fecha del día vacacional
-	 * @return True si existe el día vacacional especificado, False en caso contrario
+	 * Dada una fecha, comprueba si dicha fecha corresponde a un día vacacional
+	 * @param date Fecha
+	 * @return True si la fecha corresponde a un día vacacional, False en caso contrario
 	 */
-	public boolean existsHoliday(GregorianCalendar date) {
-		int index = date.get(GregorianCalendar.DAY_OF_YEAR) - 1;
-		return calendar.get(index) != null;
+	public boolean QueryByDate(GregorianCalendar date) {
+		return calendar[date.get(GregorianCalendar.DAY_OF_YEAR)-1];
+	}
+
+	/**
+	 * Dado un día del año, comprueba si dicho día corresponde a un día vacacional
+	 * @param int Día del año [1..366]
+	 * @return True si el día corresponde a un día vacacional, False en caso contrario
+	 */
+	public boolean QueryByDayOfYear(int dayOfYear) {
+		return calendar[dayOfYear-1];
 	}
 
 	/**
 	 * Consultora de todos los días vacacionales
 	 * @return Las fechas de todos los días vacacionales
 	 */
-	public ArrayList<GregorianCalendar> getAllHolidays() {
-		ArrayList<GregorianCalendar> arrayList = new ArrayList<GregorianCalendar>();
-		int calSize = calendar.size();
-		for (int i = 0; i < calSize; ++i) {
-			if (calendar.get(i) != null)
-				arrayList.add(calendar.get(i).get(0).getDate());
+	public ArrayList<GregorianCalendar> getALLHolidays() {
+		ArrayList<GregorianCalendar> Holidays = new ArrayList<GregorianCalendar>();
+		Iterator<Integer> it = holidays.iterator();		
+		while (it.hasNext()) {
+			Holidays.add(shifts[it.next()][0].getDate());
 		}
 
-		return arrayList;
+		return Holidays;
 	}
 
 	/**
 	 * Consultora del número total de días vacacionales del calendario
 	 * @return El número total de días vacacionales
 	 */
-	public int getNumberOfDays() {
-		return totalHolidays;
+	public int getTotalHolidays() {
+		return holidays.size();
 	}
 
 	/**
 	 * Consultora del número total de turnos de guardia del calendario
 	 * @return El número total de turnos de guardia
 	 */
-	public int getNumberOfShifts() {
-		return totalHolidays*3;
+	public int getTotalShifts() {
+		return 3*holidays.size();
 	}
 }
