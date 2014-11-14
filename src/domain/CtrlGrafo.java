@@ -91,6 +91,7 @@ public class CtrlGrafo {
 				for(int k=0;k<alturnos.size();++k) {
 					Turnos[k]=true;
 					Xor[k]=true;
+					Max[k]=true;
 				}
 				ArrayList<Restriccion> alRest = aldoc.get(i-firstdoc).getRestrictions();
 				
@@ -105,6 +106,8 @@ public class CtrlGrafo {
 							String tipot=alturnos.get(m).getShiftType(); //tipo de turno;
 							if(t.equals(tipot)){
 								Turnos[m]=false;
+								Xor[m]=false;
+								Max[m]=false;
 							}
 						}
 					}
@@ -116,6 +119,8 @@ public class CtrlGrafo {
 							GregorianCalendar gc1 = alturnos.get(m).getDate();
 							if(gc1==gc){
 								Turnos[m]=false;
+								Xor[m]=false;
+								Max[m]=false;
 								++cont;
 							}
 							if (cont==3) break;
@@ -128,6 +133,8 @@ public class CtrlGrafo {
 							String tipot=alturnos.get(m).getSpecialDate();
 							if(t.equals(tipot)){
 								Turnos[m]=false;
+								Xor[m]=false;
+								Max[m]=false;
 							}
 						}
 					}
@@ -138,7 +145,11 @@ public class CtrlGrafo {
 							GregorianCalendar gc1=alturnos.get(m).getDate();
 							int warrada = gc1.get(GregorianCalendar.DAY_OF_WEEK);
 							String warrada2=warrada3(warrada);
-							if(t.equals(warrada2))Turnos[m]=false;
+							if(t.equals(warrada2)){
+								Turnos[m]=false;
+								Xor[m]=false;
+								Max[m]=false;
+							}
 						}
 						
 					}
@@ -148,7 +159,11 @@ public class CtrlGrafo {
 						for(int m=0;m<alturnos.size();++m){
 							GregorianCalendar gc1=alturnos.get(m).getDate();
 							int day = gc1.get(GregorianCalendar.DAY_OF_MONTH);
-							if(dia==day)Turnos[m]=false;
+							if(dia==day){
+								Turnos[m]=false;
+								Xor[m]=false;
+								Max[m]=false;
+							}
 						}
 						
 					}				
@@ -157,15 +172,19 @@ public class CtrlGrafo {
 				for(int k=0;k<alRest.size();++k){
 					Restriccion res = alRest.get(k); //tengo la restriccion
 					String restipe =res.getTipo(); // tengo el tipo
+					
 					if (restipe.equals("XOR")){
 						Nodo XOR = new Nodo(id, "XOR");
 						grafo.afegirNode(XOR);
 						grafo.conectarNodes(i, id ,1, 0.0);
 						List<GregorianCalendar> listaXOR = ((XOR)res).getListDates();
+						boolean modif = false;
 						for (GregorianCalendar fecha : listaXOR){ //Para cada elemento de la lista
 							for(int m=0;m<alturnos.size();++m){
 								if(alturnos.get(m).getDate()==fecha){
-									if(Turnos[m]==true){
+									if(Turnos[m]==true & Xor[m]==true){
+										Xor[m]=false;
+										modif = true;
 										int capacidad=1; 
 										double coste =0;
 										String tt = alturnos.get(m).getShiftType();
@@ -179,9 +198,16 @@ public class CtrlGrafo {
 							}
 						
 						}
-						++id;
+						if(modif==true)++id;
+						else {
+							grafo.removeNode(id);
+						}
 					}
-					else if (restipe.equals("MAX_Turnos_por_Dia")){
+				}
+				for(int k=0;k<alRest.size();++k){
+					Restriccion res = alRest.get(k); //tengo la restriccion
+					String restipe =res.getTipo(); // tengo el tipo
+					if (restipe.equals("MAX_Turnos_por_Dia")){
 						//se obtiene el numMaxTurnosxdia
 						//si es 0 se pone TURNOS[] a false;
 						//si es 3 no se hace nada;
@@ -193,11 +219,17 @@ public class CtrlGrafo {
 						int max = N.getNumTurnos();
 						if(max==0) for(int m=0;i<alturnos.size();++m) Turnos[m]=false;
 						else if(max == 1 | max ==2){
-							for(int m=0;m<alturnos.size();++m){
-								
+							for(int m=0;m<alturnos.size();m=m+3){
+								Nodo MAX = new Nodo(id, "MAX");
+								grafo.afegirNode(MAX);
+								grafo.conectarNodes(i, id, max, 0.0);
+								if(Turnos[m]==true & Xor[m]==true & Max[m]==true){
+									
+								}
 							}
 						}
 					}
+					
 					else if (restipe.equals("MAX_Dias_Rango")){
 						//se obtiene el MaxDIASenRango
 						//se crea Nodo MaxDiasRango
@@ -219,7 +251,7 @@ public class CtrlGrafo {
 						//maxturnosconsecutivos >=3
 					}*/
 					
-				} //fi else de restricciones
+				}//fi else de restricciones
 				//biieen hEmos llegado al punto donde solo falta tirar cables
 				//for(m) compruevas si turnos[m]==true
 				//i le metes capacidad 1 i coste
