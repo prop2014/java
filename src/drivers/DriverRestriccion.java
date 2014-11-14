@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import model.Doctor;
 import model.Hospital;
-import model.MAX_Dias_Rango;
+import model.MAX_Turnos_Rango;
 import model.MAX_Turnos_Consecutivos;
 import model.MAX_Turnos_por_Dia;
 import model.NOT_Dia_Mes;
@@ -94,10 +94,10 @@ public class DriverRestriccion {
 		
 		case "MAX_Dias_Rango"  :{ //MAX_Dias_Rango
 			
-			MAX_Dias_Rango N = ((MAX_Dias_Rango)RES);
-			GregorianCalendar fechaIni = ((MAX_Dias_Rango)RES).getFechaIni();
-			GregorianCalendar fechaFin = ((MAX_Dias_Rango)RES).getFechaFin();
-			int  numDias = ((MAX_Dias_Rango)RES).getNumDias();
+			MAX_Turnos_Rango N = ((MAX_Turnos_Rango)RES);
+			GregorianCalendar fechaIni = ((MAX_Turnos_Rango)RES).getFechaIni();
+			GregorianCalendar fechaFin = ((MAX_Turnos_Rango)RES).getFechaFin();
+			int  numDias = ((MAX_Turnos_Rango)RES).getNumDias();
 			
 			System.out.print("La fecha inicial de la restriccion" + TIPO + " es ");
 			System.out.print(fechaIni.get(fechaIni.DAY_OF_MONTH));
@@ -281,7 +281,7 @@ public class DriverRestriccion {
 					System.out.print("Introduce el numero de dias\n");
 					dias = teclado.nextInt();
 					
-					RES = new MAX_Dias_Rango(id, diaI, diaF, mesI, mesF, anioI, anioF, dias);
+					RES = new MAX_Turnos_Rango(id, diaI, diaF, mesI, mesF, anioI, anioF, dias);
 					System.out.print("DONE\n");
 					break;
 					

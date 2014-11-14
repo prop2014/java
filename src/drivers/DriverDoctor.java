@@ -21,10 +21,10 @@ public class DriverDoctor {
 		Restriccion res = new Restriccion();
 		
 		System.out.print("------------------------------------\n");
-		System.out.print("¿Que desea hacer?\n");
+		System.out.print("ï¿½Que desea hacer?\n");
 		System.out.print("0: Terminar programa\n");
 		System.out.print("1: Crear Doctor\n");
-		System.out.print("2: Añadir restriccion a un Doctor\n");
+		System.out.print("2: Aï¿½adir restriccion a un Doctor\n");
 		System.out.print("3: Eliminar restriccion a un doctor\n");
 		System.out.print("4: Consultar retriccions del Doctor\n");
 		System.out.print("5: Consultar atributos del Doctor (Sin restricciones)\n");
@@ -55,7 +55,7 @@ public class DriverDoctor {
 					int idRestriccion = teclado.nextInt();
 					String tipoRestriccion = teclado.next();
 					if (tipoRestriccion.equals("MAX_Dias_Rango")) {
-						System.out.printf("Restriccion tipo MAX_Dies_Rango, ingrese la fecha inico (Dia, mes año), fecha fin y el numero de dias.\n");
+						System.out.printf("Restriccion tipo MAX_Dies_Rango, ingrese la fecha inico (Dia, mes aï¿½o), fecha fin y el numero de dias.\n");
 						int numDias;
 						int d1, d2, m1, m2, a1, a2;
 						d1 = teclado.nextInt();
@@ -65,7 +65,7 @@ public class DriverDoctor {
 						a1 = teclado.nextInt();
 						a2 = teclado.nextInt();
 						numDias = teclado.nextInt();
-						res = new MAX_Dias_Rango(idRestriccion, d1, m1, a1, d2, m2, a2, numDias);
+						res = new MAX_Turnos_Rango(idRestriccion, d1, m1, a1, d2, m2, a2, numDias);
 					}
 					else if (tipoRestriccion.equals("MAX_Turnos_Consecutivos")) {
 						System.out.printf("Restriccion tipo MAX_Turnos_Consecutivos, ingrese el numero maximo de turnos.\n");
@@ -98,7 +98,7 @@ public class DriverDoctor {
 						res = new NOT_Especial(idRestriccion, diaEspecial);
 					}
 					else if (tipoRestriccion.equals("NOT_Fecha")) {
-						System.out.printf("Restriccion tipo NOT_Fecha, ingrese la fecha (Dia, mes y año).\n");
+						System.out.printf("Restriccion tipo NOT_Fecha, ingrese la fecha (Dia, mes y aï¿½o).\n");
 						int d, m, a;
 						d = teclado.nextInt();
 						m = teclado.nextInt();
@@ -112,7 +112,7 @@ public class DriverDoctor {
 						res = new NOT_Especial(idRestriccion, tipoDia);
 					}
 					else if (tipoRestriccion.equals("XOR")) {
-						System.out.printf("Restriccion tipo XOR, ingrese las diferentas fechas (Dia, mes y año) y pon un 0 en el Dia para terminar.\n");
+						System.out.printf("Restriccion tipo XOR, ingrese las diferentas fechas (Dia, mes y aï¿½o) y pon un 0 en el Dia para terminar.\n");
 						List<GregorianCalendar> listaXOR2 = new ArrayList<GregorianCalendar>();
 						int d, m, a;
 						d = teclado.nextInt();
@@ -131,7 +131,7 @@ public class DriverDoctor {
 					}
 					if (rescorrecta) {
 						boolean c = doc.addRestriction(res);
-						if (c) System.out.printf("Restriccion añadida.\n");	
+						if (c) System.out.printf("Restriccion aï¿½adida.\n");	
 						else System.out.printf("Ya existe una restriccion con este Id.\n");
 					}
 				}
@@ -193,10 +193,10 @@ public class DriverDoctor {
 				}
 			}
 			System.out.print("\n------------------------------------\n");
-			System.out.print("¿Que desea hacer?\n");
+			System.out.print("ï¿½Que desea hacer?\n");
 			System.out.print("0: Terminar programa\n");
 			System.out.print("1: Crear Doctor\n");
-			System.out.print("2: Añadir restriccion a un Doctor\n");
+			System.out.print("2: Aï¿½adir restriccion a un Doctor\n");
 			System.out.print("3: Eliminar restriccion a un doctor\n");
 			System.out.print("4: Consultar retriccions del Doctor\n");
 			System.out.print("5: Consultar atributos del Doctor (Sin restricciones)\n");

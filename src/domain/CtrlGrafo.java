@@ -242,9 +242,9 @@ public class CtrlGrafo {
 						//se comprueva que Turnos[m]==true 
 						//se conecta el nodo con el turno con capacidad 1
 						//se añade coste i avanti
-						MAX_Dias_Rango N = ((MAX_Dias_Rango)res);
-						GregorianCalendar fechaIni = ((MAX_Dias_Rango)res).getFechaIni();
-						GregorianCalendar fechaFin = ((MAX_Dias_Rango)res).getFechaFin();
+						MAX_Turnos_Rango N = ((MAX_Turnos_Rango)res);
+						GregorianCalendar fechaIni = ((MAX_Turnos_Rango)res).getFechaIni();
+						GregorianCalendar fechaFin = ((MAX_Turnos_Rango)res).getFechaFin();
 						int  numDias = N.getNumDias();
 						
 						

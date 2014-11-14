@@ -1,9 +1,8 @@
-package model;
-
+/*package model;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.ArrayList;
-import model.Restriccion;
+import model.Restriccion;*/
 
 
 /**
