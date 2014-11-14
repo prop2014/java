@@ -43,7 +43,7 @@ public class CtrlGrafo {
 		
 		int id = 0;
 		// creamos grafo
-		Nodo Source = new Nodo(0, "Source");	// creamos nodo source		
+		Nodo Source = new Nodo(0, "Source");	// creamos nodo source
 		grafo.afegirNode(Source);    			//A�adimos el source
 		ArrayList<Doctor> aldoc = new ArrayList<Doctor>();
 		aldoc = h.getDoctors();					//aldoc: lista de doctores del hospital
