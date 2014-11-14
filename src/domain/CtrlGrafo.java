@@ -98,12 +98,8 @@ public class CtrlGrafo {
 			else {
 			//caso donde si hay restricciones
 				boolean Turnos[] = new boolean[alturnos.size()];
-				boolean Xor[] = new boolean[alturnos.size()];
-				boolean Max[] = new boolean[alturnos.size()];
 				for(int k=0;k<alturnos.size();++k) {
 					Turnos[k]=true;
-					Xor[k]=true;
-					Max[k]=true;
 				}
 				ArrayList<Restriccion> alRest = aldoc.get(i-firstdoc).getRestrictions();
 				
@@ -118,8 +114,6 @@ public class CtrlGrafo {
 							String tipot=alturnos.get(m).getShiftType(); //tipo de turno;
 							if(t.equals(tipot)){
 								Turnos[m]=false;
-								Xor[m]=false;
-								Max[m]=false;
 							}
 						}
 					}
@@ -131,8 +125,6 @@ public class CtrlGrafo {
 							GregorianCalendar gc1 = alturnos.get(m).getDate();
 							if(gc1==gc){
 								Turnos[m]=false;
-								Xor[m]=false;
-								Max[m]=false;
 								++cont;
 							}
 							if (cont==3) break;
@@ -145,8 +137,6 @@ public class CtrlGrafo {
 							String tipot=alturnos.get(m).getSpecialDate();
 							if(t.equals(tipot)){
 								Turnos[m]=false;
-								Xor[m]=false;
-								Max[m]=false;
 							}
 						}
 					}
@@ -159,8 +149,6 @@ public class CtrlGrafo {
 							String warrada2=itos(warrada);
 							if(t.equals(warrada2)){
 								Turnos[m]=false;
-								Xor[m]=false;
-								Max[m]=false;
 							}
 						}
 						
@@ -173,8 +161,6 @@ public class CtrlGrafo {
 							int day = gc1.get(GregorianCalendar.DAY_OF_MONTH);
 							if(dia==day){
 								Turnos[m]=false;
-								Xor[m]=false;
-								Max[m]=false;
 							}
 						}
 						
@@ -194,8 +180,7 @@ public class CtrlGrafo {
 						for (GregorianCalendar fecha : listaXOR){ //Para cada elemento de la lista
 							for(int m=0;m<alturnos.size();++m){
 								if(alturnos.get(m).getDate()==fecha){
-									if(Turnos[m]==true & Xor[m]==true){
-										Xor[m]=false;
+									if(Turnos[m]==true){
 										modif = true;
 										int capacidad=1; 
 										double coste =0;
@@ -236,7 +221,7 @@ public class CtrlGrafo {
 								Nodo MAX = new Nodo(id, "MAX");
 								grafo.afegirNode(MAX);
 								grafo.conectarNodes(i, id, max, 0.0);
-								if(Turnos[m]==true & Xor[m]==true & Max[m]==true){
+								if(Turnos[m]==true){
 									
 									++id;
 								}
@@ -275,7 +260,7 @@ public class CtrlGrafo {
 				//for(m) compruevas si turnos[m]==true
 				//i le metes capacidad 1 i coste
 				for(int j=firsttorn;j<=lasttorn;++j){
-					if(Turnos[j-firsttorn]==true & Xor[j-firsttorn]==true & Max[j-firsttorn]==true){
+					if(Turnos[j-firsttorn]==true ){
 						int capacidad=1; //
 						double coste =0;
 						String tt = alturnos.get(j-firsttorn).getShiftType();
