@@ -12,14 +12,14 @@ public class CtrlGrafo {
 	private int lasttorn;
 	private int sink;
 	
-	static String warrada3 (int warrada){
+	static String itos (int dia){
 		String t;
-		if(warrada==0) t="monday";
-		else if(warrada==1) t = "tuesday";
-		else if(warrada==2) t = "wednesday";
-		else if(warrada==3) t = "thursday";
-		else if(warrada==4) t = "friday";
-		else if(warrada==5) t = "saturday";
+		if(dia==0) t="monday";
+		else if(dia==1) t = "tuesday";
+		else if(dia==2) t = "wednesday";
+		else if(dia==3) t = "thursday";
+		else if(dia==4) t = "friday";
+		else if(dia==5) t = "saturday";
 		else t = "sunday";
 		return t; 
 	}
@@ -45,9 +45,10 @@ public class CtrlGrafo {
 			grafo.conectarNodes(0, id, aldoc.get(i).getNumMaxTurn(), 0.0);
 		}
 		lastdoc = id;
-		Nodo Sink = new Nodo(lastdoc+1, "Sink");
+		++id;
+		Nodo Sink = new Nodo(id, "Sink");
 		grafo.afegirNode(Sink);
-		sink = lastdoc+1;
+		sink = id;
 		//nodos de doctores añadidos
 		//añadimos todos los turnos al grafo
 		ArrayList<Turno> alturnos = new ArrayList<Turno> ();
@@ -144,7 +145,7 @@ public class CtrlGrafo {
 						for(int m=0;m<alturnos.size();++m){
 							GregorianCalendar gc1=alturnos.get(m).getDate();
 							int warrada = gc1.get(GregorianCalendar.DAY_OF_WEEK);
-							String warrada2=warrada3(warrada);
+							String warrada2=itos(warrada);
 							if(t.equals(warrada2)){
 								Turnos[m]=false;
 								Xor[m]=false;
