@@ -1,8 +1,8 @@
 package model;
 
 import java.util.GregorianCalendar;
-import java.util.List;
 import java.util.ArrayList;
+import model.Turno;
 import model.Restriccion;
 
 
@@ -12,17 +12,22 @@ import model.Restriccion;
 */
 public class XOR extends Restriccion {
 
-	private List<GregorianCalendar> listaXOR = new ArrayList<GregorianCalendar>();
+	
+	private ArrayList<Turno> listXOR = new ArrayList<Turno>();
 	
 	/* Constructora */
 	
-	
-	public XOR(int id, List<GregorianCalendar> listaX) {
+	/**
+	* Crea una Restriccion del tipo XOR
+	*  @param id: identificador de la restriccion, 
+	* 		  setX: Set de turnos(puede ser vacio), que cumpliran la condicion XOR
+	* @override Restriccion
+	*/
+	public XOR(int id, ArrayList<Turno> setX) {
 		super(id,"XOR");
-		 listaXOR  = listaX;
+		 listXOR = setX;
 	}
 
-	
 
 	/* Metodos públicos */
 
@@ -45,19 +50,34 @@ public class XOR extends Restriccion {
 		return tipo;
 	}
 	
-	public List<GregorianCalendar> getListDates(){
-		return listaXOR; 
+	/**
+	*Consultora del set de turnos
+	* @return El set de turno
+	* @override Restriccion
+	*/
+	public ArrayList<Turno> getListTurnos(){
+		return listXOR; 
 	}
 	
 	//Modificadoras
 	
-	public void AddFecha(GregorianCalendar newFecha) {
-		listaXOR.add(newFecha);
+	/**
+	*Modificadora que añade un turno a el setXOR 
+	* @override Restriccion
+	*/
+	public void AddTurno(GregorianCalendar newFecha, String t) {
+		Turno T = new Turno(newFecha,t);
+		listXOR.add(T);
 	}
 	
-	public void AddFecha(int d, int m, int a) {
+	/**
+	*Modificadora que añade un turno a el setXOR 
+	* @override Restriccion
+	*/
+	public void AddTurno(int d, int m, int a, String t) {
 		GregorianCalendar newFecha = new GregorianCalendar(a,m-1,d);
-		listaXOR.add(newFecha);
+		Turno T = new Turno(newFecha,t);
+		listXOR.add(T);
 	}
 
 }
