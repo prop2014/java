@@ -79,7 +79,7 @@ public class CtrlGrafo {
 					double sueldo = aldoc.get(i-firstdoc).getSalaryTurn();
 					if(tt.equals("morning")) coste=fm*sueldo;
 					else if(tt.equals("afternoon")) coste=ft*sueldo;
-					else if(tt.equals("night")) coste=fn*sueldo;
+					else if(tt.equals("evening")) coste=fn*sueldo;
 					grafo.conectarNodes(i, j, capacidad, coste);
 				}
 			}
@@ -191,7 +191,7 @@ public class CtrlGrafo {
 										double sueldo = aldoc.get(i-firstdoc).getSalaryTurn();
 										if(tt.equals("morning")) coste=fm*sueldo;
 										else if(tt.equals("afternoon")) coste=ft*sueldo;
-										else if(tt.equals("night")) coste=fn*sueldo;
+										else if(tt.equals("evening")) coste=fn*sueldo;
 										grafo.conectarNodes(id, m+firsttorn, capacidad, coste);
 									}
 								}
@@ -217,6 +217,7 @@ public class CtrlGrafo {
 						// se le pone coste i avanti
 						MAX_Turnos_por_Dia N = (MAX_Turnos_por_Dia)res;
 						int max = N.getNumTurnos();
+						
 						if(max==0) for(int m=0;i<alturnos.size();++m) Turnos[m]=false;
 						else if(max == 1 | max ==2){
 							for(int m=0;m<alturnos.size();m=m+3){
@@ -225,9 +226,11 @@ public class CtrlGrafo {
 								grafo.conectarNodes(i, id, max, 0.0);
 								if(Turnos[m]==true & Xor[m]==true & Max[m]==true){
 									
+									++id;
 								}
 							}
 						}
+						
 					}
 					
 					else if (restipe.equals("MAX_Dias_Rango")){
@@ -239,6 +242,10 @@ public class CtrlGrafo {
 						//se comprueva que Turnos[m]==true 
 						//se conecta el nodo con el turno con capacidad 1
 						//se añade coste i avanti
+						MAX_Dias_Rango N = ((MAX_Dias_Rango)res);
+						GregorianCalendar fechaIni = ((MAX_Dias_Rango)res).getFechaIni();
+						GregorianCalendar fechaFin = ((MAX_Dias_Rango)res).getFechaFin();
+						int  numDias = N.getNumDias();
 						
 						
 					}
@@ -255,8 +262,18 @@ public class CtrlGrafo {
 				//biieen hEmos llegado al punto donde solo falta tirar cables
 				//for(m) compruevas si turnos[m]==true
 				//i le metes capacidad 1 i coste
-				
-				
+				for(int j=firsttorn;j<=lasttorn;++j){
+					if(Turnos[j-firsttorn]==true & Xor[j-firsttorn]==true & Max[j-firsttorn]==true){
+						int capacidad=1; //
+						double coste =0;
+						String tt = alturnos.get(j-firsttorn).getShiftType();
+						double sueldo = aldoc.get(i-firstdoc).getSalaryTurn();
+						if(tt.equals("morning")) coste=fm*sueldo;
+						else if(tt.equals("afternoon")) coste=ft*sueldo;
+						else if(tt.equals("evening")) coste=fn*sueldo;
+						grafo.conectarNodes(i, j, capacidad, coste);	
+					}
+				}
 				
 			}//fin de restricciones de un doctor
 			//pasamos al siguiente doctor

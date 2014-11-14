@@ -448,8 +448,8 @@ public class DriverHospital {
 
 	static void MostrarTurno(Turno t){
 		System.out.printf("--------------------.\n");
-		//GregorianCalendar c1 = t.getDate();
-		System.out.printf("fecha:\n"+t.getDate());
+		GregorianCalendar c1 = t.getDate();
+		System.out.printf("fecha:\n"+c1.getTime());
 		System.out.printf("\n");
 		System.out.printf("tipoturno: %s\n",t.getShiftType());
 		System.out.printf("especial: %s\n",t.getSpecialDate());
@@ -460,7 +460,7 @@ public class DriverHospital {
 	static void MostrarCal(Calendario cal){
 		
 		System.out.printf("Calendari del any %d\n",cal.getCalendarYear());
-		System.out.printf("Esta format per: %d turns vacacionals\n",cal.getTotalShifts());	
+		System.out.printf("Esta format per: %d turns vacacionals\n",cal.getTotalOfShifts());	
 	}
 
 	
@@ -501,9 +501,9 @@ public class DriverHospital {
 			}
 		}
 		Calendario cal = hosp.getCalendario();
-		if(cal.getTotalHolidays()==0) System.out.printf("Actualment l'Hospital no te calendari\n");
+		if(cal.getTotalOfVacationDates()==0) System.out.printf("Actualment l'Hospital no te calendari\n");
 		else {
-			System.out.printf("El calendari te %d Turns Vacacionals\n",cal.getTotalShifts());
+			System.out.printf("El calendari te %d Turns Vacacionals\n",cal.getTotalOfShifts());
 			ArrayList<Turno> alturno = cal.getALLShifts();
 			for(int i=0;i<alturno.size();++i){
 				MostrarTurno(alturno.get(i));
@@ -648,12 +648,12 @@ public class DriverHospital {
 					year = 2;
 					month = 2;
 					day = 2;
-					GregorianCalendar gc1= new GregorianCalendar();
-					GregorianCalendar gc2= new GregorianCalendar();
+					GregorianCalendar gc1= new GregorianCalendar(day,month,year);
+					GregorianCalendar gc2= new GregorianCalendar(day,month+1,year);
 					Calendario cale = new Calendario(2);
-					cale.addHoliday(gc1);
-					cale.addHoliday(gc2);
-					System.out.print("S'ha Creat un calendari amb els dies 2 1 2 y 2 2 2 per " +
+					cale.addOneVacationDay(gc1);
+					cale.addOneVacationDay(gc2);
+					System.out.print("S'ha Creat un calendari amb els dies 2 3 2 y 2 2 2 per " +
 							"simular l'entrada\n");
 					HOSP = new Hospital(codigo,n,fm,ft,fn,aldoc,cale);
 					System.out.print("Hospital Creat Correctament\n");

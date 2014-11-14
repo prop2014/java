@@ -26,7 +26,7 @@ public class Hospital {
 		factorT=0.0;
 		factorN=0.0;
 		doctors = new TreeMap<Integer , Doctor>();
-		calendari = new Calendario(0);
+		calendari = new Calendario();
 	}
 	
 	//creadora amb id, nombre y factores
@@ -37,7 +37,7 @@ public class Hospital {
 		factorT=ft;
 		factorN=fn;
 		doctors = new TreeMap<Integer , Doctor>();
-		calendari = new Calendario(0);
+		calendari = new Calendario();
 	}
 	
 	
