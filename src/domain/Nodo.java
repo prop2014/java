@@ -2,12 +2,16 @@ package domain;
 
 public class Nodo {
 	
-	private int id;
-	String tipo;
+	protected int id;
+	protected String tipo;
 	
 	public Nodo() {}
 	
-	public Nodo(int id, String tipo) {}
+	public Nodo(int id, String tipo) {
+		this.id =id;
+		this.tipo = tipo;
+		
+	}
 	
 	public int getId() {
 		return id;

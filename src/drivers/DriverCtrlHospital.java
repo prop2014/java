@@ -5,9 +5,9 @@ import java.util.*;
 
 import model.Doctor;
 import model.Hospital;
-import domain.CtrlDominio;
+import domain.CtrlHospital;
 
-public class DriverCtrlDominio {
+public class DriverCtrlHospital {
 	private static void muestraOpciones() {
 		System.out.print("¿Que desea hacer?\n\n");
 		System.out.print("1: Crear Hospital\n");
@@ -29,7 +29,7 @@ public class DriverCtrlDominio {
 		
 	    muestraOpciones();
 	    opcion = teclado.nextInt();
-	    CtrlDominio domain = new CtrlDominio();
+	    CtrlHospital domain = new CtrlHospital();
 	    
 	    int id;
 		String nombre;

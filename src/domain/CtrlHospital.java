@@ -5,15 +5,13 @@ import java.io.IOException;
 
 import model.*;
 
-/* Comunicara con el Controlador de datos*/
-
-public class CtrlDominio {
-	/* Atributos */
+public class CtrlHospital {
+	/**Atributos */
 	private Hospital hosp;
 	
 	
 	/* Constructora */
-	public CtrlDominio(){}
+	public CtrlHospital(){}
 	
 	
 	/* Metodos públicos */
@@ -45,11 +43,6 @@ public class CtrlDominio {
 	public void eliminarHospital(int id) throws IOException{
 		//deleteHospitalData(id);
 	}
-	
-	public Hospital getHospital() {
-		return hosp;
-	}
-	
 	
 	public void crearDoctor(int id, String nombre, int numMax, double sueldo) throws IOException {
 		if(numMax < 0) throw new IOException("Número máximo de turnos incorrecto");
@@ -87,41 +80,7 @@ public class CtrlDominio {
 		//deleteDoctorData(id)?
 	}
 	
-	public Doctor getDoctor(int id) throws IOException {
-		//try {
-			Doctor doc = new Doctor();// = hosp.getDoctor(id);
-		//}
-		/*catch IOException(e) { //Que devuelva que no existe doctor con ID = id
-			throw new IOException(e);
-		} */
-		return doc;
-	}
-	
-	public void asignarDoctores(ArrayList<Doctor> arrayDoc) {
-		hosp.addDoctors(arrayDoc);
-		//updateHospitalData()?
-	}
-	
-	public void anadirRestriccion(Doctor doc, Restriccion res) {
-		doc.addRestriction(res);
-		//updateDoctorData()?
-	}
-	
-	public void eliminarRestriccion(Doctor doc, Restriccion res) {
-		//doc.eliminarRestriccion(res);
-		
-		//updateDoctorData()?
-	}
-	
-	public ArrayList<Restriccion> getRestricciones(Doctor doc) {
-		return doc.getRestrictions();
-	}
-	
 	public void asignarCalendario(Calendario cal) {
 		//updateHospitalData()?
 	}
-	
-	
-	
-	
 }

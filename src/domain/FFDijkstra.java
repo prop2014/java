@@ -10,8 +10,7 @@ import domain.Graf;
 
 /**
 *
-* @author Alex M
-* orral 
+* @author Alex Morral 
 */
 
 
@@ -24,7 +23,7 @@ public class FFDijkstra<T> extends FordFoulkerson<T> {
 	
 	
 	
-	public FFDijkstra(Integer nodeInicial, Integer nodeDesti, Graf graf)
+	public FFDijkstra(Integer nodeInicial, Integer nodeDesti, Graf<T> graf)
  	{
 		super(nodeInicial, nodeDesti, graf);
  	}
