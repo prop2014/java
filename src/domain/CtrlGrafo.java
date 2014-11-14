@@ -11,6 +11,16 @@ public class CtrlGrafo {
 	private int firsttorn;
 	private int lasttorn;
 	private int sink;
+	private Graf<Nodo> grafo;
+	
+	
+	public CtrlGrafo(){
+		grafo=new Graf<Nodo>();
+	}
+	
+	public Graf<Nodo> getGraf(){
+		return grafo;
+	}
 	
 	static String itos (int dia){
 		String t;
@@ -24,7 +34,7 @@ public class CtrlGrafo {
 		return t; 
 	}
 	
-	public Graf<Nodo> llenarGrafo(Hospital h) throws IOException {
+	public void llenarGrafo(Hospital h) throws IOException {
 		
 		double fm, ft, fn;
 		fm=h.getFactorM();
@@ -32,7 +42,7 @@ public class CtrlGrafo {
 		fn=h.getFactorN();
 		
 		int id = 0;
-		Graf<Nodo> grafo = new Graf<Nodo>(); 	// creamos grafo
+		// creamos grafo
 		Nodo Source = new Nodo(0, "Source");	// creamos nodo source		
 		grafo.afegirNode(Source);    			//A�adimos el source
 		ArrayList<Doctor> aldoc = new ArrayList<Doctor>();
@@ -280,6 +290,6 @@ public class CtrlGrafo {
 			//pasamos al siguiente doctor
 			
 		}//fi for de llenar restricciones para todos los doctores
-		return grafo;
+
 	}//fin de llenagrafo
 }//ficlas
