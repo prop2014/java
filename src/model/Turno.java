@@ -17,11 +17,13 @@ public class Turno {
 	//-- Constructoras --//
 	/**
 	 * Constructora por defecto
+	 * @param date Fecha del turno
+	 * @param shiftType Tipo del turno
 	 */
-	public Turno() {
-		date = null;
-		shiftType = null;
-		specialDate = null;
+	public Turno(GregorianCalendar date, String shiftType) {
+		this.date = date;
+		this.shiftType = shiftType;
+		specialDate = "";
 		numberOfDoctors = 0;
 	}
 
@@ -54,22 +56,6 @@ public class Turno {
 	/* Metodos públicos */
 	
 	//-- Modificadoras --//
-	/**
-	 * Modifica la fecha del turno
-	 * @param date Fecha del turno
-	 */
-	public void setDate(GregorianCalendar date) {
-		this.date = date;
-	}
-
-	/**
-	 * Modifica el tipo del turno
-	 * @param shiftType Tipo del turno
-	 */
-	public void setShiftType(String shiftType) {
-		this.shiftType = shiftType;
-	}
-
 	/**
 	 * Modifica el tipo de fecha especial del turno
 	 * @param specialDate Tipo de fecha especial
