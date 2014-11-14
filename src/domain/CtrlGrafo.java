@@ -54,6 +54,7 @@ public class CtrlGrafo {
 			grafo.afegirNode(nDoc);
 			grafo.conectarNodes(0, id, aldoc.get(i).getNumMaxTurn(), 0.0);
 		}
+		
 		lastdoc = id;
 		++id;
 		Nodo Sink = new Nodo(id, "Sink");
