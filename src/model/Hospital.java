@@ -117,13 +117,13 @@ public class Hospital {
 		return factorN;
 	}
 	
-	
 	/** 
 	 * Consultora de un Doctor del Hospital con su Id.
 	 * pre: el Hospital contiene ese doctor.
 	 * @param id 	es la id del doctor
 	 * @return el doctor con identificador = id.
 	 */
+	
 	public Doctor getDoctor(int id){
 		return doctors.get(id);
 	}
@@ -184,7 +184,7 @@ public class Hospital {
 		this.name=nom;
 	}
 	
-		//modificadora del factorManana
+		
 	/** 
 	 * Modificadora del factor Manana del Hospital
 	 * @param factor	es el nuevo factorManana del Hospital
@@ -211,7 +211,8 @@ public class Hospital {
 
 	/** 
 	 * Modificadora de un Doctor del Hospital
-	 * 	Esta funcion sobreescirbe el doctor existente.
+	 * 	pre - el id del Doctor d existe en el Hospital
+	 *  post - se ha sobreescrito el Doctor d
 	 * @param d		es el doctor ya modificado
 	 */
 	public void setDoctor(Doctor d){
@@ -224,33 +225,13 @@ public class Hospital {
 	/** 
 	 * Metodo que inserta un doctor nuevo en el Hospital
 	 * 	pre - El Hospital no contiene el Doctor d. 
+	 * 	post- Se ha anadido el Doctor d al hospital
 	 * @param d		es el nuevo doctor del Hospital
 	 */
 	public void addDoctor(Doctor d){
-		if(doctors.containsKey(d.getId())==false){
-			doctors.put(d.getId(), d);
-		}
+			doctors.put(d.getId(), d);		
+	}
 		
-	}
-	
-	/** 
-	 * Metodo que inserta un vector de doctores en el Hospital
-	 * 	post- se ha insertado el vector de doctores en el Hospital
-	 * 		  Si algun doctor ia existia se ha remplazado por el nuevo.
-	 * @param vdoc		es un vector de Doctores
-	 */
-	public void addDoctors(Doctor[] vdoc){
-		for(int i = 0; i < vdoc.length; ++i){
-			if(doctors.containsKey(vdoc[i].getId())==false){
-				doctors.put(vdoc[i].getId(), vdoc[i]);
-			}
-			else {
-				doctors.remove(vdoc[i].getId());
-				doctors.put(vdoc[i].getId(), vdoc[i]);
-			}
-		}
-	}
-	
 	/** 
 	 * Metodo que inserta un ArrayList de doctores en el Hospital
 	 * 	post- se ha insertado el ArayList de doctores en el Hospital
@@ -272,13 +253,11 @@ public class Hospital {
 	
 	/** 
 	 * Metodo que elimina un doctor del Hospital
-	 * 
+	 * pre - El id del doctor existe en el hospital
 	 * @param id 	es el identificador del doctor a borrar
 	 */
 	public void deleteDoctor(int id){
-		if(doctors.containsKey(id)){
 			doctors.remove(id);
-		}
 	}
 	
 	/** 
@@ -287,7 +266,6 @@ public class Hospital {
 	public void cleardoctors(){
 		doctors.clear();
 	}
-	
 	
 	/** 
 	 * Metodo que reseta todos los datos del Hospital
@@ -302,4 +280,4 @@ public class Hospital {
 		calendari = new Calendario(0);
 	}
 	
-}//ficlass
+}
