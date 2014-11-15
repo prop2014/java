@@ -21,11 +21,11 @@ public class DriverDoctor {
 		Restriccion res = new Restriccion();
 		
 		System.out.print("------------------------------------\n");
-		System.out.print("¿Que desea hacer?\n");
+		System.out.print("Que deseas hacer?\n");
 		System.out.print("0: Terminar programa\n");
 		System.out.print("1: Crear Doctor\n");
-		System.out.print("2: Añadir restriccion a un Doctor\n");
-		System.out.print("3: Eliminar restriccion a un doctor\n");
+		System.out.print("2: Añadir restriccion al doctor\n");
+		System.out.print("3: Eliminar restriccion al doctor\n");
 		System.out.print("4: Consultar retriccions del Doctor\n");
 		System.out.print("5: Consultar atributos del Doctor (Sin restricciones)\n");
 		System.out.print("6: Modificar atributos del Doctor\n");
@@ -65,7 +65,7 @@ public class DriverDoctor {
 						a1 = teclado.nextInt();
 						a2 = teclado.nextInt();
 						numDias = teclado.nextInt();
-						res = new MAX_Dias_Rango(idRestriccion, d1, m1, a1, d2, m2, a2, numDias);
+						//res = new MAX_Turnos_Rango(idRestriccion, d1, m1, a1, d2, m2, a2, numDias);
 					}
 					else if (tipoRestriccion.equals("MAX_Turnos_Consecutivos")) {
 						System.out.printf("Restriccion tipo MAX_Turnos_Consecutivos, ingrese el numero maximo de turnos.\n");
@@ -193,11 +193,11 @@ public class DriverDoctor {
 				}
 			}
 			System.out.print("\n------------------------------------\n");
-			System.out.print("¿Que desea hacer?\n");
+			System.out.print("Que deseas hacerr?\n");
 			System.out.print("0: Terminar programa\n");
 			System.out.print("1: Crear Doctor\n");
-			System.out.print("2: Añadir restriccion a un Doctor\n");
-			System.out.print("3: Eliminar restriccion a un doctor\n");
+			System.out.print("2: Añadir restriccion al doctor\n");
+			System.out.print("3: Eliminar restriccion al doctor\n");
 			System.out.print("4: Consultar retriccions del Doctor\n");
 			System.out.print("5: Consultar atributos del Doctor (Sin restricciones)\n");
 			System.out.print("6: Modificar atributos del Doctor\n");
