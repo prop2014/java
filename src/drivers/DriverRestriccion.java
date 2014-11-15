@@ -1,13 +1,10 @@
 package drivers;
 import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.TreeSet;
 import java.util.Scanner;
+import java.util.ArrayList;
 
-import model.Doctor;
-import model.Hospital;
-import model.MAX_Dias_Rango;
-import model.MAX_Turnos_Consecutivos;
+import model.MAX_Turnos_Rango;
 import model.MAX_Turnos_por_Dia;
 import model.NOT_Dia_Mes;
 import model.NOT_Dia_Semana;
@@ -15,6 +12,7 @@ import model.NOT_Especial;
 import model.NOT_Fecha;
 import model.NOT_Turno;
 import model.Restriccion;
+import model.Turno;
 import model.XOR;
 
 
@@ -25,20 +23,23 @@ public class DriverRestriccion {
 		String TIPO = RES.getTipo(); 
 		
 		switch(TIPO){
-		case "XOR":{//XOR
-			List<GregorianCalendar> listaXOR = ((XOR) RES).getListDates();
-			System.out.print("Los dias de la restriccion " + TIPO + " son: \n");
+		case "XOR":{
+			ArrayList<Turno> listXOR = ((XOR) RES).getListTurnos();
+			System.out.print("Los turnos de la restriccion " + TIPO + " son: \n");
 			
-			for (GregorianCalendar fecha : listaXOR){//Para cada elemento de la lista
+			for (Turno turno : listXOR){
+				GregorianCalendar fecha = turno.getDate();
 				System.out.print(fecha.get(fecha.DAY_OF_MONTH));
 				System.out.print("/" + (fecha.get(fecha.MONTH)+ 1) + "/");
-				System.out.print(fecha.get(fecha.YEAR)+ "\n\n");
+				System.out.print(fecha.get(fecha.YEAR)+ "\n");
 				//System.out.print("Full info: " + fecha + "\n");
+				System.out.print(turno.getShiftType()+"\n\n");
+				
 			}
 			break;
 		}
 		
-		case "NOT_Dia_Mes" :{ //NOT_Dia_Mes
+		case "NOT_Dia_Mes" :{ 
 			NOT_Dia_Mes N = (NOT_Dia_Mes)RES;
 			int  dia = ((NOT_Dia_Mes) RES).getDiaMes(); 
 			
@@ -46,21 +47,21 @@ public class DriverRestriccion {
 			
 			break;
 		}
-		case "NOT_Dia_Semana" :{ //NOT_Dia_Semana
+		case "NOT_Dia_Semana" :{ 
 			String  dia = ((NOT_Dia_Semana)RES).getDiaSemana(); 
 			System.out.print("El dia de la semana de la restriccion " + TIPO + " es " + dia + "\n");
 			
 			break;
 		}
 		
-		case "NOT_Especial" :{// NOT_Especial
+		case "NOT_Especial" :{
 			String  especial = ((NOT_Especial)RES).getEspecial(); 
 			System.out.print("El dia Especial de la restriccion " + TIPO + " es " + especial + "\n");;
 			
 			break;
 		}
 		
-		case "NOT_Fecha" :{ //NOT_Fecha
+		case "NOT_Fecha" :{ 
 			GregorianCalendar fecha = ((NOT_Fecha)RES).getFecha();
 		
 			System.out.print("El Dia de la restriccion " + TIPO + " es: ");
@@ -71,33 +72,26 @@ public class DriverRestriccion {
 			break;
 		}
 		
-		case "NOT_Turno" :{ //NOT_Turno
+		case "NOT_Turno" :{
 			String  turno = ((NOT_Turno)RES).getTipoTurno(); 
 			
 			System.out.print("El turno de la restriccion " + TIPO + " es " + turno + "\n");
 			break;
 		}
 		
-		case "MAX_Turnos_por_Dia" :{ //MAX_Turnos_por_Dia
+		case "MAX_Turnos_por_Dia" :{
 			int  numt = ((MAX_Turnos_por_Dia)RES).getNumTurnos(); 
 			
 			System.out.print("El maximo de turnos de la restriccion " + TIPO + " es " + numt + "\n");
 			break;
 		}
 		
-		case "MAX_Turnos_Consecutivos"  :{ //MAX_Turnos_Consecutivos
-			int  numt = ((MAX_Turnos_Consecutivos)RES).getDia_Num_Turnos(); 
+		case "MAX_Dias_Rango"  :{
 			
-			System.out.print("El el maximo de turnos consecutivos de la restriccion " + TIPO + " es " + numt + "\n");
-			break;
-		}
-		
-		case "MAX_Dias_Rango"  :{ //MAX_Dias_Rango
-			
-			MAX_Dias_Rango N = ((MAX_Dias_Rango)RES);
-			GregorianCalendar fechaIni = ((MAX_Dias_Rango)RES).getFechaIni();
-			GregorianCalendar fechaFin = ((MAX_Dias_Rango)RES).getFechaFin();
-			int  numDias = ((MAX_Dias_Rango)RES).getNumDias();
+			MAX_Turnos_Rango N = ((MAX_Turnos_Rango)RES);
+			GregorianCalendar fechaIni = ((MAX_Turnos_Rango)RES).getFechaIni();
+			GregorianCalendar fechaFin = ((MAX_Turnos_Rango)RES).getFechaFin();
+			int  numDias = ((MAX_Turnos_Rango)RES).getNumDias();
 			
 			System.out.print("La fecha inicial de la restriccion" + TIPO + " es ");
 			System.out.print(fechaIni.get(fechaIni.DAY_OF_MONTH));
@@ -142,9 +136,8 @@ public class DriverRestriccion {
 			System.out.print("| 5: Crear Restriccion tipo NOT_Fecha               |\n");
 			System.out.print("| 6: Crear Restriccion tipo NOT_Turno               |\n"); 
 			System.out.print("| 7: Crear Restriccion tipo MAX_Turnos_por_Dia      |\n");
-			System.out.print("| 8: Crear Restriccion tipo MAX_Turnos_Consecutivos |\n");
-			System.out.print("| 9: Crear Restriccion tipo MAX_Dias_Rango          |\n");
-			System.out.print("| 10: Ver Restriccion ya creada                     |\n");
+			System.out.print("| 8: Crear Restriccion tipo MAX_Dias_Rango          |\n");
+			System.out.print("| 9: Ver Restriccion ya creada                      |\n");
 			System.out.print("-----------------------------------------------------\n");
 			
 			
@@ -154,16 +147,17 @@ public class DriverRestriccion {
 				case 1:{ //XOR
 					++id;
 					int next;//Gestionar el bucle interno
-					List<GregorianCalendar> listaXOR = new ArrayList<GregorianCalendar>();
+					ArrayList<Turno> listXOR = new ArrayList<Turno>();
 					int dia, mes, anio;
-					
+					String turno;
 					System.out.print("Introduce una fecha (dd MM aaaa) \n");
 					dia = teclado.nextInt();
 					mes = teclado.nextInt();
 					anio = teclado.nextInt();
-					RES = new XOR(id, listaXOR );
-					
-					((XOR) RES).AddFecha(dia, mes, anio);
+					System.out.print("Introduce su correspondiente turno (mañana/noche/tarde) \n");
+					turno = teclado.next();
+					RES = new XOR(id, listXOR);
+					((XOR) RES).AddTurno(dia, mes, anio, turno);
 					
 					do {
 						next = -1;
@@ -172,8 +166,10 @@ public class DriverRestriccion {
 						dia = teclado.nextInt();
 						mes = teclado.nextInt();
 						anio = teclado.nextInt();
+						System.out.print("Introduce su correspondiente turno (mañana/tarde/noche) \n");
+						turno = teclado.next();
 						
-						((XOR) RES).AddFecha(dia, mes, anio);
+						((XOR) RES).AddTurno(dia, mes, anio,turno);
 												
 						while(next == -1){//GESTION DE SEGUIR AÑADIENDO FECHAS
 							System.out.print("Seguir añadiendo fechas? (Si/No) \n");
@@ -256,20 +252,10 @@ public class DriverRestriccion {
 					break;
 				}
 				
-				case 8:{//MAX_Turnos_Consecutivos
-					++id;
-					int dias;
-					System.out.print("Introduce el maximo de turnos consecutivos que quieras trabajar\n");
-					dias = teclado.nextInt();
-					RES = new MAX_Turnos_Consecutivos(id, dias);
-					System.out.print("DONE\n");
-					break;
-					
-				}
 				
-				case 9:{ //MAX_Dias_Rango
+				case 8:{ //MAX_Turnos_Rango
 					++id;
-					int diaI,diaF,mesI,mesF,anioI,anioF,dias;
+					int diaI,diaF,mesI,mesF,anioI,anioF,turnos;
 					System.out.print("Introduce la fecha inicial (dd MM aaaa) del rango de dias\n");
 					diaI = teclado.nextInt();
 					mesI = teclado.nextInt();
@@ -278,16 +264,16 @@ public class DriverRestriccion {
 					diaF = teclado.nextInt();
 					mesF = teclado.nextInt();
 					anioF = teclado.nextInt();
-					System.out.print("Introduce el numero de dias\n");
-					dias = teclado.nextInt();
+					System.out.print("Introduce el numero de turnos\n");
+					turnos = teclado.nextInt();
 					
-					RES = new MAX_Dias_Rango(id, diaI, diaF, mesI, mesF, anioI, anioF, dias);
+					RES = new MAX_Turnos_Rango(id, diaI, diaF, mesI, mesF, anioI, anioF,turnos);
 					System.out.print("DONE\n");
 					break;
 					
 				}
 				
-				case 10:{
+				case 9:{
 					if(id != -1) MostrarRestriccion(RES);
 					else System.out.print("Aun no hay ninguna Restriccion!\n\n");
 					break;
