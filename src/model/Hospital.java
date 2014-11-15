@@ -19,6 +19,9 @@ public class Hospital {
 	private Calendario calendari;
 	
 	
+	/**
+	 * Creadora Por defecto
+	 */
 	public Hospital() {
 		idHospital=0;
 		name=null;
@@ -29,7 +32,15 @@ public class Hospital {
 		calendari = new Calendario();
 	}
 	
-	//creadora amb id, nombre y factores
+	/**
+	 *Creadora de Hospital con algunos de los parametros de la clase
+	 * @param id 	Un identificador unico de hospital
+	 * @param nom	Nombre del Hospital
+	 * @param fm 	FactorMorning Se multiplicara al sueldoxTurno del doctor Para calcular el coste
+	 * @param ft	FactorTarde Se multiplicara al sueldoxTurno del doctor Para calcular el coste
+	 * @param fn	Factorevening Se multiplicara al sueldoxTurno del doctor Para calcular el coste
+	 
+	 */
 	public Hospital (int id, String nom, double fm, double ft, double fn){
 		idHospital=id;
 		name=nom;
@@ -40,8 +51,16 @@ public class Hospital {
 		calendari = new Calendario();
 	}
 	
-	
-// creadora con id, nombre, factores, arraylist de doctores y calendario. //full
+	/**
+	 *  Creadora de Hospital con todos los parametros de la clase
+	 * @param id 	Un identificador unico de hospital
+	 * @param nom	Nombre del Hospital
+	 * @param fm 	FactorMorning Se multiplicara al sueldoxTurno del doctor Para calcular el coste
+	 * @param ft	FactorTarde Se multiplicara al sueldoxTurno del doctor Para calcular el coste
+	 * @param fn	Factorevening Se multiplicara al sueldoxTurno del doctor Para calcular el coste
+	 * @param aldoc	ArrayList de Doctores con los que se inicializara el Hospital
+	 * @param cal	Representa el Calendario de turnos de guardia
+	 */
 	public Hospital (int id, String nom, double fm, double ft, double fn,
 		ArrayList<Doctor> aldoc, Calendario cal){
 		idHospital=id;
@@ -75,8 +94,8 @@ public class Hospital {
 	}
 	
 	/** 
-	 * Consultora del factor mañana
-	 * @return el factor mañana
+	 * Consultora del factor manana
+	 * @return el factor manana
 	 */
 	public double getFactorM(){
 		return factorM;
@@ -165,10 +184,10 @@ public class Hospital {
 		this.name=nom;
 	}
 	
-		//modificadora del factorMañana
+		//modificadora del factorManana
 	/** 
-	 * Modificadora del factor Mañana del Hospital
-	 * @param factor	es el nuevo factorMañana del Hospital
+	 * Modificadora del factor Manana del Hospital
+	 * @param factor	es el nuevo factorManana del Hospital
 	 */
 	public void setFactorM(double factor){
 		this.factorM=factor;
