@@ -14,7 +14,7 @@ public class Calendario {
 	private int calendarYear; // año al que corresponde el calendario
 	private TreeMap<Integer,Turno[]> vacationDates;
 	private static int shiftsPerDay = 3;
-	private static final String[] shiftTypes = {"morning","afternoon","evening"};
+	private static final String[] shiftTypes = {"manana","tarde","noche"};
 
 	//-- Constructoras --//
 	/**
@@ -27,7 +27,7 @@ public class Calendario {
 
 	/**
 	 * Constructora con argumento
-	 * @param year Ano del calendario
+	 * @param year Anio del calendario
 	 */
 	public Calendario(int year) {
 		calendarYear = year;
@@ -51,13 +51,13 @@ public class Calendario {
 	}
 
 
-	/* Métodos públicos */
+	/* Metodos publicos */
 
 	//-- Modificadoras --//
 	/**
-	 * Modificadora del ano del calendario
+	 * Modificadora del anio del calendario
 	 * pre: El calendario esta vacio
-	 * @param year Ano del calendario
+	 * @param year Anio del calendario
 	 */
 	public void setCalendarYear(int year) {
 		calendarYear = year;
@@ -65,7 +65,8 @@ public class Calendario {
 
 	/**
 	 * Modificadora que anade un nuevo dia vacacional al calendario
-	 * @param date Fecha del dia vacacional que se anadir
+	 * pre: El calendario ya tiene el anio definido
+	 * @param date Fecha del dia vacacional que se va a anadir
 	 */
 	public void addOneVacationDay(GregorianCalendar date) {
 		int key = date.get(GregorianCalendar.DAY_OF_YEAR) - 1;
@@ -76,8 +77,8 @@ public class Calendario {
 	}
 
 	/**
-	 * Modificadora que elimina un día vacacional del calendario
-	 * @param date Fecha del día vacacional que se eliminirá
+	 * Modificadora que elimina un dia vacacional del calendario
+	 * @param date Fecha del dia vacacional que se va a eliminar
 	 */
 	public void deleteOneVacationDay(GregorianCalendar date) {
 		int key = date.get(GregorianCalendar.DAY_OF_YEAR) - 1;
@@ -88,7 +89,7 @@ public class Calendario {
 	//-- Consultoras --//
 	/**
 	 * Consultora del año al que corresponde el calendario
-	 * @return Año del calendario
+	 * @return Año del calendario si se ha difinido, -1 en caso contrario
 	 */
 	public int getCalendarYear() {
 		return calendarYear;
@@ -97,7 +98,7 @@ public class Calendario {
 	/**
 	 * Consultora de un turno 
 	 * @param date Fecha del turno
-	 * @param shiftType Tipo del turno {"morning" | "afternoon" | "evening"}
+	 * @param shiftType Tipo del turno {"manana" | "tarde" | "noche"}
 	 * @return Turno correspondiente a la fecha y tipo indicados
 	 */
 	public Turno getShift(GregorianCalendar date, String shiftType) {
@@ -108,8 +109,8 @@ public class Calendario {
 	}
 
 	/**
-	 * Consultora de los tres turnos de un día vacacional
-	 * @param date Fecha del día vacacional
+	 * Consultora de los tres turnos de un dia vacacional
+	 * @param date Fecha del dia vacacional
 	 * @return Lista con los tres turnos
 	 */
 	public ArrayList<Turno> getShiftsOfOneDay(GregorianCalendar date) {
@@ -138,9 +139,9 @@ public class Calendario {
 	}
 
 	/**
-	 * Comprueba si existe un día vacacional en una fecha dada
-	 * @param date Fecha del día vacacional
-	 * @return True si el día vacacional existe, False en caso contrario
+	 * Comprueba si existe un dia vacacional en una fecha dada
+	 * @param date Fecha del dia vacacional
+	 * @return True si el dia vacacional existe, False en caso contrario
 	 */
 	public boolean existsVacationDay(GregorianCalendar date) {
 		return vacationDates.containsKey(date.get(GregorianCalendar.DAY_OF_YEAR) - 1);
@@ -159,18 +160,18 @@ public class Calendario {
 	}
 
 	/**
-	 * Consultora del número total de días vacacionales
-	 * @return El número total de días
+	 * Consultora del numero total de dias vacacionales
+	 * @return El numero total de dias
 	 */
-	public int getTotalOfVacationDates() {
+	public int getNumberOfVacationDates() {
 		return vacationDates.size();
 	}
 
 	/**
-	 * Consultora del número total de turnos de días vacacionales
-	 * @return El número total de turnos
+	 * Consultora del numero total de turnos de dias vacacionales
+	 * @return El numero total de turnos
 	 */
-	public int getTotalOfShifts() {
+	public int getNumberOfShifts() {
 		return 3*vacationDates.size();
 	}
 }

@@ -29,7 +29,7 @@ public class Turno {
 
 	/**
 	 * Constructora copia
-	 * @param T Turno que se copiará
+	 * @param T Turno que se copiara
 	 */
 	public Turno(Turno T) {
 		date = T.date;
@@ -43,7 +43,7 @@ public class Turno {
 	 * @param date Fecha del turno
 	 * @param shiftType Tipo del turno
 	 * @param specialDate Fecha especial
-	 * @param numberOfDoctors Número de doctores del turno
+	 * @param numberOfDoctors Numero de doctores del turno
 	 */
 	public Turno (GregorianCalendar date, String shiftType, String specialDate, int numberOfDoctors) {
 		this.date = date;
@@ -65,8 +65,8 @@ public class Turno {
 	}
 
 	/**
-	 * Modifica el número de doctores del turno
-	 * @param numberOfDoctors Número de doctores
+	 * Modifica el numero de doctores del turno
+	 * @param numberOfDoctors Numero de doctores
 	 */
 	public void setNumberOfDoctors(int numberOfDoctors) {
 		this.numberOfDoctors = numberOfDoctors;
@@ -99,8 +99,8 @@ public class Turno {
 	}
 
 	/**
-	 * Consultora del número de doctores del turno
-	 * @return El número de doctores
+	 * Consultora del numero de doctores del turno
+	 * @return El numero de doctores
 	 */
 	public int getNumberOfDoctors() {
 		return numberOfDoctors;
