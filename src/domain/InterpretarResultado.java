@@ -84,37 +84,72 @@ public class InterpretarResultado {
 			
 			
 		}
+		
 	}
 	
-	public HashMap<Integer,listAndSalary> InterpretarGrafo() throws IOException{
+	
+	private void haySolucion(boolean sol, ArrayList<nodoTurno> tSinSol) throws IOException{
 		
-		HashMap<Integer,listAndSalary> resMap = new HashMap<Integer,listAndSalary>();
-		//Obtener id de los vecinos de la fuente
-		ArrayList<Integer> vecinos = graf.getInNodes(idFuente);
-		
-		for(int vecino:vecinos){
+		int flujoFuenteADoctor = 0;
+		int flujoTurnoASumidero = 0;
+		ArrayList<Integer> vecinosFuente = graf.getInNodes(idFuente);
+		for(int vecino:vecinosFuente){
 			
 			int idArista = graf.getIDAresta(idFuente, vecino);
-			if(graf.getFlujoAresta(idArista) > 0){
-				ArrayList<nodoTurno> turnos = new ArrayList<nodoTurno>();
-				double sueldo = 0;
-				interpretarDFS(vecino,turnos,sueldo);
-				
-				//Almacenar datos
-				listAndSalary ls = new listAndSalary(); 
-				ls.listaTurnos = turnos;
-				ls.sueldoTotal = sueldo;
-				
-				resMap.put(vecino, ls);
-				
-				
+			flujoFuenteADoctor += graf.getFlujoAresta(idArista);
+		}
+		
+		ArrayList<Integer> vecinosSumidero = graf.getOutNodes(idSumidero);
+		for(int vecino:vecinosSumidero){	
+			int idArista = graf.getIDAresta(idFuente, vecino);
+			flujoTurnoASumidero += graf.getFlujoAresta(idArista);
+			
+			if(graf.getFlujoAresta(idArista) > graf.getCapacidadAresta(idArista)){
+				tSinSol.add((nodoTurno)graf.getNode(vecino));
+			}
+		}
+		
+		if(flujoFuenteADoctor > flujoTurnoASumidero) sol = false;
+	}
+	
+	/*
+	 * solucion nos dira si hay solucion.
+	 * If solucion rMap contendra los doctores con sus turnos asignados y el sueldo total
+	 * If not solucion 
+	 */
+	public void  InterpretarGrafo(boolean sol, HashMap<Integer,listAndSalary> resMap, 
+									ArrayList<nodoTurno> turnosSinSol) throws IOException{
+		
+		sol = true;
+		haySolucion(sol,turnosSinSol);
+
+		if(sol){
+			
+			//Obtener id de los vecinos de la fuente
+			ArrayList<Integer> vecinos = graf.getInNodes(idFuente);
+			
+			for(int vecino:vecinos){
+
+				int idArista = graf.getIDAresta(idFuente, vecino);
+				if(graf.getFlujoAresta(idArista) > 0){
+					ArrayList<nodoTurno> turnos = new ArrayList<nodoTurno>();
+					double sueldo = 0;
+					interpretarDFS(vecino,turnos,sueldo);
+					
+					//Almacenar datos
+					listAndSalary ls = new listAndSalary(); 
+					ls.listaTurnos = turnos;
+					ls.sueldoTotal = sueldo;
+					resMap.put(vecino, ls);
+					
+					
+				}
 			}
 			
 		}
-		return resMap; 
+		 
 		
-		
-		
+		}
 		
 	}
-}
+
