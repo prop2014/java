@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 /**
  * Representa un calendario
- * @author Felix Fernando Ramos Velázquez
+ * @author Felix Fernando Ramos Velazquez
  */
 public class Calendario {
 	//-- Atributos privados --//
@@ -27,16 +27,16 @@ public class Calendario {
 
 	/**
 	 * Constructora con argumento
-	 * @param year Año al que corresponderá el calendario
+	 * @param year Ano del calendario
 	 */
 	public Calendario(int year) {
-		this.calendarYear = year;
+		calendarYear = year;
 		vacationDates = new TreeMap<Integer,Turno[]>();
 	}
 
 	/**
 	 * Constructora copia 
-	 * @param calendar Calendario que se copiará
+	 * @param calendar Calendario que se copiara
 	 */
 	public Calendario(Calendario calendar) {
 		calendarYear = calendar.getCalendarYear();		
@@ -55,17 +55,17 @@ public class Calendario {
 
 	//-- Modificadoras --//
 	/**
-	 * Modificadora del año del calendario
-	 * pre: El calendario está vacío
-	 * @param year Año al que corresponderá el calendario
+	 * Modificadora del ano del calendario
+	 * pre: El calendario esta vacio
+	 * @param year Ano del calendario
 	 */
 	public void setCalendarYear(int year) {
 		calendarYear = year;
 	}
 
 	/**
-	 * Modificadora que añade un nuevo día vacacional al calendario
-	 * @param date Fecha del día vacacional que se añadirá
+	 * Modificadora que a�ade un nuevo d�a vacacional al calendario
+	 * @param date Fecha del d�a vacacional que se a�adir�
 	 */
 	public void addOneVacationDay(GregorianCalendar date) {
 		int key = date.get(GregorianCalendar.DAY_OF_YEAR) - 1;
