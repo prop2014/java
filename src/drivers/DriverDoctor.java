@@ -25,7 +25,7 @@ public class DriverDoctor {
 		System.out.print("Que desea hacer?\n");
 		System.out.print("0: Terminar programa\n");
 		System.out.print("1: Crear Doctor\n");
-		System.out.print("2: Añadir restriccion al doctor\n");
+		System.out.print("2: Add restriccion al doctor\n");
 		System.out.print("3: Eliminar restriccion a un doctor\n");
 		System.out.print("4: Consultar retriccions del Doctor\n");
 		System.out.print("5: Consultar atributos del Doctor (Sin restricciones)\n");
@@ -113,7 +113,7 @@ public class DriverDoctor {
 						res = new NOT_Especial(idRestriccion, tipoDia);
 					}
 					else if (tipoRestriccion.equals("XOR")) {
-						System.out.printf("Restriccion tipo XOR, ingrese las diferentas fechas (dd MM aaaa) y el tipoTurno (mañana, tarde, noche) de cada una. Pon un 0 en el dd para terminar.\n");
+						System.out.printf("Restriccion tipo XOR, ingrese las diferentas fechas (dd MM aaaa) y el tipoTurno (morning, afternoon, evening) de cada una. Pon un 0 en el dd para terminar.\n");
 						ArrayList<Turno> listaXOR = new ArrayList<Turno>();
 						int d, m, a;
 						String tipoTurno;
@@ -133,7 +133,7 @@ public class DriverDoctor {
 					}
 					if (rescorrecta) {
 						boolean c = doc.addRestriction(res);
-						if (c) System.out.printf("Restriccion añadida.\n");	
+						if (c) System.out.printf("Restriccion anadida.\n");	
 						else System.out.printf("Ya existe una restriccion con este Id.\n");
 					}
 				}
@@ -198,7 +198,7 @@ public class DriverDoctor {
 			System.out.print("Que desea hacer?\n");
 			System.out.print("0: Terminar programa\n");
 			System.out.print("1: Crear Doctor\n");
-			System.out.print("2: Añadir restriccion al doctorr\n");
+			System.out.print("2: Add restriccion al doctorr\n");
 			System.out.print("3: Eliminar restriccion a un doctor\n");
 			System.out.print("4: Consultar retriccions del Doctor\n");
 			System.out.print("5: Consultar atributos del Doctor (Sin restricciones)\n");
