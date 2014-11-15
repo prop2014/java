@@ -2,9 +2,10 @@
 
 package drivers;
 import java.util.*;
-import java.text.ParseException;
 
 import model.*;
+
+import java.text.ParseException;
 
 public class DriverDoctor {
 	
@@ -21,10 +22,10 @@ public class DriverDoctor {
 		Restriccion res = new Restriccion();
 		
 		System.out.print("------------------------------------\n");
-		System.out.print("ï¿½Que desea hacer?\n");
+		System.out.print("Que desea hacer?\n");
 		System.out.print("0: Terminar programa\n");
 		System.out.print("1: Crear Doctor\n");
-		System.out.print("2: Aï¿½adir restriccion a un Doctor\n");
+		System.out.print("2: Añadir restriccion al doctor\n");
 		System.out.print("3: Eliminar restriccion a un doctor\n");
 		System.out.print("4: Consultar retriccions del Doctor\n");
 		System.out.print("5: Consultar atributos del Doctor (Sin restricciones)\n");
@@ -54,9 +55,9 @@ public class DriverDoctor {
 					System.out.printf("Ingrese la id y el tipo de restriccion\n");
 					int idRestriccion = teclado.nextInt();
 					String tipoRestriccion = teclado.next();
-					if (tipoRestriccion.equals("MAX_Dias_Rango")) {
-						System.out.printf("Restriccion tipo MAX_Dies_Rango, ingrese la fecha inico (Dia, mes aï¿½o), fecha fin y el numero de dias.\n");
-						int numDias;
+					if (tipoRestriccion.equals("MAX_Turnos_Rango")) {
+						System.out.printf("Restriccion tipo MAX_Turnos_Rango, ingrese la fecha inico (dd MM aaaa), fecha fin y el numero de Turnos.\n");
+						int numTurnos;
 						int d1, d2, m1, m2, a1, a2;
 						d1 = teclado.nextInt();
 						d2 = teclado.nextInt();
@@ -64,8 +65,8 @@ public class DriverDoctor {
 						m2 = teclado.nextInt();
 						a1 = teclado.nextInt();
 						a2 = teclado.nextInt();
-						numDias = teclado.nextInt();
-						res = new MAX_Turnos_Rango(idRestriccion, d1, m1, a1, d2, m2, a2, numDias);
+						numTurnos = teclado.nextInt();
+						res = new MAX_Turnos_Rango(idRestriccion, d1, m1, a1, d2, m2, a2, numTurnos);
 					}
 					else if (tipoRestriccion.equals("MAX_Turnos_Consecutivos")) {
 						System.out.printf("Restriccion tipo MAX_Turnos_Consecutivos, ingrese el numero maximo de turnos.\n");
@@ -98,7 +99,7 @@ public class DriverDoctor {
 						res = new NOT_Especial(idRestriccion, diaEspecial);
 					}
 					else if (tipoRestriccion.equals("NOT_Fecha")) {
-						System.out.printf("Restriccion tipo NOT_Fecha, ingrese la fecha (Dia, mes y aï¿½o).\n");
+						System.out.printf("Restriccion tipo NOT_Fecha, ingrese la fecha (dd MM aaaa).\n");
 						int d, m, a;
 						d = teclado.nextInt();
 						m = teclado.nextInt();
@@ -112,18 +113,19 @@ public class DriverDoctor {
 						res = new NOT_Especial(idRestriccion, tipoDia);
 					}
 					else if (tipoRestriccion.equals("XOR")) {
-						System.out.printf("Restriccion tipo XOR, ingrese las diferentas fechas (Dia, mes y aï¿½o) y pon un 0 en el Dia para terminar.\n");
-						List<GregorianCalendar> listaXOR2 = new ArrayList<GregorianCalendar>();
+						System.out.printf("Restriccion tipo XOR, ingrese las diferentas fechas (dd MM aaaa) y el tipoTurno (mañana, tarde, noche) de cada una. Pon un 0 en el dd para terminar.\n");
+						ArrayList<Turno> listaXOR = new ArrayList<Turno>();
 						int d, m, a;
+						String tipoTurno;
+						res = new XOR(idRestriccion, listaXOR);
 						d = teclado.nextInt();
 						while (d != 0) {
 							m = teclado.nextInt();
 							a = teclado.nextInt();
-							GregorianCalendar fecha = new GregorianCalendar(d, m-1, a);
-							listaXOR2.add(fecha);
+							tipoTurno = teclado.next();
+							((XOR)res).AddTurno(d, m, a, tipoTurno);
 							d = teclado.nextInt();
-						}
-						res = new XOR(idRestriccion, listaXOR2);	
+						}	
 					}	
 					else {
 						System.out.printf("Restriccion erronea\n");
@@ -131,7 +133,7 @@ public class DriverDoctor {
 					}
 					if (rescorrecta) {
 						boolean c = doc.addRestriction(res);
-						if (c) System.out.printf("Restriccion aï¿½adida.\n");	
+						if (c) System.out.printf("Restriccion añadida.\n");	
 						else System.out.printf("Ya existe una restriccion con este Id.\n");
 					}
 				}
@@ -193,10 +195,10 @@ public class DriverDoctor {
 				}
 			}
 			System.out.print("\n------------------------------------\n");
-			System.out.print("ï¿½Que desea hacer?\n");
+			System.out.print("Que desea hacer?\n");
 			System.out.print("0: Terminar programa\n");
 			System.out.print("1: Crear Doctor\n");
-			System.out.print("2: Aï¿½adir restriccion a un Doctor\n");
+			System.out.print("2: Añadir restriccion al doctorr\n");
 			System.out.print("3: Eliminar restriccion a un doctor\n");
 			System.out.print("4: Consultar retriccions del Doctor\n");
 			System.out.print("5: Consultar atributos del Doctor (Sin restricciones)\n");
