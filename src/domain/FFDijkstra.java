@@ -5,11 +5,7 @@ import java.util.Comparator;
 import java.util.Stack;
 import java.io.IOException;
 
-import domain.FordFoulkerson;
-import domain.Graf;
-
 /**
-*
 * @author Alex Morral 
 */
 
@@ -19,19 +15,24 @@ class arcP {
     public int id;
 }
 
-public class FFDijkstra<T> extends FordFoulkerson<T> {
+public class FFDijkstra<T> extends FordFulkerson<T> {
 	
 	
-	
-	public FFDijkstra(Integer nodeInicial, Integer nodeDesti, Graf<T> graf)
- 	{
+	/**
+	 * Creadora de la clase
+	 * @param nodeInicial
+	 * @param nodeDesti
+	 * @param graf
+	 * @return Una instancia de FFDijkstra
+	 */
+	public FFDijkstra(Integer nodeInicial, Integer nodeDesti, Graf<T> graf) {
 		super(nodeInicial, nodeDesti, graf);
  	}
 		
 	/**
-	 * Pre: g es un grafo dirigido no vacío con pesos en las aristas.
-	 * Post: Devuelve un ArrayList<integer> con los id's de los nodos 
-	 * del camino que será de coste mínimo aplicando el algoritmo de Dijkstra.
+	 * @Pre: g es un grafo dirigido no vacío con pesos en las aristas.
+	 * @param Grafo graf a aplicar el algoritmo.
+	 * @return ArrayList con los id's de los nodos del camino de menor peso. Si no hay camino, ArrayList vacio.
 	*/
 	@Override
 	public ArrayList<Integer> dameCamino(Graf<T> graf) throws IOException {	

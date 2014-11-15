@@ -1,12 +1,13 @@
 package drivers;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
-import domain.FordFoulkerson;
+import domain.FordFulkerson;
 import domain.Graf;
 
-public class FordFoulkersonDriver {
+public class FordFulkersonDriver {
 
 	/**
 	 * El driver de mostra d'utilitzaci� de la clase i permet testejar el funcionament de la classe.
@@ -44,7 +45,7 @@ public class FordFoulkersonDriver {
 		graf.conectarNodes(4, 5, 2, 5.0);
 		
 		//Es crea l'objecte FordFoulkerson
-		FordFoulkerson<String> algoritme = new FordFoulkerson<String>(0,4,graf);		
+		FordFulkerson<String> algoritme = new FordFulkerson<String>();		
 		
 		// S'executa el algoritme de MaxFlow que retorna el graf residual
 		Graf<String> grafResidual = algoritme.findMaxFlow(graf,0,5);
@@ -87,7 +88,7 @@ public class FordFoulkersonDriver {
 		}
 		
 		//Executem l'algoritme
-		algoritme = new FordFoulkerson<String>(0,4,graf);
+		algoritme = new FordFulkerson<String>();
 		grafResidual = algoritme.findMaxFlow(graf,0,5);
 		//Just despr�s d'executar l'algoritme si es crida al m�tode getMaxFlow() retornar�
 		//el MaxFlow de la �ltima execuci� del algoritme. 

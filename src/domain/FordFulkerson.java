@@ -1,12 +1,13 @@
 package domain;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
 
 
 //@autor Toni Mart�nez
 
-public class FordFoulkerson<T> {	
+public class FordFulkerson<T> {	
 	
 	
 	protected Graf<T> g;
@@ -14,15 +15,23 @@ public class FordFoulkerson<T> {
 	protected int t;
 	protected int maxFlow;
 	
+	//Afegides per donar informaci� extra. Del MaxFlow calculat per cada cam� el fluxe enviat
+	//protected ArrayList<Pair<Integer,ArrayList<Integer>>> caminos;
 	
-	public FordFoulkerson(int nodeInicial, int nodeDesti, Graf<T> graf)
-	{
+	
+	public FordFulkerson(int nodeInicial, int nodeDesti, Graf<T> graf){
 		this.s = nodeInicial;
 		this.t = nodeDesti;
 		this.g = graf;
 		this.maxFlow = 0;
+		//caminos = new ArrayList<Pair<Integer,ArrayList<Integer>>>();
+		
 	}
 	
+	public FordFulkerson(){
+		this.maxFlow = 0;
+	//	caminos = new ArrayList<Pair<Integer,ArrayList<Integer>>>();
+	}
 	
 	//Variable d'�s intern pel m�tode dameCamino amb la implementaci� DFS
 	private boolean[] visited;
@@ -31,6 +40,7 @@ public class FordFoulkerson<T> {
 		this.g = graf;
 		this.s = init;
 		this.t = desti;
+		//caminos = new ArrayList<Pair<Integer,ArrayList<Integer>>>();
 		ArrayList<Integer> camino= new ArrayList<Integer>();
 		do{
 			visited = new boolean[graf.getNSize()];
@@ -44,13 +54,13 @@ public class FordFoulkerson<T> {
 			//S'obt� el cam� d'acord al graf en funci� de l'algoritme (DFS,BFS o Dijkstra).
 			camino = dameCamino(graf);
 			this.s = init;		//Es necesari perque el metode dameCamino es recursiu i utilitza aquesta variable.
-			if(camino != null){
+			if(camino != null && camino.size()>0){
 				//Es computa el graf residual. S'actualitzen les capacitats i el flux de cada aresta. 
 				//S'afegeixen les "retro-arestes".
 				computaGrafResidual(camino,graf);
 			}
 			
-		}while(camino != null);
+		}while(camino != null && camino.size()>0);
 		
 		//Es calcula el maxFlow
 		this.maxFlow = 0;
@@ -96,6 +106,9 @@ public class FordFoulkerson<T> {
 		caminoLength = camino.size();
 		//Calculamos el m�ximo flujo que puede pasar por el camino.
 		maxflowCamino = computaMaxFlowCamino(camino, graf);
+		
+		//A�adimos el camino y su maxFlow en la variable caminos
+		//caminos.add(new Pair<Integer, ArrayList<Integer>>(maxflowCamino,camino));
 		
 		//Para cada arista del camino
 		for (int k = 0; k < caminoLength -1; k++) {
@@ -215,6 +228,12 @@ public class FordFoulkerson<T> {
 	
 	public void setGrafInicial(Graf<T> gInicial){
 		g = gInicial;
-	};
+	}
+
+//	public ArrayList<Pair<Integer, ArrayList<Integer>>> getCaminos() {
+//		return caminos;
+//	}
+	
+	
 
 }

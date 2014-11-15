@@ -22,6 +22,7 @@ public class DriverEdmondsKarp<T>
         System.out.println("1) Crear un nou graf"); 
         System.out.println("2) Obtenir un possible solucio");
         System.out.println("3) Obtenir totes solucions per tal que hi hagi un maxflow de n");
+        System.out.println("4) Obtenir el max Flow");
         System.out.println("0) exit");
     }
 
@@ -35,6 +36,7 @@ public class DriverEdmondsKarp<T>
         Integer idNode;
         Integer idSink;
         Integer idTail;
+
         ArrayList<Integer> solucio;
         ArrayList<ArrayList<Integer>> solucions;
         InputStreamReader isr = new InputStreamReader(System.in);
@@ -46,6 +48,7 @@ public class DriverEdmondsKarp<T>
             switch(option)
             {
                 case 1:
+
                     System.out.println("Vols conectar nodes?\n 1): si \n 2): no\n");
                     Integer opcio = Integer.parseInt(br.readLine());
                     if(opcio == 1) 
@@ -55,6 +58,12 @@ public class DriverEdmondsKarp<T>
                         try
                         {
                             inici = graf.getNodeId(inici);
+                            if(inici == null)
+                            {
+               
+                                throw new IOException("node inici no existeix");
+                                
+                            }
                         }catch(IOException e){
                             System.out.println(e);
                         }
@@ -65,6 +74,12 @@ public class DriverEdmondsKarp<T>
                         try
                         {
                             desti = graf.getNodeId(desti);
+                            if(desti == null)
+                            {
+             
+                                throw new IOException("node desti no existeix");
+                                
+                            }
                         }catch(IOException e){
                             System.out.println(e);
                         }
@@ -73,13 +88,11 @@ public class DriverEdmondsKarp<T>
                         Integer cap = Integer.parseInt(br.readLine());
                         System.out.println("Introdueix cost de la aresta");
                         Double cost = Double.parseDouble(br.readLine());
-                        try{
-                            System.out.println("s'han connectat correctament.\n");
+            
+                            
                             graf.conectarNodes(inici, desti, cap, cost);
-                        }catch(IOException e){
-                            System.out.println(e);
-                        }
-                       
+                            System.out.println("s'han connectat correctament.\n");
+         
                     }
 
                     System.out.println("Vols afegir node?\n 1): si \n 2): no\n");
@@ -100,11 +113,18 @@ public class DriverEdmondsKarp<T>
                 break;
 
                 case 2: 
+      
                     System.out.println("Introdueix el node origen\n");
                     idSink = Integer.parseInt(br.readLine());
                     try
                     {
                         idSink = graf.getNodeId(idSink);
+                        if(idSink == null)
+                        {
+      
+                            throw new IOException("node inici no existeix");
+                           
+                        }
                     }catch(IOException e){
                         System.out.println(e);
                     }
@@ -114,25 +134,37 @@ public class DriverEdmondsKarp<T>
                     try
                     {
                         idTail = graf.getNodeId(idTail);
+                        if(idTail == null)
+                        {
+           
+                            throw new IOException("node desti no existeix");
+                            
+                        }
                     }catch(IOException e){
                         System.out.println(e);
                     }
+               
+                        ek = new EdmondsKarp<Integer>(idSink, idTail, graf);
+                        solucio = new ArrayList<Integer>();
 
-                    ek = new EdmondsKarp<Integer>(idSink, idTail, graf);
-                    solucio = new ArrayList<Integer>();
-                    try
-                    {  
-                        solucio = ek.dameCamino(graf);
-                        System.out.println("Resultat: " + 
-                            solucio.toString());
-                    }
-                    catch(IOException e){
-                        System.out.println(e);
-                    }
+                        try
+                        {  
+                            solucio = ek.dameCamino(graf);
+                            if(solucio.size() == 0) 
+                                System.out.println("No hi ha cap solucio");
+                            else 
+                                System.out.println("Resultat: " + 
+                                solucio.toString());
+                        }
+                        catch(IOException e){
+                            System.out.println(e);
+                        }
+                    
                 break;
 
 
                 case 3:
+        
                     System.out.println("Introdueix un maxflow: ");
                     Integer n = Integer.parseInt(br.readLine());
                     solucions = new ArrayList<ArrayList<Integer>>();
@@ -142,6 +174,12 @@ public class DriverEdmondsKarp<T>
                     try
                     {
                         idSink = graf.getNodeId(idSink);
+                        if(idSink == null)
+                        {
+              
+                            throw new IOException("node inici no existeix");
+                            
+                        }
                     }catch(IOException e){
                         System.out.println(e);
                     }
@@ -151,21 +189,69 @@ public class DriverEdmondsKarp<T>
                     try
                     {
                         idTail = graf.getNodeId(idTail);
+                        if(idTail == null)
+                        {
+                
+                            throw new IOException("node desti no existeix");
+                            
+                        }
                     }catch(IOException e){
                         System.out.println(e);
                     }
 
                     ek = new EdmondsKarp<Integer>(idSink, idTail, graf);
-
+       
                     try
                     {
                         solucions = ek.retorna_camins(graf, n);
-                        System.out.println("Resultats: " + 
-                            solucions.toString());
+                        if(solucions.size() == 0) 
+                            System.out.println("No hi han cap solucions");
+                        else 
+                            System.out.println("Resultats: " + 
+                                solucions.toString());
                     }
                     catch(IOException e){
                         System.out.println(e);
                     }
+                break;
+
+                case 4:
+      
+                    System.out.println("Introdueix el node origen\n");
+                    idSink = Integer.parseInt(br.readLine());
+                    try
+                    {
+                        idSink = graf.getNodeId(idSink);
+                        if(idSink == null)
+                        {
+               
+                            throw new IOException("node inici no existeix");
+                            
+                        }
+                    }catch(IOException e){
+                        System.out.println(e);
+                    }
+
+                    System.out.println("Introdueix el node desti\n");
+                    idTail = Integer.parseInt(br.readLine());
+                    try
+                    {
+                        idTail = graf.getNodeId(idTail);
+                         if(idTail == null)
+                        {
+           
+                            throw new IOException("node desti no existeix");
+                            
+                        }
+                    }catch(IOException e){
+                        System.out.println(e);
+                    }
+
+                    ek = new EdmondsKarp<Integer>(idSink, idTail, graf);
+   
+                    if(ek == null) throw new IOException("EdmondsKarp es NULL");
+       
+                    System.out.println("El maxflow es: " + ek.getMaxFlow());
                 break;
 
                 default: 
