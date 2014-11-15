@@ -15,10 +15,6 @@ import java.text.SimpleDateFormat;
  * @author Felix Fernando Ramos Velázquez
  */
 public class DriverCalendario {
-	
-	Calendario cal1, cal2;
-	Scanner sc = new Scanner(System.in);
-
 
 	private static void printDate(Date date) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
@@ -87,11 +83,12 @@ public class DriverCalendario {
 
 	public static void main(String[] args) {
 
-		//Scanner sc = new Scanner(System.in);
-		int op = -1;
+		ArrayList<Calendario> calendars;
+		Scanner sc = new Scanner(System.in);
+
 		//Calendario c1 = new Calendario(1999);
 		//Calendario c2 = new Calendario(2000);
-		
+		int op = -1;
 		while(op != 0){
 			System.out.println();
 			System.out.println("Menu Principal");
@@ -109,8 +106,8 @@ public class DriverCalendario {
 			System.out.println("11: boolean existsVacationDay(GregorianCalendar date)");
 			System.out.println("12: ArrayList<GregorianCalendar> getSubsetOfVacationDates()");
 			System.out.println("13: ArrayList<GregorianCalendar> getALLVacationDates()");		
-			System.out.println("14: int getTotalOfVacationDates()");
-			System.out.println("15: int getTotalOfShifts()");
+			System.out.println("14: int getNumberOfVacationDays()");
+			System.out.println("15: int getNumberOfShifts()");
 			System.out.println(" 0: Salir\n");
 
 			
@@ -217,14 +214,13 @@ public class DriverCalendario {
 				break;
 			}
 			case 14:{
-				System.out.println("14: getTotalOfVacationDates()\n");
-				System.out.println("TOTAL de días vacacionales del calendario actual: " + c1.getTotalOfVacationDates());
-				System.out.println("TOTAL de días vacacionales del calendario actual: " + c2.getTotalOfVacationDates());
+				System.out.println("14: getNumberOfVacationDays()\n");
+				System.out.println("Número de días vacacionales: ");
 				break;
 			}
 			case 15:{
-				System.out.println("15: int getTotalOfShifts()\n");
-				System.out.println("TOTAL de turnos del calendario actual: " + c1.getTotalOfShifts());
+				System.out.println("15: int getNumberOfShifts()\n");
+				System.out.println("Número de turnos: ");
 				break;
 			}
 			default: {
