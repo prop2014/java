@@ -47,17 +47,6 @@ public class Calendario {
 			Turno[] T = new Turno[shiftsPerDay];
 			T = calendar.vacationDates.get(key);
 			vacationDates.put(key,T);
-			//			for (int i = 0; i < shiftsPerDay; ++i) {
-			//				Turno t = new Turno();
-			//				t = calendar.vacationDaysCal.get(key)[i];
-			//			}
-			//
-			//			vacationDaysCal.put(key,T);
-			//			
-			//			
-			//			for (int i = 0; i < 3; ++i) {
-			//				turnos[key][i] = calendar.turnos[key][i];
-			//			}
 		}
 	}
 

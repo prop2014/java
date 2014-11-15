@@ -7,6 +7,7 @@ import java.util.GregorianCalendar;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
+import java.util.Date;
 import java.text.SimpleDateFormat;
 
 /**
@@ -14,69 +15,57 @@ import java.text.SimpleDateFormat;
  * @author Felix Fernando Ramos Velázquez
  */
 public class DriverCalendario {
+	
+	Calendario cal1, cal2;
+	Scanner sc = new Scanner(System.in);
 
+
+	private static void printDate(Date date) {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
+		System.out.print(date);
+	}
+		
+	private static GregorianCalendar readDate() {
+		int d, m, a;
+		System.out.println("Introducir DIA MES AÑO (separados por espacios):");
+		d = sc.nextInt();
+		m = sc.nextInt();
+		a = sc.nextInt();
+		GregorianCalendar c = new GregorianCalendar(a,m-1,d);
+		return c;
+	}
+	
+	public void testGetShiftsOfOneDay() {
+		
+	}
 	/**
-	 * Muestra por pantalla la información de 3 turnos, que corresponden a un día vacacional.
+	 * Muestra la información de 3 turnos, que corresponden a un día vacacional.
 	 *
 	 * @param <i>cv</i> es un calendario vacacional.
 	 * @param <i>gc</i> es la fecha del día vacacional al que corresponden los turnos que se mostrarán.
 	 */
-	public static void printHoliday(Calendario C, GregorianCalendar date)
-	{
-		//		if(!cv.existsDiaVacacional(gc)){
-		//			System.out.println("El día vacacional solicitado no existe");
-		//		}
-		//		else{
-		//			SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
-		//			String date = sdf.format(gc.getTime());
-		//			String especial;
-		//			System.out.println("** Día vacacional " + date + " **");
-		//			System.out.println("---------------------------------");
-		//			printTurno(cv.getTurno(gc, "m"));
-		////			
-		////			System.out.println("- num. doctores: " + c.getTurno(d, "m").getNumDoctores());
-		////			especial = c.getTurno(d, "m").getEspecial();
-		////			if(especial != null){
-		////			System.out.println("- día especial: "+ c.getTurno(d, "m").getEspecial());
-		////			}
-		//			System.out.println("---------------------------------");
-		//			System.out.println("Turno de tarde");
-		//			System.out.println("- num. doctores: "+ cv.getTurno(gc, "t").getNumDoctores());
-		//			especial = cv.getTurno(gc, "t").getEspecial();
-		//			if(especial != null){
-		//			System.out.println("- día especial: "+ cv.getTurno(gc, "t").getEspecial());
-		//			}
-		//			System.out.println("---------------------------------");
-		//			System.out.println("Turno de noche");
-		//			System.out.println("- num. doctores: "+ cv.getTurno(gc, "n").getNumDoctores());
-		//			especial = cv.getTurno(gc, "n").getEspecial();
-		//			if(especial != null){
-		//			System.out.println("- día especial: "+ cv.getTurno(gc, "n").getEspecial());
-		//			}
-		//			System.out.println("---------------------------------\n");
-		//		}
-	}
+
 	
 	/**
 	 * Muestra la información de un turno
-	 * @param T Turno del calendario que se mostrará
+	 * @param turno Turno del calendario vacacional
 	 */
-	public static void printShift(Turno T) {
+	public static void printShift(Turno turno) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
-		System.out.println("Fecha:\t\t" + sdf.format(T.getDate().getTime()));
-		System.out.println("Tipo:\t\t" + T.getShiftType());
-		System.out.println("Día especial:\t" + T.getSpecialDate());
-		System.out.println("Num. doctores:\t" + T.getNumberOfDoctors());
+		System.out.println("Fecha:\t\t" + sdf.format(turno.getDate().getTime()));
+		System.out.println("Tipo:\t\t" + turno.getShiftType());
+		System.out.println("Día especial:\t" + turno.getSpecialDate());
+		System.out.println("Num. doctores:\t" + turno.getNumberOfDoctors());
 	}
 
 	/**
-	 * Muestra la lista de todos los días vacacionales
-	 * @param VacationDaylist Conjunto de días vacacionales
+	 * Muestra el contenido de una lista de fechas que corresponden a días vacacionales
+	 * @param VacationDaylist Lista de fechas
 	 */
-	private static void printVacationDayList(int calendarYear, ArrayList<GregorianCalendar> VacationDaylist) {
-		System.out.println("Calendario: " + calendarYear);
+	private static void printVacationDayList(ArrayList<GregorianCalendar> VacationDaylist) {
+		//System.out.println("Calendario: " + calendarYear);
 		System.out.println("Días vacacionales:");
-		if (VacationDaylist.isEmpty()) System.out.println("¡No hay días vacacionales actualmente!");
+		if (VacationDaylist.isEmpty()) System.out.println("¡Lista vacía!");
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
 		Iterator<GregorianCalendar> it = VacationDaylist.iterator();		
 		while (it.hasNext()) {
@@ -98,10 +87,10 @@ public class DriverCalendario {
 
 	public static void main(String[] args) {
 
-		Scanner sc = new Scanner(System.in);
+		//Scanner sc = new Scanner(System.in);
 		int op = -1;
-		Calendario c1 = new Calendario(1999);
-		Calendario c2 = new Calendario(2000);
+		//Calendario c1 = new Calendario(1999);
+		//Calendario c2 = new Calendario(2000);
 		
 		while(op != 0){
 			System.out.println();
@@ -129,8 +118,8 @@ public class DriverCalendario {
 
 			switch(op){
 			case 1:{
-				System.out.println("1: Calendario()\n");
-				c1 = new Calendario();
+				System.out.println("1:Calendario();\n");
+				testCalendario();
 				break;
 			}
 			case 2:{
@@ -155,12 +144,13 @@ public class DriverCalendario {
 			}
 			case 5:{
 				System.out.println("5: void addHoliday(GregorianCalendar date)\n");
-				System.out.println("Introducir DIA MES AÑO (separados por espacios)");
-				int d = sc.nextInt();
-				int m = sc.nextInt();
-				int a = sc.nextInt();
-				GregorianCalendar date = new GregorianCalendar(a,m-1,d);
-				c1.addOneVacationDay(date);
+				while(op != 1){
+				c1.addOneVacationDay(readDate(sc));
+				System.out.println();
+				System.out.println("5: Añadir otra fecha     |     1: Volver al Menú Principal");
+				op = sc.nextInt();
+				}
+				op  = -1;
 				break;
 			}
 			case 6:{
@@ -193,6 +183,7 @@ public class DriverCalendario {
 			}
 			case 9:{
 				System.out.println("9: ArrayList<Turno> getShiftsOfOneDay(GregorianCalendar date)\n");
+				
 				System.out.println("## NOP ##");
 				break;
 			}
@@ -242,11 +233,11 @@ public class DriverCalendario {
 			}
 			}
 
-			System.out.println();
-			System.out.println("0: Salir     |     1: Ir a Menu Principal");
-			System.out.println();
-
-			op = sc.nextInt();
+//			System.out.println();
+//			System.out.println("1: Volver al Menú Principal     |     0: Salir");
+//			System.out.println();
+//
+//			op = sc.nextInt();
 
 		}
 		sc.close();
