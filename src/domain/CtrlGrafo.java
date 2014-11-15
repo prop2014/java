@@ -69,7 +69,7 @@ public class CtrlGrafo {
 		for (int i = 0; i < alturnos.size(); ++i) {
 			++id;
 			if(i==0) firsttorn = id;
-			nodoTurno nturn = new nodoTurno(id,"Turno", alturnos.get(i).getDate(),alturnos.get(i).getShiftType());
+			nodoTurno nturn = new nodoTurno(id,"Turno", alturnos.get(i).getDate(), alturnos.get(i).getShiftType());
 			grafo.afegirNode(nturn);
 			grafo.conectarNodes(id, sink, alturnos.get(i).getNumberOfDoctors(),0.0); 
 		}

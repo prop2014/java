@@ -57,7 +57,7 @@ public class FordFulkersonDriver {
 		System.out.println(algoritme.printMatrix(grafResidual));
 		
 		
-		//Ejecucion del fichero test.ff del mismo directorio donde esta la classe FordFoulkerson
+		/*//Ejecucion del fichero test.ff del mismo directorio donde esta la classe FordFoulkerson
 		Scanner s = new Scanner(new File("test.ff"));
 		String line = "";
 		String[] nums;
@@ -95,7 +95,7 @@ public class FordFulkersonDriver {
 		System.out.println("MaxFlow: "+algoritme.getMaxFlow());
 		
 		System.out.println("Graf residual: ");
-		System.out.println(algoritme.printMatrix(grafResidual));
+		System.out.println(algoritme.printMatrix(grafResidual));*/
 		
 	}
 

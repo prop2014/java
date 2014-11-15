@@ -154,16 +154,18 @@ public class DriverCtrlGraf {
 					}
 					Graf<Nodo> g = ctrlGraf.getGraf();
 					ArrayList<Integer> nodos = g.getOutNodes(0);
-					System.out.printf("Source Conectado con: -> ");
+					System.out.printf("Source Conectado con:\n");
 					for(int i : nodos) {
 						nodoDoctor nod = (nodoDoctor)g.getNode(i);
 						System.out.printf("DOCTOR: IdDoc: %d, IdNodo: %d -> ",nod.getIdDoc(), i);
 						for(int j : g.getOutNodes(i)){
 							nodoTurno nod2 = (nodoTurno)g.getNode(j);
-							System.out.printf("Fecha: %s Turno: %s (conectado con): ", nod2.getFecha().toString(), nod2.getTipoTurno());
+							GregorianCalendar c1 = nod2.getFecha();
+							String fecha = DateFormat.getDateInstance(DateFormat.SHORT).format(c1.getTime());
+							System.out.printf("Fecha: %s Turno: %s (conectado con): ", fecha, nod2.getTipoTurno());
 							for(int k : g.getOutNodes(j)) {
 								Nodo nod3 = g.getNode(k);
-								System.out.printf("id: %d ", nod3.getId());
+								System.out.printf("%s ", nod3.getTipo());
 							}
 							System.out.printf("|| ");
 						}
