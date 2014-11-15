@@ -175,7 +175,24 @@ public class CtrlGrafo {
 						Nodo XOR = new Nodo(id, "XOR");
 						grafo.afegirNode(XOR);
 						grafo.conectarNodes(i, id ,1, 0.0);
-						List<GregorianCalendar> listaXOR = ((XOR)res).getListDates(); //Cambiar por getListTurnos()
+						ArrayList<Turno> xorTurnos = ((XOR)res).getListTurnos();
+						boolean modif = false;
+						for(Turno turno : xorTurnos) {
+							for(int m = 0; m < alturnos.size(); ++m) {
+								if(alturnos.get(m).getDate() == turno.getDate() && alturnos.get(m).getShiftType() == turno.getShiftType()) {
+									modif = true;
+									int capacidad = 1;
+									double coste = 0;
+									String tt = alturnos.get(m).getShiftType();
+									double sueldo = aldoc.get(i-firstdoc).getSalaryTurn();
+									if(tt.equals("morning")) coste=fm*sueldo;
+									else if(tt.equals("afternoon")) coste=ft*sueldo;
+									else if(tt.equals("evening")) coste=fn*sueldo;
+									grafo.conectarNodes(id, m+firsttorn, capacidad, coste);
+								}
+							}
+						}
+						/*List<GregorianCalendar> listaXOR = ((XOR)res).getListDates(); //Cambiar por getListTurnos()
 						boolean modif = false;
 						for (GregorianCalendar fecha : listaXOR){ //Para cada elemento de la lista
 							for(int m=0;m<alturnos.size();++m){
@@ -194,7 +211,7 @@ public class CtrlGrafo {
 								}
 							}
 						
-						}
+						}*/
 						if(modif==true)++id;
 						else {
 							grafo.removeNode(id);
