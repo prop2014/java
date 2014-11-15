@@ -1,7 +1,6 @@
 package domain;
 import java.io.IOException;
 import java.util.*;
-
 import model.*;
 
 
@@ -14,24 +13,47 @@ public class CtrlDoctor {
 	
 	/* Metodos publicos */
 
-/* ---------------DOCTORES -------------------*/
+/* ---------------DOCTORES ------------------- */
 	
-	//public Doctor getDoctor(int idDoc) throws IOException {		
-	//}
+	public Doctor getDoctor(int idDoc) throws IOException {		
+		if(idDoc < 0) throw new IOException("Valor del identificador incorrecto");
+		boolean trobat = false;
+		Doctor doc = new Doctor();
+		for (int i = 0; i < Doctors.size(); ++i) {
+			if (Doctors.get(i).getId() == idDoc) {
+				trobat = true;
+				doc = Doctors.get(i);
+				break;
+			}
+		}
+		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
+		return doc;
+	}
 	
-	public void setDoctor(int idDoc) throws IOException {		
+	public void setDoctor(int idDoc, String nombre, int numMax, double sueldo) throws IOException {
+		if(idDoc < 0) throw new IOException("Valor del identificador incorrecto");
+		if(numMax < 0) throw new IOException("Numero maximo de turnos incorrecto");
+		if(sueldo < 0.0) throw new IOException("Sueldo por turno incorrecto");
+		boolean trobat = false;
+		for (int i = 0; i < Doctors.size(); ++i) {
+			if (Doctors.get(i).getId() == idDoc) {
+				trobat = true;
+				Doctors.get(i).setName(nombre);
+				Doctors.get(i).setNumMaxTurn(numMax);
+				Doctors.get(i).setSalaryTurn(sueldo);
+				break;
+			}
+		}
+		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
 	}
 	
 	
 	
 /* --------------- RESTRICCIONES -------------------- */
-	public void addResMAX_Turnos_Consecutivos(int idDoc) throws IOException {
-		//updateDoctorData()?
-	}
 	
 	public void addResMAX_Turnos_por_Dia(int idDoc, int idRes, int numT) throws IOException {
-		if(numT < 0 || numT > 3) throw new IOException("Valor del numero de turnos incorrecto");
 		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
+		if(numT < 0 || numT > 3) throw new IOException("Valor del numero de turnos incorrecto");
 		boolean trobat = false;
 		for (int i = 0; i < Doctors.size(); ++i) {
 			if (Doctors.get(i).getId() == idDoc) {
@@ -39,40 +61,132 @@ public class CtrlDoctor {
 				Restriccion res = new MAX_Turnos_por_Dia(idRes, numT);
 				boolean c = Doctors.get(i).addRestriction(res);
 				if (!c) throw new IOException("Ya existe una restriccion con esta Id");	
+				break;
 			}
 		}
 		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
 	}
 	
-	public void addResMAX_Turnos_Rango(int idDoc) throws IOException {
-		//updateDoctorData()?
+	public void addResMAX_Turnos_Rango(int idDoc, int idRes, int d1, int m1, int a1, int d2, int m2, int a2, int numT) throws IOException {
+		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
+		if (d1 < 1 || d1 > 31 || m1 < 1 || m1 > 12 || a1 < 1) throw new IOException("Valores de la fecha incorrecto");
+		if (d2 < 1 || d2 > 31 || m2 < 1 || m2 > 12 || a2 < 1) throw new IOException("Valores de la fecha incorrecto");
+		if(idDoc < numT) throw new IOException("Numero de turnos incorrecto");
+		GregorianCalendar fecha1 = new GregorianCalendar(a1,m1-1,d1);
+		GregorianCalendar fecha2 = new GregorianCalendar(a2,m2-1,d2);
+		if (!fecha1.isLenient() || !fecha2.isLenient()) throw new IOException("Fecha invalida");
+		boolean trobat = false;
+		for (int i = 0; i < Doctors.size(); ++i) {
+			if (Doctors.get(i).getId() == idDoc) {
+				trobat = true;
+				Restriccion res = new MAX_Turnos_Rango(idRes, d1, m1, a1, d2, m2, a2, numT);
+				boolean c = Doctors.get(i).addRestriction(res);
+				if (!c) throw new IOException("Ya existe una restriccion con esta Id");	
+				break;
+			}
+		}
+		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
 	}
 	
-	public void addResNOT_Dia_Mes(int idDoc) throws IOException {
-		//updateDoctorData()?
+	public void addResNOT_Dia_Mes(int idDoc, int idRes, int diaMes) throws IOException {
+		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
+		if (diaMes < 1 || diaMes > 31) throw new IOException("Dia del mes incorrecto");
+		boolean trobat = false;
+		for (int i = 0; i < Doctors.size(); ++i) {
+			if (Doctors.get(i).getId() == idDoc) {
+				trobat = true;
+				Restriccion res = new NOT_Dia_Mes(idRes, diaMes);
+				boolean c = Doctors.get(i).addRestriction(res);
+				if (!c) throw new IOException("Ya existe una restriccion con esta Id");	
+				break;
+			}
+		}
+		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
 	}
 	
-	public void addResNOT_Dia_Semana(int idDoc) throws IOException {
-		//updateDoctorData()?
+	public void addResNOT_Dia_Semana(int idDoc, int idRes, String dia) throws IOException {
+		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
+		if (!dia.equals("lunes") && !dia.equals("martes") && !dia.equals("miercoles") && !dia.equals("jueves") &&
+			!dia.equals("viernes") && !dia.equals("sabado") && !dia.equals("domingo")) throw new IOException("Dia de la semana incorrecto");
+		boolean trobat = false;
+		for (int i = 0; i < Doctors.size(); ++i) {
+			if (Doctors.get(i).getId() == idDoc) {
+				trobat = true;
+				Restriccion res = new NOT_Dia_Semana(idRes, dia);
+				boolean c = Doctors.get(i).addRestriction(res);
+				if (!c) throw new IOException("Ya existe una restriccion con esta Id");	
+				break;
+			}
+		}
+		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
 	}
 	
-	public void addResNOT_Especial(int idDoc) throws IOException {
-		//updateDoctorData()?
+	public void addResNOT_Especial(int idDoc, int idRes, String especial) throws IOException {
+		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
+		if (!especial.equals("navidad") && !especial.equals("semana_santa") && !especial.equals("noche_vieja") &&
+			!especial.equals("noche_buena")) throw new IOException("Dia especial incorrecto");
+		boolean trobat = false;
+		for (int i = 0; i < Doctors.size(); ++i) {
+			if (Doctors.get(i).getId() == idDoc) {
+				trobat = true;
+				Restriccion res = new NOT_Especial(idRes, especial);
+				boolean c = Doctors.get(i).addRestriction(res);
+				if (!c) throw new IOException("Ya existe una restriccion con esta Id");	
+				break;
+			}
+		}
+		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
 	}
 	
-	public void addResNOT_Fecha(int idDoc) throws IOException {
-		//updateDoctorData()?
+	public void addResNOT_Fecha(int idDoc, int idRes, int d, int m, int a) throws IOException {
+		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
+		if (d < 1 || d > 31 || m < 1 || m > 12 || a < 1) throw new IOException("Valores de la fecha incorrecto");
+		GregorianCalendar fecha = new GregorianCalendar(a,m-1,d);
+		if (!fecha.isLenient()) throw new IOException("Fecha invalida");
+		boolean trobat = false;
+		for (int i = 0; i < Doctors.size(); ++i) {
+			if (Doctors.get(i).getId() == idDoc) {
+				trobat = true;
+				Restriccion res = new NOT_Fecha(idRes, d, m, a);
+				boolean c = Doctors.get(i).addRestriction(res);
+				if (!c) throw new IOException("Ya existe una restriccion con esta Id");	
+				break;
+			}
+		}
+		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
 	}
 	
-	public void addResNOT_Turno(int idDoc) throws IOException {
-		//updateDoctorData()?
+	public void addResNOT_Turno(int idDoc, int idRes, String turno) throws IOException {
+		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
+		if (!turno.equals("morning") && !turno.equals("afternoon") && !turno.equals("evening")) throw new IOException("Tipo de turno incorrecto");
+		boolean trobat = false;
+		for (int i = 0; i < Doctors.size(); ++i) {
+			if (Doctors.get(i).getId() == idDoc) {
+				trobat = true;
+				Restriccion res = new NOT_Turno(idRes, turno);
+				boolean c = Doctors.get(i).addRestriction(res);
+				if (!c) throw new IOException("Ya existe una restriccion con esta Id");	
+				break;
+			}
+		}
+		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
 	}
 	
 	public void addResXOR(int idDoc) throws IOException {
-		//updateDoctorData()?
+		
 	}
 	
 	public void eliminarRestriccion(int idRes, int idDoc) throws IOException {
-		//updateDoctorData()?
+		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
+		boolean trobat = false;
+		for (int i = 0; i < Doctors.size(); ++i) {
+			if (Doctors.get(i).getId() == idDoc) {
+				trobat = true;
+				boolean c = Doctors.get(i).deleteRestriction(idRes);
+				if (!c) throw new IOException("No existe una restriccion con esta Id");	
+				break;
+			}
+		}
+		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
 	}
 }
