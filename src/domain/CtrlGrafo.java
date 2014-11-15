@@ -145,9 +145,9 @@ public class CtrlGrafo {
 						String t = N.getDiaSemana();
 						for(int m=0;m<alturnos.size();++m){
 							GregorianCalendar gc1=alturnos.get(m).getDate();
-							int warrada = gc1.get(GregorianCalendar.DAY_OF_WEEK);
-							String warrada2=itos(warrada);
-							if(t.equals(warrada2)){
+							int weekN = gc1.get(GregorianCalendar.DAY_OF_WEEK);
+							String strWeek=itos(weekN);
+							if(t.equals(strWeek)){
 								Turnos[m]=false;
 							}
 						}
@@ -175,7 +175,7 @@ public class CtrlGrafo {
 						Nodo XOR = new Nodo(id, "XOR");
 						grafo.afegirNode(XOR);
 						grafo.conectarNodes(i, id ,1, 0.0);
-						List<GregorianCalendar> listaXOR = ((XOR)res).getListDates();
+						List<GregorianCalendar> listaXOR = ((XOR)res).getListDates(); //Cambiar por getListTurnos()
 						boolean modif = false;
 						for (GregorianCalendar fecha : listaXOR){ //Para cada elemento de la lista
 							for(int m=0;m<alturnos.size();++m){

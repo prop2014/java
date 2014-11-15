@@ -437,8 +437,10 @@ public class DriverHospital {
 */
 
 package drivers;
+import java.text.DateFormat;
 import java.util.*;
 import java.io.IOException;
+
 import model.Calendario;
 import model.Doctor;
 import model.Hospital;
@@ -449,7 +451,8 @@ public class DriverHospital {
 	static void MostrarTurno(Turno t){
 		System.out.printf("--------------------.\n");
 		GregorianCalendar c1 = t.getDate();
-		System.out.printf("fecha:\n"+c1.getTime());
+		String fecha = DateFormat.getDateInstance(DateFormat.SHORT).format(c1.getTime());
+		System.out.printf("fecha: %s\n", fecha);
 		System.out.printf("\n");
 		System.out.printf("tipoturno: %s\n",t.getShiftType());
 		System.out.printf("especial: %s\n",t.getSpecialDate());
@@ -645,15 +648,15 @@ public class DriverHospital {
 					aldoc.add(doc5);
 					System.out.print("S'ha Creat un Arraylist amb 5 doctors per simular l'entrada\n");
 					int year, month, day;
-					year = 2;
+					year = 2014;
 					month = 2;
-					day = 2;
-					GregorianCalendar gc1= new GregorianCalendar(day,month,year);
-					GregorianCalendar gc2= new GregorianCalendar(day,month+1,year);
-					Calendario cale = new Calendario(2);
+					day = 20;
+					GregorianCalendar gc1= new GregorianCalendar(year, month-1, day);
+					GregorianCalendar gc2= new GregorianCalendar(year, month-1, day+1);
+					Calendario cale = new Calendario(year);
 					cale.addOneVacationDay(gc1);
 					cale.addOneVacationDay(gc2);
-					System.out.print("S'ha Creat un calendari amb els dies 2 3 2 y 2 2 2 per " +
+					System.out.print("S'ha Creat un calendari amb els dies 20/2/2014 y 21/2/2014 per " +
 							"simular l'entrada\n");
 					HOSP = new Hospital(codigo,n,fm,ft,fn,aldoc,cale);
 					System.out.print("Hospital Creat Correctament\n");
