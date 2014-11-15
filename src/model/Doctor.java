@@ -140,7 +140,7 @@ public class Doctor {
 		/** 
 		 * Metodo que inserta una restriccion nueva en el Doctor
 		 * pre: El Doctor no contiene la restriccion r. 
-		 * @param r: es la nueva restriccion que se quiere añadir al Doctor
+		 * @param r: es la nueva restriccion que se quiere anadir al Doctor
 		 * @return True si se ha podido insertar la restriccion, False en caso contrario
 		 */
 		public boolean addRestriction(Restriccion r) {

@@ -64,8 +64,8 @@ public class Calendario {
 	}
 
 	/**
-	 * Modificadora que añade un nuevo día vacacional al calendario
-	 * @param date Fecha del día vacacional que se añadirá
+	 * Modificadora que anade un nuevo dia vacacional al calendario
+	 * @param date Fecha del dia vacacional que se anadir
 	 */
 	public void addOneVacationDay(GregorianCalendar date) {
 		int key = date.get(GregorianCalendar.DAY_OF_YEAR) - 1;

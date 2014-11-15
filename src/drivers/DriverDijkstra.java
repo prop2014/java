@@ -9,6 +9,11 @@ import java.io.InputStreamReader;
 import domain.FFDijkstra;
 import domain.Graf;
 
+/**
+ * 
+ * @author Alex Morral
+ *
+ */
 
 public class DriverDijkstra {
 	
@@ -24,7 +29,7 @@ public class DriverDijkstra {
 	public static void main(String[] args) throws IOException{
 		Scanner teclado;
 		teclado = new Scanner(System.in);
-		
+
 		int opcion = -1;
 		
 		Graf<Integer> g = new Graf<Integer>();
@@ -96,9 +101,8 @@ public class DriverDijkstra {
 				
 			muestraOpciones();
 		    opcion = teclado.nextInt();
-			
-			
 		}
+		 teclado.close();
 		System.out.print("PROGRAM EXIT");
 	}
 	
