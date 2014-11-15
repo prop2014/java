@@ -192,26 +192,6 @@ public class CtrlGrafo {
 								}
 							}
 						}
-						/*List<GregorianCalendar> listaXOR = ((XOR)res).getListDates(); //Cambiar por getListTurnos()
-						boolean modif = false;
-						for (GregorianCalendar fecha : listaXOR){ //Para cada elemento de la lista
-							for(int m=0;m<alturnos.size();++m){
-								if(alturnos.get(m).getDate()==fecha){
-									if(Turnos[m]==true){
-										modif = true;
-										int capacidad=1; 
-										double coste =0;
-										String tt = alturnos.get(m).getShiftType();
-										double sueldo = aldoc.get(i-firstdoc).getSalaryTurn();
-										if(tt.equals("morning")) coste=fm*sueldo;
-										else if(tt.equals("afternoon")) coste=ft*sueldo;
-										else if(tt.equals("evening")) coste=fn*sueldo;
-										grafo.conectarNodes(id, m+firsttorn, capacidad, coste);
-									}
-								}
-							}
-						
-						}*/
 						if(modif==true)++id;
 						else {
 							grafo.removeNode(id);
@@ -227,21 +207,55 @@ public class CtrlGrafo {
 						//si es 3 no se hace nada;
 						//else se crea 1 nodo para cada 3 iteraciones del for(m)
 						// comprovar si el dia esta en true;
-						// se le pone (capacidad MaxTurnosxdia) 
+						// se le pone (capacidad 1) 
 						// se le pone coste i avanti
 						MAX_Turnos_por_Dia N = (MAX_Turnos_por_Dia)res;
 						int max = N.getNumTurnos();
-						
+						boolean modif1=false;
 						if(max==0) for(int m=0;i<alturnos.size();++m) Turnos[m]=false;
 						else if(max == 1 | max ==2){
 							for(int m=0;m<alturnos.size();m=m+3){
+								boolean modif =false;
 								Nodo MAX = new Nodo(id, "MAX");
 								grafo.afegirNode(MAX);
 								grafo.conectarNodes(i, id, max, 0.0);
 								if(Turnos[m]==true){
-									
-									++id;
+									modif=true;
+									modif1=true;
+									int capacidad = 1;
+									double coste = 0;
+									String tt = alturnos.get(m).getShiftType();
+									double sueldo = aldoc.get(i-firstdoc).getSalaryTurn();
+									if(tt.equals("morning")) coste=fm*sueldo;
+									else if(tt.equals("afternoon")) coste=ft*sueldo;
+									else if(tt.equals("evening")) coste=fn*sueldo;
+									grafo.conectarNodes(id, m+firsttorn, capacidad, coste);
 								}
+								if(Turnos[m+1]==true){
+									modif=true;
+									modif1=true;
+									int capacidad = 1;
+									double coste = 0;
+									String tt = alturnos.get(m+1).getShiftType();
+									double sueldo = aldoc.get(i-firstdoc).getSalaryTurn();
+									if(tt.equals("morning")) coste=fm*sueldo;
+									else if(tt.equals("afternoon")) coste=ft*sueldo;
+									else if(tt.equals("evening")) coste=fn*sueldo;
+									grafo.conectarNodes(id, m+1+firsttorn, capacidad, coste);
+								}
+								if(Turnos[m+2]==true){
+									modif=true;
+									modif1=true;
+									int capacidad = 1;
+									double coste = 0;
+									String tt = alturnos.get(m+2).getShiftType();
+									double sueldo = aldoc.get(i-firstdoc).getSalaryTurn();
+									if(tt.equals("morning")) coste=fm*sueldo;
+									else if(tt.equals("afternoon")) coste=ft*sueldo;
+									else if(tt.equals("evening")) coste=fn*sueldo;
+									grafo.conectarNodes(id, m+2+firsttorn, capacidad, coste);
+								}
+								if(modif==true)++id;
 							}
 						}
 						
@@ -260,7 +274,7 @@ public class CtrlGrafo {
 						GregorianCalendar fechaIni = ((MAX_Turnos_Rango)res).getFechaIni();
 						GregorianCalendar fechaFin = ((MAX_Turnos_Rango)res).getFechaFin();
 						int  numDias = N.getNumDias();
-						
+						Nodo MRango = new Nodo(id, "MAX");
 						
 					}
 					/*else if (restipe.equals("MAX_Turnos_Consecutivos")){
