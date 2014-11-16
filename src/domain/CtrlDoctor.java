@@ -4,17 +4,26 @@ import java.util.*;
 
 import model.*;
 
-
+/**
+ * Controladora de la clase Doctor y Restriccion
+ * @author Sergi Orra 
+ */
 public class CtrlDoctor {
 	/** Atributos */
 	private ArrayList<Doctor> Doctors;
 	
 	
-	/* Constructora */
+	/**
+	* Constructora del control
+	*/
 	public CtrlDoctor(){
 		Doctors = new ArrayList<Doctor>();
 	}
 	
+	/**
+	* Constructora del control con atributo
+	* @param Doc: Lista de los Doctores del hospital
+	*/
 	public CtrlDoctor(ArrayList<Doctor> Doc){
 		Doctors = Doc;
 	}
@@ -24,6 +33,12 @@ public class CtrlDoctor {
 
 /* ---------------DOCTORES ------------------- */
 	
+	/**
+	*Consultora del identificador del Doctor
+	* @param idDoc: Identificador del Doctor
+	* @return La id del Doctor
+	* @throws Exception
+	*/	
 	public Integer getIdDoctor(int idDoc) throws IOException {		
 		if(idDoc < 0) throw new IOException("Valor del identificador incorrecto");
 		boolean trobat = false;
@@ -38,6 +53,12 @@ public class CtrlDoctor {
 		return null;
 	}
 	
+	/**
+	*Consultora del nombre del Doctor
+	* @param idDoc: Identificador del Doctor
+	* @return El nombre del Doctor
+	* @throws Exception
+	*/	
 	public String getNombreDoctor(int idDoc) throws IOException {	
 		if(idDoc < 0) throw new IOException("Valor del identificador incorrecto");
 		boolean trobat = false;
@@ -52,6 +73,12 @@ public class CtrlDoctor {
 		return null;
 	}
 	
+	/**
+	*Consultora del numero maximo de turnos del Doctor
+	* @param idDoc: Identificador del Doctor
+	* @return Numero maximo de turnos del Doctor
+	* @throws Exception
+	*/	
 	public Integer getNumMaxTurnosDoctor(int idDoc) throws IOException {		
 		if(idDoc < 0) throw new IOException("Valor del identificador incorrecto");
 		boolean trobat = false;
@@ -66,6 +93,12 @@ public class CtrlDoctor {
 		return null;
 	}
 	
+	/**
+	*Consultora del sueldo por turno del Doctor
+	* @param idDoc: Identificador del Doctor
+	* @return Sueldo por turno del Doctor
+	* @throws Exception
+	*/	
 	public Double getSueldoTurnosDoctor(int idDoc) throws IOException {		
 		if(idDoc < 0) throw new IOException("Valor del identificador incorrecto");
 		boolean trobat = false;
@@ -80,6 +113,14 @@ public class CtrlDoctor {
 		return null;
 	}
 	
+	/** 
+	* Modificadora del Doctor
+	* @param idDoc: es el nuevo identificador del Doctor
+	* 		 nombre: nuevo nombre del Doctor
+	* 		 numMax: nuevo  numero maximo de turnos del Doctor
+	* 		 sueldo: nuevo suledo por turno del doctor
+	* @throws Exception
+	*/
 	public void setDoctor(int idDoc, String nombre, int numMax, double sueldo) throws IOException {
 		if(idDoc < 0) throw new IOException("Valor del identificador incorrecto");
 		if(numMax < 0) throw new IOException("Numero maximo de turnos incorrecto");
@@ -91,19 +132,26 @@ public class CtrlDoctor {
 				Doctors.get(i).setName(nombre);
 				Doctors.get(i).setNumMaxTurn(numMax);
 				Doctors.get(i).setSalaryTurn(sueldo);
-				break;
 			}
+			if (trobat) break;
 		}
 		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
 	}
 	
 	
 	
-/* --------------- RESTRICCIONES -------------------- */
+/* --------------- RESTRICCIONES CONSULTORAS-------------------- */
 	
 	
 	/* --------------- GETS COMUNES RESTRICCIONES -------------------- */
 	
+	/**
+	* Consultora del identificador de la Restriccion
+	* @param idDoc: Identificador del Doctor
+	* 		 idRes: Identificador de la restriccion
+	* @return El identificador de la restriccion
+	* @throws Exception
+	*/
 	public Integer getIdRestriccion(int idDoc, int idRes) throws IOException {
 		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
 		boolean trobat, trobat2;
@@ -111,8 +159,7 @@ public class CtrlDoctor {
 		for (int i = 0; i < Doctors.size(); ++i) {
 			if (Doctors.get(i).getId() == idDoc) {
 				trobat = true;
-				ArrayList<Restriccion> alres = new ArrayList<Restriccion>();
-				alres = Doctors.get(i).getRestrictions();
+				ArrayList<Restriccion> alres = Doctors.get(i).getRestrictions();
 				for (int j = 0; j < alres.size(); ++j) {
 					if (alres.get(j).getIdRestriccion() == idRes) {
 						trobat2 = true;
@@ -128,6 +175,13 @@ public class CtrlDoctor {
 		return null;
 	}
 	
+	/**
+	* Consultora del tipo de la Restriccion
+	* @param idDoc: Identificador del Doctor
+	* 		 idRes: Identificador de la restriccion
+	* @return El tipo de la restriccion
+	* @throws Exception
+	*/
 	public String getTipoRestriccion(int idDoc, int idRes) throws IOException {
 		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
 		boolean trobat, trobat2;
@@ -135,8 +189,7 @@ public class CtrlDoctor {
 		for (int i = 0; i < Doctors.size(); ++i) {
 			if (Doctors.get(i).getId() == idDoc) {
 				trobat = true;
-				ArrayList<Restriccion> alres = new ArrayList<Restriccion>();
-				alres = Doctors.get(i).getRestrictions();
+				ArrayList<Restriccion> alres = Doctors.get(i).getRestrictions();
 				for (int j = 0; j < alres.size(); ++j) {
 					if (alres.get(j).getIdRestriccion() == idRes) {
 						trobat2 = true;
@@ -154,6 +207,13 @@ public class CtrlDoctor {
 	
 	/* --------------- GETS TIPO MAX TURNOS CONSECUTIVOS -------------------- */
 	
+	/**
+	* Consultora del numero maximo de turnos que se trabaja por dia de la Restriccion MAX_Turnos_por_Dia
+	* @param idDoc: Identificador del Doctor
+	* 		 idRes: Identificador de la restriccion
+	* @return numero maximo de turnos que se trabaja por dia
+	* @throws Exception
+	*/
 	public Integer getMAX_Turnos_Por_Dia(int idDoc, int idRes) throws IOException {
 		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
 		boolean trobat, trobat2;
@@ -161,8 +221,7 @@ public class CtrlDoctor {
 		for (int i = 0; i < Doctors.size(); ++i) {
 			if (Doctors.get(i).getId() == idDoc) {
 				trobat = true;
-				ArrayList<Restriccion> alres = new ArrayList<Restriccion>();
-				alres = Doctors.get(i).getRestrictions();
+				ArrayList<Restriccion> alres = Doctors.get(i).getRestrictions();
 				for (int j = 0; j < alres.size(); ++j) {
 					if (alres.get(j).getIdRestriccion() == idRes) {
 						trobat2 = true;
@@ -181,6 +240,13 @@ public class CtrlDoctor {
 	
 	/* --------------- GETS TIPO MAX TURNOS RANGO -------------------- */
 	
+	/**
+	* Consultora de la fecha de inicio de la Restriccion MAX_Turnos_Rango
+	* @param idDoc: Identificador del Doctor
+	* 		 idRes: Identificador de la restriccion
+	* @return fecha inicio de la restriccion
+	* @throws Exception
+	*/
 	public GregorianCalendar getMAX_Turnos_Rango_FeIni(int idDoc, int idRes) throws IOException {
 		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
 		boolean trobat, trobat2;
@@ -188,8 +254,7 @@ public class CtrlDoctor {
 		for (int i = 0; i < Doctors.size(); ++i) {
 			if (Doctors.get(i).getId() == idDoc) {
 				trobat = true;
-				ArrayList<Restriccion> alres = new ArrayList<Restriccion>();
-				alres = Doctors.get(i).getRestrictions();
+				ArrayList<Restriccion> alres = Doctors.get(i).getRestrictions();
 				for (int j = 0; j < alres.size(); ++j) {
 					if (alres.get(j).getIdRestriccion() == idRes) {
 						trobat2 = true;
@@ -206,6 +271,13 @@ public class CtrlDoctor {
 		return null;
 	}
 	
+	/**
+	* Consultora de la fecha fin de la Restriccion MAX_Turnos_Rango
+	* @param idDoc: Identificador del Doctor
+	* 		 idRes: Identificador de la restriccion
+	* @return fecha fin de la restriccion
+	* @throws Exception
+	*/
 	public GregorianCalendar getMAX_Turnos_Rango_FeFin(int idDoc, int idRes) throws IOException {
 		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
 		boolean trobat, trobat2;
@@ -213,8 +285,7 @@ public class CtrlDoctor {
 		for (int i = 0; i < Doctors.size(); ++i) {
 			if (Doctors.get(i).getId() == idDoc) {
 				trobat = true;
-				ArrayList<Restriccion> alres = new ArrayList<Restriccion>();
-				alres = Doctors.get(i).getRestrictions();
+				ArrayList<Restriccion> alres = Doctors.get(i).getRestrictions();
 				for (int j = 0; j < alres.size(); ++j) {
 					if (alres.get(j).getIdRestriccion() == idRes) {
 						trobat2 = true;
@@ -231,6 +302,13 @@ public class CtrlDoctor {
 		return null;
 	}
 	
+	/**
+	* Consultora del numero de turnos de la Restriccion MAX_Turnos_Rango
+	* @param idDoc: Identificador del Doctor
+	* 		 idRes: Identificador de la restriccion
+	* @return numero de turnos de la restriccion
+	* @throws Exception
+	*/
 	public Integer getMAX_Turnos_Rango_numT(int idDoc, int idRes) throws IOException {
 		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
 		boolean trobat, trobat2;
@@ -238,8 +316,7 @@ public class CtrlDoctor {
 		for (int i = 0; i < Doctors.size(); ++i) {
 			if (Doctors.get(i).getId() == idDoc) {
 				trobat = true;
-				ArrayList<Restriccion> alres = new ArrayList<Restriccion>();
-				alres = Doctors.get(i).getRestrictions();
+				ArrayList<Restriccion> alres = Doctors.get(i).getRestrictions();
 				for (int j = 0; j < alres.size(); ++j) {
 					if (alres.get(j).getIdRestriccion() == idRes) {
 						trobat2 = true;
@@ -258,6 +335,13 @@ public class CtrlDoctor {
 	
 	/* --------------- GETS TIPO NOT DIA MES -------------------- */
 	
+	/**
+	* Consultora del dia del mes de la Restriccion NOT_Dia_Mes
+	* @param idDoc: Identificador del Doctor
+	* 		 idRes: Identificador de la restriccion
+	* @return Dia del mes de la restriccion
+	* @throws Exception
+	*/
 	public Integer getNOT_Dia_Mes(int idDoc, int idRes) throws IOException {
 		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
 		boolean trobat, trobat2;
@@ -265,8 +349,7 @@ public class CtrlDoctor {
 		for (int i = 0; i < Doctors.size(); ++i) {
 			if (Doctors.get(i).getId() == idDoc) {
 				trobat = true;
-				ArrayList<Restriccion> alres = new ArrayList<Restriccion>();
-				alres = Doctors.get(i).getRestrictions();
+				ArrayList<Restriccion> alres = Doctors.get(i).getRestrictions();
 				for (int j = 0; j < alres.size(); ++j) {
 					if (alres.get(j).getIdRestriccion() == idRes) {
 						trobat2 = true;
@@ -285,6 +368,13 @@ public class CtrlDoctor {
 	
 	/* --------------- GETS TIPO NOT DIA SEMANA -------------------- */
 	
+	/**
+	* Consultora del dia de la semana de la Restriccion NOT_Dia_Semana
+	* @param idDoc: Identificador del Doctor
+	* 		 idRes: Identificador de la restriccion
+	* @return Dia de la semana de la restriccion
+	* @throws Exception
+	*/
 	public String getNOT_Dia_Semana(int idDoc, int idRes) throws IOException {
 		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
 		boolean trobat, trobat2;
@@ -292,8 +382,7 @@ public class CtrlDoctor {
 		for (int i = 0; i < Doctors.size(); ++i) {
 			if (Doctors.get(i).getId() == idDoc) {
 				trobat = true;
-				ArrayList<Restriccion> alres = new ArrayList<Restriccion>();
-				alres = Doctors.get(i).getRestrictions();
+				ArrayList<Restriccion> alres = Doctors.get(i).getRestrictions();
 				for (int j = 0; j < alres.size(); ++j) {
 					if (alres.get(j).getIdRestriccion() == idRes) {
 						trobat2 = true;
@@ -312,6 +401,13 @@ public class CtrlDoctor {
 	
 	/* --------------- GETS TIPO NOT ESPECIAL -------------------- */
 	
+	/**
+	* Consultora del dia especial de la Restriccion NOT_Especial
+	* @param idDoc: Identificador del Doctor
+	* 		 idRes: Identificador de la restriccion
+	* @return Dia especial de la restriccion
+	* @throws Exception
+	*/
 	public String getNOT_Especial(int idDoc, int idRes) throws IOException {
 		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
 		boolean trobat, trobat2;
@@ -319,8 +415,7 @@ public class CtrlDoctor {
 		for (int i = 0; i < Doctors.size(); ++i) {
 			if (Doctors.get(i).getId() == idDoc) {
 				trobat = true;
-				ArrayList<Restriccion> alres = new ArrayList<Restriccion>();
-				alres = Doctors.get(i).getRestrictions();
+				ArrayList<Restriccion> alres = Doctors.get(i).getRestrictions();
 				for (int j = 0; j < alres.size(); ++j) {
 					if (alres.get(j).getIdRestriccion() == idRes) {
 						trobat2 = true;
@@ -339,6 +434,13 @@ public class CtrlDoctor {
 	
 	/* --------------- GETS TIPO NOT FECHA -------------------- */
 	
+	/**
+	* Consultora de la fecha de la Restriccion NOT_Fecha
+	* @param idDoc: Identificador del Doctor
+	* 		 idRes: Identificador de la restriccion
+	* @return Fecha de la restriccion
+	* @throws Exception
+	*/
 	public GregorianCalendar getNOT_Fecha(int idDoc, int idRes) throws IOException {
 		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
 		boolean trobat, trobat2;
@@ -346,8 +448,7 @@ public class CtrlDoctor {
 		for (int i = 0; i < Doctors.size(); ++i) {
 			if (Doctors.get(i).getId() == idDoc) {
 				trobat = true;
-				ArrayList<Restriccion> alres = new ArrayList<Restriccion>();
-				alres = Doctors.get(i).getRestrictions();
+				ArrayList<Restriccion> alres = Doctors.get(i).getRestrictions();
 				for (int j = 0; j < alres.size(); ++j) {
 					if (alres.get(j).getIdRestriccion() == idRes) {
 						trobat2 = true;
@@ -366,6 +467,13 @@ public class CtrlDoctor {
 	
 	/* --------------- GETS TIPO NOT TURNO -------------------- */
 	
+	/**
+	* Consultora del tipo de tunro de la Restriccion NOT_Turno
+	* @param idDoc: Identificador del Doctor
+	* 		 idRes: Identificador de la restriccion
+	* @return Tipo de turno de la restriccion
+	* @throws Exception
+	*/
 	public String getNOT_Turno(int idDoc, int idRes) throws IOException {
 		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
 		boolean trobat, trobat2;
@@ -373,8 +481,7 @@ public class CtrlDoctor {
 		for (int i = 0; i < Doctors.size(); ++i) {
 			if (Doctors.get(i).getId() == idDoc) {
 				trobat = true;
-				ArrayList<Restriccion> alres = new ArrayList<Restriccion>();
-				alres = Doctors.get(i).getRestrictions();
+				ArrayList<Restriccion> alres = Doctors.get(i).getRestrictions();
 				for (int j = 0; j < alres.size(); ++j) {
 					if (alres.get(j).getIdRestriccion() == idRes) {
 						trobat2 = true;
@@ -393,6 +500,13 @@ public class CtrlDoctor {
 	
 	/* --------------- GETS TIPO XOR -------------------- */
 	
+	/**
+	* Consultora de la lista de fechas de la restriccion XOR
+	* @param idDoc: Identificador del Doctor
+	* 		 idRes: Identificador de la restriccion
+	* @return Lista de fechas de la restriccion
+	* @throws Exception
+	*/
 	public ArrayList<GregorianCalendar> getXOR_Dates(int idDoc, int idRes) throws IOException {
 		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
 		boolean trobat, trobat2;
@@ -400,8 +514,7 @@ public class CtrlDoctor {
 		for (int i = 0; i < Doctors.size(); ++i) {
 			if (Doctors.get(i).getId() == idDoc) {
 				trobat = true;
-				ArrayList<Restriccion> alres = new ArrayList<Restriccion>();
-				alres = Doctors.get(i).getRestrictions();
+				ArrayList<Restriccion> alres = Doctors.get(i).getRestrictions();
 				for (int j = 0; j < alres.size(); ++j) {
 					if (alres.get(j).getIdRestriccion() == idRes) {
 						trobat2 = true;
@@ -409,10 +522,46 @@ public class CtrlDoctor {
 						ArrayList<GregorianCalendar> dates = new ArrayList<GregorianCalendar>();
 						ArrayList<Turno> turnos = N.getListTurnos();
 						for (int z = 0; z < turnos.size(); ++z) {
-							GregorianCalendar fecha = new GregorianCalendar();
-							fecha = turnos.get(z).getDate();
+							GregorianCalendar fecha = turnos.get(z).getDate();
 							dates.add(fecha);
 						}
+						return dates;
+					}
+					if (trobat2) break;
+				}
+			}
+			if (trobat) break;
+		}
+		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
+		if (!trobat2) throw new IOException("No existe una Restriccion con esta Id");
+		return null;
+	}
+	
+	/**
+	* Consultora de la lista de tipos de turnos de la restriccion XOR
+	* @param idDoc: Identificador del Doctor
+	* 		 idRes: Identificador de la restriccion
+	* @return Lista de tipos de turnos de la restriccion
+	* @throws Exception
+	*/
+	public ArrayList<String> getXOR_TipoTurno(int idDoc, int idRes) throws IOException {
+		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
+		boolean trobat, trobat2;
+		trobat = trobat2 = false;
+		for (int i = 0; i < Doctors.size(); ++i) {
+			if (Doctors.get(i).getId() == idDoc) {
+				trobat = true;
+				ArrayList<Restriccion> alres = Doctors.get(i).getRestrictions();
+				for (int j = 0; j < alres.size(); ++j) {
+					if (alres.get(j).getIdRestriccion() == idRes) {
+						trobat2 = true;
+						XOR N = (XOR)alres.get(j);
+						ArrayList<String> tTurno = new ArrayList<String>();
+						ArrayList<Turno> turnos = N.getListTurnos();
+						for (int z = 0; z < turnos.size(); ++z) {
+							tTurno.add(turnos.get(z).getShiftType());
+						}
+						return tTurno;
 					}
 					if (trobat2) break;
 				}
@@ -426,8 +575,15 @@ public class CtrlDoctor {
 	
 	
 	
+/* --------------- RESTRICCIONES METODOS PUBLICOS-------------------- */
 	
-	
+	/** 
+	 * Metodo que inserta una restriccion tipo MAX_Turnos_por_Dia nueva en el Doctor
+	 * @param idDoc: Identificador del Doctor
+	 * 		  idRes: Identificador de la restriccion
+	 * 		  numT: Numero de turnos	
+	 * @throws Exception
+	 */
 	public void addResMAX_Turnos_por_Dia(int idDoc, int idRes, int numT) throws IOException {
 		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
 		if(numT < 0 || numT > 3) throw new IOException("Valor del numero de turnos incorrecto");
@@ -444,11 +600,24 @@ public class CtrlDoctor {
 		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
 	}
 	
+	/** 
+	 * Metodo que inserta una restriccion tipo MAX_Turnos_Rango nueva en el Doctor
+	 * @param idDoc: Identificador del Doctor
+	 * 		  idRes: Identificador de la restriccion
+	 * 		  d1: Dia primera fecha
+	 * 		  m1: Mes primera fecha
+	 * 		  a1: Year primera fecha	
+	 * 		  d2: Dia segunda fecha
+	 * 		  m2: Mes segunda fecha
+	 * 		  a2: Year segunda fecha
+	 * 		  numT: Numero de turnos
+	 * @throws Exception
+	 */
 	public void addResMAX_Turnos_Rango(int idDoc, int idRes, int d1, int m1, int a1, int d2, int m2, int a2, int numT) throws IOException {
 		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
 		if (d1 < 1 || d1 > 31 || m1 < 1 || m1 > 12 || a1 < 1) throw new IOException("Valores de la fecha incorrecto");
 		if (d2 < 1 || d2 > 31 || m2 < 1 || m2 > 12 || a2 < 1) throw new IOException("Valores de la fecha incorrecto");
-		if(idDoc < numT) throw new IOException("Numero de turnos incorrecto");
+		if(numT < 0) throw new IOException("Numero de turnos incorrecto");
 		GregorianCalendar fecha1 = new GregorianCalendar(a1,m1-1,d1);
 		GregorianCalendar fecha2 = new GregorianCalendar(a2,m2-1,d2);
 		if (!fecha1.isLenient() || !fecha2.isLenient()) throw new IOException("Fecha invalida");
@@ -465,6 +634,13 @@ public class CtrlDoctor {
 		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
 	}
 	
+	/** 
+	 * Metodo que inserta una restriccion tipo NOT_Dia_Mes nueva en el Doctor
+	 * @param idDoc: Identificador del Doctor
+	 * 		  idRes: Identificador de la restriccion
+	 * 		  diaMes: Dia del mes	
+	 * @throws Exception
+	 */
 	public void addResNOT_Dia_Mes(int idDoc, int idRes, int diaMes) throws IOException {
 		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
 		if (diaMes < 1 || diaMes > 31) throw new IOException("Dia del mes incorrecto");
@@ -481,6 +657,13 @@ public class CtrlDoctor {
 		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
 	}
 	
+	/** 
+	 * Metodo que inserta una restriccion tipo NOT_Dia_Semana nueva en el Doctor
+	 * @param idDoc: Identificador del Doctor
+	 * 		  idRes: Identificador de la restriccion
+	 * 		  dia: Dia de la semana	
+	 * @throws Exception
+	 */
 	public void addResNOT_Dia_Semana(int idDoc, int idRes, String dia) throws IOException {
 		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
 		if (!dia.equals("lunes") && !dia.equals("martes") && !dia.equals("miercoles") && !dia.equals("jueves") &&
@@ -498,6 +681,13 @@ public class CtrlDoctor {
 		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
 	}
 	
+	/** 
+	 * Metodo que inserta una restriccion tipo NOT_Especial nueva en el Doctor
+	 * @param idDoc: Identificador del Doctor
+	 * 		  idRes: Identificador de la restriccion
+	 * 		  especial: Dia especial
+	 * @throws Exception
+	 */
 	public void addResNOT_Especial(int idDoc, int idRes, String especial) throws IOException {
 		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
 		if (!especial.equals("navidad") && !especial.equals("semana_santa") && !especial.equals("noche_vieja") &&
@@ -515,6 +705,15 @@ public class CtrlDoctor {
 		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
 	}
 	
+	/** 
+	 * Metodo que inserta una restriccion tipo NOT_Fecha nueva en el Doctor
+	 * @param idDoc: Identificador del Doctor
+	 * 		  idRes: Identificador de la restriccion
+	 * 		  d: Dia de la fecha
+	 * 		  m: Mes de la fecha
+	 * 		  a: Year de la fecha	
+	 * @throws Exception
+	 */
 	public void addResNOT_Fecha(int idDoc, int idRes, int d, int m, int a) throws IOException {
 		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
 		if (d < 1 || d > 31 || m < 1 || m > 12 || a < 1) throw new IOException("Valores de la fecha incorrecto");
@@ -533,6 +732,13 @@ public class CtrlDoctor {
 		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
 	}
 	
+	/** 
+	 * Metodo que inserta una restriccion tipo NOT_Turno nueva en el Doctor
+	 * @param idDoc: Identificador del Doctor
+	 * 		  idRes: Identificador de la restriccion
+	 * 		  turno: Tipo del turno	
+	 * @throws Exception
+	 */
 	public void addResNOT_Turno(int idDoc, int idRes, String turno) throws IOException {
 		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
 		if (!turno.equals("manana") && !turno.equals("tarde") && !turno.equals("noche")) throw new IOException("Tipo de turno incorrecto");
@@ -549,6 +755,16 @@ public class CtrlDoctor {
 		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
 	}
 	
+	/** 
+	 * Metodo que inserta una restriccion tipo XOR nueva en el Doctor
+	 * @param idDoc: Identificador del Doctor
+	 * 		  idRes: Identificador de la restriccion
+	 * 		  diaXOR: Lista de los dias de las diferentes fechas de la restriccion	
+	 * 		  mesXOR: Lista de los meses de las diferentes fechas de la restriccion	
+	 *        yearXOR: Lista de los years de las diferentes fechas de la restriccion	
+	 *        tipoTurnoXOR: Lista de los tipos de tunros de las diferentes fechas de la restriccion	
+	 * @throws Exception
+	 */
 	public void addResXOR(int idDoc, int idRes, ArrayList<Integer> diaXOR, ArrayList<Integer> mesXOR,  ArrayList<Integer> yearXOR, ArrayList<String> tipoTurnoXOR) throws IOException {
 		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
 		for (int i = 0; i < diaXOR.size(); ++i) {
@@ -578,6 +794,12 @@ public class CtrlDoctor {
 		
 	}
 	
+	/** 
+	 * Metodo que elimina una restriccion del Doctor
+	 * @param idRes: Identificador de la restriccion
+	 * 		  idDoc: Identificador del Doctor
+	 * @throws Exception
+	 */
 	public void eliminarRestriccion(int idRes, int idDoc) throws IOException {
 		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
 		boolean trobat = false;
