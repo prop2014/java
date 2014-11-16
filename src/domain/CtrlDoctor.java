@@ -1,6 +1,7 @@
 package domain;
 import java.io.IOException;
 import java.util.*;
+
 import model.*;
 
 
@@ -50,6 +51,31 @@ public class CtrlDoctor {
 	
 	
 /* --------------- RESTRICCIONES -------------------- */
+	
+	public Restriccion getRestriccion(int idDoc, int idRes) throws IOException {
+		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
+		boolean trobat, trobat2;
+		trobat = trobat2 = false;
+		Restriccion res = new Restriccion();
+		for (int i = 0; i < Doctors.size(); ++i) {
+			if (Doctors.get(i).getId() == idDoc) {
+				trobat = true;
+				ArrayList<Restriccion> alres = new ArrayList<Restriccion>();
+				alres = Doctors.get(i).getRestrictions();
+				for (int j = 0; j < alres.size(); ++j) {
+					if (alres.get(j).getIdRestriccion() == idRes) {
+						trobat2 = true;
+						res = alres.get(j);
+					}
+					if (trobat2) break;
+				}
+			}
+			if (trobat) break;
+		}
+		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
+		if (!trobat2) throw new IOException("No existe una Restriccion con esta Id");
+		return res;
+	}
 	
 	public void addResMAX_Turnos_por_Dia(int idDoc, int idRes, int numT) throws IOException {
 		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
@@ -172,7 +198,8 @@ public class CtrlDoctor {
 		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
 	}
 	
-	public void addResXOR(int idDoc) throws IOException {
+	public void addResXOR(int idDoc, int idRes, ArrayList<Turno> listXOR) throws IOException {
+		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
 		
 	}
 	
