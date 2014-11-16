@@ -25,12 +25,17 @@ public class InterpretarResultado {
 	private Graf<Nodo> graf;
 	private int idFuente; 
 	private int idSumidero;
+	
+	private HashMap<Integer,listAndSalary> mapSol;
+	private ArrayList<nodoTurno> turnosSinSol;
 	private boolean sol;
 	
 	InterpretarResultado(Graf<Nodo> g, int NodoF, int NodoS){
 		graf = g;
 		idFuente = NodoF;
-		idSumidero = NodoS;	
+		idSumidero = NodoS;
+		mapSol = new HashMap<Integer,listAndSalary>();
+		turnosSinSol = new  ArrayList<nodoTurno>();
 		sol = false;
 	}
 	
@@ -38,36 +43,36 @@ public class InterpretarResultado {
 		graf = g;
 		idFuente = g.getNodeId(NodoF);
 		idSumidero = g.getNodeId(NodoS);	
+		mapSol = new HashMap<Integer,listAndSalary>();
+		turnosSinSol = new  ArrayList<nodoTurno>();
 		sol = false;
 		}
 	
-	/*PSEUDOCODE::
-	 * mainprogram{
-	 * 	getfuente;
-	 * 	//vecino fuente siempre son Doctores
-	 * 	foreach(vecinoFuente){ 
-	 * 		create Array Fechas del doctor;
-	 * 		if(suficiente flujo) DFS(vecinoFuente,Array);
-	 * 		guardar datos.
+	
+	//Metodos Publicos
+	public HashMap<Integer,listAndSalary> getMapSol(){
+		return mapSol;
+	}
+	
+	public ArrayList<nodoTurno> getTurnosSinSol(){
+		return turnosSinSol;
+	}
+	
+	public boolean hasSolution() {
+		return sol;
+	}
+	
+	//Metodos Privados 
+	
+	/*
+	 * PRE: Hay solucion.
 	 * 
+	 * Vamos recoriendo el grafo desde cada Doctor al sumidero,
+	 * almacenando los turnos qe trabaja y sumando su sueldo por turno. 
 	 * 
-	 * DFS(Nodo,Array fechas){
-	 * if (Nodo == sumidero) ?CONTROL DE ERRORES?
-	 * else{
-	 * 		getvecinos;
-	 * 		foreach(vecino){
-	 * 			if(el flujo lo permite){
-	 * 				if(Nodo == Turno) Add.Array(turno);
-	 * 				DFS(vecino,Array);
-	 * 			}
-	 * 		}
-	 * }
-	 * 
-	 *
 	 */
 	private void interpretarDFS(int idNodo, ArrayList<nodoTurno> turnos, double sueldo) throws IOException{
-		if(idNodo == idSumidero); //control de errores??????????
-		else{
+		if(idNodo != idSumidero){
 			ArrayList<Integer> vecinos = graf.getOutNodes(idNodo);
 			for(int vecino : vecinos){
 				//CONTROL DE FLUJO
@@ -91,8 +96,12 @@ public class InterpretarResultado {
 	}
 	
 	
-	private void haySolucion(ArrayList<nodoTurno> tSinSol) throws IOException{
-		
+	/*
+	 * Comprueba que hay solucion, si no la hay,
+	 * mientras va comprobando guarda los turnos que no han sido completamente cubiertos
+	 * 
+	 */
+	private void haySolucion() throws IOException{
 		int flujoFuenteADoctor = 0;
 		int flujoTurnoASumidero = 0;
 		ArrayList<Integer> vecinosFuente = graf.getOutNodes(idFuente);
@@ -108,7 +117,7 @@ public class InterpretarResultado {
 			flujoTurnoASumidero += graf.getCapacidadAresta(idArista);
 			
 			if(graf.getFlujoAresta(idArista) < graf.getCapacidadAresta(idArista)){
-				tSinSol.add((nodoTurno)graf.getNode(vecino));
+				turnosSinSol.add((nodoTurno)graf.getNode(vecino));
 			}
 		}
 		
@@ -117,14 +126,15 @@ public class InterpretarResultado {
 	}
 	
 	/*
-	 * solucion nos dira si hay solucion.
-	 * If solucion rMap contendra los doctores con sus turnos asignados y el sueldo total
-	 * If not solucion 
+	 * POST:
+	 * 		-Si hay solucion mapSol estara lleno con la id de los Doctores, 
+	 * 			sus turnos asignados y el sueldo total.
+	 * 		-Si NO hay solucion turnosSinSol estara lleno 
+	 * 			con los turnos que no han sido completamente cubiertos
 	 */
-	public void  InterpretarGrafo(HashMap<Integer,listAndSalary> resMap, 
-									ArrayList<nodoTurno> turnosSinSol) throws IOException{
+	public void  InterpretarGrafo() throws IOException{
 		
-		haySolucion(turnosSinSol);
+		haySolucion();
 
 		if(sol){
 			
@@ -143,7 +153,7 @@ public class InterpretarResultado {
 					listAndSalary ls = new listAndSalary(); 
 					ls.listaTurnos = turnos;
 					ls.sueldoTotal = sueldo;
-					resMap.put(vecino, ls);
+					mapSol.put(vecino, ls);
 					
 					
 				}
@@ -154,9 +164,7 @@ public class InterpretarResultado {
 		
 		}
 	
-	public boolean hasSolution() {
-		return sol;
-	}
+
 		
 	}
 
