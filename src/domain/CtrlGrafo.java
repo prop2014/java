@@ -27,7 +27,7 @@ public class CtrlGrafo {
 		return grafo;
 	}
 	
-	static String itos (int dia){
+	private static String itos (int dia){
 		String t;
 		if(dia==0) t="monday";
 		else if(dia==1) t = "tuesday";
@@ -39,7 +39,7 @@ public class CtrlGrafo {
 		return t; 
 	}
 	
-	public void llenarGrafo(Hospital h) throws IOException {
+	public void fillGrafo(Hospital h) throws IOException {
 		
 		double fm, ft, fn;
 		fm=h.getFactorM();

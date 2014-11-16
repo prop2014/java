@@ -10,9 +10,7 @@ import model.Calendario;
 import model.Doctor;
 import model.Hospital;
 import model.Restriccion;
-import model.NOT_Dia_Semana;
 import model.NOT_Dia_Mes;
-import model.NOT_Fecha;
 import model.Turno;
 import model.XOR;
 import domain.CtrlGrafo;
@@ -168,7 +166,7 @@ public class DriverCtrlGraf {
 				case 3:
 					CtrlGrafo ctrlGraf = new CtrlGrafo();
 					try {
-						ctrlGraf.llenarGrafo(HOSP);
+						ctrlGraf.fillGrafo(HOSP);
 					}
 					catch (IOException e) {
 					    throw new IOException(e);
