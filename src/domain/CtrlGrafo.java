@@ -27,6 +27,20 @@ public class CtrlGrafo {
 		return grafo;
 	}
 	
+	public void showNodos()throws IOException {
+		
+		for(int i =0; i<grafo.getNSize();++i){
+			try {
+				String tipo = grafo.getNode(i).getTipo();
+				System.out.printf("Nodo: %d Tipo %s\n",i, tipo);
+			} catch(IOException e) {
+				throw new IOException(e);
+			}
+			
+		}
+		
+	}
+	
 	private static String itos (int dia){
 		String t;
 		if(dia==0) t="monday";
