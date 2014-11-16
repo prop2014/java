@@ -25,17 +25,20 @@ public class InterpretarResultado {
 	private Graf<Nodo> graf;
 	private int idFuente; 
 	private int idSumidero;
+	private boolean sol;
 	
 	InterpretarResultado(Graf<Nodo> g, int NodoF, int NodoS){
 		graf = g;
 		idFuente = NodoF;
 		idSumidero = NodoS;	
+		sol = false;
 	}
 	
 	InterpretarResultado(Graf<Nodo> g, Nodo NodoF, Nodo NodoS) throws IOException{
 		graf = g;
 		idFuente = g.getNodeId(NodoF);
 		idSumidero = g.getNodeId(NodoS);	
+		sol = false;
 		}
 	
 	/*PSEUDOCODE::
@@ -65,7 +68,7 @@ public class InterpretarResultado {
 	private void interpretarDFS(int idNodo, ArrayList<nodoTurno> turnos, double sueldo) throws IOException{
 		if(idNodo == idSumidero); //control de errores??????????
 		else{
-			ArrayList<Integer> vecinos = graf.getInNodes(idNodo);
+			ArrayList<Integer> vecinos = graf.getOutNodes(idNodo);
 			for(int vecino : vecinos){
 				//CONTROL DE FLUJO
 				int idArista = graf.getIDAresta(idNodo, vecino);
@@ -88,28 +91,29 @@ public class InterpretarResultado {
 	}
 	
 	
-	private void haySolucion(boolean sol, ArrayList<nodoTurno> tSinSol) throws IOException{
+	private void haySolucion(ArrayList<nodoTurno> tSinSol) throws IOException{
 		
 		int flujoFuenteADoctor = 0;
 		int flujoTurnoASumidero = 0;
-		ArrayList<Integer> vecinosFuente = graf.getInNodes(idFuente);
+		ArrayList<Integer> vecinosFuente = graf.getOutNodes(idFuente);
 		for(int vecino:vecinosFuente){
 			
 			int idArista = graf.getIDAresta(idFuente, vecino);
 			flujoFuenteADoctor += graf.getFlujoAresta(idArista);
 		}
 		
-		ArrayList<Integer> vecinosSumidero = graf.getOutNodes(idSumidero);
+		ArrayList<Integer> vecinosSumidero = graf.getInNodes(idSumidero);
 		for(int vecino:vecinosSumidero){	
-			int idArista = graf.getIDAresta(idFuente, vecino);
-			flujoTurnoASumidero += graf.getFlujoAresta(idArista);
+			int idArista = graf.getIDAresta(vecino, idSumidero);
+			flujoTurnoASumidero += graf.getCapacidadAresta(idArista);
 			
-			if(graf.getFlujoAresta(idArista) > graf.getCapacidadAresta(idArista)){
+			if(graf.getFlujoAresta(idArista) < graf.getCapacidadAresta(idArista)){
 				tSinSol.add((nodoTurno)graf.getNode(vecino));
 			}
 		}
 		
-		if(flujoFuenteADoctor > flujoTurnoASumidero) sol = false;
+		if(flujoFuenteADoctor < flujoTurnoASumidero || flujoTurnoASumidero > 0) sol = false;
+		else sol = true;
 	}
 	
 	/*
@@ -117,16 +121,15 @@ public class InterpretarResultado {
 	 * If solucion rMap contendra los doctores con sus turnos asignados y el sueldo total
 	 * If not solucion 
 	 */
-	public void  InterpretarGrafo(boolean sol, HashMap<Integer,listAndSalary> resMap, 
+	public void  InterpretarGrafo(HashMap<Integer,listAndSalary> resMap, 
 									ArrayList<nodoTurno> turnosSinSol) throws IOException{
 		
-		sol = true;
-		haySolucion(sol,turnosSinSol);
+		haySolucion(turnosSinSol);
 
 		if(sol){
 			
 			//Obtener id de los vecinos de la fuente
-			ArrayList<Integer> vecinos = graf.getInNodes(idFuente);
+			ArrayList<Integer> vecinos = graf.getOutNodes(idFuente);
 			
 			for(int vecino:vecinos){
 
@@ -150,6 +153,10 @@ public class InterpretarResultado {
 		 
 		
 		}
+	
+	public boolean hasSolution() {
+		return sol;
+	}
 		
 	}
 
