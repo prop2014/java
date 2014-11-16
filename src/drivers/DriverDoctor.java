@@ -4,7 +4,6 @@ package drivers;
 import java.util.*;
 
 import model.*;
-
 import java.text.ParseException;
 
 public class DriverDoctor {
