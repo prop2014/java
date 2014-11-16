@@ -217,7 +217,7 @@ public class CtrlGrafo {
 						else if(max == 1 | max ==2){
 							for(int m=0;m<alturnos.size();m=m+3){
 								boolean modif =false;
-								Nodo MAX = new Nodo(id, "MAX");
+								Nodo MAX = new Nodo(id, "MaxTDia");
 								grafo.afegirNode(MAX);
 								grafo.conectarNodes(i, id, max, 0.0);
 								if(Turnos[m]==true){

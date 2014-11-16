@@ -180,15 +180,64 @@ public class DriverCtrlGraf {
 						nodoDoctor nod = (nodoDoctor)g.getNode(i);
 						System.out.printf("DOCTOR: IdDoc: %d, IdNodo: %d -> ",nod.getIdDoc(), i);
 						for(int j : g.getOutNodes(i)){
-							nodoTurno nod2 = (nodoTurno)g.getNode(j);
-							GregorianCalendar c1 = nod2.getFecha();
-							String fecha = DateFormat.getDateInstance(DateFormat.SHORT).format(c1.getTime());
-							System.out.printf("Fecha: %s Turno: %s (conectado con): ", fecha, nod2.getTipoTurno());
-							for(int k : g.getOutNodes(j)) {
-								Nodo nod3 = g.getNode(k);
-								System.out.printf("%s ", nod3.getTipo());
+							if(g.getNode(j).getTipo()=="Turno"){
+								nodoTurno nod2 = (nodoTurno)g.getNode(j);
+								GregorianCalendar c1 = nod2.getFecha();
+								String fecha = DateFormat.getDateInstance(DateFormat.SHORT).format(c1.getTime());
+								System.out.printf("Fecha: %s Turno: %s (conectado con): ", fecha, nod2.getTipoTurno());
+								for(int k : g.getOutNodes(j)) {
+									Nodo nod3 = g.getNode(k);
+									System.out.printf("%s ", nod3.getTipo());
+								}
+								System.out.printf("|| ");
 							}
-							System.out.printf("|| ");
+							else if(g.getNode(j).getTipo()=="XOR"){
+								Nodo xor= g.getNode(j);
+								System.out.printf("%s ", xor.getTipo());
+								System.out.print(" conectado con -->");
+								for(int k : g.getOutNodes(j)){
+									nodoTurno nod2 = (nodoTurno)g.getNode(k);
+									GregorianCalendar c1 = nod2.getFecha();
+									String fecha = DateFormat.getDateInstance(DateFormat.SHORT).format(c1.getTime());
+									System.out.printf("Fecha: %s Turno: %s (conectado con): ", fecha, nod2.getTipoTurno());
+									for(int l : g.getOutNodes(k)) {
+										Nodo nod3 = g.getNode(l);
+										System.out.printf("%s ", nod3.getTipo());
+									}
+									System.out.printf("|| ");
+								}
+							}
+							else if(g.getNode(j).getTipo()=="MaxTDia"){
+								Nodo MaxTDia= g.getNode(j);
+								System.out.printf("%s ", MaxTDia.getTipo());
+								for(int k : g.getOutNodes(j)){
+									nodoTurno nod2 = (nodoTurno)g.getNode(k);
+									GregorianCalendar c1 = nod2.getFecha();
+									String fecha = DateFormat.getDateInstance(DateFormat.SHORT).format(c1.getTime());
+									System.out.printf("Fecha: %s Turno: %s (conectado con): ", fecha, nod2.getTipoTurno());
+									for(int l : g.getOutNodes(j)) {
+										Nodo nod3 = g.getNode(l);
+										System.out.printf("%s ", nod3.getTipo());
+									}
+									System.out.printf("|| ");
+								}
+							}
+							else if(g.getNode(j).getTipo()=="MRango"){
+								Nodo MaxR= g.getNode(j);
+								System.out.printf("%s ", MaxR.getTipo());
+								for(int k : g.getOutNodes(j)){
+									nodoTurno nod2 = (nodoTurno)g.getNode(k);
+									GregorianCalendar c1 = nod2.getFecha();
+									String fecha = DateFormat.getDateInstance(DateFormat.SHORT).format(c1.getTime());
+									System.out.printf("Fecha: %s Turno: %s (conectado con): ", fecha, nod2.getTipoTurno());
+									for(int l : g.getOutNodes(j)) {
+										Nodo nod3 = g.getNode(l);
+										System.out.printf("%s ", nod3.getTipo());
+									}
+									System.out.printf("|| ");
+								}
+							}
+							
 						}
 						System.out.printf("\n");
 					}
@@ -231,6 +280,8 @@ public class DriverCtrlGraf {
 					HOSP.setDoctor(doctor);
 					MostrarDoc(doctor);
 				
+				case 6:
+					
 				default: break;
 			}
 			muestraOpciones();
