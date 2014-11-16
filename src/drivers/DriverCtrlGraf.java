@@ -14,6 +14,7 @@ import model.NOT_Dia_Semana;
 import model.NOT_Dia_Mes;
 import model.NOT_Fecha;
 import model.Turno;
+import model.XOR;
 import domain.CtrlGrafo;
 import domain.Nodo;
 import domain.Graf;
@@ -23,9 +24,11 @@ import domain.nodoTurno;
 /**
  * 
  * @author Alex Morral
+ * 
  *
  */
 
+//@author Oscar
 public class DriverCtrlGraf {
 	
 	
@@ -34,7 +37,8 @@ public class DriverCtrlGraf {
 		System.out.print("1: Hospital (id,nom,fm,ft,fn,aldoc,cal)\n");
 		System.out.print("2: addDoctor(d)\n");
 		System.out.print("3: Llenar Grafo y mostrar conexiones\n");
-		System.out.print("4: añadir Restriccion a un Doctor\n");
+		System.out.print("4: anadir Restriccion NotDiaMes a un Doctor\n");
+		System.out.print("5: anadir Restriccion XOR a un Doctor\n");
 		System.out.print("0: Salir\n");
 	}
 	
@@ -191,37 +195,41 @@ public class DriverCtrlGraf {
 					break;
 					
 				case 4:
-					System.out.print("Introduce el ID del doctor para ponerle una Restriccion NOT DiaSemana\n");
+					System.out.print("Introduce el ID del doctor para ponerle una Restriccion NOT_Dia_Mes\n");
 					int iden;
 					System.out.print("(1,2,3,4,5)\n");
 					iden = teclado.nextInt();
 					Doctor doctor = HOSP.getDoctor(iden);
-					Restriccion Res2 = new NOT_Dia_Mes(1,20);
-					doctor.addRestriction(Res2);
+					Restriccion Res1 = new NOT_Dia_Mes(1,20);
+					doctor.addRestriction(Res1);
 					HOSP.setDoctor(doctor);
 					MostrarDoc(doctor);
 					
 					break;
 					
 				case 5:
-					CtrlGrafo CtrGra = new CtrlGrafo();
-					try {
-						CtrGra.llenarGrafo(HOSP);
-					}
-					catch (IOException e) {
-					    throw new IOException(e);
-					}
-					Graf<Nodo> g1 = CtrGra.getGraf();
-					ArrayList<Integer> nodos2 = g1.getOutNodes(0);
-					System.out.printf("Source Conectado con:\n");
-					for(int i = 1; i <= nodos2.size();++i){
-						nodoDoctor nod2 = (nodoDoctor)g1.getNode(i);
-						System.out.printf("DOCTOR: IdDoc: %d, IdNodo: %d -> ",nod2.getIdDoc(), i);
-						for(int j : g1.getOutNodes(i)){
-							System.out.printf("conected whit %d",j);
-						}
-						System.out.printf("\n");
-					}
+					System.out.print("Introduce el ID del doctor para ponerle una Restriccion XOR entre las dos fechas del calendario\n");
+					System.out.print("(1,2,3,4,5)\n");
+					iden = teclado.nextInt();
+					doctor = HOSP.getDoctor(iden);
+					
+					ArrayList<Turno> listXOR = new ArrayList<Turno>();
+					XOR Res2 = new XOR(2, listXOR);
+					int year, month, day;
+					year = 2014;
+					month = 2;
+					day = 20;
+					GregorianCalendar gc1= new GregorianCalendar(year, month-1, day);
+					GregorianCalendar gc2= new GregorianCalendar(year, month-1, day+1);
+					Res2.AddTurno(gc1,"manana");
+					Res2.AddTurno(gc1,"tarde");
+					Res2.AddTurno(gc1,"noche");
+					Res2.AddTurno(gc2,"manana");
+					Res2.AddTurno(gc2,"tarde");
+					Res2.AddTurno(gc2,"noche");
+					doctor.addRestriction(Res2);
+					HOSP.setDoctor(doctor);
+					MostrarDoc(doctor);
 				
 				default: break;
 			}

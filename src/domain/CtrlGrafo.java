@@ -1,5 +1,6 @@
 package domain;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.*;
 
 import model.*;
@@ -89,9 +90,9 @@ public class CtrlGrafo {
 					double coste =0;
 					String tt = alturnos.get(j-firsttorn).getShiftType();
 					double sueldo = aldoc.get(i-firstdoc).getSalaryTurn();
-					if(tt.equals("morning")) coste=fm*sueldo;
-					else if(tt.equals("afternoon")) coste=ft*sueldo;
-					else if(tt.equals("evening")) coste=fn*sueldo;
+					if(tt.equals("manana")) coste=fm*sueldo;
+					else if(tt.equals("tarde")) coste=ft*sueldo;
+					else if(tt.equals("noche")) coste=fn*sueldo;
 					grafo.conectarNodes(i, j, capacidad, coste);
 				}
 			}
@@ -179,16 +180,24 @@ public class CtrlGrafo {
 						boolean modif = false;
 						for(Turno turno : xorTurnos) {
 							for(int m = 0; m < alturnos.size(); ++m) {
-								if(alturnos.get(m).getDate() == turno.getDate() && alturnos.get(m).getShiftType() == turno.getShiftType()) {
+								
+								GregorianCalendar gc1 = turno.getDate();
+								String fecha = DateFormat.getDateInstance(DateFormat.SHORT).format(gc1.getTime());
+								
+								GregorianCalendar gc2 = alturnos.get(m).getDate();
+								String fecha1 = DateFormat.getDateInstance(DateFormat.SHORT).format(gc2.getTime());
+																
+								if(fecha.equals(fecha1) & alturnos.get(m).getShiftType() == turno.getShiftType() & Turnos[m]==true) {
 									modif = true;
 									int capacidad = 1;
 									double coste = 0;
 									String tt = alturnos.get(m).getShiftType();
 									double sueldo = aldoc.get(i-firstdoc).getSalaryTurn();
-									if(tt.equals("morning")) coste=fm*sueldo;
-									else if(tt.equals("afternoon")) coste=ft*sueldo;
-									else if(tt.equals("evening")) coste=fn*sueldo;
+									if(tt.equals("manana")) coste=fm*sueldo;
+									else if(tt.equals("tarde")) coste=ft*sueldo;
+									else if(tt.equals("noche")) coste=fn*sueldo;
 									grafo.conectarNodes(id, m+firsttorn, capacidad, coste);
+									Turnos[m]=false;
 								}
 							}
 						}
@@ -217,10 +226,11 @@ public class CtrlGrafo {
 									double coste = 0;
 									String tt = alturnos.get(m).getShiftType();
 									double sueldo = aldoc.get(i-firstdoc).getSalaryTurn();
-									if(tt.equals("morning")) coste=fm*sueldo;
-									else if(tt.equals("afternoon")) coste=ft*sueldo;
-									else if(tt.equals("evening")) coste=fn*sueldo;
+									if(tt.equals("manana")) coste=fm*sueldo;
+									else if(tt.equals("tarde")) coste=ft*sueldo;
+									else if(tt.equals("noche")) coste=fn*sueldo;
 									grafo.conectarNodes(id, m+firsttorn, capacidad, coste);
+									Turnos[m]=false;
 								}
 								if(Turnos[m+1]==true){
 									modif=true;
@@ -228,10 +238,11 @@ public class CtrlGrafo {
 									double coste = 0;
 									String tt = alturnos.get(m+1).getShiftType();
 									double sueldo = aldoc.get(i-firstdoc).getSalaryTurn();
-									if(tt.equals("morning")) coste=fm*sueldo;
-									else if(tt.equals("afternoon")) coste=ft*sueldo;
-									else if(tt.equals("evening")) coste=fn*sueldo;
+									if(tt.equals("manana")) coste=fm*sueldo;
+									else if(tt.equals("tarde")) coste=ft*sueldo;
+									else if(tt.equals("noche")) coste=fn*sueldo;
 									grafo.conectarNodes(id, m+1+firsttorn, capacidad, coste);
+									Turnos[m]=false;
 								}
 								if(Turnos[m+2]==true){
 									modif=true;
@@ -239,10 +250,11 @@ public class CtrlGrafo {
 									double coste = 0;
 									String tt = alturnos.get(m+2).getShiftType();
 									double sueldo = aldoc.get(i-firstdoc).getSalaryTurn();
-									if(tt.equals("morning")) coste=fm*sueldo;
-									else if(tt.equals("afternoon")) coste=ft*sueldo;
-									else if(tt.equals("evening")) coste=fn*sueldo;
+									if(tt.equals("manana")) coste=fm*sueldo;
+									else if(tt.equals("tarde")) coste=ft*sueldo;
+									else if(tt.equals("noche")) coste=fn*sueldo;
 									grafo.conectarNodes(id, m+2+firsttorn, capacidad, coste);
+									Turnos[m]=false;
 								}
 								if(modif==true)++id;
 								else grafo.removeNode(id);
@@ -250,14 +262,6 @@ public class CtrlGrafo {
 						}
 					}
 					else if (restipe.equals("MAX_Turnos_Rango")){
-						//se obtiene el MaxDIASenRango
-						//se crea Nodo MaxDiasRango
-						//se une el doctor con el nodo con capacidad MaxDiasenRango
-						//en el for(m) se comprueva que la fecha sea >=minRango
-						// & <=maxRango si la fecha es > break?
-						//se comprueva que Turnos[m]==true 
-						//se conecta el nodo con el turno con capacidad 1
-						//se añade coste i avanti
 						MAX_Turnos_Rango N = ((MAX_Turnos_Rango)res);
 						GregorianCalendar fechaIni = ((MAX_Turnos_Rango)res).getFechaIni();
 						GregorianCalendar fechaFin = ((MAX_Turnos_Rango)res).getFechaFin();
@@ -277,44 +281,33 @@ public class CtrlGrafo {
 								double coste = 0;
 								String tt = alturnos.get(m+2).getShiftType();
 								double sueldo = aldoc.get(i-firstdoc).getSalaryTurn();
-								if(tt.equals("morning")) coste=fm*sueldo;
-								else if(tt.equals("afternoon")) coste=ft*sueldo;
-								else if(tt.equals("evening")) coste=fn*sueldo;
+								if(tt.equals("manana")) coste=fm*sueldo;
+								else if(tt.equals("tarde")) coste=ft*sueldo;
+								else if(tt.equals("noche")) coste=fn*sueldo;
 								grafo.conectarNodes(id, m+firsttorn, capacidad, coste);
+								Turnos[m]=false;
 							}
 						}
-						
 					}
 					/*else if (restipe.equals("MAX_Turnos_Consecutivos")){
-						//posible implementacion
-						//se busca el primer Turno[m] en false
-						//de mientras si ++m >= MaxTurnosconsecutivos se pone ese dia en False
-						// al encontrar el primero en true cada MaxTurnosConsecutivos pones uno en false
-						//cumples especificafion? si // es la unica solucion ? nop ia que puede variar a partir de
-						//maxturnosconsecutivos >=3
+					
 					}*/
 					
 				}//fi else de restricciones
-				//biieen hEmos llegado al punto donde solo falta tirar cables
-				//for(m) compruevas si turnos[m]==true
-				//i le metes capacidad 1 i coste
 				for(int j=firsttorn;j<=lasttorn;++j){
 					if(Turnos[j-firsttorn]==true ){
 						int capacidad=1; //
 						double coste =0;
 						String tt = alturnos.get(j-firsttorn).getShiftType();
 						double sueldo = aldoc.get(i-firstdoc).getSalaryTurn();
-						if(tt.equals("morning")) coste=fm*sueldo;
-						else if(tt.equals("afternoon")) coste=ft*sueldo;
-						else if(tt.equals("evening")) coste=fn*sueldo;
+						if(tt.equals("manana")) coste=fm*sueldo;
+						else if(tt.equals("tarde")) coste=ft*sueldo;
+						else if(tt.equals("noche")) coste=fn*sueldo;
 						grafo.conectarNodes(i, j, capacidad, coste);	
 					}
 				}
 				
-			}//fin de restricciones de un doctor
-			//pasamos al siguiente doctor
-			
+			}//fin de restricciones de un doctor			
 		}//fi for de llenar restricciones para todos los doctores
-
 	}//fin de llenagrafo
 }//ficlas
