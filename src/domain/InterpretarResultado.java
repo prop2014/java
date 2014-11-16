@@ -116,7 +116,7 @@ public class InterpretarResultado {
 			int idArista = graf.getIDAresta(vecino, idSumidero);
 			flujoTurnoASumidero += graf.getCapacidadAresta(idArista);
 			
-			if(graf.getFlujoAresta(idArista) < graf.getCapacidadAresta(idArista)){
+			if(graf.getCapacidadAresta(idArista) > 0){
 				turnosSinSol.add((nodoTurno)graf.getNode(vecino));
 			}
 		}

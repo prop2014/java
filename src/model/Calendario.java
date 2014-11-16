@@ -20,7 +20,10 @@ public class Calendario {
 	/**
 	 * Constructora por defecto
 	 */
-	public Calendario() {}
+	public Calendario() {
+		calendarYear = 2014;
+		vacationDates = new TreeMap<Integer,Turno[]>();
+	}
 
 	/**
 	 * Constructora por defecto
@@ -141,7 +144,7 @@ public class Calendario {
 	 * @return True si el dia vacacional existe, False en caso contrario
 	 */
 	public boolean existsVacationDay(GregorianCalendar date) {
-		return vacationDates.containsKey(date.get(GregorianCalendar.DAY_OF_YEAR) - 1);
+		return !vacationDates.isEmpty() && vacationDates.containsKey(date.get(GregorianCalendar.DAY_OF_YEAR) - 1);
 	}
 
 	/**

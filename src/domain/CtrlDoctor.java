@@ -9,10 +9,16 @@ public class CtrlDoctor {
 	/** Atributos */
 	private ArrayList<Doctor> Doctors;
 	
+	
 	/* Constructora */
+	public CtrlDoctor(){
+		Doctors = new ArrayList<Doctor>();
+	}
+	
 	public CtrlDoctor(ArrayList<Doctor> Doc){
 		Doctors = Doc;
 	}
+	
 	
 	/* Metodos publicos */
 
