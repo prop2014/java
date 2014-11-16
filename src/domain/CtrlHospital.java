@@ -53,6 +53,7 @@ public class CtrlHospital {
 		//createDoctorData()?
 	}
 	
+	//esta en c
 	public void modificarDoctor(int id, String nombre, int numMax, double sueldo) throws IOException {
 		if(numMax < 0) throw new IOException("Número máximo de turnos incorrecto");
 		if(sueldo < 0) throw new IOException("Sueldo incorrecto");

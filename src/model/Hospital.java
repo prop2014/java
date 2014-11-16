@@ -15,7 +15,7 @@ public class Hospital {
 	private double factorM;
 	private double factorT;
 	private double factorN;
-	private Map <Integer , Doctor> doctors;
+	private ArrayList<Doctor> doctors;
 	private Calendario calendari;
 	
 	
@@ -28,17 +28,17 @@ public class Hospital {
 		factorM=0.0;
 		factorT=0.0;
 		factorN=0.0;
-		doctors = new TreeMap<Integer , Doctor>();
-		calendari = new Calendario();
+		doctors = new ArrayList<Doctor>();
+		calendari = new Calendario(0);
 	}
 	
 	/**
 	 *Creadora de Hospital con algunos de los parametros de la clase
 	 * @param id 	Un identificador unico de hospital
 	 * @param nom	Nombre del Hospital
-	 * @param fm 	FactorMorning Se multiplicara al sueldoxTurno del doctor Para calcular el coste
+	 * @param fm 	FactorManana Se multiplicara al sueldoxTurno del doctor Para calcular el coste
 	 * @param ft	FactorTarde Se multiplicara al sueldoxTurno del doctor Para calcular el coste
-	 * @param fn	Factorevening Se multiplicara al sueldoxTurno del doctor Para calcular el coste
+	 * @param fn	FactorNoche Se multiplicara al sueldoxTurno del doctor Para calcular el coste
 	 
 	 */
 	public Hospital (int id, String nom, double fm, double ft, double fn){
@@ -47,8 +47,8 @@ public class Hospital {
 		factorM=fm;
 		factorT=ft;
 		factorN=fn;
-		doctors = new TreeMap<Integer , Doctor>();
-		calendari = new Calendario();
+		doctors = new ArrayList<Doctor>();
+		calendari = new Calendario(0);
 	}
 	
 	/**
@@ -68,10 +68,10 @@ public class Hospital {
 		factorM=fm;
 		factorT=ft;
 		factorN=fn;
-		doctors = new TreeMap<Integer , Doctor>();
+		doctors = new ArrayList<Doctor>();
 		for(int i = 0; i < aldoc.size(); ++i){
-			if(doctors.containsKey(aldoc.get(i).getId())==false){
-				doctors.put(aldoc.get(i).getId(), aldoc.get(i));
+			if(doctors.contains(aldoc.get(i).getId())==false){
+				doctors.add(aldoc.get(i).getId(), aldoc.get(i));
 			}
 		}
 		calendari = new Calendario(cal);
@@ -133,13 +133,8 @@ public class Hospital {
 	 * @return el Arraylist<Doctor> con todos los doctores del Hospital
 	 */
 	public ArrayList<Doctor> getDoctors(){
-		ArrayList<Doctor> aldoc = new ArrayList<Doctor>(doctors.size());
-		Iterator<Integer> itr = doctors.keySet().iterator();
-		while(itr.hasNext()) {
-		    Integer key = itr.next();
-		    aldoc.add(doctors.get(key));
-		}
-		return aldoc;
+	
+		return doctors;
 	}
 	
 	/**
@@ -173,7 +168,7 @@ public class Hospital {
 	 * @return un boolean que indica si existe ese doctor
 	 */
 	public boolean existsDoctor(int id){
-		return doctors.containsKey(id);
+		return doctors.contains(id);
 	}
 	
 	/** 
@@ -216,8 +211,8 @@ public class Hospital {
 	 * @param d		es el doctor ya modificado
 	 */
 	public void setDoctor(Doctor d){
-			doctors.remove(d.getId());
-			doctors.put(d.getId(), d);
+			doctors.remove(d);
+			doctors.add(d);
 	}
 	
 	/** 
@@ -227,7 +222,7 @@ public class Hospital {
 	 * @param d		es el nuevo doctor del Hospital
 	 */
 	public void addDoctor(Doctor d){
-			doctors.put(d.getId(), d);		
+			doctors.add(d);		
 	}
 		
 	/** 
@@ -239,12 +234,12 @@ public class Hospital {
 	public void addDoctors(ArrayList<Doctor> aldoc){
 
 		for(int i=0; i < aldoc.size();++i){
-			if(doctors.containsKey(aldoc.get(i).getId())==false){
-				doctors.put(aldoc.get(i).getId(), aldoc.get(i));
+			if(doctors.contains(aldoc.get(i).getId())==false){
+				doctors.add(aldoc.get(i));
 			}
 			else {
-				doctors.remove(aldoc.get(i).getId());
-				doctors.put(aldoc.get(i).getId(), aldoc.get(i));
+				doctors.remove(aldoc.get(i));
+				doctors.add(aldoc.get(i));
 			}
 		}
 	}
@@ -274,7 +269,7 @@ public class Hospital {
 		factorM=0.0;
 		factorT=0.0;
 		factorN=0.0;
-		doctors = new TreeMap<Integer , Doctor>();
+		doctors = new ArrayList<Doctor>();
 		calendari = new Calendario(0);
 	}
 	
