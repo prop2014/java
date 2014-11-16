@@ -210,12 +210,13 @@ public class DriverCtrlGraf {
 							else if(g.getNode(j).getTipo()=="MaxTDia"){
 								Nodo MaxTDia= g.getNode(j);
 								System.out.printf("%s ", MaxTDia.getTipo());
+								System.out.print(" conectado con -->");
 								for(int k : g.getOutNodes(j)){
 									nodoTurno nod2 = (nodoTurno)g.getNode(k);
 									GregorianCalendar c1 = nod2.getFecha();
 									String fecha = DateFormat.getDateInstance(DateFormat.SHORT).format(c1.getTime());
 									System.out.printf("Fecha: %s Turno: %s (conectado con): ", fecha, nod2.getTipoTurno());
-									for(int l : g.getOutNodes(j)) {
+									for(int l : g.getOutNodes(k)) {
 										Nodo nod3 = g.getNode(l);
 										System.out.printf("%s ", nod3.getTipo());
 									}
@@ -225,12 +226,13 @@ public class DriverCtrlGraf {
 							else if(g.getNode(j).getTipo()=="MRango"){
 								Nodo MaxR= g.getNode(j);
 								System.out.printf("%s ", MaxR.getTipo());
+								System.out.print(" conectado con -->");
 								for(int k : g.getOutNodes(j)){
 									nodoTurno nod2 = (nodoTurno)g.getNode(k);
 									GregorianCalendar c1 = nod2.getFecha();
 									String fecha = DateFormat.getDateInstance(DateFormat.SHORT).format(c1.getTime());
 									System.out.printf("Fecha: %s Turno: %s (conectado con): ", fecha, nod2.getTipoTurno());
-									for(int l : g.getOutNodes(j)) {
+									for(int l : g.getOutNodes(k)) {
 										Nodo nod3 = g.getNode(l);
 										System.out.printf("%s ", nod3.getTipo());
 									}
@@ -244,7 +246,7 @@ public class DriverCtrlGraf {
 					break;
 					
 				case 4:
-					System.out.print("Introduce el ID del doctor para ponerle una Restriccion NOT_Dia_Mes\n");
+					System.out.print("Introduce el ID del doctor para ponerle una Restriccion NOT_Dia_Mes (el 20)\n");
 					int iden;
 					System.out.print("(1,2,3,4,5)\n");
 					iden = teclado.nextInt();
@@ -279,8 +281,6 @@ public class DriverCtrlGraf {
 					doctor.addRestriction(Res2);
 					HOSP.setDoctor(doctor);
 					MostrarDoc(doctor);
-				
-				case 6:
 					
 				default: break;
 			}

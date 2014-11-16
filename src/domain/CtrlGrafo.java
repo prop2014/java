@@ -4,7 +4,11 @@ import java.text.DateFormat;
 import java.util.*;
 
 import model.*;
-
+/**
+ * 
+ * @author oscar
+ *
+ */
 public class CtrlGrafo {
 	
 	private int firstdoc;
@@ -75,7 +79,7 @@ public class CtrlGrafo {
 			grafo.conectarNodes(id, sink, alturnos.get(i).getNumberOfDoctors(),0.0); 
 		}
 		lasttorn=id;
-		++id; //id nodo reestriccion actualizado!!!!!!!!!!!!!!!!!
+		++id; 
 				
 		
 		//nodos de turnos añadidos	
@@ -84,7 +88,6 @@ public class CtrlGrafo {
 			
 				//caso base donde no hay restricciones
 			if(aldoc.get(i-firstdoc).isREmpty()){
-				 //lo conectamos con todos los turnos
 				for(int j=firsttorn;j<=lasttorn;++j){
 					int capacidad=1; //
 					double coste =0;
@@ -167,7 +170,6 @@ public class CtrlGrafo {
 						
 					}				
 				}
-				//hemos tratado las NOT vamos a tratar las demas
 				for(int k=0;k<alRest.size();++k){
 					Restriccion res = alRest.get(k); //tengo la restriccion
 					String restipe =res.getTipo(); // tengo el tipo
@@ -296,7 +298,7 @@ public class CtrlGrafo {
 				}//fi else de restricciones
 				for(int j=firsttorn;j<=lasttorn;++j){
 					if(Turnos[j-firsttorn]==true ){
-						int capacidad=1; //
+						int capacidad=1;
 						double coste =0;
 						String tt = alturnos.get(j-firsttorn).getShiftType();
 						double sueldo = aldoc.get(i-firstdoc).getSalaryTurn();

@@ -216,10 +216,8 @@ public class Hospital {
 	 * @param d		es el doctor ya modificado
 	 */
 	public void setDoctor(Doctor d){
-		if(doctors.containsKey(d.getId())==true){
 			doctors.remove(d.getId());
 			doctors.put(d.getId(), d);
-		}	
 	}
 	
 	/** 
