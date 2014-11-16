@@ -68,6 +68,31 @@ public class CtrlHospital {
 		//updateDoctorData(id)?
 	}
 	
+	/**
+	 * @return devuelve un arraylist con los doctores del hospital
+	 */
+	
+	public ArrayList<Doctor> getDoctors(){
+		ArrayList<Doctor> aldoctor = hosp.getDoctors();
+		return aldoctor;
+	}
+	
+	/**
+	 * 
+	 * @return Devuelve el calendario
+	 */
+	public Calendario getCalendar(){
+		return hosp.getCalendario();
+	}
+	
+	/**
+	 * 
+	 * @return Devuelve el Hospital
+	 */
+	public Hospital getHospital(){
+		return hosp;
+	}
+	
 	public void eliminarDoctor(int id) throws IOException {
 		//try {
 		
