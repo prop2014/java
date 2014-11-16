@@ -19,14 +19,6 @@ public class Calendario {
 	//-- Constructoras --//
 	/**
 	 * Constructora por defecto
-	 */
-	public Calendario() {
-		calendarYear = -1;
-		vacationDates = new TreeMap<Integer,Turno[]>();
-	}
-
-	/**
-	 * Constructora con argumento
 	 * @param year Anio del calendario
 	 */
 	public Calendario(int year) {
