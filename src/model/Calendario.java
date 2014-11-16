@@ -19,6 +19,11 @@ public class Calendario {
 	//-- Constructoras --//
 	/**
 	 * Constructora por defecto
+	 */
+	public Calendario() {}
+
+	/**
+	 * Constructora por defecto
 	 * @param year Anio del calendario
 	 */
 	public Calendario(int year) {

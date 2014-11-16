@@ -10,25 +10,68 @@ public class CtrlDoctor {
 	private ArrayList<Doctor> Doctors;
 	
 	/* Constructora */
-	public CtrlDoctor(){}
+	public CtrlDoctor(ArrayList<Doctor> Doc){
+		Doctors = Doc;
+	}
 	
 	/* Metodos publicos */
 
 /* ---------------DOCTORES ------------------- */
 	
-	public Doctor getDoctor(int idDoc) throws IOException {		
+	public Integer getIdDoctor(int idDoc) throws IOException {		
 		if(idDoc < 0) throw new IOException("Valor del identificador incorrecto");
 		boolean trobat = false;
-		Doctor doc = new Doctor();
 		for (int i = 0; i < Doctors.size(); ++i) {
 			if (Doctors.get(i).getId() == idDoc) {
 				trobat = true;
-				doc = Doctors.get(i);
-				break;
+				return Doctors.get(i).getId();
 			}
+			if (trobat) break;
 		}
 		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
-		return doc;
+		return null;
+	}
+	
+	public String getNombreDoctor(int idDoc) throws IOException {	
+		if(idDoc < 0) throw new IOException("Valor del identificador incorrecto");
+		boolean trobat = false;
+		for (int i = 0; i < Doctors.size(); ++i) {
+			if (Doctors.get(i).getId() == idDoc) {
+				trobat = true;
+				return Doctors.get(i).getName();
+			}
+			if (trobat) break;
+		}
+		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
+		return null;
+	}
+	
+	public Integer getNumMaxTurnosDoctor(int idDoc) throws IOException {		
+		if(idDoc < 0) throw new IOException("Valor del identificador incorrecto");
+		boolean trobat = false;
+		for (int i = 0; i < Doctors.size(); ++i) {
+			if (Doctors.get(i).getId() == idDoc) {
+				trobat = true;
+				return Doctors.get(i).getNumMaxTurn();
+			}
+			if (trobat) break;
+		}
+		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
+		return null;
+	}
+	
+	public Double getSueldoTurnosDoctor(int idDoc) throws IOException {		
+		if(idDoc < 0) throw new IOException("Valor del identificador incorrecto");
+		boolean trobat = false;
+		for (int i = 0; i < Doctors.size(); ++i) {
+			if (Doctors.get(i).getId() == idDoc) {
+				trobat = true;
+				return Doctors.get(i).getSalaryTurn();
+			}
+			if (trobat) break;
+		}
+		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
+		return null;
 	}
 	
 	public void setDoctor(int idDoc, String nombre, int numMax, double sueldo) throws IOException {
@@ -52,11 +95,10 @@ public class CtrlDoctor {
 	
 /* --------------- RESTRICCIONES -------------------- */
 	
-	public Restriccion getRestriccion(int idDoc, int idRes) throws IOException {
+	public Integer getIdRestriccion(int idDoc, int idRes) throws IOException {
 		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
 		boolean trobat, trobat2;
 		trobat = trobat2 = false;
-		Restriccion res = new Restriccion();
 		for (int i = 0; i < Doctors.size(); ++i) {
 			if (Doctors.get(i).getId() == idDoc) {
 				trobat = true;
@@ -65,7 +107,7 @@ public class CtrlDoctor {
 				for (int j = 0; j < alres.size(); ++j) {
 					if (alres.get(j).getIdRestriccion() == idRes) {
 						trobat2 = true;
-						res = alres.get(j);
+						return alres.get(j).getIdRestriccion();
 					}
 					if (trobat2) break;
 				}
@@ -74,7 +116,31 @@ public class CtrlDoctor {
 		}
 		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
 		if (!trobat2) throw new IOException("No existe una Restriccion con esta Id");
-		return res;
+		return null;
+	}
+	
+	public String getTipoRestriccion(int idDoc, int idRes) throws IOException {
+		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
+		boolean trobat, trobat2;
+		trobat = trobat2 = false;
+		for (int i = 0; i < Doctors.size(); ++i) {
+			if (Doctors.get(i).getId() == idDoc) {
+				trobat = true;
+				ArrayList<Restriccion> alres = new ArrayList<Restriccion>();
+				alres = Doctors.get(i).getRestrictions();
+				for (int j = 0; j < alres.size(); ++j) {
+					if (alres.get(j).getIdRestriccion() == idRes) {
+						trobat2 = true;
+						return alres.get(j).getTipo();
+					}
+					if (trobat2) break;
+				}
+			}
+			if (trobat) break;
+		}
+		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
+		if (!trobat2) throw new IOException("No existe una Restriccion con esta Id");
+		return null;
 	}
 	
 	public void addResMAX_Turnos_por_Dia(int idDoc, int idRes, int numT) throws IOException {
@@ -184,7 +250,7 @@ public class CtrlDoctor {
 	
 	public void addResNOT_Turno(int idDoc, int idRes, String turno) throws IOException {
 		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
-		if (!turno.equals("morning") && !turno.equals("afternoon") && !turno.equals("evening")) throw new IOException("Tipo de turno incorrecto");
+		if (!turno.equals("manana") && !turno.equals("tarde") && !turno.equals("noche")) throw new IOException("Tipo de turno incorrecto");
 		boolean trobat = false;
 		for (int i = 0; i < Doctors.size(); ++i) {
 			if (Doctors.get(i).getId() == idDoc) {
@@ -198,8 +264,32 @@ public class CtrlDoctor {
 		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
 	}
 	
-	public void addResXOR(int idDoc, int idRes, ArrayList<Turno> listXOR) throws IOException {
+	public void addResXOR(int idDoc, int idRes, ArrayList<Integer> diaXOR, ArrayList<Integer> mesXOR,  ArrayList<Integer> yearXOR, ArrayList<String> tipoTurnoXOR) throws IOException {
 		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
+		for (int i = 0; i < diaXOR.size(); ++i) {
+			if (diaXOR.get(i) < 1 || diaXOR.get(i) > 31 || mesXOR.get(i) < 1 || mesXOR.get(i) > 12 ||
+				yearXOR.get(i) < 1) throw new IOException("valores de la fecha incorrecto");
+			if (!tipoTurnoXOR.get(i).equals("manana") && !tipoTurnoXOR.get(i).equals("tarde") && !tipoTurnoXOR.get(i).equals("noche")) throw new IOException("Tipo del turno incorrecto");
+			GregorianCalendar fecha = new GregorianCalendar(diaXOR.get(i),mesXOR.get(i)-1,yearXOR.get(i));
+			if (!fecha.isLenient()) throw new IOException("Fecha invalida");
+		}
+		boolean trobat = false;
+		for (int i = 0; i < Doctors.size(); ++i) {
+			if (Doctors.get(i).getId() == idDoc) {
+				trobat = true;
+				ArrayList<Turno> listXOR = new ArrayList<Turno>();
+				for (int j = 0; j < diaXOR.size(); ++j) {
+					GregorianCalendar fecha = new GregorianCalendar(diaXOR.get(j),mesXOR.get(j)-1,yearXOR.get(j));
+					Turno turno = new Turno(fecha, tipoTurnoXOR.get(j));
+					listXOR.add(turno);
+				}
+				Restriccion res = new XOR(idRes, listXOR);
+				boolean c = Doctors.get(i).addRestriction(res);
+				if (!c) throw new IOException("Ya existe una restriccion con esta Id");	
+				break;
+			}
+		}
+		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
 		
 	}
 	
