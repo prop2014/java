@@ -70,8 +70,8 @@ public class Hospital {
 		factorN=fn;
 		doctors = new ArrayList<Doctor>();
 		for(int i = 0; i < aldoc.size(); ++i){
-			if(doctors.contains(aldoc.get(i).getId())==false){
-				doctors.add(aldoc.get(i).getId(), aldoc.get(i));
+			if(doctors.contains(aldoc.get(i))==false){
+				doctors.add(aldoc.get(i));
 			}
 		}
 		calendari = new Calendario(cal);
@@ -125,7 +125,7 @@ public class Hospital {
 	 */
 	
 	public Doctor getDoctor(int id){
-		return doctors.get(id);
+		return doctors.get(id); 
 	}
 	
 	/** 
@@ -222,7 +222,7 @@ public class Hospital {
 	 * @param d		es el nuevo doctor del Hospital
 	 */
 	public void addDoctor(Doctor d){
-			doctors.add(d);		
+			doctors.add(d.getId(),d);		
 	}
 		
 	/** 
@@ -234,8 +234,8 @@ public class Hospital {
 	public void addDoctors(ArrayList<Doctor> aldoc){
 
 		for(int i=0; i < aldoc.size();++i){
-			if(doctors.contains(aldoc.get(i).getId())==false){
-				doctors.add(aldoc.get(i));
+			if(doctors.contains(aldoc.get(i))==false){
+				doctors.add(aldoc.get(i).getId(),aldoc.get(i));
 			}
 			else {
 				doctors.remove(aldoc.get(i));
