@@ -10,9 +10,7 @@ import model.Calendario;
 import model.Doctor;
 import model.Hospital;
 import model.Restriccion;
-import model.NOT_Dia_Semana;
 import model.NOT_Dia_Mes;
-import model.NOT_Fecha;
 import model.Turno;
 import model.XOR;
 import domain.CtrlGrafo;
@@ -129,8 +127,8 @@ public class DriverCtrlGraf {
 					GregorianCalendar gc1= new GregorianCalendar(year, month-1, day);
 					GregorianCalendar gc2= new GregorianCalendar(year, month-1, day+1);
 					Calendario cale = new Calendario(year);
-					cale.addOneVacationDay(gc1);
-					cale.addOneVacationDay(gc2);
+					cale.addVacationDay(gc1);
+					cale.addVacationDay(gc2);
 					System.out.print("Se añade un calendario con 2 dias (6 turnos) al hospital\n");
 					HOSP = new Hospital(codigo,n,fm,ft,fn,aldoc,cale);
 					Calendario cal = HOSP.getCalendario();
@@ -168,7 +166,7 @@ public class DriverCtrlGraf {
 				case 3:
 					CtrlGrafo ctrlGraf = new CtrlGrafo();
 					try {
-						ctrlGraf.llenarGrafo(HOSP);
+						ctrlGraf.fillGrafo(HOSP);
 					}
 					catch (IOException e) {
 					    throw new IOException(e);
@@ -180,22 +178,73 @@ public class DriverCtrlGraf {
 						nodoDoctor nod = (nodoDoctor)g.getNode(i);
 						System.out.printf("DOCTOR: IdDoc: %d, IdNodo: %d -> ",nod.getIdDoc(), i);
 						for(int j : g.getOutNodes(i)){
-							nodoTurno nod2 = (nodoTurno)g.getNode(j);
-							GregorianCalendar c1 = nod2.getFecha();
-							String fecha = DateFormat.getDateInstance(DateFormat.SHORT).format(c1.getTime());
-							System.out.printf("Fecha: %s Turno: %s (conectado con): ", fecha, nod2.getTipoTurno());
-							for(int k : g.getOutNodes(j)) {
-								Nodo nod3 = g.getNode(k);
-								System.out.printf("%s ", nod3.getTipo());
+							if(g.getNode(j).getTipo()=="Turno"){
+								nodoTurno nod2 = (nodoTurno)g.getNode(j);
+								GregorianCalendar c1 = nod2.getFecha();
+								String fecha = DateFormat.getDateInstance(DateFormat.SHORT).format(c1.getTime());
+								System.out.printf("Fecha: %s Turno: %s (conectado con): ", fecha, nod2.getTipoTurno());
+								for(int k : g.getOutNodes(j)) {
+									Nodo nod3 = g.getNode(k);
+									System.out.printf("%s ", nod3.getTipo());
+								}
+								System.out.printf("|| ");
 							}
-							System.out.printf("|| ");
+							else if(g.getNode(j).getTipo()=="XOR"){
+								Nodo xor= g.getNode(j);
+								System.out.printf("%s ", xor.getTipo());
+								System.out.print(" conectado con -->");
+								for(int k : g.getOutNodes(j)){
+									nodoTurno nod2 = (nodoTurno)g.getNode(k);
+									GregorianCalendar c1 = nod2.getFecha();
+									String fecha = DateFormat.getDateInstance(DateFormat.SHORT).format(c1.getTime());
+									System.out.printf("Fecha: %s Turno: %s (conectado con): ", fecha, nod2.getTipoTurno());
+									for(int l : g.getOutNodes(k)) {
+										Nodo nod3 = g.getNode(l);
+										System.out.printf("%s ", nod3.getTipo());
+									}
+									System.out.printf("|| ");
+								}
+							}
+							else if(g.getNode(j).getTipo()=="MaxTDia"){
+								Nodo MaxTDia= g.getNode(j);
+								System.out.printf("%s ", MaxTDia.getTipo());
+								System.out.print(" conectado con -->");
+								for(int k : g.getOutNodes(j)){
+									nodoTurno nod2 = (nodoTurno)g.getNode(k);
+									GregorianCalendar c1 = nod2.getFecha();
+									String fecha = DateFormat.getDateInstance(DateFormat.SHORT).format(c1.getTime());
+									System.out.printf("Fecha: %s Turno: %s (conectado con): ", fecha, nod2.getTipoTurno());
+									for(int l : g.getOutNodes(k)) {
+										Nodo nod3 = g.getNode(l);
+										System.out.printf("%s ", nod3.getTipo());
+									}
+									System.out.printf("|| ");
+								}
+							}
+							else if(g.getNode(j).getTipo()=="MRango"){
+								Nodo MaxR= g.getNode(j);
+								System.out.printf("%s ", MaxR.getTipo());
+								System.out.print(" conectado con -->");
+								for(int k : g.getOutNodes(j)){
+									nodoTurno nod2 = (nodoTurno)g.getNode(k);
+									GregorianCalendar c1 = nod2.getFecha();
+									String fecha = DateFormat.getDateInstance(DateFormat.SHORT).format(c1.getTime());
+									System.out.printf("Fecha: %s Turno: %s (conectado con): ", fecha, nod2.getTipoTurno());
+									for(int l : g.getOutNodes(k)) {
+										Nodo nod3 = g.getNode(l);
+										System.out.printf("%s ", nod3.getTipo());
+									}
+									System.out.printf("|| ");
+								}
+							}
+							
 						}
 						System.out.printf("\n");
 					}
 					break;
 					
 				case 4:
-					System.out.print("Introduce el ID del doctor para ponerle una Restriccion NOT_Dia_Mes\n");
+					System.out.print("Introduce el ID del doctor para ponerle una Restriccion NOT_Dia_Mes (el 20)\n");
 					int iden;
 					System.out.print("(1,2,3,4,5)\n");
 					iden = teclado.nextInt();
@@ -230,7 +279,7 @@ public class DriverCtrlGraf {
 					doctor.addRestriction(Res2);
 					HOSP.setDoctor(doctor);
 					MostrarDoc(doctor);
-				
+					
 				default: break;
 			}
 			muestraOpciones();

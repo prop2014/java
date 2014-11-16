@@ -11,7 +11,7 @@ import java.util.Iterator;
  */
 public class Calendario {
 	//-- Atributos privados --//
-	private int calendarYear; // año al que corresponde el calendario
+	private int calendarYear; // anio al que corresponde el calendario
 	private TreeMap<Integer,Turno[]> vacationDates;
 	private static int shiftsPerDay = 3;
 	private static final String[] shiftTypes = {"manana","tarde","noche"};
@@ -68,7 +68,7 @@ public class Calendario {
 	 * pre: El calendario ya tiene el anio definido
 	 * @param date Fecha del dia vacacional que se va a anadir
 	 */
-	public void addOneVacationDay(GregorianCalendar date) {
+	public void addVacationDay(GregorianCalendar date) {
 		int key = date.get(GregorianCalendar.DAY_OF_YEAR) - 1;
 		Turno[] t = new Turno[shiftsPerDay];		
 		for (int i = 0; i < shiftsPerDay; ++i)
@@ -80,7 +80,7 @@ public class Calendario {
 	 * Modificadora que elimina un dia vacacional del calendario
 	 * @param date Fecha del dia vacacional que se va a eliminar
 	 */
-	public void deleteOneVacationDay(GregorianCalendar date) {
+	public void deleteVacationDay(GregorianCalendar date) {
 		int key = date.get(GregorianCalendar.DAY_OF_YEAR) - 1;
 		vacationDates.remove(key);
 	}
@@ -88,8 +88,8 @@ public class Calendario {
 
 	//-- Consultoras --//
 	/**
-	 * Consultora del año al que corresponde el calendario
-	 * @return Año del calendario si se ha difinido, -1 en caso contrario
+	 * Consultora del anio al que corresponde el calendario
+	 * @return Anio del calendario si se ha difinido, -1 en caso contrario
 	 */
 	public int getCalendarYear() {
 		return calendarYear;
@@ -113,7 +113,7 @@ public class Calendario {
 	 * @param date Fecha del dia vacacional
 	 * @return Lista con los tres turnos
 	 */
-	public ArrayList<Turno> getShiftsOfOneDay(GregorianCalendar date) {
+	public ArrayList<Turno> getShiftsOfADay(GregorianCalendar date) {
 		int key = date.get(GregorianCalendar.DAY_OF_YEAR) - 1;
 		ArrayList<Turno> shiftsList = new ArrayList<Turno>(shiftsPerDay);
 		for (int i = 0; i < shiftsPerDay; ++i)
