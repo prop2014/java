@@ -219,8 +219,8 @@ public class DriverHospital {
 					GregorianCalendar gc1= new GregorianCalendar(year, month-1, day);
 					GregorianCalendar gc2= new GregorianCalendar(year, month-1, day+1);
 					Calendario cale = new Calendario(year);
-					cale.addOneVacationDay(gc1);
-					cale.addOneVacationDay(gc2);
+					cale.addVacationDay(gc1);
+					cale.addVacationDay(gc2);
 					System.out.print("S'ha Creat un calendari amb els dies 20/2/2014 y 21/2/2014 per " +
 							"simular l'entrada\n");
 					HOSP = new Hospital(codigo,n,fm,ft,fn,aldoc,cale);

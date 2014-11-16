@@ -129,8 +129,8 @@ public class DriverCtrlGraf {
 					GregorianCalendar gc1= new GregorianCalendar(year, month-1, day);
 					GregorianCalendar gc2= new GregorianCalendar(year, month-1, day+1);
 					Calendario cale = new Calendario(year);
-					cale.addOneVacationDay(gc1);
-					cale.addOneVacationDay(gc2);
+					cale.addVacationDay(gc1);
+					cale.addVacationDay(gc2);
 					System.out.print("Se añade un calendario con 2 dias (6 turnos) al hospital\n");
 					HOSP = new Hospital(codigo,n,fm,ft,fn,aldoc,cale);
 					Calendario cal = HOSP.getCalendario();

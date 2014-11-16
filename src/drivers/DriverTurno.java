@@ -5,7 +5,7 @@ import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 /**
- * @author Felix Fernando Ramos Velázquez
+ * @author Felix Fernando Ramos Velazquez
  */
 public class DriverTurno {
 
@@ -15,7 +15,7 @@ public class DriverTurno {
 	}
 
 	public static void main(String[] args) {
-		Scanner kbrd = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);
 		int op = -1;
 
 		while(op != 0){
@@ -35,7 +35,7 @@ public class DriverTurno {
 			System.out.println("11: int getNumberOfDoctors()");
 			System.out.println(" 0: Salir");
 			
-			op = kbrd.nextInt();
+			op = sc.nextInt();
 			switch(op){
 			case 1:{
 				Turno t = new Turno();
@@ -49,17 +49,17 @@ public class DriverTurno {
 			case 3:{
 				System.out.println("Introducir la fecha (dayOfMonth month year) del turno:");
 				int dayOfMonth, month, year;
-				dayOfMonth = kbrd.nextInt();
-				month = kbrd.nextInt();
-				year = kbrd.nextInt();
+				dayOfMonth = sc.nextInt();
+				month = sc.nextInt();
+				year = sc.nextInt();
 				System.out.println("Introducir el tipo {morning | afternoon | evening} del turno:");
-				String shiftType = kbrd.next();
+				String shiftType = sc.next();
 				System.out.println("Introducir la fecha especial del turno:");
-				String specialDate = kbrd.next();
+				String specialDate = sc.next();
 				System.out.println("Introducir el numero de doctores del turno:");
-				int numberOfDoctors = nextInt();
+				int numberOfDoctors = sc.nextInt();
 				GregorianCalendar date = new GregorianCalendar(year,month-1,dayOfMonth);
-				t = new Turno(date, shiftType, specialDate, numberOfDoctors);
+				//t = new Turno(date, shiftType, specialDate, numberOfDoctors);
 				System.out.println("Se ha creado un turno con los parámetros introducidos");
 				break;
 			}
@@ -97,7 +97,7 @@ public class DriverTurno {
 			}
 			}
 		}
-		kbrd.close();
+		sc.close();
 	}
 
 }
