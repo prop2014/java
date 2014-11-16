@@ -9,6 +9,10 @@ import java.io.IOException;
 import model.Calendario;
 import model.Doctor;
 import model.Hospital;
+import model.Restriccion;
+import model.NOT_Dia_Semana;
+import model.NOT_Dia_Mes;
+import model.NOT_Fecha;
 import model.Turno;
 import domain.CtrlGrafo;
 import domain.Nodo;
@@ -30,6 +34,7 @@ public class DriverCtrlGraf {
 		System.out.print("1: Hospital (id,nom,fm,ft,fn,aldoc,cal)\n");
 		System.out.print("2: addDoctor(d)\n");
 		System.out.print("3: Llenar Grafo y mostrar conexiones\n");
+		System.out.print("4: añadir Restriccion a un Doctor\n");
 		System.out.print("0: Salir\n");
 	}
 	
@@ -63,7 +68,7 @@ public class DriverCtrlGraf {
 			MostrarDoc(d);
 		}
 		Calendario cal = hosp.getCalendario();
-		System.out.printf("El calendario tiene %d Turnos Vacacionales\n",cal.getTotalOfShifts());
+		System.out.printf("El calendario tiene %d Turnos Vacacionales\n",cal.getNumberOfShifts());
 		ArrayList<Turno> alturno = cal.getALLShifts();
 		for(Turno t : alturno) {
 			MostrarTurno(t);
@@ -116,10 +121,10 @@ public class DriverCtrlGraf {
 					int year, month, day;
 					year = 2014;
 					month = 2;
-					day = 4;
+					day = 20;
 					GregorianCalendar gc1= new GregorianCalendar(year, month-1, day);
 					GregorianCalendar gc2= new GregorianCalendar(year, month-1, day+1);
-					Calendario cale = new Calendario(2);
+					Calendario cale = new Calendario(year);
 					cale.addOneVacationDay(gc1);
 					cale.addOneVacationDay(gc2);
 					System.out.print("Se añade un calendario con 2 dias (6 turnos) al hospital\n");
@@ -184,7 +189,39 @@ public class DriverCtrlGraf {
 						System.out.printf("\n");
 					}
 					break;
-				
+					
+				case 4:
+					System.out.print("Introduce el ID del doctor para ponerle una Restriccion NOT DiaSemana\n");
+					int iden;
+					System.out.print("(1,2,3,4,5)\n");
+					iden = teclado.nextInt();
+					Doctor doctor = HOSP.getDoctor(iden);
+					Restriccion Res2 = new NOT_Dia_Mes(1,20);
+					doctor.addRestriction(Res2);
+					HOSP.setDoctor(doctor);
+					MostrarDoc(doctor);
+					
+					break;
+					
+				case 5:
+					CtrlGrafo CtrGra = new CtrlGrafo();
+					try {
+						CtrGra.llenarGrafo(HOSP);
+					}
+					catch (IOException e) {
+					    throw new IOException(e);
+					}
+					Graf<Nodo> g1 = CtrGra.getGraf();
+					ArrayList<Integer> nodos2 = g1.getOutNodes(0);
+					System.out.printf("Source Conectado con:\n");
+					for(int i = 1; i <= nodos2.size();++i){
+						nodoDoctor nod2 = (nodoDoctor)g1.getNode(i);
+						System.out.printf("DOCTOR: IdDoc: %d, IdNodo: %d -> ",nod2.getIdDoc(), i);
+						for(int j : g1.getOutNodes(i)){
+							System.out.printf("conected whit %d",j);
+						}
+						System.out.printf("\n");
+					}
 				
 				default: break;
 			}

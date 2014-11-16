@@ -28,7 +28,7 @@ public class DriverHospital {
 	static void MostrarCal(Calendario cal){
 		
 		System.out.printf("Calendari del any %d\n",cal.getCalendarYear());
-		System.out.printf("Esta format per: %d turns vacacionals\n",cal.getTotalOfShifts());	
+		System.out.printf("Esta format per: %d turns vacacionals\n",cal.getNumberOfShifts());	
 	}
 
 	
@@ -69,9 +69,9 @@ public class DriverHospital {
 			}
 		}
 		Calendario cal = hosp.getCalendario();
-		if(cal.getTotalOfVacationDates()==0) System.out.printf("Actualment l'Hospital no te calendari\n");
+		if(cal.getNumberOfVacationDates()==0) System.out.printf("Actualment l'Hospital no te calendari\n");
 		else {
-			System.out.printf("El calendari te %d Turns Vacacionals\n",cal.getTotalOfShifts());
+			System.out.printf("El calendari te %d Turns Vacacionals\n",cal.getNumberOfShifts());
 			ArrayList<Turno> alturno = cal.getALLShifts();
 			for(int i=0;i<alturno.size();++i){
 				MostrarTurno(alturno.get(i));

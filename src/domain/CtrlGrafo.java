@@ -199,19 +199,11 @@ public class CtrlGrafo {
 					}
 				}
 				for(int k=0;k<alRest.size();++k){
-					Restriccion res = alRest.get(k); //tengo la restriccion
-					String restipe =res.getTipo(); // tengo el tipo
+					Restriccion res = alRest.get(k);
+					String restipe =res.getTipo(); 
 					if (restipe.equals("MAX_Turnos_por_Dia")){
-						//se obtiene el numMaxTurnosxdia
-						//si es 0 se pone TURNOS[] a false;
-						//si es 3 no se hace nada;
-						//else se crea 1 nodo para cada 3 iteraciones del for(m)
-						// comprovar si el dia esta en true;
-						// se le pone (capacidad 1) 
-						// se le pone coste i avanti
 						MAX_Turnos_por_Dia N = (MAX_Turnos_por_Dia)res;
-						int max = N.getNumTurnos();
-						boolean modif1=false;
+						int max = N.getNumTurnos();	
 						if(max==0) for(int m=0;i<alturnos.size();++m) Turnos[m]=false;
 						else if(max == 1 | max ==2){
 							for(int m=0;m<alturnos.size();m=m+3){
@@ -221,7 +213,6 @@ public class CtrlGrafo {
 								grafo.conectarNodes(i, id, max, 0.0);
 								if(Turnos[m]==true){
 									modif=true;
-									modif1=true;
 									int capacidad = 1;
 									double coste = 0;
 									String tt = alturnos.get(m).getShiftType();
@@ -233,7 +224,6 @@ public class CtrlGrafo {
 								}
 								if(Turnos[m+1]==true){
 									modif=true;
-									modif1=true;
 									int capacidad = 1;
 									double coste = 0;
 									String tt = alturnos.get(m+1).getShiftType();
@@ -245,7 +235,6 @@ public class CtrlGrafo {
 								}
 								if(Turnos[m+2]==true){
 									modif=true;
-									modif1=true;
 									int capacidad = 1;
 									double coste = 0;
 									String tt = alturnos.get(m+2).getShiftType();
@@ -256,12 +245,11 @@ public class CtrlGrafo {
 									grafo.conectarNodes(id, m+2+firsttorn, capacidad, coste);
 								}
 								if(modif==true)++id;
+								else grafo.removeNode(id);
 							}
 						}
-						
 					}
-					
-					else if (restipe.equals("MAX_Dias_Rango")){
+					else if (restipe.equals("MAX_Turnos_Rango")){
 						//se obtiene el MaxDIASenRango
 						//se crea Nodo MaxDiasRango
 						//se une el doctor con el nodo con capacidad MaxDiasenRango
@@ -273,8 +261,28 @@ public class CtrlGrafo {
 						MAX_Turnos_Rango N = ((MAX_Turnos_Rango)res);
 						GregorianCalendar fechaIni = ((MAX_Turnos_Rango)res).getFechaIni();
 						GregorianCalendar fechaFin = ((MAX_Turnos_Rango)res).getFechaFin();
-						int  numDias = N.getNumDias();
-						Nodo MRango = new Nodo(id, "MAX");
+						int firstDay = fechaIni.get(GregorianCalendar.DAY_OF_YEAR);
+						int  lastDay = fechaFin.get(GregorianCalendar.DAY_OF_YEAR);
+						int numDias=N.getNumDias();
+						boolean modif = false;
+						Nodo MRango = new Nodo(id, "MRango");
+						grafo.afegirNode(MRango);
+						grafo.conectarNodes(i, id, numDias, 0.0);
+						for(int m=0;m<alturnos.size();++m){
+							GregorianCalendar gc1 = alturnos.get(m).getDate();
+							int day = gc1.get(GregorianCalendar.DAY_OF_YEAR);
+							if((day>=firstDay & day <=lastDay) & Turnos[m]==true){
+								modif=true;
+								int capacidad = 1;
+								double coste = 0;
+								String tt = alturnos.get(m+2).getShiftType();
+								double sueldo = aldoc.get(i-firstdoc).getSalaryTurn();
+								if(tt.equals("morning")) coste=fm*sueldo;
+								else if(tt.equals("afternoon")) coste=ft*sueldo;
+								else if(tt.equals("evening")) coste=fn*sueldo;
+								grafo.conectarNodes(id, m+firsttorn, capacidad, coste);
+							}
+						}
 						
 					}
 					/*else if (restipe.equals("MAX_Turnos_Consecutivos")){
