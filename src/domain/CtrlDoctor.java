@@ -145,35 +145,6 @@ public class CtrlDoctor {
 	
 	/* --------------- GETS COMUNES RESTRICCIONES -------------------- */
 	
-	/**
-	* Consultora del identificador de la Restriccion
-	* @param idDoc: Identificador del Doctor
-	* 		 idRes: Identificador de la restriccion
-	* @return El identificador de la restriccion
-	* @throws Exception
-	*/
-	public Integer getIdRestriccion(int idDoc, int idRes) throws IOException {
-		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
-		boolean trobat, trobat2;
-		trobat = trobat2 = false;
-		for (int i = 0; i < Doctors.size(); ++i) {
-			if (Doctors.get(i).getId() == idDoc) {
-				trobat = true;
-				ArrayList<Restriccion> alres = Doctors.get(i).getRestrictions();
-				for (int j = 0; j < alres.size(); ++j) {
-					if (alres.get(j).getIdRestriccion() == idRes) {
-						trobat2 = true;
-						return alres.get(j).getIdRestriccion();
-					}
-					if (trobat2) break;
-				}
-			}
-			if (trobat) break;
-		}
-		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
-		if (!trobat2) throw new IOException("No existe una Restriccion con esta Id");
-		return null;
-	}
 	
 	/**
 	* Consultora del tipo de la Restriccion
