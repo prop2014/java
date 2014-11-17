@@ -34,6 +34,18 @@ public class CtrlDoctor {
 /* ---------------DOCTORES ------------------- */
 	
 	/**
+	*Consultora de todos los identificadores dels doctores
+	* @return ids de los doctores
+	*/
+	public ArrayList<Integer> getAllDoctors() {
+		ArrayList<Integer> docs = new ArrayList<Integer>();
+		for (int i = 0; i < Doctors.size(); ++i) {
+			docs.add(Doctors.get(i).getId());
+		}
+		return docs;
+	}
+	
+	/**
 	*Consultora del identificador del Doctor
 	* @param idDoc: Identificador del Doctor
 	* @return La id del Doctor
@@ -596,6 +608,17 @@ public class CtrlDoctor {
 		for (int i = 0; i < Doctors.size(); ++i) {
 			if (Doctors.get(i).getId() == idDoc) {
 				trobat = true;
+				ArrayList<Restriccion> alres = Doctors.get(i).getRestrictions();
+				/*Comprovar si el doctor tiene una XOR con una fecha dentro del rango de la MAX que se quiere poner */
+				for (int j = 0; j < alres.size(); ++j) {
+					if (alres.get(j).getTipo().equals("XOR")) {
+						XOR N = (XOR)alres.get(j);
+						ArrayList<Turno> listXOR = N.getListTurnos();
+						for (int z = 0; z < listXOR.size(); ++z) {
+							
+						}
+					}
+				}
 				Restriccion res = new MAX_Turnos_Rango(idRes, d1, m1, a1, d2, m2, a2, numT);
 				boolean c = Doctors.get(i).addRestriction(res);
 				if (!c) throw new IOException("Ya existe una restriccion con esta Id");	
