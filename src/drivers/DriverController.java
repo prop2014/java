@@ -2,17 +2,10 @@ package drivers;
 
 import java.text.DateFormat;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
-import model.Calendario;
-import model.Doctor;
-import model.NOT_Dia_Mes;
-import model.Restriccion;
 import domain.*;
 
 
@@ -41,8 +34,6 @@ public static void main(String[] args) throws IOException{
 		
 		Scanner teclado;
 		teclado = new Scanner(System.in);
-		InputStreamReader isr = new InputStreamReader(System.in);
-	    BufferedReader br = new BufferedReader (isr);
 	    
 	    CtrlHospital CtrlHosp = new CtrlHospital();
 
@@ -50,6 +41,7 @@ public static void main(String[] args) throws IOException{
 		String nombre, fecha, especial, turno;
 		double sueldo;
 	    double fm, ft, fn;
+	    ArrayList<Integer> docs;
 		System.out.print("Introduce el ID del hospital: ");
 		id = teclado.nextInt();
 		System.out.print("Introduce el nombre del hospital: ");
@@ -264,12 +256,10 @@ public static void main(String[] args) throws IOException{
 					break;
 					
 				case 12:
-					System.out.println("NODOS:");
 					CtrlAlg.generateGraf();
-					System.out.println("Introduce el vertice inicio:");
-					ini = teclado.nextInt();
-					System.out.println("Introduce el vertice fin:");
-					fin = teclado.nextInt();
+					docs = CtrlDoct.getAllDoctors();
+					ini = 0;
+					fin = docs.size()+1;
 					CtrlAlg.findMaxFlowFulk(ini, fin);
 					if(CtrlAlg.findSolution(ini, fin)){
 						ArrayList<Integer> idDocs = CtrlDoct.getAllDoctors();
@@ -296,12 +286,10 @@ public static void main(String[] args) throws IOException{
 					break;
 					
 				case 13:
-					System.out.println("NODOS:");
 					CtrlAlg.generateGraf();
-					System.out.println("Introduce el vertice inicio:");
-					ini = teclado.nextInt();
-					System.out.println("Introduce el vertice fin:");
-					fin = teclado.nextInt();
+					docs = CtrlDoct.getAllDoctors();
+					ini = 0;
+					fin = docs.size()+1;
 					CtrlAlg.findMaxFlowEk(ini, fin);
 					if(CtrlAlg.findSolution(ini, fin)){
 						ArrayList<Integer> idDocs = CtrlDoct.getAllDoctors();
@@ -327,12 +315,10 @@ public static void main(String[] args) throws IOException{
 					}
 					break;
 				case 14:
-					System.out.println("NODOS:");
 					CtrlAlg.generateGraf();
-					System.out.println("Introduce el vertice inicio:");
-					ini = teclado.nextInt();
-					System.out.println("Introduce el vertice fin:");
-					fin = teclado.nextInt();
+					docs = CtrlDoct.getAllDoctors();
+					ini = 0;
+					fin = docs.size()+1;
 					CtrlAlg.findMaxFlowDijk(ini, fin);
 					if(CtrlAlg.findSolution(ini, fin)){
 						ArrayList<Integer> idDocs = CtrlDoct.getAllDoctors();
