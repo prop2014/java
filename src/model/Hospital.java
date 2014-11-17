@@ -29,7 +29,7 @@ public class Hospital {
 		factorT=0.0;
 		factorN=0.0;
 		doctors = new ArrayList<Doctor>();
-		calendari = new Calendario(0);
+		calendari = new Calendario(2014);
 	}
 	
 	/**
@@ -48,7 +48,7 @@ public class Hospital {
 		factorT=ft;
 		factorN=fn;
 		doctors = new ArrayList<Doctor>();
-		calendari = new Calendario(0);
+		calendari = new Calendario(2014);
 	}
 	
 	/**

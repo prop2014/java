@@ -125,7 +125,6 @@ import java.util.Collections;
  		//System.out.println("V = " +  V);
  		boolean visited[] = new boolean[V];
  		ArrayList<Integer> path = new ArrayList<Integer>();
- 		
  		//create a queue, enqueue the vertex and mark the vertex as visited
  		Queue<Integer> queue = new LinkedList<Integer>();
  		queue.add(s);
@@ -155,7 +154,7 @@ import java.util.Collections;
 		 			
 		 				Integer capacity = graf.getCapacidadAresta(idEdge);
 		 				
-		 				if((capacity > 0) && (flux < capacity))
+		 				if((capacity > 0))
 		 				{
 		 					
 		 					if(head == s) fromNode.put(outArray.get(i), s);

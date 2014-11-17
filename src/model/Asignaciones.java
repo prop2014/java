@@ -63,8 +63,11 @@ public class Asignaciones {
 	* 		  por todos los turnos trabajados
 	*/
 	public double getSueldoTotal(int idDoctor){
-		listAndSalary ls = mapSol.get(idDoctor);
-		return  ls.sueldoTotal;
+		double s = 0.0;
+		if (mapSol.containsKey(idDoctor)) {
+			s = mapSol.get(idDoctor).sueldoTotal;
+		}
+		return  s;
 	}
 	
 	/**
@@ -73,10 +76,10 @@ public class Asignaciones {
 	* @return listado de fechas en las que el Doctor con idDoctor trabaja 
 	*/
 	public ArrayList<String> getFechasAsignaciones(int idDoctor){
-		listAndSalary ls = mapSol.get(idDoctor);
 		ArrayList<String> fechasAsignaciones = new ArrayList<String>();
-		
-		if(! ls.listaTurnos.isEmpty()){
+		if (mapSol.containsKey(idDoctor)) {
+			listAndSalary ls = mapSol.get(idDoctor);
+
 			for(nodoTurno turno : ls.listaTurnos){
 				//PARSEO
 				GregorianCalendar c1 = turno.getFecha();
@@ -84,8 +87,8 @@ public class Asignaciones {
 				
 				fechasAsignaciones.add(fecha);
 			}
-		}
 		
+		}
 		return  fechasAsignaciones; 
 		
 	}
@@ -96,12 +99,14 @@ public class Asignaciones {
 	* @return listado de tipos de turno en las que el Doctor con idDoctor trabaja 
 	*/
 	public ArrayList<String> getTipoTurnoAsignaciones(int idDoctor){
-		listAndSalary ls = mapSol.get(idDoctor);
 		ArrayList<String> tipoTurnoAsignaciones = new ArrayList<String>();
-		
-		for(nodoTurno turno : ls.listaTurnos){
-			tipoTurnoAsignaciones.add(turno.getTipoTurno());
-			
+		if (mapSol.containsKey(idDoctor)) {
+			listAndSalary ls = mapSol.get(idDoctor);
+	
+			for(nodoTurno turno : ls.listaTurnos){
+				tipoTurnoAsignaciones.add(turno.getTipoTurno());
+				
+			}
 		}
 			
 		return  tipoTurnoAsignaciones; 

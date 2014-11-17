@@ -88,11 +88,11 @@ public class InterpretarResultado {
 						
 						}
 						
-
-					}
-					
 					//llamada recursiva
 					interpretarDFS(vecino, turnos,idDoctor);
+					}
+					
+					
 				}
 			}
 			

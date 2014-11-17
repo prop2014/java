@@ -40,7 +40,7 @@ public class FFDijkstra<T> extends FordFulkerson<T> {
 		//pred[u] predecesor de u en este camino
 		try {
 			int size = graf.getNSize();
-			ArrayList<Integer> camino = new ArrayList<Integer>(0);
+			ArrayList<Integer> camino = new ArrayList<Integer>();
 			int[] pred = new int[size];
 			for(int k = 0; k < size; k++){
 		        pred[k] = -1;
@@ -72,7 +72,7 @@ public class FFDijkstra<T> extends FordFulkerson<T> {
 					int capacidadArista = graf.getCapacidadAresta(arista);
 					double costeArista = graf.getCosteAresta(arista);
 					int flujoArista = graf.getFlujoAresta(arista);
-					if(capacidadArista > 0 && flujoArista < capacidadArista) {
+					if(capacidadArista > 0) {
 						double coste = dist[p.id]+costeArista;
 						if(coste < dist[neighbour]){
 							dist[neighbour] = coste;

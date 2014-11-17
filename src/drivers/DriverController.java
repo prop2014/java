@@ -277,7 +277,7 @@ public static void main(String[] args) throws IOException{
 						for (int i : idDocs) {
 							System.out.printf("Doctor %d\n", i);
 							ArrayList<String> fechasArray = CtrlAlg.getDatesAssigned(i);
-							ArrayList<String> turnosArray = CtrlAlg.getTurnosAssigned(id);
+							ArrayList<String> turnosArray = CtrlAlg.getTurnosAssigned(i);
 							for(int j = 0; j < fechasArray.size(); ++j) {
 								System.out.printf("%s - %s \n",fechasArray.get(j), turnosArray.get(j));
 							}
@@ -309,7 +309,7 @@ public static void main(String[] args) throws IOException{
 						for (int i : idDocs) {
 							System.out.printf("Doctor %d\n", i);
 							ArrayList<String> fechasArray = CtrlAlg.getDatesAssigned(i);
-							ArrayList<String> turnosArray = CtrlAlg.getTurnosAssigned(id);
+							ArrayList<String> turnosArray = CtrlAlg.getTurnosAssigned(i);
 							for(int j = 0; j < fechasArray.size(); ++j) {
 								System.out.printf("%s - %s \n",fechasArray.get(j), turnosArray.get(j));
 							}
@@ -340,7 +340,7 @@ public static void main(String[] args) throws IOException{
 						for (int i : idDocs) {
 							System.out.printf("Doctor %d\n", i);
 							ArrayList<String> fechasArray = CtrlAlg.getDatesAssigned(i);
-							ArrayList<String> turnosArray = CtrlAlg.getTurnosAssigned(id);
+							ArrayList<String> turnosArray = CtrlAlg.getTurnosAssigned(i);
 							for(int j = 0; j < fechasArray.size(); ++j) {
 								System.out.printf("%s - %s \n",fechasArray.get(j), turnosArray.get(j));
 							}
