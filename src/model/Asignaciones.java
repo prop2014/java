@@ -76,13 +76,16 @@ public class Asignaciones {
 		listAndSalary ls = mapSol.get(idDoctor);
 		ArrayList<String> fechasAsignaciones = new ArrayList<String>();
 		
-		for(nodoTurno turno : ls.listaTurnos){
-			//PARSEO
-			GregorianCalendar c1 = turno.getFecha();
-			String fecha = DateFormat.getDateInstance(DateFormat.SHORT).format(c1.getTime());
-			
-			fechasAsignaciones.add(fecha);
+		if(! ls.listaTurnos.isEmpty()){
+			for(nodoTurno turno : ls.listaTurnos){
+				//PARSEO
+				GregorianCalendar c1 = turno.getFecha();
+				String fecha = DateFormat.getDateInstance(DateFormat.SHORT).format(c1.getTime());
+				
+				fechasAsignaciones.add(fecha);
+			}
 		}
+		
 		return  fechasAsignaciones; 
 		
 	}
