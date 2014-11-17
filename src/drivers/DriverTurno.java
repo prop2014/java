@@ -38,7 +38,6 @@ public class DriverTurno {
 
 		Turno t1 = new Turno();
 		Turno t2 = new Turno();
-		GregorianCalendar date = new GregorianCalendar();
 		Scanner sc = new Scanner(System.in);
 		String answer;
 		boolean exit = false;
@@ -70,6 +69,7 @@ public class DriverTurno {
 			}
 			case 2:{
 				System.out.println("2: Turno (GregorianCalendar date, String shiftType)\n");
+				GregorianCalendar date = new GregorianCalendar();
 				readDate(sc,date);
 				System.out.println("Introducir 'tipo':");
 				String shiftType = sc.next();
@@ -86,6 +86,7 @@ public class DriverTurno {
 			}
 			case 3:{
 				System.out.println("3: Turno (GregorianCalendar date, String shiftType, String specialDate, int numberOfDoctors)\n");
+				GregorianCalendar date = new GregorianCalendar();
 				readDate(sc,date);
 				System.out.println("Introducir 'tipo':");
 				String shiftType = sc.next();
