@@ -19,7 +19,7 @@ public class DriverCalendario {
 
 	private static int shiftsPerDay = 3;
 	private static final String[] shiftTypes = {"manana","tarde","noche"};
-	
+
 	private static void readDate(Scanner sc, GregorianCalendar date) throws ParseException {
 		System.out.println("Introducir 'fecha' { dd-mm-aaaa }:");
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -27,7 +27,7 @@ public class DriverCalendario {
 		String s = sc.next();
 		date.setTime(sdf.parse(s));
 	}
-	
+
 	private static void printDate(GregorianCalendar date) {
 		SimpleDateFormat sdf = new SimpleDateFormat("d-MMM-yyyy");
 		System.out.print(sdf.format(date.getTime()));
@@ -105,7 +105,7 @@ public class DriverCalendario {
 		String answer;
 		boolean exit = false;
 		int op;
-		
+
 		while(!exit){
 			System.out.println();
 			System.out.println("-- Menu Principal --\n");

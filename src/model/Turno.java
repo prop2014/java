@@ -13,13 +13,13 @@ public class Turno {
 	private String specialDate;
 	private int numberOfDoctors;
 
-	
+
 	//-- Constructoras --//
 	/**
 	 * Constructora por defecto
 	 */
 	public Turno() {}	
-	
+
 	/**
 	 * Constructora 2
 	 * @param date Fecha del turno
@@ -45,7 +45,7 @@ public class Turno {
 		this.specialDate = specialDate;
 		this.numberOfDoctors = numberOfDoctors;
 	}
-	
+
 	/**
 	 * Constructora 4 (copia)
 	 * @param T Turno que se copiara
@@ -56,10 +56,10 @@ public class Turno {
 		specialDate = T.specialDate;
 		numberOfDoctors = T.numberOfDoctors;
 	}
-	
-	
+
+
 	/* Metodos públicos */
-	
+
 	//-- Modificadoras --//
 	/**
 	 * Modifica el tipo de fecha especial del turno
@@ -77,7 +77,7 @@ public class Turno {
 		this.numberOfDoctors = numberOfDoctors;
 	}
 
-	
+
 	//-- Consultoras --//
 	/**
 	 * Consultora de la fecha del turno
