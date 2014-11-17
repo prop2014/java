@@ -742,7 +742,7 @@ public class CtrlDoctor {
 			if (diaXOR.get(i) < 1 || diaXOR.get(i) > 31 || mesXOR.get(i) < 1 || mesXOR.get(i) > 12 ||
 				yearXOR.get(i) < 1) throw new IOException("valores de la fecha incorrecto");
 			if (!tipoTurnoXOR.get(i).equals("manana") && !tipoTurnoXOR.get(i).equals("tarde") && !tipoTurnoXOR.get(i).equals("noche")) throw new IOException("Tipo del turno incorrecto");
-			GregorianCalendar fecha = new GregorianCalendar(diaXOR.get(i),mesXOR.get(i)-1,yearXOR.get(i));
+			GregorianCalendar fecha = new GregorianCalendar(yearXOR.get(i),mesXOR.get(i)-1,diaXOR.get(i));
 			if (!fecha.isLenient()) throw new IOException("Fecha invalida");
 		}
 		boolean trobat = false;
