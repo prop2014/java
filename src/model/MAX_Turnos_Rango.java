@@ -23,7 +23,7 @@ public class  MAX_Turnos_Rango extends Restriccion {
 	* @override Restriccion
 	*/
 	public MAX_Turnos_Rango (int id, int d1,int m1, int a1, int d2,int m2, int a2, int numT){
-		super(id,"MAX_Dias_Rango");
+		super(id,"MAX_Turnos_Rango");
 		fechaIni = new GregorianCalendar(a1,m1-1,d1);
 		fechaFin = new GregorianCalendar(a2,m2-1,d2);
 		numTurnos = numT;
@@ -37,7 +37,7 @@ public class  MAX_Turnos_Rango extends Restriccion {
 	* @override Restriccion
 	*/
 	public MAX_Turnos_Rango (int id, GregorianCalendar fechaI, GregorianCalendar fechaF, int numT) {
-		super(id,"MAX_Dias_Rango");
+		super(id,"MAX_Turnos_Rango");
 		fechaIni = fechaI;
 		fechaFin = fechaF;
 		numTurnos = numT;

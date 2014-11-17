@@ -117,9 +117,16 @@ public class InterpretarResultado {
 			int idArista = graf.getIDAresta(vecino, idSumidero);
 			flujoTurnoASumidero += graf.getCapacidadAresta(idArista);
 			
+
 			if(graf.getFlujoAresta(idArista) > graf.getCapacidadAresta(idArista)){
 				turnosSinSol.add((nodoTurno)graf.getNode(vecino));
 			}
+
+			//if(graf.getFlujoAresta(idArista) > graf.getCapacidadAresta(idArista)){
+			nodoTurno n = (nodoTurno)graf.getNode(vecino);
+				turnosSinSol.add(n);
+			//}
+
 		}
 		
 		if(flujoFuenteADoctor < flujoTurnoASumidero || flujoTurnoASumidero > 0) sol = false;

@@ -9,6 +9,8 @@ import java.io.IOException;
 import model.Calendario;
 import model.Doctor;
 import model.Hospital;
+import model.MAX_Turnos_por_Dia;
+import model.MAX_Turnos_Rango;
 import model.Restriccion;
 import model.NOT_Dia_Mes;
 import model.Turno;
@@ -22,11 +24,10 @@ import domain.nodoTurno;
 /**
  * 
  * @author Alex Morral
- * 
+ * @author Oscar
  *
  */
 
-//@author Oscar
 public class DriverCtrlGraf {
 	
 	
@@ -37,6 +38,8 @@ public class DriverCtrlGraf {
 		System.out.print("3: Llenar Grafo y mostrar conexiones\n");
 		System.out.print("4: anadir Restriccion NotDiaMes a un Doctor\n");
 		System.out.print("5: anadir Restriccion XOR a un Doctor\n");
+		System.out.print("6: anadir Restriccion Max_Turnos_Dia\n");
+		System.out.print("7: anadir Restriccion Max_Turnos_Rango\n");
 		System.out.print("0: Salir\n");
 	}
 	
@@ -279,7 +282,36 @@ public class DriverCtrlGraf {
 					doctor.addRestriction(Res2);
 					HOSP.setDoctor(doctor);
 					MostrarDoc(doctor);
+					break;
 					
+				case 6:
+					System.out.print("Introduce el ID del doctor para ponerle una Restriccion Max_Turnos_Dia(2)\n");
+					System.out.print("(1,2,3,4,5)\n");
+					iden = teclado.nextInt();
+					doctor = HOSP.getDoctor(iden);
+					MAX_Turnos_por_Dia Res3 = new MAX_Turnos_por_Dia(3, 2);
+					doctor.addRestriction(Res3);
+					HOSP.setDoctor(doctor);
+					MostrarDoc(doctor);
+					break;
+				
+				case 7:
+					System.out.print("Introduce el ID del doctor para ponerle una Restriccion Max_Turnos_Rango\n");
+					System.out.print("(1,2,3,4,5)\n");
+					iden = teclado.nextInt();
+					doctor = HOSP.getDoctor(iden);
+					int year1, month1, day1;
+					year1 = 2014;
+					month1 = 2;
+					day1 = 20;
+					GregorianCalendar gc3= new GregorianCalendar(year1, month1-1, day1);
+					GregorianCalendar gc4= new GregorianCalendar(year1, month1-1, day1+1);
+					MAX_Turnos_Rango Res4= new MAX_Turnos_Rango (4, gc3, gc4, 2);
+					doctor.addRestriction(Res4);
+					HOSP.setDoctor(doctor);
+					MostrarDoc(doctor);
+					
+					break;
 				default: break;
 			}
 			muestraOpciones();

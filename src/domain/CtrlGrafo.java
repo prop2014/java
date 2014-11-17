@@ -79,8 +79,8 @@ public class CtrlGrafo {
 		Nodo Sink = new Nodo(id, "Sink");
 		grafo.afegirNode(Sink);
 		sink = id;
-		//nodos de doctores añadidos
-		//añadimos todos los turnos al grafo
+		//nodos de doctores anadidos
+		//anadimos todos los turnos al grafo
 		ArrayList<Turno> alturnos = new ArrayList<Turno> ();
 		Calendario cal = h.getCalendario();
 		alturnos = cal.getALLShifts();
@@ -96,11 +96,9 @@ public class CtrlGrafo {
 		++id; 
 				
 		
-		//nodos de turnos añadidos	
-		// ahora vamos a añadir las restricciones de cada doctor.
+		//nodos de turnos anadidos	
+		// ahora vamos a anadir las restricciones de cada doctor.
 		for(int i=firstdoc;i<=lastdoc;++i){ //para cada doctor:
-			
-				//caso base donde no hay restricciones
 			if(aldoc.get(i-firstdoc).isREmpty()){
 				for(int j=firsttorn;j<=lasttorn;++j){
 					int capacidad=1; //
@@ -120,11 +118,9 @@ public class CtrlGrafo {
 					Turnos[k]=true;
 				}
 				ArrayList<Restriccion> alRest = aldoc.get(i-firstdoc).getRestrictions();
-				
 				for(int k=0;k<alRest.size();++k){
 					Restriccion res = alRest.get(k); //tengo la restriccion
 					String restipe =res.getTipo(); // tengo el tipo
-					
 					if(restipe.equals("NOT_Turno")){
 						NOT_Turno N = (NOT_Turno)res;
 						String t = N.getTipoTurno();  
@@ -169,7 +165,6 @@ public class CtrlGrafo {
 								Turnos[m]=false;
 							}
 						}
-						
 					}
 					else if (restipe.equals("NOT_Dia_Mes")){
 						NOT_Dia_Mes N = (NOT_Dia_Mes)res;
@@ -177,11 +172,8 @@ public class CtrlGrafo {
 						for(int m=0;m<alturnos.size();++m){
 							GregorianCalendar gc1=alturnos.get(m).getDate();
 							int day = gc1.get(GregorianCalendar.DAY_OF_MONTH);
-							if(dia==day){
-								Turnos[m]=false;
-							}
+							if(dia==day)Turnos[m]=false;
 						}
-						
 					}				
 				}
 				for(int k=0;k<alRest.size();++k){
@@ -258,7 +250,7 @@ public class CtrlGrafo {
 									else if(tt.equals("tarde")) coste=ft*sueldo;
 									else if(tt.equals("noche")) coste=fn*sueldo;
 									grafo.conectarNodes(id, m+1+firsttorn, capacidad, coste);
-									Turnos[m]=false;
+									Turnos[m+1]=false;
 								}
 								if(Turnos[m+2]==true){
 									modif=true;
@@ -270,7 +262,7 @@ public class CtrlGrafo {
 									else if(tt.equals("tarde")) coste=ft*sueldo;
 									else if(tt.equals("noche")) coste=fn*sueldo;
 									grafo.conectarNodes(id, m+2+firsttorn, capacidad, coste);
-									Turnos[m]=false;
+									Turnos[m+2]=false;
 								}
 								if(modif==true)++id;
 								else grafo.removeNode(id);
@@ -291,11 +283,13 @@ public class CtrlGrafo {
 						for(int m=0;m<alturnos.size();++m){
 							GregorianCalendar gc1 = alturnos.get(m).getDate();
 							int day = gc1.get(GregorianCalendar.DAY_OF_YEAR);
+							System.out.print("entru\n");
 							if((day>=firstDay & day <=lastDay) & Turnos[m]==true){
+								System.out.print("entru1\n");
 								modif=true;
 								int capacidad = 1;
 								double coste = 0;
-								String tt = alturnos.get(m+2).getShiftType();
+								String tt = alturnos.get(m).getShiftType();
 								double sueldo = aldoc.get(i-firstdoc).getSalaryTurn();
 								if(tt.equals("manana")) coste=fm*sueldo;
 								else if(tt.equals("tarde")) coste=ft*sueldo;
@@ -304,6 +298,8 @@ public class CtrlGrafo {
 								Turnos[m]=false;
 							}
 						}
+						if(modif==true)++id;
+						else grafo.removeNode(id);
 					}
 					/*else if (restipe.equals("MAX_Turnos_Consecutivos")){
 					
@@ -322,7 +318,6 @@ public class CtrlGrafo {
 						grafo.conectarNodes(i, j, capacidad, coste);	
 					}
 				}
-				
 			}//fin de restricciones de un doctor			
 		}//fi for de llenar restricciones para todos los doctores
 	}//fin de llenagrafo

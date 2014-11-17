@@ -125,7 +125,18 @@ public class Hospital {
 	 */
 	
 	public Doctor getDoctor(int id){
-		return doctors.get(id); 
+		
+		Iterator<Doctor> itr = doctors.iterator();
+		int n=0;
+		boolean trobat=false;
+		while(!trobat){
+			Doctor d1=itr.next();
+			if(d1.getId()==id){
+				trobat=true;
+			}
+			else ++n;
+		}
+		return doctors.get(n);
 	}
 	
 	/** 
@@ -168,7 +179,10 @@ public class Hospital {
 	 * @return un boolean que indica si existe ese doctor
 	 */
 	public boolean existsDoctor(int id){
-		return doctors.contains(id);
+		for(int i=0;i<doctors.size();++i){
+			if(doctors.get(i).getId()==id)return true;
+		}
+		return false;
 	}
 	
 	/** 
@@ -211,8 +225,19 @@ public class Hospital {
 	 * @param d		es el doctor ya modificado
 	 */
 	public void setDoctor(Doctor d){
-			doctors.remove(d);
-			doctors.add(d);
+		Iterator<Doctor> itr = doctors.iterator();
+		int n=0;
+		boolean trobat=false;
+		while(!trobat){
+			Doctor d1=itr.next();
+			if(d1.getId()==d.getId()){
+				itr.remove();
+				doctors.add(n,d);
+				trobat=true;
+			}
+			++n;
+		}
+		
 	}
 	
 	/** 
@@ -222,7 +247,7 @@ public class Hospital {
 	 * @param d		es el nuevo doctor del Hospital
 	 */
 	public void addDoctor(Doctor d){
-			doctors.add(d.getId(),d);		
+			doctors.add(d);		
 	}
 		
 	/** 
@@ -235,7 +260,7 @@ public class Hospital {
 
 		for(int i=0; i < aldoc.size();++i){
 			if(doctors.contains(aldoc.get(i))==false){
-				doctors.add(aldoc.get(i).getId(),aldoc.get(i));
+				doctors.add(aldoc.get(i));
 			}
 			else {
 				doctors.remove(aldoc.get(i));
@@ -250,7 +275,12 @@ public class Hospital {
 	 * @param id 	es el identificador del doctor a borrar
 	 */
 	public void deleteDoctor(int id){
-			doctors.remove(id);
+		for(int i=0;i<doctors.size();++i){
+			if(doctors.get(i).getId()==id) {
+				doctors.remove(i);
+				break;
+			}
+		}
 	}
 	
 	/** 
