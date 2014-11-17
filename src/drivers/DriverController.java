@@ -68,8 +68,8 @@ public static void main(String[] args) throws IOException{
 			System.out.println(e);
 		}
 		 
-	    CtrlDoctor CtrlDoct = new CtrlDoctor(CtrlHosp.getDoctors());
 	    CtrlCalendario CtrlCal = new CtrlCalendario(CtrlHosp.getCalendar());
+	    CtrlDoctor CtrlDoct = new CtrlDoctor(CtrlHosp.getDoctors(), CtrlCal.getCalendarYear());
 	    CtrlAlgorithm CtrlAlg = new CtrlAlgorithm(CtrlHosp.getHospital());
 	    
 		int opcion = -1;
@@ -272,7 +272,17 @@ public static void main(String[] args) throws IOException{
 					fin = teclado.nextInt();
 					CtrlAlg.findMaxFlowFulk(ini, fin);
 					if(CtrlAlg.findSolution(ini, fin)){
+						ArrayList<Integer> idDocs = CtrlDoct.getAllDoctors();
 						System.out.println("Hay solucion");
+						for (int i : idDocs) {
+							System.out.printf("Doctor %d\n", i);
+							ArrayList<String> fechasArray = CtrlAlg.getDatesAssigned(i);
+							ArrayList<String> turnosArray = CtrlAlg.getTurnosAssigned(id);
+							for(int j = 0; j < fechasArray.size(); ++j) {
+								System.out.printf("%s - %s \n",fechasArray.get(j), turnosArray.get(j));
+							}
+							System.out.printf("Sueldo: %f\n\n", CtrlAlg.getSueldoAssigned(i));
+						}
 					} else {
 						ArrayList<nodoTurno> turnosSinSol = CtrlAlg.getTurnosSinSol();
 						System.out.println("No hay solucion.\nTurnos sin solucion:");
@@ -294,7 +304,17 @@ public static void main(String[] args) throws IOException{
 					fin = teclado.nextInt();
 					CtrlAlg.findMaxFlowEk(ini, fin);
 					if(CtrlAlg.findSolution(ini, fin)){
+						ArrayList<Integer> idDocs = CtrlDoct.getAllDoctors();
 						System.out.println("Hay solucion");
+						for (int i : idDocs) {
+							System.out.printf("Doctor %d\n", i);
+							ArrayList<String> fechasArray = CtrlAlg.getDatesAssigned(i);
+							ArrayList<String> turnosArray = CtrlAlg.getTurnosAssigned(id);
+							for(int j = 0; j < fechasArray.size(); ++j) {
+								System.out.printf("%s - %s \n",fechasArray.get(j), turnosArray.get(j));
+							}
+							System.out.printf("Sueldo: %f\n\n", CtrlAlg.getSueldoAssigned(i));
+						}
 					} else {
 						ArrayList<nodoTurno> turnosSinSol = CtrlAlg.getTurnosSinSol();
 						System.out.println("No hay solucion.\nTurnos sin solucion:");
@@ -315,7 +335,17 @@ public static void main(String[] args) throws IOException{
 					fin = teclado.nextInt();
 					CtrlAlg.findMaxFlowDijk(ini, fin);
 					if(CtrlAlg.findSolution(ini, fin)){
+						ArrayList<Integer> idDocs = CtrlDoct.getAllDoctors();
 						System.out.println("Hay solucion");
+						for (int i : idDocs) {
+							System.out.printf("Doctor %d\n", i);
+							ArrayList<String> fechasArray = CtrlAlg.getDatesAssigned(i);
+							ArrayList<String> turnosArray = CtrlAlg.getTurnosAssigned(id);
+							for(int j = 0; j < fechasArray.size(); ++j) {
+								System.out.printf("%s - %s \n",fechasArray.get(j), turnosArray.get(j));
+							}
+							System.out.printf("Sueldo: %f\n\n", CtrlAlg.getSueldoAssigned(i));
+						}
 					} else {
 						ArrayList<nodoTurno> turnosSinSol = CtrlAlg.getTurnosSinSol();
 						System.out.println("No hay solucion.\nTurnos sin solucion:");
