@@ -6,7 +6,9 @@ import java.util.HashMap;
 import domain.nodoTurno;
 
 /**
-*
+* Representa las asignaciones de doctores a turnos
+* de una solucion posible
+* 
 * @author Axel Pelaez
 */
 
@@ -25,9 +27,10 @@ public class Asignaciones {
 	
 	private HashMap<Integer,listAndSalary> mapSol;
 	
-	/*Creadora por defecto vacia
-	 * 
-	 */
+	/**
+	* Crea un conjunto de asignaciones vacia
+	* 
+	*/
 	public Asignaciones(){
 		mapSol = new HashMap<Integer,listAndSalary>();
 	}
