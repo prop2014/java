@@ -48,26 +48,6 @@ public class CtrlDoctor {
 	}
 	
 	/**
-	*Consultora del identificador del Doctor
-	* @param idDoc: Identificador del Doctor
-	* @return La id del Doctor
-	* @throws Exception
-	*/	
-	public Integer getIdDoctor(int idDoc) throws IOException {		
-		if(idDoc < 0) throw new IOException("Valor del identificador incorrecto");
-		boolean trobat = false;
-		for (int i = 0; i < Doctors.size(); ++i) {
-			if (Doctors.get(i).getId() == idDoc) {
-				trobat = true;
-				return Doctors.get(i).getId();
-			}
-			if (trobat) break;
-		}
-		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
-		return null;
-	}
-	
-	/**
 	*Consultora del nombre del Doctor
 	* @param idDoc: Identificador del Doctor
 	* @return El nombre del Doctor
