@@ -43,12 +43,12 @@ public class CtrlGrafo {
 	
 	private static String itos (int dia){
 		String t;
-		if(dia==1) t="lunes";
-		else if(dia==2) t = "martes";
-		else if(dia==3) t = "miercoles";
-		else if(dia==4) t = "jueves";
-		else if(dia==5) t = "viernes";
-		else if(dia==6) t = "sabado";
+		if(dia==2) t="lunes";
+		else if(dia==3) t = "martes";
+		else if(dia==4) t = "miercoles";
+		else if(dia==5) t = "jueves";
+		else if(dia==6) t = "viernes";
+		else if(dia==7) t = "sabado";
 		else t = "domingo";
 		return t; 
 	}
@@ -65,7 +65,8 @@ public class CtrlGrafo {
 		Nodo Source = new Nodo(0, "Source");	// creamos nodo source
 		grafo.afegirNode(Source);    			//A�adimos el source
 		ArrayList<Doctor> aldoc = new ArrayList<Doctor>();
-		aldoc = h.getDoctors();					//aldoc: lista de doctores del hospital
+		aldoc = h.getDoctors();	
+		if (aldoc.isEmpty()) throw new IOException("No contiene doctores\n");
 		for (int i = 0; i < aldoc.size(); ++i) {
 			++id;
 			if(i==0) firstdoc = id;
@@ -84,6 +85,7 @@ public class CtrlGrafo {
 		ArrayList<Turno> alturnos = new ArrayList<Turno> ();
 		Calendario cal = h.getCalendario();
 		alturnos = cal.getALLShifts();
+		if (alturnos.isEmpty()) throw new IOException("No contiene turnos\n");
 		
 		for (int i = 0; i < alturnos.size(); ++i) {
 			++id;

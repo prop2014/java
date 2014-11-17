@@ -742,7 +742,7 @@ public class CtrlDoctor {
 			if (diaXOR.get(i) < 1 || diaXOR.get(i) > 31 || mesXOR.get(i) < 1 || mesXOR.get(i) > 12 ||
 				yearXOR.get(i) < 1) throw new IOException("valores de la fecha incorrecto");
 			if (!tipoTurnoXOR.get(i).equals("manana") && !tipoTurnoXOR.get(i).equals("tarde") && !tipoTurnoXOR.get(i).equals("noche")) throw new IOException("Tipo del turno incorrecto");
-			GregorianCalendar fecha = new GregorianCalendar(diaXOR.get(i),mesXOR.get(i)-1,yearXOR.get(i));
+			GregorianCalendar fecha = new GregorianCalendar(yearXOR.get(i),mesXOR.get(i)-1,diaXOR.get(i));
 			if (!fecha.isLenient()) throw new IOException("Fecha invalida");
 		}
 		boolean trobat = false;
@@ -756,7 +756,7 @@ public class CtrlDoctor {
 					Turno turno = new Turno(fecha, tipoTurnoXOR.get(j));
 					listXOR.add(turno);
 				}
-				/* Comprovar si hay alguna otra XOR en el mismo turno */
+				/* Comprovar si hay alguna otra XOR o MAX_Turnos_Rango en algun mismo turno de la XOR que se quiere poner */
 				for (int z = 0; z < alres.size(); ++z) {
 					if (alres.get(z).getTipo().equals("XOR")) {
 						XOR N = (XOR)alres.get(z);
@@ -769,6 +769,13 @@ public class CtrlDoctor {
 					}
 					if (alres.get(z).getTipo().equals("MAX_Turnos_Rango")) {
 						MAX_Turnos_Rango N = (MAX_Turnos_Rango)alres.get(z);
+						int firstDay = N.getFechaIni().get(GregorianCalendar.DAY_OF_YEAR);
+						int lastDay = N.getFechaFin().get(GregorianCalendar.DAY_OF_YEAR);
+						for (int j = 0; j < listXOR.size(); ++j) {
+							GregorianCalendar t = listXOR.get(j).getDate();
+							int diaXor = t.get(GregorianCalendar.DAY_OF_YEAR);
+							if (diaXor <= lastDay && diaXor >= firstDay) throw new IOException("Este Doctor ya tiene una restriccion MAX_Turnos_Rango con una fecha de la XOR"); 
+						}
 					}
 				}
 				Restriccion res = new XOR(idRes, listXOR);
