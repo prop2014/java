@@ -205,6 +205,7 @@ public class DriverDoctor {
 			System.out.print("7: Eliminar todas las restricciones del Doctor\n");
 			System.out.print("------------------------------------\n");
 			opcion = teclado.nextInt();		
-		}	
+		}
+		teclado.close();
 	}
 }
