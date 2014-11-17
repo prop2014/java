@@ -197,7 +197,7 @@ public class CtrlGrafo {
 								GregorianCalendar gc2 = alturnos.get(m).getDate();
 								String fecha1 = DateFormat.getDateInstance(DateFormat.SHORT).format(gc2.getTime());
 																
-								if(fecha.equals(fecha1) & alturnos.get(m).getShiftType() == turno.getShiftType() & Turnos[m]==true) {
+								if(fecha.equals(fecha1) & alturnos.get(m).getShiftType().equals(turno.getShiftType()) & Turnos[m]==true) {
 									modif = true;
 									int capacidad = 1;
 									double coste = 0;
