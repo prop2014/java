@@ -71,7 +71,7 @@ public class InterpretarResultado {
 	 * almacenando los turnos qe trabaja y sumando su sueldo por turno. 
 	 * 
 	 */
-	private void interpretarDFS(int idNodo, ArrayList<nodoTurno> turnos, double sueldo) throws IOException{
+	private void interpretarDFS(int idNodo, ArrayList<nodoTurno> turnos, int idDoctor) throws IOException{
 		if(idNodo != idSumidero){
 			ArrayList<Integer> vecinos = graf.getOutNodes(idNodo);
 			for(int vecino : vecinos){
@@ -82,18 +82,24 @@ public class InterpretarResultado {
 					//Si es tipo turno lo guardamos y sumamos su sueldo
 					if(veci.getTipo().equals("Turno")){
 						turnos.add((nodoTurno)(veci));
-						sueldo += graf.getCosteAresta(idArista);
+						//sueldo += graf.getCosteAresta(idArista);
+				
+						mapSol.SumaSueldo(idDoctor,graf.getCosteAresta(idArista));
+						
+						}
+						
+
 					}
 					
 					//llamada recursiva
-					interpretarDFS(vecino, turnos,sueldo);
+					interpretarDFS(vecino, turnos,idDoctor);
 				}
 			}
 			
 			
 		}
 		
-	}
+	
 	
 	
 	/*
@@ -142,6 +148,7 @@ public class InterpretarResultado {
 		if(sol){
 			
 			//Obtener id de los vecinos de la fuente
+			//Los vecinos de la fuente siempre son doctores
 			ArrayList<Integer> vecinos = graf.getOutNodes(idFuente);
 			
 			for(int vecino:vecinos){
@@ -150,7 +157,11 @@ public class InterpretarResultado {
 				if(graf.getFlujoAresta(idArista) > 0){
 					ArrayList<nodoTurno> turnos = new ArrayList<nodoTurno>();
 					double sueldo = 0;
-					interpretarDFS(vecino,turnos,sueldo);
+					
+					nodoDoctor nD = (nodoDoctor)graf.getNode(vecino);
+					int idDoc = nD.getIdDoc();
+					
+					interpretarDFS(vecino,turnos,idDoc);
 					
 					//Almacenar datos
 					/*listAndSalary ls = new listAndSalary(); 
@@ -159,7 +170,8 @@ public class InterpretarResultado {
 					mapSol.put(vecino, ls);
 					*/
 					
-					mapSol.setAsignacion(vecino,turnos,sueldo);
+					
+					mapSol.addTurnos(idDoc,turnos);
 					
 					
 				}

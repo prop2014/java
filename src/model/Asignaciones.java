@@ -21,7 +21,7 @@ import domain.nodoTurno;
  */
 class listAndSalary{
     public ArrayList<nodoTurno> listaTurnos;
-    public double sueldoTotal;
+    public double sueldoTotal = 0;
 }
 
 
@@ -110,6 +110,37 @@ public class Asignaciones {
 	//Setter 
 	
 	/**
+	*Setter de sueldo 
+	* Suma el sueldo de una asignacion
+	* @param: idDoctor: id del Doctor
+	* 		  sueldo: sueldo que cobrara el Doctor con idDoctor por trabajar un turnos
+	*/
+	
+	public void SumaSueldo(int idDoctor, double newSueldo){
+		
+		if(mapSol.containsKey(idDoctor)){
+			listAndSalary ls = mapSol.get(idDoctor);
+			ls.sueldoTotal += newSueldo;
+			mapSol.put(idDoctor,ls);
+		}
+		
+		else{
+			listAndSalary ls = new listAndSalary(); 
+			mapSol.put(idDoctor, ls);
+			ls.sueldoTotal += newSueldo;
+			mapSol.put(idDoctor,ls);
+		}
+			
+			
+	}
+	
+	public void addTurnos(int idDoctor,ArrayList<nodoTurno> lt){
+		listAndSalary ls = mapSol.get(idDoctor);
+		ls.listaTurnos = lt;
+		mapSol.put(idDoctor,ls);
+	}
+	
+	/**
 	*Setter de Asignacion 
 	* Se añade las asignaciones y el sueldo total al Doctor con idDoctor;
 	* @param: idDoctor: id del Doctor
@@ -117,12 +148,12 @@ public class Asignaciones {
 	* 		  sueldo: sueldo total que cobrara el Doctor con idDoctor por trabajar todos los turnos
 	* 
 	*/
-	public void setAsignacion(int idDoctor, ArrayList<nodoTurno> turnos, double sueldo){
+	
+	/*public void setAsignacion(int idDoctor, ArrayList<nodoTurno> turnos){
 		listAndSalary ls = new listAndSalary(); 
 		ls.listaTurnos = turnos;
-		ls.sueldoTotal = sueldo;
 		mapSol.put(idDoctor, ls);
-	}
+	}*/
 
 	
 }
