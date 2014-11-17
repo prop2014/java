@@ -17,6 +17,11 @@ public class Turno {
 	//-- Constructoras --//
 	/**
 	 * Constructora por defecto
+	 */
+	public Turno() {}	
+	
+	/**
+	 * Constructora 2
 	 * @param date Fecha del turno
 	 * @param shiftType Tipo del turno
 	 */
@@ -28,18 +33,7 @@ public class Turno {
 	}
 
 	/**
-	 * Constructora copia
-	 * @param T Turno que se copiara
-	 */
-	public Turno(Turno T) {
-		date = T.date;
-		shiftType = T.shiftType;
-		specialDate = T.specialDate;
-		numberOfDoctors = T.numberOfDoctors;
-	}
-	
-	/**
-	 * Constructora completa
+	 * Constructora 3 (completa)
 	 * @param date Fecha del turno
 	 * @param shiftType Tipo del turno
 	 * @param specialDate Fecha especial
@@ -50,6 +44,17 @@ public class Turno {
 		this.shiftType = shiftType;
 		this.specialDate = specialDate;
 		this.numberOfDoctors = numberOfDoctors;
+	}
+	
+	/**
+	 * Constructora 4 (copia)
+	 * @param T Turno que se copiara
+	 */
+	public Turno(Turno T) {
+		date = T.date;
+		shiftType = T.shiftType;
+		specialDate = T.specialDate;
+		numberOfDoctors = T.numberOfDoctors;
 	}
 	
 	

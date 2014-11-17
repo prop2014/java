@@ -1,108 +1,174 @@
 package drivers;
 
-import model.Calendario;
-import model.Turno;
-
 import java.util.GregorianCalendar;
 import java.util.Scanner;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+
+import model.Turno;
 
 /**
+ * Driver de la clase
  * @author Felix Fernando Ramos Velazquez
  */
 public class DriverTurno {
 
-	private static boolean checkInputParameters() {
-		// provisional
-		return true;
+	private static void readDate(Scanner sc, GregorianCalendar date) throws ParseException {
+		System.out.println("Introducir 'fecha' { dd-mm-aaaa }:");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		sdf.setLenient(false);
+		String s = sc.next();
+		date.setTime(sdf.parse(s));
 	}
 
-	public static void main(String[] args) {
+	private static void printDate(GregorianCalendar date) {
+		SimpleDateFormat sdf = new SimpleDateFormat("d-M-yyyy");
+		System.out.print(sdf.format(date.getTime()));
+	}
 
-		GregorianCalendar date = new GregorianCalendar(2000,0,1);
-		Turno t1 = new Turno(date,"manana"); // turno por defecto: 1-ene-2000, manana
-		Turno t2;
-		int d,m,y;
+	public static void printShift(Turno turno) {
+		SimpleDateFormat sdf = new SimpleDateFormat("d-MMM-yyyy");
+		System.out.println("Dia vacacional:\t" + sdf.format(turno.getDate().getTime()));
+		System.out.println("Tipo de turno:\t" + turno.getShiftType());
+		System.out.println("Fecha especial:\t" + turno.getSpecialDate());
+		System.out.println("Num. doctores:\t" + turno.getNumberOfDoctors() + "\n");
+	}
+
+	public static void main(String[] args) throws ParseException {
+
+		Turno t1 = new Turno();
+		Turno t2 = new Turno();
+		GregorianCalendar date = new GregorianCalendar();
 		Scanner sc = new Scanner(System.in);
 		String answer;
 		boolean exit = false;
 		int op;
 
 		while(!exit){
-			
+
 			System.out.println("-- Menu Principal --\n");
 			System.out.println(" 1: Turno()");
-			System.out.println(" 2: Turno(Turno T)");
+			System.out.println(" 2: Turno (GregorianCalendar date, String shiftType)");
 			System.out.println(" 3: Turno (GregorianCalendar date, String shiftType, String specialDate, int numberOfDoctors)");
-			System.out.println(" 4: void setSpecialDate(String specialDate)");
-			System.out.println(" 5: void setNumberOfDoctors(int numberOfDoctors)");
-			System.out.println(" 6: GregorianCalendar getDate()");
-			System.out.println(" 7: String getShiftType()");
-			System.out.println(" 8: String getSpecialDate()");
+			System.out.println(" 4: Turno(Turno T)");
+			System.out.println(" 5: void setSpecialDate(String specialDate)");
+			System.out.println(" 6: void setNumberOfDoctors(int numberOfDoctors)");
+			System.out.println(" 7: GregorianCalendar getDate()");
+			System.out.println(" 8: String getShiftType()");
+			System.out.println(" 9: String getSpecialDate()");
 			System.out.println("10: int getNumberOfDoctors()");
 			System.out.println(" 0: Salir");
-			
+
 			op = sc.nextInt();
-			
+
 			switch(op){
 			case 1:{
-				System.out.println("Introducir 'fecha' del nuevo turno: {dd} {mm} {aaaa} (separados por espacios)");
-				d = sc.nextInt();
-				m = sc.nextInt();
-				y = sc.nextInt();
-				date = new GregorianCalendar(y,m-1,d);
-				System.out.println("Introducir 'tipo' del nuevo turno:");
-				String shiftType = sc.next();
-				Turno t = new Turno(date, shiftType);
-				System.out.println("\nSe ha creado un turno t1\n");
+				System.out.println("1: Turno()\n");
+				t1 = new Turno();
+				System.out.println("Se ha creado el turno vacio t1!\n");
 				break;
 			}
 			case 2:{
-				System.out.println("Se ha creado un turno t2, que es copia del turno t1");
+				System.out.println("2: Turno (GregorianCalendar date, String shiftType)\n");
+				readDate(sc,date);
+				System.out.println("Introducir 'tipo':");
+				String shiftType = sc.next();
+				t1 = new Turno(date, shiftType);
+				System.out.println("Se ha creado el turno t1!\n");
+				System.out.println("-- t1 --");
+				printShift(t1);
+				if (t2.getDate() != null) {
+					System.out.println("-- t2 --");
+					printShift(t2);
+				}
+
 				break;
 			}
 			case 3:{
-				System.out.println("Introducir la fecha (dayOfMonth month year) del turno:");
-				int dayOfMonth, month, year;
-				dayOfMonth = sc.nextInt();
-				month = sc.nextInt();
-				year = sc.nextInt();
-				System.out.println("Introducir el tipo {morning | afternoon | evening} del turno:");
+				System.out.println("3: Turno (GregorianCalendar date, String shiftType, String specialDate, int numberOfDoctors)\n");
+				readDate(sc,date);
+				System.out.println("Introducir 'tipo':");
 				String shiftType = sc.next();
-				System.out.println("Introducir la fecha especial del turno:");
+				System.out.println("Introducir 'fecha especial':");
 				String specialDate = sc.next();
-				System.out.println("Introducir el numero de doctores del turno:");
+				System.out.println("Introducir 'numero de doctores':");
 				int numberOfDoctors = sc.nextInt();
-				date = new GregorianCalendar(year,month-1,dayOfMonth);
-				//t = new Turno(date, shiftType, specialDate, numberOfDoctors);
-				System.out.println("Se ha creado un turno con los parámetros introducidos");
+				t1 = new Turno(date, shiftType, specialDate, numberOfDoctors);
+				System.out.println("Se ha creado el turno t1!\n");
+				System.out.println("-- t1 --");
+				printShift(t1);
+				if (t2.getDate() != null) {
+					System.out.println("-- t2 --");
+					printShift(t2);
+				}
 				break;
 			}
 			case 4:{
-				System.out.println("---");
+				System.out.println("4: Turno(Turno T)");
+				if (t1.getDate() != null) {
+					t2 = new Turno(t1);
+					System.out.println("\nSe ha creado el turno t2, que es copia del turno t1!\n");
+					System.out.println("-- t1 --");
+					printShift(t1);
+					System.out.println("-- t2 --");
+					printShift(t2);
+				}
+				else {
+					System.out.println("t1 (T turno origen) no esta inicializado!\n");
+				}
 				break;
 			}
+
 			case 5:{
-				System.out.println("---");
+				System.out.println("5: void setSpecialDate(String specialDate)\n");
+				System.out.println("Introducir 'fecha especial':");
+				String specialDate = sc.next();
+				t1.setSpecialDate(specialDate);
+				System.out.println("Se ha modificado la fecha especial del turno t1!\n");
+				System.out.println("-- t1 --");
+				printShift(t1);
 				break;
 			}
 			case 6:{
-				System.out.println("---");
+				System.out.println("6: void setNumberOfDoctors(int numberOfDoctors)\n");
+				System.out.println("Introducir 'numero de doctores':");
+				int numberOfDoctors = sc.nextInt();
+				t1.setNumberOfDoctors(numberOfDoctors);
+				System.out.println("Se ha modificado el numero de doctores del turno t1!\n");
+				System.out.println("-- t1 --");
+				printShift(t1);
 				break;
 			}
 			case 7:{
-				System.out.println("---");
+				System.out.println("7: GregorianCalendar getDate()\n");
+				if (t1.getDate() != null) {
+					System.out.print("Fecha de t1: ");
+					printDate(t1.getDate());
+					System.out.println();
+				}
+				else System.out.println("t1 no esta inicializado!");
+				System.out.println();
 				break;
 			}
 			case 8:{
-				System.out.println("---");
+				System.out.println("8: String getShiftType()\n");
+				if (t1.getDate() != null) System.out.println("Tipo de t1: " + t1.getShiftType());
+				else System.out.println("t1 no esta inicializado!");
+				System.out.println();
 				break;
 			}
 			case 9:{
-				System.out.println("---");
+				System.out.println("9: String getSpecialDate()\n");
+				if (t1.getDate() != null) System.out.println("Fecha especial de t1: " + t1.getSpecialDate());
+				else System.out.println("t1 no esta inicializado!");
+				System.out.println();
 				break;
 			}
 			case 10:{
-				System.out.println("---");
+				System.out.println("10: int getNumberOfDoctors()\n");
+				if (t1.getDate() != null) System.out.println("Numero de doctores de t1: " + t1.getNumberOfDoctors());
+				else System.out.println("t1 no esta inicializado!");
+				System.out.println();
 				break;
 			}
 			case 0:{
@@ -121,7 +187,7 @@ public class DriverTurno {
 				break;
 			}
 			}
-			
+
 			if (!exit) {
 				System.out.println("Teclear c para continuar\n");
 				answer = sc.next();
