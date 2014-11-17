@@ -83,9 +83,16 @@ public class CtrlAlgorithm {
 		return gResidual;
 	}
 	
-	public Asignaciones getMapSol(){
-		//resMap.getTurnosAsigando(id);
-		return resMap;
+	public ArrayList<String> getDatesAssigned(int id){
+		return resMap.getFechasAsignaciones(id);
+	}
+	
+	public ArrayList<String> getTurnosAssigned(int id){
+		return resMap.getTipoTurnoAsignaciones(id);
+	}
+	
+	public double getSueldoAssigned(int id){
+		return resMap.getSueldoTotal(id);
 	}
 	
 	public ArrayList<nodoTurno> getTurnosSinSol(){
