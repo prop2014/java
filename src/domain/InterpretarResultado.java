@@ -3,12 +3,12 @@ package domain;
 import domain.Nodo;
 import domain.Graf;
 import domain.Nodo;
+import model.Asignaciones;
 import domain.nodoDoctor;
 import domain.nodoTurno;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
 *
@@ -26,7 +26,7 @@ public class InterpretarResultado {
 	private int idFuente; 
 	private int idSumidero;
 	
-	private HashMap<Integer,listAndSalary> mapSol;
+	private Asignaciones mapSol;
 	private ArrayList<nodoTurno> turnosSinSol;
 	private boolean sol;
 	
@@ -34,7 +34,7 @@ public class InterpretarResultado {
 		graf = g;
 		idFuente = NodoF;
 		idSumidero = NodoS;
-		mapSol = new HashMap<Integer,listAndSalary>();
+		mapSol = new Asignaciones();
 		turnosSinSol = new  ArrayList<nodoTurno>();
 		sol = false;
 	}
@@ -43,14 +43,14 @@ public class InterpretarResultado {
 		graf = g;
 		idFuente = g.getNodeId(NodoF);
 		idSumidero = g.getNodeId(NodoS);	
-		mapSol = new HashMap<Integer,listAndSalary>();
+		mapSol = new Asignaciones();
 		turnosSinSol = new  ArrayList<nodoTurno>();
 		sol = false;
 		}
 	
 	
 	//Metodos Publicos
-	public HashMap<Integer,listAndSalary> getMapSol(){
+	public Asignaciones getMapSol(){
 		return mapSol;
 	}
 	
@@ -116,10 +116,16 @@ public class InterpretarResultado {
 			int idArista = graf.getIDAresta(vecino, idSumidero);
 			flujoTurnoASumidero += graf.getCapacidadAresta(idArista);
 			
+
+			if(graf.getFlujoAresta(idArista) > graf.getCapacidadAresta(idArista)){
+				turnosSinSol.add((nodoTurno)graf.getNode(vecino));
+			}
+
 			//if(graf.getFlujoAresta(idArista) > graf.getCapacidadAresta(idArista)){
 			nodoTurno n = (nodoTurno)graf.getNode(vecino);
 				turnosSinSol.add(n);
 			//}
+
 		}
 		
 		if(flujoFuenteADoctor < flujoTurnoASumidero || flujoTurnoASumidero > 0) sol = false;
@@ -151,10 +157,13 @@ public class InterpretarResultado {
 					interpretarDFS(vecino,turnos,sueldo);
 					
 					//Almacenar datos
-					listAndSalary ls = new listAndSalary(); 
+					/*listAndSalary ls = new listAndSalary(); 
 					ls.listaTurnos = turnos;
 					ls.sueldoTotal = sueldo;
 					mapSol.put(vecino, ls);
+					*/
+					
+					mapSol.setAsignacion(vecino,turnos,sueldo);
 					
 					
 				}
@@ -163,7 +172,8 @@ public class InterpretarResultado {
 		}
 		 
 		
-		}
+	
+	}
 	
 
 		
