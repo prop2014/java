@@ -1,6 +1,8 @@
 package model;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 
 import domain.nodoTurno;
@@ -64,6 +66,46 @@ public class Asignaciones {
 		listAndSalary ls = mapSol.get(idDoctor);
 		return  ls.sueldoTotal;
 	}
+	
+	/**
+	*Consultora de las fechas que un doctor trabaja 
+	* @param: idDoctor: id del Doctor
+	* @return listado de fechas en las que el Doctor con idDoctor trabaja 
+	*/
+	public ArrayList<String> getFechasAsignaciones(int idDoctor){
+		listAndSalary ls = mapSol.get(idDoctor);
+		ArrayList<String> fechasAsignaciones = new ArrayList<String>();
+		
+		for(nodoTurno turno : ls.listaTurnos){
+			//PARSEO
+			GregorianCalendar c1 = turno.getFecha();
+			String fecha = DateFormat.getDateInstance(DateFormat.SHORT).format(c1.getTime());
+			
+			fechasAsignaciones.add(fecha);
+		}
+		return  fechasAsignaciones; 
+		
+	}
+	
+	/**
+	*Consultora de los tipos de turnos en que un doctor trabaja 
+	* @param: idDoctor: id del Doctor
+	* @return listado de tipos de turno en las que el Doctor con idDoctor trabaja 
+	*/
+	public ArrayList<String> getTipoTurnoAsignaciones(int idDoctor){
+		listAndSalary ls = mapSol.get(idDoctor);
+		ArrayList<String> tipoTurnoAsignaciones = new ArrayList<String>();
+		
+		for(nodoTurno turno : ls.listaTurnos){
+			tipoTurnoAsignaciones.add(turno.getTipoTurno());
+			
+		}
+			
+		return  tipoTurnoAsignaciones; 
+		
+	}
+	
+	
 	
 	//Setter 
 	

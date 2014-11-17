@@ -121,10 +121,6 @@ public class InterpretarResultado {
 				turnosSinSol.add((nodoTurno)graf.getNode(vecino));
 			}
 
-			//if(graf.getFlujoAresta(idArista) > graf.getCapacidadAresta(idArista)){
-			nodoTurno n = (nodoTurno)graf.getNode(vecino);
-				turnosSinSol.add(n);
-			//}
 
 		}
 		
