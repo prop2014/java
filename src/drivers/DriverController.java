@@ -20,14 +20,20 @@ public class DriverController {
 	
 	private static void muestraOpciones() {
 		System.out.print("¿Que desea hacer?\n\n");
-		System.out.print("X: Crear Hospital\n");
-		System.out.print("2: Anadir Doctor al Hospital\n");
-		System.out.print("3: Modificar un Doctor\n");
-		System.out.print("4: Anadir un dia al Calendario\n");
-		System.out.print("5: Anadir restriccion dia_mes\n");
-		System.out.print("6: FordFulkerson\n");
-		System.out.print("7: EdmondsKarp\n");
-		System.out.print("8: Dijkstra\n");
+		System.out.print("1: Anadir Doctor al Hospital\n");
+		System.out.print("2: Modificar un Doctor\n");
+		System.out.print("3: Anadir un dia al Calendario\n");
+		System.out.print("4: Anadir restriccion MAX turnos por dia \n");
+		System.out.print("5: Anadir restriccion MAX turnos en un rango de fechas\n");
+		System.out.print("6: Anadir restriccion NOT dia mes\n");
+		System.out.print("7: Anadir restriccion NOT dia semana\n");
+		System.out.print("8: Anadir restriccion NOT dia especial\n");
+		System.out.print("9: Anadir restriccion NOT fecha\n");
+		System.out.print("10: Anadir restriccion NOT turno\n");
+		System.out.print("11: Anadir restriccion XOR\n");
+		System.out.print("12: Ejecutar MaxFlow (FordFulkerson)\n");
+		System.out.print("13: Ejecutar MaxFlow (EdmondsKarp)\n");
+		System.out.print("14: Ejecutar MaxFlow (Dijkstra)\n");
 		System.out.print("0: Salir\n");
 	}
 	
@@ -40,9 +46,8 @@ public static void main(String[] args) throws IOException{
 	    
 	    CtrlHospital CtrlHosp = new CtrlHospital();
 
-	    int id;
-		String nombre, fecha;
-		int numMax;
+	    int id, ini, fin, idRes, maxT, d1, m1, a1, numMax;
+		String nombre, fecha, especial, turno;
 		double sueldo;
 	    double fm, ft, fn;
 		System.out.print("Introduce el ID del hospital: ");
@@ -63,8 +68,8 @@ public static void main(String[] args) throws IOException{
 			System.out.println(e);
 		}
 		 
-	    CtrlDoctor CtrlDoct = new CtrlDoctor(CtrlHosp.getDoctors());
 	    CtrlCalendario CtrlCal = new CtrlCalendario(CtrlHosp.getCalendar());
+	    CtrlDoctor CtrlDoct = new CtrlDoctor(CtrlHosp.getDoctors(), CtrlCal.getCalendarYear());
 	    CtrlAlgorithm CtrlAlg = new CtrlAlgorithm(CtrlHosp.getHospital());
 	    
 		int opcion = -1;
@@ -76,10 +81,6 @@ public static void main(String[] args) throws IOException{
 			
 			switch(opcion){
 				case 1:
-					
-					break;
-				
-				case 2:
 					System.out.print("Introduce el ID del doctor: ");
 					id = teclado.nextInt();
 					System.out.print("Introduce el nombre del doctor: ");
@@ -97,7 +98,7 @@ public static void main(String[] args) throws IOException{
 					}
 					break;
 				
-				case 3:
+				case 2:
 					System.out.print("Introduce el ID del doctor que quieres eliminar: ");
 					id = teclado.nextInt();
 				
@@ -109,8 +110,7 @@ public static void main(String[] args) throws IOException{
 					}
 					break;
 					
-				case 4:
-					String especial;
+				case 3:
 					int dia, mes, year, numDocM, numDocT, numDocN;
 					System.out.print("Introduce el dia: ");
 					dia = teclado.nextInt();
@@ -124,7 +124,7 @@ public static void main(String[] args) throws IOException{
 					numDocT = teclado.nextInt();
 					System.out.print("Introduce el numero de doctores para el turno night: ");
 					numDocN = teclado.nextInt();
-					System.out.print("Introduce un dia especial (navidad): ");
+					System.out.print("Introduce un dia especial [navidad semana_santa noche_vieja noche_buena]: ");
 					especial = teclado.next();
 					try {
 						CtrlCal.addVacationDay(dia, mes, year, numDocM, numDocT, numDocN, especial);
@@ -132,50 +132,157 @@ public static void main(String[] args) throws IOException{
 					} catch(IOException e) { System.out.println(e); }
 					break;
 				
+				case 4:
+					System.out.print("Introduce el ID del doctor\n");
+					id = teclado.nextInt();
+					System.out.print("Introduce el maximo de turnos por dia\n");
+					maxT = teclado.nextInt();
+					System.out.print("Introduce el id de la restriccion\n");
+					idRes = teclado.nextInt();
+					try {
+						CtrlDoct.addResMAX_Turnos_por_Dia(id, idRes, maxT);
+						System.out.println("Restriccion anadida correctamente al doctor: id="+ id);
+					} catch (IOException e) { System.out.println(e); }
+					break;
+				
 				case 5:
+					System.out.print("Introduce el ID del doctor\n");
+					id = teclado.nextInt();
+					System.out.print("Introduce el id de la restriccion\n");
+					idRes = teclado.nextInt();
+					System.out.print("Introduce la fecha inicial (dd MM yyyy)\n");
+					d1 = teclado.nextInt();
+					m1 = teclado.nextInt();
+					a1 = teclado.nextInt();
+					System.out.print("Introduce la fecha final (dd MM yyyy)\n");
+					int d2 = teclado.nextInt();
+					int m2 = teclado.nextInt();
+					int a2 = teclado.nextInt();
+					System.out.print("Introduce el maximo de turnos en el rango\n");
+					maxT = teclado.nextInt();
+					try {
+						CtrlDoct.addResMAX_Turnos_Rango(id, idRes, d1, m1, a1, d2, m2, a2, maxT);
+						System.out.println("Restriccion anadida correctamente al doctor: id="+ id);
+					} catch (IOException e) { System.out.println(e); }
+					break;
+					
+				case 6:
 					System.out.print("Introduce el ID del doctor\n");
 					id = teclado.nextInt();
 					System.out.print("Introduce el dia del mes\n");
 					int dia_mes = teclado.nextInt();
 					System.out.print("Introduce el id de la restriccion\n");
-					int idRes = teclado.nextInt();
+					idRes = teclado.nextInt();
 					try {
 						CtrlDoct.addResNOT_Dia_Mes(id, idRes, dia_mes);
 						System.out.println("Restriccion anadida correctamente al doctor: id="+ id);
 					} catch (IOException e) { System.out.println(e); }
 					break;
+				
+				case 7:
+					System.out.print("Introduce el ID del doctor\n");
+					id = teclado.nextInt();
+					System.out.print("Introduce el dia de la semana [lunes martes miercoles jueves viernes sabado domingo]\n");
+					String diaSem = teclado.next();
+					System.out.print("Introduce el id de la restriccion\n");
+					idRes = teclado.nextInt();
+					try {
+						CtrlDoct.addResNOT_Dia_Semana(id, idRes, diaSem);
+						System.out.println("Restriccion anadida correctamente al doctor: id="+ id);
+					} catch (IOException e) { System.out.println(e); }
+					break;
+				
+				case 8:
+					System.out.print("Introduce el ID del doctor\n");
+					id = teclado.nextInt();
+					System.out.print("Introduce el dia especial [navidad semana_santa noche_vieja noche_buena]\n");
+					especial = teclado.next();
+					System.out.print("Introduce el id de la restriccion\n");
+					idRes = teclado.nextInt();
+					try {
+						CtrlDoct.addResNOT_Especial(id, idRes, especial);
+						System.out.println("Restriccion anadida correctamente al doctor: id="+ id);
+					} catch (IOException e) { System.out.println(e); }
+					break;
 					
+				case 9:
+					System.out.print("Introduce el ID del doctor\n");
+					id = teclado.nextInt();
+					System.out.print("Introduce la fecha (dd MM yyyy)\n");
+					d1 = teclado.nextInt();
+					m1 = teclado.nextInt();
+					a1 = teclado.nextInt();
+					System.out.print("Introduce el id de la restriccion\n");
+					idRes = teclado.nextInt();
+					try {
+						CtrlDoct.addResNOT_Fecha(id, idRes, d1, m1, a1);
+						System.out.println("Restriccion anadida correctamente al doctor: id="+ id);
+					} catch (IOException e) { System.out.println(e); }
+					break;
 					
-				case 6:
-					CtrlAlg = new CtrlAlgorithm(CtrlHosp.getHospital());
+				case 10:
+					System.out.print("Introduce el ID del doctor\n");
+					id = teclado.nextInt();
+					System.out.print("Introduce el turno [manana tarde noche]\n");
+					turno = teclado.next();
+					System.out.print("Introduce el id de la restriccion\n");
+					idRes = teclado.nextInt();
+					try {
+						CtrlDoct.addResNOT_Turno(id, idRes, turno);
+						System.out.println("Restriccion anadida correctamente al doctor: id="+ id);
+					} catch (IOException e) { System.out.println(e); }
+					break;
+				
+				case 11:
+					ArrayList<Integer> d = new ArrayList<Integer>();
+					ArrayList<Integer> m = new ArrayList<Integer>();
+					ArrayList<Integer> a = new ArrayList<Integer>();
+					ArrayList<String> turnos = new ArrayList<String>();
+					System.out.print("Introduce el ID del doctor\n");
+					id = teclado.nextInt();
+					String opt = "S";
+					while(opt.equals("s") || opt.equals("S")) {
+						System.out.print("Introduce la fecha (dd MM yyyy)\n");
+						d1 = teclado.nextInt();
+						d.add(d1);
+						m1 = teclado.nextInt();
+						m.add(m1);
+						a1 = teclado.nextInt();
+						a.add(a1);
+						System.out.print("Introduce el turno [manana tarde noche]\n");
+						turno = teclado.next();
+						turnos.add(turno);
+						System.out.print("Quieres anadir otro turno? (S/s N/n)\n");
+						opt = teclado.next();
+					}
+					System.out.print("Introduce el id de la restriccion\n");
+					idRes = teclado.nextInt();
+					try {
+						CtrlDoct.addResXOR(id, idRes, d, m, a, turnos);
+						System.out.println("Restriccion anadida correctamente al doctor: id="+ id);
+					} catch (IOException e) { System.out.println(e); }
+					break;
+					
+				case 12:
 					System.out.println("NODOS:");
 					CtrlAlg.generateGraf();
-					int ini, fin;
 					System.out.println("Introduce el vertice inicio:");
 					ini = teclado.nextInt();
 					System.out.println("Introduce el vertice fin:");
 					fin = teclado.nextInt();
 					CtrlAlg.findMaxFlowFulk(ini, fin);
-					/*Graf<Nodo> gr = CtrlAlg.getGraf();
-					ArrayList<Integer> nodosr = gr.getOutNodes(0);
-					System.out.printf("Source Conectado con:\n");
-					for(int i : nodosr) {
-						nodoDoctor nodr = (nodoDoctor)gr.getNode(i);
-						System.out.printf("DOCTOR %d: ",nodr.getIdDoc());
-						for(int j : gr.getOutNodes(i)){
-							Nodo nod2r1 = gr.getNode(j);
-							if(nod2r1.getTipo().equals("Turno")) {
-								nodoTurno nod2r = (nodoTurno)nod2r1;
-								GregorianCalendar c1 = nod2r.getFecha();
-								fecha = DateFormat.getDateInstance(DateFormat.SHORT).format(c1.getTime());
-								System.out.printf("Fecha: %s - %s", fecha, nod2r.getTipoTurno());
-								System.out.printf(" ******* ");
-							}
-						}
-						System.out.printf("\n");
-					}*/
 					if(CtrlAlg.findSolution(ini, fin)){
+						ArrayList<Integer> idDocs = CtrlDoct.getAllDoctors();
 						System.out.println("Hay solucion");
+						for (int i : idDocs) {
+							System.out.printf("Doctor %d\n", i);
+							ArrayList<String> fechasArray = CtrlAlg.getDatesAssigned(i);
+							ArrayList<String> turnosArray = CtrlAlg.getTurnosAssigned(id);
+							for(int j = 0; j < fechasArray.size(); ++j) {
+								System.out.printf("%s - %s \n",fechasArray.get(j), turnosArray.get(j));
+							}
+							System.out.printf("Sueldo: %f\n\n", CtrlAlg.getSueldoAssigned(i));
+						}
 					} else {
 						ArrayList<nodoTurno> turnosSinSol = CtrlAlg.getTurnosSinSol();
 						System.out.println("No hay solucion.\nTurnos sin solucion:");
@@ -188,10 +295,68 @@ public static void main(String[] args) throws IOException{
 					}
 					break;
 					
-				case 7:
-					
+				case 13:
+					System.out.println("NODOS:");
+					CtrlAlg.generateGraf();
+					System.out.println("Introduce el vertice inicio:");
+					ini = teclado.nextInt();
+					System.out.println("Introduce el vertice fin:");
+					fin = teclado.nextInt();
+					CtrlAlg.findMaxFlowEk(ini, fin);
+					if(CtrlAlg.findSolution(ini, fin)){
+						ArrayList<Integer> idDocs = CtrlDoct.getAllDoctors();
+						System.out.println("Hay solucion");
+						for (int i : idDocs) {
+							System.out.printf("Doctor %d\n", i);
+							ArrayList<String> fechasArray = CtrlAlg.getDatesAssigned(i);
+							ArrayList<String> turnosArray = CtrlAlg.getTurnosAssigned(id);
+							for(int j = 0; j < fechasArray.size(); ++j) {
+								System.out.printf("%s - %s \n",fechasArray.get(j), turnosArray.get(j));
+							}
+							System.out.printf("Sueldo: %f\n\n", CtrlAlg.getSueldoAssigned(i));
+						}
+					} else {
+						ArrayList<nodoTurno> turnosSinSol = CtrlAlg.getTurnosSinSol();
+						System.out.println("No hay solucion.\nTurnos sin solucion:");
+						for(nodoTurno t : turnosSinSol) {
+							String tipo = t.getTipoTurno();
+							GregorianCalendar c1 = t.getFecha();
+							fecha = DateFormat.getDateInstance(DateFormat.SHORT).format(c1.getTime());
+							System.out.printf("Fecha:%s - %s\n", fecha, tipo);
+						}
+					}
 					break;
-				
+				case 14:
+					System.out.println("NODOS:");
+					CtrlAlg.generateGraf();
+					System.out.println("Introduce el vertice inicio:");
+					ini = teclado.nextInt();
+					System.out.println("Introduce el vertice fin:");
+					fin = teclado.nextInt();
+					CtrlAlg.findMaxFlowDijk(ini, fin);
+					if(CtrlAlg.findSolution(ini, fin)){
+						ArrayList<Integer> idDocs = CtrlDoct.getAllDoctors();
+						System.out.println("Hay solucion");
+						for (int i : idDocs) {
+							System.out.printf("Doctor %d\n", i);
+							ArrayList<String> fechasArray = CtrlAlg.getDatesAssigned(i);
+							ArrayList<String> turnosArray = CtrlAlg.getTurnosAssigned(id);
+							for(int j = 0; j < fechasArray.size(); ++j) {
+								System.out.printf("%s - %s \n",fechasArray.get(j), turnosArray.get(j));
+							}
+							System.out.printf("Sueldo: %f\n\n", CtrlAlg.getSueldoAssigned(i));
+						}
+					} else {
+						ArrayList<nodoTurno> turnosSinSol = CtrlAlg.getTurnosSinSol();
+						System.out.println("No hay solucion.\nTurnos sin solucion:");
+						for(nodoTurno t : turnosSinSol) {
+							String tipo = t.getTipoTurno();
+							GregorianCalendar c1 = t.getFecha();
+							fecha = DateFormat.getDateInstance(DateFormat.SHORT).format(c1.getTime());
+							System.out.printf("Fecha:%s - %s\n", fecha, tipo);
+						}
+					}
+					break;
 				default: break;
 			}
 			muestraOpciones();

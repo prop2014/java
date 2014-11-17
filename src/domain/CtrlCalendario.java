@@ -23,7 +23,7 @@ public class CtrlCalendario {
 	public CtrlCalendario(Calendario C) {
 		calendar = C;
 	}
-
+	
 	/* Metodos publicos */
 
 	public void addVacationDay(int dia, int mes, int year, int numDrsManana, int numDrsTarde, int numDrsNoche, String especial) throws IOException{
@@ -34,7 +34,7 @@ public class CtrlCalendario {
 			//date.setTime(sdf.parse(fecha));
 			//if (!date.isLenient() || date.get(GregorianCalendar.YEAR) != calendar.getCalendarYear()) throw new IOException("La fecha no es correcta");
 			if (calendar.existsVacationDay(date)) throw new IOException("El dia vacacional ya existe");
-			if (numDrsManana < 0) throw new IOException("El numero de doctores del turno de manana no es correcto");
+			else if (numDrsManana < 0) throw new IOException("El numero de doctores del turno de manana no es correcto");
 			else if (numDrsTarde < 0) throw new IOException("El numero de doctores del turno de tarde no es correcto");
 			else if (numDrsNoche < 0) throw new IOException("El numero de doctores del turno de noche no es correcto");
 			// making changes
@@ -102,5 +102,8 @@ public class CtrlCalendario {
 		catch (IOException e) {
 			System.out.println("Error: " + e.toString());
 		}
+	}
+	public int getCalendarYear() {
+		return calendar.getCalendarYear();
 	}
 }

@@ -9,8 +9,10 @@ import model.*;
  * @author Sergi Orra 
  */
 public class CtrlDoctor {
+	
 	/** Atributos */
 	private ArrayList<Doctor> Doctors;
+	private int yearCalendario;
 	
 	
 	/**
@@ -23,15 +25,27 @@ public class CtrlDoctor {
 	/**
 	* Constructora del control con atributo
 	* @param Doc: Lista de los Doctores del hospital
+	* 		 cal: Year del calendario que se usa en el hospital
 	*/
-	public CtrlDoctor(ArrayList<Doctor> Doc){
+	public CtrlDoctor(ArrayList<Doctor> Doc, int cal){
 		Doctors = Doc;
+		yearCalendario = cal;
 	}
 	
 	
-	/* Metodos publicos */
-
-/* ---------------DOCTORES ------------------- */
+/* Metodos publicos */
+	
+	/**
+	*Consultora de todos los identificadores dels doctores
+	* @return ids de los doctores
+	*/
+	public ArrayList<Integer> getAllDoctors() {
+		ArrayList<Integer> docs = new ArrayList<Integer>();
+		for (int i = 0; i < Doctors.size(); ++i) {
+			docs.add(Doctors.get(i).getId());
+		}
+		return docs;
+	}
 	
 	/**
 	*Consultora del identificador del Doctor
@@ -139,13 +153,6 @@ public class CtrlDoctor {
 	}
 	
 	
-	
-/* --------------- RESTRICCIONES CONSULTORAS-------------------- */
-	
-	
-	/* --------------- GETS COMUNES RESTRICCIONES -------------------- */
-	
-	
 	/**
 	* Consultora del tipo de la Restriccion
 	* @param idDoc: Identificador del Doctor
@@ -176,7 +183,6 @@ public class CtrlDoctor {
 		return null;
 	}
 	
-	/* --------------- GETS TIPO MAX TURNOS CONSECUTIVOS -------------------- */
 	
 	/**
 	* Consultora del numero maximo de turnos que se trabaja por dia de la Restriccion MAX_Turnos_por_Dia
@@ -209,7 +215,6 @@ public class CtrlDoctor {
 		return null;
 	}
 	
-	/* --------------- GETS TIPO MAX TURNOS RANGO -------------------- */
 	
 	/**
 	* Consultora de la fecha de inicio de la Restriccion MAX_Turnos_Rango
@@ -304,7 +309,6 @@ public class CtrlDoctor {
 		return null;
 	}
 	
-	/* --------------- GETS TIPO NOT DIA MES -------------------- */
 	
 	/**
 	* Consultora del dia del mes de la Restriccion NOT_Dia_Mes
@@ -337,7 +341,6 @@ public class CtrlDoctor {
 		return null;
 	}
 	
-	/* --------------- GETS TIPO NOT DIA SEMANA -------------------- */
 	
 	/**
 	* Consultora del dia de la semana de la Restriccion NOT_Dia_Semana
@@ -370,7 +373,6 @@ public class CtrlDoctor {
 		return null;
 	}
 	
-	/* --------------- GETS TIPO NOT ESPECIAL -------------------- */
 	
 	/**
 	* Consultora del dia especial de la Restriccion NOT_Especial
@@ -403,7 +405,6 @@ public class CtrlDoctor {
 		return null;
 	}
 	
-	/* --------------- GETS TIPO NOT FECHA -------------------- */
 	
 	/**
 	* Consultora de la fecha de la Restriccion NOT_Fecha
@@ -436,7 +437,6 @@ public class CtrlDoctor {
 		return null;
 	}
 	
-	/* --------------- GETS TIPO NOT TURNO -------------------- */
 	
 	/**
 	* Consultora del tipo de tunro de la Restriccion NOT_Turno
@@ -469,7 +469,6 @@ public class CtrlDoctor {
 		return null;
 	}
 	
-	/* --------------- GETS TIPO XOR -------------------- */
 	
 	/**
 	* Consultora de la lista de fechas de la restriccion XOR
@@ -544,10 +543,6 @@ public class CtrlDoctor {
 		return null;
 	}
 	
-	
-	
-/* --------------- RESTRICCIONES METODOS PUBLICOS-------------------- */
-	
 	/** 
 	 * Metodo que inserta una restriccion tipo MAX_Turnos_por_Dia nueva en el Doctor
 	 * @param idDoc: Identificador del Doctor
@@ -586,6 +581,7 @@ public class CtrlDoctor {
 	 */
 	public void addResMAX_Turnos_Rango(int idDoc, int idRes, int d1, int m1, int a1, int d2, int m2, int a2, int numT) throws IOException {
 		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
+		if (a1 != yearCalendario || a2 != yearCalendario) throw new IOException("Year incorrecto");
 		if (d1 < 1 || d1 > 31 || m1 < 1 || m1 > 12 || a1 < 1) throw new IOException("Valores de la fecha incorrecto");
 		if (d2 < 1 || d2 > 31 || m2 < 1 || m2 > 12 || a2 < 1) throw new IOException("Valores de la fecha incorrecto");
 		if(numT < 0) throw new IOException("Numero de turnos incorrecto");
@@ -596,6 +592,20 @@ public class CtrlDoctor {
 		for (int i = 0; i < Doctors.size(); ++i) {
 			if (Doctors.get(i).getId() == idDoc) {
 				trobat = true;
+				ArrayList<Restriccion> alres = Doctors.get(i).getRestrictions();
+				int firstDay = fecha1.get(GregorianCalendar.DAY_OF_YEAR);
+				int lastDay = fecha2.get(GregorianCalendar.DAY_OF_YEAR);
+				/*Comprovar si el doctor tiene una XOR con una fecha dentro del rango de la MAX que se quiere poner */
+				for (int j = 0; j < alres.size(); ++j) {
+					if (alres.get(j).getTipo().equals("XOR")) {
+						XOR N = (XOR)alres.get(j);
+						ArrayList<Turno> listXOR = N.getListTurnos();
+						for (int z = 0; z < listXOR.size(); ++z) {
+							int diaXOR = listXOR.get(z).getDate().get(GregorianCalendar.DAY_OF_YEAR);
+							if (diaXOR <= lastDay && diaXOR >= firstDay) throw new IOException("Este doctor ya tiene una XOR que apunta una turno del rango de la MAX que se uqiere poner");
+						}
+					}
+				}
 				Restriccion res = new MAX_Turnos_Rango(idRes, d1, m1, a1, d2, m2, a2, numT);
 				boolean c = Doctors.get(i).addRestriction(res);
 				if (!c) throw new IOException("Ya existe una restriccion con esta Id");	
@@ -687,6 +697,7 @@ public class CtrlDoctor {
 	 */
 	public void addResNOT_Fecha(int idDoc, int idRes, int d, int m, int a) throws IOException {
 		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
+		if (a != yearCalendario) throw new IOException("Year incorrecto");
 		if (d < 1 || d > 31 || m < 1 || m > 12 || a < 1) throw new IOException("Valores de la fecha incorrecto");
 		GregorianCalendar fecha = new GregorianCalendar(a,m-1,d);
 		if (!fecha.isLenient()) throw new IOException("Fecha invalida");
@@ -739,6 +750,7 @@ public class CtrlDoctor {
 	public void addResXOR(int idDoc, int idRes, ArrayList<Integer> diaXOR, ArrayList<Integer> mesXOR,  ArrayList<Integer> yearXOR, ArrayList<String> tipoTurnoXOR) throws IOException {
 		if(idDoc < 0 || idRes < 0) throw new IOException("Valor del identificador incorrecto");
 		for (int i = 0; i < diaXOR.size(); ++i) {
+			if (yearXOR.get(i) !=  yearCalendario) throw new IOException("Year incorrecto");
 			if (diaXOR.get(i) < 1 || diaXOR.get(i) > 31 || mesXOR.get(i) < 1 || mesXOR.get(i) > 12 ||
 				yearXOR.get(i) < 1) throw new IOException("valores de la fecha incorrecto");
 			if (!tipoTurnoXOR.get(i).equals("manana") && !tipoTurnoXOR.get(i).equals("tarde") && !tipoTurnoXOR.get(i).equals("noche")) throw new IOException("Tipo del turno incorrecto");
