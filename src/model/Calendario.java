@@ -54,14 +54,6 @@ public class Calendario {
 	/* Metodos publicos */
 
 	//-- Modificadoras --//
-	/**
-	 * Modificadora del anio del calendario
-	 * pre: El calendario esta vacio
-	 * @param year Anio del calendario
-	 */
-	public void setCalendarYear(int year) {
-		calendarYear = year;
-	}
 
 	/**
 	 * Modificadora que anade un nuevo dia vacacional al calendario
