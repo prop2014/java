@@ -43,12 +43,12 @@ public class CtrlGrafo {
 	
 	private static String itos (int dia){
 		String t;
-		if(dia==1) t="lunes";
-		else if(dia==2) t = "martes";
-		else if(dia==3) t = "miercoles";
-		else if(dia==4) t = "jueves";
-		else if(dia==5) t = "viernes";
-		else if(dia==6) t = "sabado";
+		if(dia==2) t="lunes";
+		else if(dia==3) t = "martes";
+		else if(dia==4) t = "miercoles";
+		else if(dia==5) t = "jueves";
+		else if(dia==6) t = "viernes";
+		else if(dia==7) t = "sabado";
 		else t = "domingo";
 		return t; 
 	}
