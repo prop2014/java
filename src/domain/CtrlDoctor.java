@@ -9,6 +9,7 @@ import model.*;
  * @author Sergi Orra 
  */
 public class CtrlDoctor {
+	
 	/** Atributos */
 	private ArrayList<Doctor> Doctors;
 	private int yearCalendario;
@@ -24,6 +25,7 @@ public class CtrlDoctor {
 	/**
 	* Constructora del control con atributo
 	* @param Doc: Lista de los Doctores del hospital
+	* 		 cal: Year del calendario que se usa en el hospital
 	*/
 	public CtrlDoctor(ArrayList<Doctor> Doc, int cal){
 		Doctors = Doc;
@@ -31,9 +33,7 @@ public class CtrlDoctor {
 	}
 	
 	
-	/* Metodos publicos */
-
-/* ---------------DOCTORES ------------------- */
+/* Metodos publicos */
 	
 	/**
 	*Consultora de todos los identificadores dels doctores
@@ -153,13 +153,6 @@ public class CtrlDoctor {
 	}
 	
 	
-	
-/* --------------- RESTRICCIONES CONSULTORAS-------------------- */
-	
-	
-	/* --------------- GETS COMUNES RESTRICCIONES -------------------- */
-	
-	
 	/**
 	* Consultora del tipo de la Restriccion
 	* @param idDoc: Identificador del Doctor
@@ -190,7 +183,6 @@ public class CtrlDoctor {
 		return null;
 	}
 	
-	/* --------------- GETS TIPO MAX TURNOS CONSECUTIVOS -------------------- */
 	
 	/**
 	* Consultora del numero maximo de turnos que se trabaja por dia de la Restriccion MAX_Turnos_por_Dia
@@ -223,7 +215,6 @@ public class CtrlDoctor {
 		return null;
 	}
 	
-	/* --------------- GETS TIPO MAX TURNOS RANGO -------------------- */
 	
 	/**
 	* Consultora de la fecha de inicio de la Restriccion MAX_Turnos_Rango
@@ -318,7 +309,6 @@ public class CtrlDoctor {
 		return null;
 	}
 	
-	/* --------------- GETS TIPO NOT DIA MES -------------------- */
 	
 	/**
 	* Consultora del dia del mes de la Restriccion NOT_Dia_Mes
@@ -351,7 +341,6 @@ public class CtrlDoctor {
 		return null;
 	}
 	
-	/* --------------- GETS TIPO NOT DIA SEMANA -------------------- */
 	
 	/**
 	* Consultora del dia de la semana de la Restriccion NOT_Dia_Semana
@@ -384,7 +373,6 @@ public class CtrlDoctor {
 		return null;
 	}
 	
-	/* --------------- GETS TIPO NOT ESPECIAL -------------------- */
 	
 	/**
 	* Consultora del dia especial de la Restriccion NOT_Especial
@@ -417,7 +405,6 @@ public class CtrlDoctor {
 		return null;
 	}
 	
-	/* --------------- GETS TIPO NOT FECHA -------------------- */
 	
 	/**
 	* Consultora de la fecha de la Restriccion NOT_Fecha
@@ -450,7 +437,6 @@ public class CtrlDoctor {
 		return null;
 	}
 	
-	/* --------------- GETS TIPO NOT TURNO -------------------- */
 	
 	/**
 	* Consultora del tipo de tunro de la Restriccion NOT_Turno
@@ -483,7 +469,6 @@ public class CtrlDoctor {
 		return null;
 	}
 	
-	/* --------------- GETS TIPO XOR -------------------- */
 	
 	/**
 	* Consultora de la lista de fechas de la restriccion XOR
@@ -557,10 +542,6 @@ public class CtrlDoctor {
 		if (!trobat2) throw new IOException("No existe una Restriccion con esta Id");
 		return null;
 	}
-	
-	
-	
-/* --------------- RESTRICCIONES METODOS PUBLICOS-------------------- */
 	
 	/** 
 	 * Metodo que inserta una restriccion tipo MAX_Turnos_por_Dia nueva en el Doctor
