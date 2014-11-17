@@ -750,10 +750,26 @@ public class CtrlDoctor {
 			if (Doctors.get(i).getId() == idDoc) {
 				trobat = true;
 				ArrayList<Turno> listXOR = new ArrayList<Turno>();
+				ArrayList<Restriccion> alres = Doctors.get(i).getRestrictions();
 				for (int j = 0; j < diaXOR.size(); ++j) {
-					GregorianCalendar fecha = new GregorianCalendar(diaXOR.get(j),mesXOR.get(j)-1,yearXOR.get(j));
+					GregorianCalendar fecha = new GregorianCalendar(yearXOR.get(j),mesXOR.get(j)-1,diaXOR.get(j));
 					Turno turno = new Turno(fecha, tipoTurnoXOR.get(j));
 					listXOR.add(turno);
+				}
+				/* Comprovar si hay alguna otra XOR en el mismo turno */
+				for (int z = 0; z < alres.size(); ++z) {
+					if (alres.get(z).getTipo().equals("XOR")) {
+						XOR N = (XOR)alres.get(z);
+						ArrayList<Turno> listXOR2 = N.getListTurnos();
+						for (int j = 0; j < listXOR.size(); ++j) {
+							for (int k = 0; k < listXOR2.size(); ++k) {
+								if (listXOR.get(j) == listXOR2.get(k)) throw new IOException("Este doctor ya tiene una restriccion XOR apuntando a algun turno de la que quieres poner");
+							}
+						}
+					}
+					if (alres.get(z).getTipo().equals("MAX_Turnos_Rango")) {
+						MAX_Turnos_Rango N = (MAX_Turnos_Rango)alres.get(z);
+					}
 				}
 				Restriccion res = new XOR(idRes, listXOR);
 				boolean c = Doctors.get(i).addRestriction(res);
