@@ -85,7 +85,7 @@ public class DriverDoctor {
 						diaMes = teclado.nextInt();
 						res = new NOT_Dia_Mes(idRestriccion, diaMes);
 					}
-					else if (tipoRestriccion.equals("NOT_Dia_Setmana")) {
+					else if (tipoRestriccion.equals("NOT_Dia_Semana")) {
 						System.out.printf("Restriccion tipo NOT_Dia_Setmana, ingrese el dia de la semana.\n");
 						String diaSemana;
 						diaSemana = teclado.next();
