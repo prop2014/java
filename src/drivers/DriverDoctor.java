@@ -59,10 +59,10 @@ public class DriverDoctor {
 						int numTurnos;
 						int d1, d2, m1, m2, a1, a2;
 						d1 = teclado.nextInt();
-						d2 = teclado.nextInt();
 						m1 = teclado.nextInt();
-						m2 = teclado.nextInt();
 						a1 = teclado.nextInt();
+						d2 = teclado.nextInt();
+						m2 = teclado.nextInt();
 						a2 = teclado.nextInt();
 						numTurnos = teclado.nextInt();
 						res = new MAX_Turnos_Rango(idRestriccion, d1, m1, a1, d2, m2, a2, numTurnos);
