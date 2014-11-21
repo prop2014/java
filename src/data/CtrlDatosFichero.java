@@ -21,8 +21,9 @@ public class CtrlDatosFichero {
 	
    public String[] getHospital (int id) {
 	   String[] hosp = new String[4];
+	   hosp[0]="0";
 	   try{
-	   archivo = new File("/home/oscar/Desktop/propgit/java/src/data/inHosp");
+	   archivo = new File("/prop2014/src/data/inHosp");
 	   fr = new FileReader (archivo);
 	   br = new BufferedReader(fr);
 	   // Lectura del fichero
