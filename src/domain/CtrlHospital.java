@@ -2,16 +2,20 @@ package domain;
 
 import java.util.*;
 import java.io.IOException;
+import data.CtrlDatosFichero;
 
 import model.*;
 
 public class CtrlHospital {
 	/**Atributos */
 	private Hospital hosp;
+	private CtrlDatosFichero inOut;
 	
 	
 	/* Constructora */
-	public CtrlHospital(){}
+	public CtrlHospital(){
+		inOut = new CtrlDatosFichero();
+	}
 	
 	
 	/* Metodos públicos */
@@ -20,9 +24,16 @@ public class CtrlHospital {
 		ArrayList<Hospital> hospitales = new ArrayList<>(); //hospitales = getHospitalesCtrlData()
 		return hospitales;
 	}
-	
+	/**
+	 * 
+	 * @param id identificador del Hospital
+	 * @throws IOException Hospital no encontrado
+	 */
 	public void cargarHospital(int id) throws IOException {
-		//hosp = getHospitalCtrlData(id);
+		String[] vHosp = new String[4];
+		vHosp=inOut.getHospital(id);
+		if(vHosp[0].equals("0")) throw new IOException("Id Hospital no encontrado"); 
+		hosp = new Hospital(id,vHosp[0],Double.parseDouble(vHosp[1]),Double.parseDouble(vHosp[2]),Double.parseDouble(vHosp[3]));
 	}
 	
 	public void crearHospital(int id, String nombre, double fm, double ft, double fn) throws IOException {
@@ -51,22 +62,6 @@ public class CtrlHospital {
 		if(hosp.existsDoctor(id)) throw new IOException("Ya existe un doctor con este identificador");
 		else hosp.addDoctor(doc);
 		//createDoctorData()?
-	}
-	
-	//esta en c
-	public void modificarDoctor(int id, String nombre, int numMax, double sueldo) throws IOException {
-		if(numMax < 0) throw new IOException("Número máximo de turnos incorrecto");
-		if(sueldo < 0) throw new IOException("Sueldo incorrecto");
-		//try {
-			Doctor doc = new Doctor();// = hosp.getDoctor(id);
-		//}
-		/*catch IOException(e) { // Que devuelva que no existe doctor con ID = id
-			throw new IOException(e);
-		} */
-		doc.setName(nombre);
-		doc.setNumMaxTurn(numMax);
-		doc.setSalaryTurn(sueldo);
-		//updateDoctorData(id)?
 	}
 	
 	/**

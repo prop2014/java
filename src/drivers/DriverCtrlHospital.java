@@ -6,6 +6,7 @@ import java.util.*;
 import model.Doctor;
 import model.Hospital;
 import domain.CtrlHospital;
+import data.CtrlDatosFichero;
 
 public class DriverCtrlHospital {
 	private static void muestraOpciones() {
@@ -15,6 +16,7 @@ public class DriverCtrlHospital {
 		System.out.print("3: Crear Doctor y añadir a Hospital\n");
 		System.out.print("NO: Modificar Doctor del hospital\n");
 		System.out.print("NO: Eliminar Doctor del hospital\n");
+		System.out.print("4: Cargar un hospital\n");
 		System.out.print("0: Salir\n");
 	}
 
@@ -86,6 +88,17 @@ public class DriverCtrlHospital {
 					}
 					catch(IOException e) { throw new IOException(e); }
 					System.out.println("Doctor añadido correctamente");
+					break;
+				
+				case 4:
+					System.out.println("Ingrese el identificador del Hospital: ");
+					int Id = teclado.nextInt();
+					try{
+						
+						domain.cargarHospital(Id);
+					}
+					catch(IOException e) { throw new IOException(e); }
+					System.out.println("Hospital correctamente cargado");
 					break;
 				
 				default:
