@@ -17,6 +17,7 @@ public class DriverCtrlHospital {
 		System.out.print("NO: Modificar Doctor del hospital\n");
 		System.out.print("NO: Eliminar Doctor del hospital\n");
 		System.out.print("4: Cargar un hospital\n");
+		System.out.print("5: Guradar Hospital\n");
 		System.out.print("0: Salir\n");
 	}
 
@@ -91,6 +92,7 @@ public class DriverCtrlHospital {
 					break;
 				
 				case 4:
+
 					System.out.println("Ingrese el identificador del Hospital: ");
 					int Id = teclado.nextInt();
 					try{
@@ -101,6 +103,10 @@ public class DriverCtrlHospital {
 					System.out.println("Hospital correctamente cargado");
 					break;
 				
+				case 5: 
+						domain.guardarHospital();
+					System.out.println("Hospital correctamente guardado");
+					break;
 				default:
 			}
 			

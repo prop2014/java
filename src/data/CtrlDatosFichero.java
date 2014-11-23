@@ -9,6 +9,8 @@ public class CtrlDatosFichero {
 	File archivo;
     FileReader fr;
     BufferedReader br;
+    FileWriter fw;
+    PrintWriter pw;
 	
 	/* Atributos */
 
@@ -17,26 +19,26 @@ public class CtrlDatosFichero {
 		archivo = null;
 	    fr=null;
 	    br=null;
+	    fw = null;
+	    pw = null;
 	}
 	
-   public String[] getHospital (int id) {
-	   String[] hosp = new String[4];
-	   hosp[0]="0";
+   public ArrayList<String> getHospital (int id) {
+	   ArrayList<String> alhosp = new ArrayList<String>();
+	   
 	   try{
-	   archivo = new File("/prop2014/src/data/inHosp");
+	   String num = Integer.toString(id);
+	   archivo = new File("/home/oscar/Desktop/propgit/java/data/Hospital"+num);
 	   fr = new FileReader (archivo);
 	   br = new BufferedReader(fr);
-	   // Lectura del fichero
 	   String linea;
+	   String s;
 	   while((linea=br.readLine())!=null){
 		   Scanner sl = new Scanner(linea);
-		   String s1 = sl.next();
-		  String Id= Integer.toString(id);
-		   if(s1.equals(Id)){
-			   hosp[0]=sl.next();
-			   hosp[1]=sl.next();
-			   hosp[2]=sl.next();
-			   hosp[3]=sl.next();
+		   for(int i=0; i<linea.length()-1;++i){
+			   s=sl.next().toString();
+			   System.out.print(s+" ");
+		   alhosp.add(s);
 		   }
 		   sl.close();
 	   }
@@ -53,8 +55,38 @@ public class CtrlDatosFichero {
    				e2.printStackTrace();
    			}
    		}
-   return hosp;
+   return alhosp;
    }
+   
+   
+   
+       public void saveHosp(ArrayList<String> alhosp,Integer archivo)
+       {
+           try
+           {   
+        	   String num = Integer.toString(archivo);
+        	   String path = "/home/oscar/Desktop/propgit/java/data/Hospital"+num;
+               fw = new FileWriter(path);
+               pw = new PrintWriter(fw);
+               int i;
+               for (i = 0; i < alhosp.size()-1; i++){
+                   pw.print(alhosp.get(i)+ " ");
+               }
+               pw.print(alhosp.get(alhosp.size()-1));
+           } catch (Exception e) {
+               e.printStackTrace();
+           } finally {
+              try {
+              // Nuevamente aprovechamos el finally para
+              // asegurarnos que se cierra el fichero.
+              if (null != fw)
+                 fw.close();
+              } catch (Exception e2) {
+                 e2.printStackTrace();
+              }
+           }
+       }
+   
 	
 }
          
