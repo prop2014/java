@@ -113,15 +113,17 @@ public class DriverCalendario {
 			System.out.println(" 2: Calendario(int year)");
 			System.out.println(" 3: Calendario(Calendario C)");
 			System.out.println(" 4: void addVacationDay(GregorianCalendar date)");
-			System.out.println(" 5: void deleteVacationDay(GregorianCalendar date)");			
-			System.out.println(" 6: int getCalendarYear()");
-			System.out.println(" 7: Turno getShift(GregorianCalendar date, String shiftType)");
-			System.out.println(" 8: ArrayList<Turno> getShiftsOfADay(GregorianCalendar date)");
-			System.out.println(" 9: ArrayList<Turno> getALLShifts()");
-			System.out.println("10: boolean existsVacationDay(GregorianCalendar date)");
-			System.out.println("11: ArrayList<GregorianCalendar> getALLVacationDates()");		
-			System.out.println("12: int getNumberOfVacationDays()");
-			System.out.println("13: int getNumberOfShifts()");
+			System.out.println(" 5: void deleteVacationDay(GregorianCalendar date)");
+			System.out.println(" 6: void setSpecialDate(GregorianCalendar date, String specialDate)");
+			System.out.println(" 7: void setNumberOfDoctors(GregorianCalendar date, String shiftType, int numberOfDoctors)");
+			System.out.println(" 8: int getCalendarYear()");
+			System.out.println(" 9: Turno getShift(GregorianCalendar date, String shiftType)");
+			System.out.println("10: ArrayList<Turno> getShiftsOfADay(GregorianCalendar date)");
+			System.out.println("11: ArrayList<Turno> getALLShifts()");
+			System.out.println("12: boolean existsVacationDay(GregorianCalendar date)");
+			System.out.println("13: ArrayList<GregorianCalendar> getALLVacationDates()");		
+			System.out.println("14: int getNumberOfVacationDays()");
+			System.out.println("15: int getNumberOfShifts()");
 			System.out.println(" 0: Salir\n");
 
 			op = sc.nextInt();
@@ -179,7 +181,7 @@ public class DriverCalendario {
 			}
 			case 5:{
 				System.out.println("5: deleteVacationDay(GregorianCalendar date)\n");
-				System.out.println("Dias vacacionales del calendario c1:");
+				System.out.println("-- Dias vacacionales del calendario c1 --");
 				printVacationDayList(c1.getALLVacationDates());
 				boolean gotoMainMenu = false;
 				while(!gotoMainMenu){
@@ -211,15 +213,58 @@ public class DriverCalendario {
 				break;
 			}
 			case 6:{
-				System.out.println("6: int getCalendarYear()\n");
+				System.out.println("6: void setSpecialDate(GregorianCalendar date, String specialDate)\n");
+				GregorianCalendar date = new GregorianCalendar();
+				readDate(sc,date);
+				if (c1.existsVacationDay(date)) {
+					System.out.println("Introducir 'fecha especial':");
+					String specialDate = sc.next();
+					c1.setSpecialDate(date, specialDate);
+					System.out.print("\nSe ha modificado la fecha especial del dia vacional ");
+					printDate(date);
+					System.out.println(" del calendario c1!\n");
+				}
+				else {
+					System.out.print("\nEl dia vacacional ");
+					printDate(date);
+					System.out.println(" no existe!\n");
+				}
+				break;
+			}
+			case 7:{
+				System.out.println("7: void setNumberOfDoctors(GregorianCalendar date, String shiftType, int numberOfDoctors)\n");
+				GregorianCalendar date = new GregorianCalendar();
+				readDate(sc,date);
+				if (c1.existsVacationDay(date)) {
+					System.out.println("Introducir 'tipo de turno':");
+					String shiftType = sc.next();
+					System.out.println("Introducir 'numero de doctores':");
+					int numberOfDoctors = sc.nextInt();
+					if (numberOfDoctors < 0) System.out.print("\nEl numero de doctores introducido no es correcto");
+					else {
+						c1.setNumberOfDoctors(date, shiftType, numberOfDoctors);
+						System.out.print("\nSe ha modificado el numero de doctores del turno de " + shiftType + " del dia vacional ");
+						printDate(date);
+						System.out.println(" del calendario c1!\n");
+					}
+				}
+				else {
+					System.out.print("\nEl dia vacacional ");
+					printDate(date);
+					System.out.println(" no existe!\n");
+				}
+				break;
+			}
+			case 8:{
+				System.out.println("8: int getCalendarYear()\n");
 				int year = c1.getCalendarYear();
 				if (year != -1) System.out.println("Anio del calendario c1: " + year + "\n");
 				else System.out.println("No se ha definido el anio para el calendario c1!");
 
 				break;
 			}			
-			case 7:{
-				System.out.println("7: Turno getShift(GregorianCalendar date, String shiftType)\n");
+			case 9:{
+				System.out.println("9: Turno getShift(GregorianCalendar date, String shiftType)\n");
 				GregorianCalendar date = new GregorianCalendar();
 				readDate(sc,date);
 				if (!c1.existsVacationDay(date)) {
@@ -238,8 +283,8 @@ public class DriverCalendario {
 				}
 				break;
 			}
-			case 8:{
-				System.out.println("8: ArrayList<Turno> getShiftsOfADay(GregorianCalendar date)\n");
+			case 10:{
+				System.out.println("10: ArrayList<Turno> getShiftsOfADay(GregorianCalendar date)\n");
 				GregorianCalendar date = new GregorianCalendar();
 				readDate(sc,date);
 				if (!c1.existsVacationDay(date)) {
@@ -250,16 +295,16 @@ public class DriverCalendario {
 				}
 				break;
 			}
-			case 9:{
-				System.out.println("9: ArrayList<Turno> getALLShifts()\n");
+			case 11:{
+				System.out.println("11: ArrayList<Turno> getALLShifts()\n");
 				System.out.println("-- Turnos del calendario c1 --");
 				printALLShifts(c1.getALLShifts());
 				System.out.println("-- Turnos del calendario c2 --");
 				printALLShifts(c2.getALLShifts());
 				break;
 			}
-			case 10:{
-				System.out.println("10: existsVacationDay(GregorianCalendar date)\n");
+			case 12:{
+				System.out.println("12: existsVacationDay(GregorianCalendar date)\n");
 				GregorianCalendar date = new GregorianCalendar();
 				readDate(sc,date);
 				System.out.print("\nEl dia vacional ");
@@ -268,22 +313,22 @@ public class DriverCalendario {
 				else System.out.println(" no existe!\n");
 				break;
 			}
-			case 11:{
-				System.out.println("11: ArrayList<GregorianCalendar> getALLVacationDates()\n");
+			case 13:{
+				System.out.println("13: ArrayList<GregorianCalendar> getALLVacationDates()\n");
 				System.out.println("-- Dias vacacionales del calendario c1 --");
 				printVacationDayList(c1.getALLVacationDates());
 				System.out.println("-- Dias vacacionales del calendario c2 --");
 				printVacationDayList(c2.getALLVacationDates());
 				break;
 			}
-			case 12:{
-				System.out.println("12: getNumberOfVacationDays()\n");
+			case 14:{
+				System.out.println("14: getNumberOfVacationDays()\n");
 				System.out.println("Numero de dias vacacionales del calendario c1: " + c1.getNumberOfVacationDates());
 				System.out.println("Numero de dias vacacionales del calendario c2: " + c2.getNumberOfVacationDates() + "\n");
 				break;
 			}
-			case 13:{
-				System.out.println("13: int getNumberOfShifts()\n");
+			case 15:{
+				System.out.println("15: int getNumberOfShifts()\n");
 				System.out.println("Numero de turnos del calendario c1: " + c1.getNumberOfShifts());
 				System.out.println("Numero de turnos del calendario c2: " + c2.getNumberOfShifts() + "\n");
 				break;
@@ -293,7 +338,7 @@ public class DriverCalendario {
 				answer = sc.next();
 				while (!(answer.equals("s") || answer.equals("n"))) {
 					System.out.println("Elegir una de las siguientes opciones:");
-					System.out.println("s: Salir     |     n: Continuar");
+					System.out.println("s: Salir     |     n: Volver al Menu Principal");
 					answer = sc.next();
 				}
 				if (answer.equals("s")) exit = true;

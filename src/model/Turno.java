@@ -7,13 +7,14 @@ import java.util.GregorianCalendar;
  * @author Felix Fernando Ramos Velázquez
  */
 public class Turno {
-	//-- Atributos privados --//
+	/* Atributos privados */
 	private GregorianCalendar date;
 	private String shiftType;
 	private String specialDate;
 	private int numberOfDoctors;
 
-
+	/* Constructoras y metodos publicos */
+	
 	//-- Constructoras --//
 	/**
 	 * Constructora por defecto
@@ -21,7 +22,7 @@ public class Turno {
 	public Turno() {}	
 
 	/**
-	 * Constructora 2
+	 * Constructora con fecha y tipo
 	 * @param date Fecha del turno
 	 * @param shiftType Tipo del turno
 	 */
@@ -33,7 +34,7 @@ public class Turno {
 	}
 
 	/**
-	 * Constructora 3 (completa)
+	 * Constructora completa
 	 * @param date Fecha del turno
 	 * @param shiftType Tipo del turno
 	 * @param specialDate Fecha especial
@@ -47,7 +48,7 @@ public class Turno {
 	}
 
 	/**
-	 * Constructora 4 (copia)
+	 * Constructora copia
 	 * @param T Turno que se copiara
 	 */
 	public Turno(Turno T) {
@@ -56,9 +57,6 @@ public class Turno {
 		specialDate = T.specialDate;
 		numberOfDoctors = T.numberOfDoctors;
 	}
-
-
-	/* Metodos públicos */
 
 	//-- Modificadoras --//
 	/**
@@ -76,7 +74,6 @@ public class Turno {
 	public void setNumberOfDoctors(int numberOfDoctors) {
 		this.numberOfDoctors = numberOfDoctors;
 	}
-
 
 	//-- Consultoras --//
 	/**

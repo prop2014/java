@@ -10,23 +10,22 @@ import java.util.Iterator;
  * @author Felix Fernando Ramos Velazquez
  */
 public class Calendario {
-	//-- Atributos privados --//
+	/* Atributos privados */
 	private int calendarYear; // anio al que corresponde el calendario
 	private TreeMap<Integer,Turno[]> vacationDates;
-	private static int shiftsPerDay = 3;
+	private static final int shiftsPerDay = 3;
 	private static final String[] shiftTypes = {"manana","tarde","noche"};
 
+	/* Constructoras y metodos publicos */
+	
 	//-- Constructoras --//
 	/**
 	 * Constructora por defecto
 	 */
-	public Calendario() {
-		calendarYear = 2014;
-		vacationDates = new TreeMap<Integer,Turno[]>();
-	}
+	public Calendario() {}
 
 	/**
-	 * Constructora por defecto
+	 * Constructora con anio
 	 * @param year Anio del calendario
 	 */
 	public Calendario(int year) {
@@ -50,11 +49,7 @@ public class Calendario {
 		}
 	}
 
-
-	/* Metodos publicos */
-
 	//-- Modificadoras --//
-
 	/**
 	 * Modificadora que anade un nuevo dia vacacional al calendario
 	 * pre: El calendario ya tiene el anio definido
@@ -76,7 +71,30 @@ public class Calendario {
 		int key = date.get(GregorianCalendar.DAY_OF_YEAR) - 1;
 		vacationDates.remove(key);
 	}
+	
+	/**
+	 * Modificadora de la fecha especial de los turnos de un dia vacacional del calendario
+	 * @param date Fecha del dia vacacional
+	 * @param specialDate Fecha especial
+	 */
+	public void setSpecialDate(GregorianCalendar date, String specialDate) {
+		int key = date.get(GregorianCalendar.DAY_OF_YEAR) - 1;
+		for (int i = 0; i < shiftsPerDay; ++i)
+			vacationDates.get(key)[i].setSpecialDate(specialDate);
+	}
 
+	/**
+	 * Modificadora del numero de doctores de un turno de un dia vacacional del calendario
+	 * @param date Fecha del dia vacacional
+	 * @param shiftType Tipo de turno del dia vacacional
+	 * @param numberOfDoctors Numero de doctores del turno
+	 */
+	public void setNumberOfDoctors(GregorianCalendar date, String shiftType, int numberOfDoctors) {
+		int key = date.get(GregorianCalendar.DAY_OF_YEAR) - 1;
+		if (shiftType.equals(shiftTypes[0])) vacationDates.get(key)[0].setNumberOfDoctors(numberOfDoctors);
+		else if (shiftType.equals(shiftTypes[1])) vacationDates.get(key)[1].setNumberOfDoctors(numberOfDoctors);
+		else vacationDates.get(key)[2].setNumberOfDoctors(numberOfDoctors);
+	}
 
 	//-- Consultoras --//
 	/**
