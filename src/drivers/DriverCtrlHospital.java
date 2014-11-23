@@ -118,9 +118,9 @@ public class DriverCtrlHospital {
 					}catch(IOException e) { throw new IOException(e); }
 					System.out.println("Doctores Obtenidos:");
 					for(int i=0;i<aldoctor.size();++i){
-						System.out.printf("%d : doctor:%d\n",i,aldoctor.get(i).getId());
+						System.out.printf("%d : doctor:%s\n",i,aldoctor.get(i).getName());
 					}
-					
+					System.out.print("Ingrese el numero del doctor:\n");
 					int x = teclado.nextInt();
 					Doctor	m = aldoctor.get(x);
 					Restriccion res;
