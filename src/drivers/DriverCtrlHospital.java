@@ -2,11 +2,14 @@ package drivers;
 
 import java.io.*;
 import java.util.*;
-
+import model.Restriccion;
+import model.MAX_Turnos_Rango;
 import model.Doctor;
-import model.Hospital;
+
+
+
 import domain.CtrlHospital;
-import data.CtrlDatosFichero;
+
 
 public class DriverCtrlHospital {
 	private static void muestraOpciones() {
@@ -14,10 +17,9 @@ public class DriverCtrlHospital {
 		System.out.print("1: Crear Hospital\n");
 		System.out.print("2: Modificar Hospital\n");
 		System.out.print("3: Crear Doctor y añadir a Hospital\n");
-		System.out.print("NO: Modificar Doctor del hospital\n");
-		System.out.print("NO: Eliminar Doctor del hospital\n");
 		System.out.print("4: Cargar un hospital\n");
 		System.out.print("5: Guradar Hospital\n");
+		System.out.print("6: Anadir Restriccion maxturnosRango a un doctor\n");
 		System.out.print("0: Salir\n");
 	}
 
@@ -86,6 +88,7 @@ public class DriverCtrlHospital {
 					sueldo = teclado.nextDouble();
 					try {
 						domain.crearDoctor(id, nombre, numMax, sueldo);
+						
 					}
 					catch(IOException e) { throw new IOException(e); }
 					System.out.println("Doctor añadido correctamente");
@@ -107,6 +110,36 @@ public class DriverCtrlHospital {
 						domain.guardarHospital();
 					System.out.println("Hospital correctamente guardado");
 					break;
+					
+				case 6: //Res Max Turnos Rango
+					ArrayList<Doctor> aldoctor = new ArrayList<Doctor>();
+					try{
+					aldoctor = domain.getDoctors();
+					}catch(IOException e) { throw new IOException(e); }
+					System.out.println("Doctores Obtenidos:");
+					for(int i=0;i<aldoctor.size();++i){
+						System.out.printf("%d : doctor:%d\n",i,aldoctor.get(i).getId());
+					}
+					
+					int x = teclado.nextInt();
+					Doctor	m = aldoctor.get(x);
+					Restriccion res;
+					System.out.println("Ingrese el id Restriccion:");
+					int idRestriccion = teclado.nextInt();
+						System.out.printf("Restriccion tipo MAX_Turnos_Rango, ingrese la fecha inico (dd MM aaaa), fecha fin y el numero de Turnos.\n");
+						int numTurnos;
+						int d1, d2, m1, m2, a1, a2;
+						d1 = teclado.nextInt();
+						m1 = teclado.nextInt();
+						a1 = teclado.nextInt();
+						d2 = teclado.nextInt();
+						m2 = teclado.nextInt();
+						a2 = teclado.nextInt();
+						numTurnos = teclado.nextInt();
+						res = new MAX_Turnos_Rango(idRestriccion, d1, m1, a1, d2, m2, a2, numTurnos);
+					m.addRestriction(res);
+					break;
+					
 				default:
 			}
 			
@@ -114,6 +147,7 @@ public class DriverCtrlHospital {
 			muestraOpciones();
 		    opcion = teclado.nextInt();
 		}
+		teclado.close();
 		System.out.print("PROGRAM EXIT");
 	}
 }

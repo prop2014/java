@@ -1,5 +1,6 @@
 package domain;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.io.IOException;
@@ -12,6 +13,19 @@ public class CtrlHospital {
 	private Hospital hosp;
 	private CtrlDatosFichero inOut;
 	
+	
+	private static GregorianCalendar readDate(String s) throws ParseException {
+		GregorianCalendar date =new GregorianCalendar();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
+		sdf.setLenient(false);
+		try{
+			date.setTime(sdf.parse(s));
+		}catch(
+			Exception e2){ 
+   				e2.printStackTrace();
+		}
+		return date;
+	}
 	
 	/* Constructora */
 	public CtrlHospital(){
@@ -45,9 +59,8 @@ public class CtrlHospital {
 			++i;
 			double SueldoTurno = Double.parseDouble(alhosp.get(i));
 			Doctor d = new Doctor(idDoctor,nombre,numMaxTurnos,SueldoTurno);
-			++i;
-			if(alhosp.get(i).equals("0"))++i;
-			else {
+			++i; // 0 o coma
+			if(alhosp.get(i).equals(",")){
 				++i; //em saltu la coma
 				int idRestriccion =Integer.parseInt(alhosp.get(i));
 				++i;
@@ -58,30 +71,79 @@ public class CtrlHospital {
 					d.addRestriction(N);
 				}
 				else if(tipo.equals("NOT_Fecha")){
-					SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
 					++i;
+					String s = alhosp.get(i);
+					GregorianCalendar gc = new GregorianCalendar();
+					try{
+					gc = readDate(s);
+					}catch (Exception e2){ 
+		   				e2.printStackTrace();
+					}
+					NOT_Fecha N = new NOT_Fecha(idRestriccion,gc);
+					d.addRestriction(N);
 				}
 				else if(tipo.equals("NOT_Especial")){
-					
+					++i;
+					NOT_Especial N = new NOT_Especial(idRestriccion,alhosp.get(i));
+					d.addRestriction(N);
 				}
 				else if(tipo.equals("NOT_Dia_Semana")){
-					
+					++i;
+					NOT_Dia_Semana N = new NOT_Dia_Semana(idRestriccion,alhosp.get(i));
+					d.addRestriction(N);
 				}
 				else if(tipo.equals("NOT_Dia_Mes")){
-					
+					++i;
+					NOT_Dia_Mes N = new NOT_Dia_Mes(idRestriccion,Integer.parseInt(alhosp.get(i)));
+					d.addRestriction(N);
 				}
 				else if(tipo.equals("MAX_Turnos_Rango")){
-					
+					++i;
+					String si = alhosp.get(i);
+					++i;
+					String sf = alhosp.get(i);
+					GregorianCalendar gci = new GregorianCalendar();
+					GregorianCalendar gcf= new GregorianCalendar();
+					try{
+					gci = readDate(si);
+					gcf = readDate(sf);
+					}catch (Exception e2){ 
+		   				e2.printStackTrace();
+					}
+					++i;
+					int mt = Integer.parseInt(alhosp.get(i));
+					MAX_Turnos_Rango N = new MAX_Turnos_Rango(idRestriccion,gci,gcf,mt);
+					d.addRestriction(N);					
 				}
 				else if(tipo.equals("MAX_Turnos_por_Dia")){
-					
+					++i;
+					MAX_Turnos_por_Dia N = new MAX_Turnos_por_Dia(idRestriccion,Integer.parseInt(alhosp.get(i)));
+					d.addRestriction(N);
 				}
 				else if(tipo.equals("XOR")){
+					++i;
+					int size=Integer.parseInt(alhosp.get(i));
+					ArrayList<Turno> listXOR = new ArrayList<Turno>();
+					for(int l=0; l<size;++l){
+						++i;
+						String s = alhosp.get(i);
+						++i;
+						String t=alhosp.get(i);
+						GregorianCalendar gc = new GregorianCalendar();
+						try{
+							gc = readDate(s);
+							}catch (Exception e2){ 
+				   				e2.printStackTrace();
+							}
+						Turno turn= new Turno(gc,t);
+						listXOR.add(turn);
+					}
+					XOR N = new XOR(idRestriccion,listXOR);
+					d.addRestriction(N);
 				}
-				
-				
 			}
 			hosp.addDoctor(d);
+			++i;
 		}
 	}
 	
@@ -118,8 +180,9 @@ public class CtrlHospital {
 	 * @return devuelve un arraylist con los doctores del hospital
 	 */
 	
-	public ArrayList<Doctor> getDoctors(){
+	public ArrayList<Doctor> getDoctors()  throws IOException{
 		ArrayList<Doctor> aldoctor = hosp.getDoctors();
+		if(aldoctor.isEmpty()) throw new IOException("No contiene Doctores");
 		return aldoctor;
 	}
 	
@@ -240,6 +303,8 @@ public class CtrlHospital {
 							XOR N = (XOR)Res.get(k);
 							ArrayList<Turno> listXOR = N.getListTurnos();
 							SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
+							++i;
+							alhosp.add(i,Integer.toString(listXOR.size()));
 							for(int l=0; l< listXOR.size();++l){
 								++i;
 								alhosp.add(i,sdf.format(listXOR.get(l).getDate().getTime()));
