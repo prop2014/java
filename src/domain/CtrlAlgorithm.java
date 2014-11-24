@@ -46,6 +46,7 @@ public class CtrlAlgorithm {
 		try {
 			gResidual = new Graf<Nodo>();
 			gResidual = ffulk.findMaxFlow(g, in, out);
+			System.out.println("MaxFlow: " + ffulk.getMaxFlow());
 		} catch(IOException e){
 			System.out.println(e);
 		}
@@ -57,6 +58,7 @@ public class CtrlAlgorithm {
 		try {
 			gResidual = new Graf<Nodo>();
 			gResidual = ffulk.findMaxFlow(g, in, out);
+			System.out.println("MaxFlow: " + ffulk.getMaxFlow());
 		} catch(IOException e){
 			System.out.println(e);
 		}
@@ -69,6 +71,7 @@ public class CtrlAlgorithm {
 		try {
 			gResidual = new Graf<Nodo>();
 			gResidual = ffulk.findMaxFlow(g, in, out);
+			System.out.println("MaxFlow: " + ffulk.getMaxFlow());
 		} catch(IOException e){
 			System.out.println(e);
 		}
