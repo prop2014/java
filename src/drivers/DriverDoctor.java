@@ -109,7 +109,7 @@ public class DriverDoctor {
 						System.out.printf("Restriccion tipo NOT_Turno, ingrese el tipo de turno.\n");
 						String tipoDia;
 						tipoDia = teclado.next();
-						res = new NOT_Especial(idRestriccion, tipoDia);
+						res = new NOT_Turno(idRestriccion, tipoDia);
 					}
 					else if (tipoRestriccion.equals("XOR")) {
 						System.out.printf("Restriccion tipo XOR, ingrese las diferentas fechas (dd MM aaaa) y el tipoTurno (manana, tarde, noche) de cada una. Pon un 0 en el dd para terminar.\n");
