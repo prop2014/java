@@ -39,7 +39,6 @@ public class CtrlDatosFichero {
 		   Scanner sl = new Scanner(linea);
 		   for(int i=0; i<linea.length()-1;++i){
 			   s=sl.next().toString();
-			   System.out.print(s+" ");
 		   alhosp.add(s);
 		   }
 		   sl.close();
