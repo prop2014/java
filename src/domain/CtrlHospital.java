@@ -186,7 +186,6 @@ public class CtrlHospital {
 	
 	public ArrayList<Doctor> getDoctors()  throws IOException{
 		ArrayList<Doctor> aldoctor = hosp.getDoctors();
-		if(aldoctor.isEmpty()) throw new IOException("No contiene Doctores");
 		return aldoctor;
 	}
 	
