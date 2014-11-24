@@ -1,10 +1,15 @@
 package drivers;
 
 import java.io.*;
+import java.text.DateFormat;
 import java.util.*;
+
+import model.Calendario;
+import model.Hospital;
 import model.Restriccion;
 import model.MAX_Turnos_Rango;
 import model.Doctor;
+import model.Turno;
 
 
 
@@ -23,6 +28,65 @@ public class DriverCtrlHospital {
 		System.out.print("0: Salir\n");
 	}
 
+	static void MostrarTurno(Turno t){
+		System.out.printf("--------------------.\n");
+		GregorianCalendar c1 = t.getDate();
+		String fecha = DateFormat.getDateInstance(DateFormat.SHORT).format(c1.getTime());
+		System.out.printf("fecha: %s\n", fecha);
+		System.out.printf("\n");
+		System.out.printf("tipoturno: %s\n",t.getShiftType());
+		System.out.printf("especial: %s\n",t.getSpecialDate());
+		System.out.printf("numDoctores: %d\n",t.getNumberOfDoctors());
+		System.out.printf("--------------------.\n");
+
+	}
+	static void MostrarDoc(Doctor doc){
+		System.out.printf("--------------------.\n");
+		System.out.printf("ID: %d\n",doc.getId());
+		System.out.printf("Nom: %s\n",doc.getName());
+		System.out.printf("Num Max turnos: %d\n",doc.getNumMaxTurn());
+		System.out.printf("Sueldo Por turno: %s €\n",doc.getSalaryTurn());
+		if(doc.isREmpty()) System.out.printf("No te restriccions: \n");
+		else System.out.printf("Te restriccions\n");
+		System.out.printf("--------------------.\n");
+	}
+	static void MostrarHospital(Hospital hosp){
+		ArrayList<Doctor> aldoc;
+		
+		System.out.printf("ID Hospital: %d\n",hosp.getId());
+		System.out.printf("Nombre: %s\n",hosp.getNombre());
+		System.out.printf("Factor Mati: %f\n",hosp.getFactorM());
+		System.out.printf("Factor Tarda: %f\n",hosp.getFactorT());
+		System.out.printf("Factor Nit: %f\n",hosp.getFactorN());
+		if(hosp.isDocEmpty()) {
+			System.out.printf("No hi ha doctors\n");
+		}
+		else {
+			System.out.printf("LLista de Doctors:\n");
+			System.out.printf("Hi ha %d Doctors\n",hosp.docSize());
+			aldoc=hosp.getDoctors();
+			Iterator<Doctor> itr = aldoc.iterator();
+			int i = 1;
+			while(itr.hasNext()){
+				Doctor d = new Doctor();
+				d=itr.next();
+				System.out.printf("%d.\n",i);
+				MostrarDoc(d);
+				++i;
+			}
+		}
+		Calendario cal = hosp.getCalendario();
+		if(cal.getNumberOfVacationDates()==0) System.out.printf("Actualment l'Hospital no te calendari\n");
+		else {
+			System.out.printf("El calendari te %d Turns Vacacionals\n",cal.getNumberOfShifts());
+			ArrayList<Turno> alturno = cal.getALLShifts();
+			for(int i=0;i<alturno.size();++i){
+				MostrarTurno(alturno.get(i));
+			}
+		}
+		System.out.printf("______________________________\n");
+		
+	}
 	
 	public static void main(String[] args) throws IOException{
 		Scanner teclado;
@@ -139,6 +203,9 @@ public class DriverCtrlHospital {
 						res = new MAX_Turnos_Rango(idRestriccion, d1, m1, a1, d2, m2, a2, numTurnos);
 					m.addRestriction(res);
 					break;
+				case 7:
+					Hospital Hosp =domain.getHospital();
+					MostrarHospital(Hosp);
 					
 				default:
 			}

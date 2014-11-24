@@ -62,86 +62,90 @@ public class CtrlHospital {
 			++i; // 0 o coma
 			if(alhosp.get(i).equals(",")){
 				++i; //em saltu la coma
-				int idRestriccion =Integer.parseInt(alhosp.get(i));
-				++i;
-				String tipo = alhosp.get(i);
-				if(tipo.equals("NOT_Turno")){
+				int rest=Integer.parseInt(alhosp.get(i));
+				for(int i1=0;i1<rest;++i1){
+					int idRestriccion =Integer.parseInt(alhosp.get(i));
 					++i;
-					NOT_Turno N = new NOT_Turno(idRestriccion,alhosp.get(i));
-					d.addRestriction(N);
-				}
-				else if(tipo.equals("NOT_Fecha")){
-					++i;
-					String s = alhosp.get(i);
-					GregorianCalendar gc = new GregorianCalendar();
-					try{
-					gc = readDate(s);
-					}catch (Exception e2){ 
-		   				e2.printStackTrace();
+					String tipo = alhosp.get(i);
+					if(tipo.equals("NOT_Turno")){
+						++i;
+						NOT_Turno N = new NOT_Turno(idRestriccion,alhosp.get(i));
+						d.addRestriction(N);
 					}
-					NOT_Fecha N = new NOT_Fecha(idRestriccion,gc);
-					d.addRestriction(N);
-				}
-				else if(tipo.equals("NOT_Especial")){
-					++i;
-					NOT_Especial N = new NOT_Especial(idRestriccion,alhosp.get(i));
-					d.addRestriction(N);
-				}
-				else if(tipo.equals("NOT_Dia_Semana")){
-					++i;
-					NOT_Dia_Semana N = new NOT_Dia_Semana(idRestriccion,alhosp.get(i));
-					d.addRestriction(N);
-				}
-				else if(tipo.equals("NOT_Dia_Mes")){
-					++i;
-					NOT_Dia_Mes N = new NOT_Dia_Mes(idRestriccion,Integer.parseInt(alhosp.get(i)));
-					d.addRestriction(N);
-				}
-				else if(tipo.equals("MAX_Turnos_Rango")){
-					++i;
-					String si = alhosp.get(i);
-					++i;
-					String sf = alhosp.get(i);
-					GregorianCalendar gci = new GregorianCalendar();
-					GregorianCalendar gcf= new GregorianCalendar();
-					try{
-					gci = readDate(si);
-					gcf = readDate(sf);
-					}catch (Exception e2){ 
-		   				e2.printStackTrace();
-					}
-					++i;
-					int mt = Integer.parseInt(alhosp.get(i));
-					MAX_Turnos_Rango N = new MAX_Turnos_Rango(idRestriccion,gci,gcf,mt);
-					d.addRestriction(N);					
-				}
-				else if(tipo.equals("MAX_Turnos_por_Dia")){
-					++i;
-					MAX_Turnos_por_Dia N = new MAX_Turnos_por_Dia(idRestriccion,Integer.parseInt(alhosp.get(i)));
-					d.addRestriction(N);
-				}
-				else if(tipo.equals("XOR")){
-					++i;
-					int size=Integer.parseInt(alhosp.get(i));
-					ArrayList<Turno> listXOR = new ArrayList<Turno>();
-					for(int l=0; l<size;++l){
+					else if(tipo.equals("NOT_Fecha")){
 						++i;
 						String s = alhosp.get(i);
-						++i;
-						String t=alhosp.get(i);
 						GregorianCalendar gc = new GregorianCalendar();
 						try{
-							gc = readDate(s);
-							}catch (Exception e2){ 
-				   				e2.printStackTrace();
-							}
-						Turno turn= new Turno(gc,t);
-						listXOR.add(turn);
+						gc = readDate(s);
+						}catch (Exception e2){ 
+			   				e2.printStackTrace();
+						}
+						NOT_Fecha N = new NOT_Fecha(idRestriccion,gc);
+						d.addRestriction(N);
 					}
-					XOR N = new XOR(idRestriccion,listXOR);
-					d.addRestriction(N);
+					else if(tipo.equals("NOT_Especial")){
+						++i;
+						NOT_Especial N = new NOT_Especial(idRestriccion,alhosp.get(i));
+						d.addRestriction(N);
+					}
+					else if(tipo.equals("NOT_Dia_Semana")){
+						++i;
+						NOT_Dia_Semana N = new NOT_Dia_Semana(idRestriccion,alhosp.get(i));
+						d.addRestriction(N);
+					}
+					else if(tipo.equals("NOT_Dia_Mes")){
+						++i;
+						NOT_Dia_Mes N = new NOT_Dia_Mes(idRestriccion,Integer.parseInt(alhosp.get(i)));
+						d.addRestriction(N);
+					}
+					else if(tipo.equals("MAX_Turnos_Rango")){
+						++i;
+						String si = alhosp.get(i);
+						++i;
+						String sf = alhosp.get(i);
+						GregorianCalendar gci = new GregorianCalendar();
+						GregorianCalendar gcf= new GregorianCalendar();
+						try{
+						gci = readDate(si);
+						gcf = readDate(sf);
+						}catch (Exception e2){ 
+			   				e2.printStackTrace();
+						}
+						++i;
+						int mt = Integer.parseInt(alhosp.get(i));
+						MAX_Turnos_Rango N = new MAX_Turnos_Rango(idRestriccion,gci,gcf,mt);
+						d.addRestriction(N);					
+					}
+					else if(tipo.equals("MAX_Turnos_por_Dia")){
+						++i;
+						MAX_Turnos_por_Dia N = new MAX_Turnos_por_Dia(idRestriccion,Integer.parseInt(alhosp.get(i)));
+						d.addRestriction(N);
+					}
+					else if(tipo.equals("XOR")){
+						++i;
+						int size=Integer.parseInt(alhosp.get(i));
+						ArrayList<Turno> listXOR = new ArrayList<Turno>();
+						for(int l=0; l<size;++l){
+							++i;
+							String s = alhosp.get(i);
+							++i;
+							String t=alhosp.get(i);
+							GregorianCalendar gc = new GregorianCalendar();
+							try{
+								gc = readDate(s);
+								}catch (Exception e2){ 
+					   				e2.printStackTrace();
+								}
+							Turno turn= new Turno(gc,t);
+							listXOR.add(turn);
+						}
+						XOR N = new XOR(idRestriccion,listXOR);
+						d.addRestriction(N);
+					}
 				}
 			}
+				
 			hosp.addDoctor(d);
 			++i;
 		}
@@ -253,6 +257,8 @@ public class CtrlHospital {
 					++i;
 					alhosp.add(i,","); // te restriccions
 					ArrayList<Restriccion> Res=aldocs.get(j).getRestrictions();
+					++i;
+					alhosp.add(i,Integer.toString(Res.size()));
 					for(int k=0;k<Res.size();++k){
 						++i;
 						alhosp.add(i,Integer.toString(Res.get(k).getIdRestriccion()));

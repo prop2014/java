@@ -28,7 +28,9 @@ public class CtrlDatosFichero {
 	   
 	   try{
 	   String num = Integer.toString(id);
-	   archivo = new File("/home/oscar/Desktop/propgit/java/data/Hospital"+num);
+	   String path = new File("").getAbsolutePath();
+	   String realpath = path+ "/datos/Hospital";
+	   archivo = new File(realpath+num);
 	   fr = new FileReader (archivo);
 	   br = new BufferedReader(fr);
 	   String linea;
@@ -65,8 +67,10 @@ public class CtrlDatosFichero {
            try
            {   
         	   String num = Integer.toString(archivo);
-        	   String path = "/home/oscar/Desktop/propgit/java/data/Hospital"+num;
-               fw = new FileWriter(path);
+        	   String path = new File("").getAbsolutePath();
+        	   String realpath = path+ "/datos/Hospital"+num;
+        	  
+               fw = new FileWriter(realpath);
                pw = new PrintWriter(fw);
                int i;
                for (i = 0; i < alhosp.size()-1; i++){
