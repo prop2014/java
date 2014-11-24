@@ -87,7 +87,7 @@ public class VistaRestriccion {
 		gl.setVgap(5); //distancia entre botones (vertical)
 		gl.setHgap(10); //distancia entre botones (horizontal)
 		panelButtons.setLayout(gl); //mida de los botones iguales
-		panelButtons.setBorder(BorderFactory.createEmptyBorder(40, 200, 60, 200)); 
+		panelButtons.setBorder(BorderFactory.createEmptyBorder(40, 190, 60, 190)); 
 	    // Botones
 	    panelButtons.add(buttonNOTFecha);
 	    panelButtons.add(buttonNOTTurno);
