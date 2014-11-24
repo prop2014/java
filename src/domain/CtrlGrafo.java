@@ -139,7 +139,7 @@ public class CtrlGrafo {
 						int cont=0;
 						for(int m=0;m<alturnos.size();++m){
 							GregorianCalendar gc1 = alturnos.get(m).getDate();
-							if(gc1==gc){
+							if(gc1.equals(gc)){
 								Turnos[m]=false;
 								++cont;
 							}
