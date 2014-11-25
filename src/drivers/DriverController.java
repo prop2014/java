@@ -275,12 +275,14 @@ public static void main(String[] args) throws IOException{
 						}
 					} else {
 						ArrayList<nodoTurno> turnosSinSol = CtrlAlg.getTurnosSinSol();
+						ArrayList<Integer> numSinSol = CtrlAlg.getNumSinSol();
 						System.out.println("No hay solucion.\nTurnos sin solucion:");
-						for(nodoTurno t : turnosSinSol) {
+						for(int i = 0; i < turnosSinSol.size(); ++i) {
+							nodoTurno t = turnosSinSol.get(i);
 							String tipo = t.getTipoTurno();
 							GregorianCalendar c1 = t.getFecha();
 							fecha = DateFormat.getDateInstance(DateFormat.SHORT).format(c1.getTime());
-							System.out.printf("Fecha:%s - %s\n", fecha, tipo);
+							System.out.printf("Fecha:%s - %s, faltan %d doctor/es\n", fecha, tipo, numSinSol.get(i));
 						}
 					}
 					break;
@@ -305,12 +307,14 @@ public static void main(String[] args) throws IOException{
 						}
 					} else {
 						ArrayList<nodoTurno> turnosSinSol = CtrlAlg.getTurnosSinSol();
+						ArrayList<Integer> numSinSol = CtrlAlg.getNumSinSol();
 						System.out.println("No hay solucion.\nTurnos sin solucion:");
-						for(nodoTurno t : turnosSinSol) {
+						for(int i = 0; i < turnosSinSol.size(); ++i) {
+							nodoTurno t = turnosSinSol.get(i);
 							String tipo = t.getTipoTurno();
 							GregorianCalendar c1 = t.getFecha();
 							fecha = DateFormat.getDateInstance(DateFormat.SHORT).format(c1.getTime());
-							System.out.printf("Fecha:%s - %s\n", fecha, tipo);
+							System.out.printf("Fecha:%s - %s, faltan %d doctor/es\n", fecha, tipo, numSinSol.get(i));
 						}
 					}
 					break;
@@ -334,12 +338,14 @@ public static void main(String[] args) throws IOException{
 						}
 					} else {
 						ArrayList<nodoTurno> turnosSinSol = CtrlAlg.getTurnosSinSol();
+						ArrayList<Integer> numSinSol = CtrlAlg.getNumSinSol();
 						System.out.println("No hay solucion.\nTurnos sin solucion:");
-						for(nodoTurno t : turnosSinSol) {
+						for(int i = 0; i < turnosSinSol.size(); ++i) {
+							nodoTurno t = turnosSinSol.get(i);
 							String tipo = t.getTipoTurno();
 							GregorianCalendar c1 = t.getFecha();
 							fecha = DateFormat.getDateInstance(DateFormat.SHORT).format(c1.getTime());
-							System.out.printf("Fecha:%s - %s\n", fecha, tipo);
+							System.out.printf("Fecha:%s - %s, faltan %d doctor/es\n", fecha, tipo, numSinSol.get(i));
 						}
 					}
 					break;

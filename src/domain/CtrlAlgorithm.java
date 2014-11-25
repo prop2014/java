@@ -18,6 +18,7 @@ public class CtrlAlgorithm {
 	private Hospital hosp;
 	private Asignaciones resMap;
 	private ArrayList<nodoTurno> turnosSinSol;
+	private ArrayList<Integer> numSinSol;
 	
 	//Creadora por defecto
 	public CtrlAlgorithm(Hospital h) {
@@ -25,6 +26,7 @@ public class CtrlAlgorithm {
 		gResidual = null;
 		resMap = new Asignaciones();
 		turnosSinSol = new ArrayList<nodoTurno>();
+		numSinSol = new ArrayList<Integer>();
 	}
 	
 	
@@ -85,6 +87,7 @@ public class CtrlAlgorithm {
 			result.InterpretarGrafo();
 			resMap = result.getMapSol();
 			turnosSinSol = result.getTurnosSinSol();
+			numSinSol = result.getnumSinSol();
 		} catch (IOException e) {
 			System.out.println(e);
 		}
@@ -114,5 +117,8 @@ public class CtrlAlgorithm {
 	//Funcion que devuelve los turnos que se quedan sin solucion
 	public ArrayList<nodoTurno> getTurnosSinSol(){
 		return turnosSinSol;
+	}
+	public ArrayList<Integer> getNumSinSol(){
+		return numSinSol;
 	}
 }
