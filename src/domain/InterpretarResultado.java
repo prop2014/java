@@ -108,29 +108,22 @@ public class InterpretarResultado {
 	 * 
 	 */
 	private void haySolucion() throws IOException{
-		int flujoFuenteADoctor = 0;
 		int flujoTurnoASumidero = 0;
-		ArrayList<Integer> vecinosFuente = graf.getOutNodes(idFuente);
-		for(int vecino:vecinosFuente){
-			
-			int idArista = graf.getIDAresta(idFuente, vecino);
-			flujoFuenteADoctor += graf.getFlujoAresta(idArista);
-		}
-		
+	
 		ArrayList<Integer> vecinosSumidero = graf.getInNodes(idSumidero);
 		for(int vecino:vecinosSumidero){	
 			int idArista = graf.getIDAresta(vecino, idSumidero);
 			flujoTurnoASumidero += graf.getCapacidadAresta(idArista);
 			
 
-			if(graf.getFlujoAresta(idArista) > graf.getCapacidadAresta(idArista)){
+			if(graf.getCapacidadAresta(idArista) > 0){
 				turnosSinSol.add((nodoTurno)graf.getNode(vecino));
 			}
 
 
 		}
 		
-		if(flujoFuenteADoctor < flujoTurnoASumidero || flujoTurnoASumidero > 0) sol = false;
+		if(flujoTurnoASumidero > 0) sol = false;
 		else sol = true;
 	}
 	
