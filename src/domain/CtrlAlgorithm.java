@@ -18,6 +18,7 @@ public class CtrlAlgorithm {
 	private Hospital hosp;
 	private Asignaciones resMap;
 	private ArrayList<nodoTurno> turnosSinSol;
+	int maxFlow;
 	
 	//Creadora por defecto
 	public CtrlAlgorithm(Hospital h) {
@@ -25,6 +26,7 @@ public class CtrlAlgorithm {
 		gResidual = null;
 		resMap = new Asignaciones();
 		turnosSinSol = new ArrayList<nodoTurno>();
+		maxFlow = 0;
 	}
 	
 	
@@ -47,6 +49,7 @@ public class CtrlAlgorithm {
 			gResidual = new Graf<Nodo>();
 			gResidual = ffulk.findMaxFlow(g, in, out);
 			System.out.println("MaxFlow: " + ffulk.getMaxFlow());
+			maxFlow = ffulk.getMaxFlow();
 		} catch(IOException e){
 			System.out.println(e);
 		}
@@ -59,6 +62,7 @@ public class CtrlAlgorithm {
 			gResidual = new Graf<Nodo>();
 			gResidual = ffulk.findMaxFlow(g, in, out);
 			System.out.println("MaxFlow: " + ffulk.getMaxFlow());
+			maxFlow = ffulk.getMaxFlow();
 		} catch(IOException e){
 			System.out.println(e);
 		}
@@ -72,6 +76,7 @@ public class CtrlAlgorithm {
 			gResidual = new Graf<Nodo>();
 			gResidual = ffulk.findMaxFlow(g, in, out);
 			System.out.println("MaxFlow: " + ffulk.getMaxFlow());
+			maxFlow = ffulk.getMaxFlow();
 		} catch(IOException e){
 			System.out.println(e);
 		}
@@ -80,7 +85,7 @@ public class CtrlAlgorithm {
 	
 	//Funcion que interpreta el grafo residual
 	public boolean findSolution(int in, int out) {
-		InterpretarResultado result = new InterpretarResultado(gResidual, in, out);
+		InterpretarResultado result = new InterpretarResultado(gResidual, in, out, maxFlow);
 		try {
 			result.InterpretarGrafo();
 			resMap = result.getMapSol();
