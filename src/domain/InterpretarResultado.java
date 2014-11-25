@@ -28,6 +28,7 @@ public class InterpretarResultado {
 	
 	private Asignaciones mapSol;
 	private ArrayList<nodoTurno> turnosSinSol;
+	private ArrayList<Integer> numSinSol;
 	private boolean sol;
 	
 	InterpretarResultado(Graf<Nodo> g, int NodoF, int NodoS){
@@ -37,6 +38,7 @@ public class InterpretarResultado {
 		mapSol = new Asignaciones();
 		turnosSinSol = new  ArrayList<nodoTurno>();
 		sol = false;
+		numSinSol  = new  ArrayList<Integer>();
 	}
 	
 	InterpretarResultado(Graf<Nodo> g, Nodo NodoF, Nodo NodoS) throws IOException{
@@ -46,6 +48,7 @@ public class InterpretarResultado {
 		mapSol = new Asignaciones();
 		turnosSinSol = new  ArrayList<nodoTurno>();
 		sol = false;
+		numSinSol  = new  ArrayList<Integer>();
 		}
 	
 	
@@ -118,6 +121,7 @@ public class InterpretarResultado {
 
 			if(graf.getCapacidadAresta(idArista) > 0){
 				turnosSinSol.add((nodoTurno)graf.getNode(vecino));
+				numSinSol.add(graf.getCapacidadAresta(idArista));
 			}
 
 
