@@ -57,8 +57,13 @@ public class InterpretarResultado {
 		return mapSol;
 	}
 	
-	public ArrayList<nodoTurno> getTurnosSinSol(){
+	public ArrayList<nodoTurno> getTurnosSinSol() {
 		return turnosSinSol;
+		
+	}
+	
+	public ArrayList<Integer> getnumSinSol(){
+		return numSinSol;
 	}
 	
 	public boolean hasSolution() {
