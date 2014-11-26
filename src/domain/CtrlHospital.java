@@ -48,10 +48,14 @@ public class CtrlHospital {
 		ArrayList<String> alhosp = new ArrayList<String>();
 		alhosp=inOut.getHospital(id);
 		if(alhosp.get(0)==null) throw new IOException("Id Hospital no encontrado"); 
-		hosp = new Hospital(id,alhosp.get(1),Double.parseDouble(alhosp.get(2)),Double.parseDouble(alhosp.get(3)),Double.parseDouble(alhosp.get(4)));
+		double fm = Double.parseDouble(alhosp.get(2));
+		double ft= Double.parseDouble(alhosp.get(3));
+		double fn= Double.parseDouble(alhosp.get(4));
+		hosp = new Hospital(id,alhosp.get(1),fm,ft,fn);
 		int i = 5;
-		int docs=Integer.parseInt(alhosp.get(i));
-		if(!alhosp.get(i).equals(".")){ // iasta
+		
+		if(!alhosp.get(i).equals(".")){
+			int docs=Integer.parseInt(alhosp.get(i));
 			for(int s1=0;s1<docs;++s1){
 				++i;
 				int idDoctor = Integer.parseInt(alhosp.get(i));

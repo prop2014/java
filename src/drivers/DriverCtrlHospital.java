@@ -23,8 +23,9 @@ public class DriverCtrlHospital {
 		System.out.print("2: Modificar Hospital\n");
 		System.out.print("3: Crear Doctor y añadir a Hospital\n");
 		System.out.print("4: Cargar un hospital\n");
-		System.out.print("5: Guradar Hospital\n");
+		System.out.print("5: Guardar Hospital\n");
 		System.out.print("6: Anadir Restriccion maxturnosRango a un doctor\n");
+		System.out.print("7: Mostrar Hospital\n");
 		System.out.print("0: Salir\n");
 	}
 

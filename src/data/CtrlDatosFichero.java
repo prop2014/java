@@ -12,7 +12,6 @@ public class CtrlDatosFichero {
     FileWriter fw;
     PrintWriter pw;
 	
-	/* Atributos */
 
 	/* Constructora */
 	public CtrlDatosFichero() {
@@ -23,7 +22,16 @@ public class CtrlDatosFichero {
 	    pw = null;
 	}
 	
-   public ArrayList<String> getHospital (int id) {
+	public boolean existHospId(int id){
+		String num = Integer.toString(id);
+		   String path = new File("").getAbsolutePath();
+		   String realpath = path+ "/datos/Hospital";
+		   archivo = new File(realpath+num);
+		   return archivo.exists();
+	}
+	
+	
+   public ArrayList<String> getHospital (int id)throws IOException {
 	   ArrayList<String> alhosp = new ArrayList<String>();
 	   
 	   try{
@@ -31,6 +39,7 @@ public class CtrlDatosFichero {
 	   String path = new File("").getAbsolutePath();
 	   String realpath = path+ "/datos/Hospital";
 	   archivo = new File(realpath+num);
+	   if(!archivo.exists()) throw new IOException("No Existe Este fichero");
 	   fr = new FileReader (archivo);
 	   br = new BufferedReader(fr);
 	   String linea;
@@ -46,53 +55,60 @@ public class CtrlDatosFichero {
    }
 	catch(Exception e){
 		e.printStackTrace();
-	}finally{
-		// En el finally cerramos el fichero, para asegurarnos
-		// que se cierra tanto si todo va bien como si salta 
-		// una excepcion.
-   			try{                    
-   				if( null != fr )fr.close();        
-   			}catch (Exception e2){ 
-   				e2.printStackTrace();
-   			}
+	}finally{                   
+   		if( null != fr )fr.close();        
    		}
    return alhosp;
    }
    
+   public ArrayList<String> getIdHopitals() throws IOException{
+	   ArrayList<String> alIdHosp=new ArrayList<String>();
+	   String path = new File("").getAbsolutePath();
+	   String realpath = path+"/datos/";
+	   this.archivo = new File(realpath);
+	   File[] ficheros = archivo.listFiles();
+	   if(ficheros.length==0) throw new IOException("No contiene ficheros este directorio");
+	   for (int x=0;x<ficheros.length;x++){
+		   if(ficheros[x].exists()){
+			   String fix= ficheros[x].getName();
+			   int fixsize=fix.length();
+			   String id = new String();
+			   for(int i=8;i<fixsize;++i){
+				   id=id+fix.charAt(i);
+			   }
+			   alIdHosp.add(id);
+		   }
+		   else {}
+	   }
+	   return alIdHosp;
+   }
    
    
-       public void saveHosp(ArrayList<String> alhosp,Integer archivo)
-       {
-           try
-           {   
-        	   String num = Integer.toString(archivo);
-        	   String path = new File("").getAbsolutePath();
-        	   String realpath = path+ "/datos/Hospital"+num;
-        	  
-               fw = new FileWriter(realpath);
-               pw = new PrintWriter(fw);
-               int i;
-               for (i = 0; i < alhosp.size()-1; i++){
-                   pw.print(alhosp.get(i)+ " ");
-               }
-               pw.print(alhosp.get(alhosp.size()-1));
-           } catch (Exception e) {
-               e.printStackTrace();
-           } finally {
-              try {
-              // Nuevamente aprovechamos el finally para
-              // asegurarnos que se cierra el fichero.
-              if (null != fw)
-                 fw.close();
-              } catch (Exception e2) {
-                 e2.printStackTrace();
-              }
+   public void saveHosp(ArrayList<String> alhosp,Integer id){
+       try
+       {   
+    	   String num = Integer.toString(id);
+    	   String path = new File("").getAbsolutePath();
+    	   String realpath = path+ "/datos/Hospital"+num;
+    	  
+           fw = new FileWriter(realpath);
+           pw = new PrintWriter(fw);
+           int i;
+           for (i = 0; i < alhosp.size()-1; i++){
+               pw.print(alhosp.get(i)+ " ");
            }
+           pw.print(alhosp.get(alhosp.size()-1));
+       } catch (Exception e) {
+           e.printStackTrace();
+       } finally {
+          try {
+          if (null != fw)
+             fw.close();
+          } catch (Exception e2) {
+             e2.printStackTrace();
+          }
        }
+   }
+
    
-	
 }
-         
-	
-	
-	/* Metodos públicos */
