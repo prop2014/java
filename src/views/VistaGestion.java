@@ -7,7 +7,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.border.EmptyBorder;
 
 
-
+/**
+ * Vista principal de la gestion de un hospital
+ * @author Axel Pelaez
+ */
 	
 	public class VistaGestion {
 		
@@ -17,35 +20,23 @@ import javax.swing.border.EmptyBorder;
 		
 		
 		private JPanel panelCenterButtons = new JPanel();
-		private JPanel panelSouthButtons = new JPanel();
-		private JPanel panelInfo = new JPanel();
+		//private JPanel panelInfo = new JPanel();
 		
-		private JLabel labelPanel1 = new JLabel("''NOMBRE DEL HOSPITAL''");
+		
 		
 		//CENTER
 		
-		private JButton buttonCal = new JButton("Gestion de " + "\n" + "Calendario");
-		private JButton buttonDoc = new JButton("Gestion de " + "\n" + "Doctores");
-		private JButton buttonSol = new JButton("Gestion de " + "\n" + "Soluciones");
-		
-		// SOUTH
+		private JLabel labelPanel1 = new JLabel("<html><u>''NOMBRE DEL HOSPITAL''</u>");
+		private JButton buttonCal = new JButton("<html><CENTER>Gestion de <br/>Calendario</CENTER>");
+		private JButton buttonDoc = new JButton("<html><CENTER>Gestion de <br/>Doctores</CENTER>");
+		private JButton buttonSol = new JButton("<html><CENTER>Gestion de <br/>Solucion</CENTER>");
 		private JButton buttonVolver = new JButton("Volver");
 		
 		
 		
 		//METODOS PRIVADOS
 		
-		private void inicializarComponents() {
-		    inicializar_frameView();
-		    inicializar_panelContents();
-		    
-		    inicializar_panelInfo();
-		  
-		    inicializar_panelCenterButtons();
-		    inicializar_panelSouthButtons();
-		    
-		    assignar_listenersComponents();
-		  }
+	
 		
 		private void inicializar_frameView() {
 			// Tamanyo
@@ -65,59 +56,61 @@ import javax.swing.border.EmptyBorder;
 		private void inicializar_panelContents() {
 			panelContents.setLayout(new BorderLayout());
 			// Componentes
-			panelContents.add(panelInfo,BorderLayout.NORTH);
+			
 			panelContents.add(panelCenterButtons, BorderLayout.CENTER);
-			panelContents.add(panelSouthButtons, BorderLayout.SOUTH);
-			
+						
 		}
 		
 		
 		
-		private void inicializar_panelInfo() {
-											// MODIFICA los bordes del encuadre (peq/grande,?,mover abajo, ?)
-			panelInfo.setBorder(BorderFactory.createEmptyBorder(10, 75, 0, 75));
-			panelInfo.add(labelPanel1);
-			
-			
-		}
+	
 		
 
 		
 		
 		private void inicializar_panelCenterButtons() {
-			// Layout
-			GridLayout gl = new GridLayout(0,4);
-			gl.setHgap(10);
-			panelCenterButtons.setLayout(gl);
+			
+			////// START GESTIONADO POR EL BUILDER NO TOCAR
 			panelCenterButtons.setBorder(new EmptyBorder(70, 20, 20, 0));
+			
+			
+			buttonCal.setBounds(49, 134, 173, 119);
 			buttonCal.setPreferredSize(new Dimension(0,35));
 			
+			buttonSol.setBounds(467, 132, 181, 122);
 			buttonSol.setPreferredSize(new Dimension(0,35));
+			
+			buttonDoc.setBounds(263, 134, 173, 119);
 			buttonDoc.setPreferredSize(new Dimension(0,35));
 			
 			
+			buttonVolver.setBounds(40, 324, 157, 25);
+			buttonVolver.setPreferredSize(new Dimension(0,35));
+			
+			panelCenterButtons.setBorder(BorderFactory.createEmptyBorder(10, 75, 0, 75));
+			labelPanel1.setBounds(32, 12, 177, 15);
+			
+			
+			
+			panelCenterButtons.setLayout(null);
+			/// END GESTIONADO POR EL BUILDER NO TOCAR
+			
 			// Components
 			
+			panelCenterButtons.add(labelPanel1);
+			panelCenterButtons.add(buttonVolver);
 			panelCenterButtons.add(buttonCal);
-			
 			panelCenterButtons.add(buttonSol);
-			
 			panelCenterButtons.add(buttonDoc);
 		}
 		
 		
-		private void inicializar_panelSouthButtons() {
-			// Layout
-			GridLayout gl = new GridLayout(0,4);
-			gl.setHgap(10);
-			panelSouthButtons.setLayout(gl);
-			panelSouthButtons.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
-			buttonCal.setPreferredSize(new Dimension(0,35));
-			// Components
-			panelSouthButtons.add(buttonVolver);
-			
-			
-		}
+		private void inicializarComponents() {
+		    inicializar_frameView();
+		    inicializar_panelContents();
+		    inicializar_panelCenterButtons();
+		    assignar_listenersComponents();
+		  }
 
 
 		private void assignar_listenersComponents() {
