@@ -278,8 +278,9 @@ public class DriverCtrlDoctor {
 										int a = dates.get(j).get(dates.get(j).YEAR);
 										System.out.println("-------------");
 										System.out.println("Fecha: "+d+"/"+m+"/"+a);
-										System.out.println("Tipo turno: "+turnos.get(i));
+										System.out.println("Tipo turno: "+turnos.get(j));
 									}
+									System.out.println("\n");
 								}
 							}
 						}
