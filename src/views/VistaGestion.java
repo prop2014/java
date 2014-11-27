@@ -18,9 +18,8 @@ import javax.swing.border.EmptyBorder;
 		private JFrame frameView = new JFrame("Programador de Guardias");
 		private JPanel panelContents = new JPanel();
 		
-		
 		private JPanel panelCenterButtons = new JPanel();
-		//private JPanel panelInfo = new JPanel();
+		
 		
 		
 		
@@ -70,30 +69,21 @@ import javax.swing.border.EmptyBorder;
 		
 		private void inicializar_panelCenterButtons() {
 			
-			////// START GESTIONADO POR EL BUILDER NO TOCAR
+			////// START: GESTIONADO POR EL BUILDER NO TOCAR
 			panelCenterButtons.setBorder(new EmptyBorder(70, 20, 20, 0));
 			
-			
 			buttonCal.setBounds(49, 134, 173, 119);
-			buttonCal.setPreferredSize(new Dimension(0,35));
 			
 			buttonSol.setBounds(467, 132, 181, 122);
-			buttonSol.setPreferredSize(new Dimension(0,35));
 			
 			buttonDoc.setBounds(263, 134, 173, 119);
-			buttonDoc.setPreferredSize(new Dimension(0,35));
-			
 			
 			buttonVolver.setBounds(40, 324, 157, 25);
-			buttonVolver.setPreferredSize(new Dimension(0,35));
 			
-			panelCenterButtons.setBorder(BorderFactory.createEmptyBorder(10, 75, 0, 75));
 			labelPanel1.setBounds(32, 12, 177, 15);
 			
-			
-			
 			panelCenterButtons.setLayout(null);
-			/// END GESTIONADO POR EL BUILDER NO TOCAR
+			/// END: GESTIONADO POR EL BUILDER NO TOCAR
 			
 			// Components
 			
