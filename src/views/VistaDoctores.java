@@ -4,13 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.EmptyBorder;
 
-
 /**
- * Vista principal de la gestion de un hospital
+ * Vista principal de la gestion de una plantilla de doctores de un hospital
  * @author Axel Pelaez
  */
 	
-	public class VistaGestion {
+	public class VistaDoctores {
 		
 		//Componentes interficie
 		private JFrame frameView = new JFrame("Programador de Guardias");
@@ -18,15 +17,15 @@ import javax.swing.border.EmptyBorder;
 		
 		private JPanel panelCenterButtons = new JPanel();
 		
-		
-		
+		//SCROLL PANEL
+		private JList<String> list = new JList<String>();
+		private JScrollPane scrollPanel = new JScrollPane();
 		
 		//CENTER
-		
-		private JLabel labelPanel1 = new JLabel("<html><u>''NOMBRE DEL HOSPITAL''</u>");
-		private JButton buttonCal = new JButton("<html><CENTER>Gestion de <br/>Calendario</CENTER>");
-		private JButton buttonDoc = new JButton("<html><CENTER>Gestion de <br/>Doctores</CENTER>");
-		private JButton buttonSol = new JButton("<html><CENTER>Gestion de <br/>Solucion</CENTER>");
+		private JLabel labelPanel1 = new JLabel("<html><u>Plantilla de ''NOMBRE DEL HOSPITAL''</u>");
+		private JButton buttonCal = new JButton("<html><CENTER>Crear <br/>Doctor</CENTER>");
+		private JButton buttonDoc = new JButton("<html><CENTER>Eliminar <br/>Doctor</CENTER>");
+		private JButton buttonSol = new JButton("<html><CENTER>Modificar <br/>Doctor</CENTER>");
 		private JButton buttonVolver = new JButton("Volver");
 		
 		
@@ -51,12 +50,14 @@ import javax.swing.border.EmptyBorder;
 	
 		
 		private void inicializar_panelContents() {
+			
 			panelContents.setLayout(null);
-			panelCenterButtons.setBounds(0, 0, 700, 372);
+			panelCenterButtons.setBounds(12, 0, 700, 372);
 			// Componentes
 			
 			panelContents.add(panelCenterButtons);
-						
+			
+		
 		}
 		
 		
@@ -70,22 +71,39 @@ import javax.swing.border.EmptyBorder;
 			
 			////// START: GESTIONADO POR EL BUILDER NO TOCAR
 			panelCenterButtons.setBorder(new EmptyBorder(70, 20, 20, 0));
-		
-			buttonCal.setBounds(52, 134, 173, 119);;
+			panelCenterButtons.setLayout(null);
 			
-			buttonSol.setBounds(469, 134, 173, 119);
+			buttonCal.setBounds(442, 234, 173, 57);;
 			
-			buttonDoc.setBounds(263, 134, 173, 119);
+			buttonSol.setBounds(442, 68, 173, 57);
+			
+			buttonDoc.setBounds(442, 152, 173, 57);
 			
 			buttonVolver.setBounds(52, 323, 157, 25);
 			
-			labelPanel1.setBounds(32, 12, 177, 15);
+			labelPanel1.setBounds(34, 12, 361, 25);
 			
-			panelCenterButtons.setLayout(null);
+			
+			
+			scrollPanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+			
+			scrollPanel.setBounds(52, 66, 238, 225);
+			
 			/// END: GESTIONADO POR EL BUILDER NO TOCAR
 			
 			// Components
-			
+			panelCenterButtons.add(scrollPanel);
+			scrollPanel.setViewportView(list);
+			list.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+			list.setModel(new AbstractListModel() {
+				String[] values = new String[] {"Dr. Cooper", "Dr. Nick", "Dr. Pelaez" ,"Dr. Perez"};
+				public int getSize() {
+					return values.length;
+				}
+				public Object getElementAt(int index) {
+					return values[index];
+				}
+			});
 			panelCenterButtons.add(labelPanel1);
 			panelCenterButtons.add(buttonVolver);
 			panelCenterButtons.add(buttonCal);
@@ -108,7 +126,10 @@ import javax.swing.border.EmptyBorder;
 		
 		//METODOS PUBLICOS
 		
-		public VistaGestion() {
+		/**
+		 * @wbp.parser.entryPoint
+		 */
+		public VistaDoctores() {
 			inicializarComponents();
 		}
 		
