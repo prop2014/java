@@ -119,7 +119,7 @@ public static void main(String[] args) throws IOException{
 					System.out.print("Introduce un dia especial [navidad semana_santa noche_vieja noche_buena]: ");
 					especial = teclado.next();
 					try {
-						CtrlCal.addVacationDay(dia, mes, year, numDocM, numDocT, numDocN, especial);
+						CtrlCal.addVacationDay(dia, mes, year, numDocM, numDocT, numDocN, especial,especial,especial);
 						System.out.println("Fecha (3 turnos) introducida correctamente");
 					} catch(IOException e) { System.out.println(e); }
 					break;

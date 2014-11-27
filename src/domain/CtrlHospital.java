@@ -7,16 +7,21 @@ import java.io.IOException;
 import data.CtrlDatosFichero;
 
 import model.*;
-
+/**Controladora del Hospital
+ * 
+ * @author oscar
+ *
+ */
 public class CtrlHospital {
 	/**Atributos */
 	private Hospital hosp;
 	private CtrlDatosFichero inOut;
 	
 	
+	
 	private static GregorianCalendar readDate(String s) throws ParseException {
 		GregorianCalendar date =new GregorianCalendar();
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		sdf.setLenient(false);
 		try{
 			date.setTime(sdf.parse(s));
@@ -39,22 +44,26 @@ public class CtrlHospital {
 		ArrayList<Hospital> hospitales = new ArrayList<>(); //hospitales = getHospitalesCtrlData()
 		return hospitales;
 	}
+	
+	
+	
+	
 	/**
-	 * 
 	 * @param id identificador del Hospital
 	 * @throws IOException Hospital no encontrado
 	 */
 	public void cargarHospital(int id) throws IOException {
 		ArrayList<String> alhosp = new ArrayList<String>();
-		alhosp=inOut.getHospital(id);
-		if(alhosp.get(0)==null) throw new IOException("Id Hospital no encontrado"); 
+		alhosp=inOut.getDataHospital(id);
 		double fm = Double.parseDouble(alhosp.get(2));
 		double ft= Double.parseDouble(alhosp.get(3));
 		double fn= Double.parseDouble(alhosp.get(4));
 		hosp = new Hospital(id,alhosp.get(1),fm,ft,fn);
+	}
+	/*
 		int i = 5;
 		
-		if(!alhosp.get(i).equals(".")){
+		if(!alhosp.get(i).equals("0")){
 			int docs=Integer.parseInt(alhosp.get(i));
 			for(int s1=0;s1<docs;++s1){
 				++i;
@@ -156,9 +165,34 @@ public class CtrlHospital {
 				System.out.print("BIIIEN\n");
 			}
 			++i;
-			if(alhosp.get(i).equals(".")) System.out.print("fin\n");
+			if(alhosp.get(i).equals("0")) System.out.print("fi doctores\n");
 		}
+		Calendario cale =hosp.getCalendario();
+		++i;
+		int calesize = Integer.parseInt(alhosp.get(i));
+		for(int n=0;n<calesize;++n){
+			++i;
+			String s = alhosp.get(i); //  fecha
+			++i;
+			String shiftType=alhosp.get(i); // tipoturno
+			GregorianCalendar gc = new GregorianCalendar();
+			try{
+				gc = readDate(s);
+			}catch (Exception e2){ 
+	   			e2.printStackTrace();
+			}
+			++i;
+			String specialDate =alhosp.get(i); //fecha especial
+			++i;
+			int numberOfDoctors= Integer.parseInt(alhosp.get(i));
+			cale.addVacationDay(gc); //dia puesto
+			Turno turn = cale.getShift(gc, shiftType);
+			turn.setSpecialDate(specialDate);
+			turn.setNumberOfDoctors(numberOfDoctors);			
+		}
+		//inportar cale
 	}
+	*/
 	
 	public void crearHospital(int id, String nombre, double fm, double ft, double fn) throws IOException {
 		if(fm < 0.0 || ft < 0.0 || fn < 0.0) throw new IOException("Valor de factor incorrecto");
@@ -244,7 +278,7 @@ public class CtrlHospital {
 		alhosp.add(i,Double.toString(hosp.getFactorN()));
 		if(hosp.isDocEmpty()){//no hi han doctors
 			++i;
-			alhosp.add(i,".");
+			alhosp.add(i,"0");
 		}
 		else{
 			ArrayList<Doctor> aldocs=hosp.getDoctors();
@@ -282,7 +316,7 @@ public class CtrlHospital {
 						else if(Res.get(k).getTipo().equals("NOT_Fecha")){
 							++i;
 							NOT_Fecha N = (NOT_Fecha)Res.get(k);
-							SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
+							SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 							alhosp.add(i,sdf.format(N.getFecha().getTime()));
 						}
 						else if(Res.get(k).getTipo().equals("NOT_Especial")){
@@ -303,7 +337,7 @@ public class CtrlHospital {
 						else if(Res.get(k).getTipo().equals("MAX_Turnos_Rango")){
 							++i;
 							MAX_Turnos_Rango N = (MAX_Turnos_Rango)Res.get(k);
-							SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
+							SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 							alhosp.add(i,sdf.format(N.getFechaIni().getTime()));
 							++i;
 							alhosp.add(i,sdf.format(N.getFechaFin().getTime()));
@@ -318,7 +352,7 @@ public class CtrlHospital {
 						else if(Res.get(k).getTipo().equals("XOR")){
 							XOR N = (XOR)Res.get(k);
 							ArrayList<Turno> listXOR = N.getListTurnos();
-							SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
+							SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 							++i;
 							alhosp.add(i,Integer.toString(listXOR.size()));
 							for(int l=0; l< listXOR.size();++l){
@@ -333,8 +367,26 @@ public class CtrlHospital {
 				}
 			}
 			++i;//ok
-			alhosp.add(i,"."); //ok
+			alhosp.add(i,"0");
 		}
+		Calendario cale = hosp.getCalendario();
+		ArrayList<Turno> alturns=cale.getALLShifts();
+		int calesize = alturns.size();
+		++i;
+		alhosp.add(i,Integer.toString(calesize));
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		for(int y=0;y<alturns.size();++y){
+			++i;
+			alhosp.add(i,sdf.format(alturns.get(y).getDate().getTime()));
+			++i;
+			alhosp.add(i,alturns.get(y).getShiftType());
+			++i;
+			alhosp.add(i,alturns.get(y).getSpecialDate());
+			++i;
+			alhosp.add(i,Integer.toString(alturns.get(y).getNumberOfDoctors()));
+		}
+		++i;
+		alhosp.add(i,"0");
 		inOut.saveHosp(alhosp,hosp.getId());
 	}
 }

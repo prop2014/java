@@ -26,7 +26,7 @@ public class CtrlCalendario {
 
 	/* Metodos publicos */
 
-	public void addVacationDay(int dia, int mes, int year, int numDrsManana, int numDrsTarde, int numDrsNoche, String especial) throws IOException{
+	public void addVacationDay(int dia, int mes, int year, int numDrsManana, int numDrsTarde, int numDrsNoche, String especialManana, String especialTarde, String especialNoche) throws IOException{
 		try {
 			// checking input data
 			//SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -43,9 +43,9 @@ public class CtrlCalendario {
 				calendar.getShift(date, shiftTypes[0]).setNumberOfDoctors(numDrsManana);
 				calendar.getShift(date, shiftTypes[1]).setNumberOfDoctors(numDrsTarde);
 				calendar.getShift(date, shiftTypes[2]).setNumberOfDoctors(numDrsNoche);
-				calendar.getShift(date, shiftTypes[0]).setSpecialDate(especial);
-				calendar.getShift(date, shiftTypes[1]).setSpecialDate(especial);
-				calendar.getShift(date, shiftTypes[2]).setSpecialDate(especial);
+				calendar.getShift(date, shiftTypes[0]).setSpecialDate(especialManana);
+				calendar.getShift(date, shiftTypes[1]).setSpecialDate(especialTarde);
+				calendar.getShift(date, shiftTypes[2]).setSpecialDate(especialNoche);
 			}
 
 		}
