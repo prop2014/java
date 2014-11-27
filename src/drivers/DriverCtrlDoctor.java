@@ -30,6 +30,7 @@ public class DriverCtrlDoctor {
 	}
 	
 	
+	@SuppressWarnings("static-access")
 	public static void main(String[] args) throws IOException {
 		Scanner teclado;
 		teclado = new Scanner(System.in);
@@ -244,7 +245,7 @@ public class DriverCtrlDoctor {
 									System.out.println("Restriccion tipo: "+ctrlDoc.getTipoRestriccion(idDoc, idR));
 									System.out.println("Fecha inicio: "+fecha1.get(fecha1.DAY_OF_MONTH)+"/"+(fecha1.get(fecha1.MONTH)+1)+"/"+fecha1.get(fecha1.YEAR));
 									System.out.println("Fecha fin: "+fecha2.get(fecha2.DAY_OF_MONTH)+"/"+(fecha2.get(fecha2.MONTH)+1)+"/"+fecha2.get(fecha2.YEAR));
-									System.out.println("Numero maximo de turnos: "+ctrlDoc.getMAX_Turnos_Rango_numT(idDoc, idR));
+									System.out.println("Numero maximo de turnos: "+ctrlDoc.getMAX_Turnos_Rango_numT(idDoc, idR)+"\n");
 								}
 								else if (alres.get(i).getTipo().equals("NOT_Dia_Mes")) {
 									System.out.println("Restriccion tipo: "+ctrlDoc.getTipoRestriccion(idDoc, idR));
@@ -259,13 +260,26 @@ public class DriverCtrlDoctor {
 									System.out.println("Dia Especial: "+ctrlDoc.getNOT_Especial(idDoc,idR)+"\n");
 								}
 								else if (alres.get(i).getTipo().equals("NOT_Fecha")) {
+									GregorianCalendar fecha = ctrlDoc.getNOT_Fecha(idDoc, idR);
 									System.out.println("Restriccion tipo: "+ctrlDoc.getTipoRestriccion(idDoc, idR));
+									System.out.println("Fecha: "+fecha.get(fecha.DAY_OF_MONTH)+"/"+(fecha.get(fecha.MONTH)+1)+"/"+fecha.get(fecha.YEAR)+"\n");
 								}
 								else if (alres.get(i).getTipo().equals("NOT_Turno")) {
 									System.out.println("Restriccion tipo: "+ctrlDoc.getTipoRestriccion(idDoc, idR));
+									System.out.println("Tipo turno: "+ctrlDoc.getNOT_Turno(idDoc,idR)+"\n");
 								}
 								else if (alres.get(i).getTipo().equals("XOR")) {
+									ArrayList<GregorianCalendar> dates = ctrlDoc.getXOR_Dates(idDoc, idR);
+									ArrayList<String> turnos = ctrlDoc.getXOR_TipoTurno(idDoc, idR);
 									System.out.println("Restriccion tipo: "+ctrlDoc.getTipoRestriccion(idDoc, idR));
+									for (int j = 0; j < dates.size(); ++j) {
+										int d = dates.get(j).get(dates.get(j).DAY_OF_MONTH);
+										int m = (dates.get(j).get(dates.get(j).MONTH)+1);
+										int a = dates.get(j).get(dates.get(j).YEAR);
+										System.out.println("-------------");
+										System.out.println("Fecha: "+d+"/"+m+"/"+a);
+										System.out.println("Tipo turno: "+turnos.get(i));
+									}
 								}
 							}
 						}
