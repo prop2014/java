@@ -13,7 +13,9 @@ import javax.swing.GroupLayout.Alignment;
  */
 public class VistaCjtHospitales {
 	/* Atributos y metodos privados */
-
+	
+	private CtrlPresentacion ctrlPresentacion;
+	
 	//-- Components --//
 	private JFrame frameView = new JFrame("Gestion calendario");
 	private JPanel panelContents = new JPanel();
@@ -111,11 +113,48 @@ public class VistaCjtHospitales {
 		
 		panelRightButtons.add(btnSeleccionarHospital);
 	}
-
+	
+	
+	/** Asignacion de listeners **/
+	
 	private void assign_listenersComponents() {
-
+		
+		
+		btnCrearHospital.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				String texto = ((JButton) e.getSource()).getText();
+				System.out.println("Has clickado el boton con texto: " + texto);
+			}
+		});
+		
+		btnEliminarHospital.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				String texto = ((JButton) e.getSource()).getText();
+				System.out.println("Has clickado el boton con texto: " + texto);
+			}
+		});
+		
+		btnImportarHospital.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				String texto = ((JButton) e.getSource()).getText();
+				System.out.println("Has clickado el boton con texto: " + texto);
+			}
+		});
+		
+		btnSeleccionarHospital.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				String texto = ((JButton) e.getSource()).getText();
+				System.out.println("Has clickado el boton con texto: " + texto);
+			}
+		});
+		
 	}
 
+	
 	private void initComponents() {
 		init_frameView();
 		init_panelContents();
@@ -127,7 +166,8 @@ public class VistaCjtHospitales {
 	}
 
 	/* Constructoras y metodos publicos */
-	public VistaCjtHospitales() {
+	public VistaCjtHospitales(CtrlPresentacion pCtrlVistaPrincipal) {
+		ctrlPresentacion = pCtrlVistaPrincipal;
 		initComponents();
 	}
 
@@ -144,9 +184,4 @@ public class VistaCjtHospitales {
 		frameView.setEnabled(false);
 	}
 
-	public static void main(String[] args) {
-		VistaCjtHospitales v = new VistaCjtHospitales();
-
-		v.showView();
-	}
 }
