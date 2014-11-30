@@ -26,24 +26,16 @@ public class CtrlCalendario {
 		calendar = C;
 	}
 	
-	/**
-	 * 
-	 * @param year anyo del calendario
-	 */
-	public void setYear(int year){
-		calendar.setYear(year);
-	}
 	
 	/* Metodos publicos */
 	/** Crea un calendario comprovando errores de fechas
 	 * @param id identificador del Hospital
 	 * @throws IOException fichero incorrecto
 	 */
-	public void makeCale (int id) throws IOException{
+	public void getDataCalendar (int id) throws IOException{
 		ArrayList<String> alcale = inOut.getDataCale(id);
 		if(!alcale.isEmpty()){
 			int year = Integer.parseInt(alcale.get(0));
-			calendar.setYear(year);
 			int size=Integer.parseInt(alcale.get(1));
 			int dia,mes,any,numDrsManana,numDrsTarde,numDrsNoche;
 			String specialManana;

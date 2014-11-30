@@ -310,12 +310,5 @@ public class Hospital {
 		doctors = new ArrayList<Doctor>();
 		calendari = new Calendario(0);
 	}
-	/**
-	 * inicializa el calendario con el anyo year
-	 * @param year anyio del calendario
-	 */
-	public void addCalendar(int year){
-		calendari = new Calendario(year);
-	}
 	
 }

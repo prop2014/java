@@ -15,6 +15,7 @@ public class CtrlDatosFichero {
 	
 	
 	
+<<<<<<< HEAD
 	
 	
 	 public ArrayList<String> getHopitals() throws IOException{
@@ -60,6 +61,15 @@ public class CtrlDatosFichero {
 	 * @param id es el identificador del hospital
 	 * @return la existencia del Hospital con identificador = id en los ficheros
 	 */
+=======
+	/**Devuelve un ArrayList con strings de la forma
+	 * IDHospital NombreHospital*/
+	/* 					POR HACER				*/
+	/*public ArrayList<String> getHospitals() {
+		
+	}*/
+	
+>>>>>>> 8f1ab5c833cf6eef046bf2e5683754169178aa57
 	public boolean existHospId(int id){
 		String num = Integer.toString(id);
 		   String path = new File("").getAbsolutePath();
