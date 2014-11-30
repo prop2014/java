@@ -26,6 +26,13 @@ public class CtrlDatosFichero {
 	    pw = null;
 	}
 	
+	/**Devuelve un ArrayList con strings de la forma
+	 * IDHospital NombreHospital*/
+	/* 					POR HACER				*/
+	/*public ArrayList<String> getHospitals() {
+		
+	}*/
+	
 	public boolean existHospId(int id){
 		String num = Integer.toString(id);
 		   String path = new File("").getAbsolutePath();
