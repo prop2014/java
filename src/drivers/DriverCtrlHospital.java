@@ -172,7 +172,7 @@ public class DriverCtrlHospital {
 					break;
 				
 				case 5: 
-						domain.guardarHospital();
+						domain.saveDataHosp();
 					System.out.println("Hospital correctamente guardado");
 					break;
 					

@@ -6,6 +6,8 @@ import java.util.GregorianCalendar;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.io.IOException;
+import java.util.ArrayList;
+import data.CtrlDatosFichero;
 
 
 /**
@@ -15,7 +17,7 @@ import java.io.IOException;
 public class CtrlCalendario {
 	private Calendario calendar;
 	private static final String[] shiftTypes = {"manana","tarde","noche"};
-
+	private CtrlDatosFichero inOut;
 	//-- Constructora --//
 	/**
 	 * Constructora por defecto
@@ -23,11 +25,66 @@ public class CtrlCalendario {
 	public CtrlCalendario(Calendario C) {
 		calendar = C;
 	}
-
+	
+	/**
+	 * 
+	 * @param year anyo del calendario
+	 */
+	public void setYear(int year){
+		calendar.setYear(year);
+	}
+	
 	/* Metodos publicos */
-
+	/** Crea un calendario comprovando errores de fechas
+	 * @param id identificador del Hospital
+	 * @throws IOException fichero incorrecto
+	 */
+	public void makeCale (int id) throws IOException{
+		ArrayList<String> alcale = inOut.getDataCale(id);
+		if(!alcale.isEmpty()){
+			int year = Integer.parseInt(alcale.get(0));
+			calendar.setYear(year);
+			int size=Integer.parseInt(alcale.get(1));
+			int dia,mes,any,numDrsManana,numDrsTarde,numDrsNoche;
+			String specialManana;
+			String specialTarde;
+			String specialNoche;
+			
+				int j=2;
+			for (int i = 0; i < size;++i){
+				dia=Integer.parseInt(alcale.get(j));
+				++j;
+				mes=Integer.parseInt(alcale.get(j));
+				++j;
+				any=Integer.parseInt(alcale.get(j));
+				++j;
+				numDrsManana=Integer.parseInt(alcale.get(j));
+				++j;
+				numDrsTarde=Integer.parseInt(alcale.get(j));
+				++j;
+				numDrsNoche=Integer.parseInt(alcale.get(j));
+				++j;
+				specialManana=alcale.get(j);
+				++j;
+				specialTarde=alcale.get(j);
+				++j;
+				specialNoche=alcale.get(j);
+				addVacationDay(dia,mes,any,numDrsManana,numDrsTarde,numDrsNoche,specialManana,specialTarde,specialNoche);
+			    ++j;
+			}
+		}
+	}
+	
+	/** 
+	 *@return el calendario
+	 */
+	public Calendario getCale(){
+		return calendar;
+	}
+	
 	public void addVacationDay(int dia, int mes, int year, int numDrsManana, int numDrsTarde, int numDrsNoche, String especialManana, String especialTarde, String especialNoche) throws IOException{
 		try {
+			if(year != calendar.getCalendarYear()) throw new IOException("Anyo incorrecto");
 			// checking input data
 			//SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 			GregorianCalendar date = new GregorianCalendar(year, mes-1, dia);

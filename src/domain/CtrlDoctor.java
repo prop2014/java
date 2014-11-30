@@ -1,6 +1,10 @@
 package domain;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
+
+import data.CtrlDatosFichero;
 
 import model.*;
 
@@ -31,6 +35,18 @@ public class CtrlDoctor {
 		Doctors = Doc;
 		yearCalendario = cal;
 	}
+	
+	/*if(!aldocs.isEmpty()){
+	int size = Integer.parseInt(aldocs.get(0));
+	int idDoc,numMaxTurnos;
+	String name;
+	double SueldoTurno;
+		int j = 0;
+	for(int i=0;i<size;++i){}
+	
+	
+	
+	}*/
 	
 	
 /* Metodos publicos */
