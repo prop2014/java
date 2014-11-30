@@ -4,8 +4,6 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.GroupLayout.Alignment;
 
 /**
  * Vista principal del Conjunto de Hospitales
@@ -92,10 +90,6 @@ public class VistaCjtHospitales {
 		panelContents.add(bottomPanel);
 		bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 	}
-
-	private void init_panelCalendar() {
-//		panelCalendar.setPreferredSize(new Dimension(500,200));;
-	}
 	private void init_panelTopButtons() {
 		topPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
 	}
@@ -108,9 +102,7 @@ public class VistaCjtHospitales {
 		
 		panelRightButtons.add(btnCrearHospital);
 		panelRightButtons.add(btnEliminarHospital);
-		
 		panelRightButtons.add(btnImportarHospital);
-		
 		panelRightButtons.add(btnSeleccionarHospital);
 	}
 	
@@ -123,32 +115,26 @@ public class VistaCjtHospitales {
 		btnCrearHospital.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				String texto = ((JButton) e.getSource()).getText();
-				System.out.println("Has clickado el boton con texto: " + texto);
+				ctrlPresentacion.changeViewGestion();
 			}
 		});
 		
 		btnEliminarHospital.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				String texto = ((JButton) e.getSource()).getText();
-				System.out.println("Has clickado el boton con texto: " + texto);
 			}
 		});
 		
 		btnImportarHospital.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				String texto = ((JButton) e.getSource()).getText();
-				System.out.println("Has clickado el boton con texto: " + texto);
 			}
 		});
 		
 		btnSeleccionarHospital.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				String texto = ((JButton) e.getSource()).getText();
-				System.out.println("Has clickado el boton con texto: " + texto);
+				// TODO Saber que Hospital está seleccionado
+				// TODO changeViewAGestion(Hospital seleccionado)
 			}
 		});
 		
@@ -158,22 +144,27 @@ public class VistaCjtHospitales {
 	private void initComponents() {
 		init_frameView();
 		init_panelContents();
-		init_panelCalendar();
 		init_panelTopButtons();
 		init_panelBottomButtons();
 		init_panelRightButtons();
 		assign_listenersComponents();
 	}
-
+	
+	private void loadHospitals(){}
+	
 	/* Constructoras y metodos publicos */
 	public VistaCjtHospitales(CtrlPresentacion pCtrlVistaPrincipal) {
 		ctrlPresentacion = pCtrlVistaPrincipal;
+		loadHospitals();
 		initComponents();
 	}
 
 	public void showView() {
 //		frameView.pack();
 		frameView.setVisible(true);
+	}
+	public void hideView() {
+		frameView.setVisible(false);
 	}
 
 	public void enableView() {
