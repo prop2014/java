@@ -77,7 +77,7 @@ public class DriverCtrlHospital {
 			}
 		}
 		Calendario cal = hosp.getCalendario();
-		if(cal.getNumberOfVacationDates()==0) System.out.printf("Actualment l'Hospital no te calendari\n");
+		if(hosp.isCaleEmpty()) System.out.printf("Actualment l'Hospital no te calendari\n");
 		else {
 			System.out.printf("El calendari te %d Turns Vacacionals\n",cal.getNumberOfShifts());
 			ArrayList<Turno> alturno = cal.getALLShifts();
@@ -172,7 +172,7 @@ public class DriverCtrlHospital {
 					break;
 				
 				case 5: 
-						domain.saveDataHosp();
+						domain.guardarHospital();
 					System.out.println("Hospital correctamente guardado");
 					break;
 					

@@ -290,6 +290,9 @@ public class Hospital {
 			}
 		}
 	}
+	public boolean isCaleEmpty(){
+		return calendari.getNumberOfShifts()==0;
+	}
 	
 	/** 
 	 * Metodo que elimina todos los doctores del Hospital
