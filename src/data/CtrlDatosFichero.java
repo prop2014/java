@@ -14,10 +14,7 @@ public class CtrlDatosFichero {
 	public CtrlDatosFichero() {}
 	
 	
-	
-<<<<<<< HEAD
-	
-	
+
 	 public ArrayList<String> getHopitals() throws IOException{
 		   ArrayList<String> alHosp=new ArrayList<String>();
 		   String path = new File("").getAbsolutePath();
@@ -61,15 +58,6 @@ public class CtrlDatosFichero {
 	 * @param id es el identificador del hospital
 	 * @return la existencia del Hospital con identificador = id en los ficheros
 	 */
-=======
-	/**Devuelve un ArrayList con strings de la forma
-	 * IDHospital NombreHospital*/
-	/* 					POR HACER				*/
-	/*public ArrayList<String> getHospitals() {
-		
-	}*/
-	
->>>>>>> 8f1ab5c833cf6eef046bf2e5683754169178aa57
 	public boolean existHospId(int id){
 		String num = Integer.toString(id);
 		   String path = new File("").getAbsolutePath();
@@ -429,7 +417,7 @@ public class CtrlDatosFichero {
 			   for(int i =0; i<bufferH.size();++i){
 				   System.out.print(" "+bufferH.get(i));
 			   }
-			   if(bufferH.isEmpty())H = false;
+			   if(bufferH.isEmpty()) H = false;
 			   System.out.print("\n");
 		   }catch(Exception e) {e.printStackTrace();}
 		   try{
@@ -443,9 +431,11 @@ public class CtrlDatosFichero {
 		   try{
 			   FileWriter fw = new FileWriter(archivo);
 			   PrintWriter pw = new PrintWriter(fw);
-			   pw.print(".H");
-			   for (int i = 0; i < bufferH.size(); i++){
-				   pw.print(" "+bufferH.get(i));
+			   if(H){
+					   pw.print(".H");
+				   for (int i = 0; i < bufferH.size(); i++){
+					   pw.print(" "+bufferH.get(i));
+				   }
 			   }
 			   pw.println();
 			   pw.print(".D");
@@ -459,6 +449,63 @@ public class CtrlDatosFichero {
 					   pw.print(" "+bufferC.get(i));
 				   } 
 			   }
+			   pw.close();
+		   }catch(Exception e) {e.printStackTrace();}
+		   
+	   }
+	   else{
+		   System.out.print("No Existeix\n");
+	   }
+	   
+   }
+   public void saveDataCale(ArrayList<String> alhosp,Integer id) throws IOException{
+	   ArrayList<String> bufferH = new  ArrayList<String>();
+	   ArrayList<String> bufferD = new  ArrayList<String>();
+	   String num = Integer.toString(id);
+	   String path = new File("").getAbsolutePath();
+	   String realpath = path+ "/datos/Hospital"+num;
+	   File archivo = new File(realpath);
+	   boolean H=true,D = true;
+	   if(archivo.exists()){
+		   try{
+			   bufferH=getDataHospital(id);
+			   for(int i =0; i<bufferH.size();++i){
+				   System.out.print(" "+bufferH.get(i));
+			   }
+			   if(bufferH.isEmpty()) H = false;
+			   System.out.print("\n");
+		   }catch(Exception e) {e.printStackTrace();}
+		   try{
+			   bufferD=getDataDoctors(id);
+			   for(int i =0; i<bufferD.size();++i){
+				   System.out.print(" "+bufferD.get(i));
+			   }
+			   if(bufferD.isEmpty())D = false;
+			   System.out.print("\n");
+		   }catch(Exception e) {e.printStackTrace();}
+		   try{
+			   FileWriter fw = new FileWriter(archivo);
+			   PrintWriter pw = new PrintWriter(fw);
+			   if(H){
+					   pw.print(".H");
+				   for (int i = 0; i < bufferH.size(); i++){
+					   pw.print(" "+bufferH.get(i));
+				   }
+			   }
+			   if(D){
+				   pw.println();
+				   pw.print(".D");
+				   for(int i=0; i<bufferD.size();++i){
+					   pw.print(" "+bufferD.get(i));
+				   	}
+			   }
+			   
+				   pw.println();
+				   pw.print(".C");
+				   for (int i = 0; i < alhosp.size(); i++){
+					   pw.print(" "+alhosp.get(i));
+				   } 
+			   
 			   pw.close();
 		   }catch(Exception e) {e.printStackTrace();}
 		   

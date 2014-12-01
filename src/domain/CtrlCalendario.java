@@ -1,6 +1,7 @@
 package domain;
 
 import model.Calendario;
+import model.Turno;
 
 import java.util.GregorianCalendar;
 import java.text.SimpleDateFormat;
@@ -152,6 +153,51 @@ public class CtrlCalendario {
 			System.out.println("Error: " + e.toString());
 		}
 	}
+	
+	public void saveDataCale(int id) throws IOException{
+		ArrayList<String> alcal = new ArrayList<String>();
+		if(calendar.getNumberOfVacationDates()>0){	
+	   		alcal.add(Integer.toString(calendar.getCalendarYear()));
+	   		alcal.add(Integer.toString(calendar.getNumberOfVacationDates()));
+	   		ArrayList<GregorianCalendar> cal =calendar.getALLVacationDates();
+	   		ArrayList<Turno> turns =new ArrayList<Turno>();
+	   		for(int i=0;i<cal.size();++i){
+	   			turns=calendar.getShiftsOfADay(cal.get(i));
+	   			int dia=0,mes=0,year=0,numDrsManana=0,numDrsTarde=0,numDrsNoche=0;
+	   			String especialm = null,especialt=null,especialn=null;
+	   			for(int j=0;j<turns.size();++j){
+	   				Turno t=turns.get(j);
+	   				dia=t.getDate().DAY_OF_MONTH;
+	   				mes=t.getDate().MONTH;
+	   				year=t.getDate().YEAR;
+	   				if(t.getShiftType().equals("manana")){
+	   					numDrsManana=t.getNumberOfDoctors();
+	   					especialm=t.getSpecialDate();
+	   				}
+	   				else if(t.getShiftType().equals("tarde")){
+	   					numDrsTarde=t.getNumberOfDoctors();
+	   					especialt=t.getSpecialDate();
+	   				}
+	   				else if(t.getShiftType().equals("noche")){
+	   					numDrsNoche=t.getNumberOfDoctors();
+	   					especialn=t.getSpecialDate();
+	   				}
+	   			}
+	   			alcal.add(Integer.toString(dia));
+	   			alcal.add(Integer.toString(mes));
+	   			alcal.add(Integer.toString(year));
+	   			alcal.add(Integer.toString(numDrsManana));
+	   			alcal.add(Integer.toString(numDrsTarde));
+	   			alcal.add(Integer.toString(numDrsNoche));
+	   			alcal.add(especialm);
+	   			alcal.add(especialt);
+	   			alcal.add(especialn);
+	   		}
+		}
+		inOut.saveDataCale(alcal, id);
+    }
+	
+	
 	public int getCalendarYear() {
 		return calendar.getCalendarYear();
 	}
