@@ -1,5 +1,6 @@
 package views;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 import java.awt.*;
 
@@ -16,10 +17,11 @@ public class VistaNOTDiaSemana {
 	
 	private JLabel labelPanel1 = new JLabel("Crear Restriccion: Tipo NOT Dia Semana");
 	
-	private JLabel labelPanel2 = new JLabel("NOT DIA SEMANA");
-	private JLabel labelPanel3 = new JLabel("Seleccione dia semana:");
+	//private JLabel labelPanel2 = new JLabel("NOT DIA SEMANA");
+	private JLabel labelPanel3 = new JLabel("<html><CENTER>Seleccione dia de <br/>la semana:</CENTER>");
 	private JComboBox comboboxInformacion1 = new JComboBox();
-	private JButton button = new JButton("OK");
+	private JButton button = new JButton("Aceptar");
+	private JButton buttonVolver = new JButton("Volver");
 	
 	
 	private void inicializarComponents() {
@@ -61,13 +63,22 @@ public class VistaNOTDiaSemana {
 	
 	private void inicializar_panelButtons() {
 	    // Layout
-		GridLayout gl = new GridLayout(1,0);
+		/*GridLayout gl = new GridLayout(1,0);
 		gl.setVgap(5); //distancia entre botones (vertical)
 		gl.setHgap(10); //distancia entre botones (horizontal)
 		panelButtons.setLayout(gl); //mida de los botones iguales
-		panelButtons.setBorder(BorderFactory.createEmptyBorder(110, 40, 150, 50)); 
+		panelButtons.setBorder(BorderFactory.createEmptyBorder(90, 100, 170, 90));
+		buttonVolver.setBounds(40, 260, 150, 40);*/
+		panelButtons.setBorder(new EmptyBorder(70, 20, 20, 0));
+		
+		labelPanel3.setBounds(100, 95, 150, 30);
+		comboboxInformacion1.setBounds(275, 95, 150, 30);
+		button.setBounds(440, 95, 150, 30);
+		
+		buttonVolver.setBounds(40, 230, 150, 40);
+		panelButtons.setLayout(null);
 	    // Botones
-	    panelButtons.add(labelPanel2);
+	   // panelButtons.add(labelPanel2);
 	    panelButtons.add(labelPanel3);
 	    panelButtons.add(comboboxInformacion1);
 	    comboboxInformacion1.addItem("Lunes");
@@ -78,6 +89,7 @@ public class VistaNOTDiaSemana {
 	    comboboxInformacion1.addItem("Sabado");
 	    comboboxInformacion1.addItem("Domingo");
 	    panelButtons.add(button);
+	    panelButtons.add(buttonVolver);
 	    // Tooltips
 	    button.setToolTipText("Aceptar");
 	}
