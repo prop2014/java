@@ -1,5 +1,6 @@
 package views;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import domain.*;
@@ -33,11 +34,8 @@ public class CtrlPresentacion {
 	}
 	
 	/* Metodos de VistaCjtCalendario */
-	public ArrayList<String> loadHospitals() {
-		// return ctrlHospital.getHospitals();
-		//
-		ArrayList<String> hospitales = new ArrayList<String>();
-		return hospitales;
+	public ArrayList<String> loadHospitals() throws IOException {
+		return ctrlHospital.verHospitales();
 	}
 	
 }
