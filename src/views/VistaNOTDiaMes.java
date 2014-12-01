@@ -5,20 +5,20 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 /**
- * Vista secundaria de gestion de restricciones tipo NOT Dia Semana
+ * Vista secundaria de gestion de restricciones tipo NOT Dia Mes
  * @author Sergi Orra Genero
  */
-public class VistaNOTDiaSemana {
+public class VistaNOTDiaMes {
 	
 	private JFrame frameView = new JFrame("Programador de Guardias");
 	private JPanel panelContents = new JPanel();
 	private JPanel panelButtons = new JPanel();
 	private JPanel panelInfo = new JPanel();
 	
-	private JLabel labelPanel1 = new JLabel("<html><u>Crear Restriccion: Tipo NOT Dia Semana</u>");
+	private JLabel labelPanel1 = new JLabel("<html><u>Crear Restriccion: Tipo NOT Dia Mes</u>");
 	
-	private JLabel labelPanel3 = new JLabel("<html><CENTER>Seleccione dia de <br/>la semana:</CENTER>");
-	private JComboBox comboboxInformacion1 = new JComboBox();
+	private JLabel labelPanel3 = new JLabel("<html><CENTER>Escribe el dia del mes:</CENTER>");
+	private JTextArea textArea = new JTextArea(1,1);
 	private JButton button = new JButton("Aceptar");
 	private JButton buttonVolver = new JButton("Volver");
 	
@@ -61,25 +61,18 @@ public class VistaNOTDiaSemana {
 	}
 	
 	private void inicializar_panelButtons() {
-	    // Layout
+		//layout
 		panelButtons.setBorder(new EmptyBorder(70, 20, 20, 0));
 		
-		labelPanel3.setBounds(100, 95, 150, 30);
-		comboboxInformacion1.setBounds(275, 95, 150, 30);
-		button.setBounds(440, 95, 150, 30);
+		labelPanel3.setBounds(150, 95, 150, 30);
+		textArea.setBounds(305, 102, 50, 16);
+		button.setBounds(400, 95, 150, 30);
 		
 		buttonVolver.setBounds(40, 230, 150, 40);
 		panelButtons.setLayout(null);
 	    // Botones
 	    panelButtons.add(labelPanel3);
-	    panelButtons.add(comboboxInformacion1);
-	    comboboxInformacion1.addItem("lunes");
-	    comboboxInformacion1.addItem("martes");
-	    comboboxInformacion1.addItem("miercoles");
-	    comboboxInformacion1.addItem("jueves");
-	    comboboxInformacion1.addItem("viernes");
-	    comboboxInformacion1.addItem("sabado");
-	    comboboxInformacion1.addItem("domingo");
+	    panelButtons.add(textArea);
 	    panelButtons.add(button);
 	    panelButtons.add(buttonVolver);
 	    // Tooltips
@@ -92,7 +85,7 @@ public class VistaNOTDiaSemana {
 	
 	//METODOS PUBLICOS
 	
-	public VistaNOTDiaSemana() {
+	public VistaNOTDiaMes() {
 		inicializarComponents();
 	}
 	
@@ -109,7 +102,7 @@ public class VistaNOTDiaSemana {
 	}
 	
 	public static void main(String[] args) {
-		VistaNOTDiaSemana v = new VistaNOTDiaSemana();
+		VistaNOTDiaMes v = new VistaNOTDiaMes();
 		v.showView();
 	}
 

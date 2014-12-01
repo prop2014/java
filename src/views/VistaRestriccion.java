@@ -11,14 +11,14 @@ import java.awt.*;
 public class VistaRestriccion {
 	
 	//Componentes interficie
-	private JFrame frameView = new JFrame("Programador de Guardias: Gestion de restricciones");
+	private JFrame frameView = new JFrame("Programador de Guardias");
 	private JPanel panelContents = new JPanel();
 	private JPanel panelButtons = new JPanel();
 	private JPanel panelVolver = new JPanel();
 	private JPanel panelInfo = new JPanel();
 	
 	//Etiquetas
-	  private JLabel labelPanel = new JLabel("Elije el tipo de restriccion para crear:");
+	  private JLabel labelPanel = new JLabel("<html><u>Elije el tipo de restriccion para crear:</u>");
 	
 	//Botones
 	private JButton buttonNOTFecha = new JButton("NOT Fecha");
