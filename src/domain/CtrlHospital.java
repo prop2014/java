@@ -44,9 +44,8 @@ public class CtrlHospital {
 	
 	/* Metodos públicos */
 	
-	public ArrayList<Hospital> verHospitales() throws IOException {
-		ArrayList<Hospital> hospitales = new ArrayList<>(); //hospitales = getHospitalesCtrlData()
-		return hospitales;
+	public ArrayList<String> verHospitales() throws IOException {
+		return inOut.getHopitals();
 	}
 	
 	/**
@@ -452,6 +451,6 @@ public class CtrlHospital {
 		}
 		++i;
 		alhosp.add(i,"0");
-		inOut.saveHosp(alhosp,hosp.getId());
+		inOut.saveDataHosp(alhosp,hosp.getId());
 	}
 }
