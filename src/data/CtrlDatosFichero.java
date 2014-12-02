@@ -15,6 +15,7 @@ public class CtrlDatosFichero {
 
 	 public ArrayList<String> getHopitals() throws IOException{
 		   ArrayList<String> alHosp=new ArrayList<String>();
+		   String hosp = new String();
 		   String path = new File("").getAbsolutePath();
 		   String realpath = path+"/datos/";
 		   File archivo = new File(realpath);
@@ -28,7 +29,8 @@ public class CtrlDatosFichero {
 				   for(int i=8;i<fixsize;++i){
 					   id=id+fix.charAt(i);
 				   }
-				   alHosp.add(id);
+				   hosp = id;
+				   //alHosp.add(id);
 				   try{
 					   	FileReader fr = new FileReader (archivo+"/"+fix);
 						BufferedReader br = new BufferedReader(fr);
@@ -41,7 +43,8 @@ public class CtrlDatosFichero {
 					   		if(word.equals(".H")){
 					   			int iden = sl.nextInt(); //id
 					   			word = sl.next(); // name
-					   			alHosp.add(word);
+					   			hosp = hosp+"-"+word;
+					   			alHosp.add(hosp);
 					   		}
 				   		}
 				   		sl.close();
