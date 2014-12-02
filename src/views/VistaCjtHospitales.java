@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import javax.swing.*;
 
 /**
@@ -34,6 +35,15 @@ public class VistaCjtHospitales {
 
 	//-- Metodos privados --//
 	private void init_frameView() {
+		/*** DESCOMENTAR PARA EDITAR *
+		frameView =  new JFrame("Programador Guardias");
+		frameView.setMinimumSize(new Dimension(700, 400));
+		frameView.setPreferredSize(frameView.getMinimumSize());
+		frameView.setResizable(false);
+		frameView.setLocationRelativeTo(null);
+		frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frameView.getContentPane().setBackground(Color.WHITE);
+		/*** END DESCOMENTAR PARA EDITAR */
 		frameView = ctrlPresentacion.getFrame();
 		JPanel contentPane = (JPanel) frameView.getContentPane();
 		contentPane.setLayout(null);
@@ -103,7 +113,7 @@ public class VistaCjtHospitales {
 		btnCrearHospital.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				ctrlPresentacion.changeViewGestion();
+				ctrlPresentacion.changeViewCrear();
 			}
 		});
 		
@@ -123,6 +133,7 @@ public class VistaCjtHospitales {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Saber que Hospital está seleccionado
 				// TODO changeViewAGestion(Hospital seleccionado)
+				ctrlPresentacion.changeViewGestion();
 			}
 		});
 		
@@ -158,16 +169,31 @@ public class VistaCjtHospitales {
 	/* Constructoras y metodos publicos */
 	public VistaCjtHospitales(CtrlPresentacion pCtrlVistaPrincipal) {
 		ctrlPresentacion = pCtrlVistaPrincipal;
+		/*** DESCOMENTAR PARA EDITAR *
+		 initComponents();
+		 /*** END DESCOMENTAR PARA EDITAR */
 	}
 	
 	public void init() {
 		loadHospitals();
 		initComponents();
 	}
+	
+	public JPanel getPanel() {
+		return panelContents;
+	}
 
 	public void showView() {
 		frameView.setVisible(true);
 	}
+	
+	public void hidePanel() {
+		panelContents.setVisible(false);
+	}
+	public void showPanel() {
+		panelContents.setVisible(true);
+	}
+	
 	public void hideView() {
 		frameView.setVisible(false);
 	}

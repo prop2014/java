@@ -28,6 +28,15 @@ public class VistaGestion {
 	
 	//METODOS PRIVADOS
 	private void inicializar_frameView() {
+		/*** DESCOMENTAR PARA EDITAR *
+		frameView =  new JFrame("Programador Guardias");
+		frameView.setMinimumSize(new Dimension(700, 400));
+		frameView.setPreferredSize(frameView.getMinimumSize());
+		frameView.setResizable(false);
+		frameView.setLocationRelativeTo(null);
+		frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frameView.getContentPane().setBackground(Color.WHITE);
+		/*** END DESCOMENTAR PARA EDITAR */
 		frameView = ctrlPresentacion.getFrame();
 		JPanel contentPane = (JPanel) frameView.getContentPane();
 		contentPane.setLayout(null);
@@ -68,7 +77,7 @@ public class VistaGestion {
 	private void assignar_listenersComponents() {
 		buttonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ctrlPresentacion.changeVolver();
+				ctrlPresentacion.changeVolver(panelContents);
 			}
 		});
 		
@@ -77,16 +86,29 @@ public class VistaGestion {
 	
 	//METODOS PUBLICOS
 	public VistaGestion(CtrlPresentacion pCtrlPresentacion) {
-		
 		ctrlPresentacion = pCtrlPresentacion;
+		/** DESCOMENTAR PARA EDITAR
+		 * inicializarComponents();
+		 */
 	}
 	
 	public void init() {
 		inicializarComponents();
 	}
 	
+	public JPanel getPanel() {
+		return panelContents;
+	}
+	
+	public void hidePanel() {
+		panelContents.setVisible(false);
+	}
+	public void showPanel() {
+		panelContents.setVisible(true);
+	}
+	
 	public void showView() {
-		frameView.setVisible(true);
+		panelContents.setVisible(true);
 	}
 	
 	public void enableView() {

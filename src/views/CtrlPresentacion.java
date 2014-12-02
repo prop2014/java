@@ -18,13 +18,16 @@ public class CtrlPresentacion {
 	private JFrame frameView;
 	private CtrlHospital ctrlHospital;
 	private VistaCjtHospitales vistaCjtHospitales;
+	private VistaCrearHospital vistaCrearHospital;
 	private VistaGestion vistaGestion;
+	
 	
 	/* Constructora */
 	public CtrlPresentacion(){
 		init_frameView();
 		ctrlHospital = new CtrlHospital();
 		vistaCjtHospitales = new VistaCjtHospitales(this);
+		vistaCrearHospital = new VistaCrearHospital(this);
 		vistaGestion = new VistaGestion(this);
 		
 	}
@@ -49,21 +52,42 @@ public class CtrlPresentacion {
 	
 	public void initPresentation() {
 		vistaCjtHospitales.init();
+		vistaGestion.init();
+		vistaCrearHospital.init();
+		vistaCrearHospital.hidePanel();
+		vistaGestion.hidePanel();
 		vistaCjtHospitales.showView();
 	}
 	
-	public void changeViewGestion() {
+	public void changeViewCrear() {
 		JPanel contentPane = (JPanel) frameView.getContentPane();
-		contentPane.removeAll();
-		vistaGestion.init();
+		contentPane.remove(vistaCjtHospitales.getPanel());
+		contentPane.add(vistaCrearHospital.getPanel());
+		vistaCrearHospital.showPanel();
+		//contentPane.removeAll();
+		//vistaCrearHospital.init();
 		contentPane.revalidate();
 		contentPane.repaint();
 	}
 	
-	public void changeVolver() {
+	public void changeViewGestion() {
 		JPanel contentPane = (JPanel) frameView.getContentPane();
-		contentPane.removeAll();
-		vistaCjtHospitales.init();
+		contentPane.remove(vistaCjtHospitales.getPanel());
+		//vistaCjtHospitales.hidePanel();
+		contentPane.add(vistaGestion.getPanel());
+		vistaGestion.showPanel();
+		//vistaGestion.init();
+		contentPane.revalidate();
+		contentPane.repaint();
+	}
+	
+	public void changeVolver(JPanel panel) {
+		JPanel contentPane = (JPanel) frameView.getContentPane();
+		contentPane.remove(panel);
+		//vistaGestion.hidePanel();
+		contentPane.add(vistaCjtHospitales.getPanel());
+		vistaCjtHospitales.showPanel();
+		//vistaCjtHospitales.init();
 		contentPane.revalidate();
 		contentPane.repaint();
 	}
