@@ -14,11 +14,10 @@ public class VistaCjtHospitales {
 	/* Atributos y metodos privados */
 	
 	private CtrlPresentacion ctrlPresentacion;
-
 	private ArrayList<String> hospitales;
 	
 	//-- Components --//
-	private JFrame frameView = new JFrame("Gestion calendario");
+	private JFrame frameView;
 	private JPanel panelContents = new JPanel();
 	private JPanel topPanel = new JPanel();
 	private JPanel panelRightButtons = new JPanel();
@@ -35,15 +34,10 @@ public class VistaCjtHospitales {
 
 	//-- Metodos privados --//
 	private void init_frameView() {
-		frameView.setTitle("Programador de Guardias");
-		frameView.setMinimumSize(new Dimension(700,400));
-		frameView.setPreferredSize(frameView.getMinimumSize());
-		frameView.setResizable(false);
-		frameView.setLocationRelativeTo(null);
-		frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frameView = ctrlPresentacion.getFrame();
 		JPanel contentPane = (JPanel) frameView.getContentPane();
-		frameView.getContentPane().setLayout(null);
-		panelContents.setBounds(0, 0, 700, 378);
+		contentPane.setLayout(null);
+		panelContents.setBounds(0,0,700,378);
 		contentPane.add(panelContents);
 	}
 
@@ -164,12 +158,14 @@ public class VistaCjtHospitales {
 	/* Constructoras y metodos publicos */
 	public VistaCjtHospitales(CtrlPresentacion pCtrlVistaPrincipal) {
 		ctrlPresentacion = pCtrlVistaPrincipal;
+	}
+	
+	public void init() {
 		loadHospitals();
 		initComponents();
 	}
 
 	public void showView() {
-//		frameView.pack();
 		frameView.setVisible(true);
 	}
 	public void hideView() {

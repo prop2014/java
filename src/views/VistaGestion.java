@@ -1,14 +1,21 @@
 package views;
 import javax.swing.*;
+
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.border.EmptyBorder;
 /**
  * Vista principal de la gestion de un hospital
  * @author Axel Pelaez
  */
 public class VistaGestion {
+	
+	private CtrlPresentacion ctrlPresentacion;
+	
 	//Componentes interficie
-	private JFrame frameView = new JFrame("Programador de Guardias");
+	private JFrame frameView;
 	private JPanel panelContents = new JPanel();
 	private JPanel panelCenterButtons = new JPanel();
 	//CENTER
@@ -17,23 +24,23 @@ public class VistaGestion {
 	private JButton buttonDoc = new JButton("<html><CENTER>Gestion de <br/>Doctores</CENTER>");
 	private JButton buttonSol = new JButton("<html><CENTER>Gestion de <br/>Solucion</CENTER>");
 	private JButton buttonVolver = new JButton("Volver");
+	
+	
 	//METODOS PRIVADOS
 	private void inicializar_frameView() {
-		// Tamanyo
-		frameView.setMinimumSize(new Dimension(700,400));
-		frameView.setPreferredSize(frameView.getMinimumSize());
-		frameView.setResizable(false);
-		// Posicion y operaciones por defecto
-		frameView.setLocationRelativeTo(null);
-		frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frameView = ctrlPresentacion.getFrame();
 		JPanel contentPane = (JPanel) frameView.getContentPane();
+		contentPane.setLayout(null);
+		panelContents.setBounds(0,0,700,378);
 		contentPane.add(panelContents);
 	}
+	
 	private void inicializar_panelContents() {
 		panelContents.setLayout(new BorderLayout());
 		// Componentes
 		panelContents.add(panelCenterButtons, BorderLayout.CENTER);
 	}
+	
 	private void inicializar_panelCenterButtons() {
 		////// START: GESTIONADO POR EL BUILDER NO TOCAR
 		panelCenterButtons.setBorder(new EmptyBorder(70, 20, 20, 0));
@@ -57,23 +64,36 @@ public class VistaGestion {
 		inicializar_panelCenterButtons();
 		assignar_listenersComponents();
 	}
+	
 	private void assignar_listenersComponents() {
+		buttonVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ctrlPresentacion.changeVolver();
+			}
+		});
+		
 	}
+	
+	
 	//METODOS PUBLICOS
-	public VistaGestion() {
+	public VistaGestion(CtrlPresentacion pCtrlPresentacion) {
+		
+		ctrlPresentacion = pCtrlPresentacion;
+	}
+	
+	public void init() {
 		inicializarComponents();
 	}
+	
 	public void showView() {
 		frameView.setVisible(true);
 	}
+	
 	public void enableView() {
 		frameView.setEnabled(true);
 	}
+	
 	public void disableView() {
 		frameView.setEnabled(false);
-	}
-	public static void main(String[] args) {
-		VistaGestion v = new VistaGestion();
-		v.showView();
 	}
 }
