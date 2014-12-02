@@ -180,7 +180,62 @@ public class CtrlDatosFichero {
 		   	}catch(Exception e) {e.printStackTrace();}
 	   return alhosp;
 	   }
-	 	
+	 
+	 public boolean existstCalendar(int id) throws IOException{
+		 boolean exists=false;
+		 try{
+		   		String num = Integer.toString(id);
+		   		String path = new File("").getAbsolutePath();
+		   		String realpath = path+ "/datos/Hospital";
+		   		File archivo = new File(realpath+num);
+				if(archivo.exists()) {
+					FileReader fr = new FileReader (archivo);
+					BufferedReader br = new BufferedReader(fr);
+					String linea;
+					while((linea=br.readLine())!=null){
+			   			Scanner sl = new Scanner(linea);
+			   			if(sl.hasNext()){
+			   				if(sl.next().equals(".C")) exists=true;
+			   			}
+			   			sl.close();
+			   		}
+					br.close();
+				}
+		 }catch(Exception e) {e.printStackTrace();}
+		  return exists;
+	 }
+	 
+	 public boolean existstDoctor(int id) throws IOException{
+		 boolean exists=false;
+		 try{
+		   		String num = Integer.toString(id);
+		   		String path = new File("").getAbsolutePath();
+		   		String realpath = path+ "/datos/Hospital";
+		   		File archivo = new File(realpath+num);
+				if(archivo.exists()) {
+					FileReader fr = new FileReader (archivo);
+					BufferedReader br = new BufferedReader(fr);
+					String linea;
+					while((linea=br.readLine())!=null & !exists){
+			   			Scanner sl = new Scanner(linea);
+			   			if(sl.hasNext()){
+			   				if(sl.next().equals(".D")) exists=true;
+			   			}
+			   			sl.close();
+			   		}
+					br.close();
+				}
+		 }catch(Exception e) {e.printStackTrace();}
+		  return exists;
+	 }
+	 
+	 
+	 /**
+	  * 
+	  * @param id identificador del Hospital
+	  * @return los datos del calendario del hospital con identificador=id
+	  * @throws IOException no existe fichero
+	  */
 	 public ArrayList<String> getDataCale (int id)throws IOException {
 		 	ArrayList<String> alhosp = new ArrayList<String>();
 		 	try{
