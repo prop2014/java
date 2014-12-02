@@ -302,7 +302,6 @@ public class CtrlHospital {
 	}
 	public void saveDataHosp()throws IOException{
 		ArrayList<String> alhosp = new ArrayList<String>();
-			alhosp.add(".H");
 			alhosp.add(Integer.toString(hosp.getId()));
 			alhosp.add(hosp.getNombre());
 			alhosp.add(Double.toString(hosp.getFactorM()));
@@ -312,7 +311,6 @@ public class CtrlHospital {
 	}
 	public void saveDataDoctors()throws IOException{
 		ArrayList<String> alhosp = new ArrayList<String>();
-		alhosp.add(".D");
 		alhosp.add(Integer.toString(hosp.docSize()));
 		ArrayList<Doctor>aldoc = hosp.getDoctors();
 		for(int i=0; i<hosp.docSize();++i){

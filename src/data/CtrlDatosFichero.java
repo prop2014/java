@@ -181,7 +181,7 @@ public class CtrlDatosFichero {
 	   return alhosp;
 	   }
 	 
-	 public boolean existstCalendar(int id) throws IOException{
+	 public boolean existsCalendar(int id) throws IOException{
 		 boolean exists=false;
 		 try{
 		   		String num = Integer.toString(id);
@@ -205,7 +205,7 @@ public class CtrlDatosFichero {
 		  return exists;
 	 }
 	 
-	 public boolean existstDoctor(int id) throws IOException{
+	 public boolean existsDoctor(int id) throws IOException{
 		 boolean exists=false;
 		 try{
 		   		String num = Integer.toString(id);
@@ -247,41 +247,37 @@ public class CtrlDatosFichero {
 				FileReader fr = new FileReader (archivo);
 				BufferedReader br = new BufferedReader(fr);
 		   		String linea;
+		   		boolean exists=false;
 		   		String word;
-		   		linea=br.readLine();
-		   		linea=br.readLine();
-		   		linea=br.readLine();
-		   		Scanner sl = new Scanner(linea);
-		   		if(sl.hasNext()){
-			   		word=sl.next();
-			   		if(word.equals(".C")){
-			   			int year = sl.nextInt(); //any
-			   			alhosp.add(Integer.toString(year));
-			   			int calesize = sl.nextInt(); //calesize
-			   			alhosp.add(Integer.toString(calesize));
-			   			int value;
-			   			for(int i=0;i<calesize;++i){
-			   				//dia,mes,year,numDrsManana,numDrsTarde,numDrsNoche
-			   				for(int j=0; j<6;++j){
-			   					value=sl.nextInt();
-			   					alhosp.add(Integer.toString(value));
-			   				}
-			   				word=sl.next(); //specialManana
-			   				alhosp.add(word);
-			   				word=sl.next(); //specialTarde
-			   				alhosp.add(word);
-			   				word=sl.next(); //specialNoche
-			   				alhosp.add(word);
-			   			}
+		   		while((linea=br.readLine())!=null & !exists){
+			   		Scanner sl = new Scanner(linea);
+			   		if(sl.hasNext()){
+				   		word=sl.next();
+				   		if(word.equals(".C")){
+				   			exists=true;
+				   			int year = sl.nextInt(); //any
+				   			alhosp.add(Integer.toString(year));
+				   			int calesize = sl.nextInt(); //calesize
+				   			alhosp.add(Integer.toString(calesize));
+				   			int value;
+				   			for(int i=0;i<calesize;++i){
+				   				//dia,mes,year,numDrsManana,numDrsTarde,numDrsNoche
+				   				for(int j=0; j<6;++j){
+				   					value=sl.nextInt();
+				   					alhosp.add(Integer.toString(value));
+				   				}
+				   				word=sl.next(); //specialManana
+				   				alhosp.add(word);
+				   				word=sl.next(); //specialTarde
+				   				alhosp.add(word);
+				   				word=sl.next(); //specialNoche
+				   				alhosp.add(word);
+				   			}
+				   		}
+				   		sl.close();
 			   		}
-			   		else{
-			   			sl.close();
-			   			fr.close();
-			   			throw new IOException("No hi ha Cale");
-			   		}
-		   		}
-		   		sl.close();
-		   		fr.close();
+			   	}
+		   		br.close();
 		   	}catch(Exception e) {e.printStackTrace();}
 	   return alhosp;
 	   }
@@ -399,24 +395,16 @@ public class CtrlDatosFichero {
 	   String path = new File("").getAbsolutePath();
 	   String realpath = path+ "/datos/Hospital"+num;
 	   File archivo = new File(realpath);
-	   boolean D=true,C = true;
+	   boolean D=false,C = false;
 	   if(archivo.exists()){
-		   try{
-			   bufferD=getDataDoctors(id);
-			   for(int i =0; i<bufferD.size();++i){
-				   System.out.print(" "+bufferD.get(i));
-			   }
-			   if(bufferD.isEmpty())D = false;
-			   System.out.print("\n");
-		   }catch(Exception e) {e.printStackTrace();}
-		   try{
-			   bufferC=getDataCale(id);
-			   for(int i =0; i<bufferC.size();++i){
-				   System.out.print(" "+bufferC.get(i));
-			   }
-			   if(bufferC.isEmpty())C = false;
-			   System.out.print("\n");
-		   }catch(Exception e) {e.printStackTrace();}
+		   	   if(existsDoctor(id)) {
+		   		   bufferD=getDataDoctors(id);
+		   		   D=true;
+		   	   }
+			   if(existsCalendar(id)){
+				   bufferC=getDataCale(id);
+				   C=true;
+		   	   }
 		   try{
 			   FileWriter fw = new FileWriter(archivo);
 			   PrintWriter pw = new PrintWriter(fw);
@@ -426,22 +414,14 @@ public class CtrlDatosFichero {
 				   pw.print(" "+alhosp.get(i));
 			   }
 			   if(D){
-				   pw.println("");
+				   pw.println();
 				   pw.print(".D");
 				   for (i = 0; i <bufferD.size(); i++){
 					   pw.print(" "+bufferD.get(i));
 				   }
-				   if (C){
-					   pw.println("");
-					   pw.print(".C");
-					   for (i = 0; i <bufferC.size(); i++){
-						   pw.print(" "+bufferC.get(i));
-					   }
-				   }
 			   }
-			   else if(C){
+			   if(C){
 				   pw.println();
-			       pw.println();
 				   pw.print(".C");
 				   for (i = 0; i <bufferC.size(); i++){
 					   pw.print(" "+bufferC.get(i));
@@ -452,7 +432,16 @@ public class CtrlDatosFichero {
 		   
 	   }
 	   else{
-		   System.out.print("No Existeix\n");
+		   try{
+			   FileWriter fw = new FileWriter(archivo);
+			   PrintWriter pw = new PrintWriter(fw);
+			   int i;
+			   pw.print(".H");
+			   for (i = 0; i < alhosp.size(); i++){
+				   pw.print(" "+alhosp.get(i));
+			   }
+			   pw.close();
+		   }catch(Exception e) {e.printStackTrace();}
 	   }
 	   
    }
@@ -463,37 +452,30 @@ public class CtrlDatosFichero {
 	   String path = new File("").getAbsolutePath();
 	   String realpath = path+ "/datos/Hospital"+num;
 	   File archivo = new File(realpath);
-	   boolean H=true,C = true;
+	   boolean C = false;
 	   if(archivo.exists()){
-		   try{
 			   bufferH=getDataHospital(id);
-			   for(int i =0; i<bufferH.size();++i){
-				   System.out.print(" "+bufferH.get(i));
+			   if(existsCalendar(id))  {
+				   bufferC=getDataCale(id);
+				   C=true;
 			   }
-			   if(bufferH.isEmpty()) H = false;
-			   System.out.print("\n");
-		   }catch(Exception e) {e.printStackTrace();}
-		   try{
-			   bufferC=getDataCale(id);
-			   for(int i =0; i<bufferC.size();++i){
-				   System.out.print(" "+bufferC.get(i));
-			   }
-			   if(bufferC.isEmpty())C = false;
-			   System.out.print("\n");
-		   }catch(Exception e) {e.printStackTrace();}
 		   try{
 			   FileWriter fw = new FileWriter(archivo);
 			   PrintWriter pw = new PrintWriter(fw);
-			   if(H){
-					   pw.print(".H");
-				   for (int i = 0; i < bufferH.size(); i++){
-					   pw.print(" "+bufferH.get(i));
-				   }
+			   pw.print(".H");
+			   for (int i = 0; i < bufferH.size(); i++){
+				   pw.print(" "+bufferH.get(i));
 			   }
-			   pw.println();
-			   pw.print(".D");
-			   for(int i=0; i<alhosp.size();++i){
-				   pw.print(" "+alhosp.get(i));
+			   if(!alhosp.isEmpty()){
+				   pw.println();
+				   pw.print(".D");
+				   for(int i=0; i<alhosp.size();++i){
+					   pw.print(" "+alhosp.get(i));
+			   		}
+			   }
+			   else{
+				   pw.close();
+				   throw new IOException("No hay datos a guardar");
 			   }
 			   if(C){
 				   pw.println();
@@ -507,7 +489,7 @@ public class CtrlDatosFichero {
 		   
 	   }
 	   else{
-		   System.out.print("No Existeix\n");
+		   throw new IOException ("Debes crear un Hospital\n");
 	   }
 	   
    }
@@ -518,32 +500,19 @@ public class CtrlDatosFichero {
 	   String path = new File("").getAbsolutePath();
 	   String realpath = path+ "/datos/Hospital"+num;
 	   File archivo = new File(realpath);
-	   boolean H=true,D = true;
+	   boolean D = false;
 	   if(archivo.exists()){
-		   try{
 			   bufferH=getDataHospital(id);
-			   for(int i =0; i<bufferH.size();++i){
-				   System.out.print(" "+bufferH.get(i));
+			   if(existsDoctor(id)){
+				   bufferD=getDataDoctors(id);
+				   D=true;
 			   }
-			   if(bufferH.isEmpty()) H = false;
-			   System.out.print("\n");
-		   }catch(Exception e) {e.printStackTrace();}
-		   try{
-			   bufferD=getDataDoctors(id);
-			   for(int i =0; i<bufferD.size();++i){
-				   System.out.print(" "+bufferD.get(i));
-			   }
-			   if(bufferD.isEmpty())D = false;
-			   System.out.print("\n");
-		   }catch(Exception e) {e.printStackTrace();}
 		   try{
 			   FileWriter fw = new FileWriter(archivo);
 			   PrintWriter pw = new PrintWriter(fw);
-			   if(H){
-					   pw.print(".H");
-				   for (int i = 0; i < bufferH.size(); i++){
-					   pw.print(" "+bufferH.get(i));
-				   }
+			   pw.print(".H");
+			   for (int i = 0; i < bufferH.size(); i++){
+				   pw.print(" "+bufferH.get(i));
 			   }
 			   if(D){
 				   pw.println();
@@ -552,19 +521,23 @@ public class CtrlDatosFichero {
 					   pw.print(" "+bufferD.get(i));
 				   	}
 			   }
-			   
+			   if(!alhosp.isEmpty()){
 				   pw.println();
 				   pw.print(".C");
 				   for (int i = 0; i < alhosp.size(); i++){
-					   pw.print(" "+alhosp.get(i));
+					  pw.print(" "+alhosp.get(i));
 				   } 
-			   
-			   pw.close();
+				   pw.close();
+			   }
+			   else{
+				   pw.close();
+				   throw new IOException("No hay datos a guardar");
+			   }
 		   }catch(Exception e) {e.printStackTrace();}
 		   
 	   }
 	   else{
-		   System.out.print("No Existeix\n");
+		   throw new IOException ("Debes Crear un Hospital\n");
 	   }
 	   
    }
