@@ -2,7 +2,8 @@ package views;
 
 import java.awt.*;
 import java.awt.event.*;
-
+import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.*;
 
 /**
@@ -13,6 +14,8 @@ public class VistaCjtHospitales {
 	/* Atributos y metodos privados */
 	
 	private CtrlPresentacion ctrlPresentacion;
+
+	private ArrayList<String> hospitales;
 	
 	//-- Components --//
 	private JFrame frameView = new JFrame("Gestion calendario");
@@ -71,15 +74,6 @@ public class VistaCjtHospitales {
 		midPanel.add(scrollPanel);
 		list.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
 		scrollPanel.setViewportView(list);
-		list.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Hospital Del Mar", "Hospital De Bellvitge", "Hospital Sant Joan de Deu", "Hospital Quirón", "Hospital De Barcelona"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
 		mediumPanel.setPreferredSize(new Dimension(150, 0));
 		
 		midPanel.add(mediumPanel);
@@ -150,7 +144,22 @@ public class VistaCjtHospitales {
 		assign_listenersComponents();
 	}
 	
-	private void loadHospitals(){}
+
+	private void loadHospitals() {
+		hospitales = new ArrayList<String>();
+		try {
+			hospitales = ctrlPresentacion.loadHospitals();
+		} catch (IOException e) {
+			hospitales.add("No hay hospitales disponibles");
+		}
+		
+		DefaultListModel<String> model = new DefaultListModel<String>();
+	    for(String st : hospitales){
+	         model.addElement(st);
+	    }    
+	    list.setModel(model);     
+		
+	}
 	
 	/* Constructoras y metodos publicos */
 	public VistaCjtHospitales(CtrlPresentacion pCtrlVistaPrincipal) {

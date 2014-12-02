@@ -19,6 +19,7 @@ public class CtrlHospital {
 	
 	
 	
+	
 	private static GregorianCalendar readDate(String s) throws ParseException {
 		GregorianCalendar date =new GregorianCalendar();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -32,21 +33,20 @@ public class CtrlHospital {
 		return date;
 	}
 	
+	
+	
 	/* Constructora */
 	public CtrlHospital(){
+		hosp = new Hospital();
 		inOut = new CtrlDatosFichero();
 	}
 	
 	
 	/* Metodos públicos */
 	
-	public ArrayList<Hospital> verHospitales() throws IOException {
-		ArrayList<Hospital> hospitales = new ArrayList<>(); //hospitales = getHospitalesCtrlData()
-		return hospitales;
+	public ArrayList<String> verHospitales() throws IOException {
+		return inOut.getHopitals();
 	}
-	
-	
-	
 	
 	/**
 	 * @param id identificador del Hospital
@@ -54,12 +54,49 @@ public class CtrlHospital {
 	 */
 	public void cargarHospital(int id) throws IOException {
 		ArrayList<String> alhosp = new ArrayList<String>();
+		
 		alhosp=inOut.getDataHospital(id);
-		double fm = Double.parseDouble(alhosp.get(2));
-		double ft= Double.parseDouble(alhosp.get(3));
-		double fn= Double.parseDouble(alhosp.get(4));
-		hosp = new Hospital(id,alhosp.get(1),fm,ft,fn);
+		if(alhosp.size()==0) throw new IOException("El fichero no contenia datos correctos");
+		else{
+			int iden=Integer.parseInt(alhosp.get(0));
+			if(iden<0) throw new IOException("Valor de id incorrecto");
+			String name = alhosp.get(1);
+			double fm = Double.parseDouble(alhosp.get(2));
+			double ft= Double.parseDouble(alhosp.get(3));
+			double fn= Double.parseDouble(alhosp.get(4));
+			if(fm < 0.0 || ft < 0.0 || fn < 0.0) throw new IOException("Valor de factor incorrecto");
+			hosp = new Hospital(iden,name,fm,ft,fn);
+		}
 	}
+	
+	public void addCalendar(int year){
+		hosp.setCalendarYear(year);
+	}
+	/**
+	 * obte de fitxer els doctors i els posa al hospital
+	 * @param id identificador del hospital
+	 * @throws IOException valores incorrectos, fichero no encontrado
+	 */
+	public void getDataDoctors(int id)throws IOException{
+		ArrayList<String> aldocs = inOut.getDataDoctors(id);
+		if(!aldocs.isEmpty()){
+			int docs=Integer.parseInt(aldocs.get(0));
+				int j =0;
+			for(int s1=0;s1<docs;++s1){
+				++j;
+				int idDoctor = Integer.parseInt(aldocs.get(j));
+				++j;
+				String nombre = aldocs.get(j);
+				++j;
+				int numMaxTurnos = Integer.parseInt(aldocs.get(j));
+				++j;
+				double SueldoTurno = Double.parseDouble(aldocs.get(j));
+				crearDoctor(idDoctor,nombre,numMaxTurnos,SueldoTurno);
+			}
+		}
+	}
+	
+	
 	/*
 		int i = 5;
 		
@@ -263,9 +300,79 @@ public class CtrlHospital {
 	public void asignarCalendario(Calendario cal) {
 		//updateHospitalData()?
 	}
-	
-	public void guardarHospital(){
+	public void saveDataHosp()throws IOException{
 		ArrayList<String> alhosp = new ArrayList<String>();
+			alhosp.add(".H");
+			alhosp.add(Integer.toString(hosp.getId()));
+			alhosp.add(hosp.getNombre());
+			alhosp.add(Double.toString(hosp.getFactorM()));
+			alhosp.add(Double.toString(hosp.getFactorT()));
+			alhosp.add(Double.toString(hosp.getFactorN()));
+		inOut.saveDataHosp(alhosp, hosp.getId());
+	}
+	public void saveDataDoctors()throws IOException{
+		ArrayList<String> alhosp = new ArrayList<String>();
+		alhosp.add(".D");
+		alhosp.add(Integer.toString(hosp.docSize()));
+		ArrayList<Doctor>aldoc = hosp.getDoctors();
+		for(int i=0; i<hosp.docSize();++i){
+			alhosp.add(Integer.toString(aldoc.get(i).getId()));
+			alhosp.add(aldoc.get(i).getName());
+			alhosp.add(Integer.toString(aldoc.get(i).getNumMaxTurn()));
+			alhosp.add(Double.toString(aldoc.get(i).getSalaryTurn()));
+		}
+		inOut.saveDataDoctors(alhosp,hosp.getId());
+	}	
+	
+	public void saveDataCale(int id) throws IOException{
+		ArrayList<String> alcal = new ArrayList<String>();
+		if(!hosp.isCaleEmpty()){	
+			Calendario calendar =hosp.getCalendario();
+	   		alcal.add(Integer.toString(calendar.getCalendarYear()));
+	   		alcal.add(Integer.toString(calendar.getNumberOfVacationDates()));
+	   		ArrayList<GregorianCalendar> cal =calendar.getALLVacationDates();
+	   		ArrayList<Turno> turns =new ArrayList<Turno>();
+	   		for(int i=0;i<cal.size();++i){
+	   			turns=calendar.getShiftsOfADay(cal.get(i));
+	   			int dia=0,mes=0,year=0,numDrsManana=0,numDrsTarde=0,numDrsNoche=0;
+	   			String especialm = null,especialt=null,especialn=null;
+	   			for(int j=0;j<turns.size();++j){
+	   				Turno t=turns.get(j);
+	   				dia=t.getDate().DAY_OF_MONTH;
+	   				mes=t.getDate().MONTH;
+	   				year=t.getDate().YEAR;
+	   				if(t.getShiftType().equals("manana")){
+	   					numDrsManana=t.getNumberOfDoctors();
+	   					especialm=t.getSpecialDate();
+	   				}
+	   				else if(t.getShiftType().equals("tarde")){
+	   					numDrsTarde=t.getNumberOfDoctors();
+	   					especialt=t.getSpecialDate();
+	   				}
+	   				else if(t.getShiftType().equals("noche")){
+	   					numDrsNoche=t.getNumberOfDoctors();
+	   					especialn=t.getSpecialDate();
+	   				}
+	   			}
+	   			alcal.add(Integer.toString(dia));
+	   			alcal.add(Integer.toString(mes));
+	   			alcal.add(Integer.toString(year));
+	   			alcal.add(Integer.toString(numDrsManana));
+	   			alcal.add(Integer.toString(numDrsTarde));
+	   			alcal.add(Integer.toString(numDrsNoche));
+	   			alcal.add(especialm);
+	   			alcal.add(especialt);
+	   			alcal.add(especialn);
+	   		}
+		}
+		inOut.saveDataCale(alcal, id);
+    }
+	public void guardarHospital()throws IOException{
+		ArrayList<String> alhosp = new ArrayList<String>();
+		saveDataHosp();
+		if(!hosp.isDocEmpty()) saveDataDoctors();
+		if(!hosp.isCaleEmpty()) saveDataCale(hosp.getId());
+	}/*
 		int i =0;
 		alhosp.add(i,Integer.toString(hosp.getId()));
 		++i;
@@ -388,5 +495,11 @@ public class CtrlHospital {
 		++i;
 		alhosp.add(i,"0");
 		inOut.saveHosp(alhosp,hosp.getId());
-	}
-}
+		*/
+	
+	
+	
+	
+	
+}//FICLAS
+

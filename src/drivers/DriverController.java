@@ -41,6 +41,7 @@ public static void main(String[] args) throws IOException{
 		String nombre, fecha, especial, turno;
 		double sueldo;
 	    double fm, ft, fn;
+	    int year;
 	    ArrayList<Integer> docs;
 		System.out.print("Introduce el ID del hospital: ");
 		id = teclado.nextInt();
@@ -52,14 +53,15 @@ public static void main(String[] args) throws IOException{
 		ft = teclado.nextDouble();
 		System.out.print("Introduce el factorNoche: ");
 		fn = teclado.nextDouble();
-		
+		System.out.print("Introduce el anyo del Calendario: ");
+		year = teclado.nextInt();
 		try {
 			CtrlHosp.crearHospital(id, nombre, fm, ft, fn);
 			System.out.println("Hospital Creado Correctamente");
 		} catch (IOException e) {
 			System.out.println(e);
 		}
-		 
+		CtrlHosp.addCalendar(year);
 	    CtrlCalendario CtrlCal = new CtrlCalendario(CtrlHosp.getCalendar());
 	    CtrlDoctor CtrlDoct = new CtrlDoctor(CtrlHosp.getDoctors(), CtrlCal.getCalendarYear());
 	    CtrlAlgorithm CtrlAlg = new CtrlAlgorithm(CtrlHosp.getHospital());
@@ -103,13 +105,13 @@ public static void main(String[] args) throws IOException{
 					break;
 					
 				case 3:
-					int dia, mes, year, numDocM, numDocT, numDocN;
+					int dia, mes, yea, numDocM, numDocT, numDocN;
 					System.out.print("Introduce el dia: ");
 					dia = teclado.nextInt();
 					System.out.print("Introduce el mes: ");
 					mes = teclado.nextInt();
 					System.out.print("Introduce el year: ");
-					year = teclado.nextInt();
+					yea = teclado.nextInt();
 					System.out.print("Introduce el numero de doctores para el turno morning: ");
 					numDocM = teclado.nextInt();
 					System.out.print("Introduce el numero de doctores para el turno afternoon: ");
@@ -119,7 +121,7 @@ public static void main(String[] args) throws IOException{
 					System.out.print("Introduce un dia especial [navidad semana_santa noche_vieja noche_buena]: ");
 					especial = teclado.next();
 					try {
-						CtrlCal.addVacationDay(dia, mes, year, numDocM, numDocT, numDocN, especial,especial,especial);
+						CtrlCal.addVacationDay(dia, mes, yea, numDocM, numDocT, numDocN, especial,especial,especial);
 						System.out.println("Fecha (3 turnos) introducida correctamente");
 					} catch(IOException e) { System.out.println(e); }
 					break;

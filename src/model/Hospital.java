@@ -29,7 +29,7 @@ public class Hospital {
 		factorT=0.0;
 		factorN=0.0;
 		doctors = new ArrayList<Doctor>();
-		calendari = new Calendario(2014);
+		calendari = new Calendario();
 	}
 	
 	/**
@@ -48,7 +48,7 @@ public class Hospital {
 		factorT=ft;
 		factorN=fn;
 		doctors = new ArrayList<Doctor>();
-		calendari = new Calendario(2014);
+		calendari = new Calendario();
 	}
 	
 	/**
@@ -240,6 +240,14 @@ public class Hospital {
 		
 	}
 	
+	/** Modifica el anyo del calendario
+	 * 
+	 * @param year anyo del calendario
+	 */
+	public void setCalendarYear(int year){
+		calendari = new Calendario(year);
+	}
+	
 	/** 
 	 * Metodo que inserta un doctor nuevo en el Hospital
 	 * 	pre - El Hospital no contiene el Doctor d. 
@@ -281,6 +289,9 @@ public class Hospital {
 				break;
 			}
 		}
+	}
+	public boolean isCaleEmpty(){
+		return calendari.getNumberOfShifts()==0;
 	}
 	
 	/** 
