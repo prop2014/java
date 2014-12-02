@@ -22,7 +22,9 @@ public class Calendario {
 	/**
 	 * Constructora por defecto
 	 */
-	public Calendario() {}
+	public Calendario() {
+		vacationDates= null;
+	}
 
 	/**
 	 * Constructora con anio
@@ -80,6 +82,12 @@ public class Calendario {
 		int key = date.get(GregorianCalendar.DAY_OF_YEAR) - 1;
 		for (int i = 0; i < shiftsPerDay; ++i)
 			vacationDates.get(key)[i].setSpecialDate(specialDate);
+	}
+	public boolean isEmpty(){
+		if(vacationDates!=null){
+			return vacationDates.isEmpty();
+		}
+		return true;
 	}
 
 	/**

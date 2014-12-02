@@ -291,7 +291,7 @@ public class Hospital {
 		}
 	}
 	public boolean isCaleEmpty(){
-		return calendari.getNumberOfShifts()==0;
+		return calendari.isEmpty();
 	}
 	
 	/** 
