@@ -26,6 +26,7 @@ public class DriverCtrlHospital {
 		System.out.print("5: Guardar Hospital\n");
 		System.out.print("6: Anadir Restriccion maxturnosRango a un doctor\n");
 		System.out.print("7: Mostrar Hospital\n");
+		System.out.print("8; getFDI\n");
 		System.out.print("0: Salir\n");
 	}
 
@@ -207,7 +208,13 @@ public class DriverCtrlHospital {
 				case 7:
 					Hospital Hosp =domain.getHospital();
 					MostrarHospital(Hosp);
-					
+					break;
+				
+				case 8:
+					int di=domain.getFDI();
+					System.out.printf("el primer id disponible es: %d\n",di);
+					break;
+				
 				default:
 			}
 			
