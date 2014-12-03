@@ -130,7 +130,10 @@ public class CtrlPresentacion {
 	
 	public void crearHospital(String nameHosp, Double factM, Double factT, Double factN) throws IOException{
 		int idHosp = ctrlHospital.getFDI();
-		ctrlHospital.crearHospital(idHosp, nameHosp, factM, factT, factN);
+		try {
+			ctrlHospital.crearHospital(idHosp, nameHosp, factM, factT, factN);
+		} catch (IOException e) {throw new IOException(e);}
+		ctrlHospital.guardarHospital();
 	}
 	
 }

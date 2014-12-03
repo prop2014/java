@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Scanner;
 
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -89,7 +90,7 @@ public class VistaCrearHospital {
 		panelCenterButtons.add(lblFactorDeTurno);
 		
 		mTextField = new JTextField();
-		mTextField.setText("1.0\n");
+		mTextField.setText("1.0");
 		mTextField.setBounds(335, 143, 40, 28);
 		panelCenterButtons.add(mTextField);
 		mTextField.setColumns(10);
@@ -137,15 +138,28 @@ public class VistaCrearHospital {
 		btnCrearHospital.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nameHosp = nameHospTextField.getText();
-				Double factM = Double.parseDouble(mTextField.getText());
-				Double factT = Double.parseDouble(tTextField.getText());
-				Double factN = Double.parseDouble(nTextField.getText());
-				try {
-					ctrlPresentacion.crearHospital(nameHosp, factM, factT, factN);
-				} catch (IOException eX) {
-					System.out.printf("Hospital no creado");
-					//JDIalog;
+				Scanner sc1 = new Scanner(mTextField.getText());
+				Scanner sc2 = new Scanner(tTextField.getText());
+				Scanner sc3 = new Scanner(nTextField.getText());
+				Double factM, factT, factN;
+				factM = factT = factN = 0.0;
+				
+				if(sc1.hasNextDouble() && sc2.hasNextDouble() && sc3.hasNextDouble()) {
+					factM = Double.parseDouble(mTextField.getText());
+					factT = Double.parseDouble(tTextField.getText());
+					factN = Double.parseDouble(nTextField.getText());
+					try {
+						ctrlPresentacion.crearHospital(nameHosp, factM, factT, factN);
+					} catch (IOException eX) {
+						System.out.printf("Hospital no creado");
+						JOptionPane.showMessageDialog(null, "alert", "alert", JOptionPane.ERROR_MESSAGE); 
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Alguno de los factores no es un valor correcto", "Error", JOptionPane.ERROR_MESSAGE); 
 				}
+				sc1.close();
+				sc2.close();
+				sc3.close();
 			}
 		});
 		

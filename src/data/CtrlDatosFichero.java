@@ -381,7 +381,7 @@ public class CtrlDatosFichero {
 	   File archivo = new File(realpath);
 	   File[] ficheros = archivo.listFiles();
 	   for (int x=0;x<ficheros.length;x++){
-		   if(ficheros[x].exists() && !ficheros[x].getName().equals(".DS_Store")){
+		   if(ficheros[x].exists() && !((ficheros[x].getName()).equals(".DS_Store"))){
 			   String fix= ficheros[x].getName();
 			   int fixsize=fix.length();
 			   String id = new String();
