@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 
+
 /**Gestiona el sistema de almacenamiento de datos
  * 
  * @author oscar
@@ -166,19 +167,26 @@ public class CtrlDatosFichero {
 				BufferedReader br = new BufferedReader(fr);
 		   		String linea;
 		   		String word;
+		   		boolean HD;
 		   		linea=br.readLine();
 		   		linea=br.readLine();
-		   		linea=br.readLine();
-		   		linea=br.readLine(); //estamos encima de .R
 		   		Scanner sl = new Scanner(linea);
-		   		word=sl.next();
-		   		if(word.equals(".R")){
-		   			
-		   		}//fi if	   		
+		   		if(sl.hasNext()){
+			   		word=sl.next();
+			   		if(word.equals(".D")){
+			   			HD=true;
+			   		
+					}//fi if
+			   		else {
+			   			sl.close();
+			   			fr.close();
+			   			throw new IOException("No hay doctores");
+			   		}
+		   		}
 		   		sl.close();
 		   		fr.close();
 		   	}catch(Exception e) {e.printStackTrace();}
-	   return alhosp;
+		 return alhosp;
 	   }
 	 
 	 public boolean existsCalendar(int id) throws IOException{
@@ -205,7 +213,7 @@ public class CtrlDatosFichero {
 		  return exists;
 	 }
 	 
-	 public boolean existsDoctor(int id) throws IOException{
+	 public boolean existsDoctors(int id) throws IOException{
 		 boolean exists=false;
 		 try{
 		   		String num = Integer.toString(id);
@@ -366,13 +374,12 @@ public class CtrlDatosFichero {
    return alhosp;
    }
    */
-   public ArrayList<String> getIdHopitals() throws IOException{
-	   ArrayList<String> alIdHosp=new ArrayList<String>();
+   public ArrayList<Integer> getIdHopitals() {
+	   ArrayList<Integer> alIdHosp=new ArrayList<Integer>();
 	   String path = new File("").getAbsolutePath();
 	   String realpath = path+"/datos/";
 	   File archivo = new File(realpath);
 	   File[] ficheros = archivo.listFiles();
-	   if(ficheros.length==0) throw new IOException("No contiene ficheros este directorio");
 	   for (int x=0;x<ficheros.length;x++){
 		   if(ficheros[x].exists()){
 			   String fix= ficheros[x].getName();
@@ -381,9 +388,19 @@ public class CtrlDatosFichero {
 			   for(int i=8;i<fixsize;++i){
 				   id=id+fix.charAt(i);
 			   }
-			   alIdHosp.add(id);
+			   alIdHosp.add(Integer.parseInt(id));
 		   }
 	   }
+	   Collections.sort(alIdHosp, new Comparator<Integer>() 
+		            { public int compare(Integer p, Integer q)
+		            {
+			            if(p > q) return 1;
+			            if(p < q) return -1;
+		                return 0;
+		            }
+		            } ); 
+   
+		   
 	   return alIdHosp;
    }
       
@@ -397,7 +414,7 @@ public class CtrlDatosFichero {
 	   File archivo = new File(realpath);
 	   boolean D=false,C = false;
 	   if(archivo.exists()){
-		   	   if(existsDoctor(id)) {
+		   	   if(existsDoctors(id)) {
 		   		   bufferD=getDataDoctors(id);
 		   		   D=true;
 		   	   }
@@ -503,7 +520,7 @@ public class CtrlDatosFichero {
 	   boolean D = false;
 	   if(archivo.exists()){
 			   bufferH=getDataHospital(id);
-			   if(existsDoctor(id)){
+			   if(existsDoctors(id)){
 				   bufferD=getDataDoctors(id);
 				   D=true;
 			   }

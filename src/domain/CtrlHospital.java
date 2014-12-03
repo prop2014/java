@@ -49,6 +49,7 @@ public class CtrlHospital {
 	}
 	
 	/**
+	 * obtiene los datos basicos del Hospital(no doctores ni calendario)
 	 * @param id identificador del Hospital
 	 * @throws IOException Hospital no encontrado
 	 */
@@ -276,6 +277,23 @@ public class CtrlHospital {
 	public Calendario getCalendar(){
 		return hosp.getCalendario();
 	}
+	
+	
+	/**
+	 * 
+	 * @return return el primer id disponible
+	 * @throws IOE
+	 */
+	public Integer getFDI(){
+		ArrayList<Integer> ids = inOut.getIdHopitals();
+		for(int i=0; i< ids.size();++i){
+			if(i!=ids.get(i)){
+				return i;
+			}
+		}
+		return ids.size();
+	}
+	
 	
 	/**
 	 * 
