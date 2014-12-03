@@ -126,58 +126,64 @@ public class VistaRestriccion {
 	private void assignar_listenersComponents() {
 		buttonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ctrlPresentacion.changeView(8, panelContents);
+				ctrlPresentacion.changeView("vistaDoctor", panelContents);
 			}
 		});
 		
-		buttonNOTFecha.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ctrlPresentacion.changeView(0, panelContents);
-			}
-		});
+	
 		
 		buttonNOTTurno.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ctrlPresentacion.changeView(0, panelContents);
+				ctrlPresentacion.changeView("vistaNOTTurno", panelContents);
 			}
 		});
 		
 		buttonNOTEspecial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ctrlPresentacion.changeView(0, panelContents);
+				ctrlPresentacion.changeView("vistaNOTEspecial", panelContents);
 			}
 		});
 		
 		buttonNOTDiaMes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ctrlPresentacion.changeView(0, panelContents);
+				ctrlPresentacion.changeView("vistaNOTDiaMes", panelContents);
 			}
 		});
 		
 		buttonNOTDiaSemana.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ctrlPresentacion.changeView(0, panelContents);
+				ctrlPresentacion.changeView("vistaNOTDiaSemana", panelContents);
 			}
 		});
 		
-		buttonMAXTurnosRango.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ctrlPresentacion.changeView(0, panelContents);
-			}
-		});
+		
 		
 		buttonMAXTurnosDia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ctrlPresentacion.changeView(0, panelContents);
+				ctrlPresentacion.changeView("vistaMAXTurnosporDia", panelContents);
 			}
 		});
 		
-		buttonXOR.addActionListener(new ActionListener() {
+		/*buttonMAXTurnosRango.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ctrlPresentacion.changeView(0, panelContents);
+				ctrlPresentacion.changeView("vistaMAXTurnosRango", panelContents);
 			}
 		});
+		*/
 		
+		/*buttonXOR.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ctrlPresentacion.changeView("vistaXOR", panelContents);
+			}
+		});
+		*/
+		
+		/*buttonNOTFecha.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ctrlPresentacion.changeView("vistaNOTFecha", panelContents);
+			}
+		});
+		*/
 		
 	}
 	

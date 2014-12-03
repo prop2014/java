@@ -14,8 +14,6 @@ import domain.*;
 
 public class CtrlPresentacion {
 
-	
-	
 	/* Atributos */
 	
 	
@@ -26,7 +24,16 @@ public class CtrlPresentacion {
 	private VistaGestion vistaGestion;
 	private VistaPlantillaDoctores vistaPlantillaDoctores;
 	private VistaDoctor vistaDoctor;
+	private VistaCalendario vistaCalendario;
 	private VistaRestriccion vistaRestriccion;
+	private VistaMAXTurnosporDia vistaMAXTurnosporDia;
+	private VistaNOTTurno vistaNOTTurno;
+	private VistaNOTDiaMes vistaNOTDiaMes;
+	private VistaNOTEspecial vistaNOTEspecial; 
+	private VistaNOTDiaSemana vistaNOTDiaSemana;
+	//private VistaNOTFecha vistaNOTFecha;
+	//private VistaXOR vistaXOR;
+	//private VistaMAXTurnosRango vistaMAXTurnosRango;
 	
 	/* Constructora */
 	public CtrlPresentacion(){
@@ -37,7 +44,17 @@ public class CtrlPresentacion {
 		vistaGestion = new VistaGestion(this);
 		vistaPlantillaDoctores = new VistaPlantillaDoctores(this);
 		vistaDoctor = new VistaDoctor(this);
+		//vistaCalendario = new VistaCalendario(this);
 		vistaRestriccion = new VistaRestriccion(this);
+		vistaMAXTurnosporDia = new VistaMAXTurnosporDia(this);
+		vistaNOTTurno = new VistaNOTTurno(this);
+		vistaNOTDiaMes = new VistaNOTDiaMes(this);
+		vistaNOTEspecial = new VistaNOTEspecial(this);
+		vistaNOTDiaSemana = new VistaNOTDiaSemana(this);
+		//vistaNOTFecha = new VistaNOTFecha(this);
+		//vistaXOR = new VistaXOR(this);
+		//vistaMAXTurnosRango = new VistaMAXTurnosRango(this);
+		
 	}
 	
 	private void init_frameView() {
@@ -64,18 +81,34 @@ public class CtrlPresentacion {
 		vistaCrearHospital.init();
 		vistaPlantillaDoctores.init();
 		vistaDoctor.init();
+		//vistaCalendario.init();
 		vistaRestriccion.init();
-		
-		
-		vistaRestriccion.hidePanel();
-		vistaDoctor.hidePanel();
-		vistaCrearHospital.hidePanel();
-		vistaGestion.hidePanel();
-		vistaPlantillaDoctores.hidePanel();
-		
-		
+		vistaMAXTurnosporDia.init();
+		vistaNOTTurno.init();
+		vistaNOTDiaMes.init();
+		vistaNOTEspecial.init();
+		vistaNOTDiaSemana.init();
+		//vistaNOTFecha.init();
+		//vistaXOR.init();
+		//vistaMAXTurnosRango.init();
 		
 		vistaCjtHospitales.showView();
+		vistaGestion.hidePanel();
+		vistaCrearHospital.hidePanel();
+		vistaPlantillaDoctores.hidePanel();
+		vistaDoctor.hidePanel();
+		//vistaCalendario.hidePanel();
+		vistaRestriccion.hidePanel();
+		vistaMAXTurnosporDia.hidePanel();
+		vistaNOTTurno.hidePanel();
+		vistaNOTDiaMes.hidePanel();
+		vistaNOTEspecial.hidePanel();
+		vistaNOTDiaSemana.hidePanel();
+		//vistaNOTFecha.hidePanel();
+		//vistaXOR.hidePanel();
+		//vistaMAXTurnosRango.hidePanel();
+		
+		
 	}
 	
 	public void changeView(String nextView, JPanel panel) {
@@ -84,7 +117,6 @@ public class CtrlPresentacion {
 		
 		switch(nextView){
 		case "vistaCjtHospitales":{
-		
 			contentPane.add(vistaCjtHospitales.getPanel());
 			vistaCjtHospitales.showPanel();
 			break;
@@ -114,12 +146,68 @@ public class CtrlPresentacion {
 			break;
 		}
 		
+		/*case "vistaCalendario":{
+			contentPane.add(vistaCalendario.getPanel());
+			vistaCalendario.showPanel();
+			break;
+		}
+		*/
 		case "vistaRestriccion": {
 			contentPane.add(vistaRestriccion.getPanel());
 			vistaRestriccion.showPanel();
 			break;
 		}
 		
+		case "vistaMAXTurnosporDia":{
+			contentPane.add(vistaMAXTurnosporDia.getPanel());
+			vistaMAXTurnosporDia.showPanel();
+			break;
+			
+		}
+		
+		case "vistaNOTTurno":{
+			contentPane.add(vistaNOTTurno.getPanel());
+			vistaNOTTurno.showPanel();
+			break;
+			
+		}
+		
+		case "vistaNOTDiaMes":{
+			contentPane.add(vistaNOTDiaMes.getPanel());
+			vistaNOTDiaMes.showPanel();
+			break;
+			
+		}
+		case "vistaNOTEspecial" :{
+			contentPane.add(vistaNOTEspecial.getPanel());
+			vistaNOTEspecial.showPanel();
+			break;
+		}
+		case "vistaNOTDiaSemana" :{
+			contentPane.add(vistaNOTDiaSemana.getPanel());
+			vistaNOTDiaSemana.showPanel();
+			break;
+		}
+		/*case "vistaNOTFecha": {
+			contentPane.add(vistaNOTFecha.getPanel());
+			vistaNOTFecha.showPanel();
+			break;
+		}
+		*/
+		
+		/*case "vistaXOR":{
+			contentPane.add(vistaXOR.getPanel());
+			vistaXOR.showPanel();
+			break;
+		}
+		*/
+		
+		/*case "vistaMAXTurnosRango":{
+		contentPane.add(vistaMAXTurnosRango.getPanel());
+		vistaMAXTurnosRango.showPanel();
+		break;
+		}
+		 */
 		
 	
 		}
@@ -127,38 +215,6 @@ public class CtrlPresentacion {
 			contentPane.repaint();
 	}
 	
-	/*public void changeViewCrear(JPanel panel) {
-		JPanel contentPane = (JPanel) frameView.getContentPane();
-		contentPane.remove(panel);
-		contentPane.add(vistaCrearHospital.getPanel());
-		vistaCrearHospital.showPanel();
-		//vistaCjtHospitales.hidePanel();
-		//vistaGestion.init();
-		contentPane.revalidate();
-		contentPane.repaint();
-	}
-	
-	 public void changeViewGestion(JPanel panel) {
-		JPanel contentPane = (JPanel) frameView.getContentPane();
-		contentPane.remove(panel);
-		contentPane.add(vistaGestion.getPanel());
-		vistaGestion.showPanel();
-		//vistaCjtHospitales.hidePanel();
-		//vistaGestion.init();
-		contentPane.revalidate();
-		contentPane.repaint();
-	}
-	
-	public void changeVolver(JPanel panel) {
-		JPanel contentPane = (JPanel) frameView.getContentPane();
-		contentPane.remove(panel);
-		//vistaGestion.hidePanel();
-		contentPane.add(vistaCjtHospitales.getPanel());
-		vistaCjtHospitales.showPanel();
-		//vistaCjtHospitales.init();
-		contentPane.revalidate();
-		contentPane.repaint();
-	}*/
 	/* Metodos de VistaCjtCalendario */
 	public ArrayList<String> loadHospitals() throws IOException {
 		return ctrlHospital.verHospitales();

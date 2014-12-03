@@ -90,9 +90,17 @@ public class VistaGestion {
 			public void actionPerformed(ActionEvent e) {
 				ctrlPresentacion.changeView("vistaPlantillaDoctores", panelContents);
 			}
+			
+			
 		});
 		
-		
+		buttonCal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ctrlPresentacion.changeView("vistaCalendario", panelContents);
+			}
+			
+			
+		});
 		
 		/*buttonSol.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
