@@ -14,6 +14,8 @@ public class VistaGestion {
 	
 	private CtrlPresentacion ctrlPresentacion;
 	
+	//ID VISTA 2
+	
 	//Componentes interficie
 	private JFrame frameView;
 	private JPanel panelContents = new JPanel();

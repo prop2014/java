@@ -14,7 +14,11 @@ import domain.*;
 
 public class CtrlPresentacion {
 
+	
+	
 	/* Atributos */
+	
+	
 	private JFrame frameView;
 	private CtrlHospital ctrlHospital;
 	private VistaCjtHospitales vistaCjtHospitales;
@@ -59,18 +63,30 @@ public class CtrlPresentacion {
 		vistaCjtHospitales.showView();
 	}
 	
-	public void changeViewCrear() {
+	public void changeView(int nextView, JPanel panel) {
 		JPanel contentPane = (JPanel) frameView.getContentPane();
-		contentPane.remove(vistaCjtHospitales.getPanel());
-		contentPane.add(vistaCrearHospital.getPanel());
-		vistaCrearHospital.showPanel();
-		//contentPane.removeAll();
-		//vistaCrearHospital.init();
-		contentPane.revalidate();
-		contentPane.repaint();
+		contentPane.remove(panel);
+		
+		switch(nextView){
+		case 13:{
+		
+			contentPane.add(vistaCrearHospital.getPanel());
+			vistaCrearHospital.showPanel();
+		}
+		case 2:{
+		
+			contentPane.add(vistaGestion.getPanel());
+			vistaGestion.showPanel();
+		}
+	
+		}
+			//contentPane.removeAll();
+			//vistaCrearHospital.init();
+			contentPane.revalidate();
+			contentPane.repaint();
 	}
 	
-	public void changeViewGestion() {
+	/* public void changeViewGestion() {
 		JPanel contentPane = (JPanel) frameView.getContentPane();
 		contentPane.remove(vistaCjtHospitales.getPanel());
 		contentPane.add(vistaGestion.getPanel());
@@ -80,7 +96,7 @@ public class CtrlPresentacion {
 		contentPane.revalidate();
 		contentPane.repaint();
 	}
-	
+	*/
 	public void changeVolver(JPanel panel) {
 		JPanel contentPane = (JPanel) frameView.getContentPane();
 		contentPane.remove(panel);

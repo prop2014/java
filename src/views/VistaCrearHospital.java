@@ -15,6 +15,8 @@ public class VistaCrearHospital {
 	
 	private CtrlPresentacion ctrlPresentacion;
 	
+	//ID VISTA 13
+	
 	//Componentes interficie
 	private JFrame frameView;
 	private JPanel panelContents = new JPanel();

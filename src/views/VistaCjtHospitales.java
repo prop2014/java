@@ -17,6 +17,8 @@ public class VistaCjtHospitales {
 	private CtrlPresentacion ctrlPresentacion;
 	private ArrayList<String> hospitales;
 	
+	// ID VISTA 1
+	
 	//-- Components --//
 	private JFrame frameView;
 	private JPanel panelContents = new JPanel();
@@ -113,7 +115,7 @@ public class VistaCjtHospitales {
 		btnCrearHospital.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				ctrlPresentacion.changeViewCrear();
+				ctrlPresentacion.changeView(13,panelContents);
 			}
 		});
 		
@@ -133,7 +135,7 @@ public class VistaCjtHospitales {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Saber que Hospital está seleccionado
 				// TODO changeViewAGestion(Hospital seleccionado)
-				ctrlPresentacion.changeViewGestion();
+				ctrlPresentacion.changeView(2,panelContents);
 			}
 		});
 		
