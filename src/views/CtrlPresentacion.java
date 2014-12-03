@@ -73,9 +73,9 @@ public class CtrlPresentacion {
 	public void changeViewGestion() {
 		JPanel contentPane = (JPanel) frameView.getContentPane();
 		contentPane.remove(vistaCjtHospitales.getPanel());
-		//vistaCjtHospitales.hidePanel();
 		contentPane.add(vistaGestion.getPanel());
 		vistaGestion.showPanel();
+		//vistaCjtHospitales.hidePanel();
 		//vistaGestion.init();
 		contentPane.revalidate();
 		contentPane.repaint();
