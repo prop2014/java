@@ -2,13 +2,19 @@ package views;
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.border.EmptyBorder;
 
 /**
  * Vista principal de la gestion de una plantilla de doctores de un hospital
  * @author Axel Pelaez
  */
-	
+
+// ID VISTA 6
+
+
 	public class VistaPlantillaDoctores {
 		
 		private CtrlPresentacion ctrlPresentacion;
@@ -25,9 +31,9 @@ import javax.swing.border.EmptyBorder;
 		
 		//CENTER
 		private JLabel labelPanel1 = new JLabel("<html><u>Plantilla de ''NOMBRE DEL HOSPITAL''</u>");
-		private JButton buttonCal = new JButton("<html><CENTER>Crear <br/>Doctor</CENTER>");
-		private JButton buttonDoc = new JButton("<html><CENTER>Eliminar <br/>Doctor</CENTER>");
-		private JButton buttonSol = new JButton("<html><CENTER>Modificar <br/>Doctor</CENTER>");
+		private JButton buttonCrear = new JButton("<html><CENTER>Crear <br/>Doctor</CENTER>");
+		private JButton buttonEliminar = new JButton("<html><CENTER>Eliminar <br/>Doctor</CENTER>");
+		private JButton buttonModificar = new JButton("<html><CENTER>Modificar <br/>Doctor</CENTER>");
 		private JButton buttonVolver = new JButton("Volver");
 		
 		
@@ -47,6 +53,7 @@ import javax.swing.border.EmptyBorder;
 			frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			frameView.getContentPane().setBackground(Color.WHITE);
 			/*** END DESCOMENTAR PARA EDITAR */
+			
 			frameView = ctrlPresentacion.getFrame();
 			JPanel contentPane = (JPanel) frameView.getContentPane();
 			contentPane.setLayout(null);
@@ -75,11 +82,14 @@ import javax.swing.border.EmptyBorder;
 			panelCenterButtons.setBorder(new EmptyBorder(70, 20, 20, 0));
 			panelCenterButtons.setLayout(null);
 			
-			buttonCal.setBounds(442, 234, 173, 57);;
 			
-			buttonSol.setBounds(442, 68, 173, 57);
+			buttonModificar.setBounds(442, 68, 173, 57);
+			buttonEliminar.setBounds(442, 152, 173, 57);
+			buttonCrear.setBounds(442, 234, 173, 57);
 			
-			buttonDoc.setBounds(442, 152, 173, 57);
+			
+			
+			
 			
 			buttonVolver.setBounds(52, 323, 157, 25);
 			
@@ -108,9 +118,9 @@ import javax.swing.border.EmptyBorder;
 			});
 			panelCenterButtons.add(labelPanel1);
 			panelCenterButtons.add(buttonVolver);
-			panelCenterButtons.add(buttonCal);
-			panelCenterButtons.add(buttonSol);
-			panelCenterButtons.add(buttonDoc);
+			panelCenterButtons.add(buttonEliminar);
+			panelCenterButtons.add(buttonModificar);
+			panelCenterButtons.add(buttonCrear);
 		}
 		
 		
@@ -123,6 +133,25 @@ import javax.swing.border.EmptyBorder;
 
 
 		private void assignar_listenersComponents() {
+			buttonVolver.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					ctrlPresentacion.changeView("vistaGestion",panelContents);
+				}
+			});
+			
+			buttonModificar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					ctrlPresentacion.changeView("vistaDoctor",panelContents);
+				}
+			});
+			
+			buttonCrear.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					ctrlPresentacion.changeView("vistaDoctor",panelContents);
+				}
+			});
+			
+			
 		}
 		
 		
@@ -132,9 +161,9 @@ import javax.swing.border.EmptyBorder;
 		 * @wbp.parser.entryPoint
 		 */
 		public VistaPlantillaDoctores(CtrlPresentacion pCtrlPresentacion) {
-			/** DESCOMENTAR PARA EDITAR
-			 * inicializarComponents();
-			 */
+			/** DESCOMENTAR PARA EDITAR*/
+			 // inicializarComponents();
+			 
 			ctrlPresentacion = pCtrlPresentacion;
 		}
 		

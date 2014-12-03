@@ -11,6 +11,9 @@ import javax.swing.border.EmptyBorder;
  * Vista principal de la gestion de una plantilla de doctores de un hospital
  * @author Axel Pelaez
  */
+
+
+//  NO HACE FALTA
 	
 	public class VistaDoctores {
 		
@@ -65,7 +68,7 @@ import javax.swing.border.EmptyBorder;
 		
 		private void inicializar_panelCenterButtons() {
 			
-			/*** DESCOMENTAR PARA EDITAR *
+			/*** DESCOMENTAR PARA EDITAR */
 			frameView =  new JFrame("Programador Guardias");
 			frameView.setMinimumSize(new Dimension(700, 400));
 			frameView.setPreferredSize(frameView.getMinimumSize());
@@ -132,12 +135,23 @@ import javax.swing.border.EmptyBorder;
 
 
 		private void assignar_listenersComponents() {
-			buttonVolver.addActionListener(new ActionListener() {
+			/*buttonVolver.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					ctrlPresentacion.changeVolver(panelContents);
+					ctrlPresentacion.changeView(2,panelContents);
 				}
 			});
 			
+			buttonDoc.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					ctrlPresentacion.changeView(8,panelContents);
+				}
+			});
+			
+			button.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					ctrlPresentacion.changeView(8,panelContents);
+				}
+			}); */
 		}
 		
 		

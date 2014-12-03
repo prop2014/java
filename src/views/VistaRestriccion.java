@@ -3,15 +3,23 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Vista principal de la gestion de restricciones
  * @author Sergi Orra Genero
  */
+
+
+//ID VISTA 9
+
 public class VistaRestriccion {
 	
+	private CtrlPresentacion ctrlPresentacion;
+	
 	//Componentes interficie
-	private JFrame frameView = new JFrame("Programador de Guardias");
+	private JFrame frameView;
 	private JPanel panelContents = new JPanel();
 	private JPanel panelButtons = new JPanel();
 	private JPanel panelVolver = new JPanel();
@@ -42,17 +50,20 @@ public class VistaRestriccion {
 	  }
 	
 	private void inicializar_frameView() {
-	    // Tamanyo
-	    frameView.setMinimumSize(new Dimension(700,400));
-	    frameView.setPreferredSize(frameView.getMinimumSize());
-	    frameView.setResizable(false);
-	    // Posicion y operaciones por defecto
-	    frameView.setLocationRelativeTo(null);
-	    frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    // Se agrega panelContents al contentPane (el panelContents se
-	    // podria ahorrar y trabajar directamente sobre el contentPane)
-	    JPanel contentPane = (JPanel) frameView.getContentPane();
-	    contentPane.add(panelContents);
+		/*** DESCOMENTAR PARA EDITAR *
+		frameView =  new JFrame("Programador Guardias");
+		frameView.setMinimumSize(new Dimension(700, 400));
+		frameView.setPreferredSize(frameView.getMinimumSize());
+		frameView.setResizable(false);
+		frameView.setLocationRelativeTo(null);
+		frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frameView.getContentPane().setBackground(Color.WHITE);
+		/*** END DESCOMENTAR PARA EDITAR */
+		frameView = ctrlPresentacion.getFrame();
+		JPanel contentPane = (JPanel) frameView.getContentPane();
+		contentPane.setLayout(null);
+		panelContents.setBounds(0,0,700,378);
+		contentPane.add(panelContents);
 	}
 	
 	private void inicializar_panelContents() {
@@ -113,29 +124,96 @@ public class VistaRestriccion {
 	}
 
 	private void assignar_listenersComponents() {
+		buttonVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ctrlPresentacion.changeView(8, panelContents);
+			}
+		});
+		
+		buttonNOTFecha.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ctrlPresentacion.changeView(0, panelContents);
+			}
+		});
+		
+		buttonNOTTurno.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ctrlPresentacion.changeView(0, panelContents);
+			}
+		});
+		
+		buttonNOTEspecial.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ctrlPresentacion.changeView(0, panelContents);
+			}
+		});
+		
+		buttonNOTDiaMes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ctrlPresentacion.changeView(0, panelContents);
+			}
+		});
+		
+		buttonNOTDiaSemana.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ctrlPresentacion.changeView(0, panelContents);
+			}
+		});
+		
+		buttonMAXTurnosRango.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ctrlPresentacion.changeView(0, panelContents);
+			}
+		});
+		
+		buttonMAXTurnosDia.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ctrlPresentacion.changeView(0, panelContents);
+			}
+		});
+		
+		buttonXOR.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ctrlPresentacion.changeView(0, panelContents);
+			}
+		});
+		
+		
 	}
 	
 	
 	//METODOS PUBLICOS
 	
-	public VistaRestriccion() {
+	public VistaRestriccion(CtrlPresentacion pCtrlPresentacion) {
+		ctrlPresentacion = pCtrlPresentacion;
+		/** DESCOMENTAR PARA EDITAR
+		 * inicializarComponents();
+		 */
+	}
+	public void init() {
 		inicializarComponents();
 	}
 	
-	public void showView() {
-		frameView.setVisible(true);
+	public JPanel getPanel() {
+		return panelContents;
 	}
-
+	
+	public void hidePanel() {
+		panelContents.setVisible(false);
+	}
+	public void showPanel() {
+		panelContents.setVisible(true);
+	}
+	
+	public void showView() {
+		panelContents.setVisible(true);
+	}
+	
 	public void enableView() {
 		frameView.setEnabled(true);
 	}
-
+	
 	public void disableView() {
 		frameView.setEnabled(false);
-	}
-	
-	public static void main(String[] args) {
-		VistaRestriccion v = new VistaRestriccion();
-		v.showView();
 	}
 }

@@ -11,13 +11,16 @@ import javax.swing.*;
  * Vista principal del Conjunto de Hospitales
  * @author Alex Morral
  */
+
+// ID VISTA 1
+
 public class VistaCjtHospitales {
 	/* Atributos y metodos privados */
 	
 	private CtrlPresentacion ctrlPresentacion;
 	private ArrayList<String> hospitales;
 	
-	// ID VISTA 1
+
 	
 	//-- Components --//
 	private JFrame frameView;
@@ -114,8 +117,17 @@ public class VistaCjtHospitales {
 		
 		btnCrearHospital.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				ctrlPresentacion.changeView(2, panelContents);
+				// TODO Saber que Hospital está seleccionado
+				// TODO changeViewAGestion(Hospital seleccionado)
+				ctrlPresentacion.changeView("vistaCrearHospital", panelContents);
+			}
+		});
+		
+		btnSeleccionarHospital.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO Saber que Hospital está seleccionado
+				// TODO changeViewAGestion(Hospital seleccionado)
+				ctrlPresentacion.changeView("vistaGestion", panelContents);
 			}
 		});
 		
@@ -131,13 +143,7 @@ public class VistaCjtHospitales {
 			}
 		});
 		
-		btnSeleccionarHospital.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// TODO Saber que Hospital está seleccionado
-				// TODO changeViewAGestion(Hospital seleccionado)
-				ctrlPresentacion.changeView(3, panelContents);
-			}
-		});
+	
 		
 	}
 

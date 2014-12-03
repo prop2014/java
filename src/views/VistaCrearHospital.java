@@ -175,7 +175,7 @@ public class VistaCrearHospital {
 		
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ctrlPresentacion.changeView(1, panelContents);
+				ctrlPresentacion.changeView("vistaCjtHospitales", panelContents);
 			}
 		});
 		

@@ -10,11 +10,14 @@ import javax.swing.border.EmptyBorder;
  * Vista principal de la gestion de un hospital
  * @author Axel Pelaez
  */
+
+
+//ID VISTA 2
+
 public class VistaGestion {
 	
 	private CtrlPresentacion ctrlPresentacion;
 	
-	//ID VISTA 2
 	
 	//Componentes interficie
 	private JFrame frameView;
@@ -79,9 +82,31 @@ public class VistaGestion {
 	private void assignar_listenersComponents() {
 		buttonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ctrlPresentacion.changeView("vistaCjtHospitales", panelContents);
+			}
+		});
+		
+		buttonDoc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ctrlPresentacion.changeView("vistaPlantillaDoctores", panelContents);
+			}
+		});
+		
+		
+		
+		/*buttonSol.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				ctrlPresentacion.changeView(1, panelContents);
 			}
 		});
+		
+		/*buttonCal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ctrlPresentacion.changeView(1, panelContents);
+			}
+		});*/
+		
+		
 		
 	}
 	

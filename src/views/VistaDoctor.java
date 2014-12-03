@@ -12,6 +12,9 @@ import javax.swing.border.EmptyBorder;
  * @author Axel Pelaez
  */
 
+//ID VISTA 8
+
+
 public class VistaDoctor {
 	//Componentes interficie
 	
@@ -176,7 +179,13 @@ public class VistaDoctor {
 			private void assignar_listenersComponents() {
 				buttonVolver.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						ctrlPresentacion.changeVolver(panelContents);
+						ctrlPresentacion.changeView("vistaPlantillaDoctores",panelContents);
+					}
+				});
+				
+				buttonAnadir.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						ctrlPresentacion.changeView("vistaRestriccion",panelContents);
 					}
 				});
 			}

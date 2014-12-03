@@ -24,7 +24,9 @@ public class CtrlPresentacion {
 	private VistaCjtHospitales vistaCjtHospitales;
 	private VistaCrearHospital vistaCrearHospital;
 	private VistaGestion vistaGestion;
-	
+	private VistaPlantillaDoctores vistaPlantillaDoctores;
+	private VistaDoctor vistaDoctor;
+	private VistaRestriccion vistaRestriccion;
 	
 	/* Constructora */
 	public CtrlPresentacion(){
@@ -33,7 +35,9 @@ public class CtrlPresentacion {
 		vistaCjtHospitales = new VistaCjtHospitales(this);
 		vistaCrearHospital = new VistaCrearHospital(this);
 		vistaGestion = new VistaGestion(this);
-		
+		vistaPlantillaDoctores = new VistaPlantillaDoctores(this);
+		vistaDoctor = new VistaDoctor(this);
+		vistaRestriccion = new VistaRestriccion(this);
 	}
 	
 	private void init_frameView() {
@@ -58,33 +62,65 @@ public class CtrlPresentacion {
 		vistaCjtHospitales.init();
 		vistaGestion.init();
 		vistaCrearHospital.init();
+		vistaPlantillaDoctores.init();
+		vistaDoctor.init();
+		vistaRestriccion.init();
+		
+		
+		vistaRestriccion.hidePanel();
+		vistaDoctor.hidePanel();
 		vistaCrearHospital.hidePanel();
 		vistaGestion.hidePanel();
+		vistaPlantillaDoctores.hidePanel();
+		
+		
+		
 		vistaCjtHospitales.showView();
 	}
 	
-	public void changeView(int nextView, JPanel panel) {
+	public void changeView(String nextView, JPanel panel) {
 		JPanel contentPane = (JPanel) frameView.getContentPane();
 		contentPane.remove(panel);
 		
 		switch(nextView){
-		case 1:{
+		case "vistaCjtHospitales":{
 		
 			contentPane.add(vistaCjtHospitales.getPanel());
-			vistaCrearHospital.showPanel();
+			vistaCjtHospitales.showPanel();
 			break;
 		}
-		case 2:{
 		
+		case "vistaCrearHospital":{
 			contentPane.add(vistaCrearHospital.getPanel());
 			vistaCrearHospital.showPanel();
 			break;
 		}
-		case 3: {
+		
+		case "vistaGestion": {
 			contentPane.add(vistaGestion.getPanel());
 			vistaGestion.showPanel();
 			break;
 		}
+		
+		case "vistaPlantillaDoctores": {
+			contentPane.add(vistaPlantillaDoctores.getPanel());
+			vistaPlantillaDoctores.showPanel();
+			break;
+		}
+		
+		case "vistaDoctor": {
+			contentPane.add(vistaDoctor.getPanel());
+			vistaDoctor.showPanel();
+			break;
+		}
+		
+		case "vistaRestriccion": {
+			contentPane.add(vistaRestriccion.getPanel());
+			vistaRestriccion.showPanel();
+			break;
+		}
+		
+		
 	
 		}
 			contentPane.revalidate();
