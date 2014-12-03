@@ -79,7 +79,7 @@ public class VistaGestion {
 	private void assignar_listenersComponents() {
 		buttonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ctrlPresentacion.changeVolver(panelContents);
+				ctrlPresentacion.changeView(1, panelContents);
 			}
 		});
 		

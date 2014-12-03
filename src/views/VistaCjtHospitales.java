@@ -115,7 +115,7 @@ public class VistaCjtHospitales {
 		btnCrearHospital.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				ctrlPresentacion.changeView(13,panelContents);
+				ctrlPresentacion.changeView(2, panelContents);
 			}
 		});
 		
@@ -135,7 +135,7 @@ public class VistaCjtHospitales {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Saber que Hospital está seleccionado
 				// TODO changeViewAGestion(Hospital seleccionado)
-				ctrlPresentacion.changeView(2,panelContents);
+				ctrlPresentacion.changeView(3, panelContents);
 			}
 		});
 		

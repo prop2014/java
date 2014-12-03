@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -23,6 +24,7 @@ public class VistaCrearHospital {
 	private JPanel panelCenterButtons = new JPanel();
 	//CENTER
 	private JLabel labelPanel1 = new JLabel("<html><u><b>Crear Hospital</b></u>");
+	JButton btnCrearHospital = new JButton("Crear Hospital");
 	private JButton btnImportCal = new JButton("<html><CENTER>Importar<br/>Calendario</CENTER>");
 	private JButton btnImportDoc = new JButton("<html><CENTER>Importar<br/>Doctores</CENTER>");
 	private JButton btnCancel = new JButton("Cancelar");
@@ -119,7 +121,7 @@ public class VistaCrearHospital {
 		lblN.setBounds(445, 124, 24, 16);
 		panelCenterButtons.add(lblN);
 		
-		JButton btnCrearHospital = new JButton("Crear Hospital");
+	
 		btnCrearHospital.setBounds(371, 322, 160, 25);
 		panelCenterButtons.add(btnCrearHospital);
 	}
@@ -131,6 +133,21 @@ public class VistaCrearHospital {
 	}
 	
 	private void assignar_listenersComponents() {
+		
+		btnCrearHospital.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String nameHosp = nameHospTextField.getText();
+				Double factM = Double.parseDouble(mTextField.getText());
+				Double factT = Double.parseDouble(tTextField.getText());
+				Double factN = Double.parseDouble(nTextField.getText());
+				try {
+					ctrlPresentacion.crearHospital(nameHosp, factM, factT, factN);
+				} catch (IOException eX) {
+					System.out.printf("Hospital no creado");
+					//JDIalog;
+				}
+			}
+		});
 		
 		btnImportCal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -144,7 +161,7 @@ public class VistaCrearHospital {
 		
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ctrlPresentacion.changeVolver(panelContents);
+				ctrlPresentacion.changeView(1, panelContents);
 			}
 		});
 		

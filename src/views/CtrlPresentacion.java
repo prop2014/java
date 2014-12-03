@@ -68,27 +68,43 @@ public class CtrlPresentacion {
 		contentPane.remove(panel);
 		
 		switch(nextView){
-		case 13:{
+		case 1:{
 		
-			contentPane.add(vistaCrearHospital.getPanel());
+			contentPane.add(vistaCjtHospitales.getPanel());
 			vistaCrearHospital.showPanel();
+			break;
 		}
 		case 2:{
 		
+			contentPane.add(vistaCrearHospital.getPanel());
+			vistaCrearHospital.showPanel();
+			break;
+		}
+		case 3: {
 			contentPane.add(vistaGestion.getPanel());
 			vistaGestion.showPanel();
+			break;
 		}
 	
 		}
-			//contentPane.removeAll();
-			//vistaCrearHospital.init();
 			contentPane.revalidate();
 			contentPane.repaint();
 	}
 	
-	/* public void changeViewGestion() {
+	/*public void changeViewCrear(JPanel panel) {
 		JPanel contentPane = (JPanel) frameView.getContentPane();
-		contentPane.remove(vistaCjtHospitales.getPanel());
+		contentPane.remove(panel);
+		contentPane.add(vistaCrearHospital.getPanel());
+		vistaCrearHospital.showPanel();
+		//vistaCjtHospitales.hidePanel();
+		//vistaGestion.init();
+		contentPane.revalidate();
+		contentPane.repaint();
+	}
+	
+	 public void changeViewGestion(JPanel panel) {
+		JPanel contentPane = (JPanel) frameView.getContentPane();
+		contentPane.remove(panel);
 		contentPane.add(vistaGestion.getPanel());
 		vistaGestion.showPanel();
 		//vistaCjtHospitales.hidePanel();
@@ -96,7 +112,7 @@ public class CtrlPresentacion {
 		contentPane.revalidate();
 		contentPane.repaint();
 	}
-	*/
+	
 	public void changeVolver(JPanel panel) {
 		JPanel contentPane = (JPanel) frameView.getContentPane();
 		contentPane.remove(panel);
@@ -106,10 +122,15 @@ public class CtrlPresentacion {
 		//vistaCjtHospitales.init();
 		contentPane.revalidate();
 		contentPane.repaint();
-	}
+	}*/
 	/* Metodos de VistaCjtCalendario */
 	public ArrayList<String> loadHospitals() throws IOException {
 		return ctrlHospital.verHospitales();
+	}
+	
+	public void crearHospital(String nameHosp, Double factM, Double factT, Double factN) throws IOException{
+		int idHosp = ctrlHospital.getFDI();
+		ctrlHospital.crearHospital(idHosp, nameHosp, factM, factT, factN);
 	}
 	
 }
