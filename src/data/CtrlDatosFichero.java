@@ -167,16 +167,32 @@ public class CtrlDatosFichero {
 				BufferedReader br = new BufferedReader(fr);
 		   		String linea;
 		   		String word;
-		   		boolean HD;
 		   		linea=br.readLine();
 		   		linea=br.readLine();
 		   		Scanner sl = new Scanner(linea);
 		   		if(sl.hasNext()){
 			   		word=sl.next();
 			   		if(word.equals(".D")){
-			   			HD=true;
-			   		
-					}//fi if
+			   			while((linea=br.readLine())!=null){
+				   			Scanner sl1 = new Scanner(linea);
+				   			if(sl1.hasNext()){
+				   				word=sl1.next();
+				   				if(word.equals(".R")){
+				   					while(sl.hasNext()){
+					   					int idDoc = sl.nextInt();
+					   					alhosp.add(Integer.toString(idDoc));
+					   					int numRes = sl.nextInt();
+					   					alhosp.add(Integer.toString(numRes));
+					   					for(int i=0;i<numRes;++i){
+					   						
+					   					}
+					   					int idRes = sl.nextInt();
+				   					}
+				   				}
+				   			}
+				   			sl1.close();
+				   		}
+					}
 			   		else {
 			   			sl.close();
 			   			fr.close();
