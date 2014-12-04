@@ -99,9 +99,9 @@ public class VistaNOTDiaMes {
 	
 	public VistaNOTDiaMes(CtrlPresentacion pCtrlPresentacion) {
 		ctrlPresentacion = pCtrlPresentacion;
-		/** DESCOMENTAR PARA EDITAR
-		 * inicializarComponents();
-		 */
+		/* DESCOMENTAR PARA EDITAR
+		      inicializarComponents();
+		*/
 	}
 	
 	public void init() {
