@@ -4,12 +4,16 @@ import javax.swing.border.EmptyBorder;
 import com.toedter.calendar.JDateChooser;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Vista secundaria de gestion de restricciones tipo NOTFecha
  * @author Sergi Orra Genero
  */
 public class VistaNOTFecha {
+	
+	private CtrlPresentacion ctrlPresentacion;
 	
 	private JFrame frameView = new JFrame("Programador de Guardias");
 	private JPanel panelContents = new JPanel();
@@ -80,6 +84,11 @@ public class VistaNOTFecha {
 	}
 
 	private void assignar_listenersComponents() {
+		buttonVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ctrlPresentacion.changeView("vistaRestriccion", panelContents);
+			}
+		});
 	}
 	
 	
