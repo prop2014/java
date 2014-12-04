@@ -193,11 +193,6 @@ public class VistaDoctor {
 					public void actionPerformed(ActionEvent e) {
 					
 					Object[] options = {"Aceptar", "Cancelar"};
-					/*JOptionPane.showMessageDialog(null, "Estas seguro de que quieres eliminar la restriccion?", 
-							"Alert", JOptionPane.WARNING_MESSAGE,
-						    options,
-						    options[2]);
-					*/
 					JOptionPane.showOptionDialog(null,
 							"Esta seguro de que quiere eliminar la restriccion?",
 						    "Alert",
