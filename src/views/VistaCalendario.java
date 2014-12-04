@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 //import javax.swing.table.DefaultTableModel;
 //import javax.swing.table.DefaultTableCellRenderer;
@@ -18,14 +19,13 @@ import com.toedter.calendar.JCalendar;
 
 
 /**
- * Vista principal de gestion de calendario
+ * Vista gestion de calendario
  * @author Felix Fernando Ramos Velazquez
  */
 public class VistaCalendario {
 
 	/* Private attributes */
-	//-- VistaCalendario controller --//
-		private CtrlPresentacion ctrlPresentacion;
+	private CtrlPresentacion ctrlPresentacion;
 
 	//-- Containers --//
 	private JFrame frameView;
@@ -34,77 +34,33 @@ public class VistaCalendario {
 	private JPanel panelBottom = new JPanel();
 	private JPanel panelCentral = new JPanel();
 
-//	private JPanel panelAddVacation = new JPanel();
-//	private JPanel panelCalendar = new JPanel();
-
 	//-- Buttons --//
-	// top
 	private JButton buttonCreateCal = new JButton("Crear calendario");
 	private JButton buttonImportCal = new JButton("Importar calendario");
 	private JButton buttonDeleteCal = new JButton("Eliminar calendario");
 	private JButton buttonAddVacation = new JButton("Anadir dia");
-	// bottom
 	private JButton buttonGoBack = new JButton("Volver");
 	private JButton buttonHelp = new JButton("Ayuda");
+	private JButton buttonMod = new JButton("Modificar dia");
+	private JButton buttonDel = new JButton("Eliminar dia");
 
 	//-- Labels --//
-	// top panel
-	private JLabel labelCalendar;
-	// central panel
-	private JLabel labelVacationList1, labelVacationList2;
+	private JLabel labelCalendar, labelVacationList1, labelVacationList2;
 
 	DefaultListModel<String> dlm = new DefaultListModel<String>();
 	private JList<String> vacationList;
 	private JScrollPane scrollPanel;
 	private JDateChooser dateChooser = new JDateChooser("dd/MM/yyyy", "##/##/##", '_');
 
-	//	// right c
-	//	private JButton buttonMod = new JButton("Modificar dia vacacional");
-	//	private JButton buttonDel = new JButton("Eliminar dia vacacional");
-	//	
-
-
 	//-- Others private atributes--//
-	private static final int width = 700;	// anchura de la vista
-	private static final int height = 400;	// altura de la vista
+	private static final int width = 700;	// anchura del panel contenedor
+	private static final int height = 400;	// altura del panel contenedor
 	private static final String pattern = "%7s%13d%11d%11d%-5s%s";	// patron de formato de lista dias vacacionales
 
 	// selected panelInfo
 	//	private int iPanelInfo; // provissional
 
 	/* Private Methods */
-
-	//	private void init_panelInfo() {
-	//		panelLeftCenter = panelAddVacation;
-	//	}
-
-//	private void init_panelAddVacation() throws ParseException{
-//		panelAddVacation.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 20));
-//		JCalendar c = new JCalendar();
-//		c.setWeekOfYearVisible(false);
-//		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-//		c.setDate(sdf.parse("01-01-2007"));
-//		c.setSelectableDateRange(sdf.parse("01-01-2007"), sdf.parse("31-12-2007"));
-//		panelAddVacation.add(c);
-//	}
-//	private void init_panelCalendar() throws ParseException{
-//		//		panelCalendar.setPreferredSize(new Dimension(500,200));;
-//		panelCalendar.setLayout(new BorderLayout());
-//		panelCalendar.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 20));
-//		//		JDateChooser c = new JDateChooser();
-//		JCalendar c = new JCalendar();
-//		c.setWeekOfYearVisible(false);
-//
-//		//		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-//		//		String min = "27-01-2007";
-//		//		c.setDate(sdf.parse(min));
-//		//		//c.setMinSelectableDate(sdf.parse(s));
-//		//		String max = "31-12-2009";
-//		//		c.setDate(sdf.parse(max));
-//		//		c.setSelectableDateRange(sdf.parse(min), sdf.parse(max));
-//		//c.setMaxSelectableDate(sdf.parse(s));
-//		panelCalendar.add(c, BorderLayout.CENTER);
-//	}
 
 	private void init_panelTop() {
 		// panel
@@ -216,42 +172,23 @@ public class VistaCalendario {
 		frameView = ctrlPresentacion.getFrame();
 		JPanel contentPane = (JPanel) frameView.getContentPane();
 		contentPane.setLayout(null);
-		panelContents.setBounds(0,0,700,378);
+		panelContents.setBounds(0,0,width,height);
 		contentPane.add(panelContents);
 
-		frameView.add(panelTop);
-		frameView.add(panelCentral);
-		frameView.add(panelBottom);
+//		frameView.add(panelTop);
+//		frameView.add(panelCentral);
+//		frameView.add(panelBottom);
 
 
 	}
 	private void init_panelContents() {
-		panelContents.setLayout(new BorderLayout());
+		panelContents.setLayout(null);
 		// Componentes
 		panelContents.add(panelTop);
 		panelContents.add(panelCentral);
 		panelContents.add(panelBottom);
 	}
 	
-	private void initComponents(){
-
-		init_panelTop();
-		init_panelCentral();
-		init_panelBottom();
-		init_frameView();
-		init_panelContents();
-
-
-
-		//		init_panelAddVacation();
-		//		init_panelInfo();
-		//
-		//		init_panelCalendar();
-
-		//		assign_listenersComponents();
-
-	}
-
 	//	//************************************************//
 	//	/* Methods of the listener interfaces */
 	public void actionPerformed_buttonAddVacation (ActionEvent event) {
@@ -261,6 +198,21 @@ public class VistaCalendario {
 	/* Assigning listeners */	
 	private void assign_listenersComponents() {
 
+		buttonGoBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ctrlPresentacion.changeView("vistaGestion", panelContents);
+			}
+		});
+
+		buttonImportCal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser chooser = new JFileChooser();
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("Text File (.txt)", "txt");
+				chooser.setFileFilter(filter);
+				chooser.showOpenDialog(frameView);
+			}
+		});
+		
 		buttonAddVacation.addActionListener
 		(new ActionListener() {
 			public void actionPerformed (ActionEvent event) {
@@ -278,7 +230,12 @@ public class VistaCalendario {
 	}
 	
 	public void init() {
-		initComponents();
+		init_panelTop();
+		init_panelCentral();
+		init_panelBottom();
+		init_frameView();
+		init_panelContents();
+		assign_listenersComponents();
 	}
 	
 	public JPanel getPanel() {
@@ -288,6 +245,7 @@ public class VistaCalendario {
 	public void showPanel() {
 		panelContents.setVisible(true);
 	}
+	
 	public void hidePanel() {
 		panelContents.setVisible(false);
 	}
@@ -303,12 +261,4 @@ public class VistaCalendario {
 	public void disableView() {
 		frameView.setEnabled(false);
 	}
-
-	/** For testing, a main program 
-	 * @throws ParseException */
-	/*public static void main(String[] args) throws ParseException {
-		VistaCalendario v = new VistaCalendario();
-
-		v.showView();
-	}*/
 }
