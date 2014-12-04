@@ -539,6 +539,82 @@ public class CtrlDoctor {
 		return null;
 	}
 	
+	public void addResData(int id)throws IOException{
+		CtrlDatosFichero inOut = new CtrlDatosFichero();
+		ArrayList<String> alRes = inOut.getDataRes(id);
+			int idDoc;
+		for(int i=0;i<alRes.size();++i){
+			int NumRes, idRes;
+			idDoc=Integer.parseInt(alRes.get(i));
+			NumRes=Integer.parseInt(alRes.get(i));
+			for(int j=0; j<NumRes;++j){
+				++i;
+				idRes=Integer.parseInt(alRes.get(i));
+				++i;
+				String tipo = alRes.get(i);
+				if(tipo.equals("NOT_Turno")){
+						++i;
+						String word = alRes.get(i); //tipoturno
+						addResNOT_Turno(idDoc,idRes,word);
+				}
+				else if(tipo.equals("NOT_Fecha")){
+					++i;
+					int d=Integer.parseInt(alRes.get(i));
+					++i;
+					int m=Integer.parseInt(alRes.get(i));
+					++i;
+					int a=Integer.parseInt(alRes.get(i));
+					addResNOT_Fecha(idDoc,idRes,d,m,a);
+				}
+				else if(tipo.equals("NOT_Especial")){
+					++i;
+					String word=alRes.get(i); //especial
+					addResNOT_Especial(idDoc,idRes,word);
+				}
+				else if(tipo.equals("NOT_Dia_Semana")){
+					++i;
+					String word=alRes.get(i);
+					addResNOT_Dia_Semana(idDoc,idRes,word);
+				}
+				else if(tipo.equals("NOT_Dia_Mes")){
+					++i;
+					int dia =Integer.parseInt(alRes.get(i));
+					addResNOT_Dia_Mes(idDoc,idRes,dia);
+				}
+				else if(tipo.equals("MAX_Turnos_Rango")){
+					++i;
+					int d1=Integer.parseInt(alRes.get(i));
+					++i;
+					int m1=Integer.parseInt(alRes.get(i));
+					++i;
+					int a1=Integer.parseInt(alRes.get(i));
+					++i;
+					int d2=Integer.parseInt(alRes.get(i));
+					++i;
+					int m2=Integer.parseInt(alRes.get(i));
+					++i;
+					int a2=Integer.parseInt(alRes.get(i));
+					++i;
+					int numT=Integer.parseInt(alRes.get(i));
+					addResMAX_Turnos_Rango(idDoc,idRes,d1, m1, a1, d2,m2,  a2, numT);					
+				}
+				else if(tipo.equals("MAX_Turnos_por_Dia")){
+					int numT =Integer.parseInt(alRes.get(i));
+					addResMAX_Turnos_por_Dia(idDoc,idRes,numT);
+				}
+				else if(tipo.equals("XOR")){
+					++i;
+					int numdays=Integer.parseInt(alRes.get(i));
+					ArrayList<Integer> diaXOR = new ArrayList<Integer>();
+					ArrayList<Integer> mesXOR = new ArrayList<Integer>();
+					ArrayList<Integer> yearXOR = new ArrayList<Integer>();
+					ArrayList<String> tipoTurnoXOR = new ArrayList<String>();
+					addResXOR(idDoc,idRes,diaXOR,mesXOR,yearXOR,tipoTurnoXOR);
+				}
+			}
+		}
+	}
+	
 	/** 
 	 * Metodo que inserta una restriccion tipo MAX_Turnos_por_Dia nueva en el Doctor
 	 * @param idDoc: Identificador del Doctor
