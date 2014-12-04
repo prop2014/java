@@ -153,7 +153,7 @@ public class VistaCrearHospital {
 						ctrlPresentacion.crearHospital(nameHosp, factM, factT, factN);
 					} catch (IOException eX) {
 						System.out.printf("Hospital no creado");
-						JOptionPane.showMessageDialog(null, "alert", "alert", JOptionPane.ERROR_MESSAGE); 
+						JOptionPane.showMessageDialog(null, "alert", "alert",JOptionPane.WARNING_MESSAGE); 
 					}
 				} else {
 					JOptionPane.showMessageDialog(null, "Alguno de los factores no es un valor correcto", "Error", JOptionPane.ERROR_MESSAGE); 

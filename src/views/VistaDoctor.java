@@ -188,6 +188,27 @@ public class VistaDoctor {
 						ctrlPresentacion.changeView("vistaRestriccion",panelContents);
 					}
 				});
+				
+				buttonEliminar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+					
+					Object[] options = {"Aceptar", "Cancelar"};
+					/*JOptionPane.showMessageDialog(null, "Estas seguro de que quieres eliminar la restriccion?", 
+							"Alert", JOptionPane.WARNING_MESSAGE,
+						    options,
+						    options[2]);
+					*/
+					JOptionPane.showOptionDialog(null,
+							"Esta seguro de que quiere eliminar la restriccion?",
+						    "Alert",
+						    JOptionPane.YES_NO_CANCEL_OPTION,
+						    JOptionPane.WARNING_MESSAGE,
+						    null,
+						    options,
+						    options[1]);
+					}
+				});
+
 			}
 			
 			

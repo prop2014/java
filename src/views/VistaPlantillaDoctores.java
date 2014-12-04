@@ -150,6 +150,20 @@ import javax.swing.border.EmptyBorder;
 					ctrlPresentacion.changeView("vistaDoctor",panelContents);
 				}
 			});
+			buttonEliminar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				
+				Object[] options = {"Aceptar", "Cancelar"};
+				JOptionPane.showOptionDialog(null,
+						"Esta seguro de que quiere eliminar el Doctor?",
+					    "Alert",
+					    JOptionPane.YES_NO_CANCEL_OPTION,
+					    JOptionPane.WARNING_MESSAGE,
+					    null,
+					    options,
+					    options[1]);
+				}
+			});
 			
 			
 		}
