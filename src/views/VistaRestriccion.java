@@ -170,12 +170,12 @@ public class VistaRestriccion {
 		});
 		
 		
-		/*buttonXOR.addActionListener(new ActionListener() {
+		buttonXOR.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ctrlPresentacion.changeView("vistaXOR", panelContents);
 			}
 		});
-		*/
+		
 		
 		buttonNOTFecha.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
