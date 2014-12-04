@@ -138,6 +138,7 @@ public class VistaCrearHospital {
 		btnCrearHospital.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nameHosp = nameHospTextField.getText();
+				nameHosp.replaceAll(" ", "%");
 				Scanner sc1 = new Scanner(mTextField.getText());
 				Scanner sc2 = new Scanner(tTextField.getText());
 				Scanner sc3 = new Scanner(nTextField.getText());
