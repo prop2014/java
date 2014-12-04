@@ -134,9 +134,18 @@ public class VistaCjtHospitales {
 		
 		btnEliminarHospital.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-			}
-		});
+					
+					Object[] options = {"Aceptar", "Cancelar"};
+					JOptionPane.showOptionDialog(null,
+							"Esta seguro de que quiere eliminar el Hospital?",
+						    "Alert",
+						    JOptionPane.YES_NO_CANCEL_OPTION,
+						    JOptionPane.WARNING_MESSAGE,
+						    null,
+						    options,
+						    options[1]);
+					}
+				});
 		
 		btnImportarHospital.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
