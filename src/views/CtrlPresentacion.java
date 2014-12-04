@@ -30,8 +30,8 @@ public class CtrlPresentacion {
 	private VistaNOTDiaMes vistaNOTDiaMes;
 	private VistaNOTEspecial vistaNOTEspecial; 
 	private VistaNOTDiaSemana vistaNOTDiaSemana;
-	//private VistaNOTFecha vistaNOTFecha;
-	//private VistaXOR vistaXOR;
+	private VistaNOTFecha vistaNOTFecha;
+	private VistaXOR vistaXOR;
 	private VistaMAXTurnosRango vistaMAXTurnosRango;
 	
 	/* Constructora */
@@ -50,8 +50,8 @@ public class CtrlPresentacion {
 		vistaNOTDiaMes = new VistaNOTDiaMes(this);
 		vistaNOTEspecial = new VistaNOTEspecial(this);
 		vistaNOTDiaSemana = new VistaNOTDiaSemana(this);
-		//vistaNOTFecha = new VistaNOTFecha(this);
-		//vistaXOR = new VistaXOR(this);
+		vistaNOTFecha = new VistaNOTFecha(this);
+		vistaXOR = new VistaXOR(this);
 		vistaMAXTurnosRango = new VistaMAXTurnosRango(this);
 		
 	}
@@ -87,8 +87,8 @@ public class CtrlPresentacion {
 		vistaNOTDiaMes.init();
 		vistaNOTEspecial.init();
 		vistaNOTDiaSemana.init();
-		//vistaNOTFecha.init();
-		//vistaXOR.init();
+		vistaNOTFecha.init();
+		vistaXOR.init();
 		vistaMAXTurnosRango.init();
 		
 		vistaCjtHospitales.showView();
@@ -103,8 +103,8 @@ public class CtrlPresentacion {
 		vistaNOTDiaMes.hidePanel();
 		vistaNOTEspecial.hidePanel();
 		vistaNOTDiaSemana.hidePanel();
-		//vistaNOTFecha.hidePanel();
-		//vistaXOR.hidePanel();
+		vistaNOTFecha.hidePanel();
+		vistaXOR.hidePanel();
 		vistaMAXTurnosRango.hidePanel();
 		
 		
@@ -187,19 +187,19 @@ public class CtrlPresentacion {
 			vistaNOTDiaSemana.showPanel();
 			break;
 		}
-		/*case "vistaNOTFecha": {
+		case "vistaNOTFecha": {
 			contentPane.add(vistaNOTFecha.getPanel());
 			vistaNOTFecha.showPanel();
 			break;
-		}*/
+		}
 		
 		
-		/*case "vistaXOR":{
+		case "vistaXOR":{
 			contentPane.add(vistaXOR.getPanel());
 			vistaXOR.showPanel();
 			break;
 		}
-		*/
+		
 		
 		case "vistaMAXTurnosRango":{
 		contentPane.add(vistaMAXTurnosRango.getPanel());
