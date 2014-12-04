@@ -122,12 +122,12 @@ public class CtrlDatosFichero {
 		   			alhosp.add(Integer.toString(iden));
 		   			word = sl.next(); // name
 		   			alhosp.add(word);
-		   			double fact = sl.nextDouble();//fm
-		   			alhosp.add(Double.toString(fact));
-		   			fact=sl.nextDouble();//ft
-		   			alhosp.add(Double.toString(fact));
-		   			fact=sl.nextDouble();//fn
-		   			alhosp.add(Double.toString(fact));
+		   			String fact = sl.next();//fm
+		   			alhosp.add(fact);
+		   			fact=sl.next();//ft
+		   			alhosp.add(fact);
+		   			fact=sl.next();//fn
+		   			alhosp.add(fact);
 		   		}
 	   		}
 	   		sl.close();
