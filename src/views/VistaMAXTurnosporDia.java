@@ -99,6 +99,9 @@ public class VistaMAXTurnosporDia {
 	
 	//METODOS PUBLICOS
 	
+	public VistaMAXTurnosporDia() {
+	}
+	
 	public VistaMAXTurnosporDia(CtrlPresentacion pCtrlPresentacion) {
 		ctrlPresentacion = pCtrlPresentacion;
 		/** DESCOMENTAR PARA EDITAR
@@ -132,5 +135,9 @@ public class VistaMAXTurnosporDia {
 	public void disableView() {
 		frameView.setEnabled(false);
 	}
+	/*public static void main(String[] args)  {
+		VistaMAXTurnosporDia v = new VistaMAXTurnosporDia();
+		v.showView();
+	}*/
 
 }
