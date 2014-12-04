@@ -2,6 +2,7 @@ package views;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -145,6 +146,16 @@ public class VistaCjtHospitales {
 					        "Text File (.txt)", "txt");
 					    chooser.setFileFilter(filter);
 					int returnVal = chooser.showOpenDialog(frameView);
+					File f = chooser.getSelectedFile();
+					/*if(returnVal == JFileChooser.APPROVE_OPTION) {
+						try{
+					       ctrlPresentacion.importarHospital(f.getAbsolutePath());
+						} catch(IOException eX) {
+							JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
+
+						}
+					 }*/
+
 				
 			}
 		});
@@ -206,6 +217,9 @@ public class VistaCjtHospitales {
 		panelContents.setVisible(false);
 	}
 	public void showPanel() {
+		loadHospitals();
+		list.revalidate();
+		list.repaint();
 		panelContents.setVisible(true);
 	}
 	

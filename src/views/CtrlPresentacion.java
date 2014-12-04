@@ -31,7 +31,7 @@ public class CtrlPresentacion {
 	private VistaNOTDiaMes vistaNOTDiaMes;
 	private VistaNOTEspecial vistaNOTEspecial; 
 	private VistaNOTDiaSemana vistaNOTDiaSemana;
-	private VistaNOTFecha vistaNOTFecha;
+	//private VistaNOTFecha vistaNOTFecha;
 	//private VistaXOR vistaXOR;
 	//private VistaMAXTurnosRango vistaMAXTurnosRango;
 	
@@ -51,7 +51,7 @@ public class CtrlPresentacion {
 		vistaNOTDiaMes = new VistaNOTDiaMes(this);
 		vistaNOTEspecial = new VistaNOTEspecial(this);
 		vistaNOTDiaSemana = new VistaNOTDiaSemana(this);
-		vistaNOTFecha = new VistaNOTFecha(this);
+		//vistaNOTFecha = new VistaNOTFecha(this);
 		//vistaXOR = new VistaXOR(this);
 		//vistaMAXTurnosRango = new VistaMAXTurnosRango(this);
 		
@@ -88,7 +88,7 @@ public class CtrlPresentacion {
 		vistaNOTDiaMes.init();
 		vistaNOTEspecial.init();
 		vistaNOTDiaSemana.init();
-		vistaNOTFecha.init();
+		//vistaNOTFecha.init();
 		//vistaXOR.init();
 		//vistaMAXTurnosRango.init();
 		
@@ -104,7 +104,7 @@ public class CtrlPresentacion {
 		vistaNOTDiaMes.hidePanel();
 		vistaNOTEspecial.hidePanel();
 		vistaNOTDiaSemana.hidePanel();
-		vistaNOTFecha.hidePanel();
+		//vistaNOTFecha.hidePanel();
 		//vistaXOR.hidePanel();
 		//vistaMAXTurnosRango.hidePanel();
 		
@@ -188,11 +188,11 @@ public class CtrlPresentacion {
 			vistaNOTDiaSemana.showPanel();
 			break;
 		}
-		case "vistaNOTFecha": {
+		/*case "vistaNOTFecha": {
 			contentPane.add(vistaNOTFecha.getPanel());
 			vistaNOTFecha.showPanel();
 			break;
-		}
+		}*/
 		
 		
 		/*case "vistaXOR":{
@@ -226,6 +226,10 @@ public class CtrlPresentacion {
 			ctrlHospital.crearHospital(idHosp, nameHosp, factM, factT, factN);
 		} catch (IOException e) {throw new IOException(e);}
 		ctrlHospital.guardarHospital();
+	}
+	
+	public void importarHospital(String path) throws IOException{
+		ctrlHospital.importarHospital(path);
 	}
 	
 }
