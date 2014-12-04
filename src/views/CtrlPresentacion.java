@@ -44,7 +44,7 @@ public class CtrlPresentacion {
 		vistaGestion = new VistaGestion(this);
 		vistaPlantillaDoctores = new VistaPlantillaDoctores(this);
 		vistaDoctor = new VistaDoctor(this);
-		//vistaCalendario = new VistaCalendario(this);
+		vistaCalendario = new VistaCalendario(this);
 		vistaRestriccion = new VistaRestriccion(this);
 		vistaMAXTurnosporDia = new VistaMAXTurnosporDia(this);
 		vistaNOTTurno = new VistaNOTTurno(this);
@@ -81,7 +81,7 @@ public class CtrlPresentacion {
 		vistaCrearHospital.init();
 		vistaPlantillaDoctores.init();
 		vistaDoctor.init();
-		//vistaCalendario.init();
+		vistaCalendario.init();
 		vistaRestriccion.init();
 		vistaMAXTurnosporDia.init();
 		vistaNOTTurno.init();
@@ -97,7 +97,7 @@ public class CtrlPresentacion {
 		vistaCrearHospital.hidePanel();
 		vistaPlantillaDoctores.hidePanel();
 		vistaDoctor.hidePanel();
-		//vistaCalendario.hidePanel();
+		vistaCalendario.hidePanel();
 		vistaRestriccion.hidePanel();
 		vistaMAXTurnosporDia.hidePanel();
 		vistaNOTTurno.hidePanel();
@@ -146,12 +146,12 @@ public class CtrlPresentacion {
 			break;
 		}
 		
-		/*case "vistaCalendario":{
+		case "vistaCalendario":{
 			contentPane.add(vistaCalendario.getPanel());
 			vistaCalendario.showPanel();
 			break;
 		}
-		*/
+		
 		case "vistaRestriccion": {
 			contentPane.add(vistaRestriccion.getPanel());
 			vistaRestriccion.showPanel();
