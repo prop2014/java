@@ -47,6 +47,14 @@ public class CtrlHospital {
 	public ArrayList<String> verHospitales() throws IOException {
 		return inOut.getHopitals();
 	}
+	public void importarHospital(String path)throws IOException{
+		ArrayList<String> alhosp = new ArrayList<String>();
+		if(path!=null){
+			int id=inOut.getId(path);
+			alhosp=inOut.getDataHospital(id,path);
+			inOut.saveDataHosp(alhosp, id); //comprovarids
+		}
+	}
 	
 	/**
 	 * obtiene los datos basicos del Hospital(no doctores ni calendario)
@@ -56,7 +64,7 @@ public class CtrlHospital {
 	public void cargarHospital(int id) throws IOException {
 		ArrayList<String> alhosp = new ArrayList<String>();
 		
-		alhosp=inOut.getDataHospital(id);
+		alhosp=inOut.getDataHospital(id,null);
 		if(alhosp.size()==0) throw new IOException("El fichero no contenia datos correctos");
 		else{
 			int iden=Integer.parseInt(alhosp.get(0));
