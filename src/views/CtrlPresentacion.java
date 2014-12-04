@@ -18,6 +18,7 @@ public class CtrlPresentacion {
 	
 	private JFrame frameView;
 	private CtrlHospital ctrlHospital;
+	private CtrlDoctor crtlDoctor;
 	private VistaCjtHospitales vistaCjtHospitales;
 	private VistaCrearHospital vistaCrearHospital;
 	private VistaGestion vistaGestion;
@@ -230,5 +231,14 @@ public class CtrlPresentacion {
 	public void importarHospital(String path) throws IOException{
 		ctrlHospital.importarHospital(path);
 	}
+	
+	public void crearDoctor(String nameDoc, int idD, int maxTurnos, double sueldo) throws IOException{
+		//int idDoc = ctrlDoctor.getFDI();
+		try {
+			crtlDoctor.crearDoctor(nameDoc, idD, maxTurnos, sueldo);
+		} catch (IOException e) {throw new IOException(e);}
+		//ctrlHospital.guardarHospital();
+	}
+	
 	
 }

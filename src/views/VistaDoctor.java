@@ -4,16 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
 import javax.swing.border.EmptyBorder;
 
 /**
  * Vista principal de los datos de un Doctor
  * @author Axel Pelaez
  */
-
-//ID VISTA 8
-
 
 public class VistaDoctor {
 	//Componentes interficie
@@ -133,22 +132,13 @@ public class VistaDoctor {
 				
 				/// END: GESTIONADO POR EL BUILDER NO TOCAR
 				
+				list.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+				scrollPanel.setViewportView(list);
 				// Components
 				panelCenterButtons.add(scrollPanel);
 				scrollPanel.setViewportView(list);
 				list.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
-				list.setModel(new AbstractListModel() {
-					String[] values = new String[] {"<html>NOT Dia Mes: <br/>-> 13 <html/>", "<html>NOT Fecha: <br/>-> 5/01/2007<html/>", 
-													"<html>NOT Tipo Turno: <br/>-> Noche<html/>",
-													"<html>XOR: <br/>-> 5/07/2007 Mañana <br/>-> 5/07/2007 Tarde <br/>-> 5/07/2007 Noche<html/>"};
-					
-					public int getSize() {
-						return values.length;
-					}
-					public Object getElementAt(int index) {
-						return values[index];
-					}
-				});
+
 				
 				panelCenterButtons.add(labelPanel1);
 				panelCenterButtons.add(labelPanelID);
@@ -177,6 +167,44 @@ public class VistaDoctor {
 
 
 			private void assignar_listenersComponents() {
+				
+				buttonGuardar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						String nameDoc = textNombre.getText();
+						nameDoc=nameDoc.replaceAll(" ", "%");
+						
+						Scanner sc1 = new Scanner(textID.getText());
+						Scanner sc2 = new Scanner(textMaxTurnos.getText());
+						Scanner sc3 = new Scanner(textSueldo.getText());
+						
+						Double sueldo = 0.00; 
+						Integer maxTurnos, id; 
+						
+						if(!nameDoc.isEmpty() && sc1.hasNextInt() 
+								&& sc2.hasNextInt() && sc3.hasNextDouble()) {
+							
+							id = Integer.parseInt(textID.getText());
+							maxTurnos = Integer.parseInt(textMaxTurnos.getText());
+							sueldo = Double.parseDouble(textSueldo.getText());
+							try {
+								ctrlPresentacion.crearDoctor(nameDoc, id, maxTurnos, sueldo);
+							} catch (IOException eX) {
+								System.out.printf("Doctor no creado");
+								JOptionPane.showMessageDialog(null, "Doctor no creado", "Error",JOptionPane.ERROR_MESSAGE); 
+							}
+						} else {
+							JOptionPane.showMessageDialog(null, "Alguno de los factores no es un valor correcto", "Error", JOptionPane.ERROR_MESSAGE); 
+						}
+						sc1.close();
+						sc2.close();
+						sc3.close();
+						ctrlPresentacion.changeView("vistaPlantillaDoctores", panelContents);
+					}
+				});
+		
+				
+				
+				
 				buttonVolver.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						ctrlPresentacion.changeView("vistaPlantillaDoctores",panelContents);
@@ -203,9 +231,29 @@ public class VistaDoctor {
 						    options[1]);
 					}
 				});
+				
+				
+				
 
 			}
-			
+		/*	private void loadDoctores() {
+				doctores = new ArrayList<String>();
+				try {
+					doctores = ctrlPresentacion.loadDoctores();
+				} catch (IOException e) {
+					doctores.add("No hay doctores disponibles");
+				}
+				
+				DefaultListModel<String> model = new DefaultListModel<String>();
+			    for(String st : doctores){
+			    	st = st.replace("%", " ");
+			         model.addElement(st);
+			    }    
+			    list.setModel(model);  
+			    list.revalidate();
+				list.repaint();
+				
+			}*/
 			
 			//METODOS PUBLICOS
 			
