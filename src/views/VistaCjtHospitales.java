@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * Vista principal del Conjunto de Hospitales
@@ -139,7 +140,12 @@ public class VistaCjtHospitales {
 		
 		btnImportarHospital.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+					JFileChooser chooser = new JFileChooser();
+					FileNameExtensionFilter filter = new FileNameExtensionFilter(
+					        "Text File (.txt)", "txt");
+					    chooser.setFileFilter(filter);
+					int returnVal = chooser.showOpenDialog(frameView);
+				
 			}
 		});
 		
@@ -168,6 +174,7 @@ public class VistaCjtHospitales {
 		
 		DefaultListModel<String> model = new DefaultListModel<String>();
 	    for(String st : hospitales){
+	    	st = st.replace("%", " ");
 	         model.addElement(st);
 	    }    
 	    list.setModel(model);     

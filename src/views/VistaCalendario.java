@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
+
 //import javax.swing.table.DefaultTableModel;
 //import javax.swing.table.DefaultTableCellRenderer;
 //
@@ -24,10 +25,11 @@ public class VistaCalendario {
 
 	/* Private attributes */
 	//-- VistaCalendario controller --//
-	//	private CtrlVistaCalendario ctrl;
+		private CtrlPresentacion ctrlPresentacion;
 
 	//-- Containers --//
-	private JFrame frameView = new JFrame("Programador de guardias:  gestion de calendario");
+	private JFrame frameView;
+	private JPanel panelContents = new JPanel();
 	private JPanel panelTop = new JPanel();
 	private JPanel panelBottom = new JPanel();
 	private JPanel panelCentral = new JPanel();
@@ -211,12 +213,11 @@ public class VistaCalendario {
 	}
 
 	private void init_frameView() {
-		frameView.setLayout(null);
-		frameView.setSize(width, height);
-
-		frameView.setResizable(false);
-		frameView.setLocationRelativeTo(null);
-		frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frameView = ctrlPresentacion.getFrame();
+		JPanel contentPane = (JPanel) frameView.getContentPane();
+		contentPane.setLayout(null);
+		panelContents.setBounds(0,0,700,378);
+		contentPane.add(panelContents);
 
 		frameView.add(panelTop);
 		frameView.add(panelCentral);
@@ -224,13 +225,21 @@ public class VistaCalendario {
 
 
 	}
-
-	private void initComponents() throws ParseException {
+	private void init_panelContents() {
+		panelContents.setLayout(new BorderLayout());
+		// Componentes
+		panelContents.add(panelTop);
+		panelContents.add(panelCentral);
+		panelContents.add(panelBottom);
+	}
+	
+	private void initComponents(){
 
 		init_panelTop();
 		init_panelCentral();
 		init_panelBottom();
 		init_frameView();
+		init_panelContents();
 
 
 
@@ -264,8 +273,23 @@ public class VistaCalendario {
 	//************************************************//
 
 	/* Constructors & public methods */
-	public VistaCalendario() throws ParseException {
+	public VistaCalendario(CtrlPresentacion pCtrlPresentacion) {
+		ctrlPresentacion = pCtrlPresentacion;
+	}
+	
+	public void init() {
 		initComponents();
+	}
+	
+	public JPanel getPanel() {
+		return panelContents;
+	}
+	
+	public void showPanel() {
+		panelContents.setVisible(true);
+	}
+	public void hidePanel() {
+		panelContents.setVisible(false);
 	}
 
 	public void showView() {
@@ -282,9 +306,9 @@ public class VistaCalendario {
 
 	/** For testing, a main program 
 	 * @throws ParseException */
-	public static void main(String[] args) throws ParseException {
+	/*public static void main(String[] args) throws ParseException {
 		VistaCalendario v = new VistaCalendario();
 
 		v.showView();
-	}
+	}*/
 }
