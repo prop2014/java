@@ -87,19 +87,27 @@ public class CtrlDatosFichero {
 		   return alIdHosp;
 	   }
 	
+	 
 	/**
 	 * 
 	 * @param id es el identificador del hospital
 	 * @return los datos basicos del Hospital
 	 * @throws IOException Ficheros incorrectos
 	 */
-	 public ArrayList<String> getDataHospital (int id)throws IOException {
+	 public ArrayList<String> getDataHospital (int id,String importar)throws IOException {
 	 	ArrayList<String> alhosp = new ArrayList<String>();
 	 	try{
-	   		String num = Integer.toString(id);
-	   		String path = new File("").getAbsolutePath();
-	   		String realpath = path+ "/datos/Hospital";
-	   		File archivo = new File(realpath+num);
+	 		File archivo;
+	 		if(importar==null){
+	 			String num = Integer.toString(id);
+		   		String path = new File("").getAbsolutePath();
+		   		String realpath = path+ "/datos/Hospital";
+		   		archivo = new File(realpath+num);
+	 		}
+	 		else{
+	 			archivo = new File(importar);
+	 			
+	 		}
 			if(!archivo.exists()) throw new IOException("No Existe Este fichero");
 			FileReader fr = new FileReader (archivo);
 			BufferedReader br = new BufferedReader(fr);
@@ -329,6 +337,30 @@ public class CtrlDatosFichero {
 		 return alhosp;
 	   }
 	 
+	 
+	public int getId(String Path)throws IOException{
+		int id=-1;
+		File archivo = new File(Path);
+		if(!archivo.exists()) throw new IOException("No Existe Este fichero");
+		try{
+			FileReader fr = new FileReader (archivo);
+			BufferedReader br = new BufferedReader(fr);
+			String linea;
+   			String word;
+   			linea=br.readLine();
+   			Scanner sl = new Scanner(linea);
+   			if(sl.hasNext()){
+   				word=sl.next();
+   				if(word.equals(".H")){
+   					id = sl.nextInt(); //id
+   				}
+   				sl.close();
+   			}
+   			br.close();
+		}catch(Exception e) {e.printStackTrace();}
+		if(id<0)throw new IOException("id Negativo");
+		return id;
+	}
 	 
 	public boolean existHospId(int id){
 		String num = Integer.toString(id);
@@ -577,7 +609,7 @@ public class CtrlDatosFichero {
 	   File archivo = new File(realpath);
 	   boolean C = false, R=false;
 	   if(archivo.exists()){
-			   bufferH=getDataHospital(id);
+			   bufferH=getDataHospital(id,null);
 			   if(existsCalendar(id))  {
 				   bufferC=getDataCale(id);
 				   C=true;
@@ -639,7 +671,7 @@ public class CtrlDatosFichero {
 	   if(archivo.exists()){
 		   	if(existsDoctors(id)){
 		   			D=true;
-				   bufferH=getDataHospital(id);
+				   bufferH=getDataHospital(id,null);
 				   if(existsCalendar(id))  {
 					   bufferC=getDataCale(id);
 					   C=true;
@@ -700,7 +732,7 @@ public class CtrlDatosFichero {
 	   File archivo = new File(realpath);
 	   boolean D = false, R = false;
 	   if(archivo.exists()){
-			   bufferH=getDataHospital(id);
+			   bufferH=getDataHospital(id,null);
 			   if(existsDoctors(id)){
 				   bufferD=getDataDoctors(id);
 				   D=true;
@@ -762,7 +794,7 @@ public class CtrlDatosFichero {
 	   File archivo = new File(realpath);
 	   boolean H = false, D =false, C=false, R = false;
 	   if(archivo.exists()){
-			   bufferH=getDataHospital(id);
+			   bufferH=getDataHospital(id,null);
 			   H =true;
 			   if(existsDoctors(id)){
 				   bufferD=getDataDoctors(id);

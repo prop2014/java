@@ -69,7 +69,7 @@ public class DriverCtrlDatosFichero {
 				num=teclado.nextInt();
 					if(inOut.existHospId(num)){
 						alhosp.clear();
-						alhosp=inOut.getDataHospital(num);
+						alhosp=inOut.getDataHospital(num,null);
 						if(!alhosp.isEmpty()){
 								System.out.print("Hospital Cargado Correctamente\n");
 							for(int i =0; i<alhosp.size()-1;++i){
@@ -198,7 +198,7 @@ public class DriverCtrlDatosFichero {
 			case 11: //ok
 					System.out.print("Igrese id Hosp\n");
 					num=teclado.nextInt();
-					alhosp=inOut.getDataHospital(num);
+					alhosp=inOut.getDataHospital(num,null);
 					inOut.saveDataHosp(alhosp, num);
 					System.out.print("Hospital guardado correctamente\n");
 					break;
