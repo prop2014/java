@@ -138,14 +138,14 @@ public class VistaCrearHospital {
 		btnCrearHospital.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nameHosp = nameHospTextField.getText();
-				nameHosp.replaceAll(" ", "%");
+				nameHosp=nameHosp.replaceAll(" ", "%");
 				Scanner sc1 = new Scanner(mTextField.getText());
 				Scanner sc2 = new Scanner(tTextField.getText());
 				Scanner sc3 = new Scanner(nTextField.getText());
 				Double factM, factT, factN;
 				factM = factT = factN = 0.0;
 				
-				if(sc1.hasNextDouble() && sc2.hasNextDouble() && sc3.hasNextDouble()) {
+				if(!nameHosp.isEmpty() && sc1.hasNextDouble() && sc2.hasNextDouble() && sc3.hasNextDouble()) {
 					factM = Double.parseDouble(mTextField.getText());
 					factT = Double.parseDouble(tTextField.getText());
 					factN = Double.parseDouble(nTextField.getText());
@@ -153,7 +153,7 @@ public class VistaCrearHospital {
 						ctrlPresentacion.crearHospital(nameHosp, factM, factT, factN);
 					} catch (IOException eX) {
 						System.out.printf("Hospital no creado");
-						JOptionPane.showMessageDialog(null, "alert", "alert",JOptionPane.WARNING_MESSAGE); 
+						JOptionPane.showMessageDialog(null, "Hospital no creado", "Error",JOptionPane.ERROR_MESSAGE); 
 					}
 				} else {
 					JOptionPane.showMessageDialog(null, "Alguno de los factores no es un valor correcto", "Error", JOptionPane.ERROR_MESSAGE); 
@@ -161,6 +161,7 @@ public class VistaCrearHospital {
 				sc1.close();
 				sc2.close();
 				sc3.close();
+				ctrlPresentacion.changeView("vistaCjtHospitales", panelContents);
 			}
 		});
 		

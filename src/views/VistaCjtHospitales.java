@@ -2,6 +2,7 @@ package views;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -136,7 +137,7 @@ public class VistaCjtHospitales {
 			public void actionPerformed(ActionEvent e) {
 					
 					Object[] options = {"Aceptar", "Cancelar"};
-					JOptionPane.showOptionDialog(null,
+					int returnVal = JOptionPane.showOptionDialog(null,
 							"Esta seguro de que quiere eliminar el Hospital?",
 						    "Alert",
 						    JOptionPane.YES_NO_CANCEL_OPTION,
@@ -144,7 +145,10 @@ public class VistaCjtHospitales {
 						    null,
 						    options,
 						    options[1]);
-					}
+						if(returnVal == JOptionPane.YES_NO_CANCEL_OPTION) {
+							//ctrlPresentacion.borrarHospital(list.getSelectedValue());
+						}
+				}
 				});
 		
 		btnImportarHospital.addActionListener(new ActionListener() {
@@ -152,8 +156,19 @@ public class VistaCjtHospitales {
 					JFileChooser chooser = new JFileChooser();
 					FileNameExtensionFilter filter = new FileNameExtensionFilter(
 					        "Text File (.txt)", "txt");
-					    chooser.setFileFilter(filter);
+					  //  chooser.setFileFilter(filter);
 					int returnVal = chooser.showOpenDialog(frameView);
+					File f = chooser.getSelectedFile();
+					if(returnVal == JFileChooser.APPROVE_OPTION) {
+						try{
+					       ctrlPresentacion.importarHospital(f.getAbsolutePath());
+					       loadHospitals();
+						} catch(IOException eX) {
+							JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
+
+						}
+					 }
+
 				
 			}
 		});
@@ -186,7 +201,9 @@ public class VistaCjtHospitales {
 	    	st = st.replace("%", " ");
 	         model.addElement(st);
 	    }    
-	    list.setModel(model);     
+	    list.setModel(model);  
+	    list.revalidate();
+		list.repaint();
 		
 	}
 	
@@ -215,6 +232,7 @@ public class VistaCjtHospitales {
 		panelContents.setVisible(false);
 	}
 	public void showPanel() {
+		loadHospitals();
 		panelContents.setVisible(true);
 	}
 	
