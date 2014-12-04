@@ -5,12 +5,16 @@ import javax.swing.border.EmptyBorder;
 import com.toedter.calendar.JDateChooser;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Vista secundaria de gestion de restricciones tipo MAXTurnosRango
  * @author Sergi Orra Genero
  */
 public class VistaMAXTurnosRango {
+	
+	private CtrlPresentacion ctrlPresentacion;
 	
 	private JFrame frameView = new JFrame("Programador de Guardias");
 	private JPanel panelContents = new JPanel();
@@ -39,17 +43,20 @@ public class VistaMAXTurnosRango {
 	// METODOS PRIVADOS
 	
 	private void inicializar_frameView() {
-	    // Tamanyo
-	    frameView.setMinimumSize(new Dimension(700,400));
-	    frameView.setPreferredSize(frameView.getMinimumSize());
-	    frameView.setResizable(false);
-	    // Posicion y operaciones por defecto
-	    frameView.setLocationRelativeTo(null);
-	    frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    // Se agrega panelContents al contentPane (el panelContents se
-	    // podria ahorrar y trabajar directamente sobre el contentPane)
-	    JPanel contentPane = (JPanel) frameView.getContentPane();
-	    contentPane.add(panelContents);
+		/*** DESCOMENTAR PARA EDITAR *
+		frameView =  new JFrame("Programador Guardias");
+		frameView.setMinimumSize(new Dimension(700, 400));
+		frameView.setPreferredSize(frameView.getMinimumSize());
+		frameView.setResizable(false);
+		frameView.setLocationRelativeTo(null);
+		frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frameView.getContentPane().setBackground(Color.WHITE);
+		/*** END DESCOMENTAR PARA EDITAR */
+		frameView = ctrlPresentacion.getFrame();
+		JPanel contentPane = (JPanel) frameView.getContentPane();
+		contentPane.setLayout(null);
+		panelContents.setBounds(0,0,700,378);
+		contentPane.add(panelContents);
 	}
 	
 	private void inicializar_panelContents() {
@@ -93,30 +100,48 @@ public class VistaMAXTurnosRango {
 	}
 
 	private void assignar_listenersComponents() {
+		buttonVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ctrlPresentacion.changeView("vistaRestriccion", panelContents);
+			}
+		});
 	}
 	
 	
 	//METODOS PUBLICOS
 	
-	public VistaMAXTurnosRango() {
+	public VistaMAXTurnosRango(CtrlPresentacion pCtrlPresentacion) {
+		ctrlPresentacion = pCtrlPresentacion;
+		/** DESCOMENTAR PARA EDITAR
+		 * inicializarComponents();
+		 */
+	}
+	
+	public void init() {
 		inicializarComponents();
 	}
 	
-	public void showView() {
-		frameView.setVisible(true);
+	public JPanel getPanel() {
+		return panelContents;
 	}
-
+	
+	public void hidePanel() {
+		panelContents.setVisible(false);
+	}
+	public void showPanel() {
+		panelContents.setVisible(true);
+	}
+	
+	public void showView() {
+		panelContents.setVisible(true);
+	}
+	
 	public void enableView() {
 		frameView.setEnabled(true);
 	}
-
+	
 	public void disableView() {
 		frameView.setEnabled(false);
-	}
-	
-	public static void main(String[] args) {
-		VistaMAXTurnosRango v = new VistaMAXTurnosRango();
-		v.showView();
 	}
 
 }

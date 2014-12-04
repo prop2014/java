@@ -16,7 +16,6 @@ public class CtrlPresentacion {
 
 	/* Atributos */
 	
-	
 	private JFrame frameView;
 	private CtrlHospital ctrlHospital;
 	private VistaCjtHospitales vistaCjtHospitales;
@@ -33,7 +32,7 @@ public class CtrlPresentacion {
 	private VistaNOTDiaSemana vistaNOTDiaSemana;
 	//private VistaNOTFecha vistaNOTFecha;
 	//private VistaXOR vistaXOR;
-	//private VistaMAXTurnosRango vistaMAXTurnosRango;
+	private VistaMAXTurnosRango vistaMAXTurnosRango;
 	
 	/* Constructora */
 	public CtrlPresentacion(){
@@ -53,7 +52,7 @@ public class CtrlPresentacion {
 		vistaNOTDiaSemana = new VistaNOTDiaSemana(this);
 		//vistaNOTFecha = new VistaNOTFecha(this);
 		//vistaXOR = new VistaXOR(this);
-		//vistaMAXTurnosRango = new VistaMAXTurnosRango(this);
+		vistaMAXTurnosRango = new VistaMAXTurnosRango(this);
 		
 	}
 	
@@ -90,7 +89,7 @@ public class CtrlPresentacion {
 		vistaNOTDiaSemana.init();
 		//vistaNOTFecha.init();
 		//vistaXOR.init();
-		//vistaMAXTurnosRango.init();
+		vistaMAXTurnosRango.init();
 		
 		vistaCjtHospitales.showView();
 		vistaGestion.hidePanel();
@@ -106,7 +105,7 @@ public class CtrlPresentacion {
 		vistaNOTDiaSemana.hidePanel();
 		//vistaNOTFecha.hidePanel();
 		//vistaXOR.hidePanel();
-		//vistaMAXTurnosRango.hidePanel();
+		vistaMAXTurnosRango.hidePanel();
 		
 		
 	}
@@ -202,12 +201,12 @@ public class CtrlPresentacion {
 		}
 		*/
 		
-		/*case "vistaMAXTurnosRango":{
+		case "vistaMAXTurnosRango":{
 		contentPane.add(vistaMAXTurnosRango.getPanel());
 		vistaMAXTurnosRango.showPanel();
 		break;
 		}
-		 */
+		 
 		
 	
 		}

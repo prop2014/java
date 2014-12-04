@@ -22,7 +22,6 @@ public class VistaRestriccion {
 	private JFrame frameView;
 	private JPanel panelContents = new JPanel();
 	private JPanel panelButtons = new JPanel();
-	private JPanel panelVolver = new JPanel();
 	private JPanel panelInfo = new JPanel();
 	
 	//Etiquetas
@@ -164,12 +163,12 @@ public class VistaRestriccion {
 			}
 		});
 		
-		/*buttonMAXTurnosRango.addActionListener(new ActionListener() {
+		buttonMAXTurnosRango.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ctrlPresentacion.changeView("vistaMAXTurnosRango", panelContents);
 			}
 		});
-		*/
+		
 		
 		/*buttonXOR.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -178,12 +177,12 @@ public class VistaRestriccion {
 		});
 		*/
 		
-		/*buttonNOTFecha.addActionListener(new ActionListener() {
+		buttonNOTFecha.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ctrlPresentacion.changeView("vistaNOTFecha", panelContents);
 			}
 		});
-		*/
+		
 		
 	}
 	
