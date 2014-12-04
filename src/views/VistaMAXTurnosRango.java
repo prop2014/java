@@ -75,7 +75,7 @@ public class VistaMAXTurnosRango {
 		dataChooser1.setBounds(340, 75, 150, 30);
 		dataChooser2.setBounds(340, 110, 150, 30);
 		textArea.setBounds(340, 152, 50, 16);
-		button.setBounds(510, 95, 150, 30);
+		button.setBounds(510, 110, 150, 30);
 		
 		buttonVolver.setBounds(40, 230, 150, 40);
 		panelButtons.setLayout(null);
