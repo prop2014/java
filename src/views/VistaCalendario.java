@@ -6,6 +6,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+
 //import javax.swing.table.DefaultTableModel;
 //import javax.swing.table.DefaultTableCellRenderer;
 //
@@ -15,21 +16,17 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import com.toedter.calendar.JDateChooser;
-import com.toedter.calendar.JCalendar;
 
 
 /**
  * Vista gestion de calendario
  * @author Felix Fernando Ramos Velazquez
  */
-public class VistaCalendario {
+public class VistaCalendario extends Vista {
 
 	/* Private attributes */
-	private CtrlPresentacion ctrlPresentacion;
 
 	//-- Containers --//
-	private JFrame frameView;
-	private JPanel panelContents = new JPanel();
 	private JPanel panelTop = new JPanel();
 	private JPanel panelBottom = new JPanel();
 	private JPanel panelCentral = new JPanel();
@@ -38,11 +35,11 @@ public class VistaCalendario {
 	private JButton buttonCreateCal = new JButton("Crear calendario");
 	private JButton buttonImportCal = new JButton("Importar calendario");
 	private JButton buttonDeleteCal = new JButton("Eliminar calendario");
-	private JButton buttonAddVacation = new JButton("Anadir dia");
+	private JButton buttonAddVacation = new JButton("Anadir dia");	
+//	private JButton buttonModVacation = new JButton("Modificar dia");
+//	private JButton buttonDelVacation = new JButton("Eliminar dia");
 	private JButton buttonGoBack = new JButton("Volver");
 	private JButton buttonHelp = new JButton("Ayuda");
-	private JButton buttonMod = new JButton("Modificar dia");
-	private JButton buttonDel = new JButton("Eliminar dia");
 
 	//-- Labels --//
 	private JLabel labelCalendar, labelVacationList1, labelVacationList2;
@@ -53,12 +50,7 @@ public class VistaCalendario {
 	private JDateChooser dateChooser = new JDateChooser("dd/MM/yyyy", "##/##/##", '_');
 
 	//-- Others private atributes--//
-	private static final int width = 700;	// anchura del panel contenedor
-	private static final int height = 400;	// altura del panel contenedor
 	private static final String pattern = "%7s%13d%11d%11d%-5s%s";	// patron de formato de lista dias vacacionales
-
-	// selected panelInfo
-	//	private int iPanelInfo; // provissional
 
 	/* Private Methods */
 
@@ -158,32 +150,15 @@ public class VistaCalendario {
 		// panel
 		panelBottom.setLayout(null);
 		panelBottom.setBounds(0, 315, width, 60);
-//		panelBottom.setBackground(Color.cyan);
-
 		// components
 		buttonGoBack.setBounds(20, 10, 150, 30);
 		buttonHelp.setBounds(365, 10, 150, 30);
-
 		panelBottom.add(buttonGoBack);
 		panelBottom.add(buttonHelp);
 	}
-
-	private void init_frameView() {
-		frameView = ctrlPresentacion.getFrame();
-		JPanel contentPane = (JPanel) frameView.getContentPane();
-		contentPane.setLayout(null);
-		panelContents.setBounds(0,0,width,height);
-		contentPane.add(panelContents);
-
-//		frameView.add(panelTop);
-//		frameView.add(panelCentral);
-//		frameView.add(panelBottom);
-
-
-	}
-	private void init_panelContents() {
+	
+	protected void init_panelContents() {
 		panelContents.setLayout(null);
-		// Componentes
 		panelContents.add(panelTop);
 		panelContents.add(panelCentral);
 		panelContents.add(panelBottom);
@@ -196,7 +171,7 @@ public class VistaCalendario {
 	}
 
 	/* Assigning listeners */	
-	private void assign_listenersComponents() {
+	protected void assign_listenersComponents() {
 
 		buttonGoBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -226,7 +201,7 @@ public class VistaCalendario {
 
 	/* Constructors & public methods */
 	public VistaCalendario(CtrlPresentacion pCtrlPresentacion) {
-		ctrlPresentacion = pCtrlPresentacion;
+		super(pCtrlPresentacion);
 	}
 	
 	public void init() {
@@ -236,29 +211,5 @@ public class VistaCalendario {
 		init_frameView();
 		init_panelContents();
 		assign_listenersComponents();
-	}
-	
-	public JPanel getPanel() {
-		return panelContents;
-	}
-	
-	public void showPanel() {
-		panelContents.setVisible(true);
-	}
-	
-	public void hidePanel() {
-		panelContents.setVisible(false);
-	}
-
-	public void showView() {
-		frameView.setVisible(true);
-	}
-
-	public void enableView() {
-		frameView.setEnabled(true);
-	}
-
-	public void disableView() {
-		frameView.setEnabled(false);
 	}
 }
