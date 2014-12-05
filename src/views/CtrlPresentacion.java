@@ -232,10 +232,12 @@ public class CtrlPresentacion {
 		ctrlHospital.importarHospital(path);
 	}
 	
+
+	
 	public void crearDoctor(String nameDoc, int idD, int maxTurnos, double sueldo) throws IOException{
 		//int idDoc = ctrlDoctor.getFDI();
 		try {
-			crtlDoctor.crearDoctor(nameDoc, idD, maxTurnos, sueldo);
+			ctrlHospital.crearDoctor(idD, nameDoc, maxTurnos, sueldo);
 		} catch (IOException e) {throw new IOException(e);}
 		//ctrlHospital.guardarHospital();
 	}
