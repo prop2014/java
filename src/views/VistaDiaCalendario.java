@@ -59,7 +59,7 @@ public class VistaDiaCalendario extends Vista {
 		//		labelCalendar.setForeground(Color.BLUE);
 		labelCalendar.setBounds(20, 10, 325, 30);
 
-//		panelTop.add(labelCalendar);
+		panelTop.add(labelCalendar);
 //		panelTop.add(buttonCreateCal);
 //		panelTop.add(buttonImportCal);
 //		panelTop.add(buttonDeleteCal);
@@ -110,7 +110,7 @@ public class VistaDiaCalendario extends Vista {
 		buttonHelp.setBounds(365, 10, 150, 30);
 
 		panelBottom.add(buttonGoBack);
-		panelBottom.add(buttonHelp);
+//		panelBottom.add(buttonHelp);
 	}
 
 	protected void init_panelContents() {
@@ -123,7 +123,7 @@ public class VistaDiaCalendario extends Vista {
 	
 	//	//************************************************//
 	//	/* Methods of the listener interfaces */
-	public void actionPerformed_buttonAddVacation (ActionEvent event) {
+	public void actionPerformed_buttonGoBack (ActionEvent event) {
 
 	}
 
@@ -132,16 +132,7 @@ public class VistaDiaCalendario extends Vista {
 
 		buttonGoBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ctrlPresentacion.changeView("VistaCalendario", panelContents);
-			}
-		});
-
-		
-		buttonAddVacation.addActionListener
-		(new ActionListener() {
-			public void actionPerformed (ActionEvent event) {
-
-				actionPerformed_buttonAddVacation(event);
+				ctrlPresentacion.changeView("vistaCalendario", panelContents);
 			}
 		});
 	}
@@ -151,5 +142,14 @@ public class VistaDiaCalendario extends Vista {
 	/* Constructors & public methods */
 	public VistaDiaCalendario(CtrlPresentacion pCtrlPresentacion) {
 		super(pCtrlPresentacion);
+	}
+	
+	public void init() {
+		init_panelTop();
+		init_panelCentral();
+		init_panelBottom();
+		init_frameView();
+		init_panelContents();
+		assign_listenersComponents();
 	}
 }

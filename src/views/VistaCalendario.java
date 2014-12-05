@@ -209,8 +209,16 @@ public class VistaCalendario extends Vista {
 
 		buttonAddVacation.addActionListener(new ActionListener() {
 			public void actionPerformed (ActionEvent e) {
-				if (!vacationList.isSelectionEmpty())
-					dlm.remove(vacationList.getSelectedIndex());
+
+			}
+		});
+		
+		buttonModVacation.addActionListener(new ActionListener() {
+			public void actionPerformed (ActionEvent e) {
+				if (!vacationList.isSelectionEmpty()) {
+					ctrlPresentacion.changeView("vistaDiaCalendario", panelContents);
+					vacationList.clearSelection();
+				}
 			}
 		});
 		

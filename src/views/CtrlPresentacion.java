@@ -85,6 +85,7 @@ public class CtrlPresentacion {
 		vistaPlantillaDoctores.init();
 		vistaDoctor.init();
 		vistaCalendario.init();
+		vistaDiaCalendario.init();
 		vistaRestriccion.init();
 		vistaMAXTurnosporDia.init();
 		vistaNOTTurno.init();
@@ -101,6 +102,7 @@ public class CtrlPresentacion {
 		vistaPlantillaDoctores.hidePanel();
 		vistaDoctor.hidePanel();
 		vistaCalendario.hidePanel();
+		vistaDiaCalendario.hidePanel();
 		vistaRestriccion.hidePanel();
 		vistaMAXTurnosporDia.hidePanel();
 		vistaNOTTurno.hidePanel();
@@ -149,13 +151,13 @@ public class CtrlPresentacion {
 			break;
 		}
 		
-		case "vistaCalendario":{
+		case "vistaCalendario": {
 			contentPane.add(vistaCalendario.getPanel());
 			vistaCalendario.showPanel();
 			break;
 		}
 		
-		case "vistaDiaCalendario":{
+		case "vistaDiaCalendario": {
 			contentPane.add(vistaDiaCalendario.getPanel());
 			vistaDiaCalendario.showPanel();
 			break;
