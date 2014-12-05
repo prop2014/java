@@ -136,11 +136,11 @@ public class VistaCalendario extends Vista {
 		dateChooser.setEnabled(true);
 		
 		buttonAddVacation.setBounds(525, 80, 150, 30);
-		buttonAddVacation.setEnabled(true);
+//		buttonAddVacation.setEnabled(true);
 		buttonModVacation.setBounds(525, 120, 150, 30);
-		buttonModVacation.setEnabled(false);
+//		buttonModVacation.setEnabled(false);
 		buttonDelVacation.setBounds(525, 160, 150, 30);
-		buttonDelVacation.setEnabled(false);
+//		buttonDelVacation.setEnabled(false);
 
 		panelCentral.add(scrollPanel);
 		panelCentral.add(labelVacationList1);
@@ -180,8 +180,6 @@ public class VistaCalendario extends Vista {
 	public void actionPerformed_buttonGoBack (ActionEvent event) {
 		ctrlPresentacion.changeView("vistaGestion", panelContents);
 		vacationList.clearSelection();
-		buttonModVacation.setEnabled(false);
-		buttonDelVacation.setEnabled(false);
 	}
 
 	/* Assigning listeners */	
@@ -208,12 +206,18 @@ public class VistaCalendario extends Vista {
 				chooser.showOpenDialog(frameView);
 			}
 		});
+
+		buttonAddVacation.addActionListener(new ActionListener() {
+			public void actionPerformed (ActionEvent e) {
+				if (!vacationList.isSelectionEmpty())
+					dlm.remove(vacationList.getSelectedIndex());
+			}
+		});
 		
 		buttonDelVacation.addActionListener(new ActionListener() {
 			public void actionPerformed (ActionEvent e) {
-				dlm.remove(vacationList.getSelectedIndex());
-				buttonModVacation.setEnabled(false);
-				buttonDelVacation.setEnabled(false);
+				if (!vacationList.isSelectionEmpty())
+					dlm.remove(vacationList.getSelectedIndex());
 			}
 		});
 	}
