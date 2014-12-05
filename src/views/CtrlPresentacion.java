@@ -25,6 +25,7 @@ public class CtrlPresentacion {
 	private VistaPlantillaDoctores vistaPlantillaDoctores;
 	private VistaDoctor vistaDoctor;
 	private VistaCalendario vistaCalendario;
+	private VistaDiaCalendario vistaDiaCalendario;
 	private VistaRestriccion vistaRestriccion;
 	private VistaMAXTurnosporDia vistaMAXTurnosporDia;
 	private VistaNOTTurno vistaNOTTurno;
@@ -46,6 +47,7 @@ public class CtrlPresentacion {
 		vistaPlantillaDoctores = new VistaPlantillaDoctores(this);
 		vistaDoctor = new VistaDoctor(this);
 		vistaCalendario = new VistaCalendario(this);
+		vistaDiaCalendario = new VistaDiaCalendario(this);
 		vistaRestriccion = new VistaRestriccion(this);
 		vistaMAXTurnosporDia = new VistaMAXTurnosporDia(this);
 		vistaNOTTurno = new VistaNOTTurno(this);
@@ -153,6 +155,12 @@ public class CtrlPresentacion {
 			break;
 		}
 		
+		case "vistaDiaCalendario":{
+			contentPane.add(vistaDiaCalendario.getPanel());
+			vistaDiaCalendario.showPanel();
+			break;
+		}
+		
 		case "vistaRestriccion": {
 			contentPane.add(vistaRestriccion.getPanel());
 			vistaRestriccion.showPanel();
@@ -237,8 +245,6 @@ public class CtrlPresentacion {
 	public void importarHospital(String path) throws IOException{
 		ctrlHospital.importarHospital(path);
 	}
-	
-
 	
 	public void crearDoctor(String nameDoc, int idD, int maxTurnos, double sueldo) throws IOException{
 		try {
