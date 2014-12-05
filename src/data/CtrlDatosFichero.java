@@ -86,6 +86,48 @@ public class CtrlDatosFichero {
 			   
 		   return alIdHosp;
 	   }
+	 
+	 
+	 
+	 
+	 public ArrayList<Integer> getIdRestrictions(int idHosp,int idDoc)throws IOException{
+		 ArrayList<Integer> idRestrictions =new ArrayList<Integer>();
+		 
+		 String num = Integer.toString(idHosp);
+	   		String path = new File("").getAbsolutePath();
+	   		String realpath = path+ "/datos/Hospital";
+	   		File archivo = new File(realpath+num);
+	   		try{
+	   			FileReader fr = new FileReader (archivo);
+	   		
+	   			BufferedReader br = new BufferedReader(fr);
+	   			String linea;
+	   			String word;
+	   			while((linea=br.readLine())!=null){
+	   				Scanner sl = new Scanner(linea);
+	   				if(sl.hasNext()){
+	   					word=sl.next();
+	   					if(word.equals(".R")){
+	   						while(sl.hasNext()){
+			   					int iddoc = sl.nextInt();
+			   					if(iddoc==idDoc){
+			   						
+				   					int numRes = sl.nextInt();
+				   					
+				   					for(int j=0;j<numRes;++j){
+				   						
+				   					
+				   					}
+			   					}//fiif ==
+		   					}
+	   					}
+	   				}
+	   				sl.close();
+	   			}
+	   			br.close();
+	   		}catch(Exception e) {e.printStackTrace();}
+		 return idRestrictions;
+	 }
 	
 	 
 	/**

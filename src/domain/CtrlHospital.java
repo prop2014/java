@@ -181,7 +181,7 @@ public class CtrlHospital {
 	 * @throws IOE
 	 */
 	public Integer getFDIRes() throws IOException {
-		ArrayList<Integer> ids = inOut.getIdRestriction();
+		ArrayList<Integer> ids = inOut.getIdRestrictions();
 		for(int i=0; i< ids.size();++i){
 			if(i!=ids.get(i)){
 				return i;
