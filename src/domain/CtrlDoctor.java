@@ -539,6 +539,89 @@ public class CtrlDoctor {
 		return null;
 	}
 	
+	public void saveDataRes(int id)throws IOException{
+		ArrayList<String> alRes = new ArrayList<String>();
+			for(int i=0;i<Doctors.size();++i){
+				int idDoc=Doctors.get(i).getId();
+				if(!Doctors.get(i).isREmpty()){
+					alRes.add(Integer.toString(idDoc));
+					ArrayList<Restriccion> Res = Doctors.get(i).getRestrictions();
+					int numRes=Res.size();
+					alRes.add(Integer.toString(numRes));
+					for(int j=0;j<numRes;++j){
+						alRes.add(Integer.toString(Res.get(j).getIdRestriccion()));
+						alRes.add(Res.get(j).getTipo()); // ok vamos a ver kual es
+						if(Res.get(j).getTipo().equals("NOT_Turno")){
+							++i;
+							NOT_Turno N = (NOT_Turno)Res.get(j);
+							alRes.add(N.getTipoTurno());
+						}
+						else if(Res.get(j).getTipo().equals("NOT_Fecha")){
+							int d=0,m=0,a=0;
+							NOT_Fecha N = (NOT_Fecha)Res.get(j);
+							d=N.getFecha().DAY_OF_MONTH;
+							m=N.getFecha().MONTH;
+							a=N.getFecha().YEAR;
+							alRes.add(Integer.toString(d));
+							alRes.add(Integer.toString(m));
+							alRes.add(Integer.toString(a));
+							
+						}
+						else if(Res.get(j).getTipo().equals("NOT_Especial")){
+							NOT_Especial N = (NOT_Especial)Res.get(j);
+							alRes.add(N.getEspecial());
+						}
+						else if(Res.get(j).getTipo().equals("NOT_Dia_Semana")){
+							NOT_Dia_Semana N = (NOT_Dia_Semana)Res.get(j);
+							alRes.add(N.getDiaSemana());
+						}
+						else if(Res.get(j).getTipo().equals("NOT_Dia_Mes")){
+							++i;
+							NOT_Dia_Mes N = (NOT_Dia_Mes)Res.get(j);
+							alRes.add(Integer.toString(N.getDiaMes()));
+						}
+						
+						else if(Res.get(j).getTipo().equals("MAX_Turnos_Rango")){
+							int d1=0,m1=0,a1=0,d2=0,m2=0,a2=0;
+							MAX_Turnos_Rango N = (MAX_Turnos_Rango)Res.get(j);
+							d1=N.getFechaIni().DAY_OF_MONTH;
+							m1=N.getFechaIni().MONTH;
+							a1=N.getFechaIni().YEAR;
+							d2=N.getFechaFin().DAY_OF_MONTH;
+							m2=N.getFechaFin().MONTH;
+							a2=N.getFechaFin().YEAR;
+							alRes.add(Integer.toString(d1));
+							alRes.add(Integer.toString(m1));
+							alRes.add(Integer.toString(a1));
+							alRes.add(Integer.toString(d2));
+							alRes.add(Integer.toString(m2));
+							alRes.add(Integer.toString(a2));
+							alRes.add(Integer.toString(N.getNumDias()));
+						}
+						else if(Res.get(j).getTipo().equals("MAX_Turnos_por_Dia")){
+							MAX_Turnos_por_Dia N = (MAX_Turnos_por_Dia)Res.get(j);
+							alRes.add(Integer.toString(N.getNumTurnos()));
+						}
+						else if(Res.get(j).getTipo().equals("XOR")){
+							XOR N = (XOR)Res.get(j);
+							ArrayList<Turno> alTurn=N.getListTurnos();
+							alRes.add(Integer.toString(alTurn.size()));
+							for(int k=0;k<alTurn.size();++k){
+								Turno t=alTurn.get(k);
+								alRes.add(Integer.toString(t.getDate().DAY_OF_MONTH));
+								alRes.add(Integer.toString(t.getDate().MONTH));
+								alRes.add(Integer.toString(t.getDate().YEAR));
+								alRes.add(t.getShiftType());
+							}
+						}
+					}
+				}
+			}
+		CtrlDatosFichero inOut = new CtrlDatosFichero();
+		inOut.saveDataRes(alRes, id);
+	}
+	
+	
 	public void addResData(int id)throws IOException{
 		CtrlDatosFichero inOut = new CtrlDatosFichero();
 		ArrayList<String> alRes = inOut.getDataRes(id);
@@ -546,6 +629,7 @@ public class CtrlDoctor {
 		for(int i=0;i<alRes.size();++i){
 			int NumRes, idRes;
 			idDoc=Integer.parseInt(alRes.get(i));
+			++i;
 			NumRes=Integer.parseInt(alRes.get(i));
 			for(int j=0; j<NumRes;++j){
 				++i;
@@ -609,6 +693,17 @@ public class CtrlDoctor {
 					ArrayList<Integer> mesXOR = new ArrayList<Integer>();
 					ArrayList<Integer> yearXOR = new ArrayList<Integer>();
 					ArrayList<String> tipoTurnoXOR = new ArrayList<String>();
+					for(int k=0;k<numdays;++k){
+						++i;
+						diaXOR.add(Integer.parseInt(alRes.get(i)));
+						++i;
+						mesXOR.add(Integer.parseInt(alRes.get(i)));
+						++i;
+						yearXOR.add(Integer.parseInt(alRes.get(i)));
+						++i;
+						tipoTurnoXOR.add(alRes.get(i));
+					}
+					++i;
 					addResXOR(idDoc,idRes,diaXOR,mesXOR,yearXOR,tipoTurnoXOR);
 				}
 			}

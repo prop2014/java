@@ -324,9 +324,9 @@ public class CtrlHospital {
 		//deleteDoctorData(id)?
 	}
 	
-	public void asignarCalendario(Calendario cal) {
+	//public void asignarCalendario(Calendario cal) {
 		//updateHospitalData()?
-	}
+//	}
 	public void saveDataHosp()throws IOException{
 		ArrayList<String> alhosp = new ArrayList<String>();
 			alhosp.add(Integer.toString(hosp.getId()));

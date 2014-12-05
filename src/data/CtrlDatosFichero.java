@@ -196,6 +196,7 @@ public class CtrlDatosFichero {
 	 public ArrayList<String> getDataCale (int id)throws IOException {
 		 	ArrayList<String> alhosp = new ArrayList<String>();
 		 	try{
+		 		System.out.print("entru almens\n");
 		   		String num = Integer.toString(id);
 		   		String path = new File("").getAbsolutePath();
 		   		String realpath = path+ "/datos/Hospital";
@@ -206,7 +207,7 @@ public class CtrlDatosFichero {
 		   		String linea;
 		   		boolean exists=false;
 		   		String word;
-		   		while((linea=br.readLine())!=null & !exists){
+		   		while((linea=br.readLine())!=null && !exists){
 			   		Scanner sl = new Scanner(linea);
 			   		if(sl.hasNext()){
 				   		word=sl.next();

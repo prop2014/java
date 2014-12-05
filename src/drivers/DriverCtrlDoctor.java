@@ -1,6 +1,7 @@
 package drivers;
 import model.*;
 import domain.*;
+import data.CtrlDatosFichero;
 
 import java.util.GregorianCalendar;
 import java.util.Scanner;
@@ -12,7 +13,7 @@ public class DriverCtrlDoctor {
 
 	private static void mostrarOpciones() {
 		System.out.print("-----------------------------------------------\n");
-		System.out.print("¿Que desea hacer?\n");
+		System.out.print("ï¿½Que desea hacer?\n");
 		System.out.print("0: Salir\n");
 		System.out.print("1: Consultar Doctor\n");
 		System.out.print("2: Modificar Doctor\n");
@@ -26,6 +27,7 @@ public class DriverCtrlDoctor {
 		System.out.print("10: Anadir restriccion tipo XOR\n");
 		System.out.print("11: Eliminar restriccion\n");
 		System.out.print("12: Consultar restricciones Doctor\n");
+		System.out.print("13: SaveDataRes\n");
 		System.out.print("-----------------------------------------------\n\n");
 	}
 	
@@ -288,6 +290,23 @@ public class DriverCtrlDoctor {
 					
 				} catch (IOException e) { System.out.println(e); }
 			}
+			else if(opcion == 13){
+				System.out.print("ingrese id hosp:\n");
+				int id = teclado.nextInt();
+				Integer num=id;
+				CtrlHospital Ho = new CtrlHospital();
+				Ho.cargarHospital(num);
+				Ho.getDataDoctors(id);
+				System.out.print("HospitalCargat\n");
+				CtrlCalendario cal= new CtrlCalendario(Ho.getCalendar());
+				System.out.print("cargu el calendari\n");
+				System.out.print("cargu el calendar de data\n");
+				CtrlDoctor s = new CtrlDoctor(Ho.getDoctors(),cal.getCalendarYear());
+				s.addResData(id);
+				System.out.print("OOuyeah\n");
+				s.saveDataRes(id);
+				System.out.print("Fet\n");
+			}	
 			mostrarOpciones();
 			opcion = teclado.nextInt();
 		}

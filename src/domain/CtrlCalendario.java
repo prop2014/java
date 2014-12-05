@@ -34,7 +34,10 @@ public class CtrlCalendario {
 	 * @throws IOException fichero incorrecto
 	 */
 	public void getDataCalendar (int id) throws IOException{
-		ArrayList<String> alcale = inOut.getDataCale(id);
+		ArrayList<String> alcale =new ArrayList<String>();
+		if(inOut.existsCalendar(id)){
+			alcale=inOut.getDataCale(id);
+		}
 		if(!alcale.isEmpty()){
 			int year = Integer.parseInt(alcale.get(0));
 			int size=Integer.parseInt(alcale.get(1));
