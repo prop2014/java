@@ -294,13 +294,17 @@ public class DriverCtrlDoctor {
 				System.out.print("ingrese id hosp:\n");
 				int id = teclado.nextInt();
 				Integer num=id;
+				CtrlDatosFichero inOut = new CtrlDatosFichero();
 				CtrlHospital Ho = new CtrlHospital();
 				Ho.cargarHospital(num);
 				Ho.getDataDoctors(id);
+				int year=inOut.getYear(id,null);
+				Ho.addCalendar(year);
 				System.out.print("HospitalCargat\n");
 				CtrlCalendario cal= new CtrlCalendario(Ho.getCalendar());
 				System.out.print("cargu el calendari\n");
-				System.out.print("cargu el calendar de data\n");
+				cal.getDataCalendar(id);
+				System.out.printf("cargu el calendar de data %d\n",cal.getCalendarYear());
 				CtrlDoctor s = new CtrlDoctor(Ho.getDoctors(),cal.getCalendarYear());
 				s.addResData(id);
 				System.out.print("OOuyeah\n");

@@ -338,6 +338,41 @@ public class CtrlDatosFichero {
 		 return alhosp;
 	   }
 	 
+	public int getYear(int id,String Path) throws IOException{
+		int year=-1;
+		
+		File archivo;
+ 		if(Path==null){
+ 			String num = Integer.toString(id);
+	   		String path = new File("").getAbsolutePath();
+	   		String realpath = path+ "/datos/Hospital";
+	   		archivo = new File(realpath+num);
+ 		}
+ 		else{
+ 			archivo = new File(Path);
+ 			
+ 		}
+		if(!archivo.exists()) throw new IOException("No Existe Este fichero");
+		try{
+			FileReader fr = new FileReader (archivo);
+			BufferedReader br = new BufferedReader(fr);
+			String linea;
+   			String word;
+   			while((linea=br.readLine())!=null){
+		   		Scanner sl = new Scanner(linea);
+		   		if(sl.hasNext()){
+			   		word=sl.next();
+			   		if(word.equals(".C")){
+			   			year = sl.nextInt();
+   					}
+   				sl.close();
+		   		}
+		   	}
+   			br.close();
+		}catch(Exception e) {e.printStackTrace();}
+		if(year<0)throw new IOException("id Negativo");
+		return year;
+	}
 	 
 	public int getId(String Path)throws IOException{
 		int id=-1;
@@ -373,6 +408,7 @@ public class CtrlDatosFichero {
 	 
 	 public boolean existsCalendar(int id) throws IOException{
 		 boolean exists=false;
+		 System.out.print("kepasatio\n");
 		 try{
 		   		String num = Integer.toString(id);
 		   		String path = new File("").getAbsolutePath();
