@@ -47,6 +47,7 @@ public class CtrlPresentacion {
 		vistaPlantillaDoctores = new VistaPlantillaDoctores(this);
 		vistaDoctor = new VistaDoctor(this);
 		vistaCalendario = new VistaCalendario(this);
+		vistaDiaCalendario = new VistaDiaCalendario(this);
 		vistaRestriccion = new VistaRestriccion(this);
 		vistaMAXTurnosporDia = new VistaMAXTurnosporDia(this);
 		vistaNOTTurno = new VistaNOTTurno(this);
