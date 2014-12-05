@@ -4,16 +4,16 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
+import javax.swing.event.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
 
 //import javax.swing.table.DefaultTableModel;
 //import javax.swing.table.DefaultTableCellRenderer;
 //
 //import java.util.Date;
 //import java.util.Formatter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+//import java.text.ParseException;
+//import java.text.SimpleDateFormat;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -36,8 +36,8 @@ public class VistaCalendario extends Vista {
 	private JButton buttonImportCal = new JButton("Importar calendario");
 	private JButton buttonDeleteCal = new JButton("Eliminar calendario");
 	private JButton buttonAddVacation = new JButton("Anadir dia");	
-//	private JButton buttonModVacation = new JButton("Modificar dia");
-//	private JButton buttonDelVacation = new JButton("Eliminar dia");
+	private JButton buttonModVacation = new JButton("Modificar dia");
+	private JButton buttonDelVacation = new JButton("Eliminar dia");
 	private JButton buttonGoBack = new JButton("Volver");
 	private JButton buttonHelp = new JButton("Ayuda");
 
@@ -50,7 +50,7 @@ public class VistaCalendario extends Vista {
 	private JDateChooser dateChooser = new JDateChooser("dd/MM/yyyy", "##/##/##", '_');
 
 	//-- Others private atributes--//
-	private static final String pattern = "%7s%13d%11d%11d%-5s%s";	// patron de formato de lista dias vacacionales
+	private static final String pattern = "%7s%13d%11d%11d%-5s%s";	// patron formato lista dias vacacionales
 
 	/* Private Methods */
 
@@ -125,6 +125,7 @@ public class VistaCalendario extends Vista {
 		dlm.addElement(String.format(pattern, "31-dic",45,60,98,"","noche vieja"));
 
 		vacationList = new JList<String>(dlm);
+		vacationList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION );
 		vacationList.setFont(new Font("Courier", Font.BOLD,14));
 		scrollPanel = new JScrollPane(vacationList);
 		scrollPanel.setBounds(20, 50, 495, 211);
@@ -136,6 +137,10 @@ public class VistaCalendario extends Vista {
 		
 		buttonAddVacation.setBounds(525, 80, 150, 30);
 		buttonAddVacation.setEnabled(true);
+		buttonModVacation.setBounds(525, 120, 150, 30);
+		buttonModVacation.setEnabled(false);
+		buttonDelVacation.setBounds(525, 160, 150, 30);
+		buttonDelVacation.setEnabled(false);
 
 		panelCentral.add(scrollPanel);
 		panelCentral.add(labelVacationList1);
@@ -144,6 +149,8 @@ public class VistaCalendario extends Vista {
 		
 		panelCentral.add(dateChooser);
 		panelCentral.add(buttonAddVacation);
+		panelCentral.add(buttonModVacation);
+		panelCentral.add(buttonDelVacation);
 	}
 
 	private void init_panelBottom() {
@@ -166,16 +173,30 @@ public class VistaCalendario extends Vista {
 	
 	//	//************************************************//
 	//	/* Methods of the listener interfaces */
-	public void actionPerformed_buttonAddVacation (ActionEvent event) {
+	public void actionPerformed_buttonDelVacation (ActionEvent event) {
+//		dlm.remove(vacationList.getSelectedIndex());
+	}
 
+	public void actionPerformed_buttonGoBack (ActionEvent event) {
+		ctrlPresentacion.changeView("vistaGestion", panelContents);
+		vacationList.clearSelection();
+		buttonModVacation.setEnabled(false);
+		buttonDelVacation.setEnabled(false);
 	}
 
 	/* Assigning listeners */	
 	protected void assign_listenersComponents() {
+		
+		vacationList.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				buttonModVacation.setEnabled(true);
+				buttonDelVacation.setEnabled(true);
+			}
+		});
 
 		buttonGoBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ctrlPresentacion.changeView("vistaGestion", panelContents);
+				actionPerformed_buttonGoBack (e);
 			}
 		});
 
@@ -188,11 +209,11 @@ public class VistaCalendario extends Vista {
 			}
 		});
 		
-		buttonAddVacation.addActionListener
-		(new ActionListener() {
-			public void actionPerformed (ActionEvent event) {
-
-				actionPerformed_buttonAddVacation(event);
+		buttonDelVacation.addActionListener(new ActionListener() {
+			public void actionPerformed (ActionEvent e) {
+				dlm.remove(vacationList.getSelectedIndex());
+				buttonModVacation.setEnabled(false);
+				buttonDelVacation.setEnabled(false);
 			}
 		});
 	}
