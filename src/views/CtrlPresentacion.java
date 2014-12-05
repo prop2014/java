@@ -39,6 +39,7 @@ public class CtrlPresentacion {
 	public CtrlPresentacion(){
 		init_frameView();
 		ctrlHospital = new CtrlHospital();
+		crtlDoctor = new CtrlDoctor();
 		vistaCjtHospitales = new VistaCjtHospitales(this);
 		vistaCrearHospital = new VistaCrearHospital(this);
 		vistaGestion = new VistaGestion(this);
@@ -220,6 +221,11 @@ public class CtrlPresentacion {
 		return ctrlHospital.verHospitales();
 	}
 	
+	public ArrayList<String> loadDoctores() throws IOException {
+		return ctrlHospital.verDoctores();
+		
+	}
+	
 	public void crearHospital(String nameHosp, Double factM, Double factT, Double factN) throws IOException{
 		int idHosp = ctrlHospital.getFDI();
 		try {
@@ -232,12 +238,13 @@ public class CtrlPresentacion {
 		ctrlHospital.importarHospital(path);
 	}
 	
+
+	
 	public void crearDoctor(String nameDoc, int idD, int maxTurnos, double sueldo) throws IOException{
-		//int idDoc = ctrlDoctor.getFDI();
 		try {
-			crtlDoctor.crearDoctor(nameDoc, idD, maxTurnos, sueldo);
+			ctrlHospital.crearDoctor(idD, nameDoc, maxTurnos, sueldo);
 		} catch (IOException e) {throw new IOException(e);}
-		//ctrlHospital.guardarHospital();
+		//ctrlHospital.guardarDoctor();
 	}
 	
 	
