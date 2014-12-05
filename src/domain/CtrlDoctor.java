@@ -173,6 +173,39 @@ public class CtrlDoctor {
 		return null;
 	}
 	
+	public ArrayList<Integer> getIdsRestrictions(){
+		ArrayList<Integer> ids = new ArrayList<Integer>();
+		for(Doctor doc : Doctors){
+			ArrayList<Restriccion>Res=doc.getRestrictions();
+			for(Restriccion res: Res){
+				ids.add(res.getIdRestriccion());
+			}
+		}
+		return ids;
+	}
+	
+	/**
+	 * 
+	 * @return return el primer id disponible de las restricciones
+	 * @throws IOE
+	 */
+	public Integer getFDIRes() throws IOException {
+		ArrayList<Integer> ids = getIdsRestrictions();
+		 Collections.sort(ids, new Comparator<Integer>() 
+		            { public int compare(Integer p, Integer q)
+		            {
+			            if(p > q) return 1;
+			            if(p < q) return -1;
+		                return 0;
+		            }
+		            } );
+		for(int i=0; i< Doctors.size();++i){
+			if(i!=ids.get(i)){
+				return i;
+			}
+		}
+		return ids.size();
+	}
 	
 	/**
 	* Consultora del numero maximo de turnos que se trabaja por dia de la Restriccion MAX_Turnos_por_Dia
