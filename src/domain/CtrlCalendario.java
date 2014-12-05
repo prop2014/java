@@ -18,7 +18,6 @@ import data.CtrlDatosFichero;
 public class CtrlCalendario {
 	private Calendario calendar;
 	private static final String[] shiftTypes = {"manana","tarde","noche"};
-	private CtrlDatosFichero inOut;
 	//-- Constructora --//
 	/**
 	 * Constructora por defecto
@@ -35,8 +34,12 @@ public class CtrlCalendario {
 	 */
 	public void getDataCalendar (int id) throws IOException{
 		ArrayList<String> alcale =new ArrayList<String>();
+		Integer num = id;
+		System.out.print("entru\n");
+		CtrlDatosFichero inOut = new CtrlDatosFichero();
 		if(inOut.existsCalendar(id)){
-			alcale=inOut.getDataCale(id);
+			System.out.print("entru2\n");
+			alcale=inOut.getDataCale(num);
 		}
 		if(!alcale.isEmpty()){
 			int year = Integer.parseInt(alcale.get(0));
@@ -197,6 +200,7 @@ public class CtrlCalendario {
 	   			alcal.add(especialn);
 	   		}
 		}
+		CtrlDatosFichero inOut = new CtrlDatosFichero();
 		inOut.saveDataCale(alcal, id);
     }
 	

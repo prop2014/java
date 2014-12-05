@@ -23,7 +23,8 @@ public class Calendario {
 	 * Constructora por defecto
 	 */
 	public Calendario() {
-		vacationDates= null;
+		calendarYear=-1;
+		vacationDates = new TreeMap<Integer,Turno[]>();
 	}
 
 	/**
@@ -34,6 +35,8 @@ public class Calendario {
 		calendarYear = year;
 		vacationDates = new TreeMap<Integer,Turno[]>();
 	}
+	
+	
 	/**
 	 * Constructora copia 
 	 * @param calendar Calendario que se copiara

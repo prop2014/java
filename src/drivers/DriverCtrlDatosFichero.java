@@ -24,6 +24,7 @@ public class DriverCtrlDatosFichero {
 		System.out.print("13: saveDataCalendar\n");
 		System.out.print("14: saveDataRes\n");
 		System.out.print("15: removepart\n");
+		System.out.print("16: getYear\n");
 		System.out.print("0: Salir\n");
 	}
 
@@ -248,6 +249,12 @@ public class DriverCtrlDatosFichero {
 				inOut.removePart(num,s);
 				System.out.print("Se ha eliminado el contenido\n");
 				break;
+				
+			case 16:
+				System.out.print("Ingrese el id del hospital para ver el anyo\n");
+				num=teclado.nextInt();
+				int year=inOut.getYear(num,null);
+				System.out.printf("year: %d\n",year);
 				default:break;
 			}
 			muestraOpciones();

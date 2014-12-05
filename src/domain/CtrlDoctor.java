@@ -36,17 +36,6 @@ public class CtrlDoctor {
 		yearCalendario = cal;
 	}
 	
-	/*if(!aldocs.isEmpty()){
-	int size = Integer.parseInt(aldocs.get(0));
-	int idDoc,numMaxTurnos;
-	String name;
-	double SueldoTurno;
-		int j = 0;
-	for(int i=0;i<size;++i){}
-	
-	
-	
-	}*/
 	
 	
 /* Metodos publicos */
