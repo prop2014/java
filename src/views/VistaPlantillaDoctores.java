@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.Scanner;
 
 import javax.swing.border.EmptyBorder;
 
@@ -133,6 +135,12 @@ import javax.swing.border.EmptyBorder;
 
 
 		private void assignar_listenersComponents() {
+			
+		
+			
+			
+			
+			
 			buttonVolver.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					ctrlPresentacion.changeView("vistaGestion",panelContents);
@@ -164,6 +172,10 @@ import javax.swing.border.EmptyBorder;
 					    options[1]);
 				}
 			});
+			
+			
+
+			
 			
 			
 		}
