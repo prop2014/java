@@ -56,6 +56,12 @@ public class CtrlHospital {
 		}
 	}
 	
+	public ArrayList<String> verDoctores() throws IOException {
+		return hosp.verDoctores();
+	}
+	
+	
+	
 	/**
 	 * obtiene los datos basicos del Hospital(no doctores ni calendario)
 	 * @param id identificador del Hospital
@@ -397,7 +403,14 @@ public class CtrlHospital {
 		saveDataHosp();
 		if(!hosp.isDocEmpty()) saveDataDoctors();
 		if(!hosp.isCaleEmpty()) saveDataCale(hosp.getId());
-	}/*
+	}
+	
+	
+	
+	
+	
+	
+	/*
 		int i =0;
 		alhosp.add(i,Integer.toString(hosp.getId()));
 		++i;

@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.swing.border.EmptyBorder;
@@ -20,6 +21,7 @@ import javax.swing.border.EmptyBorder;
 	public class VistaPlantillaDoctores {
 		
 		private CtrlPresentacion ctrlPresentacion;
+		private ArrayList<String> doctores;
 		
 		//Componentes interficie
 		private JFrame frameView;
@@ -109,15 +111,7 @@ import javax.swing.border.EmptyBorder;
 			panelCenterButtons.add(scrollPanel);
 			scrollPanel.setViewportView(list);
 			list.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-			list.setModel(new AbstractListModel() {
-				String[] values = new String[] {"Dr. Cooper", "Dr. Nick", "Dr. Pelaez" ,"Dr. Perez"};
-				public int getSize() {
-					return values.length;
-				}
-				public Object getElementAt(int index) {
-					return values[index];
-				}
-			});
+			
 			panelCenterButtons.add(labelPanel1);
 			panelCenterButtons.add(buttonVolver);
 			panelCenterButtons.add(buttonEliminar);
@@ -180,6 +174,27 @@ import javax.swing.border.EmptyBorder;
 			
 		}
 		
+		private void loadDoctores() {
+			doctores = new ArrayList<String>();
+			try {
+				doctores = ctrlPresentacion.loadDoctores();
+			} catch (IOException e) {
+				doctores.add("No doctores disponibles");
+			}
+			
+			DefaultListModel<String> model = new DefaultListModel<String>();
+		    for(String st : doctores){
+		    	st = st.replace("%", " ");
+		         model.addElement(st);
+		    }    
+		    list.setModel(model);  
+		    list.revalidate();
+			list.repaint();
+			
+		}
+		
+		
+		
 		
 		//METODOS PUBLICOS
 		
@@ -195,6 +210,7 @@ import javax.swing.border.EmptyBorder;
 		
 		
 		public void init() {
+			loadDoctores();
 			inicializarComponents();
 		}
 		
@@ -206,6 +222,7 @@ import javax.swing.border.EmptyBorder;
 			panelContents.setVisible(false);
 		}
 		public void showPanel() {
+			loadDoctores();
 			panelContents.setVisible(true);
 		}
 		

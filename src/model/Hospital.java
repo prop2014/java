@@ -1,4 +1,5 @@
 package model;
+import java.io.IOException;
 import java.util.*;
 
 import model.Calendario;
@@ -312,6 +313,14 @@ public class Hospital {
 		factorN=0.0;
 		doctors = new ArrayList<Doctor>();
 		calendari = new Calendario(0);
+	}
+	
+	public ArrayList<String> verDoctores() throws IOException {
+		ArrayList<String> docName = new ArrayList<String>();
+		for(Doctor doc: doctors){
+			docName.add(doc.getName());
+		}
+		return docName;
 	}
 	
 }
