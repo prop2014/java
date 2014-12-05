@@ -5,6 +5,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Scanner;
 
 /**
  * Vista secundaria de gestion de restricciones tipo NOT Dia Mes
@@ -92,6 +93,19 @@ public class VistaNOTDiaMes {
 				ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 			}
 		});
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Scanner sc1 = new Scanner(textArea.getText());
+				int dia;
+				if (!sc1.hasNextInt()) {
+					JOptionPane.showMessageDialog(null, "Valor del dia incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				else {
+					dia = Integer.parseInt(textArea.getText());
+				}
+				sc1.close();
+			}
+		});	
 	}
 	
 	
