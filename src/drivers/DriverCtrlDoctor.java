@@ -28,6 +28,8 @@ public class DriverCtrlDoctor {
 		System.out.print("11: Eliminar restriccion\n");
 		System.out.print("12: Consultar restricciones Doctor\n");
 		System.out.print("13: SaveDataRes\n");
+		System.out.print("14: getFDIdocs\n");
+		System.out.print("15: getFDIRes\n");
 		System.out.print("-----------------------------------------------\n\n");
 	}
 	
@@ -310,7 +312,50 @@ public class DriverCtrlDoctor {
 				System.out.print("OOuyeah\n");
 				s.saveDataRes(id);
 				System.out.print("Fet\n");
-			}	
+			}
+			else if(opcion==14){
+				System.out.print("ingrese id hosp:\n");
+				int id = teclado.nextInt();
+				Integer num=id;
+				CtrlDatosFichero inOut = new CtrlDatosFichero();
+				CtrlHospital Ho = new CtrlHospital();
+				Ho.cargarHospital(num);
+				Ho.getDataDoctors(id);
+				int year=inOut.getYear(id,null);
+				Ho.addCalendar(year);
+				System.out.print("HospitalCargat\n");
+				CtrlCalendario cal= new CtrlCalendario(Ho.getCalendar());
+				System.out.print("cargu el calendari\n");
+				cal.getDataCalendar(id);
+				Ho.getDataDoctors(id);
+				System.out.printf("cargu el calendar de data %d\n",cal.getCalendarYear());
+				CtrlDoctor s = new CtrlDoctor(Ho.getDoctors(),cal.getCalendarYear());
+				s.addResData(id);
+				System.out.printf("El primer doctor lliure es: %d\n",s.getFDIdocs());
+			}
+			else if(opcion==15){
+				System.out.print("ingrese id hosp:\n");
+				int id = teclado.nextInt();
+				Integer num=id;
+				CtrlDatosFichero inOut = new CtrlDatosFichero();
+				CtrlHospital Ho = new CtrlHospital();
+				Ho.cargarHospital(num);
+				Ho.getDataDoctors(id);
+				int year=inOut.getYear(id,null);
+				Ho.addCalendar(year);
+				System.out.print("HospitalCargat\n");
+				CtrlCalendario cal= new CtrlCalendario(Ho.getCalendar());
+				System.out.print("cargu el calendari\n");
+				cal.getDataCalendar(id);
+				Ho.getDataDoctors(id);
+				System.out.printf("cargu el calendar de data %d\n",cal.getCalendarYear());
+				CtrlDoctor s = new CtrlDoctor(Ho.getDoctors(),cal.getCalendarYear());
+				s.addResData(id);
+				System.out.print("ingrese el id del doctor:\n");
+				int ne=teclado.nextInt();
+				System.out.printf("la primera res lliure es: %d\n",s.getFDIRes(ne));
+				
+			}
 			mostrarOpciones();
 			opcion = teclado.nextInt();
 		}

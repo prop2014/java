@@ -173,12 +173,44 @@ public class CtrlDoctor {
 		return null;
 	}
 	
-	public ArrayList<Integer> getIdsRestrictions(){
+	public ArrayList<Integer> getIdsDoctores(){
 		ArrayList<Integer> ids = new ArrayList<Integer>();
 		for(Doctor doc : Doctors){
-			ArrayList<Restriccion>Res=doc.getRestrictions();
-			for(Restriccion res: Res){
-				ids.add(res.getIdRestriccion());
+			ids.add(doc.getId());
+		}
+		return ids;
+	}
+	
+	public Integer getFDIdocs() throws IOException {
+		ArrayList<Integer> ids = getIdsDoctores();
+		 Collections.sort(ids, new Comparator<Integer>() 
+		            { public int compare(Integer p, Integer q)
+		            {
+			            if(p > q) return 1;
+			            if(p < q) return -1;
+		                return 0;
+		            }
+		            } );
+		for(int i=0; i< Doctors.size();++i){
+			if(i!=ids.get(i)){
+				return i;
+			}
+		}
+		return ids.size();
+	}
+	
+	
+	
+	
+	
+	public ArrayList<Integer> getIdsRestrictions(int id){
+		ArrayList<Integer> ids = new ArrayList<Integer>();
+		for(Doctor doc : Doctors){
+			if(doc.getId()==id){
+				ArrayList<Restriccion>Res=doc.getRestrictions();
+				for(Restriccion res: Res){
+					ids.add(res.getIdRestriccion());
+				}
 			}
 		}
 		return ids;
@@ -189,8 +221,8 @@ public class CtrlDoctor {
 	 * @return return el primer id disponible de las restricciones
 	 * @throws IOE
 	 */
-	public Integer getFDIRes() throws IOException {
-		ArrayList<Integer> ids = getIdsRestrictions();
+	public Integer getFDIRes(int id) throws IOException {
+		ArrayList<Integer> ids = getIdsRestrictions(id);
 		 Collections.sort(ids, new Comparator<Integer>() 
 		            { public int compare(Integer p, Integer q)
 		            {

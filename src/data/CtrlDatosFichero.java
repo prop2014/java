@@ -3,6 +3,9 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import model.Turno;
+import model.XOR;
+
 
 
 /**Gestiona el sistema de almacenamiento de datos
@@ -197,7 +200,6 @@ public class CtrlDatosFichero {
 	 public ArrayList<String> getDataCale (int id)throws IOException {
 		 	ArrayList<String> alhosp = new ArrayList<String>();
 		 	try{
-		 		System.out.print("entru almens\n");
 		   		String num = Integer.toString(id);
 		   		String path = new File("").getAbsolutePath();
 		   		String realpath = path+ "/datos/Hospital";
@@ -264,46 +266,38 @@ public class CtrlDatosFichero {
 				   				word=sl1.next();
 				   				if(word.equals(".R")){
 				   					while(sl1.hasNext()){
-					   					int idDoc = sl1.nextInt();
-					   					System.out.printf("idDoc %d\n",idDoc);
-					   					alhosp.add(Integer.toString(idDoc));
+					   					alhosp.add(sl1.next());
 					   					int numRes = sl1.nextInt();
 					   					alhosp.add(Integer.toString(numRes));
-					   					System.out.printf("numRes %d\n",numRes);
 					   					for(int i=0;i<numRes;++i){
-					   						int idRes = sl1.nextInt();
-					   						alhosp.add(Integer.toString(idRes));
+					   						alhosp.add(sl1.next());
 					   						String Tipo=sl1.next();
-					   						System.out.println(Tipo);
 					   						alhosp.add(Tipo);
 					   						if(Tipo.equals("NOT_Turno")){
-					   							word = sl1.next(); //tipoturno
-					   							System.out.println(word);
-					   							alhosp.add(word);
+					   							alhosp.add(sl1.next());
 					   						}
 					   						else if(Tipo.equals("NOT_Fecha")){
-					   							word=sl1.next();//fecha
-					   							alhosp.add(word);
+					   							alhosp.add(sl1.next());
+					   							alhosp.add(sl1.next());
+					   							alhosp.add(sl1.next());
 					   						}
 					   						else if(Tipo.equals("NOT_Especial")){
-					   							word=sl1.next(); //especial
-					   							alhosp.add(word);
+					   							alhosp.add(sl1.next());
 					   						}
 					   						else if(Tipo.equals("NOT_Dia_Semana")){
-					   							word=sl1.next(); //diasemana
-					   							alhosp.add(word);
+					   							alhosp.add(sl1.next());
 					   						}
 					   						else if(Tipo.equals("NOT_Dia_Mes")){
-					   							int dia =sl1.nextInt();
-					   							alhosp.add(Integer.toString(dia));
+					   							alhosp.add(sl1.next());
 					   						}
 					   						else if(Tipo.equals("MAX_Turnos_Rango")){
-					   							word=sl1.next(); //fecha ini
-					   							alhosp.add(word);
-					   							word=sl1.next();
-					   							alhosp.add(word);//fecha fin
-					   							int mt = sl1.nextInt();
-					   							alhosp.add(Integer.toString(mt));					
+												alhosp.add(sl1.next());
+												alhosp.add(sl1.next());
+												alhosp.add(sl1.next());
+												alhosp.add(sl1.next());
+												alhosp.add(sl1.next());
+												alhosp.add(sl1.next());
+												alhosp.add(sl1.next());					
 					   						}
 					   						else if(Tipo.equals("MAX_Turnos_por_Dia")){
 					   							int dia =sl1.nextInt();
@@ -313,10 +307,10 @@ public class CtrlDatosFichero {
 					   							int size=sl1.nextInt();
 					   							alhosp.add(Integer.toString(size));
 					   							for(int l=0; l<size;++l){
-					   								word=sl1.next(); //fecha
-					   								alhosp.add(word);
-					   								word=sl1.next(); //tipoturno
-					   								alhosp.add(word);
+					   								alhosp.add(sl.next());
+					   								alhosp.add(sl.next());
+					   								alhosp.add(sl.next());
+					   								alhosp.add(sl.next());
 					   							}
 					   						}
 					   					}
@@ -409,7 +403,6 @@ public class CtrlDatosFichero {
 	 
 	 public boolean existsCalendar(int id) throws IOException{
 		 boolean exists=false;
-		 System.out.print("kepasatio\n");
 		 try{
 		   		String num = Integer.toString(id);
 		   		String path = new File("").getAbsolutePath();
