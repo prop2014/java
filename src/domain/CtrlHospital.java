@@ -175,6 +175,21 @@ public class CtrlHospital {
 		return ids.size();
 	}
 	
+	/**
+	 * 
+	 * @return return el primer id disponible de las restricciones
+	 * @throws IOE
+	 */
+	public Integer getFDIRes() throws IOException {
+		ArrayList<Integer> ids = inOut.getIdRestriction();
+		for(int i=0; i< ids.size();++i){
+			if(i!=ids.get(i)){
+				return i;
+			}
+		}
+		return ids.size();
+	}
+	
 	
 	/**
 	 * 
