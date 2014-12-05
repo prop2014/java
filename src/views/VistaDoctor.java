@@ -198,7 +198,7 @@ public class VistaDoctor {
 						sc1.close();
 						sc2.close();
 						sc3.close();
-						ctrlPresentacion.changeView("vistaPlantillaDoctores", panelContents);
+
 					}
 				});
 		

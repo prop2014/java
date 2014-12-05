@@ -244,7 +244,7 @@ public class CtrlPresentacion {
 		try {
 			ctrlHospital.crearDoctor(idD, nameDoc, maxTurnos, sueldo);
 		} catch (IOException e) {throw new IOException(e);}
-		//ctrlHospital.guardarDoctor();
+		ctrlHospital.saveDataDoctors();
 	}
 	
 	
