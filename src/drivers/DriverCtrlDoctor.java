@@ -305,7 +305,7 @@ public class DriverCtrlDoctor {
 				System.out.print("HospitalCargat\n");
 				CtrlCalendario cal= new CtrlCalendario(Ho.getCalendar());
 				System.out.print("cargu el calendari\n");
-				cal.getDataCalendar(id);
+				cal.readCalendar(id);
 				System.out.printf("cargu el calendar de data %d\n",cal.getCalendarYear());
 				CtrlDoctor s = new CtrlDoctor(Ho.getDoctors(),cal.getCalendarYear());
 				s.addResData(id);
@@ -326,8 +326,7 @@ public class DriverCtrlDoctor {
 				System.out.print("HospitalCargat\n");
 				CtrlCalendario cal= new CtrlCalendario(Ho.getCalendar());
 				System.out.print("cargu el calendari\n");
-				cal.getDataCalendar(id);
-				Ho.getDataDoctors(id);
+				cal.readCalendar(id);
 				System.out.printf("cargu el calendar de data %d\n",cal.getCalendarYear());
 				CtrlDoctor s = new CtrlDoctor(Ho.getDoctors(),cal.getCalendarYear());
 				s.addResData(id);
@@ -346,8 +345,7 @@ public class DriverCtrlDoctor {
 				System.out.print("HospitalCargat\n");
 				CtrlCalendario cal= new CtrlCalendario(Ho.getCalendar());
 				System.out.print("cargu el calendari\n");
-				cal.getDataCalendar(id);
-				Ho.getDataDoctors(id);
+				cal.readCalendar(id);
 				System.out.printf("cargu el calendar de data %d\n",cal.getCalendarYear());
 				CtrlDoctor s = new CtrlDoctor(Ho.getDoctors(),cal.getCalendarYear());
 				s.addResData(id);

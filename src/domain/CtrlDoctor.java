@@ -210,6 +210,7 @@ public class CtrlDoctor {
 				ArrayList<Restriccion>Res=doc.getRestrictions();
 				for(Restriccion res: Res){
 					ids.add(res.getIdRestriccion());
+					System.out.printf("Restriccio: %d\n",res.getIdRestriccion());
 				}
 			}
 		}
@@ -223,6 +224,7 @@ public class CtrlDoctor {
 	 */
 	public Integer getFDIRes(int id) throws IOException {
 		ArrayList<Integer> ids = getIdsRestrictions(id);
+		if(!ids.isEmpty()){
 		 Collections.sort(ids, new Comparator<Integer>() 
 		            { public int compare(Integer p, Integer q)
 		            {
@@ -231,12 +233,15 @@ public class CtrlDoctor {
 		                return 0;
 		            }
 		            } );
-		for(int i=0; i< Doctors.size();++i){
-			if(i!=ids.get(i)){
-				return i;
+		
+			for(int i=0; i< ids.size();++i){
+				if(i!=ids.get(i)){
+					return i;
+				}
 			}
-		}
 		return ids.size();
+		}
+		return -1;
 	}
 	
 	/**
