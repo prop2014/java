@@ -278,8 +278,6 @@ public class CtrlDatosFichero {
 					   						}
 					   						else if(Tipo.equals("NOT_Fecha")){
 					   							alhosp.add(sl1.next());
-					   							alhosp.add(sl1.next());
-					   							alhosp.add(sl1.next());
 					   						}
 					   						else if(Tipo.equals("NOT_Especial")){
 					   							alhosp.add(sl1.next());
@@ -291,10 +289,6 @@ public class CtrlDatosFichero {
 					   							alhosp.add(sl1.next());
 					   						}
 					   						else if(Tipo.equals("MAX_Turnos_Rango")){
-												alhosp.add(sl1.next());
-												alhosp.add(sl1.next());
-												alhosp.add(sl1.next());
-												alhosp.add(sl1.next());
 												alhosp.add(sl1.next());
 												alhosp.add(sl1.next());
 												alhosp.add(sl1.next());					

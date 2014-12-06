@@ -18,6 +18,16 @@ public class CtrlDoctor {
 	private ArrayList<Doctor> Doctors;
 	private int yearCalendario;
 	
+	private static String readDate(String date,String format) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		GregorianCalendar gc=new GregorianCalendar();
+		sdf.setLenient(false);
+		gc.setTime(sdf.parse(date));
+		SimpleDateFormat sdf2 = new SimpleDateFormat(format);
+		String result =sdf2.format(gc.getTime());
+		return result;
+	}
+
 	
 	/**
 	* Constructora del control
@@ -223,8 +233,7 @@ public class CtrlDoctor {
 	 * @throws IOE
 	 */
 	public Integer getFDIRes(int id) throws IOException {
-		ArrayList<Integer> ids = getIdsRestrictions(id);
-		if(!ids.isEmpty()){
+		ArrayList<Integer> ids = this.getIdsRestrictions(id);
 		 Collections.sort(ids, new Comparator<Integer>() 
 		            { public int compare(Integer p, Integer q)
 		            {
@@ -240,8 +249,6 @@ public class CtrlDoctor {
 				}
 			}
 		return ids.size();
-		}
-		return -1;
 	}
 	
 	/**
@@ -605,6 +612,7 @@ public class CtrlDoctor {
 	
 	public void saveDataRes(int id)throws IOException{
 		ArrayList<String> alRes = new ArrayList<String>();
+		
 			for(int i=0;i<Doctors.size();++i){
 				int idDoc=Doctors.get(i).getId();
 				if(!Doctors.get(i).isREmpty()){
@@ -616,19 +624,16 @@ public class CtrlDoctor {
 						alRes.add(Integer.toString(Res.get(j).getIdRestriccion()));
 						alRes.add(Res.get(j).getTipo()); // ok vamos a ver kual es
 						if(Res.get(j).getTipo().equals("NOT_Turno")){
-							++i;
 							NOT_Turno N = (NOT_Turno)Res.get(j);
 							alRes.add(N.getTipoTurno());
+							System.out.printf("tipoturno: %s\n",N.getTipoTurno());
 						}
 						else if(Res.get(j).getTipo().equals("NOT_Fecha")){
-							int d=0,m=0,a=0;
 							NOT_Fecha N = (NOT_Fecha)Res.get(j);
-							d=N.getFecha().DAY_OF_MONTH;
-							m=N.getFecha().MONTH;
-							a=N.getFecha().YEAR;
-							alRes.add(Integer.toString(d));
-							alRes.add(Integer.toString(m));
-							alRes.add(Integer.toString(a));
+							GregorianCalendar gc=N.getFecha();
+							SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+							String fecha =sdf.format(gc.getTime());
+							alRes.add(fecha);
 							
 						}
 						else if(Res.get(j).getTipo().equals("NOT_Especial")){
@@ -640,26 +645,21 @@ public class CtrlDoctor {
 							alRes.add(N.getDiaSemana());
 						}
 						else if(Res.get(j).getTipo().equals("NOT_Dia_Mes")){
-							++i;
 							NOT_Dia_Mes N = (NOT_Dia_Mes)Res.get(j);
 							alRes.add(Integer.toString(N.getDiaMes()));
 						}
 						
 						else if(Res.get(j).getTipo().equals("MAX_Turnos_Rango")){
-							int d1=0,m1=0,a1=0,d2=0,m2=0,a2=0;
+							
 							MAX_Turnos_Rango N = (MAX_Turnos_Rango)Res.get(j);
-							d1=N.getFechaIni().DAY_OF_MONTH;
-							m1=N.getFechaIni().MONTH;
-							a1=N.getFechaIni().YEAR;
-							d2=N.getFechaFin().DAY_OF_MONTH;
-							m2=N.getFechaFin().MONTH;
-							a2=N.getFechaFin().YEAR;
-							alRes.add(Integer.toString(d1));
-							alRes.add(Integer.toString(m1));
-							alRes.add(Integer.toString(a1));
-							alRes.add(Integer.toString(d2));
-							alRes.add(Integer.toString(m2));
-							alRes.add(Integer.toString(a2));
+							
+							GregorianCalendar gc=N.getFechaIni();
+							GregorianCalendar gc1=N.getFechaFin();
+							SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+							String fechaini =sdf.format(gc.getTime());
+							String fechafin =sdf.format(gc1.getTime());
+							alRes.add(fechaini);
+							alRes.add(fechafin);
 							alRes.add(Integer.toString(N.getNumDias()));
 						}
 						else if(Res.get(j).getTipo().equals("MAX_Turnos_por_Dia")){
@@ -707,11 +707,13 @@ public class CtrlDoctor {
 				}
 				else if(tipo.equals("NOT_Fecha")){
 					++i;
-					int d=Integer.parseInt(alRes.get(i));
-					++i;
-					int m=Integer.parseInt(alRes.get(i));
-					++i;
-					int a=Integer.parseInt(alRes.get(i));
+					String fecha =  alRes.get(i);
+					int d=0,m=0,a=0;
+					try{
+					d=Integer.parseInt(readDate(fecha,"d"));
+					 m=Integer.parseInt(readDate(fecha,"M"));
+					 a =Integer.parseInt(readDate(fecha,"y"));
+					}catch (ParseException e){System.out.print("ERROR");}
 					addResNOT_Fecha(idDoc,idRes,d,m,a);
 				}
 				else if(tipo.equals("NOT_Especial")){
@@ -730,23 +732,25 @@ public class CtrlDoctor {
 					addResNOT_Dia_Mes(idDoc,idRes,dia);
 				}
 				else if(tipo.equals("MAX_Turnos_Rango")){
+					int d1=0, m1=0, a1=0, d2=0,m2=0,a2=0;
 					++i;
-					int d1=Integer.parseInt(alRes.get(i));
+					String fechaini =  alRes.get(i);
 					++i;
-					int m1=Integer.parseInt(alRes.get(i));
-					++i;
-					int a1=Integer.parseInt(alRes.get(i));
-					++i;
-					int d2=Integer.parseInt(alRes.get(i));
-					++i;
-					int m2=Integer.parseInt(alRes.get(i));
-					++i;
-					int a2=Integer.parseInt(alRes.get(i));
+					String fechafin =  alRes.get(i);
+					try{
+						d1=Integer.parseInt(readDate(fechaini,"d"));
+						 m1=Integer.parseInt(readDate(fechaini,"M"));
+						 a1 =Integer.parseInt(readDate(fechaini,"y"));
+						 d2=Integer.parseInt(readDate(fechafin,"d"));
+						 m2=Integer.parseInt(readDate(fechafin,"M"));
+						 a2 =Integer.parseInt(readDate(fechafin,"y"));
+					}catch (ParseException e){System.out.print("ERROR");}
 					++i;
 					int numT=Integer.parseInt(alRes.get(i));
 					addResMAX_Turnos_Rango(idDoc,idRes,d1, m1, a1, d2,m2,  a2, numT);					
 				}
 				else if(tipo.equals("MAX_Turnos_por_Dia")){
+					++i;
 					int numT =Integer.parseInt(alRes.get(i));
 					addResMAX_Turnos_por_Dia(idDoc,idRes,numT);
 				}
