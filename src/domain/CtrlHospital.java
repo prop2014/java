@@ -17,24 +17,6 @@ public class CtrlHospital {
 	private Hospital hosp;
 	private CtrlDatosFichero inOut;
 	
-	
-	
-	
-	private static GregorianCalendar readDate(String s) throws ParseException {
-		GregorianCalendar date =new GregorianCalendar();
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-		sdf.setLenient(false);
-		try{
-			date.setTime(sdf.parse(s));
-		}catch(
-			Exception e2){ 
-   				e2.printStackTrace();
-		}
-		return date;
-	}
-	
-	
-	
 	/* Constructora */
 	public CtrlHospital(){
 		hosp = new Hospital();

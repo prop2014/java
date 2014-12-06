@@ -711,11 +711,12 @@ public class CtrlDoctor {
 					String fecha =  alRes.get(i);
 					int d=0,m=0,a=0;
 					try{
-					d=Integer.parseInt(readDate(fecha,"d"));
-					 m=Integer.parseInt(readDate(fecha,"M"));
-					 a =Integer.parseInt(readDate(fecha,"y"));
+					d=Integer.parseInt(readDate(fecha,"dd"));
+					 m=Integer.parseInt(readDate(fecha,"MM"));
+					 a =Integer.parseInt(readDate(fecha,"yyyy"));
 					}catch (ParseException e){System.out.print("ERROR");}
 					addResNOT_Fecha(idDoc,idRes,d,m,a);
+					System.out.printf("dia: %d mes: %d, any: %d\n",d,m,a);
 				}
 				else if(tipo.equals("NOT_Especial")){
 					++i;
@@ -739,12 +740,12 @@ public class CtrlDoctor {
 					++i;
 					String fechafin =  alRes.get(i);
 					try{
-						d1=Integer.parseInt(readDate(fechaini,"d"));
-						 m1=Integer.parseInt(readDate(fechaini,"M"));
-						 a1 =Integer.parseInt(readDate(fechaini,"y"));
-						 d2=Integer.parseInt(readDate(fechafin,"d"));
-						 m2=Integer.parseInt(readDate(fechafin,"M"));
-						 a2 =Integer.parseInt(readDate(fechafin,"y"));
+						d1=Integer.parseInt(readDate(fechaini,"dd"));
+						 m1=Integer.parseInt(readDate(fechaini,"MM"));
+						 a1 =Integer.parseInt(readDate(fechaini,"yyyy"));
+						 d2=Integer.parseInt(readDate(fechafin,"dd"));
+						 m2=Integer.parseInt(readDate(fechafin,"MM"));
+						 a2 =Integer.parseInt(readDate(fechafin,"yyyy"));
 					}catch (ParseException e){System.out.print("ERROR");}
 					++i;
 					int numT=Integer.parseInt(alRes.get(i));
@@ -767,9 +768,9 @@ public class CtrlDoctor {
 						++i;
 						String fecha =  alRes.get(i);
 						try{
-							d1=Integer.parseInt(readDate(fecha,"d"));
-							 m1=Integer.parseInt(readDate(fecha,"M"));
-							 a1 =Integer.parseInt(readDate(fecha,"y"));
+							d1=Integer.parseInt(readDate(fecha,"dd"));
+							 m1=Integer.parseInt(readDate(fecha,"MM"));
+							 a1 =Integer.parseInt(readDate(fecha,"yyyy"));
 						}catch (ParseException e){System.out.print("ERROR");}
 						diaXOR.add(d1);
 						mesXOR.add(m1);
