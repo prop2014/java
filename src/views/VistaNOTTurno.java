@@ -5,6 +5,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * Vista secundaria de gestion de restricciones tipo NOT Turno
@@ -99,6 +101,26 @@ public class VistaNOTTurno {
 				ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 			}
 		});
+		
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if ((checkBox1.isSelected() && !checkBox2.isSelected() && !checkBox3.isSelected()) ||
+					(!checkBox1.isSelected() && checkBox2.isSelected() && !checkBox3.isSelected()) ||
+					(!checkBox1.isSelected() && !checkBox2.isSelected() && checkBox3.isSelected())) {
+					try {
+						if(checkBox1.isSelected()) ctrlPresentacion.addResNOT_Turno(1, "manana");
+						else if (checkBox2.isSelected()) ctrlPresentacion.addResNOT_Turno(1, "tarde");
+						else if (checkBox3.isSelected()) ctrlPresentacion.addResNOT_Turno(1, "noche");
+					} catch (IOException eX) {
+						System.out.printf("Restriccion no creada");
+						JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Turno seleccionado incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});	
 	}
 	
 	
