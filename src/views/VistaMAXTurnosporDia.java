@@ -6,6 +6,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * Vista secundaria de gestion de restricciones tipo MAX Turnos por Dia
@@ -94,6 +96,26 @@ public class VistaMAXTurnosporDia {
 				ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 			}
 		});
+		
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Scanner sc1 = new Scanner(textArea.getText());
+				int numT;
+				if (sc1.hasNextInt()) {
+					numT = Integer.parseInt(textArea.getText());
+					try {
+						ctrlPresentacion.addResMAX_Turnos_por_Dia(1, numT);
+					} catch (IOException eX) {
+						System.out.printf("Restriccion no creada");
+						JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Numero de turnos incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				sc1.close();
+			}
+		});	
 	}
 	
 	

@@ -5,6 +5,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * Vista secundaria de gestion de restricciones tipo NOT Dia Semana
@@ -99,6 +101,26 @@ public class VistaNOTDiaSemana {
 				ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 			}
 		});
+		
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Scanner sc1 = new Scanner(comboboxInformacion1.getToolTipText());
+				String diaSemana;
+				if (sc1.hasNextInt()) {
+					diaSemana = comboboxInformacion1.getToolTipText();
+					try {
+						ctrlPresentacion.addResNOT_Dia_Semana(1, diaSemana);
+					} catch (IOException eX) {
+						System.out.printf("Restriccion no creada");
+						JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Dia de la semana incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				sc1.close();
+			}
+		});	
 	}
 	
 	

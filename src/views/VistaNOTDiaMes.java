@@ -5,6 +5,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -93,15 +94,22 @@ public class VistaNOTDiaMes {
 				ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 			}
 		});
+		
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Scanner sc1 = new Scanner(textArea.getText());
 				int dia;
-				if (!sc1.hasNextInt()) {
-					JOptionPane.showMessageDialog(null, "Valor del dia incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
+				if (sc1.hasNextInt()) {
+					dia = Integer.parseInt(textArea.getText());
+					try {
+						ctrlPresentacion.addResNOT_Dia_Mes(1, dia);
+					} catch (IOException eX) {
+						System.out.printf("Restriccion no creada");
+						JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 
+					}
 				}
 				else {
-					dia = Integer.parseInt(textArea.getText());
+					JOptionPane.showMessageDialog(null, "Dia del mes incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				sc1.close();
 			}

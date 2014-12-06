@@ -5,6 +5,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * Vista secundaria de gestion de restricciones tipo NOT Especial
@@ -97,6 +99,26 @@ public class VistaNOTEspecial {
 				ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 			}
 		});
+		
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Scanner sc1 = new Scanner(comboboxInformacion1.getToolTipText());
+				String especial;
+				if (sc1.hasNextInt()) {
+					especial = comboboxInformacion1.getToolTipText();
+					try {
+						ctrlPresentacion.addResNOT_Especial(1, especial);
+					} catch (IOException eX) {
+						System.out.printf("Restriccion no creada");
+						JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Dia especial incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				sc1.close();
+			}
+		});	
 	}
 	
 	
