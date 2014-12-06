@@ -90,7 +90,7 @@ public class DriverCtrlDatosFichero {
 				num=teclado.nextInt();
 					if(inOut.existHospId(num)){
 						alhosp.clear();
-						if(inOut.existsDoctors(num))	alhosp=inOut.getDataDoctors(num);
+						if(inOut.existsDoctors(num))	alhosp=inOut.getDataDoctors(num,null);
 						if(!alhosp.isEmpty()){
 							System.out.print("Doctores Correctamente cargados\n");
 							for(int i =0; i<alhosp.size()-1;++i){
@@ -207,7 +207,7 @@ public class DriverCtrlDatosFichero {
 					System.out.print("Ingrese el id del hospital para Guardar los doctores\n");
 					num=teclado.nextInt();
 					if(inOut.existsDoctors(num)){
-						alhosp=inOut.getDataDoctors(num);
+						alhosp=inOut.getDataDoctors(num,null);
 						inOut.saveDataDoctors(alhosp, num);
 						System.out.print("Doctores almacenados correctamente\n");
 					}

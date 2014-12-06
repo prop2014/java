@@ -146,13 +146,20 @@ public class CtrlDatosFichero {
 	  * @return los datos de los doctores del hospital
 	  * @throws IOException existencia de fichero
 	  */
-	 public ArrayList<String> getDataDoctors (int id)throws IOException {
+	 public ArrayList<String> getDataDoctors (int id,String importar)throws IOException {
 		 	ArrayList<String> alhosp = new ArrayList<String>();
 		 	try{
-		   		String num = Integer.toString(id);
-		   		String path = new File("").getAbsolutePath();
-		   		String realpath = path+ "/datos/Hospital";
-		   		File archivo = new File(realpath+num);
+		 		File archivo;
+		 		if(importar==null){
+		 			String num = Integer.toString(id);
+			   		String path = new File("").getAbsolutePath();
+			   		String realpath = path+ "/datos/Hospital";
+			   		archivo = new File(realpath+num);
+		 		}
+		 		else{
+		 			archivo = new File(importar);
+		 			
+		 		}
 				if(!archivo.exists()) throw new IOException("No Existe Este fichero");
 				FileReader fr = new FileReader (archivo);
 				BufferedReader br = new BufferedReader(fr);
@@ -566,7 +573,7 @@ public class CtrlDatosFichero {
 	   boolean D=false,C = false, R = false;
 	   if(archivo.exists() && !alhosp.isEmpty()){
 		   	   if(existsDoctors(id)) {
-		   		   bufferD=getDataDoctors(id);
+		   		   bufferD=getDataDoctors(id,null);
 		   		   D=true;
 		   	   }
 			   if(existsCalendar(id)){
@@ -701,7 +708,7 @@ public class CtrlDatosFichero {
 					   bufferC=getDataCale(id);
 					   C=true;
 				   }
-				   bufferD=getDataDoctors(id);
+				   bufferD=getDataDoctors(id,null);
 			   try{
 				   FileWriter fw = new FileWriter(archivo);
 				   PrintWriter pw = new PrintWriter(fw);
@@ -759,7 +766,7 @@ public class CtrlDatosFichero {
 	   if(archivo.exists()){
 			   bufferH=getDataHospital(id,null);
 			   if(existsDoctors(id)){
-				   bufferD=getDataDoctors(id);
+				   bufferD=getDataDoctors(id,null);
 				   D=true;
 				   if(existsRes(id)){
 					   bufferR=getDataRes(id);
@@ -822,7 +829,7 @@ public class CtrlDatosFichero {
 			   bufferH=getDataHospital(id,null);
 			   H =true;
 			   if(existsDoctors(id)){
-				   bufferD=getDataDoctors(id);
+				   bufferD=getDataDoctors(id,null);
 				   D=true;
 			   }
 			   if(existsRes(id)){

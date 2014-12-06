@@ -76,7 +76,7 @@ public class CtrlHospital {
 	 * @throws IOException valores incorrectos, fichero no encontrado
 	 */
 	public void getDataDoctors(int id)throws IOException{
-		ArrayList<String> aldocs = inOut.getDataDoctors(id);
+		ArrayList<String> aldocs = inOut.getDataDoctors(id,null);
 		if(!aldocs.isEmpty()){
 			int docs=Integer.parseInt(aldocs.get(0));
 				int j =0;
