@@ -669,12 +669,13 @@ public class CtrlDoctor {
 						else if(Res.get(j).getTipo().equals("XOR")){
 							XOR N = (XOR)Res.get(j);
 							ArrayList<Turno> alTurn=N.getListTurnos();
+							SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 							alRes.add(Integer.toString(alTurn.size()));
 							for(int k=0;k<alTurn.size();++k){
 								Turno t=alTurn.get(k);
-								alRes.add(Integer.toString(t.getDate().DAY_OF_MONTH));
-								alRes.add(Integer.toString(t.getDate().MONTH));
-								alRes.add(Integer.toString(t.getDate().YEAR));
+								GregorianCalendar gc=t.getDate();
+								String fecha =sdf.format(gc.getTime());
+								alRes.add(fecha);
 								alRes.add(t.getShiftType());
 							}
 						}
@@ -755,6 +756,7 @@ public class CtrlDoctor {
 					addResMAX_Turnos_por_Dia(idDoc,idRes,numT);
 				}
 				else if(tipo.equals("XOR")){
+					int d1=0, m1=0, a1=0;
 					++i;
 					int numdays=Integer.parseInt(alRes.get(i));
 					ArrayList<Integer> diaXOR = new ArrayList<Integer>();
@@ -763,11 +765,15 @@ public class CtrlDoctor {
 					ArrayList<String> tipoTurnoXOR = new ArrayList<String>();
 					for(int k=0;k<numdays;++k){
 						++i;
-						diaXOR.add(Integer.parseInt(alRes.get(i)));
-						++i;
-						mesXOR.add(Integer.parseInt(alRes.get(i)));
-						++i;
-						yearXOR.add(Integer.parseInt(alRes.get(i)));
+						String fecha =  alRes.get(i);
+						try{
+							d1=Integer.parseInt(readDate(fecha,"d"));
+							 m1=Integer.parseInt(readDate(fecha,"M"));
+							 a1 =Integer.parseInt(readDate(fecha,"y"));
+						}catch (ParseException e){System.out.print("ERROR");}
+						diaXOR.add(d1);
+						mesXOR.add(m1);
+						yearXOR.add(a1);
 						++i;
 						tipoTurnoXOR.add(alRes.get(i));
 					}
