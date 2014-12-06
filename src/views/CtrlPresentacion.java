@@ -18,7 +18,7 @@ public class CtrlPresentacion {
 	
 	private JFrame frameView;
 	private CtrlHospital ctrlHospital;
-	private CtrlDoctor crtlDoctor;
+	private CtrlDoctor ctrlDoctor;
 	private VistaCjtHospitales vistaCjtHospitales;
 	private VistaCrearHospital vistaCrearHospital;
 	private VistaGestion vistaGestion;
@@ -40,7 +40,7 @@ public class CtrlPresentacion {
 	public CtrlPresentacion(){
 		init_frameView();
 		ctrlHospital = new CtrlHospital();
-		crtlDoctor = new CtrlDoctor();
+		ctrlDoctor = new CtrlDoctor();
 		vistaCjtHospitales = new VistaCjtHospitales(this);
 		vistaCrearHospital = new VistaCrearHospital(this);
 		vistaGestion = new VistaGestion(this);
@@ -253,6 +253,70 @@ public class CtrlPresentacion {
 			ctrlHospital.crearDoctor(idD, nameDoc, maxTurnos, sueldo);
 		} catch (IOException e) {throw new IOException(e);}
 		ctrlHospital.saveDataDoctors();
+	}
+	
+	public void addResMAX_Turnos_por_Dia(int idDoc, int numD) throws IOException {
+		int idRes = ctrlDoctor.getFDIRes(idDoc);
+		try {
+			ctrlDoctor.addResMAX_Turnos_por_Dia(idDoc, idRes, numD);
+		} catch (IOException e) {throw new IOException(e);}
+		//ctrlHospital.saveDataRes(idDoc, "MAX_Turnos_por_Dia");
+	}
+	
+	public void addResMAX_Turnos_Rango(int idDoc, int d1, int m1, int a1, int d2, int m2, int a2, int numT) throws IOException {
+		int idRes = ctrlDoctor.getFDIRes(idDoc);
+		try {
+			ctrlDoctor.addResMAX_Turnos_Rango(idDoc, idRes, d1, m1, a1, d2, m2, a2, numT);
+		} catch (IOException e) {throw new IOException(e);}
+		//ctrlHospital.saveDataRes(idDoc, "MAX_Turnos_Rango");
+	}
+	
+	public void addResNOT_Dia_Mes(int idDoc, int diaMes) throws IOException {
+		int idRes = ctrlDoctor.getFDIRes(idDoc);
+		try {
+			ctrlDoctor.addResNOT_Dia_Mes(idDoc, idRes, diaMes);
+		} catch (IOException e) {throw new IOException(e);}
+		//ctrlHospital.saveDataRes(idDoc,"NOT_Dia_Mes");
+	}
+	
+	public void addResNOT_Dia_Semana(int idDoc, String diaSemana) throws IOException {
+		int idRes = ctrlDoctor.getFDIRes(idDoc);
+		try {
+			ctrlDoctor.addResNOT_Dia_Semana(idDoc, idRes, diaSemana);
+		} catch (IOException e) {throw new IOException(e);}
+		//ctrlHospital.saveDataRes(idDoc, "NOT_Dia_Semana");
+	}
+	
+	public void addResNOT_Especial(int idDoc, String especial) throws IOException {
+		int idRes = ctrlDoctor.getFDIRes(idDoc);
+		try {
+			ctrlDoctor.addResNOT_Especial(idDoc, idRes, especial);
+		} catch (IOException e) {throw new IOException(e);}
+		//ctrlHospital.saveDataRes(idDoc, "NOT_Especial");
+	}
+	
+	public void addResNOT_Fecha(int idDoc, int d, int m, int a) throws IOException {
+		int idRes = ctrlDoctor.getFDIRes(idDoc);
+		try {
+			ctrlDoctor.addResNOT_Fecha(idDoc, idRes, d, m, a);
+		} catch (IOException e) {throw new IOException(e);}
+		//ctrlHospital.saveDataRes(idDoc, "NOT_Fecha");
+	}
+	
+	public void addResNOT_Turno(int idDoc, String tipoTurno) throws IOException {
+		int idRes = ctrlDoctor.getFDIRes(idDoc);
+		try {
+			ctrlDoctor.addResNOT_Turno(idDoc, idRes, tipoTurno);
+		} catch (IOException e) {throw new IOException(e);}
+		//ctrlHospital.saveDataRes(idDoc, "NOT_Turno");
+	}
+	
+	public void addResXOR(int idDoc, ArrayList<Integer> diaXOR, ArrayList<Integer> mesXOR,  ArrayList<Integer> yearXOR, ArrayList<String> tipoTurnoXOR) throws IOException {
+		int idRes = ctrlDoctor.getFDIRes(idDoc);
+		try {
+			ctrlDoctor.addResXOR(idDoc, idRes, diaXOR, mesXOR, yearXOR, tipoTurnoXOR);
+		} catch (IOException e) {throw new IOException(e);}
+		//ctrlHospital.saveDataRes(idDoc, "XOR");
 	}
 	
 	
