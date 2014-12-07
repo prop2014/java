@@ -1,11 +1,15 @@
 package views;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
 import com.toedter.calendar.JDateChooser;
 
+import java.util.Date;
+import java.util.Calendar;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 /**
  * Vista secundaria de gestion de restricciones tipo NOTFecha
@@ -92,6 +96,22 @@ public class VistaNOTFecha {
 				ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 			}
 		});
+		
+		button.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
+			public void actionPerformed(ActionEvent e) {
+				Date data = dataChooser.getDate();
+				int dia = data.getDay();
+				int mes = data.getMonth()+1;
+				int year = data.getYear();
+				try {
+					ctrlPresentacion.addResNOT_Fecha(1, dia, mes, year);
+				} catch (IOException eX) {
+					System.out.printf("Restriccion no creada");
+					JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 
+				}
+			}
+		});	
 	}
 	
 	
