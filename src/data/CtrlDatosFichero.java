@@ -163,35 +163,35 @@ public class CtrlDatosFichero {
 				if(!archivo.exists()) throw new IOException("No Existe Este fichero");
 				FileReader fr = new FileReader (archivo);
 				BufferedReader br = new BufferedReader(fr);
+				boolean exists =false;
 		   		String linea;
 		   		String word;
-		   		linea=br.readLine();
-		   		linea=br.readLine();
-		   		Scanner sl = new Scanner(linea);
-		   		if(sl.hasNext()){
-			   		word=sl.next();
-			   		if(word.equals(".D")){
-			   			int numD=sl.nextInt(); //numero de doctores
-			   			alhosp.add(Integer.toString(numD));
-			   			for(int i=0;i<numD;++i){ //para cada doctor
-							int idDoctor = sl.nextInt(); //id
-							alhosp.add(Integer.toString(idDoctor));
-							word = sl.next(); //nombre
-							alhosp.add(word);
-							int numMaxTurnos = sl.nextInt();//Maxturnos
-							alhosp.add(Integer.toString(numMaxTurnos));
-							double SueldoTurno = sl.nextDouble(); //sueldo
-							alhosp.add(Double.toString(SueldoTurno));
-			   			} //fifordoc
-					}//fi if
-			   		else {
-			   			sl.close();
-			   			fr.close();
+		   		while(((linea=br.readLine())!=null) && !exists ){
+		   			Scanner sl = new Scanner(linea);
+			   		if(sl.hasNext()){
+				   		word=sl.next();
+				   		if(word.equals(".D")){
+				   			exists=true;
+				   			int numD=sl.nextInt(); //numero de doctores
+				   			alhosp.add(Integer.toString(numD));
+				   			for(int i=0;i<numD;++i){ //para cada doctor
+								int idDoctor = sl.nextInt(); //id
+								alhosp.add(Integer.toString(idDoctor));
+								word = sl.next(); //nombre
+								alhosp.add(word);
+								int numMaxTurnos = sl.nextInt();//Maxturnos
+								alhosp.add(Integer.toString(numMaxTurnos));
+								double SueldoTurno = sl.nextDouble(); //sueldo
+								alhosp.add(Double.toString(SueldoTurno));
+				   			} //fifordoc
+						}//fi if
+			   		}
+			   		sl.close();
+		   		}
+			   		fr.close();
+			   		if(!exists) {
 			   			throw new IOException("No hay doctores");
 			   		}
-		   		}
-		   		sl.close();
-		   		fr.close();
 		   	}catch(Exception e) {e.printStackTrace();}
 		 return alhosp;
 	 }
