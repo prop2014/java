@@ -56,6 +56,18 @@ public class CtrlDatosFichero {
 				   }catch(Exception e) {e.printStackTrace();}
 			   }
 		   }
+		   Collections.sort(alHosp, new Comparator<String>() 
+		            { public int compare(String p, String q)
+		            {
+		            	String[] partP = p.split("-");
+		            	String[] partQ = q.split("-");
+		            	int pNum = Integer.parseInt(partP[0]);
+		            	int qNum = Integer.parseInt(partQ[0]);
+			            if(pNum > qNum) return 1;
+			            if(pNum < qNum) return -1;
+		                return 0;
+		            }
+		            } ); 
 		   return alHosp;
 	   }
 	

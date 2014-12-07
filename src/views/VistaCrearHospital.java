@@ -4,11 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
-import java.util.Scanner;
 
 import javax.swing.border.EmptyBorder;
-import javax.swing.filechooser.FileNameExtensionFilter;
 /**
  * Vista para la creacion de un hospital
  * @author Alex Morral
@@ -23,6 +22,8 @@ public class VistaCrearHospital {
 	private JFrame frameView;
 	private JPanel panelContents = new JPanel();
 	private JPanel panelCenterButtons = new JPanel();
+	private String pathDoctores = new String();
+	private String pathCalendario = new String();
 	//CENTER
 	private JLabel labelPanel1 = new JLabel("<html><u><b>Crear Hospital</b></u>");
 	JButton btnCrearHospital = new JButton("Crear Hospital");
@@ -139,28 +140,21 @@ public class VistaCrearHospital {
 			public void actionPerformed(ActionEvent e) {
 				String nameHosp = nameHospTextField.getText();
 				nameHosp=nameHosp.replaceAll(" ", "%");
-				Scanner sc1 = new Scanner(mTextField.getText());
-				Scanner sc2 = new Scanner(tTextField.getText());
-				Scanner sc3 = new Scanner(nTextField.getText());
 				Double factM, factT, factN;
 				factM = factT = factN = 0.0;
-				
-				if(!nameHosp.isEmpty() && sc1.hasNextDouble() && sc2.hasNextDouble() && sc3.hasNextDouble()) {
+				try {
 					factM = Double.parseDouble(mTextField.getText());
 					factT = Double.parseDouble(tTextField.getText());
 					factN = Double.parseDouble(nTextField.getText());
-					try {
-						ctrlPresentacion.crearHospital(nameHosp, factM, factT, factN);
-					} catch (IOException eX) {
-						System.out.printf("Hospital no creado");
-						JOptionPane.showMessageDialog(null, "Hospital no creado", "Error",JOptionPane.ERROR_MESSAGE); 
-					}
-				} else {
+				} catch (NumberFormatException nE){
 					JOptionPane.showMessageDialog(null, "Alguno de los factores no es un valor correcto", "Error", JOptionPane.ERROR_MESSAGE); 
 				}
-				sc1.close();
-				sc2.close();
-				sc3.close();
+				try {
+					ctrlPresentacion.crearHospital(nameHosp, factM, factT, factN, pathDoctores, pathCalendario);
+				} catch (IOException eX) {
+					System.out.printf("Hospital no creado");
+					JOptionPane.showMessageDialog(null, eX, "Error",JOptionPane.ERROR_MESSAGE); 
+				}
 				ctrlPresentacion.changeView("vistaCjtHospitales", panelContents);
 			}
 		});
@@ -168,10 +162,22 @@ public class VistaCrearHospital {
 		btnImportCal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser chooser = new JFileChooser();
-				FileNameExtensionFilter filter = new FileNameExtensionFilter(
-				        "Text File (.txt)", "txt");
-				    chooser.setFileFilter(filter);
 				int returnVal = chooser.showOpenDialog(frameView);
+				File f = chooser.getSelectedFile();
+				if(returnVal == JFileChooser.APPROVE_OPTION) {
+					pathCalendario = f.getAbsolutePath();
+				 }
+			}
+		});
+		
+		btnImportDoc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser chooser = new JFileChooser();
+				int returnVal = chooser.showOpenDialog(frameView);
+				File f = chooser.getSelectedFile();
+				if(returnVal == JFileChooser.APPROVE_OPTION) {
+					pathDoctores = f.getAbsolutePath();
+				 }
 			}
 		});
 		
@@ -196,6 +202,15 @@ public class VistaCrearHospital {
 		inicializarComponents();
 	}
 	
+	public void clearData() {
+		nameHospTextField.setText("");
+		mTextField.setText("1.0");
+		tTextField.setText("1.0");
+		nTextField.setText("1.0");
+		pathCalendario = null;
+		pathDoctores = null;
+	}
+	
 	public JPanel getPanel() {
 		return panelContents;
 	}
@@ -208,6 +223,7 @@ public class VistaCrearHospital {
 		panelContents.setVisible(false);
 	}
 	public void showPanel() {
+		clearData();
 		panelContents.setVisible(true);
 	}
 	
