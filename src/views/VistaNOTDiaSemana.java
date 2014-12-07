@@ -104,21 +104,13 @@ public class VistaNOTDiaSemana {
 		
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Scanner sc1 = new Scanner(comboboxInformacion1.getToolTipText());
-				String diaSemana;
-				if (sc1.hasNextInt()) {
-					diaSemana = comboboxInformacion1.getToolTipText();
-					try {
-						ctrlPresentacion.addResNOT_Dia_Semana(1, diaSemana);
-					} catch (IOException eX) {
-						System.out.printf("Restriccion no creada");
-						JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 
-					}
+				String diaSemana = comboboxInformacion1.getSelectedItem().toString();
+				try {
+					ctrlPresentacion.addResNOT_Dia_Semana(1, diaSemana);
+				} catch (IOException eX) {
+					System.out.printf("Restriccion no creada");
+					JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 
 				}
-				else {
-					JOptionPane.showMessageDialog(null, "Dia de la semana incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
-				}
-				sc1.close();
 			}
 		});	
 	}
