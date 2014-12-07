@@ -7,15 +7,15 @@ import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-//import javax.swing.table.DefaultTableModel;
-//import javax.swing.table.DefaultTableCellRenderer;
-//
-//import java.util.Date;
-//import java.util.Formatter;
-//import java.text.ParseException;
-//import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.lang.NumberFormatException;
 
 import com.toedter.calendar.JDateChooser;
+//import java.util.Formatter;
+//import java.text.ParseException;
 
 
 /**
@@ -24,13 +24,12 @@ import com.toedter.calendar.JDateChooser;
  */
 public class VistaCalendario extends Vista {
 
-	/* Private attributes */
-
 	//-- Containers --//
 	private JPanel panelTop = new JPanel();
+	private JPanel panelInfo1 = new JPanel();
+	private JPanel panelInfo2 = new JPanel();
+	private JPanel panelRight = new JPanel();
 	private JPanel panelBottom = new JPanel();
-	private JPanel panelCentral = new JPanel();
-
 	//-- Buttons --//
 	private JButton buttonCreateCal = new JButton("Crear calendario");
 	private JButton buttonImportCal = new JButton("Importar calendario");
@@ -40,25 +39,24 @@ public class VistaCalendario extends Vista {
 	private JButton buttonDelVacation = new JButton("Eliminar dia");
 	private JButton buttonGoBack = new JButton("Volver");
 	private JButton buttonHelp = new JButton("Ayuda");
-
 	//-- Labels --//
 	private JLabel labelCalendar, labelVacationList1, labelVacationList2;
 
+	private ArrayList<GregorianCalendar> vacations;
 	DefaultListModel<String> dlm = new DefaultListModel<String>();
-	private JList<String> vacationList;
+	private JList<String> listVacations;
 	private JScrollPane scrollPanel;
 	private JDateChooser dateChooser = new JDateChooser("dd/MM/yyyy", "##/##/##", '_');
 
-	//-- Others private atributes--//
-	private static final String pattern = "%7s%13d%11d%11d%-5s%s";	// patron formato lista dias vacacionales
+
+	//-- Others private attributes--//
+	private static final String pattern = "%7s%11d%9d%9d%-7s%s";	// patron formato lista dias vacacionales
 
 	/* Private Methods */
-
 	private void init_panelTop() {
 		// panel
 		panelTop.setLayout(null);
-		panelTop.setBounds(0, 0, width, 50);
-
+		panelTop.setBounds(0, 0, width, 95);
 		// components
 		buttonCreateCal.setBounds(325, 10, 170, 30);
 		buttonCreateCal.setFont(new Font("Arial", Font.BOLD, 11));
@@ -67,22 +65,22 @@ public class VistaCalendario extends Vista {
 		buttonDeleteCal.setVisible(false);
 		buttonImportCal.setBounds(505, 10, 170, 30);
 		buttonImportCal.setFont(new Font("Arial", Font.BOLD, 11));
-//		labelCalendar = new JLabel(" (No hay calendario)");
-		labelCalendar = new JLabel("Calendario vacacional 2014");
-//		labelCalendar.setHorizontalAlignment(SwingConstants.LEFT);
-//		labelCalendar.setText("(No hay calendario)");
-//		labelCalendar.setOpaque(true);
-//		labelCalendar.setBackground(Color.cyan);
-//		labelCalendar.setFont(new Font("Arial Italic", Font.TRUETYPE_FONT,16));
-		labelCalendar.setFont(new Font("Arial", Font.BOLD, 16));
-		//		labelCalendar.setForeground(Color.BLUE);
+		labelCalendar = new JLabel("(No hay calendario vacacional)");
+		labelCalendar.setFont(new Font("Arial Italic", Font.TRUETYPE_FONT,16));
 		labelCalendar.setBounds(20, 10, 325, 30);
+		labelVacationList1 = new JLabel(String.format("%36s", "Numero de doctores:"));
+		labelVacationList1.setFont(new Font("Courier", Font.BOLD,14));
+		labelVacationList1.setBounds(20, 60, 495, 15);
+		labelVacationList2 = new JLabel(String.format("%7s%9s%9s%9s%-7s%s", " Dia vac.","M","T","N","","Fecha espec."));
+		labelVacationList2.setFont(new Font("Courier", Font.BOLD,14));
+		labelVacationList2.setBounds(20, 75, 495, 15);
 
 		panelTop.add(labelCalendar);
 		panelTop.add(buttonCreateCal);
 		panelTop.add(buttonImportCal);
 		panelTop.add(buttonDeleteCal);
-
+		panelTop.add(labelVacationList1);
+		panelTop.add(labelVacationList2);
 
 		// tooltips
 		buttonCreateCal.setToolTipText("Crear nuevo calendario");
@@ -90,69 +88,59 @@ public class VistaCalendario extends Vista {
 		buttonDeleteCal.setToolTipText("Eliminar calendario existente");
 	}
 
-	private void init_panelCentral() {
+	private void init_panelInfo1() {
 		// panel
-		panelCentral.setLayout(null);
-		panelCentral.setBounds(0, 50, width, 265);
-
+		panelInfo1.setLayout(null);
+		panelInfo1.setBounds(0, 50, 525, 265);
 		// components
-		labelVacationList1 = new JLabel(String.format("%62s", "Numero de Drs. por turno:"));
-//		labelVacationList1.setOpaque(true);
-//		labelVacationList1.setBackground(Color.white);
-//		labelVacationList1.setBorder(BorderFactory.createLineBorder(Color.cyan, 1));
-		labelVacationList1.setFont(new Font("Arial", Font.BOLD, 12));
-		labelVacationList1.setBounds(20, 10, 495, 20);
+//		dlm.addElement(String.format(pattern, "17-ene",23,12,7,"", ""));
+//		dlm.addElement(String.format(pattern, "31-ene",23,23,12,"", ""));
+//		dlm.addElement(String.format(pattern, "2-feb",0,0,0,"", ""));
+//		dlm.addElement(String.format(pattern, "3-feb",0,0,0,"", ""));
+//		dlm.addElement(String.format(pattern, "4-feb",0,0,0,"", ""));
+//		dlm.addElement(String.format(pattern, "17-feb",25,25,12,"", ""));
+//		dlm.addElement(String.format(pattern, "17-mar",25,25,12,"", ""));
+//		dlm.addElement(String.format(pattern, "14-abr",26,25,12,"", ""));
+//		dlm.addElement(String.format(pattern, "19-abr",26,25,12,"", ""));
+//		dlm.addElement(String.format(pattern, "23-jun",1220,1222,12100,"", "san juan"));
+//		dlm.addElement(String.format(pattern, "14-ago",32,33,23,"", ""));
+//		dlm.addElement(String.format(pattern, "15-sep",23,23,13,"", ""));
+//		dlm.addElement(String.format(pattern, "25-dic",35,23,43,"","navidad"));
+//		dlm.addElement(String.format(pattern, "31-dic",45,60,98,"","noche vieja"));
 
-		labelVacationList2 = new JLabel(String.format(" %s%12s%20s%21s%23s", "Dia vacacional","M","T","N","Fecha especial"));
-//		labelVacationList2.setOpaque(true);
-//		labelVacationList2.setBackground(Color.cyan);
-		labelVacationList2.setFont(new Font("Arial", Font.BOLD, 12));
-		labelVacationList2.setBounds(20, 30, 495, 20);
-		
-		dlm.addElement(String.format(pattern, "17-ene",23,12,7,"", ""));
-		dlm.addElement(String.format(pattern, "31-ene",23,23,12,"", ""));
-		dlm.addElement(String.format(pattern, "2-feb",0,0,0,"", ""));
-		dlm.addElement(String.format(pattern, "3-feb",0,0,0,"", ""));
-		dlm.addElement(String.format(pattern, "4-feb",0,0,0,"", ""));
-		dlm.addElement(String.format(pattern, "17-feb",25,25,12,"", ""));
-		dlm.addElement(String.format(pattern, "17-mar",25,25,12,"", ""));
-		dlm.addElement(String.format(pattern, "14-abr",26,25,12,"", ""));
-		dlm.addElement(String.format(pattern, "19-abr",26,25,12,"", ""));
-		dlm.addElement(String.format(pattern, "23-jun",1220,1222,12100,"", "san juan"));
-		dlm.addElement(String.format(pattern, "14-ago",32,33,23,"", ""));
-		dlm.addElement(String.format(pattern, "15-sep",23,23,13,"", ""));
-		dlm.addElement(String.format(pattern, "25-dic",35,23,43,"","navidad"));
-		dlm.addElement(String.format(pattern, "31-dic",45,60,98,"","noche vieja"));
+		listVacations = new JList<String>(dlm);
+		listVacations.setSelectionMode(ListSelectionModel.SINGLE_SELECTION );
+		listVacations.setFont(new Font("Courier", Font.PLAIN,14));
+		scrollPanel = new JScrollPane(listVacations);
+		scrollPanel.setBounds(20, 45, 495, 200);
 
-		vacationList = new JList<String>(dlm);
-		vacationList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION );
-		vacationList.setFont(new Font("Courier", Font.BOLD,14));
-		scrollPanel = new JScrollPane(vacationList);
-		scrollPanel.setBounds(20, 50, 495, 211);
-		scrollPanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-
+		panelInfo1.add(scrollPanel);
+	}
+	
+	private void init_panelInfo2() {
 		
-		dateChooser.setBounds(525, 50, 150, 20);
-		dateChooser.setEnabled(true);
-		
-		buttonAddVacation.setBounds(525, 80, 150, 30);
-//		buttonAddVacation.setEnabled(true);
-		buttonModVacation.setBounds(525, 120, 150, 30);
-//		buttonModVacation.setEnabled(false);
-		buttonDelVacation.setBounds(525, 160, 150, 30);
-//		buttonDelVacation.setEnabled(false);
-
-		panelCentral.add(scrollPanel);
-		panelCentral.add(labelVacationList1);
-		panelCentral.add(labelVacationList2);
-		panelCentral.add(scrollPanel);
-		
-		panelCentral.add(dateChooser);
-		panelCentral.add(buttonAddVacation);
-		panelCentral.add(buttonModVacation);
-		panelCentral.add(buttonDelVacation);
 	}
 
+	private void init_panelRight() {
+		// panel
+		panelRight.setLayout(null);
+		panelRight.setBounds(525, 95, 175, 220);
+		// components
+		dateChooser.setBounds(0, 0, 150, 25);
+		dateChooser.setEnabled(false);
+		buttonAddVacation.setBounds(0, 35, 150, 40);
+		buttonAddVacation.setEnabled(false);
+		buttonModVacation.setBounds(0, 95, 150, 40);
+		buttonModVacation.setEnabled(false);
+		buttonDelVacation.setBounds(0, 155, 150, 40);
+		buttonDelVacation.setEnabled(false);
+
+		panelRight.add(dateChooser);
+		panelRight.add(buttonAddVacation);
+		panelRight.add(buttonModVacation);
+		panelRight.add(buttonDelVacation);
+	}
+	
 	private void init_panelBottom() {
 		// panel
 		panelBottom.setLayout(null);
@@ -164,82 +152,233 @@ public class VistaCalendario extends Vista {
 		panelBottom.add(buttonHelp);
 	}
 	
+	private void change_panelInfo() {
+		
+	}
+
 	protected void init_panelContents() {
 		panelContents.setLayout(null);
 		panelContents.add(panelTop);
-		panelContents.add(panelCentral);
+		panelContents.add(panelInfo1);
+		panelContents.add(panelRight);
 		panelContents.add(panelBottom);
 	}
+
+	//******************************************************************************//
+	/* Methods of the listener interfaces */
+	public void actionPerformed_buttonCreateCal(ActionEvent event) {
+		String s = JOptionPane.showInputDialog(null, "Introducir anyo del calendario ", "Crear calendario", JOptionPane.PLAIN_MESSAGE );
+		if ((s != null) && (s.length() > 0)) {
+			try {
+				int year = Integer.parseInt(s);
+				GregorianCalendar currentDate = new GregorianCalendar();
+				int minYear = currentDate.get(GregorianCalendar.YEAR);
+				int maxYear = currentDate.get(GregorianCalendar.YEAR) + 5;
+				if (year < minYear || year > maxYear) {
+					rejectedOperationDialog("El anyo introducido esta fuera del rango " + minYear + " - " + maxYear + " ");
+				}
+				else {
+					ctrlPresentacion.createCalendar(year);
+					calendarYear = ctrlPresentacion.getCalendarYear();
+					labelCalendar.setText("Calendario vacacional " + calendarYear);
+					labelCalendar.setFont(new Font("Arial", Font.BOLD, 16));
+
+					buttonDeleteCal.setVisible(true);
+					GregorianCalendar minSelectDate, maxSelectDate;
+					minSelectDate = new GregorianCalendar(calendarYear,0,1,0,0,0);
+					maxSelectDate = new GregorianCalendar(calendarYear,11,31,23,59,59);
+//					dateChooser.setDate(minSelectDate.getTime());
+					dateChooser.setSelectableDateRange(minSelectDate.getTime(), maxSelectDate.getTime());
+					dateChooser.setEnabled(true);
+					buttonAddVacation.setEnabled(true);
+					buttonCreateCal.setVisible(false);
+					successfulOperationDialog("Se ha creado el calendario del anyo " + year + " ! ");
+				}
+			}
+			catch(NumberFormatException e) {
+				rejectedOperationDialog("El anyo introducido no es correcto ");
+			}
+			return;
+		}
+		canceledOperationDialog("No se ha creado el calendario !");
+	}
+
+	public void actionPerformed_buttonDeleteCal(ActionEvent event) {
+		if (confirmationDialog("Eliminar el calendario actual ? ", "Eliminar calendario") == JOptionPane.YES_OPTION) {
+			int year = calendarYear;
+			calendarYear = -1;
+			labelCalendar.setText("(No hay calendario vacacional)");
+			labelCalendar.setFont(new Font("Arial", Font.ITALIC, 16));
+			dateChooser.setCalendar(null);
+			dateChooser.setEnabled(false);
+			buttonAddVacation.setEnabled(false);
+			buttonCreateCal.setVisible(true);
+			buttonDeleteCal.setVisible(false);
+			dlm.clear();
+			successfulOperationDialog("Se ha eliminado el calendario vacacional " + year + " ! ");
+		}
+	}
+
+	public void actionPerformed_buttonImportCal(ActionEvent event) {
+		if (calendarYear != -1) {
+			if (confirmationDialog("Importar un nuevo calendario y reemplazar el calendario actual ? ", "Importar calendario") == JOptionPane.CANCEL_OPTION) {
+				return;
+			}
+		}
+		JFileChooser chooser = new JFileChooser();
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("Text File (.txt)", "txt");
+		chooser.setFileFilter(filter);
+		chooser.showOpenDialog(frameView);
+	}
+	//--------------------------------------------------------------------------//
+	public void actionPerformed_listVacations(ListSelectionEvent event) {
+		if (!listVacations.isSelectionEmpty()) {
+			buttonModVacation.setEnabled(true);
+			buttonDelVacation.setEnabled(true);
+		}
+		else {
+			buttonModVacation.setEnabled(false);
+			buttonDelVacation.setEnabled(false);
+		}
+	}
 	
-	//	//************************************************//
-	//	/* Methods of the listener interfaces */
-	public void actionPerformed_buttonDelVacation (ActionEvent event) {
-//		dlm.remove(vacationList.getSelectedIndex());
+	
+	public void actionPerformed_dateChooser(ActionEvent event) {
+		if (dateChooser.getDate() == null)
+		dateChooser.setCalendar(new GregorianCalendar(calendarYear,0,1,0,0,0));
 	}
 
-	public void actionPerformed_buttonGoBack (ActionEvent event) {
+//	public void actionPerformed_buttonAddVacation(ActionEvent event) {
+//		Date date = dateChooser.getDate();
+//		if (date != null && !(date.before(dateChooser.getMinSelectableDate())) && !(date.after(dateChooser.getMaxSelectableDate()))) {
+//			
+////			vacations = ctrlPresentacion.getALLVacations();
+//		}
+//		else {
+//			rejectedOperationDialog("No se ha introducido una fecha o la fecha introducida no es correcta ");
+//		}
+//	}
+	
+	public void actionPerformed_buttonAddVacation(ActionEvent event) {
+		Date date = dateChooser.getDate();
+		if (date != null && !(date.before(dateChooser.getMinSelectableDate())) && !(date.after(dateChooser.getMaxSelectableDate()))) {
+			SimpleDateFormat sdf = new SimpleDateFormat("d 'de' MMMM 'de' yyyy");
+			if (confirmationDialog("Anadir el dia vacacional " + sdf.format(date) + " ? ", "Anadir dia vacacional") == JOptionPane.YES_OPTION) {
+				sdf.applyPattern("d-MMM");
+				dlm.addElement(String.format(pattern, sdf.format(date),0,0,0,"", ""));
+				sdf.applyPattern("d 'de' MMMM 'de' yyyy");
+				successfulOperationDialog("Se ha anadido el dia vacacional " + sdf.format(date) + " ! ");
+			}
+			else {
+				canceledOperationDialog("No se ha anadido el dia vacacional !");
+			}
+		}
+		else {
+			rejectedOperationDialog("No se ha introducido una fecha o la fecha introducida no es correcta ");
+		}
+		dateChooser.setDate(null);
+	}
+
+	public void actionPerformed_ModVacation(ActionEvent event) {
+		if (!listVacations.isSelectionEmpty()) {
+//			ctrlPresentacion.changeView("vistaDiaCalendario", panelContents);
+			change_panelInfo();
+		}
+	}
+	
+	public void actionPerformed_buttonDelVacation(ActionEvent event) {
+		if (!listVacations.isSelectionEmpty()) {
+			if (confirmationDialog("Eliminar el dia vacacional ?", "Eliminar dia vacacional") == JOptionPane.YES_OPTION) {
+				dlm.remove(listVacations.getSelectedIndex());
+				successfulOperationDialog("Se ha eliminado el dia vacacional !");
+			}
+		}
+		else {
+			rejectedOperationDialog("No se ha seleccionado ningun dia vacacional ");
+		}
+	}
+	//--------------------------------------------------------------------------//
+	public void actionPerformed_buttonGoBack(ActionEvent event) {
 		ctrlPresentacion.changeView("vistaGestion", panelContents);
-		vacationList.clearSelection();
+		listVacations.clearSelection();
 	}
-
-	/* Assigning listeners */	
+	//--------------------------------------------------------------------------//
+	/* Assigning listeners */
+	//--------------------------------------------------------------------------//
 	protected void assign_listenersComponents() {
-		
-		vacationList.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e) {
-				buttonModVacation.setEnabled(true);
-				buttonDelVacation.setEnabled(true);
+
+		buttonCreateCal.addActionListener(new ActionListener() {
+			public void actionPerformed (ActionEvent event) {
+				actionPerformed_buttonCreateCal(event);
 			}
 		});
 
-		buttonGoBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				actionPerformed_buttonGoBack (e);
+		buttonDeleteCal.addActionListener(new ActionListener() {
+			public void actionPerformed (ActionEvent event) {
+				actionPerformed_buttonDeleteCal(event);
 			}
 		});
 
 		buttonImportCal.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JFileChooser chooser = new JFileChooser();
-				FileNameExtensionFilter filter = new FileNameExtensionFilter("Text File (.txt)", "txt");
-				chooser.setFileFilter(filter);
-				chooser.showOpenDialog(frameView);
+			public void actionPerformed(ActionEvent event) {
+				actionPerformed_buttonImportCal(event);
+			}
+		});
+		//--------------------------------------------------------------------------//
+		listVacations.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent event) {
+				actionPerformed_listVacations(event);
 			}
 		});
 
+		dateChooser.getCalendarButton().addActionListener(new ActionListener() {
+			public void actionPerformed (ActionEvent event) {
+				actionPerformed_dateChooser (event);
+			}
+		});
+		
 		buttonAddVacation.addActionListener(new ActionListener() {
-			public void actionPerformed (ActionEvent e) {
+			public void actionPerformed (ActionEvent event) {
+				actionPerformed_buttonAddVacation(event);
+			}
+		});
 
-			}
-		});
-		
 		buttonModVacation.addActionListener(new ActionListener() {
-			public void actionPerformed (ActionEvent e) {
-				if (!vacationList.isSelectionEmpty()) {
-					ctrlPresentacion.changeView("vistaDiaCalendario", panelContents);
-					vacationList.clearSelection();
-				}
+			public void actionPerformed (ActionEvent event) {
+				actionPerformed_ModVacation (event);
 			}
 		});
-		
+
 		buttonDelVacation.addActionListener(new ActionListener() {
-			public void actionPerformed (ActionEvent e) {
-				if (!vacationList.isSelectionEmpty())
-					dlm.remove(vacationList.getSelectedIndex());
+			public void actionPerformed (ActionEvent event) {
+				actionPerformed_buttonDelVacation(event);
+			}
+		});
+		//--------------------------------------------------------------------------//
+		buttonGoBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				actionPerformed_buttonGoBack (event);
+			}
+		});
+
+		buttonHelp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				//				actionPerformed_buttonHelp (event);
 			}
 		});
 	}
-
-	//************************************************//
+	//******************************************************************************//
 
 	/* Constructors & public methods */
 	public VistaCalendario(CtrlPresentacion pCtrlPresentacion) {
 		super(pCtrlPresentacion);
 	}
-	
+
 	public void init() {
 		init_panelTop();
-		init_panelCentral();
+		init_panelInfo1();
+		init_panelInfo2();
+		init_panelRight();
 		init_panelBottom();
 		init_frameView();
 		init_panelContents();
