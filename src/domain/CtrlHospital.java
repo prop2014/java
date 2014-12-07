@@ -167,15 +167,12 @@ public class CtrlHospital {
 	}
 	
 	public void eliminarDoctor(int id) throws IOException {
-		//try {
 		
-		Doctor doc = new Doctor();// = hosp.getDoctor(id);
-		//}
-		/*catch IOException(e) { //Que devuelva que no existe doctor con ID = id
-			throw new IOException(e);
-		} */
+		if(hosp.existsDoctor(id)){
+			throw new IOException("No existe este doctor en el Hospital");
+		}
 		hosp.deleteDoctor(id);
-		//deleteDoctorData(id)?
+		
 	}
 	
 	//public void asignarCalendario(Calendario cal) {
@@ -190,6 +187,8 @@ public class CtrlHospital {
 			alhosp.add(Double.toString(hosp.getFactorN()));
 		inOut.saveDataHosp(alhosp, hosp.getId());
 	}
+	
+	
 	public void saveDataDoctors()throws IOException{
 		ArrayList<String> alhosp = new ArrayList<String>();
 		alhosp.add(Integer.toString(hosp.docSize()));

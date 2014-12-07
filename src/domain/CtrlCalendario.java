@@ -35,10 +35,8 @@ public class CtrlCalendario {
 	public void readCalendar (int id) throws IOException{
 		ArrayList<String> alcale =new ArrayList<String>();
 		Integer num = id;
-		System.out.print("entru\n");
 		CtrlDatosFichero inOut = new CtrlDatosFichero();
 		if(inOut.existsCalendar(id)){
-			System.out.print("entru2\n");
 			alcale=inOut.getDataCale(num);
 		}
 		if(!alcale.isEmpty()){
