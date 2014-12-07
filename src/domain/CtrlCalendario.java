@@ -28,51 +28,6 @@ public class CtrlCalendario {
 
 
 	/* Metodos publicos */
-	/** Crea un calendario comprobando errores de fechas
-	 * @param id identificador del Hospital
-	 * @throws IOException fichero incorrecto
-	 */
-	public void readCalendar (int id) throws IOException{
-		ArrayList<String> alcale =new ArrayList<String>();
-		Integer num = id;
-		CtrlDatosFichero inOut = new CtrlDatosFichero();
-		if(inOut.existsCalendar(id)){
-			alcale=inOut.getDataCale(num);
-		}
-		if(!alcale.isEmpty()){
-			int year = Integer.parseInt(alcale.get(0));
-			int size=Integer.parseInt(alcale.get(1));
-			int dia,mes,any,numDrsManana,numDrsTarde,numDrsNoche;
-			String specialManana;
-			String specialTarde;
-			String specialNoche;
-
-			calendar = new Calendario(year);
-			int j=2;
-			for (int i = 0; i < size;++i){
-				dia=Integer.parseInt(alcale.get(j));
-				++j;
-				mes=Integer.parseInt(alcale.get(j));
-				++j;
-				any=Integer.parseInt(alcale.get(j));
-				++j;
-				numDrsManana=Integer.parseInt(alcale.get(j));
-				++j;
-				numDrsTarde=Integer.parseInt(alcale.get(j));
-				++j;
-				numDrsNoche=Integer.parseInt(alcale.get(j));
-				++j;
-				specialManana=alcale.get(j);
-				++j;
-				specialTarde=alcale.get(j);
-				++j;
-				specialNoche=alcale.get(j);
-				addVacationDay(dia,mes,any,numDrsManana,numDrsTarde,numDrsNoche,specialManana,specialTarde,specialNoche);
-				++j;
-			}
-		}
-	}
-
 	/** 
 	 *@return el calendario
 	 */
@@ -80,6 +35,30 @@ public class CtrlCalendario {
 		return calendar;
 	}
 
+	public boolean addVacationDay2(GregorianCalendar date, int morningDrs, int eveningDrs, int nightDrs, String especialDate) throws IOException{
+		try {
+			if(date.get(GregorianCalendar.YEAR) != calendar.getCalendarYear()) throw new IOException("La fecha del dia vacacional no corresponde al calendario actual ");
+			else if (calendar.existsVacationDay(date)) throw new IOException("El dia vacacional ya existe");
+			else if (morningDrs < 0) throw new IOException("El numero de doctores del turno de manana no es correcto ");
+			else if (eveningDrs < 0) throw new IOException("El numero de doctores del turno de tarde no es correcto ");
+			else if (nightDrs < 0) throw new IOException("El numero de doctores del turno de noche no es correcto ");
+			// making changes
+			else {
+				calendar.addVacationDay(date);
+				calendar.getShift(date, shiftTypes[0]).setNumberOfDoctors(morningDrs);
+				calendar.getShift(date, shiftTypes[1]).setNumberOfDoctors(eveningDrs);
+				calendar.getShift(date, shiftTypes[2]).setNumberOfDoctors(nightDrs);
+				calendar.getShift(date, shiftTypes[0]).setSpecialDate(especialDate);
+				calendar.getShift(date, shiftTypes[1]).setSpecialDate(especialDate);
+				calendar.getShift(date, shiftTypes[2]).setSpecialDate(especialDate);
+				return true;
+			}
+		}
+		catch (IOException e) {
+			throw new IOException(e);
+		}
+	}
+	
 	public void addVacationDay(int dia, int mes, int any, int numDrsManana, int numDrsTarde, int numDrsNoche, String especialManana, String especialTarde, String especialNoche) throws IOException{
 		GregorianCalendar date = new GregorianCalendar(any,mes-1,dia);
 		try {
@@ -142,6 +121,59 @@ public class CtrlCalendario {
 		}
 	}
 
+	public int getCalendarYear() {
+		return calendar.getCalendarYear();
+	}
+	
+	public ArrayList<GregorianCalendar> getALLVacations() {
+		return calendar.getALLVacationDates();
+	}
+	
+	/** Crea un calendario comprobando errores de fechas
+	 * @param id identificador del Hospital
+	 * @throws IOException fichero incorrecto
+	 */
+	public void readCalendar (int id) throws IOException{
+		ArrayList<String> alcale =new ArrayList<String>();
+		Integer num = id;
+		CtrlDatosFichero inOut = new CtrlDatosFichero();
+		if(inOut.existsCalendar(id)){
+			alcale=inOut.getDataCale(num);
+		}
+		if(!alcale.isEmpty()){
+			int year = Integer.parseInt(alcale.get(0));
+			int size=Integer.parseInt(alcale.get(1));
+			int dia,mes,any,numDrsManana,numDrsTarde,numDrsNoche;
+			String specialManana;
+			String specialTarde;
+			String specialNoche;
+
+			calendar = new Calendario(year);
+			int j=2;
+			for (int i = 0; i < size;++i){
+				dia=Integer.parseInt(alcale.get(j));
+				++j;
+				mes=Integer.parseInt(alcale.get(j));
+				++j;
+				any=Integer.parseInt(alcale.get(j));
+				++j;
+				numDrsManana=Integer.parseInt(alcale.get(j));
+				++j;
+				numDrsTarde=Integer.parseInt(alcale.get(j));
+				++j;
+				numDrsNoche=Integer.parseInt(alcale.get(j));
+				++j;
+				specialManana=alcale.get(j);
+				++j;
+				specialTarde=alcale.get(j);
+				++j;
+				specialNoche=alcale.get(j);
+				addVacationDay(dia,mes,any,numDrsManana,numDrsTarde,numDrsNoche,specialManana,specialTarde,specialNoche);
+				++j;
+			}
+		}
+	}
+	
 	public void writeCalendar(int id) throws IOException{
 		ArrayList<String> alcal = new ArrayList<String>();
 		if(calendar.getNumberOfVacationDates()>0){	
@@ -184,10 +216,5 @@ public class CtrlCalendario {
 		}
 		CtrlDatosFichero inOut = new CtrlDatosFichero();
 		inOut.saveDataCale(alcal, id);
-	}
-
-
-	public int getCalendarYear() {
-		return calendar.getCalendarYear();
 	}
 }

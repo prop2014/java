@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -18,6 +19,7 @@ public class CtrlPresentacion {
 	
 	private JFrame frameView;
 	private CtrlHospital ctrlHospital;
+	private CtrlCalendario ctrlCalendario;
 	private CtrlDoctor ctrlDoctor;
 	private VistaCjtHospitales vistaCjtHospitales;
 	private VistaCrearHospital vistaCrearHospital;
@@ -40,6 +42,7 @@ public class CtrlPresentacion {
 	public CtrlPresentacion(){
 		init_frameView();
 		ctrlHospital = new CtrlHospital();
+		ctrlCalendario = new CtrlCalendario(ctrlHospital.getCalendar());
 		ctrlDoctor = new CtrlDoctor();
 		vistaCjtHospitales = new VistaCjtHospitales(this);
 		vistaCrearHospital = new VistaCrearHospital(this);
@@ -85,7 +88,7 @@ public class CtrlPresentacion {
 		vistaPlantillaDoctores.init();
 		vistaDoctor.init();
 		vistaCalendario.init();
-		vistaDiaCalendario.init();
+//		vistaDiaCalendario.init();
 		vistaRestriccion.init();
 		vistaMAXTurnosporDia.init();
 		vistaNOTTurno.init();
@@ -327,6 +330,25 @@ public class CtrlPresentacion {
 		} catch (IOException e) {throw new IOException(e);}
 		//ctrlDoctor.saveDataRes(idHosp);
 	}
+	/* Calendar methods */
+	//--------------------------------------------------------------------------//
+	public void createCalendar(int year) {
+		ctrlHospital.addCalendar(year);
+		ctrlCalendario = new CtrlCalendario(ctrlHospital.getCalendar());
+	}
 	
+	public int getCalendarYear() {
+		return ctrlCalendario.getCalendarYear();
+	}
 	
+	public ArrayList<GregorianCalendar> getALLVacations() {
+		return ctrlCalendario.getALLVacations();
+	}
+	
+	public boolean addVacation(GregorianCalendar date, int morningDrs, int eveningDrs, int nightDrs, String especialDate) throws IOException{
+		try {
+			return ctrlCalendario.addVacationDay2(date, morningDrs, eveningDrs, nightDrs, especialDate);
+		}
+		catch (IOException e) {throw new IOException(e);}
+	}
 }
