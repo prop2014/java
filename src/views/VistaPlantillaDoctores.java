@@ -6,22 +6,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * Vista principal de la gestion de una plantilla de doctores de un hospital
  * @author Axel Pelaez
  */
 
-// ID VISTA 6
+
 
 
 	public class VistaPlantillaDoctores {
 		
 		private CtrlPresentacion ctrlPresentacion;
-		private ArrayList<String> doctores;
+		ArrayList<ArrayList<String>> doctores;
 		
 		//Componentes interficie
 		private JFrame frameView;
@@ -30,7 +31,12 @@ import javax.swing.border.EmptyBorder;
 		private JPanel panelCenterButtons = new JPanel();
 		
 		//SCROLL PANEL
-		private JList<String> list = new JList<String>();
+		
+		final String[] fila1 ={"<html><LEFT>Id</LEFT></html>","<html><LEFT>Nombre</LEFT></html>",
+								"<html><LEFT>Sueldo/Turnos</LEFT></html>", "<html><LEFT>Max turno</LEFT></html>"};
+		final Object[][] datos={};
+		
+		private JTable tabla = new JTable();
 		private JScrollPane scrollPanel = new JScrollPane();
 		
 		//CENTER
@@ -48,7 +54,7 @@ import javax.swing.border.EmptyBorder;
 		
 		private void inicializar_frameView() {
 			
-			/*** DESCOMENTAR PARA EDITAR *
+			/** DESCOMENTAR PARA EDITAR *
 			frameView =  new JFrame("Programador Guardias");
 			frameView.setMinimumSize(new Dimension(700, 400));
 			frameView.setPreferredSize(frameView.getMinimumSize());
@@ -56,7 +62,7 @@ import javax.swing.border.EmptyBorder;
 			frameView.setLocationRelativeTo(null);
 			frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			frameView.getContentPane().setBackground(Color.WHITE);
-			/*** END DESCOMENTAR PARA EDITAR */
+			 END DESCOMENTAR PARA EDITAR **/
 			
 			frameView = ctrlPresentacion.getFrame();
 			JPanel contentPane = (JPanel) frameView.getContentPane();
@@ -103,14 +109,20 @@ import javax.swing.border.EmptyBorder;
 			
 			scrollPanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 			
-			scrollPanel.setBounds(52, 66, 238, 225);
+			scrollPanel.setBounds(52, 66, 361, 225);
 			
 			/// END: GESTIONADO POR EL BUILDER NO TOCAR
 			
 			// Components
 			panelCenterButtons.add(scrollPanel);
-			scrollPanel.setViewportView(list);
-			list.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+			//scrollPanel.setViewportView(list);
+			//list.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+			
+			scrollPanel.setViewportView(tabla);
+			tabla.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+			
+			tabla.setForeground(Color.red);
+			tabla.setBackground(Color.white);
 			
 			panelCenterButtons.add(labelPanel1);
 			panelCenterButtons.add(buttonVolver);
@@ -166,30 +178,46 @@ import javax.swing.border.EmptyBorder;
 					    options[1]);
 				}
 			});
-			
-			
-
-			
-			
+					
 			
 		}
 		
 		private void loadDoctores() {
-			doctores = new ArrayList<String>();
+			ArrayList<ArrayList<String>> doctores = new ArrayList<ArrayList<String>>();
 			try {
+				
 				doctores = ctrlPresentacion.loadDoctores();
 			} catch (IOException e) {
-				doctores.add("No doctores disponibles");
+				// "No doctores disponibles";
 			}
 			
-			DefaultListModel<String> model = new DefaultListModel<String>();
-		    for(String st : doctores){
-		    	st = st.replace("%", " ");
-		         model.addElement(st);
-		    }    
-		    list.setModel(model);  
-		    list.revalidate();
-			list.repaint();
+			
+			DefaultTableModel dtm = new DefaultTableModel(datos,fila1){
+			    public boolean isCellEditable(int row, int column) {
+			        return false;
+			    }
+			}; 
+			
+			if(!doctores.isEmpty()){
+				
+				
+				
+				for(ArrayList<String> arrayDoc : doctores){
+					String[] row = new String[arrayDoc.size()];
+					row = arrayDoc.toArray(row);
+					dtm.addRow(row); 
+				}
+			
+			}
+			
+			
+			tabla.setModel(dtm);  
+			tabla.revalidate();
+			tabla.repaint();
+			
+		    
+			
+			
 			
 		}
 		
@@ -202,8 +230,8 @@ import javax.swing.border.EmptyBorder;
 		 * @wbp.parser.entryPoint
 		 */
 		public VistaPlantillaDoctores(CtrlPresentacion pCtrlPresentacion) {
-			/** DESCOMENTAR PARA EDITAR*/
-			 // inicializarComponents();
+			/** DESCOMENTAR PARA EDITAR
+			  inicializarComponents(); */
 			 
 			ctrlPresentacion = pCtrlPresentacion;
 		}

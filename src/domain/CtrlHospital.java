@@ -39,7 +39,7 @@ public class CtrlHospital {
 		}
 	}
 	
-	public ArrayList<String> verDoctores() throws IOException {
+	public ArrayList<ArrayList<String>> verDoctores() throws IOException {
 		return hosp.verDoctores();
 	}
 	

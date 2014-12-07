@@ -234,7 +234,7 @@ public class CtrlPresentacion {
 		return ctrlHospital.verHospitales();
 	}
 	
-	public ArrayList<String> loadDoctores() throws IOException {
+	public ArrayList<ArrayList<String>> loadDoctores() throws IOException {
 		return ctrlHospital.verDoctores();
 		
 	}
