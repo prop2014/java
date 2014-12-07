@@ -62,7 +62,9 @@ public class VistaGestion {
 		buttonSol.setBounds(467, 132, 181, 122);
 		buttonDoc.setBounds(263, 134, 173, 119);
 		buttonVolver.setBounds(40, 324, 157, 25);
-		labelPanel1.setBounds(32, 12, 177, 15);
+		labelPanel1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		labelPanel1.setBounds(36, 32, 230, 15);
+		
 		panelCenterButtons.setLayout(null);
 		/// END: GESTIONADO POR EL BUILDER NO TOCAR
 		// Components
@@ -122,13 +124,19 @@ public class VistaGestion {
 	//METODOS PUBLICOS
 	public VistaGestion(CtrlPresentacion pCtrlPresentacion) {
 		ctrlPresentacion = pCtrlPresentacion;
-		/** DESCOMENTAR PARA EDITAR
-		 * inicializarComponents();
-		 */
+		/** DESCOMENTAR PARA EDITAR *
+		  inicializarComponents();
+		 /**/
 	}
 	
 	public void init() {
 		inicializarComponents();
+	}
+	
+	public void cargarHospital() {
+		String name = ctrlPresentacion.getNameHospital();
+		name = name.replace("%", " ");
+		labelPanel1.setText(name);
 	}
 	
 	public JPanel getPanel() {
@@ -139,6 +147,7 @@ public class VistaGestion {
 		panelContents.setVisible(false);
 	}
 	public void showPanel() {
+		cargarHospital();
 		panelContents.setVisible(true);
 	}
 	

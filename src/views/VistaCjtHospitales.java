@@ -127,9 +127,17 @@ public class VistaCjtHospitales {
 		
 		btnSeleccionarHospital.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Saber que Hospital está seleccionado
-				// TODO changeViewAGestion(Hospital seleccionado)
-				ctrlPresentacion.changeView("vistaGestion", panelContents);
+				if(!list.isSelectionEmpty()){
+					String[] parts = (list.getSelectedValue()).split("-");
+					String idHosp = parts[0];
+					try{
+						ctrlPresentacion.cargarHospital(Integer.parseInt(idHosp));
+					} catch (IOException eX){
+						JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
+					}
+					ctrlPresentacion.changeView("vistaGestion", panelContents);
+				}
+				else {JOptionPane.showMessageDialog(null, "Debe seleccionar un hospital", "Error", JOptionPane.ERROR_MESSAGE); }
 			}
 		});
 		
@@ -154,9 +162,9 @@ public class VistaCjtHospitales {
 		btnImportarHospital.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					JFileChooser chooser = new JFileChooser();
-					FileNameExtensionFilter filter = new FileNameExtensionFilter(
+					/*FileNameExtensionFilter filter = new FileNameExtensionFilter(
 					        "Text File (.txt)", "txt");
-					  //  chooser.setFileFilter(filter);
+					  //  chooser.setFileFilter(filter);*/
 					int returnVal = chooser.showOpenDialog(frameView);
 					File f = chooser.getSelectedFile();
 					if(returnVal == JFileChooser.APPROVE_OPTION) {

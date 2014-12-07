@@ -248,6 +248,14 @@ public class CtrlPresentacion {
 		ctrlHospital.importarHospital(path);
 	}
 	
+	public void cargarHospital(int idHosp) throws IOException {
+		ctrlHospital.cargarHospital(idHosp);
+	}
+	
+	public String getNameHospital() {
+		return ctrlHospital.getNameHospital();
+	}
+	
 	public void crearDoctor(String nameDoc, int idD, int maxTurnos, double sueldo) throws IOException{
 		try {
 			ctrlHospital.crearDoctor(idD, nameDoc, maxTurnos, sueldo);

@@ -166,6 +166,10 @@ public class CtrlHospital {
 		return hosp;
 	}
 	
+	public String getNameHospital(){
+		return hosp.getNombre();
+	}
+	
 	public void eliminarDoctor(int id) throws IOException {
 		
 		if(hosp.existsDoctor(id)){
