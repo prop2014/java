@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import javax.swing.border.EmptyBorder;
 
 /**
@@ -172,32 +173,18 @@ public class VistaDoctor {
 					public void actionPerformed(ActionEvent e) {
 						String nameDoc = textNombre.getText();
 						nameDoc=nameDoc.replaceAll(" ", "%");
-						
-						Scanner sc1 = new Scanner(textID.getText());
-						Scanner sc2 = new Scanner(textMaxTurnos.getText());
-						Scanner sc3 = new Scanner(textSueldo.getText());
-						
-						Double sueldo = 0.00; 
-						Integer maxTurnos, id; 
-						
-						if(!nameDoc.isEmpty() && sc1.hasNextInt() 
-								&& sc2.hasNextInt() && sc3.hasNextDouble()) {
-							
-							id = Integer.parseInt(textID.getText());
-							maxTurnos = Integer.parseInt(textMaxTurnos.getText());
-							sueldo = Double.parseDouble(textSueldo.getText());
-							try {
-								ctrlPresentacion.crearDoctor(nameDoc, id, maxTurnos, sueldo);
-							} catch (IOException eX) {
-								System.out.printf("Doctor no creado");
-								JOptionPane.showMessageDialog(null, "Doctor no creado", "Error",JOptionPane.ERROR_MESSAGE); 
-							}
-						} else {
+						try {
+							int id = Integer.parseInt(textID.getText());
+							int maxTurnos = Integer.parseInt(textMaxTurnos.getText());
+							Double sueldo = Double.parseDouble(textSueldo.getText());
+							if(nameDoc.isEmpty()) throw new IOException("El doctor no tiene nombre");
+							ctrlPresentacion.crearDoctor(nameDoc, id, maxTurnos, sueldo);
+						} catch (IOException eX) {
+							JOptionPane.showMessageDialog(null, eX, "Error",JOptionPane.ERROR_MESSAGE); 
+						} catch (NumberFormatException nE){
 							JOptionPane.showMessageDialog(null, "Alguno de los factores no es un valor correcto", "Error", JOptionPane.ERROR_MESSAGE); 
 						}
-						sc1.close();
-						sc2.close();
-						sc3.close();
+						
 
 					}
 				});

@@ -140,20 +140,16 @@ public class VistaCrearHospital {
 			public void actionPerformed(ActionEvent e) {
 				String nameHosp = nameHospTextField.getText();
 				nameHosp=nameHosp.replaceAll(" ", "%");
-				Double factM, factT, factN;
-				factM = factT = factN = 0.0;
 				try {
-					factM = Double.parseDouble(mTextField.getText());
-					factT = Double.parseDouble(tTextField.getText());
-					factN = Double.parseDouble(nTextField.getText());
-				} catch (NumberFormatException nE){
-					JOptionPane.showMessageDialog(null, "Alguno de los factores no es un valor correcto", "Error", JOptionPane.ERROR_MESSAGE); 
-				}
-				try {
+					Double factM = Double.parseDouble(mTextField.getText());
+					Double factT = Double.parseDouble(tTextField.getText());
+					Double factN = Double.parseDouble(nTextField.getText());
+					if(nameHosp.isEmpty()) throw new IOException("No le has puesto un nombre al hospital");
 					ctrlPresentacion.crearHospital(nameHosp, factM, factT, factN, pathDoctores, pathCalendario);
 				} catch (IOException eX) {
-					System.out.printf("Hospital no creado");
 					JOptionPane.showMessageDialog(null, eX, "Error",JOptionPane.ERROR_MESSAGE); 
+				} catch (NumberFormatException nE){
+					JOptionPane.showMessageDialog(null, "Alguno de los factores no es un valor correcto", "Error", JOptionPane.ERROR_MESSAGE); 
 				}
 				ctrlPresentacion.changeView("vistaCjtHospitales", panelContents);
 			}
