@@ -29,19 +29,20 @@ public class VistaDoctor {
 			private JList<String> list = new JList<String>();
 			private JScrollPane scrollPanel = new JScrollPane();
 			
+			private String[] docInfo;
+			
 			//CENTER
 			
-			
-			private JLabel labelPanel1 = new JLabel("<html><u>Doctor ''NOMBRE DEL DOCTOR''</u>");
+			private JLabel labelPanel1 = new JLabel();
 			private JLabel labelPanelID  = new JLabel("ID:");
 			private JLabel labelPanelNombre = new JLabel("Nombre:");
 			private JLabel labelPanelMaxTurnos = new JLabel("Max. Turnos:");
 			private JLabel labelPanelSueldo = new JLabel("Sueldo:");
 			
-			private JTextArea textID = new JTextArea("666");
-			private JTextArea textNombre = new JTextArea("Axel Pelaez");
-			private JTextArea textMaxTurnos = new JTextArea("3");
-			private JTextArea textSueldo = new JTextArea("100");
+			private JTextArea textID = new JTextArea();
+			private JTextArea textNombre = new JTextArea();
+			private JTextArea textMaxTurnos = new JTextArea();
+			private JTextArea textSueldo = new JTextArea();
 			
 			private JButton buttonEliminar = new JButton("<html><CENTER>Eliminar<br/>Restriccion</CENTER>");
 			private JButton buttonAnadir = new JButton("<html><CENTER>Añadir<br/>Restriccion</CENTER>");
@@ -97,12 +98,6 @@ public class VistaDoctor {
 				panelCenterButtons.setBorder(new EmptyBorder(70, 20, 20, 0));
 				panelCenterButtons.setLayout(null);
 				
-				
-				/* OLD SETTINGS
-				buttonAnadir.setBounds(442, 152, 173, 57);
-				
-				buttonEliminar.setBounds(442, 234, 173, 57);
-				*/
 				
 				buttonAnadir.setBounds(449, 128, 173, 40);
 				buttonEliminar.setBounds(449, 180, 173, 40);
@@ -164,29 +159,92 @@ public class VistaDoctor {
 			    inicializar_panelContents();
 			    inicializar_panelCenterButtons();
 			    assignar_listenersComponents();
+			    
+			 
+			    
 			  }
 
 
 			private void assignar_listenersComponents() {
 				
 				buttonGuardar.addActionListener(new ActionListener() {
+					
+					
 					public void actionPerformed(ActionEvent e) {
-						String nameDoc = textNombre.getText();
-						nameDoc=nameDoc.replaceAll(" ", "%");
-						try {
-							int id = Integer.parseInt(textID.getText());
-							int maxTurnos = Integer.parseInt(textMaxTurnos.getText());
-							Double sueldo = Double.parseDouble(textSueldo.getText());
-							if(nameDoc.isEmpty()) throw new IOException("El doctor no tiene nombre");
-							ctrlPresentacion.crearDoctor(nameDoc, id, maxTurnos, sueldo);
-						} catch (IOException eX) {
-							JOptionPane.showMessageDialog(null, eX, "Error",JOptionPane.ERROR_MESSAGE); 
-						} catch (NumberFormatException nE){
-							JOptionPane.showMessageDialog(null, "Alguno de los factores no es un valor correcto", "Error", JOptionPane.ERROR_MESSAGE); 
+						
+						if(docInfo[0].equals("")){//Se a entrado para crear
+							Object[] options = {"Aceptar", "Cancelar"};
+							int option = JOptionPane.showOptionDialog(null,
+									"entro por crear",
+								    "Alert",
+								    JOptionPane.YES_NO_CANCEL_OPTION,
+								    JOptionPane.WARNING_MESSAGE,
+								    null,
+								    options,
+								    options[1]);
+							
+							
+							String nameDoc = textNombre.getText();
+							nameDoc=nameDoc.replaceAll(" ", "%");
+							try {
+								int id = Integer.parseInt(textID.getText());
+								int maxTurnos = Integer.parseInt(textMaxTurnos.getText());
+								Double sueldo = Double.parseDouble(textSueldo.getText());
+								if(nameDoc.isEmpty()) throw new IOException("El doctor no tiene nombre");
+								ctrlPresentacion.crearDoctor(nameDoc, id, maxTurnos, sueldo);
+							} catch (IOException eX) {
+								JOptionPane.showMessageDialog(null, eX, "Error",JOptionPane.ERROR_MESSAGE); 
+							} catch (NumberFormatException nE){
+								JOptionPane.showMessageDialog(null, "Alguno de los factores no es un valor correcto", "Error", JOptionPane.ERROR_MESSAGE); 
+							}
+							
 						}
 						
+						else{//Se a entrado para modificar
+							Object[] options = {"Aceptar", "Cancelar"};
+							int option = JOptionPane.showOptionDialog(null,
+									"entro por modificar ",
+								    "Alert",
+								    JOptionPane.YES_NO_CANCEL_OPTION,
+								    JOptionPane.WARNING_MESSAGE,
+								    null,
+								    options,
+								    options[1]);
 
+							
+							if(!docInfo[0].equals(textID.getText()) 
+								|| !docInfo[1].equals(textNombre.getText())
+								|| !docInfo[2].equals(textSueldo.getText()) 
+								|| !docInfo[3].equals(textMaxTurnos.getText())){
+								// Habra que comprobar si se han modificado las restricciones
+									
+							
+							String nameDoc = textNombre.getText();
+							nameDoc=nameDoc.replaceAll(" ", "%");
+							try {
+								int id = Integer.parseInt(textID.getText());
+								int maxTurnos = Integer.parseInt(textMaxTurnos.getText());
+								Double sueldo = Double.parseDouble(textSueldo.getText());
+								if(nameDoc.isEmpty()) throw new IOException("El doctor no tiene nombre");
+								
+								ctrlPresentacion.eliminarDoc(nameDoc);
+								ctrlPresentacion.crearDoctor(nameDoc, id, maxTurnos, sueldo);
+							} catch (IOException eX) {
+								JOptionPane.showMessageDialog(null, eX, "Error",JOptionPane.ERROR_MESSAGE); 
+							} catch (NumberFormatException nE){
+								JOptionPane.showMessageDialog(null, "Alguno de los factores no es un valor correcto", "Error", JOptionPane.ERROR_MESSAGE); 
+							}
+							
+							
+							
+						}
+							
+						}
+						
+						
 					}
+					
+					
 				});
 		
 				
@@ -223,6 +281,8 @@ public class VistaDoctor {
 				
 
 			}
+			
+
 		/*	private void loadDoctores() {
 				doctores = new ArrayList<String>();
 				try {
@@ -256,6 +316,12 @@ public class VistaDoctor {
 			
 			public void init() {
 				inicializarComponents();
+				
+				
+			}
+			
+			public void setDocInfo(String[] newDocInfo){
+				docInfo = newDocInfo;
 			}
 			
 			public JPanel getPanel() {
@@ -266,6 +332,13 @@ public class VistaDoctor {
 				panelContents.setVisible(false);
 			}
 			public void showPanel() {
+				
+				textID.setText(docInfo[0]);
+				textNombre.setText(docInfo[1]); 
+				textMaxTurnos.setText(docInfo[2]);
+				textSueldo.setText(docInfo[3]);
+					
+				
 				panelContents.setVisible(true);
 			}
 			

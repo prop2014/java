@@ -273,6 +273,11 @@ public class CtrlPresentacion {
 		ctrlHospital.eliminarDoc(id);
 		
 	}
+	
+	public void setDocInfo(String[] newDocInfo){
+		vistaDoctor.setDocInfo(newDocInfo);
+	}
+	
 	public void addResMAX_Turnos_por_Dia(int idDoc, int numD) throws IOException {
 		int idRes = ctrlDoctor.getFDIRes(idDoc);
 		try {
