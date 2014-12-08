@@ -261,7 +261,7 @@ public class CtrlHospital {
 	}
 	
 	public void deleteHospital(int id) throws IOException {
-		inOut.removePart(id, null);
+		inOut.removePart(id, ".H");
 	}
 	
 	

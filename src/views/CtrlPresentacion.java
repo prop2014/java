@@ -261,6 +261,10 @@ public class CtrlPresentacion {
 	public String getNameHospital() {
 		return ctrlHospital.getNameHospital();
 	}
+	
+	public void deleteHospital(int id) throws IOException {
+		ctrlHospital.deleteHospital(id);
+	}
 	/*DOCTORES*/
 	public void crearDoctor(String nameDoc, int idD, int maxTurnos, double sueldo) throws IOException{
 		try {
