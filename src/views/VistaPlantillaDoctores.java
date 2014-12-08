@@ -9,6 +9,10 @@ import java.util.ArrayList;
 
 
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -129,6 +133,9 @@ import javax.swing.table.DefaultTableModel;
 			panelCenterButtons.add(buttonEliminar);
 			panelCenterButtons.add(buttonModificar);
 			panelCenterButtons.add(buttonCrear);
+			
+			buttonModificar.setEnabled(false); 
+	        buttonEliminar.setEnabled(false);
 		}
 		
 		
@@ -142,8 +149,16 @@ import javax.swing.table.DefaultTableModel;
 
 		private void assignar_listenersComponents() {
 			
-		
 			
+			//OCULTAR los botones
+			ListSelectionModel listSelectionModel = tabla.getSelectionModel();
+			listSelectionModel.addListSelectionListener(new ListSelectionListener() {
+			        public void valueChanged(ListSelectionEvent e) { 
+			            ListSelectionModel lsm = (ListSelectionModel)e.getSource();
+			            buttonModificar.setEnabled(!lsm.isSelectionEmpty()); 
+			            buttonEliminar.setEnabled(!lsm.isSelectionEmpty()); 
+			        }
+			});
 			
 			
 			
@@ -224,10 +239,13 @@ import javax.swing.table.DefaultTableModel;
 			    public boolean isCellEditable(int row, int column) {
 			        return false;
 			    }
+			
 			}; 
+			//Que no se muevan las columnas
+			tabla.getTableHeader().setReorderingAllowed(false);
+		
 			
 			if(!doctores.isEmpty()){
-				
 				for(ArrayList<String> arrayDoc : doctores){
 					String[] row = new String[arrayDoc.size()];
 					row = arrayDoc.toArray(row);
