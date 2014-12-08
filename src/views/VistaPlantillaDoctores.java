@@ -241,7 +241,8 @@ import javax.swing.table.DefaultTableModel;
 		}
 		public void cargarHospital() {
 			String name = ctrlPresentacion.getNameHospital();
-			name = name.replace("%", " ");
+			name = "Plantilla de "+ name.replace("%", " ");
+			
 			labelPanel1.setText(name);
 		}
 		
@@ -253,6 +254,7 @@ import javax.swing.table.DefaultTableModel;
 			panelContents.setVisible(false);
 		}
 		public void showPanel() {
+			cargarHospital();
 			loadDoctores();
 			panelContents.setVisible(true);
 		}
