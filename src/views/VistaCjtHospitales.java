@@ -150,7 +150,14 @@ public class VistaCjtHospitales {
 						    options,
 						    options[1]);
 						if(returnVal == JOptionPane.YES_NO_CANCEL_OPTION) {
-							//ctrlPresentacion.borrarHospital(list.getSelectedValue());
+							try {
+								if(list.isSelectionEmpty()) throw new IOException("Debe seleccionar un hospital");
+							
+							String[] parts = (list.getSelectedValue()).split("-");
+							//ctrlPresentacion.borrarHospital(parts[0]);
+							} catch (IOException eX) {
+								JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
+							}
 						}
 				}
 				});

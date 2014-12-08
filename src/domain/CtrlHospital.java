@@ -260,6 +260,10 @@ public class CtrlHospital {
 		if(!hosp.isCaleEmpty()) saveDataCale(hosp.getId());
 	}
 	
+	public void deleteHospital(int id) throws IOException {
+		inOut.removePart(id, null);
+	}
+	
 	
 }//FICLAS
 
