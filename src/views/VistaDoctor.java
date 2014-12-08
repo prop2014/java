@@ -82,13 +82,7 @@ public class VistaDoctor {
 				
 			
 			}
-			
-			
-			
-		
-			
 
-		
 			
 			private void inicializar_panelCenterButtons() {
 				
@@ -221,10 +215,22 @@ public class VistaDoctor {
 							
 							String nameDoc = textNombre.getText();
 							nameDoc=nameDoc.replaceAll(" ", "%");
+							
+							JOptionPane.showOptionDialog(null,
+									"entro por modificar "+nameDoc+ " "  +textID.getText() +
+									" "+ textMaxTurnos.getText()+ " " + textSueldo.getText(),
+								    "Alert",
+								    JOptionPane.YES_NO_CANCEL_OPTION,
+								    JOptionPane.WARNING_MESSAGE,
+								    null,
+								    options,
+								    options[1]);
+							
 							try {
 								int id = Integer.parseInt(textID.getText());
 								int maxTurnos = Integer.parseInt(textMaxTurnos.getText());
 								Double sueldo = Double.parseDouble(textSueldo.getText());
+								
 								if(nameDoc.isEmpty()) throw new IOException("El doctor no tiene nombre");
 								
 								ctrlPresentacion.eliminarDoc(nameDoc);
