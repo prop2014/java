@@ -40,7 +40,7 @@ import javax.swing.table.DefaultTableModel;
 		private JScrollPane scrollPanel = new JScrollPane();
 		
 		//CENTER
-		private JLabel labelPanel1 = new JLabel("<html><u>Plantilla de ''NOMBRE DEL HOSPITAL''</u>");
+		private JLabel labelPanel1 = new JLabel();
 		private JButton buttonCrear = new JButton("<html><CENTER>Crear <br/>Doctor</CENTER>");
 		private JButton buttonEliminar = new JButton("<html><CENTER>Eliminar <br/>Doctor</CENTER>");
 		private JButton buttonModificar = new JButton("<html><CENTER>Modificar <br/>Doctor</CENTER>");
@@ -184,12 +184,12 @@ import javax.swing.table.DefaultTableModel;
 		
 		private void loadDoctores() {
 			ArrayList<ArrayList<String>> doctores = new ArrayList<ArrayList<String>>();
-//			try {
-//				
-//				doctores = ctrlPresentacion.loadDoctores();
-//			} catch (IOException e) {
-//				// "No doctores disponibles";
-//			}
+			try {
+				
+				doctores = ctrlPresentacion.loadDoctores();
+			} catch (IOException e) {
+				// "No doctores disponibles";
+			}
 			
 			
 			DefaultTableModel dtm = new DefaultTableModel(datos,fila1){
@@ -199,8 +199,6 @@ import javax.swing.table.DefaultTableModel;
 			}; 
 			
 			if(!doctores.isEmpty()){
-				
-				
 				
 				for(ArrayList<String> arrayDoc : doctores){
 					String[] row = new String[arrayDoc.size()];
@@ -240,6 +238,11 @@ import javax.swing.table.DefaultTableModel;
 		public void init() {
 			loadDoctores();
 			inicializarComponents();
+		}
+		public void cargarHospital() {
+			String name = ctrlPresentacion.getNameHospital();
+			name = name.replace("%", " ");
+			labelPanel1.setText(name);
 		}
 		
 		public JPanel getPanel() {

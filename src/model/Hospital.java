@@ -315,12 +315,33 @@ public class Hospital {
 		calendari = new Calendario(0);
 	}
 	
-	public ArrayList<String> verDoctores() throws IOException {
-		ArrayList<String> docName = new ArrayList<String>();
-		for(Doctor doc: doctors){
-			docName.add(doc.getName());
-		}
-		return docName;
+	public ArrayList<ArrayList<String>> verDoctores() throws IOException {
+		ArrayList<ArrayList<String>> docInfo = new ArrayList<ArrayList<String>>();
+			if(!doctors.isEmpty()){
+				
+				
+				ArrayList<String> Doc = new ArrayList<String>();
+
+				for(Doctor doc: doctors){
+					
+					Doc.add(Integer.toString(doc.getId()));
+					 
+					String name = doc.getName().replace("%", " ");
+					Doc.add(name);
+					
+					Doc.add(Double.toString(doc.getSalaryTurn()));
+					Doc.add(Integer.toString(doc.getNumMaxTurn()));
+					
+					docInfo.add(Doc);
+					
+					Doc = new ArrayList<String>();
+					
+				}
+				
+				
+			}
+			
+		return docInfo;
 	}
 	
 }
