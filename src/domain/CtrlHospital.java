@@ -115,6 +115,7 @@ public class CtrlHospital {
 		//deleteHospitalData(id);
 	}
 	
+	/*DOCTORES*/
 	public void crearDoctor(int id, String nombre, int numMax, double sueldo) throws IOException {
 		if(numMax < 0) throw new IOException("Número máximo de turnos incorrecto");
 		if(sueldo < 0) throw new IOException("Sueldo incorrecto");
@@ -122,6 +123,9 @@ public class CtrlHospital {
 		if(hosp.existsDoctor(id)) throw new IOException("Ya existe un doctor con este identificador");
 		else hosp.addDoctor(doc);
 		//createDoctorData()?
+	}
+	public void eliminarDoc(String id){
+		hosp.deleteDoctor(Integer.parseInt(id));
 	}
 	
 	/**

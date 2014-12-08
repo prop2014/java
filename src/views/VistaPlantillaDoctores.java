@@ -167,15 +167,30 @@ import javax.swing.table.DefaultTableModel;
 			buttonEliminar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 				
-				Object[] options = {"Aceptar", "Cancelar"};
-				JOptionPane.showOptionDialog(null,
-						"Esta seguro de que quiere eliminar el Doctor?",
-					    "Alert",
-					    JOptionPane.YES_NO_CANCEL_OPTION,
-					    JOptionPane.WARNING_MESSAGE,
-					    null,
-					    options,
-					    options[1]);
+					int row = tabla.getSelectedRow();
+					String name = (String) tabla.getValueAt(row, 1);
+					Object[] options = {"Aceptar", "Cancelar"};
+					int option = JOptionPane.showOptionDialog(null,
+							"Esta seguro de que quiere eliminar el Doctor "
+							+ name +" ?",
+						    "Alert",
+						    JOptionPane.YES_NO_CANCEL_OPTION,
+						    JOptionPane.WARNING_MESSAGE,
+						    null,
+						    options,
+						    options[1]);
+					
+					
+					if(option == JOptionPane.YES_OPTION){
+
+						String id = (String) tabla.getValueAt(row, 0); 
+						try {
+							ctrlPresentacion.eliminarDoc(id);
+						} catch (IOException e1) {
+							//Error
+						}
+						loadDoctores();
+					}
 				}
 			});
 					

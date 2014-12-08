@@ -261,7 +261,7 @@ public class CtrlPresentacion {
 	public String getNameHospital() {
 		return ctrlHospital.getNameHospital();
 	}
-	
+	/*DOCTORES*/
 	public void crearDoctor(String nameDoc, int idD, int maxTurnos, double sueldo) throws IOException{
 		try {
 			ctrlHospital.crearDoctor(idD, nameDoc, maxTurnos, sueldo);
@@ -269,6 +269,10 @@ public class CtrlPresentacion {
 		ctrlHospital.saveDataDoctors();
 	}
 	
+	public void eliminarDoc(String id)throws IOException{
+		ctrlHospital.eliminarDoc(id);
+		
+	}
 	public void addResMAX_Turnos_por_Dia(int idDoc, int numD) throws IOException {
 		int idRes = ctrlDoctor.getFDIRes(idDoc);
 		try {
