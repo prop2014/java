@@ -337,18 +337,29 @@ public class CtrlPresentacion {
 		ctrlCalendario = new CtrlCalendario(ctrlHospital.getCalendar());
 	}
 	
+	public boolean addVacation(GregorianCalendar date, int morningDrs, int eveningDrs, int nightDrs, String especialDate) throws IOException {
+		try {
+			return ctrlCalendario.addVacationDay2(date, morningDrs, eveningDrs, nightDrs, especialDate);
+		} catch (IOException e) {throw e;}
+	}
+
+	public boolean modifyVacation(GregorianCalendar date, int morningDrs, int eveningDrs, int nightDrs, String especialDate) throws IOException {
+		try {
+			return ctrlCalendario.modifyVacationDay(date, morningDrs, eveningDrs, nightDrs, especialDate);
+		} catch (IOException e) {throw e;}
+	}
+	
+	public boolean deleteVacationDay(GregorianCalendar date) throws IOException {
+		try {
+			return ctrlCalendario.deleteVacationDay(date);
+		} catch (IOException e) {throw e;}
+	}
+	
 	public int getCalendarYear() {
 		return ctrlCalendario.getCalendarYear();
 	}
 	
-	public ArrayList<GregorianCalendar> getALLVacations() {
+	public ArrayList<ArrayList<String>> getALLVacations() {
 		return ctrlCalendario.getALLVacations();
-	}
-	
-	public boolean addVacation(GregorianCalendar date, int morningDrs, int eveningDrs, int nightDrs, String especialDate) throws IOException{
-		try {
-			return ctrlCalendario.addVacationDay2(date, morningDrs, eveningDrs, nightDrs, especialDate);
-		}
-		catch (IOException e) {throw new IOException(e);}
 	}
 }
