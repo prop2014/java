@@ -124,8 +124,8 @@ public class CtrlHospital {
 		else hosp.addDoctor(doc);
 		//createDoctorData()?
 	}
-	public void eliminarDoc(String id){
-		hosp.deleteDoctor(Integer.parseInt(id));
+	public void eliminarDoc(int id){
+		hosp.deleteDoctor(id);
 	}
 	
 	/**

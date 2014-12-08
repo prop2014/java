@@ -197,7 +197,8 @@ import javax.swing.table.DefaultTableModel;
 
 						String id = (String) tabla.getValueAt(row, 0); 
 						try {
-							ctrlPresentacion.eliminarDoc(id);
+							
+							ctrlPresentacion.eliminarDoc(Integer.parseInt(id));
 						} catch (IOException e1) {
 							//Error
 						}

@@ -167,15 +167,6 @@ public class VistaDoctor {
 					public void actionPerformed(ActionEvent e) {
 						
 						if(docInfo[0].equals("")){//Se a entrado para crear
-							Object[] options = {"Aceptar", "Cancelar"};
-							int option = JOptionPane.showOptionDialog(null,
-									"entro por crear",
-								    "Alert",
-								    JOptionPane.YES_NO_CANCEL_OPTION,
-								    JOptionPane.WARNING_MESSAGE,
-								    null,
-								    options,
-								    options[1]);
 							
 							
 							String nameDoc = textNombre.getText();
@@ -195,15 +186,7 @@ public class VistaDoctor {
 						}
 						
 						else{//Se a entrado para modificar
-							Object[] options = {"Aceptar", "Cancelar"};
-							int option = JOptionPane.showOptionDialog(null,
-									"entro por modificar ",
-								    "Alert",
-								    JOptionPane.YES_NO_CANCEL_OPTION,
-								    JOptionPane.WARNING_MESSAGE,
-								    null,
-								    options,
-								    options[1]);
+						
 
 							
 							if(!docInfo[0].equals(textID.getText()) 
@@ -216,15 +199,7 @@ public class VistaDoctor {
 							String nameDoc = textNombre.getText();
 							nameDoc=nameDoc.replaceAll(" ", "%");
 							
-							JOptionPane.showOptionDialog(null,
-									"entro por modificar "+nameDoc+ " "  +textID.getText() +
-									" "+ textMaxTurnos.getText()+ " " + textSueldo.getText(),
-								    "Alert",
-								    JOptionPane.YES_NO_CANCEL_OPTION,
-								    JOptionPane.WARNING_MESSAGE,
-								    null,
-								    options,
-								    options[1]);
+							
 							
 							try {
 								int id = Integer.parseInt(textID.getText());
@@ -233,7 +208,7 @@ public class VistaDoctor {
 								
 								if(nameDoc.isEmpty()) throw new IOException("El doctor no tiene nombre");
 								
-								ctrlPresentacion.eliminarDoc(nameDoc);
+								ctrlPresentacion.eliminarDoc(id);
 								ctrlPresentacion.crearDoctor(nameDoc, id, maxTurnos, sueldo);
 							} catch (IOException eX) {
 								JOptionPane.showMessageDialog(null, eX, "Error",JOptionPane.ERROR_MESSAGE); 
@@ -247,7 +222,7 @@ public class VistaDoctor {
 							
 						}
 						
-						
+						ctrlPresentacion.changeView("vistaPlantillaDoctores", panelContents);
 					}
 					
 					
@@ -340,9 +315,10 @@ public class VistaDoctor {
 			public void showPanel() {
 				
 				textID.setText(docInfo[0]);
-				textNombre.setText(docInfo[1]); 
-				textMaxTurnos.setText(docInfo[2]);
-				textSueldo.setText(docInfo[3]);
+				textNombre.setText(docInfo[1]);
+				textSueldo.setText(docInfo[2]);
+				textMaxTurnos.setText(docInfo[3]);
+				
 					
 				
 				panelContents.setVisible(true);
