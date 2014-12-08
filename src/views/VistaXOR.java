@@ -4,6 +4,9 @@ import javax.swing.border.EmptyBorder;
 
 import com.toedter.calendar.JDateChooser;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,7 +34,11 @@ public class VistaXOR {
 	private JButton buttonSiguiente = new JButton("Siguiente fecha");
 	private JButton button = new JButton("Aceptar");
 	private JButton buttonVolver = new JButton("Volver");
-	
+
+	private ArrayList<Integer> dia = new ArrayList<Integer>();
+	private ArrayList<Integer> mes = new ArrayList<Integer>();
+	private ArrayList<Integer> year = new ArrayList<Integer>();
+	private ArrayList<String> turno = new ArrayList<String>();
 	
 	private void inicializarComponents() {
 	    inicializar_frameView();
@@ -108,6 +115,53 @@ public class VistaXOR {
 				ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 			}
 		});
+		
+		button.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
+			public void actionPerformed(ActionEvent e) {
+				Date data = dataChooser.getDate();
+				if (data != null && ((checkBox1.isSelected() && !checkBox2.isSelected() && !checkBox3.isSelected()) ||
+				   (!checkBox1.isSelected() && checkBox2.isSelected() && !checkBox3.isSelected()) ||
+				   (!checkBox1.isSelected() && !checkBox2.isSelected() && checkBox3.isSelected()))) {
+						dia.add(data.getDay());
+						mes.add(data.getMonth()+1);
+						year.add(data.getYear());
+						if(checkBox1.isSelected()) turno.add("manana");
+						else if (checkBox2.isSelected()) turno.add("tarde");
+						else if (checkBox3.isSelected()) turno.add("noche");
+					try {
+						 ctrlPresentacion.addResXOR(1, dia, mes, year, turno);
+					} catch (IOException eX) {
+						System.out.printf("Restriccion no creada");
+						JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Valores introducidos incorrectamente", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});	
+		
+		buttonSiguiente.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
+			public void actionPerformed(ActionEvent e) {
+				Date data = dataChooser.getDate();
+				if (data != null && ((checkBox1.isSelected() && !checkBox2.isSelected() && !checkBox3.isSelected()) ||
+				   (!checkBox1.isSelected() && checkBox2.isSelected() && !checkBox3.isSelected()) ||
+				   (!checkBox1.isSelected() && !checkBox2.isSelected() && checkBox3.isSelected()))) {
+						dia.add(data.getDay());
+						mes.add(data.getMonth()+1);
+						year.add(data.getYear());
+						if(checkBox1.isSelected()) turno.add("manana");
+						else if (checkBox2.isSelected()) turno.add("tarde");
+						else if (checkBox3.isSelected()) turno.add("noche");
+						JOptionPane.showMessageDialog(null, "Fecha anadida correctamente, seleccione la siguiente", "Operacion realizada", JOptionPane.INFORMATION_MESSAGE);
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Valores introducidos incorrectamente", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});	
 	}
 	
 	

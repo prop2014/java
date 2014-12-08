@@ -6,7 +6,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Vista secundaria de gestion de restricciones tipo NOT Dia Semana
@@ -24,6 +23,7 @@ public class VistaNOTDiaSemana {
 	private JLabel labelPanel1 = new JLabel("<html><u>Crear Restriccion: Tipo NOT Dia Semana</u>");
 	
 	private JLabel labelPanel3 = new JLabel("<html><CENTER>Seleccione dia de <br/>la semana:</CENTER>");
+	@SuppressWarnings("rawtypes")
 	private JComboBox comboboxInformacion1 = new JComboBox();
 	private JButton button = new JButton("Aceptar");
 	private JButton buttonVolver = new JButton("Volver");
@@ -69,6 +69,7 @@ public class VistaNOTDiaSemana {
 		panelInfo.add(labelPanel1);
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void inicializar_panelButtons() {
 	    // Layout
 		panelButtons.setBorder(new EmptyBorder(70, 20, 20, 0));
