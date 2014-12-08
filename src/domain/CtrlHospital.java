@@ -39,9 +39,9 @@ public class CtrlHospital {
 		}
 	}
 	
-	public ArrayList<ArrayList<String>> verDoctores() throws IOException {
-		return hosp.verDoctores();
-	}
+//	public ArrayList<ArrayList<String>> verDoctores() throws IOException {
+//		return hosp.verDoctores();
+//	}
 	
 	
 	

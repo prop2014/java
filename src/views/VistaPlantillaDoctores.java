@@ -184,12 +184,12 @@ import javax.swing.table.DefaultTableModel;
 		
 		private void loadDoctores() {
 			ArrayList<ArrayList<String>> doctores = new ArrayList<ArrayList<String>>();
-			try {
-				
-				doctores = ctrlPresentacion.loadDoctores();
-			} catch (IOException e) {
-				// "No doctores disponibles";
-			}
+//			try {
+//				
+//				doctores = ctrlPresentacion.loadDoctores();
+//			} catch (IOException e) {
+//				// "No doctores disponibles";
+//			}
 			
 			
 			DefaultTableModel dtm = new DefaultTableModel(datos,fila1){

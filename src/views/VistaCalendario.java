@@ -94,20 +94,20 @@ public class VistaCalendario extends Vista {
 		panelInfo1.setLayout(null);
 		panelInfo1.setBounds(0, 50, 525, 265);
 		// components
-		dlm.addElement("17-ene");
-		//		dlm.addElement(String.format(pattern, "31-ene",23,23,12,"", ""));
-		//		dlm.addElement(String.format(pattern, "2-feb",0,0,0,"", ""));
-		//		dlm.addElement(String.format(pattern, "3-feb",0,0,0,"", ""));
-		//		dlm.addElement(String.format(pattern, "4-feb",0,0,0,"", ""));
-		//		dlm.addElement(String.format(pattern, "17-feb",25,25,12,"", ""));
-		//		dlm.addElement(String.format(pattern, "17-mar",25,25,12,"", ""));
-		//		dlm.addElement(String.format(pattern, "14-abr",26,25,12,"", ""));
-		//		dlm.addElement(String.format(pattern, "19-abr",26,25,12,"", ""));
-		//		dlm.addElement(String.format(pattern, "23-jun",1220,1222,12100,"", "san juan"));
-		//		dlm.addElement(String.format(pattern, "14-ago",32,33,23,"", ""));
-		//		dlm.addElement(String.format(pattern, "15-sep",23,23,13,"", ""));
-		//		dlm.addElement(String.format(pattern, "25-dic",35,23,43,"","navidad"));
-		//		dlm.addElement(String.format(pattern, "31-dic",45,60,98,"","noche vieja"));
+		dlm.addElement(String.format(pattern, "17-ene",23,23,12,"", ""));
+				dlm.addElement(String.format(pattern, "31-jan",23,23,12,"", ""));
+				dlm.addElement(String.format(pattern, "2-feb",0,0,0,"", ""));
+				dlm.addElement(String.format(pattern, "3-feb",0,0,0,"", ""));
+				dlm.addElement(String.format(pattern, "4-feb",0,0,0,"", ""));
+				dlm.addElement(String.format(pattern, "17-feb",25,25,12,"", ""));
+				dlm.addElement(String.format(pattern, "17-mar",25,25,12,"", ""));
+				dlm.addElement(String.format(pattern, "14-abr",26,25,12,"", ""));
+				dlm.addElement(String.format(pattern, "19-apr",26,25,12,"", ""));
+				dlm.addElement(String.format(pattern, "23-jun",1220,1222,12100,"", "san juan"));
+				dlm.addElement(String.format(pattern, "14-ago",32,33,23,"", ""));
+				dlm.addElement(String.format(pattern, "15-sep",23,23,13,"", ""));
+				dlm.addElement(String.format(pattern, "25-dic",35,23,43,"","navidad"));
+				dlm.addElement(String.format(pattern, "31-dic",45,60,98,"","noche vieja"));
 
 		listVacations = new JList<String>(dlm);
 		listVacations.setSelectionMode(ListSelectionModel.SINGLE_SELECTION );
@@ -168,29 +168,27 @@ public class VistaCalendario extends Vista {
 		}
 	}
 
-	private GregorianCalendar getSelectedDate(String strDate) throws ParseException,NumberFormatException {
+	private GregorianCalendar getSelectedDate(String strDate) throws NumberFormatException, ParseException {
 		try {
 			int hyphenIndex = strDate.indexOf('-');
 			int beginIndex = (strDate.charAt(hyphenIndex-2) != ' ') ? hyphenIndex-2 : hyphenIndex-1;
-			
+
 			int d = Integer.parseInt(strDate.substring(beginIndex, hyphenIndex));
 			int M;
 			switch (strDate.substring(hyphenIndex+1, hyphenIndex+4)) {
 			case "ene": {M = 0;break;}
-			case "feb": {M = 2;break;}
-			case "mar": {M = 3;break;}
-			case "abr": {M = 4;break;}
-			case "may": {M = 5;break;}
-			case "jun": {M = 6;break;}
-			case "jul": {M = 7;break;}
-			case "ago": {M = 8;break;}
-			case "sep": {M = 9;break;}
-			case "oct": {M = 10;break;}
-			case "nov": {M = 11;break;}
-			case "dic": {M = 12;break;}
-			default: {
-				throw new ParseException("El mes no es correcto ",0);
-			}
+			case "feb": {M = 1;break;}
+			case "mar": {M = 2;break;}
+			case "abr": {M = 3;break;}
+			case "may": {M = 4;break;}
+			case "jun": {M = 5;break;}
+			case "jul": {M = 6;break;}
+			case "ago": {M = 7;break;}
+			case "sep": {M = 8;break;}
+			case "oct": {M = 9;break;}
+			case "nov": {M = 10;break;}
+			case "dic": {M = 11;break;}
+			default: {throw new ParseException("El mes de la fecha seleccionada no es correcto ",0);}
 			}
 			GregorianCalendar date = new GregorianCalendar(calendarYear,M,d);
 			return date;
@@ -329,19 +327,19 @@ public class VistaCalendario extends Vista {
 
 	public void actionPerformed_buttonDelVacation(ActionEvent event) {
 		if (!listVacations.isSelectionEmpty()) {
-			if (confirmationDialog("Eliminar el dia vacacional ?", "Eliminar dia vacacional") == JOptionPane.YES_OPTION) {
-				try {
-					GregorianCalendar date = getSelectedDate(listVacations.getSelectedValue());
+			try {
+				GregorianCalendar date = getSelectedDate(listVacations.getSelectedValue());
+				SimpleDateFormat sdf = new SimpleDateFormat("d 'de' MMMM 'de' yyyy");
+				if (confirmationDialog("Eliminar el dia vacacional " + sdf.format(date.getTime()) + " ? ", "Eliminar dia vacacional") == JOptionPane.YES_OPTION) {
 					if (ctrlPresentacion.deleteVacationDay(date)) {
 						update_listVacations();
-						//						dlm.remove(listVacations.getSelectedIndex());
 						successfulOperationDialog("Se ha eliminado el dia vacacional !");
-					}
+					}	
 				}
-				catch(IOException e) {rejectedOperationDialog(e.getMessage());}
-				catch(NumberFormatException e) {rejectedOperationDialog(e.getMessage());}
-				catch(ParseException e) {rejectedOperationDialog(e.getMessage());}
 			}
+			catch(IOException e) {rejectedOperationDialog(e.getMessage());}
+			catch(NumberFormatException e) {rejectedOperationDialog(e.getMessage());}
+			catch(ParseException e) {rejectedOperationDialog(e.getMessage());}
 		}
 		else rejectedOperationDialog("No se ha seleccionado ningun dia vacacional ");
 	}

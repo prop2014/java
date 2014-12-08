@@ -234,10 +234,10 @@ public class CtrlPresentacion {
 		return ctrlHospital.verHospitales();
 	}
 	
-	public ArrayList<ArrayList<String>> loadDoctores() throws IOException {
-		return ctrlHospital.verDoctores();
-		
-	}
+//	public ArrayList<ArrayList<String>> loadDoctores() throws IOException {
+//		return ctrlHospital.verDoctores();
+//		
+//	}
 	
 	public void crearHospital(String nameHosp, Double factM, Double factT, Double factN, String pathDoc, String pathCal) throws IOException{
 		int idHosp = ctrlHospital.getFDI();
