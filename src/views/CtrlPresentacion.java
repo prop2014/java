@@ -254,6 +254,8 @@ public class CtrlPresentacion {
 	
 	public void cargarHospital(int idHosp) throws IOException {
 		ctrlHospital.cargarHospital(idHosp);
+		ctrlHospital.getDataDoctors(idHosp);
+		
 	}
 	
 	public String getNameHospital() {

@@ -187,23 +187,23 @@ public class CtrlDatosFichero {
 				   			int numD=sl.nextInt(); //numero de doctores
 				   			alhosp.add(Integer.toString(numD));
 				   			for(int i=0;i<numD;++i){ //para cada doctor
-								int idDoctor = sl.nextInt(); //id
-								alhosp.add(Integer.toString(idDoctor));
+								String idDoctor = sl.next(); //id
+								alhosp.add(idDoctor);
 								word = sl.next(); //nombre
 								alhosp.add(word);
-								int numMaxTurnos = sl.nextInt();//Maxturnos
-								alhosp.add(Integer.toString(numMaxTurnos));
-								double SueldoTurno = sl.nextDouble(); //sueldo
-								alhosp.add(Double.toString(SueldoTurno));
+								String numMaxTurnos = sl.next();//Maxturnos
+								alhosp.add(numMaxTurnos);
+								String SueldoTurno = sl.next(); //sueldo
+								alhosp.add(SueldoTurno);
 				   			} //fifordoc
 						}//fi if
 			   		}
 			   		sl.close();
 		   		}
 			   		fr.close();
-			   		if(!exists) {
+			   		/*if(!exists) {
 			   			throw new IOException("No hay doctores");
-			   		}
+			   		}*/
 		   	}catch(Exception e) {e.printStackTrace();}
 		 return alhosp;
 	 }

@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * Vista principal del Conjunto de Hospitales
@@ -119,26 +118,23 @@ public class VistaCjtHospitales {
 		
 		btnCrearHospital.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Saber que Hospital está seleccionado
-				// TODO changeViewAGestion(Hospital seleccionado)
 				ctrlPresentacion.changeView("vistaCrearHospital", panelContents);
 			}
 		});
 		
 		btnSeleccionarHospital.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!list.isSelectionEmpty()){
+				try{
+					if(list.isSelectionEmpty()) throw new IOException("Debe seleccionar un hospital");
 					String[] parts = (list.getSelectedValue()).split("-");
 					String idHosp = parts[0];
-					try{
-						ctrlPresentacion.cargarHospital(Integer.parseInt(idHosp));
-					} catch (IOException eX){
-						JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
-					}
+					ctrlPresentacion.cargarHospital(Integer.parseInt(idHosp));
 					ctrlPresentacion.changeView("vistaGestion", panelContents);
+				} catch (IOException eX){
+					JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
 				}
-				else {JOptionPane.showMessageDialog(null, "Debe seleccionar un hospital", "Error", JOptionPane.ERROR_MESSAGE); }
 			}
+			
 		});
 		
 		btnEliminarHospital.addActionListener(new ActionListener() {
