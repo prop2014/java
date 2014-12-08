@@ -6,7 +6,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Vista secundaria de gestion de restricciones tipo NOT Turno

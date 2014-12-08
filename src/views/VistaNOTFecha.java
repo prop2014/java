@@ -5,7 +5,6 @@ import javax.swing.border.EmptyBorder;
 import com.toedter.calendar.JDateChooser;
 
 import java.util.Date;
-import java.util.Calendar;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -101,14 +100,19 @@ public class VistaNOTFecha {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				Date data = dataChooser.getDate();
-				int dia = data.getDay();
-				int mes = data.getMonth()+1;
-				int year = data.getYear();
-				try {
-					ctrlPresentacion.addResNOT_Fecha(1, dia, mes, year);
-				} catch (IOException eX) {
-					System.out.printf("Restriccion no creada");
-					JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 
+				if (data != null) {
+					int dia = data.getDay();
+					int mes = data.getMonth()+1;
+					int year = data.getYear();
+					try {
+						ctrlPresentacion.addResNOT_Fecha(1, dia, mes, year);
+					} catch (IOException eX) {
+						System.out.printf("Restriccion no creada");
+						JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "No se ha introducido una fecha correcta", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});	

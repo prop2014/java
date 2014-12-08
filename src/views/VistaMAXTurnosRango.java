@@ -7,6 +7,9 @@ import com.toedter.calendar.JDateChooser;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.Date;
+import java.util.Scanner;
 
 /**
  * Vista secundaria de gestion de restricciones tipo MAXTurnosRango
@@ -105,6 +108,34 @@ public class VistaMAXTurnosRango {
 				ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 			}
 		});
+		
+		button.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
+			public void actionPerformed(ActionEvent e) {
+				Date data1 = dataChooser1.getDate();
+				Date data2 = dataChooser2.getDate();
+				Scanner sc1 = new Scanner(textArea.getText());
+				if (data1 != null && data2 != null && sc1.hasNextInt()) {
+					int dia1 = data1.getDay();
+					int mes1 = data1.getMonth()+1;
+					int year1 = data1.getYear();
+					int dia2 = data2.getDay();
+					int mes2 = data2.getMonth()+1;
+					int year2 = data2.getYear();
+					int num = Integer.parseInt(textArea.getText());
+					try {
+						ctrlPresentacion.addResMAX_Turnos_Rango(1, dia1, mes1, year1, dia2, mes2, year2, num);
+					} catch (IOException eX) {
+						System.out.printf("Restriccion no creada");
+						JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Valores introducidos incorrectamente", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				sc1.close();
+			}
+		});	
 	}
 	
 	
