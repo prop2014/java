@@ -44,7 +44,9 @@ public class CtrlHospital {
 	}
 	
 	
-	
+	public ArrayList<String> getInfoHospital(int id) throws IOException {
+		return inOut.getInfoHospital(id);
+	}
 	/**
 	 * obtiene los datos basicos del Hospital(no doctores ni calendario)
 	 * @param id identificador del Hospital

@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  * Vista principal del Conjunto de Hospitales
@@ -27,7 +29,6 @@ public class VistaCjtHospitales {
 	private JFrame frameView;
 	private JPanel panelContents = new JPanel();
 	private JPanel topPanel = new JPanel();
-	private JPanel panelRightButtons = new JPanel();
 	private final JButton btnCrearHospital = new JButton("Crear Hospital");
 	private final JButton btnEliminarHospital = new JButton("Eliminar Hospital");
 	private final JButton btnImportarHospital = new JButton("Importar Hospital");
@@ -35,9 +36,19 @@ public class VistaCjtHospitales {
 	private final JList<String> list = new JList<String>();
 	private final JScrollPane scrollPanel = new JScrollPane();
 	private final JLabel titleLabel = new JLabel("Conjunto de Hospitales");
-	private final JPanel bottomPanel = new JPanel();
 	private final JPanel mediumPanel = new JPanel();
-	private final JPanel panel = new JPanel();
+	private JPanel midPanel;
+	private final JPanel panelInfo = new JPanel();
+	private final JLabel lblInformacion = new JLabel("INFORMACION");
+	private final JLabel lblFactm = new JLabel("FactM:");
+	private final JLabel lblFactt = new JLabel("FactT:");
+	private final JLabel lblFactn = new JLabel("FactN:");
+	private final JLabel nDocField = new JLabel("");
+	private final JLabel solField = new JLabel("");
+	private final JLabel turnosField = new JLabel("");
+	private final JLabel factMField = new JLabel("");
+	private final JLabel factTField = new JLabel("");
+	private final JLabel factNField = new JLabel("");
 
 	//-- Metodos privados --//
 	private void init_frameView() {
@@ -58,41 +69,37 @@ public class VistaCjtHospitales {
 	}
 
 	private void init_panelContents() {
-		panelContents.setLayout(new BoxLayout(panelContents, BoxLayout.PAGE_AXIS));
+		panelContents.setLayout(null);
+		topPanel.setBounds(0, 0, 700, 60);
 		topPanel.setMinimumSize(new Dimension(0, 10));
 		topPanel.setPreferredSize(new Dimension(10, 5));
 		// Components
 		panelContents.add(topPanel);
-		topPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		topPanel.setLayout(null);
+		titleLabel.setBounds(276, 15, 148, 16);
 		titleLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		titleLabel.setHorizontalTextPosition(SwingConstants.LEADING);
 		
 		topPanel.add(titleLabel);
 		
-		JPanel midPanel = new JPanel();
+		midPanel = new JPanel();
+		midPanel.setBounds(0, 60, 700, 251);
 		midPanel.setAlignmentY(Component.BOTTOM_ALIGNMENT);
 		panelContents.add(midPanel);
-		midPanel.setLayout(new BoxLayout(midPanel, BoxLayout.X_AXIS));
-		panel.setPreferredSize(new Dimension(20, 10));
-		
-		midPanel.add(panel);
-		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+		midPanel.setLayout(null);
+		scrollPanel.setBounds(20, 0, 234, 251);
 		scrollPanel.setPreferredSize(new Dimension(150, 10));
 		scrollPanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		
 		midPanel.add(scrollPanel);
 		list.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
 		scrollPanel.setViewportView(list);
+		mediumPanel.setBounds(254, 125, 150, 0);
 		mediumPanel.setPreferredSize(new Dimension(150, 0));
 		
 		midPanel.add(mediumPanel);
 		mediumPanel.setLayout(new BoxLayout(mediumPanel, BoxLayout.X_AXIS));
-		midPanel.add(panelRightButtons);
-		panelRightButtons.setLayout(new GridLayout(0, 1, 0, 20));
-		
-		panelContents.add(bottomPanel);
-		bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 	}
 	private void init_panelTopButtons() {
 		topPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
@@ -102,40 +109,97 @@ public class VistaCjtHospitales {
 	}
 
 	private void init_panelRightButtons() {
-		panelRightButtons.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
-		
-		panelRightButtons.add(btnCrearHospital);
-		panelRightButtons.add(btnEliminarHospital);
-		panelRightButtons.add(btnImportarHospital);
-		panelRightButtons.add(btnSeleccionarHospital);
 	}
 	
 	
 	/** Asignacion de listeners **/
 	
 	private void assign_listenersComponents() {
+		btnCrearHospital.setBounds(266, 186, 150, 30);
+		midPanel.add(btnCrearHospital);
+		btnSeleccionarHospital.setBounds(533, 215, 161, 30);
+		midPanel.add(btnSeleccionarHospital);
+		btnImportarHospital.setBounds(266, 215, 150, 30);
+		midPanel.add(btnImportarHospital);
 		
 		
-		btnCrearHospital.addActionListener(new ActionListener() {
+		panelInfo.setBackground(Color.WHITE);
+		panelInfo.setBounds(266, 0, 428, 123);
+		midPanel.add(panelInfo);
+		panelInfo.setLayout(null);
+		
+		JLabel labelDoc = new JLabel("Nº de doctores:");
+		labelDoc.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		labelDoc.setBounds(23, 45, 102, 16);
+		panelInfo.add(labelDoc);
+		
+		JLabel lblNmeroDeTurnos = new JLabel("Nº de Turnos:");
+		lblNmeroDeTurnos.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		lblNmeroDeTurnos.setBounds(168, 45, 102, 16);
+		panelInfo.add(lblNmeroDeTurnos);
+		
+		JLabel lblHaySolucionGuardada = new JLabel("Hay solucion guardada:");
+		lblHaySolucionGuardada.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		lblHaySolucionGuardada.setBounds(23, 86, 189, 16);
+		panelInfo.add(lblHaySolucionGuardada);
+		lblInformacion.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		lblInformacion.setBounds(168, 6, 97, 16);
+		
+		panelInfo.add(lblInformacion);
+		lblFactm.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		lblFactm.setBounds(346, 30, 42, 16);
+		
+		panelInfo.add(lblFactm);
+		lblFactt.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		lblFactt.setBounds(347, 58, 41, 16);
+		
+		panelInfo.add(lblFactt);
+		lblFactn.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		lblFactn.setBounds(347, 86, 41, 16);
+		
+		panelInfo.add(lblFactn);
+		nDocField.setBounds(136, 45, 22, 16);
+		
+		panelInfo.add(nDocField);
+		solField.setBounds(190, 86, 22, 16);
+		
+		panelInfo.add(solField);
+		turnosField.setBounds(272, 45, 22, 16);
+		
+		panelInfo.add(turnosField);
+		factMField.setBounds(400, 30, 22, 16);
+		
+		panelInfo.add(factMField);
+		factTField.setBounds(400, 58, 22, 16);
+		
+		panelInfo.add(factTField);
+		factNField.setBounds(400, 86, 22, 16);
+		
+		panelInfo.add(factNField);
+		
+		btnImportarHospital.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ctrlPresentacion.changeView("vistaCrearHospital", panelContents);
+					JFileChooser chooser = new JFileChooser();
+					/*FileNameExtensionFilter filter = new FileNameExtensionFilter(
+					        "Text File (.txt)", "txt");
+					  //  chooser.setFileFilter(filter);*/
+					int returnVal = chooser.showOpenDialog(frameView);
+					File f = chooser.getSelectedFile();
+					if(returnVal == JFileChooser.APPROVE_OPTION) {
+						try{
+					       ctrlPresentacion.importarHospital(f.getAbsolutePath());
+					       loadHospitals();
+						} catch(IOException eX) {
+							JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
+
+						}
+					 }
+
+				
 			}
 		});
-		
-		btnSeleccionarHospital.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try{
-					if(list.isSelectionEmpty()) throw new IOException("Debe seleccionar un hospital");
-					String[] parts = (list.getSelectedValue()).split("-");
-					String idHosp = parts[0];
-					ctrlPresentacion.cargarHospital(Integer.parseInt(idHosp));
-					ctrlPresentacion.changeView("vistaGestion", panelContents);
-				} catch (IOException eX){
-					JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
-				}
-			}
-			
-		});
+		btnEliminarHospital.setBounds(20, 323, 150, 30);
+		panelContents.add(btnEliminarHospital);
 		
 		btnEliminarHospital.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -163,28 +227,54 @@ public class VistaCjtHospitales {
 				}
 				});
 		
-		btnImportarHospital.addActionListener(new ActionListener() {
+		btnSeleccionarHospital.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-					JFileChooser chooser = new JFileChooser();
-					/*FileNameExtensionFilter filter = new FileNameExtensionFilter(
-					        "Text File (.txt)", "txt");
-					  //  chooser.setFileFilter(filter);*/
-					int returnVal = chooser.showOpenDialog(frameView);
-					File f = chooser.getSelectedFile();
-					if(returnVal == JFileChooser.APPROVE_OPTION) {
-						try{
-					       ctrlPresentacion.importarHospital(f.getAbsolutePath());
-					       loadHospitals();
-						} catch(IOException eX) {
-							JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
-
-						}
-					 }
-
-				
+				try{
+					if(list.isSelectionEmpty()) throw new IOException("Debe seleccionar un hospital");
+					String[] parts = (list.getSelectedValue()).split("-");
+					String idHosp = parts[0];
+					ctrlPresentacion.cargarHospital(Integer.parseInt(idHosp));
+					ctrlPresentacion.changeView("vistaGestion", panelContents);
+				} catch (IOException eX){
+					JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
+				}
+			}
+			
+		});
+		
+		
+		btnCrearHospital.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ctrlPresentacion.changeView("vistaCrearHospital", panelContents);
 			}
 		});
 		
+	
+		list.addListSelectionListener(new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				if(!list.isSelectionEmpty()){
+					if(!panelInfo.isVisible()) panelInfo.setVisible(true);
+					boolean isAdjusting = e.getValueIsAdjusting();
+					if(!isAdjusting) {
+						String[] parts = (list.getSelectedValue()).split("-");
+						try {
+							ArrayList<String> info = ctrlPresentacion.getInfoHospital(Integer.parseInt(parts[0]));
+							//0-> ID //1-> Name //2-> FM //3-> FT //4-> FN //5-> nDoc //6-> nDias //
+							nDocField.setText(info.get(5));
+							turnosField.setText(new Integer(Integer.parseInt(info.get(6))*3).toString());//dias * 3 = turnos
+							factMField.setText(info.get(2));
+							factTField.setText(info.get(3));
+							factNField.setText(info.get(4));
+						} catch(IOException eX) {
+							
+						}
+					}
+				}
+				
+			}
+		});
+			
 	
 		
 	}
@@ -201,6 +291,8 @@ public class VistaCjtHospitales {
 	
 
 	private void loadHospitals() {
+		panelInfo.setVisible(false);
+		list.clearSelection();
 		hospitales = new ArrayList<String>();
 		try {
 			hospitales = ctrlPresentacion.loadHospitals();
@@ -216,7 +308,11 @@ public class VistaCjtHospitales {
 	    list.setModel(model);  
 	    list.revalidate();
 		list.repaint();
-		
+		nDocField.setText("0");
+		turnosField.setText("0");
+		factMField.setText("0");
+		factTField.setText("0");
+		factNField.setText("0");
 	}
 	
 	/* Constructoras y metodos publicos */
@@ -259,5 +355,4 @@ public class VistaCjtHospitales {
 	public void disableView() {
 		frameView.setEnabled(false);
 	}
-
 }

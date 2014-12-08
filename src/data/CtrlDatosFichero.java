@@ -71,6 +71,7 @@ public class CtrlDatosFichero {
 		   return alHosp;
 	   }
 	
+	 
 
 	 public ArrayList<Integer> getIdHopitals() {
 		   ArrayList<Integer> alIdHosp=new ArrayList<Integer>();
@@ -102,7 +103,80 @@ public class CtrlDatosFichero {
 		   return alIdHosp;
 	   }
 	 
-	
+	 
+	 
+	 public ArrayList<String> getInfoHospital (int id)throws IOException {
+		 	ArrayList<String> alhosp = new ArrayList<String>();
+		 	try{
+		 		File archivo;
+	 			String num = Integer.toString(id);
+		   		String path = new File("").getAbsolutePath();
+		   		String realpath = path+ "/datos/Hospital";
+		   		archivo = new File(realpath+num);
+		 		
+				if(!archivo.exists()) throw new IOException("No Existe Este fichero");
+				FileReader fr = new FileReader (archivo);
+				BufferedReader br = new BufferedReader(fr);
+		   		String linea;
+		   		String word;
+		   		linea=br.readLine();
+		   		Scanner sl = new Scanner(linea);
+		   		if(sl.hasNext()){
+		   			word=sl.next();
+			   		if(word.equals(".H")){
+			   			int iden = sl.nextInt(); //id
+			   			alhosp.add(Integer.toString(iden));
+			   			word = sl.next(); // name
+			   			alhosp.add(word);
+			   			String fact = sl.next();//fm
+			   			alhosp.add(fact);
+			   			fact=sl.next();//ft
+			   			alhosp.add(fact);
+			   			fact=sl.next();//fn
+			   			alhosp.add(fact);
+			   		}
+			   		boolean foundD = false;
+			   		boolean foundC = false;
+			   		sl.close();
+			   		linea=br.readLine();
+			   		if(linea != null) {
+				   		Scanner sl2 = new Scanner(linea);
+				   		while(sl2.hasNext() && !foundD) {
+				   			word = sl2.next();
+				   			if(word.equals(".D")){
+				   				foundD = true;
+				   				word = sl2.next(); //numDoc
+				   				alhosp.add(word);
+				   				break;
+				   			}
+				   		}
+				   		sl2.close();
+			   		}
+			   		if(!foundD) alhosp.add("0");
+			   		
+			   		linea=br.readLine();
+			   		if(linea != null) {
+			   			Scanner sl3 = new Scanner(linea);
+				   		while(sl3.hasNext() && !foundC) {
+				   			word = sl3.next();
+				   			if(word.equals(".C")){
+				   				foundC = true;
+				   				word = sl3.next(); //anyo
+				   				word = sl3.next(); //nTurnos
+				   				alhosp.add(word);
+				   				break;
+				   			}
+				   		}
+				   		sl3.close();
+			   		}
+			   		if(!foundC) alhosp.add("0");
+		   		}
+		   		
+		   		fr.close();
+		   	}catch(Exception e) {e.printStackTrace();}
+	   return alhosp;
+	   }
+	 
 	 
 	/**
 	 * 

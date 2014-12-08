@@ -262,6 +262,10 @@ public class CtrlPresentacion {
 		return ctrlHospital.getNameHospital();
 	}
 	
+	public ArrayList<String> getInfoHospital(int id) throws IOException{
+		return ctrlHospital.getInfoHospital(id);
+	}
+	
 	public void deleteHospital(int id) throws IOException {
 		ctrlHospital.deleteHospital(id);
 	}
