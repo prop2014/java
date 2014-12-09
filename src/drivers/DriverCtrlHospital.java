@@ -21,13 +21,6 @@ import domain.CtrlHospital;
 public class DriverCtrlHospital {
 	private static void muestraOpciones() {
 		System.out.print("¿Que desea hacer?\n\n");
-		/*
-		
-		System.out.print("5: Guardar Hospital\n");
-		System.out.print("6: Anadir Restriccion maxturnosRango a un doctor\n");
-		System.out.print("7: Mostrar Hospital\n");
-		System.out.print("8; getFDI\n");
-		*/
 		System.out.print("1: MostrarOpciones\n");
 		System.out.print("2: verHospitales()\n");
 		System.out.print("3: importarHospital\n");

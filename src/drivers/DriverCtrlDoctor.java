@@ -3,6 +3,7 @@ import model.*;
 import domain.*;
 import data.CtrlDatosFichero;
 
+import java.text.ParseException;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class DriverCtrlDoctor {
 	
 	
 	@SuppressWarnings("static-access")
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, ParseException {
 		Scanner teclado;
 		teclado = new Scanner(System.in);
 		
