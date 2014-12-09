@@ -171,7 +171,7 @@ public class CtrlHospital {
 	
 	public void eliminarDoctor(int id) throws IOException {
 		
-		if(hosp.existsDoctor(id)){
+		if(!hosp.existsDoctor(id)){
 			throw new IOException("No existe este doctor en el Hospital");
 		}
 		hosp.deleteDoctor(id);
