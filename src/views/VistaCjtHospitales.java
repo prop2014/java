@@ -49,6 +49,7 @@ public class VistaCjtHospitales {
 	private final JLabel factMField = new JLabel("");
 	private final JLabel factTField = new JLabel("");
 	private final JLabel factNField = new JLabel("");
+	private final JLabel lblNo = new JLabel("No");
 
 	//-- Metodos privados --//
 	private void init_frameView() {
@@ -94,7 +95,7 @@ public class VistaCjtHospitales {
 		scrollPanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		
 		midPanel.add(scrollPanel);
-		list.setFont(new Font("Arial", Font.PLAIN, 14));
+		list.setFont(new Font("Arial", Font.PLAIN, 13));
 		scrollPanel.setViewportView(list);
 		mediumPanel.setBounds(254, 125, 150, 0);
 		mediumPanel.setPreferredSize(new Dimension(150, 0));
@@ -134,17 +135,17 @@ public class VistaCjtHospitales {
 		
 		JLabel labelDoc = new JLabel("Nº de doctores:");
 		labelDoc.setFont(new Font("Arial", Font.BOLD, 12));
-		labelDoc.setBounds(23, 45, 102, 16);
+		labelDoc.setBounds(23, 45, 88, 16);
 		panelInfo.add(labelDoc);
 		
 		JLabel lblNmeroDeTurnos = new JLabel("Nº de Turnos:");
 		lblNmeroDeTurnos.setFont(new Font("Arial", Font.BOLD, 12));
-		lblNmeroDeTurnos.setBounds(168, 45, 102, 16);
+		lblNmeroDeTurnos.setBounds(168, 45, 77, 16);
 		panelInfo.add(lblNmeroDeTurnos);
 		
 		JLabel lblHaySolucionGuardada = new JLabel("Hay solucion guardada:");
 		lblHaySolucionGuardada.setFont(new Font("Arial", Font.BOLD, 12));
-		lblHaySolucionGuardada.setBounds(23, 86, 189, 16);
+		lblHaySolucionGuardada.setBounds(72, 86, 140, 16);
 		panelInfo.add(lblHaySolucionGuardada);
 		lblInformacion.setFont(new Font("Arial", Font.BOLD, 12));
 		lblInformacion.setBounds(168, 6, 97, 16);
@@ -163,28 +164,32 @@ public class VistaCjtHospitales {
 		
 		panelInfo.add(lblFactn);
 		nDocField.setFont(new Font("Arial", Font.PLAIN, 12));
-		nDocField.setBounds(136, 45, 22, 16);
+		nDocField.setBounds(115, 45, 22, 16);
 		
 		panelInfo.add(nDocField);
 		solField.setBounds(190, 86, 22, 16);
 		
 		panelInfo.add(solField);
 		turnosField.setFont(new Font("Arial", Font.PLAIN, 12));
-		turnosField.setBounds(272, 45, 22, 16);
+		turnosField.setBounds(250, 45, 20, 16);
 		
 		panelInfo.add(turnosField);
 		factMField.setFont(new Font("Arial", Font.PLAIN, 12));
-		factMField.setBounds(379, 30, 22, 16);
+		factMField.setBounds(370, 30, 22, 16);
 		
 		panelInfo.add(factMField);
 		factTField.setFont(new Font("Arial", Font.PLAIN, 12));
-		factTField.setBounds(379, 58, 22, 16);
+		factTField.setBounds(370, 58, 22, 16);
 		
 		panelInfo.add(factTField);
 		factNField.setFont(new Font("Arial", Font.PLAIN, 12));
-		factNField.setBounds(379, 86, 22, 16);
+		factNField.setBounds(370, 86, 22, 16);
 		
 		panelInfo.add(factNField);
+		lblNo.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblNo.setBounds(210, 86, 22, 16);
+		
+		panelInfo.add(lblNo);
 		
 		btnImportarHospital.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
