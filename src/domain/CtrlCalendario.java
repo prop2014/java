@@ -158,12 +158,12 @@ public class CtrlCalendario {
 	 * @param id identificador del Hospital
 	 * @throws IOException fichero incorrecto
 	 */
-	public void readCalendar (int id) throws IOException{
+	public void readCalendar (int id,String path) throws IOException{
 		ArrayList<String> alcale =new ArrayList<String>();
 		Integer num = id;
 		CtrlDatosFichero inOut = new CtrlDatosFichero();
 		if(inOut.existsCalendar(id)){
-			alcale=inOut.getDataCale(num);
+			alcale=inOut.getDataCale(num,path);
 		}
 		if(!alcale.isEmpty()){
 			int year = Integer.parseInt(alcale.get(0));

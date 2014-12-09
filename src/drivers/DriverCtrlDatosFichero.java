@@ -110,7 +110,7 @@ public class DriverCtrlDatosFichero {
 				num=teclado.nextInt();
 					if(inOut.existHospId(num)){
 						alhosp.clear();
-						if(inOut.existsCalendar(num))alhosp=inOut.getDataCale(num);
+						if(inOut.existsCalendar(num))alhosp=inOut.getDataCale(num,null);
 						if(!alhosp.isEmpty()){
 							System.out.print("Calendario Correctamente Cargado\n");
 							for(int i =0; i<alhosp.size()-1;++i){
@@ -130,7 +130,7 @@ public class DriverCtrlDatosFichero {
 				num=teclado.nextInt();
 					if(inOut.existHospId(num)){
 						alhosp.clear();
-						if(inOut.existsRes(num))alhosp=inOut.getDataRes(num);
+						if(inOut.existsRes(num))alhosp=inOut.getDataRes(num,null);
 						if(!alhosp.isEmpty()){
 							System.out.print("Restricciones Correctamente Cargadas\n");
 							for(int i =0; i<alhosp.size()-1;++i){
@@ -221,7 +221,7 @@ public class DriverCtrlDatosFichero {
 					System.out.print("Ingrese el id del hospital para Guardar el Calendario\n");
 					num=teclado.nextInt();
 					if(inOut.existsCalendar(num)){
-						alhosp=inOut.getDataCale(num);
+						alhosp=inOut.getDataCale(num,null);
 						inOut.saveDataCale(alhosp, num);
 						System.out.print("Calendario guardado correctamente\n");
 					}
@@ -233,7 +233,7 @@ public class DriverCtrlDatosFichero {
 				System.out.print("Ingrese el id del hospital para guardar las Restricciones\n");
 				num=teclado.nextInt();
 				if(inOut.existsRes(num)){
-					alhosp=inOut.getDataRes(num);
+					alhosp=inOut.getDataRes(num,null);
 					inOut.saveDataRes(alhosp, num);
 					System.out.print("Restricciones guardadas correctamente\n");
 				}

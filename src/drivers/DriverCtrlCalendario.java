@@ -33,6 +33,8 @@ public class DriverCtrlCalendario {
 		int op;
 		CtrlDatosFichero inOut= new CtrlDatosFichero();
 		CtrlHospital Ho = new CtrlHospital();
+		
+		/*
 		int year=-1;
 		int id= 100;
 		try{
@@ -54,7 +56,7 @@ public class DriverCtrlCalendario {
 				MostrarTurno(alturno.get(i));
 			}
 		}
-		
+		*/
 
 		while(!exit){
 			System.out.println();
@@ -71,7 +73,7 @@ public class DriverCtrlCalendario {
 			op = sc.nextInt();
 
 			switch(op){
-			case 1:{
+			/*case 1:{
 				
 				System.out.print("Stub:Hospital id = 100, No te calendari\n");
 				try{
@@ -120,6 +122,13 @@ public class DriverCtrlCalendario {
 				cal.writeCalendar(id);
 				} catch (IOException e){System.out.print("NO SE HA PODIDO Introducir\n");}
 				break;
+			}
+			*/
+			
+			case 1:{
+				System.out.println("ReadCalendar\n");
+				System.out.println("Esta operacion lee un Calendario contenido en un \nFicheroHospital o en un Fichero con un Calendario");
+				System.out.print("");
 			}
 			case 3:{
 				break;

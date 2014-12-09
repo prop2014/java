@@ -687,9 +687,9 @@ public class CtrlDoctor {
 	}
 	
 	
-	public void addResData(int id)throws IOException{
+	public void addResData(int id,String path)throws IOException{
 		CtrlDatosFichero inOut = new CtrlDatosFichero();
-		ArrayList<String> alRes = inOut.getDataRes(id);
+		ArrayList<String> alRes = inOut.getDataRes(id,path);
 			int idDoc;
 		for(int i=0;i<alRes.size();++i){
 			int NumRes, idRes;

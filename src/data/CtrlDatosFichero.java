@@ -290,13 +290,20 @@ public class CtrlDatosFichero {
 	  * @return los datos del calendario del hospital con identificador=id
 	  * @throws IOException no existe fichero
 	  */
-	 public ArrayList<String> getDataCale (int id)throws IOException {
+	 public ArrayList<String> getDataCale (int id,String importar)throws IOException {
 		 	ArrayList<String> alhosp = new ArrayList<String>();
 		 	try{
-		   		String num = Integer.toString(id);
-		   		String path = new File("").getAbsolutePath();
-		   		String realpath = path+ "/datos/Hospital";
-		   		File archivo = new File(realpath+num);
+		 		File archivo;
+		 		if(importar==null){
+		 			String num = Integer.toString(id);
+			   		String path = new File("").getAbsolutePath();
+			   		String realpath = path+ "/datos/Hospital";
+			   		archivo = new File(realpath+num);
+		 		}
+		 		else{
+		 			archivo = new File(importar);
+		 			
+		 		}
 				if(!archivo.exists()) throw new IOException("No Existe Este fichero");
 				FileReader fr = new FileReader (archivo);
 				BufferedReader br = new BufferedReader(fr);
@@ -335,86 +342,96 @@ public class CtrlDatosFichero {
 		   	}catch(Exception e) {e.printStackTrace();}
 	   return alhosp;
 	   }
-	 public ArrayList<String> getDataRes (int id)throws IOException {
+	 
+	 public ArrayList<String> getDataRes (int id,String importar)throws IOException {
 		 	ArrayList<String> alhosp = new ArrayList<String>();
 		 	try{
-		   		String num = Integer.toString(id);
-		   		String path = new File("").getAbsolutePath();
-		   		String realpath = path+ "/datos/Hospital";
-		   		File archivo = new File(realpath+num);
+		 		File archivo;
+		 		if(importar==null){
+		 			String num = Integer.toString(id);
+			   		String path = new File("").getAbsolutePath();
+			   		String realpath = path+ "/datos/Hospital";
+			   		archivo = new File(realpath+num);
+		 		}
+		 		else{
+		 			archivo = new File(importar);
+		 			
+		 		}
 				if(!archivo.exists()) throw new IOException("No Existe Este fichero");
 				FileReader fr = new FileReader (archivo);
 				BufferedReader br = new BufferedReader(fr);
 		   		String linea;
 		   		String word;
-		   		linea=br.readLine();
-		   		linea=br.readLine();
-		   		Scanner sl = new Scanner(linea);
-		   		if(sl.hasNext()){
-			   		word=sl.next();
-			   		if(word.equals(".D")){
-			   			while((linea=br.readLine())!=null){
-				   			Scanner sl1 = new Scanner(linea);
-				   			if(sl1.hasNext()){
-				   				word=sl1.next();
-				   				if(word.equals(".R")){
-				   					while(sl1.hasNext()){
-					   					alhosp.add(sl1.next());
-					   					int numRes = sl1.nextInt();
-					   					alhosp.add(Integer.toString(numRes));
-					   					for(int i=0;i<numRes;++i){
-					   						alhosp.add(sl1.next());
-					   						String Tipo=sl1.next();
-					   						alhosp.add(Tipo);
-					   						if(Tipo.equals("NOT_Turno")){
-					   							alhosp.add(sl1.next());
-					   						}
-					   						else if(Tipo.equals("NOT_Fecha")){
-					   							alhosp.add(sl1.next());
-					   						}
-					   						else if(Tipo.equals("NOT_Especial")){
-					   							alhosp.add(sl1.next());
-					   						}
-					   						else if(Tipo.equals("NOT_Dia_Semana")){
-					   							alhosp.add(sl1.next());
-					   						}
-					   						else if(Tipo.equals("NOT_Dia_Mes")){
-					   							alhosp.add(sl1.next());
-					   						}
-					   						else if(Tipo.equals("MAX_Turnos_Rango")){
-												alhosp.add(sl1.next());
-												alhosp.add(sl1.next());
-												alhosp.add(sl1.next());					
-					   						}
-					   						else if(Tipo.equals("MAX_Turnos_por_Dia")){
-					   							int dia =sl1.nextInt();
-					   							alhosp.add(Integer.toString(dia));
-					   						}
-					   						else if(Tipo.equals("XOR")){
-					   							int size=sl1.nextInt();
-					   							alhosp.add(Integer.toString(size));
-					   							for(int l=0; l<size;++l){
-					   								alhosp.add(sl.next());
-					   								alhosp.add(sl.next());
-					   								alhosp.add(sl.next());
-					   								alhosp.add(sl.next());
-					   							}
-					   						}
+		   		boolean exists = false;
+		   		while(((linea=br.readLine())!=null) && !exists){
+			   		Scanner sl = new Scanner(linea);
+			   		if(sl.hasNext()){
+				   		word=sl.next();
+				   		if(word.equals(".D")){
+				   			while((linea=br.readLine())!=null){
+					   			Scanner sl1 = new Scanner(linea);
+					   			if(sl1.hasNext()){
+					   				word=sl1.next();
+					   				if(word.equals(".R")){
+					   					exists = true;
+					   					while(sl1.hasNext()){
+						   					alhosp.add(sl1.next());
+						   					int numRes = sl1.nextInt();
+						   					alhosp.add(Integer.toString(numRes));
+						   					for(int i=0;i<numRes;++i){
+						   						alhosp.add(sl1.next());
+						   						String Tipo=sl1.next();
+						   						alhosp.add(Tipo);
+						   						if(Tipo.equals("NOT_Turno")){
+						   							alhosp.add(sl1.next());
+						   						}
+						   						else if(Tipo.equals("NOT_Fecha")){
+						   							alhosp.add(sl1.next());
+						   						}
+						   						else if(Tipo.equals("NOT_Especial")){
+						   							alhosp.add(sl1.next());
+						   						}
+						   						else if(Tipo.equals("NOT_Dia_Semana")){
+						   							alhosp.add(sl1.next());
+						   						}
+						   						else if(Tipo.equals("NOT_Dia_Mes")){
+						   							alhosp.add(sl1.next());
+						   						}
+						   						else if(Tipo.equals("MAX_Turnos_Rango")){
+													alhosp.add(sl1.next());
+													alhosp.add(sl1.next());
+													alhosp.add(sl1.next());					
+						   						}
+						   						else if(Tipo.equals("MAX_Turnos_por_Dia")){
+						   							int dia =sl1.nextInt();
+						   							alhosp.add(Integer.toString(dia));
+						   						}
+						   						else if(Tipo.equals("XOR")){
+						   							int size=sl1.nextInt();
+						   							alhosp.add(Integer.toString(size));
+						   							for(int l=0; l<size;++l){
+						   								alhosp.add(sl.next());
+						   								alhosp.add(sl.next());
+						   								alhosp.add(sl.next());
+						   								alhosp.add(sl.next());
+						   							}
+						   						}
+						   					}
+						   					
 					   					}
-					   					
-				   					}
-				   				}
-				   			}
-				   			sl1.close();
-				   		}
-					}
-			   		else {
-			   			sl.close();
-			   			fr.close();
-			   			throw new IOException("No hay doctores");
+					   				}
+					   			}
+					   			sl1.close();
+					   		}
+						}
 			   		}
+			   		sl.close();
 		   		}
-		   		sl.close();
+		   		if(!exists){
+		   			br.close();
+		   			throw new IOException ("Datos No encontrados");
+		   		}
+		   		br.close();
 		   		fr.close();
 		   	}catch(Exception e) {e.printStackTrace();}
 		 return alhosp;
@@ -663,11 +680,11 @@ public class CtrlDatosFichero {
 		   		   D=true;
 		   	   }
 			   if(existsCalendar(id)){
-				   bufferC=getDataCale(id);
+				   bufferC=getDataCale(id,null);
 				   C=true;
 		   	   }
 			   if(existsRes(id)){
-				   bufferR=getDataRes(id);
+				   bufferR=getDataRes(id,null);
 				   R=true;
 			   }
 		   try{
@@ -732,11 +749,11 @@ public class CtrlDatosFichero {
 	   if(archivo.exists()){
 			   bufferH=getDataHospital(id,null);
 			   if(existsCalendar(id))  {
-				   bufferC=getDataCale(id);
+				   bufferC=getDataCale(id,null);
 				   C=true;
 			   }
 			   if(existsRes(id)){
-				   bufferR=getDataRes(id);
+				   bufferR=getDataRes(id,null);
 				   R=true;
 			   }
 		   try{
@@ -794,7 +811,7 @@ public class CtrlDatosFichero {
 		   			D=true;
 				   bufferH=getDataHospital(id,null);
 				   if(existsCalendar(id))  {
-					   bufferC=getDataCale(id);
+					   bufferC=getDataCale(id,null);
 					   C=true;
 				   }
 				   bufferD=getDataDoctors(id,null);
@@ -858,7 +875,7 @@ public class CtrlDatosFichero {
 				   bufferD=getDataDoctors(id,null);
 				   D=true;
 				   if(existsRes(id)){
-					   bufferR=getDataRes(id);
+					   bufferR=getDataRes(id,null);
 					   R=true;
 				   }
 			   }
@@ -922,11 +939,11 @@ public class CtrlDatosFichero {
 				   D=true;
 			   }
 			   if(existsRes(id)){
-				   bufferR=getDataRes(id);
+				   bufferR=getDataRes(id,null);
 				   R=true;
 			   }
 			   if(existsCalendar(id)){
-				   bufferC=getDataCale(id);
+				   bufferC=getDataCale(id,null);
 				   C=true;
 			   }
 			   if(part.equals(".H")){

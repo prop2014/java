@@ -64,10 +64,10 @@ public class DriverCtrlDoctor {
 		System.out.print("HospitalCargat\n");
 		CtrlCalendario cal= new CtrlCalendario(Hosp.getCalendar());
 		System.out.print("cargu el calendari\n");
-		cal.readCalendar(12);
+		cal.readCalendar(12,null);
 		System.out.printf("cargu el calendar de data %d\n",cal.getCalendarYear());
 		CtrlDoctor s = new CtrlDoctor(Hosp.getDoctors(),cal.getCalendarYear());
-		s.addResData(12);
+		s.addResData(12,null);
 		
 		
 		mostrarOpciones();
@@ -348,10 +348,10 @@ public class DriverCtrlDoctor {
 				System.out.print("HospitalCargat\n");
 				CtrlCalendario cal1= new CtrlCalendario(Ho.getCalendar());
 				System.out.print("cargu el calendari\n");
-				cal1.readCalendar(id);
+				cal1.readCalendar(id,null);
 				System.out.printf("cargu el calendar de data %d\n",cal.getCalendarYear());
 				CtrlDoctor s1 = new CtrlDoctor(Ho.getDoctors(),cal1.getCalendarYear());
-				s1.addResData(id);
+				s1.addResData(id,null);
 				System.out.print("OOuyeah\n");
 				s1.saveDataRes(id);
 				System.out.print("Fet\n");
@@ -369,10 +369,10 @@ public class DriverCtrlDoctor {
 				System.out.print("HospitalCargat\n");
 				CtrlCalendario cal2= new CtrlCalendario(Ho.getCalendar());
 				System.out.print("cargu el calendari\n");
-				cal2.readCalendar(id);
+				cal2.readCalendar(id,null);
 				System.out.printf("cargu el calendar de data %d\n",cal2.getCalendarYear());
 				CtrlDoctor s2 = new CtrlDoctor(Ho.getDoctors(),cal.getCalendarYear());
-				s2.addResData(id);
+				s2.addResData(id,null);
 				System.out.printf("El primer doctor lliure es: %d\n",s.getFDIdocs());
 			}
 			else if(opcion==15){
@@ -388,10 +388,10 @@ public class DriverCtrlDoctor {
 				System.out.print("HospitalCargat\n");
 				CtrlCalendario cal3= new CtrlCalendario(Ho.getCalendar());
 				System.out.print("cargu el calendari\n");
-				cal3.readCalendar(id);
+				cal3.readCalendar(id,null);
 				System.out.printf("cargu el calendar de data %d\n",cal3.getCalendarYear());
 				CtrlDoctor s3 = new CtrlDoctor(Ho.getDoctors(),cal.getCalendarYear());
-				s3.addResData(id);
+				s3.addResData(id,null);
 				System.out.print("ingrese el id del doctor:\n");
 				int ne=teclado.nextInt();
 				System.out.printf("la primera res lliure es: %d\n",s.getFDIRes(ne));

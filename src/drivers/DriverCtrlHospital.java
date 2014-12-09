@@ -394,18 +394,26 @@ public class DriverCtrlHospital {
 				case 18:
 					System.out.print("SaveDataDoctors\n");
 					domain.saveDataDoctors();
+					System.out.print("se han guardado los datos\n");
 				break;
 				case 19:
 					System.out.print("SaveDataCale\n");
 					domain.saveDataCale();
+					System.out.print("se han guardado los datos\n");
 				break;
+				case 20:
+					System.out.print("GuardarHospital\n");
+					domain.guardarHospital();
+					System.out.print("se han guardado los datos\n");
+				break;
+					
 					/*
 					
 		
 		System.out.print("17: saveDataHosp\n");
 		System.out.print("18: saveDataDoctors\n");
 		System.out.print("19: saveDataCale\n");
-		System.out.print("20: guardarHospital\n");
+		
 					*/
 				default:
 			}
