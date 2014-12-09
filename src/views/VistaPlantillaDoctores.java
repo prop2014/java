@@ -66,7 +66,7 @@ import javax.swing.table.DefaultTableModel;
 			frameView.setLocationRelativeTo(null);
 			frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			frameView.getContentPane().setBackground(Color.WHITE);
-			 END DESCOMENTAR PARA EDITAR **/
+			 //END DESCOMENTAR PARA EDITAR **/
 			
 			frameView = ctrlPresentacion.getFrame();
 			JPanel contentPane = (JPanel) frameView.getContentPane();
@@ -96,34 +96,30 @@ import javax.swing.table.DefaultTableModel;
 			panelCenterButtons.setBorder(new EmptyBorder(70, 20, 20, 0));
 			panelCenterButtons.setLayout(null);
 			
-			
+			buttonModificar.setFont(new Font("Arial", Font.PLAIN, 15));
 			buttonModificar.setBounds(442, 68, 173, 57);
+			buttonEliminar.setFont(new Font("Arial", Font.PLAIN, 15));
 			buttonEliminar.setBounds(442, 152, 173, 57);
-			buttonCrear.setBounds(442, 234, 173, 57);
-			
-			
-			
-			
-			
+			buttonCrear.setFont(new Font("Arial", Font.PLAIN, 15));
+			buttonCrear.setBounds(442, 234, 173, 57);	
+			buttonVolver.setFont(new Font("Arial", Font.PLAIN, 15));
 			buttonVolver.setBounds(52, 323, 157, 25);
-			
-			labelPanel1.setBounds(34, 12, 361, 25);
+	
+			labelPanel1.setFont(new Font("Arial", Font.PLAIN, 18));
+			labelPanel1.setBounds(52, 29, 361, 25);
 			
 			
 			
 			scrollPanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-			
 			scrollPanel.setBounds(52, 66, 361, 225);
 			
 			/// END: GESTIONADO POR EL BUILDER NO TOCAR
 			
 			// Components
 			panelCenterButtons.add(scrollPanel);
-			//scrollPanel.setViewportView(list);
-			//list.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
 			
 			scrollPanel.setViewportView(tabla);
-			tabla.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+			tabla.setFont(new Font("Arial", Font.PLAIN, 12));
 			
 			tabla.setForeground(Color.red);
 			tabla.setBackground(Color.white);
@@ -269,8 +265,8 @@ import javax.swing.table.DefaultTableModel;
 		 * @wbp.parser.entryPoint
 		 */
 		public VistaPlantillaDoctores(CtrlPresentacion pCtrlPresentacion) {
-			/** DESCOMENTAR PARA EDITAR
-			  inicializarComponents(); */
+			/** DESCOMENTAR PARA EDITAR*
+			  //inicializarComponents(); */
 			 
 			ctrlPresentacion = pCtrlPresentacion;
 		}
