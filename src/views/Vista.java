@@ -54,7 +54,7 @@ public class Vista {
 	}
 	
 	protected static int confirmationDialog(Object message, String title) {
-		return JOptionPane.showConfirmDialog(null, message, title, JOptionPane.OK_CANCEL_OPTION);
+		return JOptionPane.showConfirmDialog(null, message, title, JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
 	}
 	
 	/* Public methods */
