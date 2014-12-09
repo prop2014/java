@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -252,6 +253,8 @@ public class VistaCjtHospitales {
 					ctrlPresentacion.changeView("vistaGestion", panelContents);
 				} catch (IOException eX){
 					JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
+				} catch (ParseException eP) {
+					JOptionPane.showMessageDialog(null, eP, "Error", JOptionPane.ERROR_MESSAGE); 
 				}
 			}
 			

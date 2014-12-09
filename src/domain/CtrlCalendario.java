@@ -206,6 +206,8 @@ public class CtrlCalendario {
 			int j=2;
 			for (int i = 0; i < size;++i){
 				fecha=alcale.get(j);
+				++j;
+				fecha=fecha+"-"+alcale.get(j)+"-"+alcale.get(++j);
 				SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 				GregorianCalendar gc=new GregorianCalendar();
 				sdf.setLenient(false);
@@ -218,17 +220,15 @@ public class CtrlCalendario {
 				numDrsNoche=Integer.parseInt(alcale.get(j));
 				++j;
 				specialManana=alcale.get(j);
-				++j;
 				specialTarde=alcale.get(j);
-				++j;
 				specialNoche=alcale.get(j);
 				if(!addVacationDay3(gc,numDrsManana,numDrsTarde,numDrsNoche,specialManana,specialTarde,specialNoche)) throw new IOException("DIA no anyadido");
 				++j;
 			}
 		}
-		else{
+		/*else{
 		throw new IOException ("No hay datos a leer");
-		}
+		}*/
 	}
 	
 	public void writeCalendar(int id) throws IOException{

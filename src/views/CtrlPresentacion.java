@@ -3,6 +3,7 @@ package views;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -261,9 +262,10 @@ public class CtrlPresentacion {
 		ctrlHospital.importarHospital(path);
 	}
 	
-	public void cargarHospital(int idHosp) throws IOException {
+	public void cargarHospital(int idHosp) throws IOException, ParseException {
 		ctrlHospital.cargarHospital(idHosp);
 		ctrlHospital.getDataDoctors(idHosp);
+		ctrlCalendario.readCalendar(idHosp, null);
 		
 	}
 	
