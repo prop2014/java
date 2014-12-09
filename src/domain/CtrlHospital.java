@@ -113,9 +113,6 @@ public class CtrlHospital {
 		//updateHospitalData()?
 	}
 	
-	public void eliminarHospital(int id) throws IOException{
-		//deleteHospitalData(id);
-	}
 	
 	/*DOCTORES*/
 	public void crearDoctor(int id, String nombre, int numMax, double sueldo) throws IOException {
@@ -126,17 +123,13 @@ public class CtrlHospital {
 		else hosp.addDoctor(doc);
 		//createDoctorData()?
 	}
-	public void eliminarDoc(int id){
-		hosp.deleteDoctor(id);
-	}
 	
 	/**
 	 * @return devuelve un arraylist con los doctores del hospital
 	 */
 	
 	public ArrayList<Doctor> getDoctors()  throws IOException{
-		ArrayList<Doctor> aldoctor = hosp.getDoctors();
-		return aldoctor;
+		return hosp.getDoctors();
 	}
 	
 	/**

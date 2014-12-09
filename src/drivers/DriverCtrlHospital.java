@@ -2,17 +2,19 @@ package drivers;
 
 import java.io.*;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import model.Calendario;
 import model.Hospital;
-import model.Restriccion;
-import model.MAX_Turnos_Rango;
 import model.Doctor;
 import model.Turno;
+import data.CtrlDatosFichero;
+import domain.CtrlCalendario;
 
 
 
+import data.CtrlDatosFichero;
 import domain.CtrlHospital;
 
 
@@ -20,10 +22,7 @@ public class DriverCtrlHospital {
 	private static void muestraOpciones() {
 		System.out.print("¿Que desea hacer?\n\n");
 		/*
-		System.out.print("1: Crear Hospital\n");
-		System.out.print("2: Modificar Hospital\n");
-		System.out.print("3: Crear Doctor y añadir a Hospital\n");
-		System.out.print("4: Cargar un hospital\n");
+		
 		System.out.print("5: Guardar Hospital\n");
 		System.out.print("6: Anadir Restriccion maxturnosRango a un doctor\n");
 		System.out.print("7: Mostrar Hospital\n");
@@ -53,11 +52,13 @@ public class DriverCtrlHospital {
 	}
 
 	static void MostrarTurno(Turno t){
+			SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+
 		System.out.printf("--------------------.\n");
 		GregorianCalendar c1 = t.getDate();
-		String fecha = DateFormat.getDateInstance(DateFormat.SHORT).format(c1.getTime());
+		
+		String fecha = sdf.format(c1.getTime());
 		System.out.printf("fecha: %s\n", fecha);
-		System.out.printf("\n");
 		System.out.printf("tipoturno: %s\n",t.getShiftType());
 		System.out.printf("especial: %s\n",t.getSpecialDate());
 		System.out.printf("numDoctores: %d\n",t.getNumberOfDoctors());
@@ -119,6 +120,7 @@ public class DriverCtrlHospital {
 	    muestraOpciones();
 	    opcion = teclado.nextInt();
 	    CtrlHospital domain = new CtrlHospital();
+	    CtrlDatosFichero inOut = new CtrlDatosFichero();
 	    
 	    
 		while(opcion != 0) {
@@ -226,10 +228,7 @@ public class DriverCtrlHospital {
 					MostrarHospital(Hosp);
 					break;
 				
-				case 38:
-					int di=domain.getFDI();
-					System.out.printf("el primer id disponible es: %d\n",di);
-					break;
+				
 					*/
 			case 1: 
 				muestraOpciones();
@@ -251,7 +250,146 @@ public class DriverCtrlHospital {
 					System.out.print("Se ha importado el Hospital\n");
 					break;
 					
+				case 4:
+					System.out.print("VerDoctores\n");
+					ArrayList<ArrayList<String>> verDoctores = domain.verDoctores();
+						for(ArrayList<String> s : verDoctores){
+							for(String s1 : s){
+								System.out.print(s1+" ");
+							}
+							System.out.println();
+						}
+						System.out.println();
+						
+					break;
+					
+				case 5:
+					System.out.print("CargarHospital\n");
+					System.out.print("Introduzca el id Hospital a cargar\n");
+					int id=teclado.nextInt();
+					domain.cargarHospital(id);
+					Hospital hosp=domain.getHospital();
+					MostrarHospital(hosp);
+					
+				break;
 				
+				case 6:
+					System.out.print("AddCalendar\n");
+					System.out.print("iNtroduzca el anyo del calendario\n");
+					int year = teclado.nextInt();
+					domain.addCalendar(year);
+					hosp =domain.getHospital();
+					Calendario c = hosp.getCalendario();
+					
+					System.out.printf("el anyo del calendario es %d \n",c.getCalendarYear());
+				break;
+					
+				case 7:
+					System.out.print("GetDataDoctors\n");
+					System.out.print("Introduzca el id Hospital para cargar sus doctores\n");
+					id=teclado.nextInt();
+					domain.getDataDoctors(id);
+					hosp=domain.getHospital();
+					MostrarHospital(hosp);
+				break;
+					
+				case 8:
+					System.out.print("CrearHospital\n");
+					int fm,ft,fn;
+					System.out.print("Introduzca id:");
+					id=teclado.nextInt();
+					System.out.print("Introduzca NOmbre: \n");
+					String Name = teclado.next();
+					System.out.print("Introduzca factor Manana:\n");
+					fm=teclado.nextInt();
+					System.out.print("Introduzca factor Tarde: \n");
+					ft=teclado.nextInt();
+					System.out.print("Introduzca factor Noche: \n");
+					fn=teclado.nextInt();
+					domain.crearHospital(id, Name, fm, ft, fn);
+					hosp=domain.getHospital();
+					MostrarHospital(hosp);
+					
+					break;
+				case 9:
+					System.out.print("ModificarHospital\n");
+					System.out.print("Introduzca NOmbre: \n");
+					Name = teclado.next();
+					System.out.print("Introduzca factor Manana:\n");
+					fm=teclado.nextInt();
+					System.out.print("Introduzca factor Tarde: \n");
+					ft=teclado.nextInt();
+					System.out.print("Introduzca factor Noche: \n");
+					fn=teclado.nextInt();
+					domain.modificarHospital(Name, fm, ft, fn);
+					hosp=domain.getHospital();
+					MostrarHospital(hosp);
+					break;
+					
+				case 10:
+					System.out.print("EliminarHospital\n");
+					System.out.print("Introduzca id:");
+					id=teclado.nextInt();
+					domain.deleteHospital(id);
+					if(!inOut.existHospId(id)) System.out.print("Ya no existe este hospital en datos\n");
+					else{
+						domain.cargarHospital(id);
+					
+					hosp=domain.getHospital();
+					MostrarHospital(hosp);
+					}
+					break;
+					
+				case 11:
+					System.out.print("GetDoctors\n");
+					ArrayList<Doctor> aldoctor = domain.getDoctors();
+					for(Doctor doc:aldoctor){
+						MostrarDoc(doc);
+					}
+					break;
+					
+				case 12:
+					System.out.print("GetCalendar\n");
+					System.out.print("se introduce un Turno para este ejemplo\n");
+					domain.addCalendar(2014);
+					CtrlCalendario calen= new CtrlCalendario(domain.getCalendar());
+					calen.addVacationDay(25, 12, 2014, 1, 1, 1, "navidad", "navidad","navidad");
+					Calendario cal = domain.getCalendar();
+					ArrayList<Turno> turns=cal.getALLShifts();
+						for(Turno t: turns){
+							MostrarTurno(t);
+						}
+					
+					break;
+				case 13:
+					int di=domain.getFDI();
+					System.out.printf("el primer id disponible es: %d\n",di);
+					break;
+				
+				case 14:
+					System.out.print("GetHospital\n");
+					hosp=domain.getHospital();
+					MostrarHospital(hosp);
+				break;
+				
+				case 15:
+					System.out.print("GetNameHospital\n");
+					String name = domain.getNameHospital();
+					System.out.print(name);
+					System.out.println();
+					break;
+					
+				case 16:
+					
+				
+					/*
+					
+		System.out.print("16: eliminarDoctor\n");
+		System.out.print("17: saveDataHosp\n");
+		System.out.print("18: saveDataDoctors\n");
+		System.out.print("19: saveDataCale\n");
+		System.out.print("20: guardarHospital\n");
+					*/
 				default:
 			}
 			

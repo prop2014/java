@@ -268,7 +268,7 @@ public class CtrlPresentacion {
 	}
 	
 	public void eliminarDoc(int id)throws IOException{
-		ctrlHospital.eliminarDoc(id);
+		ctrlHospital.eliminarDoctor(id);
 		ctrlHospital.saveDataDoctors();
 	}
 	
