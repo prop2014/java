@@ -1,6 +1,8 @@
 package drivers;
 
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
@@ -12,16 +14,20 @@ import model.*;
 
 public class DriverCtrlCalendario {
 	static void MostrarTurno(Turno t){
-		System.out.printf("--------------------.\n");
-		GregorianCalendar c1 = t.getDate();
-		String fecha = DateFormat.getDateInstance(DateFormat.SHORT).format(c1.getTime());
-		System.out.printf("fecha: %s\n", fecha);
-		System.out.printf("tipoturno: %s\n",t.getShiftType());
-		System.out.printf("especial: %s\n",t.getSpecialDate());
-		System.out.printf("numDoctores: %d\n",t.getNumberOfDoctors());
-		System.out.printf("--------------------.\n");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
-	}
+	System.out.printf("--------------------.\n");
+	GregorianCalendar c1 = t.getDate();
+	
+	String fecha = sdf.format(c1.getTime());
+	System.out.printf("fecha: %s\n", fecha);
+	System.out.printf("tipoturno: %s\n",t.getShiftType());
+	System.out.printf("especial: %s\n",t.getSpecialDate());
+	System.out.printf("numDoctores: %d\n",t.getNumberOfDoctors());
+	System.out.printf("--------------------.\n");
+
+}
+
 	
 	
 	
@@ -125,14 +131,74 @@ public class DriverCtrlCalendario {
 			}
 			*/
 			
-			case 1:{
+			case 1:
 				System.out.println("ReadCalendar\n");
 				System.out.println("Esta operacion lee un Calendario contenido en un \nFicheroHospital o en un Fichero con un Calendario");
-				System.out.print("");
-			}
-			case 3:{
+					System.out.print("iNtroduce el id del Hospital");
+					int id=sc.nextInt();
+					boolean exists=false;
+					try{
+						 exists = inOut.existsCalendar(id);
+					}catch (IOException e){System.out.print("NO SE HA PODIDO leer el archivo\n");}
+					
+						if(exists){
+							try{
+							Ho.cargarHospital(id);
+							Ho.addCalendar(inOut.getYear(id,null));
+							CtrlCalendario cal = new CtrlCalendario(Ho.getCalendar());
+							try{
+							cal.readCalendar(id, null);
+							} catch (ParseException e) {
+								e.printStackTrace();
+							}
+							Calendario cale = cal.getCalendar();
+							ArrayList<Turno> t = cale.getALLShifts();
+							for(Turno tu: t){
+								MostrarTurno(tu);
+							}
+							
+							}catch (IOException e){System.out.print("no year");}
+						}
+						else{
+							System.out.print("Este hospital no tenia calendario");
+						}
+			break;
+				case 2:
+					System.out.println("WriteCalendar\n");
+					System.out.println("Esta operacion lee un Calendario de un fichero i lo vuelve a guardar");
+						System.out.print("iNtroduce el id del Hospital");
+						id=sc.nextInt();
+						 exists=false;
+						try{
+							 exists = inOut.existsCalendar(id);
+						}catch (IOException e){System.out.print("NO SE HA PODIDO leer el archivo\n");}
+						
+							if(exists){
+								try{
+								Ho.cargarHospital(id);
+								Ho.addCalendar(inOut.getYear(id,null));
+								CtrlCalendario cal = new CtrlCalendario(Ho.getCalendar());
+								try{
+								cal.readCalendar(id, null);
+								} catch (ParseException e) {
+									e.printStackTrace();
+								}
+								Calendario cale = cal.getCalendar();
+								ArrayList<Turno> t = cale.getALLShifts();
+								for(Turno tu: t){
+									MostrarTurno(tu);
+								}
+								cal.writeCalendar(id);
+								
+								}catch (IOException e){System.out.print("no year");}
+							}
+							else{
+								System.out.print("Este hospital no tenia calendario");
+							}
+					
+					
 				break;
-			}
+			
 			case 4:{
 				break;
 			}

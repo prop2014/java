@@ -322,8 +322,8 @@ public class CtrlDatosFichero {
 				   			alhosp.add(Integer.toString(calesize));
 				   			int value;
 				   			for(int i=0;i<calesize;++i){
-				   				//dia,mes,year,numDrsManana,numDrsTarde,numDrsNoche
-				   				for(int j=0; j<6;++j){
+				   				alhosp.add(sl.next());
+				   				for(int j=0; j<3;++j){
 				   					value=sl.nextInt();
 				   					alhosp.add(Integer.toString(value));
 				   				}
