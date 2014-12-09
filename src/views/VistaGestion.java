@@ -17,8 +17,6 @@ import javax.swing.border.EmptyBorder;
 public class VistaGestion {
 	
 	private static final int CENTER = 0;
-
-
 	private static final int LEFT = 0;
 
 
@@ -30,7 +28,7 @@ public class VistaGestion {
 	private JPanel panelContents = new JPanel();
 	private JPanel panelCenterButtons = new JPanel();
 	//CENTER
-	private JLabel labelPanel1 = new JLabel("<html><CENTER>Gestion <br/>Calendario</CENTER>");
+	private JLabel labelPanel1 = new JLabel();
 	private JButton buttonCal = new JButton("<html><CENTER>Gestion de <br/>Calendario</CENTER>");
 	private JButton buttonDoc = new JButton("<html><CENTER>Gestion de <br/>Doctores</CENTER>");
 	private JButton buttonSol = new JButton("<html><CENTER>Gestion de <br/>Solucion</CENTER>");
@@ -120,7 +118,7 @@ public class VistaGestion {
 		
 		buttonSol.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ctrlPresentacion.changeView("vistaGestionSolucion", panelContents);
+				ctrlPresentacion.changeView("vistaGestionSoluciones", panelContents);
 			}
 		});
 		

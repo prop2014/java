@@ -36,6 +36,8 @@ public class CtrlPresentacion {
 	private VistaNOTFecha vistaNOTFecha;
 	private VistaXOR vistaXOR;
 	private VistaMAXTurnosRango vistaMAXTurnosRango;
+	private VistaGestionSoluciones vistaGestionSoluciones;
+	private VistaSolucion vistaSolucion;
 	
 	/* Constructora */
 	public CtrlPresentacion(){
@@ -58,6 +60,8 @@ public class CtrlPresentacion {
 		vistaNOTFecha = new VistaNOTFecha(this);
 		vistaXOR = new VistaXOR(this);
 		vistaMAXTurnosRango = new VistaMAXTurnosRango(this);
+		vistaGestionSoluciones = new VistaGestionSoluciones(this);
+		vistaSolucion = new VistaSolucion(this);
 		
 	}
 	
@@ -95,6 +99,8 @@ public class CtrlPresentacion {
 		vistaNOTFecha.init();
 		vistaXOR.init();
 		vistaMAXTurnosRango.init();
+		vistaGestionSoluciones.init();
+		vistaSolucion.init();
 		
 		vistaCjtHospitales.showView();
 		vistaGestion.hidePanel();
@@ -111,6 +117,8 @@ public class CtrlPresentacion {
 		vistaNOTFecha.hidePanel();
 		vistaXOR.hidePanel();
 		vistaMAXTurnosRango.hidePanel();
+		vistaGestionSoluciones.hidePanel();
+		vistaSolucion.hidePanel();
 		
 		
 	}
@@ -120,6 +128,17 @@ public class CtrlPresentacion {
 		contentPane.remove(panel);
 		
 		switch(nextView){
+		
+		case "vistaGestionSoluciones":{
+			contentPane.add(vistaGestionSoluciones.getPanel());
+			vistaGestionSoluciones.showPanel();
+			break;
+		}
+		case "vistaSolucion":{
+			contentPane.add(vistaSolucion.getPanel());
+			vistaSolucion.showPanel();
+			break;
+		}
 		case "vistaCjtHospitales":{
 			contentPane.add(vistaCjtHospitales.getPanel());
 			vistaCjtHospitales.showPanel();
