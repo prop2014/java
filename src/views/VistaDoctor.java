@@ -299,6 +299,10 @@ public class VistaDoctor {
 			
 			//METODOS PUBLICOS
 			
+			public int getDocId() {
+				return Integer.parseInt(docInfo[0]);
+			}
+			
 			/**
 			 * @wbp.parser.entryPoint
 			 */
