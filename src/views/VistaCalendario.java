@@ -10,8 +10,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Date;
+import java.util.Locale;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.lang.NumberFormatException;
 import java.io.IOException;
 
@@ -47,12 +47,10 @@ public class VistaCalendario extends Vista {
 	private JTextField textNightDrs = new JTextField(4);
 	private JTextField textSpecialDate = new JTextField(7);
 
-
 	DefaultListModel<String> dlm = new DefaultListModel<String>();
 	private JList<String> listVacations;
 	private JScrollPane scrollPanel;
 	private JDateChooser dateChooser = new JDateChooser("dd/MM/yyyy", "##/##/##", '_');
-
 
 	//-- Others private attributes--//
 	private static final String pattern = "%7s%11s%9s%9s%-7s%s";	// patron formato lista dias vacacionales
@@ -84,7 +82,7 @@ public class VistaCalendario extends Vista {
 		panelTop.add(buttonCreateCal);
 		panelTop.add(buttonImportCal);
 		panelTop.add(buttonDeleteCal);
-		panelTop.add(labelVacationList1);
+//		panelTop.add(labelVacationList1);
 		panelTop.add(labelVacationHeaders);
 
 		// tooltips
@@ -118,6 +116,7 @@ public class VistaCalendario extends Vista {
 		// components
 		dateChooser.setBounds(0, 0, 150, 25);
 		dateChooser.setEnabled(false);
+		dateChooser.setLocale(new Locale("es","ES"));
 		buttonAddVacation.setBounds(0, 35, 150, 40);
 		buttonAddVacation.setEnabled(false);
 		buttonModVacation.setBounds(0, 95, 150, 40);
@@ -309,8 +308,7 @@ public class VistaCalendario extends Vista {
 			textEveningDrs.setText("0");
 			textNightDrs.setText("0");
 			textSpecialDate.setText("");
-			SimpleDateFormat sdf = new SimpleDateFormat("d 'de' MMMM 'de' yyyy");
-			Object[] dialogContents = {new JLabel("Anadir el dia vacacional " + sdf.format(selectedDate) + " ? "), Box.createVerticalStrut(20), panelTxtFieldsDialog,Box.createVerticalStrut(20)};
+			Object[] dialogContents = {new JLabel("Anadir el dia vacacional " + simpleDateFormat.format(selectedDate) + " ? "), Box.createVerticalStrut(20), panelTxtFieldsDialog,Box.createVerticalStrut(20)};
 			if (JOptionPane.showConfirmDialog(null, dialogContents, "Anadir dia", JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE) == JOptionPane.OK_OPTION) {
 				try{
 					int morningDrs = Integer.parseInt(textMorningDrs.getText());
@@ -323,7 +321,7 @@ public class VistaCalendario extends Vista {
 					if (ctrlPresentacion.addVacation(date, morningDrs, eveningDrs, nightDrs, especialDate)) {
 						dateChooser.setDate(null);
 						update_listVacations();
-						successfulOperationDialog("Se ha anadido el dia vacacional " + sdf.format(selectedDate) + " ! ");
+						successfulOperationDialog("Se ha anadido el dia vacacional " + simpleDateFormat.format(selectedDate) + " ! ");
 					}
 				}
 				catch(NumberFormatException e) {rejectedOperationDialog("El numero de doctores de alguno de los turnos no es correcto ");}
@@ -348,9 +346,8 @@ public class VistaCalendario extends Vista {
 				textEveningDrs.setText(vacation.get(1));
 				textNightDrs.setText(vacation.get(2));
 				textSpecialDate.setText(vacation.get(3));
-				SimpleDateFormat sdf = new SimpleDateFormat("d 'de' MMMM 'de' yyyy");
-				if (confirmationDialog("Modificar el dia vacacional " + sdf.format(date.getTime()) + " ? ", "Modificar dia") == JOptionPane.YES_OPTION) {
-					Object[] dialogContents = {new JLabel("Introducir los nuevos datos para el dia vacacional " + sdf.format(date.getTime()) + ": "), Box.createVerticalStrut(20), panelTxtFieldsDialog,Box.createVerticalStrut(20)};
+				if (confirmationDialog("Modificar el dia vacacional " + simpleDateFormat.format(date.getTime()) + " ? ", "Modificar dia") == JOptionPane.YES_OPTION) {
+					Object[] dialogContents = {new JLabel("Introducir los nuevos datos para el dia vacacional " + simpleDateFormat.format(date.getTime()) + ": "), Box.createVerticalStrut(20), panelTxtFieldsDialog,Box.createVerticalStrut(20)};
 					if (JOptionPane.showConfirmDialog(null, dialogContents, "Modificar dia", JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION) {
 						int morningDrs = Integer.parseInt(textMorningDrs.getText());
 						int eveningDrs = Integer.parseInt(textEveningDrs.getText());
@@ -367,7 +364,7 @@ public class VistaCalendario extends Vista {
 
 			}
 			catch(NumberFormatException e) {rejectedOperationDialog("El numero de doctores de alguno de los turnos no es correcto ");}
-			catch(ParseException e) {rejectedOperationDialog("La fecha seleccionada no es correcta ");}
+			catch(ParseException e) {rejectedOperationDialog(e.getMessage());}
 			catch(IOException e) {rejectedOperationDialog(e.getMessage());}
 		}
 	}
@@ -385,15 +382,14 @@ public class VistaCalendario extends Vista {
 				textEveningDrs.setText(vacation.get(1));
 				textNightDrs.setText(vacation.get(2));
 				textSpecialDate.setText(vacation.get(3));
-				SimpleDateFormat sdf = new SimpleDateFormat("d 'de' MMMM 'de' yyyy");
-				// llamada a dominio
-				if (confirmationDialog("Modificar el dia vacacional " + sdf.format(date.getTime()) + " ? ", "Modificar dia") == JOptionPane.YES_OPTION) {
-					Object[] dialogContents = {new JLabel("Introducir los nuevos datos para el dia vacacional " + sdf.format(date.getTime()) + ": "), Box.createVerticalStrut(20), panelTxtFieldsDialog,Box.createVerticalStrut(20)};
+				if (confirmationDialog("Modificar el dia vacacional " + simpleDateFormat.format(date.getTime()) + " ? ", "Modificar dia") == JOptionPane.YES_OPTION) {
+					Object[] dialogContents = {new JLabel("Introducir los nuevos datos para el dia vacacional " + simpleDateFormat.format(date.getTime()) + ": "), Box.createVerticalStrut(20), panelTxtFieldsDialog,Box.createVerticalStrut(20)};
 					if (JOptionPane.showConfirmDialog(null, dialogContents, "Modificar dia", JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION) {
 						int morningDrs = Integer.parseInt(textMorningDrs.getText());
 						int eveningDrs = Integer.parseInt(textEveningDrs.getText());
 						int nightDrs = Integer.parseInt(textNightDrs.getText());
 						String especialDate = textSpecialDate.getText();
+						// llamada a dominio
 						if (ctrlPresentacion.modifyVacation(date, morningDrs, eveningDrs, nightDrs, especialDate)) {
 							update_listVacations();
 							successfulOperationDialog("Se ha modificado el dia vacacional !");
@@ -404,7 +400,7 @@ public class VistaCalendario extends Vista {
 
 			}
 			catch(NumberFormatException e) {rejectedOperationDialog("El numero de doctores de alguno de los turnos no es correcto ");}
-			catch(ParseException e) {rejectedOperationDialog("La fecha seleccionada no es correcta ");}
+			catch(ParseException e) {rejectedOperationDialog(e.getMessage());}
 			catch(IOException e) {rejectedOperationDialog(e.getMessage());}
 		}
 	}
@@ -412,8 +408,7 @@ public class VistaCalendario extends Vista {
 		if (!listVacations.isSelectionEmpty()) {
 			try {
 				GregorianCalendar date = getSelectedDate(listVacations.getSelectedValue());
-				SimpleDateFormat sdf = new SimpleDateFormat("d 'de' MMMM 'de' yyyy");
-				if (confirmationDialog("Eliminar el dia vacacional " + sdf.format(date.getTime()) + " ? ", "Eliminar dia vacacional") == JOptionPane.YES_OPTION) {
+				if (confirmationDialog("Eliminar el dia vacacional " + simpleDateFormat.format(date.getTime()) + " ? ", "Eliminar dia vacacional") == JOptionPane.YES_OPTION) {
 					// llamada a dominio
 					if (ctrlPresentacion.deleteVacationDay(date)) {
 						update_listVacations();
