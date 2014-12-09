@@ -295,17 +295,17 @@ public class DriverCtrlHospital {
 					
 				case 8:
 					System.out.print("CrearHospital\n");
-					int fm,ft,fn;
+					double fm,ft,fn;
 					System.out.print("Introduzca id:");
 					id=teclado.nextInt();
 					System.out.print("Introduzca NOmbre: \n");
 					String Name = teclado.next();
 					System.out.print("Introduzca factor Manana:\n");
-					fm=teclado.nextInt();
+					fm=teclado.nextDouble();
 					System.out.print("Introduzca factor Tarde: \n");
-					ft=teclado.nextInt();
+					ft=teclado.nextDouble();
 					System.out.print("Introduzca factor Noche: \n");
-					fn=teclado.nextInt();
+					fn=teclado.nextDouble();
 					domain.crearHospital(id, Name, fm, ft, fn);
 					hosp=domain.getHospital();
 					MostrarHospital(hosp);
@@ -316,11 +316,11 @@ public class DriverCtrlHospital {
 					System.out.print("Introduzca NOmbre: \n");
 					Name = teclado.next();
 					System.out.print("Introduzca factor Manana:\n");
-					fm=teclado.nextInt();
+					fm=teclado.nextDouble();
 					System.out.print("Introduzca factor Tarde: \n");
-					ft=teclado.nextInt();
+					ft=teclado.nextDouble();
 					System.out.print("Introduzca factor Noche: \n");
-					fn=teclado.nextInt();
+					fn=teclado.nextDouble();
 					domain.modificarHospital(Name, fm, ft, fn);
 					hosp=domain.getHospital();
 					MostrarHospital(hosp);
@@ -380,11 +380,28 @@ public class DriverCtrlHospital {
 					break;
 					
 				case 16:
-					
+					System.out.print("EliminarDoctor\n");
+					System.out.print("Introduzca id del doctor a eliminar:");
+					id=teclado.nextInt();
+					domain.eliminarDoctor(id);
+					break;
 				
+				case 17:
+					System.out.print("SaveDataHosp\n");
+					domain.saveDataHosp();
+				break;
+				
+				case 18:
+					System.out.print("SaveDataDoctors\n");
+					domain.saveDataDoctors();
+				break;
+				case 19:
+					System.out.print("SaveDataCale\n");
+					domain.saveDataCale();
+				break;
 					/*
 					
-		System.out.print("16: eliminarDoctor\n");
+		
 		System.out.print("17: saveDataHosp\n");
 		System.out.print("18: saveDataDoctors\n");
 		System.out.print("19: saveDataCale\n");

@@ -194,6 +194,7 @@ public class CtrlHospital {
 	
 	public void saveDataDoctors()throws IOException{
 		ArrayList<String> alhosp = new ArrayList<String>();
+		if(hosp.docSize()!=0){
 		alhosp.add(Integer.toString(hosp.docSize()));
 		ArrayList<Doctor>aldoc = hosp.getDoctors();
 		for(int i=0; i<hosp.docSize();++i){
@@ -203,9 +204,13 @@ public class CtrlHospital {
 			alhosp.add(Double.toString(aldoc.get(i).getSalaryTurn()));
 		}
 		inOut.saveDataDoctors(alhosp,hosp.getId());
+		}
+		else {
+			throw new IOException("No hay doctores a guardar");
+		}
 	}	
 	
-	public void saveDataCale(int id) throws IOException{
+	public void saveDataCale() throws IOException{
 		ArrayList<String> alcal = new ArrayList<String>();
 		if(!hosp.isCaleEmpty()){	
 			Calendario calendar =hosp.getCalendario();
@@ -252,12 +257,12 @@ public class CtrlHospital {
 			}
 	   		
 		}
-		inOut.saveDataCale(alcal, id);
+		inOut.saveDataCale(alcal,hosp.getId());
     }
 	public void guardarHospital()throws IOException{
 		saveDataHosp();
 		if(!hosp.isDocEmpty()) saveDataDoctors();
-		if(!hosp.isCaleEmpty()) saveDataCale(hosp.getId());
+		if(!hosp.isCaleEmpty()) saveDataCale();
 	}
 	
 	public void deleteHospital(int id) throws IOException {
