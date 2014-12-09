@@ -179,7 +179,12 @@ public class VistaSolucion {
 	/** Asignacion de listeners **/
 	
 	private void assign_listenersComponents() {
-		
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ctrlPresentacion.changeView("vistaGestionSoluciones", panelContents);
+				
+			}
+		});
 	
 		listDoc.addListSelectionListener(new ListSelectionListener() {
 			@Override
