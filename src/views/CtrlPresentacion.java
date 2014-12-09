@@ -3,7 +3,6 @@ package views;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -262,10 +261,9 @@ public class CtrlPresentacion {
 		ctrlHospital.importarHospital(path);
 	}
 	
-	public void cargarHospital(int idHosp) throws IOException, ParseException {
+	public void cargarHospital(int idHosp) throws IOException {
 		ctrlHospital.cargarHospital(idHosp);
 		ctrlHospital.getDataDoctors(idHosp);
-		ctrlCalendario.readCalendar(idHosp, null);
 		
 	}
 	
@@ -297,68 +295,84 @@ public class CtrlPresentacion {
 		vistaDoctor.setDocInfo(newDocInfo);
 	}
 	
-	public void addResMAX_Turnos_por_Dia(int idDoc, int numD) throws IOException {
+	public void addResMAX_Turnos_por_Dia(int numD) throws IOException {
+		int idDoc = VistaDoctor.getDocId();
 		int idRes = ctrlDoctor.getFDIRes(idDoc);
+		int idHosp = ctrlHospital.getID();
 		try {
 			ctrlDoctor.addResMAX_Turnos_por_Dia(idDoc, idRes, numD);
 		} catch (IOException e) {throw new IOException(e);}
-		//ctrlDoctor.saveDataRes(idHosp);
+		ctrlDoctor.saveDataRes(idHosp);
 	}
 	
-	public void addResMAX_Turnos_Rango(int idDoc, int d1, int m1, int a1, int d2, int m2, int a2, int numT) throws IOException {
+	public void addResMAX_Turnos_Rango(int d1, int m1, int a1, int d2, int m2, int a2, int numT) throws IOException {
+		int idDoc = VistaDoctor.getDocId();
 		int idRes = ctrlDoctor.getFDIRes(idDoc);
+		int idHosp = ctrlHospital.getID();
 		try {
 			ctrlDoctor.addResMAX_Turnos_Rango(idDoc, idRes, d1, m1, a1, d2, m2, a2, numT);
 		} catch (IOException e) {throw new IOException(e);}
-		//ctrlDoctor.saveDataRes(idHosp);
+		ctrlDoctor.saveDataRes(idHosp);
 	}
 	
-	public void addResNOT_Dia_Mes(int idDoc, int diaMes) throws IOException {
+	public void addResNOT_Dia_Mes(int diaMes) throws IOException {
+		int idDoc = VistaDoctor.getDocId();
 		int idRes = ctrlDoctor.getFDIRes(idDoc);
+		int idHosp = ctrlHospital.getID();
 		try {
 			ctrlDoctor.addResNOT_Dia_Mes(idDoc, idRes, diaMes);
 		} catch (IOException e) {throw new IOException(e);}
-		//ctrlDoctor.saveDataRes(idHosp);
+		ctrlDoctor.saveDataRes(idHosp);
 	}
 	
-	public void addResNOT_Dia_Semana(int idDoc, String diaSemana) throws IOException {
+	public void addResNOT_Dia_Semana(String diaSemana) throws IOException {
+		int idDoc = VistaDoctor.getDocId();
 		int idRes = ctrlDoctor.getFDIRes(idDoc);
+		int idHosp = ctrlHospital.getID();
 		try {
 			ctrlDoctor.addResNOT_Dia_Semana(idDoc, idRes, diaSemana);
 		} catch (IOException e) {throw new IOException(e);}
-		//ctrlDoctor.saveDataRes(idHosp);
+		ctrlDoctor.saveDataRes(idHosp);
 	}
 	
-	public void addResNOT_Especial(int idDoc, String especial) throws IOException {
+	public void addResNOT_Especial(String especial) throws IOException {
+		int idDoc = VistaDoctor.getDocId();
 		int idRes = ctrlDoctor.getFDIRes(idDoc);
+		int idHosp = ctrlHospital.getID();
 		try {
 			ctrlDoctor.addResNOT_Especial(idDoc, idRes, especial);
 		} catch (IOException e) {throw new IOException(e);}
-		//ctrlDoctor.saveDataRes(idHosp);
+		ctrlDoctor.saveDataRes(idHosp);
 	}
 	
-	public void addResNOT_Fecha(int idDoc, int d, int m, int a) throws IOException {
+	public void addResNOT_Fecha(int d, int m, int a) throws IOException {
+		int idDoc = VistaDoctor.getDocId();
 		int idRes = ctrlDoctor.getFDIRes(idDoc);
+		int idHosp = ctrlHospital.getID();
 		try {
 			ctrlDoctor.addResNOT_Fecha(idDoc, idRes, d, m, a);
 		} catch (IOException e) {throw new IOException(e);}
-		//ctrlDoctor.saveDataRes(idHosp);
+		ctrlDoctor.saveDataRes(idHosp);
 	}
 	
-	public void addResNOT_Turno(int idDoc, String tipoTurno) throws IOException {
+	public void addResNOT_Turno(String tipoTurno) throws IOException {
+		int idDoc = VistaDoctor.getDocId();
 		int idRes = ctrlDoctor.getFDIRes(idDoc);
+		int idHosp = ctrlHospital.getID();
 		try {
 			ctrlDoctor.addResNOT_Turno(idDoc, idRes, tipoTurno);
 		} catch (IOException e) {throw new IOException(e);}
-		//ctrlDoctor.saveDataRes(idHosp);
+		ctrlDoctor.saveDataRes(idHosp);
 	}
 	
-	public void addResXOR(int idDoc, ArrayList<Integer> diaXOR, ArrayList<Integer> mesXOR,  ArrayList<Integer> yearXOR, ArrayList<String> tipoTurnoXOR) throws IOException {
+	public void addResXOR(ArrayList<Integer> diaXOR, ArrayList<Integer> mesXOR,  ArrayList<Integer> yearXOR, ArrayList<String> tipoTurnoXOR) throws IOException {
+		int idDoc = VistaDoctor.getDocId();
 		int idRes = ctrlDoctor.getFDIRes(idDoc);
+		int idHosp = ctrlHospital.getID();
 		try {
 			ctrlDoctor.addResXOR(idDoc, idRes, diaXOR, mesXOR, yearXOR, tipoTurnoXOR);
 		} catch (IOException e) {throw new IOException(e);}
-		//ctrlDoctor.saveDataRes(idHosp);
+		ctrlDoctor.saveDataRes(idHosp);
 	}
 	/* Calendar methods */
 	//--------------------------------------------------------------------------//
