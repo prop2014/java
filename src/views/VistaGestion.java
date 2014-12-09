@@ -16,6 +16,12 @@ import javax.swing.border.EmptyBorder;
 
 public class VistaGestion {
 	
+	private static final int CENTER = 0;
+
+
+	private static final int LEFT = 0;
+
+
 	private CtrlPresentacion ctrlPresentacion;
 	
 	
@@ -24,7 +30,7 @@ public class VistaGestion {
 	private JPanel panelContents = new JPanel();
 	private JPanel panelCenterButtons = new JPanel();
 	//CENTER
-	private JLabel labelPanel1 = new JLabel("<html><u>''NOMBRE DEL HOSPITAL''</u>");
+	private JLabel labelPanel1 = new JLabel("<html><CENTER>Gestion <br/>Calendario</CENTER>");
 	private JButton buttonCal = new JButton("<html><CENTER>Gestion de <br/>Calendario</CENTER>");
 	private JButton buttonDoc = new JButton("<html><CENTER>Gestion de <br/>Doctores</CENTER>");
 	private JButton buttonSol = new JButton("<html><CENTER>Gestion de <br/>Solucion</CENTER>");
@@ -58,12 +64,20 @@ public class VistaGestion {
 	private void inicializar_panelCenterButtons() {
 		////// START: GESTIONADO POR EL BUILDER NO TOCAR
 		panelCenterButtons.setBorder(new EmptyBorder(70, 20, 20, 0));
+		buttonCal.setFont(new Font("Arial", Font.PLAIN, 16));
 		buttonCal.setBounds(49, 134, 173, 119);
+		
+		buttonSol.setFont(new Font("Arial", Font.PLAIN, 16));
 		buttonSol.setBounds(467, 132, 181, 122);
+		
+		buttonDoc.setFont(new Font("Arial", Font.PLAIN, 16));
 		buttonDoc.setBounds(263, 134, 173, 119);
+		
+		buttonVolver.setFont(new Font("Arial", Font.PLAIN, 12));
 		buttonVolver.setBounds(40, 324, 157, 25);
-		labelPanel1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		labelPanel1.setBounds(36, 32, 230, 15);
+		
+		labelPanel1.setFont(new Font("Arial", Font.PLAIN, 20));
+		labelPanel1.setBounds(49, 32, 599, 45);
 		
 		panelCenterButtons.setLayout(null);
 		/// END: GESTIONADO POR EL BUILDER NO TOCAR
@@ -104,17 +118,12 @@ public class VistaGestion {
 			
 		});
 		
-		/*buttonSol.addActionListener(new ActionListener() {
+		buttonSol.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ctrlPresentacion.changeView(1, panelContents);
+				ctrlPresentacion.changeView("vistaGestionSolucion", panelContents);
 			}
 		});
 		
-		/*buttonCal.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ctrlPresentacion.changeView(1, panelContents);
-			}
-		});*/
 		
 		
 		
@@ -136,7 +145,11 @@ public class VistaGestion {
 	public void cargarHospital() {
 		String name = ctrlPresentacion.getNameHospital();
 		name = name.replace("%", " ");
+	
+		labelPanel1.setHorizontalAlignment(LEFT);
+		labelPanel1.setVerticalAlignment(CENTER);
 		labelPanel1.setText(name);
+		labelPanel1.setVerticalTextPosition(CENTER);
 	}
 	
 	public JPanel getPanel() {

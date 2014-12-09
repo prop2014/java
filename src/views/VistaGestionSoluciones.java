@@ -170,7 +170,7 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 	}
 	
 	public void init() {
-		loadSoluciones();
+		//loadSoluciones();
 		inicializarComponents();
 	}
 	
@@ -186,7 +186,7 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 		panelContents.setVisible(false);
 	}
 	public void showPanel() {
-		loadSoluciones();
+		//loadSoluciones();
 		panelContents.setVisible(true);
 	}
 	

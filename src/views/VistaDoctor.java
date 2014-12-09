@@ -92,18 +92,32 @@ public class VistaDoctor {
 				panelCenterButtons.setBorder(new EmptyBorder(70, 20, 20, 0));
 				panelCenterButtons.setLayout(null);
 				
-				
+				buttonAnadir.setFont(new Font("Arial", Font.PLAIN, 12));
 				buttonAnadir.setBounds(449, 128, 173, 40);
+				
+				buttonEliminar.setFont(new Font("Arial", Font.PLAIN, 12));
 				buttonEliminar.setBounds(449, 180, 173, 40);
+				
+				buttonGuardar.setFont(new Font("Arial", Font.PLAIN, 12));
 				buttonGuardar.setBounds(449, 233, 173, 40);
+				
+				buttonVolver.setFont(new Font("Arial", Font.PLAIN, 12));
 				buttonVolver.setBounds(52, 323, 157, 25);
 				
 				//labels
+				labelPanel1.setFont(new Font("Arial", Font.PLAIN, 12));
 				labelPanel1.setBounds(44, 16, 361, 25);
 				
+				labelPanelID.setFont(new Font("Arial", Font.PLAIN, 12));
 				labelPanelID.setBounds(52, 45, 28, 30);
+				
+				labelPanelNombre.setFont(new Font("Arial", Font.PLAIN, 12));
 				labelPanelNombre.setBounds(52, 69, 71, 33);
+				
+				labelPanelMaxTurnos.setFont(new Font("Arial", Font.PLAIN, 12));
 				labelPanelMaxTurnos.setBounds(340, 45, 101, 31);
+				
+				labelPanelSueldo.setFont(new Font("Arial", Font.PLAIN, 12));
 				labelPanelSueldo.setBounds(340, 70, 88, 31);
 				
 				//textArea
