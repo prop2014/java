@@ -715,6 +715,9 @@ public class CtrlDatosFichero {
 			   pw.close();
 		   }catch(Exception e) {e.printStackTrace();}
 	   }
+	   else {
+		   throw new IOException ("No Hay datos a guardar");
+	   }
 	   
    }
    public void saveDataDoctors(ArrayList<String> alhosp,Integer id) throws IOException{
