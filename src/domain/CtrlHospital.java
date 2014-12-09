@@ -133,6 +133,13 @@ public class CtrlHospital {
 	}
 	
 	/**
+	 * @return devuelve el id
+	 */
+	public int getID() {
+		return hosp.getId();
+	}
+	
+	/**
 	 * 
 	 * @return Devuelve el calendario
 	 */
