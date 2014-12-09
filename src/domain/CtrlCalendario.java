@@ -4,6 +4,7 @@ import model.Calendario;
 import model.Turno;
 
 import java.util.GregorianCalendar;
+import java.util.Locale;
 import java.text.SimpleDateFormat;
 //import java.text.ParseException;
 import java.io.IOException;
@@ -115,7 +116,7 @@ public class CtrlCalendario {
 	public ArrayList<ArrayList<String>> getALLVacations() {
 		ArrayList<GregorianCalendar> vacations = calendar.getALLVacationDates();
 		ArrayList<ArrayList<String>> listVacations = new ArrayList<ArrayList<String>>();
-		SimpleDateFormat sdf = new SimpleDateFormat("d-MMM");
+		SimpleDateFormat sdf = new SimpleDateFormat("d-MMM", new Locale("es","ES"));
 		for (GregorianCalendar date : vacations) {
 			ArrayList<String> vacationDay = new ArrayList<String>();
 			vacationDay.add(sdf.format(date.getTime()));
@@ -128,7 +129,7 @@ public class CtrlCalendario {
 		return listVacations;
 	}
 	
-	// ¡¡¡ PROVISIONAL: SERA ELIMINADA Y SUSTITUIDA POR addVacationDay2 !!!
+	// ï¿½ï¿½ï¿½ PROVISIONAL: SERA ELIMINADA Y SUSTITUIDA POR addVacationDay2 !!!
 	public void addVacationDay(int dia, int mes, int any, int numDrsManana, int numDrsTarde, int numDrsNoche, String especialManana, String especialTarde, String especialNoche) throws IOException{
 		GregorianCalendar date = new GregorianCalendar(any,mes-1,dia);
 		try {
