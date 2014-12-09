@@ -27,7 +27,6 @@ public class CtrlPresentacion {
 	private VistaPlantillaDoctores vistaPlantillaDoctores;
 	private VistaDoctor vistaDoctor;
 	private VistaCalendario vistaCalendario;
-	private VistaDiaCalendario vistaDiaCalendario;
 	private VistaRestriccion vistaRestriccion;
 	private VistaMAXTurnosporDia vistaMAXTurnosporDia;
 	private VistaNOTTurno vistaNOTTurno;
@@ -50,7 +49,6 @@ public class CtrlPresentacion {
 		vistaPlantillaDoctores = new VistaPlantillaDoctores(this);
 		vistaDoctor = new VistaDoctor(this);
 		vistaCalendario = new VistaCalendario(this);
-		vistaDiaCalendario = new VistaDiaCalendario(this);
 		vistaRestriccion = new VistaRestriccion(this);
 		vistaMAXTurnosporDia = new VistaMAXTurnosporDia(this);
 		vistaNOTTurno = new VistaNOTTurno(this);
@@ -88,7 +86,6 @@ public class CtrlPresentacion {
 		vistaPlantillaDoctores.init();
 		vistaDoctor.init();
 		vistaCalendario.init();
-//		vistaDiaCalendario.init();
 		vistaRestriccion.init();
 		vistaMAXTurnosporDia.init();
 		vistaNOTTurno.init();
@@ -105,7 +102,6 @@ public class CtrlPresentacion {
 		vistaPlantillaDoctores.hidePanel();
 		vistaDoctor.hidePanel();
 		vistaCalendario.hidePanel();
-		vistaDiaCalendario.hidePanel();
 		vistaRestriccion.hidePanel();
 		vistaMAXTurnosporDia.hidePanel();
 		vistaNOTTurno.hidePanel();
@@ -157,12 +153,6 @@ public class CtrlPresentacion {
 		case "vistaCalendario": {
 			contentPane.add(vistaCalendario.getPanel());
 			vistaCalendario.showPanel();
-			break;
-		}
-		
-		case "vistaDiaCalendario": {
-			contentPane.add(vistaDiaCalendario.getPanel());
-			vistaDiaCalendario.showPanel();
 			break;
 		}
 		
@@ -371,11 +361,20 @@ public class CtrlPresentacion {
 	public boolean deleteVacationDay(GregorianCalendar date) throws IOException {
 		try {
 			return ctrlCalendario.deleteVacationDay(date);
-		} catch (IOException e) {throw e;}
+		}
+		catch (IOException e) {throw e;}
+//		catch (Exception e) {throw e;}
 	}
 	
 	public int getCalendarYear() {
 		return ctrlCalendario.getCalendarYear();
+	}
+	
+	public ArrayList<String> getVacationDay(GregorianCalendar date) throws IOException {
+		try {
+			return ctrlCalendario.getVacationDay(date);
+		}
+		catch (IOException e) {throw e;}
 	}
 	
 	public ArrayList<ArrayList<String>> getALLVacations() {
