@@ -16,7 +16,6 @@ public class DriverCtrlCalendario {
 		GregorianCalendar c1 = t.getDate();
 		String fecha = DateFormat.getDateInstance(DateFormat.SHORT).format(c1.getTime());
 		System.out.printf("fecha: %s\n", fecha);
-		System.out.printf("\n");
 		System.out.printf("tipoturno: %s\n",t.getShiftType());
 		System.out.printf("especial: %s\n",t.getSpecialDate());
 		System.out.printf("numDoctores: %d\n",t.getNumberOfDoctors());
@@ -34,22 +33,19 @@ public class DriverCtrlCalendario {
 		int op;
 		CtrlDatosFichero inOut= new CtrlDatosFichero();
 		CtrlHospital Ho = new CtrlHospital();
-		System.out.print("El Calendario corresponde a un Hospital porfavor introdzca el id de Hospital");
-		int id = sc.nextInt();
 		int year=-1;
+		int id= 100;
 		try{
-		Ho.cargarHospital(id);
+			Ho.cargarHospital(id);
+			if(inOut.existsCalendar(id)){
+				year=inOut.getYear(id,null);
+			}
 		}catch (IOException e){System.out.print("fallo");}
-		try {
-		year = inOut.getYear(id,null);
-		}catch (IOException e){
-			System.out.print("fallo el anyo");
-		}
-		if(year ==-1) exit=true;
 		Ho.addCalendar(year);
 		CtrlCalendario cal = new CtrlCalendario(Ho.getCalendar());
 		
 		Calendario calendar1 = cal.getCalendar();
+		System.out.print("Driver CtrlCalendario\n");
 		if(calendar1.getNumberOfVacationDates()==0) System.out.printf("Actualment l'Hospital no te calendari\n");
 		else {
 			System.out.printf("El calendari te %d Turns Vacacionals\n",calendar1.getNumberOfShifts());
@@ -59,10 +55,6 @@ public class DriverCtrlCalendario {
 			}
 		}
 		
-		
-		
-		
-		System.out.print("Driver CtrlCalendario\n");
 
 		while(!exit){
 			System.out.println();
@@ -80,7 +72,13 @@ public class DriverCtrlCalendario {
 
 			switch(op){
 			case 1:{
+				
+				System.out.print("Stub:Hospital id = 100, No te calendari\n");
 				try{
+				
+				System.out.println();
+				System.out.print("introduzca el id de un Hospital para cargar su calendario o 100 para seguir con Stub\n");
+				id = sc.nextInt();
 				cal.readCalendar(id);
 				}catch (IOException e){System.out.print("No se ha podido leer");}
 				System.out.print("Se ha cargado el calendario\n");
@@ -96,6 +94,31 @@ public class DriverCtrlCalendario {
 				break;
 			}
 			case 2:{
+				int dia,mes,any,morningDrs,eveningDrs,nightDrs;
+				String especialDate = null;
+				System.out.print("Creando fecha!\n");
+				System.out.print("Introduzca el dia del mes\n");
+				dia = sc.nextInt();
+				System.out.print("Introduzca el mes del anyo (1-12)\n");
+				mes = sc.nextInt();
+				System.out.print("Introduzca el anyo\n");
+				any = sc.nextInt();
+				System.out.print("Introduzca el numero de doctores manana\n");
+				morningDrs= sc.nextInt();
+				System.out.print("Introduzca el numero de doctores tarde\n");
+				eveningDrs=sc.nextInt();
+				System.out.print("Introduzca el numero de doctores noche\n");
+				nightDrs=sc.nextInt();
+				System.out.print("Quieres que sea fecha especial? (s o n)\n");
+				String sino = sc.next();
+				if(sino.equals("s")){
+				System.out.print("Introduzca que fecha especial es! (navdiad,reyes..)\n");
+				especialDate=sc.next();
+				}
+				try{
+				cal.addVacationDay(dia,mes,any,morningDrs,eveningDrs,nightDrs,especialDate,especialDate,especialDate);
+				cal.writeCalendar(id);
+				} catch (IOException e){System.out.print("NO SE HA PODIDO Introducir\n");}
 				break;
 			}
 			case 3:{

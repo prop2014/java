@@ -117,7 +117,7 @@ public class CtrlCalendario {
 		return listVacations;
 	}
 	
-	// ¡¡¡ PROVISIONAL: SERA ELIMINADA Y SUSTITUIDA POR addVacationDay2 !!!
+	// ï¿½ï¿½ï¿½ PROVISIONAL: SERA ELIMINADA Y SUSTITUIDA POR addVacationDay2 !!!
 	public void addVacationDay(int dia, int mes, int any, int numDrsManana, int numDrsTarde, int numDrsNoche, String especialManana, String especialTarde, String especialNoche) throws IOException{
 		GregorianCalendar date = new GregorianCalendar(any,mes-1,dia);
 		try {
@@ -184,6 +184,9 @@ public class CtrlCalendario {
 				addVacationDay(dia,mes,any,numDrsManana,numDrsTarde,numDrsNoche,specialManana,specialTarde,specialNoche);
 				++j;
 			}
+		}
+		else{
+		throw new IOException ("No hay datos a leer");
 		}
 	}
 	

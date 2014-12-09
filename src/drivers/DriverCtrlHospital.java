@@ -19,6 +19,7 @@ import domain.CtrlHospital;
 public class DriverCtrlHospital {
 	private static void muestraOpciones() {
 		System.out.print("¿Que desea hacer?\n\n");
+		/*
 		System.out.print("1: Crear Hospital\n");
 		System.out.print("2: Modificar Hospital\n");
 		System.out.print("3: Crear Doctor y añadir a Hospital\n");
@@ -27,6 +28,27 @@ public class DriverCtrlHospital {
 		System.out.print("6: Anadir Restriccion maxturnosRango a un doctor\n");
 		System.out.print("7: Mostrar Hospital\n");
 		System.out.print("8; getFDI\n");
+		*/
+		System.out.print("1: MostrarOpciones\n");
+		System.out.print("2: verHospitales()\n");
+		System.out.print("3: importarHospital\n");
+		System.out.print("4: verDoctores()\n");
+		System.out.print("5: cargarHospital\n");
+		System.out.print("6: addCalendar\n");
+		System.out.print("7: getDataDoctors\n");
+		System.out.print("8: crearHospital\n");
+		System.out.print("9: modificarHospital\n");
+		System.out.print("10: eliminarHospital\n");
+		System.out.print("11: getDoctors\n");
+		System.out.print("12: getCalendar\n");
+		System.out.print("13: getFDI\n");
+		System.out.print("14: getHospital\n");
+		System.out.print("15: getNameHospital\n");
+		System.out.print("16: eliminarDoctor\n");
+		System.out.print("17: saveDataHosp\n");
+		System.out.print("18: saveDataDoctors\n");
+		System.out.print("19: saveDataCale\n");
+		System.out.print("20: guardarHospital\n");
 		System.out.print("0: Salir\n");
 	}
 
@@ -93,23 +115,17 @@ public class DriverCtrlHospital {
 	public static void main(String[] args) throws IOException{
 		Scanner teclado;
 		teclado = new Scanner(System.in);
-		
 		int opcion = -1;
-		InputStreamReader isr = new InputStreamReader(System.in);
-	    BufferedReader br = new BufferedReader (isr);
-		
 	    muestraOpciones();
 	    opcion = teclado.nextInt();
 	    CtrlHospital domain = new CtrlHospital();
 	    
-	    int id;
-		String nombre;
-		double fm, ft, fn;
 	    
 		while(opcion != 0) {
 	        
 			switch(opcion){
-				case 1:
+			/*
+				case 31:
 					System.out.println("Ingrese el id del hospital: ");
 					id = teclado.nextInt();
 					System.out.println("Ingrese el nombre del hospital: ");
@@ -126,7 +142,7 @@ public class DriverCtrlHospital {
 					System.out.println("Hospital creado correctamente");	
 					break;
 					
-				case 2:
+				case 32:
 					System.out.println("Ingrese el nuevo nombre del hospital: ");
 					nombre = br.readLine();
 					System.out.println("Ingrese el nuevo factorMañana: ");
@@ -141,7 +157,7 @@ public class DriverCtrlHospital {
 					System.out.println("Hospital modificado correctamente");
 					break;
 				
-				case 3:
+				case 33:
 					int numMax;
 					Double sueldo;
 					System.out.println("Ingrese el identificador del Doctor: ");
@@ -160,7 +176,7 @@ public class DriverCtrlHospital {
 					System.out.println("Doctor añadido correctamente");
 					break;
 				
-				case 4:
+				case 34:
 
 					System.out.println("Ingrese el identificador del Hospital: ");
 					int Id = teclado.nextInt();
@@ -172,12 +188,12 @@ public class DriverCtrlHospital {
 					System.out.println("Hospital correctamente cargado");
 					break;
 				
-				case 5: 
+				case 35: 
 						domain.guardarHospital();
 					System.out.println("Hospital correctamente guardado");
 					break;
 					
-				case 6: //Res Max Turnos Rango
+				case 36: //Res Max Turnos Rango
 					ArrayList<Doctor> aldoctor = new ArrayList<Doctor>();
 					try{
 					aldoctor = domain.getDoctors();
@@ -205,21 +221,43 @@ public class DriverCtrlHospital {
 						res = new MAX_Turnos_Rango(idRestriccion, d1, m1, a1, d2, m2, a2, numTurnos);
 					m.addRestriction(res);
 					break;
-				case 7:
+				case 37:
 					Hospital Hosp =domain.getHospital();
 					MostrarHospital(Hosp);
 					break;
 				
-				case 8:
+				case 38:
 					int di=domain.getFDI();
 					System.out.printf("el primer id disponible es: %d\n",di);
 					break;
+					*/
+			case 1: 
+				muestraOpciones();
+				break;
+			
+				case 2:
+					System.out.print("verHospitales\n");
+					
+					ArrayList<String> verHospitales = domain.verHospitales();
+					for(int i=0;i<verHospitales.size();++i){
+						System.out.println(verHospitales.get(i));
+					}
+					break;
+				case 3:
+					System.out.print("importarHospital\n");
+					System.out.print("introduzca el path donde esta el Hospital a importar\n");
+					String path =teclado.next();
+					domain.importarHospital(path);
+					System.out.print("Se ha importado el Hospital\n");
+					break;
+					
 				
 				default:
 			}
 			
-				
-			muestraOpciones();
+			System.out.print("------------------\n");
+			System.out.print("1: MostrarOpciones\n");
+			System.out.print("------------------\n");
 		    opcion = teclado.nextInt();
 		}
 		teclado.close();

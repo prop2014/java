@@ -716,7 +716,6 @@ public class CtrlDoctor {
 					 a =Integer.parseInt(readDate(fecha,"yyyy"));
 					}catch (ParseException e){System.out.print("ERROR");}
 					addResNOT_Fecha(idDoc,idRes,d,m,a);
-					System.out.printf("dia: %d mes: %d, any: %d\n",d,m,a);
 				}
 				else if(tipo.equals("NOT_Especial")){
 					++i;
