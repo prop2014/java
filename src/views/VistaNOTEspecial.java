@@ -105,7 +105,7 @@ public class VistaNOTEspecial {
 			public void actionPerformed(ActionEvent e) {
 				String especial = comboboxInformacion1.getSelectedItem().toString();
 				try {
-					ctrlPresentacion.addResNOT_Especial(1, especial);
+					ctrlPresentacion.addResNOT_Especial(especial);
 				} catch (IOException eX) {
 					System.out.printf("Restriccion no creada");
 					JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 

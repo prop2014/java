@@ -102,7 +102,7 @@ public class VistaNOTDiaMes {
 				if (sc1.hasNextInt()) {
 					dia = Integer.parseInt(textArea.getText());
 					try {
-						ctrlPresentacion.addResNOT_Dia_Mes(1, dia);
+						ctrlPresentacion.addResNOT_Dia_Mes(dia);
 					} catch (IOException eX) {
 						System.out.printf("Restriccion no creada");
 						JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 

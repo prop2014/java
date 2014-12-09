@@ -124,7 +124,7 @@ public class VistaMAXTurnosRango {
 					int year2 = data2.getYear();
 					int num = Integer.parseInt(textArea.getText());
 					try {
-						ctrlPresentacion.addResMAX_Turnos_Rango(1, dia1, mes1, year1, dia2, mes2, year2, num);
+						ctrlPresentacion.addResMAX_Turnos_Rango(dia1, mes1, year1, dia2, mes2, year2, num);
 					} catch (IOException eX) {
 						System.out.printf("Restriccion no creada");
 						JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 

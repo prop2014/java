@@ -107,9 +107,9 @@ public class VistaNOTTurno {
 					(!checkBox1.isSelected() && checkBox2.isSelected() && !checkBox3.isSelected()) ||
 					(!checkBox1.isSelected() && !checkBox2.isSelected() && checkBox3.isSelected())) {
 					try {
-						if(checkBox1.isSelected()) ctrlPresentacion.addResNOT_Turno(1, "manana");
-						else if (checkBox2.isSelected()) ctrlPresentacion.addResNOT_Turno(1, "tarde");
-						else if (checkBox3.isSelected()) ctrlPresentacion.addResNOT_Turno(1, "noche");
+						if(checkBox1.isSelected()) ctrlPresentacion.addResNOT_Turno("manana");
+						else if (checkBox2.isSelected()) ctrlPresentacion.addResNOT_Turno("tarde");
+						else if (checkBox3.isSelected()) ctrlPresentacion.addResNOT_Turno("noche");
 					} catch (IOException eX) {
 						System.out.printf("Restriccion no creada");
 						JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 

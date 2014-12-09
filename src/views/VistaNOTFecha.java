@@ -105,7 +105,7 @@ public class VistaNOTFecha {
 					int mes = data.getMonth()+1;
 					int year = data.getYear();
 					try {
-						ctrlPresentacion.addResNOT_Fecha(1, dia, mes, year);
+						ctrlPresentacion.addResNOT_Fecha(dia, mes, year);
 					} catch (IOException eX) {
 						System.out.printf("Restriccion no creada");
 						JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 

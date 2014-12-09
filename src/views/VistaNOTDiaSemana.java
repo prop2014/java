@@ -107,7 +107,7 @@ public class VistaNOTDiaSemana {
 			public void actionPerformed(ActionEvent e) {
 				String diaSemana = comboboxInformacion1.getSelectedItem().toString();
 				try {
-					ctrlPresentacion.addResNOT_Dia_Semana(1, diaSemana);
+					ctrlPresentacion.addResNOT_Dia_Semana(diaSemana);
 				} catch (IOException eX) {
 					System.out.printf("Restriccion no creada");
 					JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 

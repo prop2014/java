@@ -104,7 +104,7 @@ public class VistaMAXTurnosporDia {
 				if (sc1.hasNextInt()) {
 					numT = Integer.parseInt(textArea.getText());
 					try {
-						ctrlPresentacion.addResMAX_Turnos_por_Dia(1, numT);
+						ctrlPresentacion.addResMAX_Turnos_por_Dia(numT);
 					} catch (IOException eX) {
 						System.out.printf("Restriccion no creada");
 						JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 

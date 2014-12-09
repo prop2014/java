@@ -130,7 +130,7 @@ public class VistaXOR {
 						else if (checkBox2.isSelected()) turno.add("tarde");
 						else if (checkBox3.isSelected()) turno.add("noche");
 					try {
-						 ctrlPresentacion.addResXOR(1, dia, mes, year, turno);
+						 ctrlPresentacion.addResXOR(dia, mes, year, turno);
 					} catch (IOException eX) {
 						System.out.printf("Restriccion no creada");
 						JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 
