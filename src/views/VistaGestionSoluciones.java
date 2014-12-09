@@ -28,7 +28,7 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 	private JPanel panelCenterButtons = new JPanel();
 	
 	//Componentes
-	private JLabel labelPanel1 = new JLabel("<html><u>''NOMBRE DEL HOSPITAL''</u>");
+	private JLabel labelPanel1 = new JLabel();
 	private JButton buttonGenerarFF = new JButton("<html><CENTER>Generar Solucion <br/>[FordFulkerson]</CENTER>");
 	private JButton buttonGenerarED = new JButton("<html><CENTER>Generar Solucion <br/>[EdmondKarp]</CENTER>");
 	private JButton buttonGenerarDI = new JButton("<html><CENTER>Generar Solucion Optima <br/>[Dijkstra]</CENTER>");
@@ -40,7 +40,7 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 	
 	//METODOS PRIVADOS
 	private void inicializar_frameView() {
-		// DESCOMENTAR PARA EDITAR 
+		/** DESCOMENTAR PARA EDITAR *
 		frameView =  new JFrame("Programador Guardias");
 		frameView.setMinimumSize(new Dimension(700, 400));
 		frameView.setPreferredSize(frameView.getMinimumSize());
@@ -116,7 +116,7 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 		
 		buttonGenerarFF.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ctrlPresentacion.changeView("vistaCalendario", panelContents);
+				
 			}
 			
 			
@@ -144,6 +144,7 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 		
 		buttonModSol.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ctrlPresentacion.changeView("vistaSolucion", panelContents);
 				
 			}
 			
@@ -152,7 +153,7 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 		
 		buttonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ctrlPresentacion.changeView("Gestion", panelContents);
+				ctrlPresentacion.changeView("vistaGestion", panelContents);
 			}
 		});
 		
@@ -164,9 +165,9 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 	/* Constructoras y metodos publicos */
 	public VistaGestionSoluciones(CtrlPresentacion pCtrlVistaPrincipal) {
 		ctrlPresentacion = pCtrlVistaPrincipal;
-		// DESCOMENTAR PARA EDITAR 
+		/* DESCOMENTAR PARA EDITAR *
 		 inicializarComponents();
-		 /*** END DESCOMENTAR PARA EDITAR */
+		/*  END DESCOMENTAR PARA EDITAR */
 	}
 	
 	public void init() {
@@ -177,28 +178,27 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 	public JPanel getPanel() {
 		return panelContents;
 	}
-
-	public void showView() {
-		frameView.setVisible(true);
-	}
 	
 	public void hidePanel() {
 		panelContents.setVisible(false);
 	}
 	public void showPanel() {
-		//loadSoluciones();
+		//cargarSoluciones();
 		panelContents.setVisible(true);
 	}
 	
-	public void hideView() {
-		frameView.setVisible(false);
+	public void showView() {
+		panelContents.setVisible(true);
 	}
-
+	
 	public void enableView() {
 		frameView.setEnabled(true);
 	}
-
+	
 	public void disableView() {
 		frameView.setEnabled(false);
 	}
+	
+	
+	
 }
