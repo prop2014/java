@@ -29,7 +29,7 @@ public class VistaDoctor {
 			private JList<String> list = new JList<String>();
 			private JScrollPane scrollPanel = new JScrollPane();
 			
-			private String[] docInfo;
+			private static String[] docInfo;
 			
 			//CENTER
 			
@@ -299,7 +299,7 @@ public class VistaDoctor {
 			
 			//METODOS PUBLICOS
 			
-			public int getDocId() {
+			public static int getDocId() {
 				return Integer.parseInt(docInfo[0]);
 			}
 			
