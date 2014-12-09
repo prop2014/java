@@ -63,10 +63,13 @@ public class VistaCrearHospital {
 	private void inicializar_panelCenterButtons() {
 		////// START: GESTIONADO POR EL BUILDER NO TOCAR
 		panelCenterButtons.setBorder(new EmptyBorder(70, 20, 20, 0));
+		btnImportDoc.setFont(new Font("Arial", Font.PLAIN, 12));
 		btnImportDoc.setBounds(371, 219, 140, 45);
+		btnImportCal.setFont(new Font("Arial", Font.PLAIN, 12));
 		btnImportCal.setBounds(187, 219, 140, 45);
-		btnCancel.setBounds(167, 322, 160, 25);
-		labelPanel1.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+		btnCancel.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnCancel.setBounds(187, 322, 140, 25);
+		labelPanel1.setFont(new Font("Arial", Font.PLAIN, 14));
 		labelPanel1.setBounds(66, 30, 112, 15);
 		panelCenterButtons.setLayout(null);
 		/// END: GESTIONADO POR EL BUILDER NO TOCAR
@@ -77,54 +80,64 @@ public class VistaCrearHospital {
 		panelCenterButtons.add(btnImportCal);
 		
 		JLabel lblNombreDelHospital = new JLabel("Nombre del Hospital: ");
-		lblNombreDelHospital.setBounds(185, 90, 138, 16);
+		lblNombreDelHospital.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblNombreDelHospital.setBounds(205, 90, 118, 16);
 		panelCenterButtons.add(lblNombreDelHospital);
 		
 		nameHospTextField = new JTextField();
+		nameHospTextField.setFont(new Font("Arial", Font.PLAIN, 12));
 		nameHospTextField.setToolTipText("");
 		nameHospTextField.setBounds(335, 84, 145, 28);
 		panelCenterButtons.add(nameHospTextField);
 		nameHospTextField.setColumns(10);
 		
 		JLabel lblFactorDeTurno = new JLabel("Factor de Turno: ");
-		lblFactorDeTurno.setBounds(216, 149, 107, 16);
+		lblFactorDeTurno.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblFactorDeTurno.setBounds(231, 149, 92, 16);
 		panelCenterButtons.add(lblFactorDeTurno);
 		
 		mTextField = new JTextField();
+		mTextField.setFont(new Font("Arial", Font.PLAIN, 12));
 		mTextField.setText("1.0");
 		mTextField.setBounds(335, 143, 40, 28);
 		panelCenterButtons.add(mTextField);
 		mTextField.setColumns(10);
 		
 		tTextField = new JTextField();
+		tTextField.setFont(new Font("Arial", Font.PLAIN, 12));
 		tTextField.setText("1.0");
 		tTextField.setColumns(10);
 		tTextField.setBounds(388, 143, 40, 28);
 		panelCenterButtons.add(tTextField);
 		
 		nTextField = new JTextField();
+		nTextField.setFont(new Font("Arial", Font.PLAIN, 12));
 		nTextField.setText("1.0");
 		nTextField.setColumns(10);
 		nTextField.setBounds(440, 143, 40, 28);
 		panelCenterButtons.add(nTextField);
 		
 		JLabel lblM = new JLabel("M");
+		lblM.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblM.setHorizontalAlignment(SwingConstants.CENTER);
 		lblM.setBounds(341, 124, 24, 16);
 		panelCenterButtons.add(lblM);
 		
 		JLabel lblT = new JLabel("T");
+		lblT.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblT.setHorizontalAlignment(SwingConstants.CENTER);
 		lblT.setBounds(393, 124, 24, 16);
 		panelCenterButtons.add(lblT);
 		
 		JLabel lblN = new JLabel("N");
+		lblN.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblN.setHorizontalAlignment(SwingConstants.CENTER);
 		lblN.setBounds(445, 124, 24, 16);
 		panelCenterButtons.add(lblN);
+		btnCrearHospital.setFont(new Font("Arial", Font.PLAIN, 12));
 		
 	
-		btnCrearHospital.setBounds(371, 322, 160, 25);
+		btnCrearHospital.setBounds(371, 322, 140, 25);
 		panelCenterButtons.add(btnCrearHospital);
 	}
 	private void inicializarComponents() {

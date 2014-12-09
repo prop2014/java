@@ -1,5 +1,8 @@
 package views;
 
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -18,6 +21,7 @@ public class Vista {
 	/* Protected static attributes */
 	protected static final int width = 700;		// panelContents width
 	protected static final int height = 378;	// panelContents height
+	protected static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("d 'de' MMMM 'de' yyyy", new Locale("es","ES"));
 	
 	protected static int calendarYear = -1;
 	
@@ -54,7 +58,7 @@ public class Vista {
 	}
 	
 	protected static int confirmationDialog(Object message, String title) {
-		return JOptionPane.showConfirmDialog(null, message, title, JOptionPane.OK_CANCEL_OPTION);
+		return JOptionPane.showConfirmDialog(null, message, title, JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
 	}
 	
 	/* Public methods */

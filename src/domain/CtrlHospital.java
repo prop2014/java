@@ -44,7 +44,9 @@ public class CtrlHospital {
 	}
 	
 	
-	
+	public ArrayList<String> getInfoHospital(int id) throws IOException {
+		return inOut.getInfoHospital(id);
+	}
 	/**
 	 * obtiene los datos basicos del Hospital(no doctores ni calendario)
 	 * @param id identificador del Hospital
@@ -115,6 +117,7 @@ public class CtrlHospital {
 		//deleteHospitalData(id);
 	}
 	
+	/*DOCTORES*/
 	public void crearDoctor(int id, String nombre, int numMax, double sueldo) throws IOException {
 		if(numMax < 0) throw new IOException("Número máximo de turnos incorrecto");
 		if(sueldo < 0) throw new IOException("Sueldo incorrecto");
@@ -122,6 +125,9 @@ public class CtrlHospital {
 		if(hosp.existsDoctor(id)) throw new IOException("Ya existe un doctor con este identificador");
 		else hosp.addDoctor(doc);
 		//createDoctorData()?
+	}
+	public void eliminarDoc(int id){
+		hosp.deleteDoctor(id);
 	}
 	
 	/**
@@ -259,6 +265,10 @@ public class CtrlHospital {
 		saveDataHosp();
 		if(!hosp.isDocEmpty()) saveDataDoctors();
 		if(!hosp.isCaleEmpty()) saveDataCale(hosp.getId());
+	}
+	
+	public void deleteHospital(int id) throws IOException {
+		inOut.removePart(id, ".H");
 	}
 	
 	

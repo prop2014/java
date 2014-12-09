@@ -155,27 +155,55 @@ import javax.swing.table.DefaultTableModel;
 			
 			buttonModificar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					
+					int row = tabla.getSelectedRow();
+					
+					String[] newDocInfo = { (String) tabla.getValueAt(row, 0),
+											(String) tabla.getValueAt(row, 1),
+											(String) tabla.getValueAt(row, 2),
+											(String) tabla.getValueAt(row, 3)};
+					
+					ctrlPresentacion.setDocInfo(newDocInfo);
 					ctrlPresentacion.changeView("vistaDoctor",panelContents);
 				}
 			});
 			
 			buttonCrear.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					
+					String[] newDocInfo = { "","","", ""};
+					ctrlPresentacion.setDocInfo(newDocInfo);
 					ctrlPresentacion.changeView("vistaDoctor",panelContents);
 				}
 			});
 			buttonEliminar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 				
-				Object[] options = {"Aceptar", "Cancelar"};
-				JOptionPane.showOptionDialog(null,
-						"Esta seguro de que quiere eliminar el Doctor?",
-					    "Alert",
-					    JOptionPane.YES_NO_CANCEL_OPTION,
-					    JOptionPane.WARNING_MESSAGE,
-					    null,
-					    options,
-					    options[1]);
+					int row = tabla.getSelectedRow();
+					String name = (String) tabla.getValueAt(row, 1);
+					Object[] options = {"Aceptar", "Cancelar"};
+					int option = JOptionPane.showOptionDialog(null,
+							"Esta seguro de que quiere eliminar el Doctor "
+							+ name +" ?",
+						    "Alert",
+						    JOptionPane.YES_NO_CANCEL_OPTION,
+						    JOptionPane.WARNING_MESSAGE,
+						    null,
+						    options,
+						    options[1]);
+					
+					
+					if(option == JOptionPane.YES_OPTION){
+
+						String id = (String) tabla.getValueAt(row, 0); 
+						try {
+							
+							ctrlPresentacion.eliminarDoc(Integer.parseInt(id));
+						} catch (IOException e1) {
+							//Error
+						}
+						loadDoctores();
+					}
 				}
 			});
 					
@@ -208,14 +236,9 @@ import javax.swing.table.DefaultTableModel;
 			
 			}
 			
-			
 			tabla.setModel(dtm);  
 			tabla.revalidate();
 			tabla.repaint();
-			
-		    
-			
-			
 			
 		}
 		
