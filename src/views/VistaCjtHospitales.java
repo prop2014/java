@@ -52,7 +52,7 @@ public class VistaCjtHospitales {
 
 	//-- Metodos privados --//
 	private void init_frameView() {
-		/*** DESCOMENTAR PARA EDITAR */
+		/*** DESCOMENTAR PARA EDITAR *
 		frameView =  new JFrame("Programador Guardias");
 		frameView.setMinimumSize(new Dimension(700, 400));
 		frameView.setPreferredSize(frameView.getMinimumSize());
@@ -328,7 +328,7 @@ public class VistaCjtHospitales {
 	/* Constructoras y metodos publicos */
 	public VistaCjtHospitales(CtrlPresentacion pCtrlVistaPrincipal) {
 		ctrlPresentacion = pCtrlVistaPrincipal;
-		/*** DESCOMENTAR PARA EDITAR */
+		/*** DESCOMENTAR PARA EDITAR *
 		 initComponents();
 		 /*** END DESCOMENTAR PARA EDITAR */
 	}
