@@ -60,6 +60,21 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 		panelContents.setLayout(new BorderLayout());
 		// Componentes
 		panelContents.add(panelCenterButtons, BorderLayout.CENTER);
+		
+		list.setModel(new AbstractListModel() {
+			String[] values = new String[] { "Solucion Simple EK 1", "Solucion Simple FF 1",
+					"Solucion Simple EK 2", "Solucion Optima DI 1 " };
+
+			public int getSize() {
+				return values.length;
+			}
+
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
+		
+		
 	}
 	
 	private void inicializar_panelCenterButtons() {
@@ -82,7 +97,7 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 		buttonVolver.setBounds(40, 324, 157, 25);
 		
 		labelPanel1.setFont(new Font("Arial", Font.PLAIN, 15));
-		labelPanel1.setBounds(40, 30, 230, 15);
+		labelPanel1.setBounds(40, 26, 361, 25);
 		
 		panelCenterButtons.setLayout(null);
 		/// END: GESTIONADO POR EL BUILDER NO TOCAR
@@ -102,6 +117,8 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 		panelCenterButtons.add(buttonGenerarDI);
 		panelCenterButtons.add(buttonGenerarED);
 		panelCenterButtons.add(buttonModSol);
+		
+		buttonModSol.setEnabled(false);
 	}
 	private void inicializarComponents() {
 		inicializar_frameView();
@@ -111,9 +128,16 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 	}
 	
 	private void assignar_listenersComponents() {
+		
+		ListSelectionModel listSelectionModel = list.getSelectionModel();
+		listSelectionModel.addListSelectionListener(new ListSelectionListener() {
+		        public void valueChanged(ListSelectionEvent e) { 
+		            ListSelectionModel lsm = (ListSelectionModel)e.getSource();
+		            buttonModSol.setEnabled(!lsm.isSelectionEmpty()); 
+		       
+		        }
+		});
 
-		
-		
 		buttonGenerarFF.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -171,8 +195,18 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 	}
 	
 	public void init() {
-		//loadSoluciones();
-		inicializarComponents();
+		 cargarHospital();
+		 inicializarComponents();
+	}
+	
+	public void cargarHospital() {
+		
+		String name = ctrlPresentacion.getNameHospital();
+		//name = name.replace("%", " ");
+		name = 	"Soluciones del Hospital: "	+ name;
+		
+		labelPanel1.setText(name);
+		
 	}
 	
 	public JPanel getPanel() {

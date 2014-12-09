@@ -279,7 +279,6 @@ import javax.swing.table.DefaultTableModel;
 		public void cargarHospital() {
 			String name = ctrlPresentacion.getNameHospital();
 			name = "Plantilla de "+ name.replace("%", " ");
-			
 			labelPanel1.setText(name);
 		}
 		
