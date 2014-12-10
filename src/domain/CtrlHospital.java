@@ -69,6 +69,14 @@ public class CtrlHospital {
 		}
 	}
 	
+	public boolean existsCalendar(){
+		return hosp.isCaleEmpty();
+	}
+	
+	public void deleteCalendar(){
+		hosp.deleteCalendar();
+	}
+	
 	public void addCalendar(int year){
 		hosp.setCalendarYear(year);
 	}

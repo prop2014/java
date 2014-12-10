@@ -295,6 +295,10 @@ public class Hospital {
 		return calendari.isEmpty();
 	}
 	
+	public void deleteCalendar(){
+		calendari = new Calendario();
+	}
+	
 	/** 
 	 * Metodo que elimina todos los doctores del Hospital
 	 */

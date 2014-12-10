@@ -68,7 +68,7 @@ public class DriverCtrlDoctor {
 		cal.readCalendar(12,null);
 		System.out.printf("cargu el calendar de data %d\n",cal.getCalendarYear());
 		CtrlDoctor s = new CtrlDoctor(Hosp.getDoctors(),cal.getCalendarYear());
-		s.addResData(12,null);
+		if(inOut1.existsRes(12))s.addResData(12,null);
 		
 		
 		mostrarOpciones();

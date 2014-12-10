@@ -1003,4 +1003,13 @@ public class CtrlDatosFichero {
 	   }
    }
    
+   
+   public ArrayList<String> getSol(){
+	   ArrayList<String> alsol =new ArrayList<String>();
+	   
+	   
+	   
+	   return alsol;
+   }
+   
 }//ficlas
