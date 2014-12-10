@@ -3,6 +3,7 @@ package views;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -379,6 +380,15 @@ public class CtrlPresentacion {
 	public void createCalendar(int year) {
 		ctrlHospital.addCalendar(year);
 		ctrlCalendario = new CtrlCalendario(ctrlHospital.getCalendar());
+	}
+	public void importarCalendar(String path){
+		try {
+			ctrlCalendario.importarCalendario(path,ctrlHospital.getID());
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public boolean addVacation(GregorianCalendar date, int morningDrs, int eveningDrs, int nightDrs, String especialDate) throws IOException {

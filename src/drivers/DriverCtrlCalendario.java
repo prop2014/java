@@ -31,7 +31,7 @@ public class DriverCtrlCalendario {
 	
 	
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 		
 		Scanner sc = new Scanner(System.in);
 		String answer;
@@ -199,9 +199,23 @@ public class DriverCtrlCalendario {
 					
 				break;
 			
-			case 4:{
+			case 3:
+				System.out.print("Importar Calendario\n");
+				System.out.print("Introduzca el path a buscar\n");
+				String path = sc.next();
+				
+				System.out.print("iNtroduce el id del Hospital");
+				id=sc.nextInt();
+				CtrlCalendario cal;
+						try{
+						Ho.cargarHospital(id);
+						Ho.addCalendar(-1);
+						cal = new CtrlCalendario(Ho.getCalendar());
+						cal.importarCalendario(path, id);
+						}catch (IOException e){System.out.print("no year");}
+						
 				break;
-			}
+			
 			case 5:{
 				break;
 			}			

@@ -40,6 +40,13 @@ public class CtrlCalendario {
 		return calendar;
 	}
 
+	public void importarCalendario(String path,int id)throws IOException,ParseException{
+		ArrayList<String> alcale =new ArrayList<String>();
+		CtrlDatosFichero inOut= new CtrlDatosFichero();
+		alcale=inOut.getDataCale(id, path);
+		inOut.saveDataCale(alcale, id);
+	}
+	
 	public boolean addVacationDay2(GregorianCalendar date, int morningDrs, int eveningDrs, int nightDrs, String especialDate) throws IOException{
 //		try {
 			/*if(date.get(GregorianCalendar.YEAR) != calendar.getCalendarYear()) throw new IOException("La fecha del dia vacacional no corresponde al calendario actual ");
@@ -63,30 +70,6 @@ public class CtrlCalendario {
 //			throw new IOException(e);
 //		}
 	}
-	public boolean addVacationDay3(GregorianCalendar date, int morningDrs, int eveningDrs, int nightDrs, String especialDate, String especialDate1, String especialDate2) throws IOException{
-//		try {
-			/*if(date.get(GregorianCalendar.YEAR) != calendar.getCalendarYear()) throw new IOException("La fecha del dia vacacional no corresponde al calendario actual ");
-			else */if (calendar.existsVacationDay(date)) throw new IOException("El dia vacacional ya existe");
-			else if (morningDrs < 0) throw new IOException("El numero de doctores del turno de manana no es correcto ");
-			else if (eveningDrs < 0) throw new IOException("El numero de doctores del turno de tarde no es correcto ");
-			else if (nightDrs < 0) throw new IOException("El numero de doctores del turno de noche no es correcto ");
-			// making changes
-			else {
-				calendar.addVacationDay(date);
-				calendar.getShift(date, shiftTypes[0]).setNumberOfDoctors(morningDrs);
-				calendar.getShift(date, shiftTypes[1]).setNumberOfDoctors(eveningDrs);
-				calendar.getShift(date, shiftTypes[2]).setNumberOfDoctors(nightDrs);
-				calendar.getShift(date, shiftTypes[0]).setSpecialDate(especialDate);
-				calendar.getShift(date, shiftTypes[1]).setSpecialDate(especialDate1);
-				calendar.getShift(date, shiftTypes[2]).setSpecialDate(especialDate2);
-				return true;
-			}
-//		}
-//		catch (IOException e) {
-//			throw new IOException(e);
-//		}
-	}
-
 	
 	public boolean modifyVacationDay(GregorianCalendar date, int morningDrs, int eveningDrs, int nightDrs, String especialDate) throws IOException{
 		try {
@@ -198,16 +181,13 @@ public class CtrlCalendario {
 			int size=Integer.parseInt(alcale.get(1));
 			int numDrsManana,numDrsTarde,numDrsNoche;
 			String fecha;
-			String specialManana;
-			String specialTarde;
-			String specialNoche;
+			String special;
 
 			calendar = new Calendario(year);
 			int j=2;
 			for (int i = 0; i < size;++i){
 				fecha=alcale.get(j);
-				++j;
-				fecha=fecha+"-"+alcale.get(j)+"-"+alcale.get(++j);
+				fecha=fecha+"-"+alcale.get(j)+"-"+alcale.get(j);
 				SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 				GregorianCalendar gc=new GregorianCalendar();
 				sdf.setLenient(false);
@@ -219,10 +199,8 @@ public class CtrlCalendario {
 				++j;
 				numDrsNoche=Integer.parseInt(alcale.get(j));
 				++j;
-				specialManana=alcale.get(j);
-				specialTarde=alcale.get(j);
-				specialNoche=alcale.get(j);
-				if(!addVacationDay3(gc,numDrsManana,numDrsTarde,numDrsNoche,specialManana,specialTarde,specialNoche)) throw new IOException("DIA no anyadido");
+				special=alcale.get(j);
+				if(!addVacationDay2(gc,numDrsManana,numDrsTarde,numDrsNoche,special)) throw new IOException("DIA no anyadido");
 				++j;
 			}
 		}
@@ -241,7 +219,7 @@ public class CtrlCalendario {
 			for(int i=0;i<cal.size();++i){
 				turns=calendar.getShiftsOfADay(cal.get(i));
 				int numDrsManana=0,numDrsTarde=0,numDrsNoche=0;
-				String especialm = null,especialt=null,especialn=null;
+				String especialm = null;
 				String fecha=null;
 				for(int j=0;j<turns.size();++j){
 					Turno t=turns.get(j);
@@ -254,11 +232,11 @@ public class CtrlCalendario {
 					}
 					else if(t.getShiftType().equals("tarde")){
 						numDrsTarde=t.getNumberOfDoctors();
-						especialt=t.getSpecialDate();
+						
 					}
 					else if(t.getShiftType().equals("noche")){
 						numDrsNoche=t.getNumberOfDoctors();
-						especialn=t.getSpecialDate();
+						
 					}
 				}
 				alcal.add(fecha);
@@ -266,8 +244,6 @@ public class CtrlCalendario {
 				alcal.add(Integer.toString(numDrsTarde));
 				alcal.add(Integer.toString(numDrsNoche));
 				alcal.add(especialm);
-				alcal.add(especialt);
-				alcal.add(especialn);
 			}
 		}
 		CtrlDatosFichero inOut = new CtrlDatosFichero();

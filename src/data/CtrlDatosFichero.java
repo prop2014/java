@@ -324,14 +324,10 @@ public class CtrlDatosFichero {
 				   			for(int i=0;i<calesize;++i){
 				   				alhosp.add(sl.next());
 				   				for(int j=0; j<3;++j){
-				   					value=sl.nextInt();
+				   					value=sl.nextInt(); //numdoctores
 				   					alhosp.add(Integer.toString(value));
 				   				}
-				   				word=sl.next(); //specialManana
-				   				alhosp.add(word);
-				   				word=sl.next(); //specialTarde
-				   				alhosp.add(word);
-				   				word=sl.next(); //specialNoche
+				   				word=sl.next();//special
 				   				alhosp.add(word);
 				   			}
 				   		}
@@ -457,12 +453,14 @@ public class CtrlDatosFichero {
 			BufferedReader br = new BufferedReader(fr);
 			String linea;
    			String word;
-   			while((linea=br.readLine())!=null){
+   			boolean trobat = false;
+   			while(((linea=br.readLine())!=null) && !trobat){
 		   		Scanner sl = new Scanner(linea);
 		   		if(sl.hasNext()){
 			   		word=sl.next();
 			   		if(word.equals(".C")){
 			   			year = sl.nextInt();
+			   			trobat=true;
    					}
    				sl.close();
 		   		}
@@ -576,93 +574,7 @@ public class CtrlDatosFichero {
 		 }catch(Exception e) {e.printStackTrace();}
 		  return exists;
 	 }
-	 
-	 
-	 
-	 /*int rest = sl.nextInt();
-		alhosp.add(Integer.toString(rest));
-		for(int j=0;j<rest;++j){
-			int idRestriccion = sl.nextInt();
-			alhosp.add(Integer.toString(idRestriccion));
-			word = sl.next(); //tipo
-			alhosp.add(word);
-			if(word.equals("NOT_Turno")){
-				word = sl.next(); //tipoturno
-				alhosp.add(word);
-			}
-			else if(word.equals("NOT_Fecha")){
-				word=sl.next();//fecha
-				alhosp.add(word);
-			}
-			else if(word.equals("NOT_Especial")){
-				word=sl.next(); //especial
-				alhosp.add(word);
-			}
-			else if(word.equals("NOT_Dia_Semana")){
-				word=sl.next(); //diasemana
-				alhosp.add(word);
-			}
-			else if(word.equals("NOT_Dia_Mes")){
-				int dia =sl.nextInt();
-				alhosp.add(Integer.toString(dia));
-			}
-			else if(word.equals("MAX_Turnos_Rango")){
-				word=sl.next(); //fecha ini
-				alhosp.add(word);
-				word=sl.next();
-				alhosp.add(word);//fecha fin
-				int mt = sl.nextInt();
-				alhosp.add(Integer.toString(mt));					
-			}
-			else if(word.equals("MAX_Turnos_por_Dia")){
-				int dia =sl.nextInt();
-				alhosp.add(Integer.toString(dia));
-			}
-			else if(word.equals("XOR")){
-				int size=sl.nextInt();
-				alhosp.add(Integer.toString(size));
-				for(int l=0; l<size;++l){
-					word=sl.next(); //fecha
-					alhosp.add(word);
-					word=sl.next(); //tipoturno
-					alhosp.add(word);
-				}
-			}
-		//nextres
-		} */
-	 
-	/*
-   public ArrayList<String> getHospital (int id)throws IOException {
-	   ArrayList<String> alhosp = new ArrayList<String>();
-	   
-	   try{
-	   String num = Integer.toString(id);
-	   String path = new File("").getAbsolutePath();
-	   String realpath = path+ "/datos/Hospital";
-	   archivo = new File(realpath+num);
-	   if(!archivo.exists()) throw new IOException("No Existe Este fichero");
-	   fr = new FileReader (archivo);
-	   br = new BufferedReader(fr);
-	   String linea;
-	   String s;
-	   while((linea=br.readLine())!=null){
-		   Scanner sl = new Scanner(linea);
-		   for(int i=0; i<linea.length()-1;++i){
-			   s=sl.next().toString();
-		   alhosp.add(s);
-		   }
-		   sl.close();
-	   }
-   }
-	catch(Exception e){
-		e.printStackTrace();
-	}finally{                   
-   		if( null != fr )fr.close();        
-   		}
-   return alhosp;
-   }
-   */
-   
+	    
       
    
    public void saveDataHosp(ArrayList<String> alhosp,Integer id) throws IOException{
