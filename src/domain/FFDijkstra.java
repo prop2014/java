@@ -71,7 +71,6 @@ public class FFDijkstra<T> extends FordFulkerson<T> {
 					//System.out.printf("Nodo Princ: %d , Nodo vecino: %d, ID Arista: %d\n", p.id, neighbour, arista);
 					int capacidadArista = graf.getCapacidadAresta(arista);
 					double costeArista = graf.getCosteAresta(arista);
-					int flujoArista = graf.getFlujoAresta(arista);
 					if(capacidadArista > 0) {
 						double coste = dist[p.id]+costeArista;
 						if(coste < dist[neighbour]){
@@ -90,7 +89,7 @@ public class FFDijkstra<T> extends FordFulkerson<T> {
 			Stack<Integer> cam = new Stack<Integer>();
 			int sig = t;
 			if(pred[sig] != -1) { 
-				while(sig != 0) {
+				while(sig != s) {
 					cam.push(sig);
 					sig = pred[sig];
 				}

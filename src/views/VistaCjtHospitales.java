@@ -253,8 +253,6 @@ public class VistaCjtHospitales {
 					ctrlPresentacion.changeView("vistaGestion", panelContents);
 				} catch (IOException eX){
 					JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
-				} catch (ParseException eP) {
-					JOptionPane.showMessageDialog(null, eP, "Error", JOptionPane.ERROR_MESSAGE); 
 				}
 			}
 			
