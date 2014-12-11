@@ -22,6 +22,7 @@ public class CtrlPresentacion {
 	private CtrlHospital ctrlHospital;
 	private CtrlCalendario ctrlCalendario;
 	private CtrlDoctor ctrlDoctor;
+	private CtrlAlgorithm ctrlAlgorithm;
 	private VistaCjtHospitales vistaCjtHospitales;
 	private VistaCrearHospital vistaCrearHospital;
 	private VistaGestion vistaGestion;
@@ -266,6 +267,7 @@ public class CtrlPresentacion {
 		ctrlHospital.getDataDoctors(idHosp);
 		ctrlCalendario.readCalendar(idHosp, null);
 		ctrlDoctor = new CtrlDoctor(ctrlHospital.getDoctors(), ctrlCalendario.getCalendarYear());
+		ctrlAlgorithm = new CtrlAlgorithm(ctrlHospital.getHospital());
 		
 	}
 	
@@ -280,6 +282,7 @@ public class CtrlPresentacion {
 	public void deleteHospital(int id) throws IOException {
 		ctrlHospital.deleteHospital(id);
 	}
+	
 	/*DOCTORES*/
 	public void crearDoctor(String nameDoc, int idD, int maxTurnos, double sueldo) throws IOException{
 		try {

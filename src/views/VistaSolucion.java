@@ -27,7 +27,7 @@ public class VistaSolucion {
 	private JFrame frameView;
 	private JPanel panelContents = new JPanel();
 	private JPanel topPanel = new JPanel();
-	private final JList<String> listDoc = new JList<String>();
+	private final JList<String> listAsig = new JList<String>();
 	private final JScrollPane scrollDoc = new JScrollPane();
 	private final JLabel titleLabel = new JLabel("Solucion");
 	private final JPanel mediumPanel = new JPanel();
@@ -39,7 +39,7 @@ public class VistaSolucion {
 	private JTextArea txtComent = new JTextArea();
 	private JButton btnGuardar = new JButton("Guardar");
 	private JButton btnCancelar = new JButton("Cancelar");
-	private JList<String> listTurn = new JList<String>();
+	private JList<String> listNoTurn = new JList<String>();
 
 	//-- Metodos privados --//
 	private void init_frameView() {
@@ -80,13 +80,13 @@ public class VistaSolucion {
 		midPanel.setAlignmentY(Component.BOTTOM_ALIGNMENT);
 		panelContents.add(midPanel);
 		midPanel.setLayout(null);
-		scrollDoc.setBounds(110, 6, 233, 128);
+		scrollDoc.setBounds(35, 35, 172, 226);
 		scrollDoc.setPreferredSize(new Dimension(150, 10));
 		scrollDoc.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		
 		midPanel.add(scrollDoc);
-		listDoc.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Doctor Alex", "Doctor Oscar", "Doctor Axel", "Doctor Felix", "Doctor Sergi"};
+		listAsig.setModel(new AbstractListModel() {
+			String[] values = new String[] {"Doctor Alex", "---------\t27/11/2014 M", "---------\t27/11/2014 M", "---------\t27/11/2014 M", "Doctor Oscar", "---------\t27/11/2014 M", "Doctor Axel", "---------\t27/11/2014 M", "---------\t27/11/2014 M", "Doctor Felix", "Doctor Sergi"};
 			public int getSize() {
 				return values.length;
 			}
@@ -94,8 +94,8 @@ public class VistaSolucion {
 				return values[index];
 			}
 		});
-		listDoc.setFont(new Font("Arial", Font.PLAIN, 13));
-		scrollDoc.setViewportView(listDoc);
+		listAsig.setFont(new Font("Arial", Font.PLAIN, 13));
+		scrollDoc.setViewportView(listAsig);
 		mediumPanel.setBounds(254, 125, 150, 0);
 		mediumPanel.setPreferredSize(new Dimension(150, 0));
 		
@@ -105,9 +105,9 @@ public class VistaSolucion {
 		
 		scrollTurn.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollTurn.setPreferredSize(new Dimension(150, 10));
-		scrollTurn.setBounds(355, 6, 233, 128);
+		scrollTurn.setBounds(234, 35, 115, 128);
 		midPanel.add(scrollTurn);
-		listTurn.setModel(new AbstractListModel() {
+		listNoTurn.setModel(new AbstractListModel() {
 			String[] values = new String[] {"01/01/2014 M", "01/01/2014 T", "02/01/2014 M", "03/01/2014 M", "03/01/2014 N"};
 			public int getSize() {
 				return values.length;
@@ -118,42 +118,54 @@ public class VistaSolucion {
 		});
 		
 		
-		scrollTurn.setViewportView(listTurn);
-		listTurn.setFont(new Font("Arial", Font.PLAIN, 13));
+		scrollTurn.setViewportView(listNoTurn);
+		listNoTurn.setFont(new Font("Arial", Font.PLAIN, 13));
 		
 		
 		
 		btnAnadirTurno.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnAnadirTurno.setBounds(355, 139, 117, 29);
+		btnAnadirTurno.setBounds(234, 175, 117, 29);
 		midPanel.add(btnAnadirTurno);
 		
 		
 		btnEliminarTurno.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnEliminarTurno.setBounds(473, 139, 117, 29);
+		btnEliminarTurno.setBounds(234, 204, 117, 29);
 		midPanel.add(btnEliminarTurno);
 		
 		JLabel lblNombreSolucin = new JLabel("Nombre Solucion:");
 		lblNombreSolucin.setFont(new Font("Arial", Font.PLAIN, 13));
-		lblNombreSolucin.setBounds(68, 192, 112, 16);
+		lblNombreSolucin.setBounds(381, 38, 112, 16);
 		midPanel.add(lblNombreSolucin);
 		
 		
 		txtNameSol.setFont(new Font("Arial", Font.PLAIN, 12));
-		txtNameSol.setBounds(187, 186, 117, 28);
+		txtNameSol.setBounds(521, 32, 117, 28);
 		midPanel.add(txtNameSol);
 		txtNameSol.setColumns(10);
 		
 		JLabel lblComentario = new JLabel("Comentario:");
 		lblComentario.setFont(new Font("Arial", Font.PLAIN, 13));
-		lblComentario.setBounds(359, 192, 77, 16);
+		lblComentario.setBounds(415, 66, 77, 16);
 		midPanel.add(lblComentario);
 		
 		
 		txtComent.setFont(new Font("Arial", Font.PLAIN, 12));
 		txtComent.setWrapStyleWord(true);
 		txtComent.setLineWrap(true);
-		txtComent.setBounds(440, 192, 148, 74);
+		txtComent.setBounds(521, 72, 148, 74);
 		midPanel.add(txtComent);
+		
+		JLabel lblAsignaciones = new JLabel("Asignaciones");
+		lblAsignaciones.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAsignaciones.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblAsignaciones.setBounds(61, 7, 115, 16);
+		midPanel.add(lblAsignaciones);
+		
+		JLabel lblTurnosNoAsignados = new JLabel("Turnos no asignados");
+		lblTurnosNoAsignados.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTurnosNoAsignados.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblTurnosNoAsignados.setBounds(234, 7, 115, 29);
+		midPanel.add(lblTurnosNoAsignados);
 		
 		
 		btnGuardar.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -186,7 +198,7 @@ public class VistaSolucion {
 			}
 		});
 	
-		listDoc.addListSelectionListener(new ListSelectionListener() {
+		listAsig.addListSelectionListener(new ListSelectionListener() {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				
@@ -207,8 +219,19 @@ public class VistaSolucion {
 		assign_listenersComponents();
 	}
 	
-
+	private void findSolution() {
+	/*	ctrlPresentacion.findSolution();
+		listAsig.setModel(ctrlPresentacion.getAsignaciones());
+		listAsig.setModel(ctrlPresentacion.getTurnosSinSol());
+		*/
+	}
 	
+	private void reloadLists() {
+		listAsig.revalidate();
+		listAsig.repaint();
+		listNoTurn.revalidate();
+		listNoTurn.repaint();
+	}
 	
 	/* Constructoras y metodos publicos */
 	public VistaSolucion(CtrlPresentacion pCtrlVistaPrincipal) {
