@@ -136,7 +136,7 @@ public class CtrlHospital {
 	 * @return devuelve un arraylist con los doctores del hospital
 	 */
 	
-	public ArrayList<Doctor> getDoctors()  throws IOException{
+	public ArrayList<Doctor> getDoctors() {
 		return hosp.getDoctors();
 	}
 	

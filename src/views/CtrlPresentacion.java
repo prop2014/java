@@ -41,11 +41,11 @@ public class CtrlPresentacion {
 	private VistaSolucion vistaSolucion;
 	
 	/* Constructora */
-	public CtrlPresentacion(){
+	public CtrlPresentacion() {
 		init_frameView();
 		ctrlHospital = new CtrlHospital();
 		ctrlCalendario = new CtrlCalendario(ctrlHospital.getCalendar());
-		ctrlDoctor = new CtrlDoctor();
+		ctrlDoctor = new CtrlDoctor(ctrlHospital.getDoctors(), ctrlCalendario.getCalendarYear());
 		vistaCjtHospitales = new VistaCjtHospitales(this);
 		vistaCrearHospital = new VistaCrearHospital(this);
 		vistaGestion = new VistaGestion(this);
