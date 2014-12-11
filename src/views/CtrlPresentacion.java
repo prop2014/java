@@ -299,7 +299,13 @@ public class CtrlPresentacion {
 	public void setDocInfo(String[] newDocInfo){
 		vistaDoctor.setDocInfo(newDocInfo);
 	}
-	  public void setId(int id, int idOld) throws IOException {
+	
+	public void setDoctor(int idDoc, String nombre, int numMax, double sueldo) throws IOException{
+		ctrlDoctor.setDoctor(idDoc, nombre, numMax, sueldo);
+		ctrlHospital.saveDataDoctors();
+		
+	}
+	 /* public void setId(int id, int idOld) throws IOException {
 	    	ctrlDoctor.setId(id, idOld);
 		    ctrlHospital.saveDataDoctors();
 		}
@@ -318,6 +324,7 @@ public class CtrlPresentacion {
 			ctrlDoctor.setSalaryTurn(sueldo, idOld);
 		    ctrlHospital.saveDataDoctors();
 		}
+		*/
 	
 	public void addResMAX_Turnos_por_Dia(int numD) throws IOException {
 		int idDoc = vistaDoctor.getDocId();
