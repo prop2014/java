@@ -45,7 +45,7 @@ public class CtrlPresentacion {
 		init_frameView();
 		ctrlHospital = new CtrlHospital();
 		ctrlCalendario = new CtrlCalendario(ctrlHospital.getCalendar());
-		ctrlDoctor = new CtrlDoctor(ctrlHospital.getDoctors(), ctrlCalendario.getCalendarYear());
+		ctrlDoctor = new CtrlDoctor();
 		vistaCjtHospitales = new VistaCjtHospitales(this);
 		vistaCrearHospital = new VistaCrearHospital(this);
 		vistaGestion = new VistaGestion(this);
