@@ -195,13 +195,12 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 	}
 	
 	public void init() {
-		 cargarHospital();
 		 inicializarComponents();
 	}
 	
 	public void cargarHospital() {
 		
-		String name = ctrlPresentacion.getNameHospital();
+		String name = new String(ctrlPresentacion.getNameHospital());
 		//name = name.replace("%", " ");
 		name = 	"Soluciones del Hospital: "	+ name;
 		
@@ -217,6 +216,7 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 		panelContents.setVisible(false);
 	}
 	public void showPanel() {
+		cargarHospital();
 		//cargarSoluciones();
 		panelContents.setVisible(true);
 	}
