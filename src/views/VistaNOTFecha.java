@@ -5,6 +5,7 @@ import javax.swing.border.EmptyBorder;
 import com.toedter.calendar.JDateChooser;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -97,13 +98,14 @@ public class VistaNOTFecha {
 		});
 		
 		button.addActionListener(new ActionListener() {
-			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				Date data = dataChooser.getDate();
 				if (data != null) {
-					int dia = data.getDay();
-					int mes = data.getMonth()+1;
-					int year = data.getYear();
+					GregorianCalendar cal = new GregorianCalendar();
+				    cal.setTime(data);		
+					int dia = cal.get(GregorianCalendar.DAY_OF_MONTH);
+					int mes = cal.get(GregorianCalendar.MONTH)+1;
+					int year = cal.get(GregorianCalendar.YEAR);
 					try {
 						ctrlPresentacion.addResNOT_Fecha(dia, mes, year);
 					} catch (IOException eX) {
