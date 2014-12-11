@@ -45,7 +45,6 @@ public class CtrlPresentacion {
 		init_frameView();
 		ctrlHospital = new CtrlHospital();
 		ctrlCalendario = new CtrlCalendario(ctrlHospital.getCalendar());
-		ctrlDoctor = new CtrlDoctor();
 		vistaCjtHospitales = new VistaCjtHospitales(this);
 		vistaCrearHospital = new VistaCrearHospital(this);
 		vistaGestion = new VistaGestion(this);
@@ -262,9 +261,11 @@ public class CtrlPresentacion {
 		ctrlHospital.importarHospital(path);
 	}
 	
-	public void cargarHospital(int idHosp) throws IOException {
+	public void cargarHospital(int idHosp) throws IOException, ParseException {
 		ctrlHospital.cargarHospital(idHosp);
 		ctrlHospital.getDataDoctors(idHosp);
+		ctrlCalendario.readCalendar(idHosp, null);
+		ctrlDoctor = new CtrlDoctor(ctrlHospital.getDoctors(), ctrlCalendario.getCalendarYear());
 		
 	}
 	
