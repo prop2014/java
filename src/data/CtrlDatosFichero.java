@@ -503,6 +503,34 @@ public class CtrlDatosFichero {
 		   return archivo.exists();
 	}
 	 
+	
+	
+	
+	public boolean existsSol(int id) throws IOException{
+		 boolean exists=false;
+		 try{
+		   		String num = Integer.toString(id);
+		   		String path = new File("").getAbsolutePath();
+		   		String realpath = path+ "/datos/Hospital";
+		   		File archivo = new File(realpath+num);
+				if(archivo.exists()) {
+					FileReader fr = new FileReader (archivo);
+					BufferedReader br = new BufferedReader(fr);
+					String linea;
+					while((linea=br.readLine())!=null){
+			   			Scanner sl = new Scanner(linea);
+			   			if(sl.hasNext()){
+			   				if(sl.next().equals(".S")) exists=true;
+			   			}
+			   			sl.close();
+			   		}
+					br.close();
+				}
+		 }catch(Exception e) {e.printStackTrace();}
+		  return exists;
+	 }
+	
+	
 	 public boolean existsCalendar(int id) throws IOException{
 		 boolean exists=false;
 		 try{
@@ -581,11 +609,13 @@ public class CtrlDatosFichero {
 		ArrayList<String> bufferD = new  ArrayList<String>();
 	   ArrayList<String> bufferC = new  ArrayList<String>();
 	   ArrayList<String> bufferR = new  ArrayList<String>();
+	   ArrayList<String> bufferS = new  ArrayList<String>();
+	   ArrayList<String> bufferNS = new  ArrayList<String>();
 	   String num = Integer.toString(id);
 	   String path = new File("").getAbsolutePath();
 	   String realpath = path+ "/datos/Hospital"+num;
 	   File archivo = new File(realpath);
-	   boolean D=false,C = false, R = false;
+	   boolean D=false,C = false, R = false, S=false, NS=false;
 	   if(archivo.exists() && !alhosp.isEmpty()){
 		   	   if(existsDoctors(id)) {
 		   		   bufferD=getDataDoctors(id,null);
@@ -599,6 +629,14 @@ public class CtrlDatosFichero {
 				   bufferR=getDataRes(id,null);
 				   R=true;
 			   }
+			   if(existsSol(id)){
+				   bufferS=getDataSol(id);
+				   S=true;
+				   bufferNS=getDataNoSol(id);
+				   NS=true;
+		   	   }
+			   
+			   
 		   try{
 			   FileWriter fw = new FileWriter(archivo);
 			   PrintWriter pw = new PrintWriter(fw);
@@ -628,6 +666,18 @@ public class CtrlDatosFichero {
 					   pw.print(" "+bufferR.get(i));
 				   }
 			   }
+			   if(C&&S&&NS){
+				   pw.println();
+				   pw.print(".S");
+				   for (i = 0; i <bufferS.size(); i++){
+					   pw.print(" "+bufferS.get(i));
+				   }
+				   pw.println();
+				   pw.print(".NS");
+				   for (i = 0; i <bufferNS.size(); i++){
+					   pw.print(" "+bufferNS.get(i));
+				   }
+			   }
 			   pw.close();
 		   }catch(Exception e) {e.printStackTrace();}
 		   
@@ -653,11 +703,13 @@ public class CtrlDatosFichero {
 	   ArrayList<String> bufferH = new  ArrayList<String>();
 	   ArrayList<String> bufferC = new  ArrayList<String>();
 	   ArrayList<String> bufferR = new ArrayList<String>();
+	   ArrayList<String> bufferS = new  ArrayList<String>();
+	   ArrayList<String> bufferNS = new ArrayList<String>();
 	   String num = Integer.toString(id);
 	   String path = new File("").getAbsolutePath();
 	   String realpath = path+ "/datos/Hospital"+num;
 	   File archivo = new File(realpath);
-	   boolean C = false, R=false;
+	   boolean C = false, R=false, S=false, NS = false;
 	   if(archivo.exists()){
 			   bufferH=getDataHospital(id,null);
 			   if(existsCalendar(id))  {
@@ -668,6 +720,12 @@ public class CtrlDatosFichero {
 				   bufferR=getDataRes(id,null);
 				   R=true;
 			   }
+			   if(existsSol(id)){
+				   bufferS=getDataSol(id);
+				   S=true;
+				   bufferNS=getDataNoSol(id);
+				   NS=true;
+		   	   }
 		   try{
 			   if(!alhosp.isEmpty()){
 				   FileWriter fw = new FileWriter(archivo);
@@ -695,6 +753,18 @@ public class CtrlDatosFichero {
 						   pw.print(" "+bufferR.get(i));
 					   } 
 				   }
+				   if(C&&S&&NS){
+					   pw.println();
+					   pw.print(".S");
+					   for (int i = 0; i < bufferS.size(); i++){
+						   pw.print(" "+bufferS.get(i));
+					   }
+					   pw.println();
+					   pw.print(".NS");
+					   for (int i = 0; i < bufferNS.size(); i++){
+						   pw.print(" "+bufferNS.get(i));
+					   }
+				   }
 				   pw.close();
 			   }
 			   else{
@@ -713,11 +783,13 @@ public class CtrlDatosFichero {
 	   ArrayList<String> bufferH = new  ArrayList<String>();
 	   ArrayList<String> bufferD = new  ArrayList<String>();
 	   ArrayList<String> bufferC = new  ArrayList<String>();
+	   ArrayList<String> bufferS = new  ArrayList<String>();
+	   ArrayList<String> bufferNS = new ArrayList<String>();
 	   String num = Integer.toString(id);
 	   String path = new File("").getAbsolutePath();
 	   String realpath = path+ "/datos/Hospital"+num;
 	   File archivo = new File(realpath);
-	   boolean C = false, D = false;
+	   boolean C = false, D = false, S=false, NS=false;
 	   if(archivo.exists()){
 		   	if(existsDoctors(id)){
 		   			D=true;
@@ -727,6 +799,12 @@ public class CtrlDatosFichero {
 					   C=true;
 				   }
 				   bufferD=getDataDoctors(id,null);
+				   if(existsSol(id)){
+					   bufferS=getDataSol(id);
+					   S=true;
+					   bufferNS=getDataNoSol(id);
+					   NS=true;
+			   	   }
 			   try{
 				   FileWriter fw = new FileWriter(archivo);
 				   PrintWriter pw = new PrintWriter(fw);
@@ -759,6 +837,18 @@ public class CtrlDatosFichero {
 					   pw.close(); 
 					   throw new IOException("no hay datos a guardar\n");
 				   }
+				   if(C&&S&&NS){
+					   pw.println();
+					   pw.print(".S");
+					   for (int i = 0; i < bufferS.size(); i++){
+						   pw.print(" "+bufferS.get(i));
+					   }
+					   pw.println();
+					   pw.print(".NS");
+					   for (int i = 0; i < bufferNS.size(); i++){
+						   pw.print(" "+bufferNS.get(i));
+					   }
+				   }
 				   pw.close();
 			   }catch(Exception e) {e.printStackTrace();}
 		   	}
@@ -776,11 +866,13 @@ public class CtrlDatosFichero {
 	   ArrayList<String> bufferH = new  ArrayList<String>();
 	   ArrayList<String> bufferD = new  ArrayList<String>();
 	   ArrayList<String> bufferR = new  ArrayList<String>();
+	   ArrayList<String> bufferS = new  ArrayList<String>();
+	   ArrayList<String> bufferNS = new ArrayList<String>();
 	   String num = Integer.toString(id);
 	   String path = new File("").getAbsolutePath();
 	   String realpath = path+ "/datos/Hospital"+num;
 	   File archivo = new File(realpath);
-	   boolean D = false, R = false;
+	   boolean D = false, R = false, S=false, NS=false;
 	   if(archivo.exists()){
 			   bufferH=getDataHospital(id,null);
 			   if(existsDoctors(id)){
@@ -790,6 +882,12 @@ public class CtrlDatosFichero {
 					   bufferR=getDataRes(id,null);
 					   R=true;
 				   }
+				   if(existsSol(id)){
+					   bufferS=getDataSol(id);
+					   S=true;
+					   bufferNS=getDataNoSol(id);
+					   NS=true;
+			   	   }
 			   }
 		   try{
 			   FileWriter fw = new FileWriter(archivo);
@@ -821,6 +919,18 @@ public class CtrlDatosFichero {
 				   pw.print(".R");
 				   for (int i = 0; i < bufferR.size(); i++){
 					  pw.print(" "+bufferR.get(i));
+				   }
+			   }
+			   if(S&&NS){
+				   pw.println();
+				   pw.print(".S");
+				   for (int i = 0; i < bufferS.size(); i++){
+					   pw.print(" "+bufferS.get(i));
+				   }
+				   pw.println();
+				   pw.print(".NS");
+				   for (int i = 0; i < bufferNS.size(); i++){
+					   pw.print(" "+bufferNS.get(i));
 				   }
 			   }
 			   pw.close();
@@ -916,12 +1026,147 @@ public class CtrlDatosFichero {
    }
    
    
-   public ArrayList<String> getSol(){
-	   ArrayList<String> alsol =new ArrayList<String>();
+   public ArrayList<String> getDataSol(int id)throws IOException{
+	   ArrayList<String> alsol = new ArrayList<String>();
+ 		File archivo;
+		String num = Integer.toString(id);
+   		String path = new File("").getAbsolutePath();
+   		String realpath = path+ "/datos/Hospital";
+   		archivo = new File(realpath+num);
+		if(!archivo.exists()) throw new IOException("No Existe Este fichero");
+		FileReader fr = new FileReader (archivo);
+		BufferedReader br = new BufferedReader(fr);
+   		String linea;
+   		boolean exists=false;
+   		String word;
+   		while((linea=br.readLine())!=null && !exists){
+	   		Scanner sl = new Scanner(linea);
+	   		if(sl.hasNext()){
+		   		word=sl.next();
+		   		if(word.equals(".S")){
+		   			exists=true;
+		   			while(sl.hasNext()){
+		   				alsol.add(sl.next());
+		   			}
+		   		}
+		   		sl.close();
+	   		}
+	   	}
+   		br.close();
+   		if(!exists)throw new IOException("Solution isn't reachable");
+   		return alsol;
+  }
 	   
-	   
-	   
-	   return alsol;
+   
+   
+   public ArrayList<String> getDataNoSol(int id)throws IOException{
+	   ArrayList<String> alnosol = new ArrayList<String>();
+		File archivo;
+		String num = Integer.toString(id);
+  		String path = new File("").getAbsolutePath();
+  		String realpath = path+ "/datos/Hospital";
+  		archivo = new File(realpath+num);
+		if(!archivo.exists()) throw new IOException("No Existe Este fichero");
+		FileReader fr = new FileReader (archivo);
+		BufferedReader br = new BufferedReader(fr);
+  		String linea;
+  		boolean exists=false;
+  		String word;
+  		while((linea=br.readLine())!=null && !exists){
+	   		Scanner sl = new Scanner(linea);
+	   		if(sl.hasNext()){
+		   		word=sl.next();
+		   		if(word.equals(".NS")){
+		   			exists=true;
+		   			while(sl.hasNext()){
+		   				alnosol.add(sl.next());
+		   			}
+		   		}
+		   		sl.close();
+	   		}
+	   	}
+  		br.close();
+  		if(!exists)throw new IOException("NoSolution isn't reachable");
+  		return alnosol;
    }
+   
+   
+   public void saveDataSol(ArrayList<String> alsol,ArrayList<String> alnosol,Integer id) throws IOException{
+	   ArrayList<String> bufferH = new  ArrayList<String>();
+	   ArrayList<String> bufferD = new  ArrayList<String>();
+	   ArrayList<String> bufferC = new  ArrayList<String>();
+	   ArrayList<String> bufferR = new  ArrayList<String>();
+	   String num = Integer.toString(id);
+	   String path = new File("").getAbsolutePath();
+	   String realpath = path+ "/datos/Hospital"+num;
+	   File archivo = new File(realpath);
+	   boolean D = false, R = false, C = false;
+	   if(archivo.exists()){
+			   bufferH=getDataHospital(id,null);
+			   if(existsDoctors(id)){
+				   bufferD=getDataDoctors(id,null);
+				   D=true;
+				   if(existsRes(id)){
+					   bufferR=getDataRes(id,null);
+					   R=true;
+				   }
+				   if(existsCalendar(id)){
+					   bufferC=getDataCale(id,null);
+					   C=true;
+				   }
+			   }
+		   try{
+			   FileWriter fw = new FileWriter(archivo);
+			   PrintWriter pw = new PrintWriter(fw);
+			   pw.print(".H");
+			   for (int i = 0; i < bufferH.size(); i++){
+				   pw.print(" "+bufferH.get(i));
+			   }
+			   if(D){
+				   pw.println();
+				   pw.print(".D");
+				   for(int i=0; i<bufferD.size();++i){
+					   pw.print(" "+bufferD.get(i));
+				   	}
+			   }
+			   if(C){
+				   pw.println();
+				   pw.print(".C");
+				   for (int i = 0; i < bufferC.size(); i++){
+					  pw.print(" "+bufferC.get(i));
+				   }
+			   }
+			   if(R){
+				   pw.println();
+				   pw.print(".R");
+				   for (int i = 0; i < bufferR.size(); i++){
+					  pw.print(" "+bufferR.get(i));
+				   }
+			   }
+			   if(C){
+				   pw.println();
+				   pw.print(".S");
+				   for (int i = 0; i < alsol.size(); i++){
+						  pw.print(" "+alsol.get(i));
+				   }
+				   pw.println();
+				   pw.print(".NS");
+				   for (int i = 0; i < alnosol.size(); i++){
+						  pw.print(" "+alnosol.get(i));
+				   }
+			   }
+			   pw.close();
+		   }catch(Exception e) {e.printStackTrace();}
+		   
+	   }
+	   else{
+		   throw new IOException ("Debes Crear un Hospital\n");
+	   }
+	   
+   }
+
+   
+   
+   
    
 }//ficlas
