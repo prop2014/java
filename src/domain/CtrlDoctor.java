@@ -1061,7 +1061,7 @@ public class CtrlDoctor {
 		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
 	}
 
-
+ /*
 	public void setId(int id, int idOld) throws IOException {
 		int i = 0;
 		boolean done = false;
@@ -1069,8 +1069,9 @@ public class CtrlDoctor {
 			if(idOld == Doctors.get(i).getId()){
 				done = true;
 				Doctors.get(i).setId(id);
+				
 			}
-			
+			++i;
 		}
 		
 		if (!done) throw new IOException("No existe un Doctor con esta Id");
@@ -1084,8 +1085,9 @@ public class CtrlDoctor {
 			if(idOld == Doctors.get(i).getId()){
 				done = true;
 				Doctors.get(i).setName(nombre);
+				
 			}
-			
+			++i;
 		}
 		
 		if (!done) throw new IOException("No existe un Doctor con esta Id");
@@ -1099,7 +1101,9 @@ public class CtrlDoctor {
 			if(idOld == Doctors.get(i).getId()){
 				done = true;
 				Doctors.get(i).setNumMaxTurn(num);
+				
 			}
+			++i;
 			
 		}
 		
@@ -1114,11 +1118,13 @@ public class CtrlDoctor {
 			if(idOld == Doctors.get(i).getId()){
 				done = true;
 				Doctors.get(i).setSalaryTurn(sueldo);
+				
 			}
-			
+			++i;
 		}
 		
 		if (!done) throw new IOException("No existe un Doctor con esta Id");
 	    
 	}
+	*/
 }

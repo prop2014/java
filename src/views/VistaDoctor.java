@@ -209,32 +209,15 @@ public class VistaDoctor {
 								|| !docInfo[3].equals(textMaxTurnos.getText())){
 								// Habra que comprobar si se han modificado las restricciones
 							
-							try {
-								int idOld = Integer.parseInt(docInfo[0]);
-								String nameDoc;
-								if(!docInfo[0].equals(textID.getText())){ 
-										nameDoc = textNombre.getText();
-										nameDoc=nameDoc.replaceAll(" ", "%");
-										ctrlPresentacion.setName(nameDoc, idOld);
-								}
+							try{
+								String nombre = textNombre.getText();
+								nombre = nombre.replaceAll(" ", "%");
+								int idDoc = Integer.parseInt(textID.getText());
+								int maxTurnos = Integer.parseInt(textMaxTurnos.getText());
+								Double sueldo = Double.parseDouble(textSueldo.getText());
+								ctrlPresentacion.setDoctor(idDoc, nombre, maxTurnos, sueldo);
 								
-								if(!docInfo[1].equals(textNombre.getText())){
-									int id = Integer.parseInt(textID.getText());
-									ctrlPresentacion.setId(id, idOld );
-								}
-								
-								if(!docInfo[3].equals(textMaxTurnos.getText())){
-									int maxTurnos = Integer.parseInt(textMaxTurnos.getText());
-									ctrlPresentacion.setNumMaxTurn(maxTurnos, idOld );
-								}
-								
-								if(!docInfo[2].equals(textSueldo.getText())){
-									Double sueldo = Double.parseDouble(textSueldo.getText());
-									ctrlPresentacion.setSalaryTurn(sueldo, idOld );
-								}
-								
-								
-								
+	
 								/*if(nameDoc.isEmpty()) throw new IOException("El doctor no tiene nombre");
 								
 								//ctrlPresentacion.eliminarDoc(id);
@@ -244,8 +227,6 @@ public class VistaDoctor {
 							} catch (NumberFormatException nE){
 								JOptionPane.showMessageDialog(null, "Alguno de los factores no es un valor correcto", "Error", JOptionPane.ERROR_MESSAGE); 
 							}
-							
-							
 							
 							}
 							
