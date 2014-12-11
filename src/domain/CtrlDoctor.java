@@ -1060,4 +1060,65 @@ public class CtrlDoctor {
 		}
 		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
 	}
+
+
+	public void setId(int id, int idOld) throws IOException {
+		int i = 0;
+		boolean done = false;
+		while(!done ||  i < Doctors.size() ){
+			if(idOld == Doctors.get(i).getId()){
+				done = true;
+				Doctors.get(i).setId(id);
+			}
+			
+		}
+		
+		if (!done) throw new IOException("No existe un Doctor con esta Id");
+	    
+	}
+	
+	public void setName(String nombre, int idOld) throws IOException {
+		int i = 0;
+		boolean done = false;
+		while(!done ||  i < Doctors.size() ){
+			if(idOld == Doctors.get(i).getId()){
+				done = true;
+				Doctors.get(i).setName(nombre);
+			}
+			
+		}
+		
+		if (!done) throw new IOException("No existe un Doctor con esta Id");
+	    
+	}
+	
+	public void setNumMaxTurn(int num, int idOld) throws IOException {
+		int i = 0;
+		boolean done = false;
+		while(!done ||  i < Doctors.size() ){
+			if(idOld == Doctors.get(i).getId()){
+				done = true;
+				Doctors.get(i).setNumMaxTurn(num);
+			}
+			
+		}
+		
+		if (!done) throw new IOException("No existe un Doctor con esta Id");
+	   
+	}
+	
+	public void setSalaryTurn(double sueldo, int idOld) throws IOException {
+		int i = 0;
+		boolean done = false;
+		while(!done ||  i < Doctors.size() ){
+			if(idOld == Doctors.get(i).getId()){
+				done = true;
+				Doctors.get(i).setSalaryTurn(sueldo);
+			}
+			
+		}
+		
+		if (!done) throw new IOException("No existe un Doctor con esta Id");
+	    
+	}
 }

@@ -208,22 +208,37 @@ public class VistaDoctor {
 								|| !docInfo[2].equals(textSueldo.getText()) 
 								|| !docInfo[3].equals(textMaxTurnos.getText())){
 								// Habra que comprobar si se han modificado las restricciones
-									
-							
-							String nameDoc = textNombre.getText();
-							nameDoc=nameDoc.replaceAll(" ", "%");
-							
-							
 							
 							try {
-								int id = Integer.parseInt(textID.getText());
-								int maxTurnos = Integer.parseInt(textMaxTurnos.getText());
-								Double sueldo = Double.parseDouble(textSueldo.getText());
+								int idOld = Integer.parseInt(docInfo[0]);
+								String nameDoc;
+								if(!docInfo[0].equals(textID.getText())){ 
+										nameDoc = textNombre.getText();
+										nameDoc=nameDoc.replaceAll(" ", "%");
+										ctrlPresentacion.setName(nameDoc, idOld);
+								}
 								
-								if(nameDoc.isEmpty()) throw new IOException("El doctor no tiene nombre");
+								if(!docInfo[1].equals(textNombre.getText())){
+									int id = Integer.parseInt(textID.getText());
+									ctrlPresentacion.setId(id, idOld );
+								}
 								
-								ctrlPresentacion.eliminarDoc(id);
-								ctrlPresentacion.crearDoctor(nameDoc, id, maxTurnos, sueldo);
+								if(!docInfo[3].equals(textMaxTurnos.getText())){
+									int maxTurnos = Integer.parseInt(textMaxTurnos.getText());
+									ctrlPresentacion.setNumMaxTurn(maxTurnos, idOld );
+								}
+								
+								if(!docInfo[2].equals(textSueldo.getText())){
+									Double sueldo = Double.parseDouble(textSueldo.getText());
+									ctrlPresentacion.setSalaryTurn(sueldo, idOld );
+								}
+								
+								
+								
+								/*if(nameDoc.isEmpty()) throw new IOException("El doctor no tiene nombre");
+								
+								//ctrlPresentacion.eliminarDoc(id);
+								//ctrlPresentacion.crearDoctor(nameDoc, id, maxTurnos, sueldo); */
 							} catch (IOException eX) {
 								JOptionPane.showMessageDialog(null, eX, "Error",JOptionPane.ERROR_MESSAGE); 
 							} catch (NumberFormatException nE){
@@ -232,7 +247,7 @@ public class VistaDoctor {
 							
 							
 							
-						}
+							}
 							
 						}
 						

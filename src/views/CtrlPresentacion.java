@@ -299,6 +299,25 @@ public class CtrlPresentacion {
 	public void setDocInfo(String[] newDocInfo){
 		vistaDoctor.setDocInfo(newDocInfo);
 	}
+	  public void setId(int id, int idOld) throws IOException {
+	    	ctrlDoctor.setId(id, idOld);
+		    ctrlHospital.saveDataDoctors();
+		}
+	    
+		public void setName(String nombre, int idOld) throws IOException {
+			ctrlDoctor.setName(nombre, idOld);
+		    ctrlHospital.saveDataDoctors();
+		}
+		
+		public void setNumMaxTurn(int num, int idOld) throws IOException {
+			ctrlDoctor.setNumMaxTurn(num, idOld);
+		    ctrlHospital.saveDataDoctors();
+		}
+		
+		public void setSalaryTurn(double sueldo, int idOld) throws IOException {
+			ctrlDoctor.setSalaryTurn(sueldo, idOld);
+		    ctrlHospital.saveDataDoctors();
+		}
 	
 	public void addResMAX_Turnos_por_Dia(int numD) throws IOException {
 		int idDoc = vistaDoctor.getDocId();
