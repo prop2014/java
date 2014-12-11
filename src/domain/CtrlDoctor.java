@@ -50,6 +50,15 @@ public class CtrlDoctor {
 	
 /* Metodos publicos */
 	
+	public ArrayList<ArrayList<String>> loadRest(int id){
+		Doctor doct = new Doctor();
+		for(Doctor doc: Doctors){
+			if(doc.getId() == id) doct = doc;
+		}
+		
+		return  doct.loadRest();
+	}
+	
 	/**
 	*Consultora de todos los identificadores dels doctores
 	* @return ids de los doctores

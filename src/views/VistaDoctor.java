@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * Vista principal de los datos de un Doctor
@@ -24,13 +27,19 @@ public class VistaDoctor {
 
 	private JFrame frameView;
 	private JPanel panelContents = new JPanel();
-
 	private JPanel panelCenterButtons = new JPanel();
 
-	// SCROLL PANEL
-	private JList<String> list = new JList<String>();
-	private JScrollPane scrollPanel = new JScrollPane();
+	
 
+	//SCROLL PANEL
+	
+	final String[] fila1 ={"<html><LEFT>Tipo</LEFT></html>","<html><LEFT>Info</LEFT></html>"};
+	final Object[][] datos={};
+	
+	private JTable tabla = new JTable();
+	private JScrollPane scrollPanel = new JScrollPane();
+	
+	
 	private String[] docInfo;
 
 	// CENTER
@@ -57,16 +66,15 @@ public class VistaDoctor {
 	// METODOS PRIVADOS
 
 	private void inicializar_frameView() {
-		/***
-		 * DESCOMENTAR PARA EDITAR * frameView = new
-		 * JFrame("Programador Guardias"); frameView.setMinimumSize(new
-		 * Dimension(700, 400));
-		 * frameView.setPreferredSize(frameView.getMinimumSize());
-		 * frameView.setResizable(false); frameView.setLocationRelativeTo(null);
-		 * frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		 * frameView.getContentPane().setBackground(Color.WHITE); /*** END
-		 * DESCOMENTAR PARA EDITAR
-		 */
+		/*** DESCOMENTAR PARA EDITAR * 
+		 frameView = new
+		 JFrame("Programador Guardias"); frameView.setMinimumSize(new
+		 Dimension(700, 400));
+		 frameView.setPreferredSize(frameView.getMinimumSize());
+		 frameView.setResizable(false); frameView.setLocationRelativeTo(null);
+		 frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		 frameView.getContentPane().setBackground(Color.WHITE); 
+		 /*** END DESCOMENTAR PARA EDITAR */
 		frameView = ctrlPresentacion.getFrame();
 		JPanel contentPane = (JPanel) frameView.getContentPane();
 		contentPane.setLayout(null);
@@ -125,18 +133,21 @@ public class VistaDoctor {
 		textSueldo.setBounds(449, 78, 166, 15);
 
 		// Scroll
-		scrollPanel
-				.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPanel.setBounds(52, 114, 246, 177);
+		panelCenterButtons.add(scrollPanel);
+		
+		scrollPanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPanel.setBounds(52, 107, 377, 191);
+		scrollPanel.setViewportView(tabla);
+		tabla.setFont(new Font("Arial", Font.PLAIN, 12));
+		
+		tabla.setForeground(Color.red);
+		tabla.setBackground(Color.white);
 
 		// / END: GESTIONADO POR EL BUILDER NO TOCAR
 
-		list.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-		scrollPanel.setViewportView(list);
+
 		// Components
-		panelCenterButtons.add(scrollPanel);
-		scrollPanel.setViewportView(list);
-		list.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+		
 
 		panelCenterButtons.add(labelPanel1);
 		panelCenterButtons.add(labelPanelID);
@@ -153,6 +164,8 @@ public class VistaDoctor {
 		panelCenterButtons.add(buttonAnadir);
 		panelCenterButtons.add(buttonGuardar);
 		panelCenterButtons.add(buttonVolver);
+		
+		buttonEliminar.setEnabled(false);
 	}
 
 	private void inicializarComponents() {
@@ -165,6 +178,16 @@ public class VistaDoctor {
 
 	private void assignar_listenersComponents() {
 
+		ListSelectionModel listSelectionModel = tabla.getSelectionModel();
+		listSelectionModel.addListSelectionListener(new ListSelectionListener() {
+		        public void valueChanged(ListSelectionEvent e) { 
+		            ListSelectionModel lsm = (ListSelectionModel)e.getSource();
+		            buttonEliminar.setEnabled(!lsm.isSelectionEmpty()); 
+		        }
+		});
+		
+		
+		
 		buttonGuardar.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -298,19 +321,36 @@ public class VistaDoctor {
 
 	}
 
-	/*
-	 * private void loadDoctores() { doctores = new ArrayList<String>(); try {
-	 * doctores = ctrlPresentacion.loadDoctores(); } catch (IOException e) {
-	 * doctores.add("No hay doctores disponibles"); }
-	 * 
-	 * DefaultListModel<String> model = new DefaultListModel<String>();
-	 * for(String st : doctores){ st = st.replace("%", " ");
-	 * model.addElement(st); } list.setModel(model); list.revalidate();
-	 * list.repaint();
-	 * 
-	 * }
-	 */
 
+	
+	private void loadRest() {
+		ArrayList<ArrayList<String>> restricciones = new ArrayList<ArrayList<String>>() ;
+		if(! docInfo[0].equals(""))restricciones = ctrlPresentacion.loadRest(getDocId());
+		
+		DefaultTableModel dtm = new DefaultTableModel(datos,fila1){
+		    public boolean isCellEditable(int row, int column) {
+		        return false;
+		    }
+		
+		}; 
+		//Que no se muevan las columnas
+		tabla.getTableHeader().setReorderingAllowed(false);
+	
+		if(!restricciones.isEmpty()){
+			for(ArrayList<String> rest : restricciones){
+				String[] row = new String[rest.size()];
+				row = rest.toArray(row);
+				dtm.addRow(row); 
+			}
+		
+		}
+		
+		tabla.setModel(dtm);  
+		tabla.revalidate();
+		tabla.repaint();
+		
+	}
+	
 	// METODOS PUBLICOS
 
 	public int getDocId() {
@@ -322,9 +362,9 @@ public class VistaDoctor {
 	 */
 	public VistaDoctor(CtrlPresentacion pCtrlPresentacion) {
 		ctrlPresentacion = pCtrlPresentacion;
-		/**
-		 * DESCOMENTAR PARA EDITAR inicializarComponents();
-		 */
+		/** DESCOMENTAR PARA EDITAR *
+		 inicializarComponents();
+		 //*/
 	}
 
 	public void init() {
@@ -346,6 +386,8 @@ public class VistaDoctor {
 
 	public void showPanel() {
 
+		loadRest();
+		
 		textID.setText(docInfo[0]);
 		textNombre.setText(docInfo[1]);
 		textSueldo.setText(docInfo[2]);
