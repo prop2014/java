@@ -147,7 +147,7 @@ public class InterpretarResultado {
 		
 		haySolucion();
 
-		if(sol){
+	//	if(sol){
 			
 			//Obtener id de los vecinos de la fuente
 			//Los vecinos de la fuente siempre son doctores
@@ -177,7 +177,7 @@ public class InterpretarResultado {
 					
 					
 				}
-			}
+			//}
 			
 		}
 		 

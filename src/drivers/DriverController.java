@@ -326,7 +326,7 @@ public static void main(String[] args) throws IOException{
 					ini = 0;
 					fin = docs.size()+1;
 					CtrlAlg.findMaxFlowDijk(ini, fin);
-					if(CtrlAlg.findSolution(ini, fin)){
+					/*if(*/CtrlAlg.findSolution(ini, fin);//){
 						ArrayList<Integer> idDocs = CtrlDoct.getAllDoctors();
 						System.out.println("Hay solucion");
 						for (int i : idDocs) {
@@ -338,7 +338,7 @@ public static void main(String[] args) throws IOException{
 							}
 							System.out.printf("Sueldo: %f\n\n", CtrlAlg.getSueldoAssigned(i));
 						}
-					} else {
+					//} else {
 						ArrayList<nodoTurno> turnosSinSol = CtrlAlg.getTurnosSinSol();
 						ArrayList<Integer> numSinSol = CtrlAlg.getNumSinSol();
 						System.out.println("No hay solucion.\nTurnos sin solucion:");
@@ -349,7 +349,7 @@ public static void main(String[] args) throws IOException{
 							fecha = DateFormat.getDateInstance(DateFormat.SHORT).format(c1.getTime());
 							System.out.printf("Fecha:%s - %s, faltan %d doctor/es\n", fecha, tipo, numSinSol.get(i));
 						}
-					}
+				//	}
 					break;
 				default: break;
 			}
