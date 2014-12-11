@@ -187,7 +187,6 @@ public class CtrlCalendario {
 			int j=2;
 			for (int i = 0; i < size;++i){
 				fecha=alcale.get(j);
-				fecha=fecha+"-"+alcale.get(j)+"-"+alcale.get(j);
 				SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 				GregorianCalendar gc=new GregorianCalendar();
 				sdf.setLenient(false);
