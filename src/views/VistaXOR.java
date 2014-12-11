@@ -7,6 +7,7 @@ import com.toedter.calendar.JDateChooser;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -117,15 +118,16 @@ public class VistaXOR {
 		});
 		
 		button.addActionListener(new ActionListener() {
-			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				Date data = dataChooser.getDate();
 				if (data != null && ((checkBox1.isSelected() && !checkBox2.isSelected() && !checkBox3.isSelected()) ||
 				   (!checkBox1.isSelected() && checkBox2.isSelected() && !checkBox3.isSelected()) ||
 				   (!checkBox1.isSelected() && !checkBox2.isSelected() && checkBox3.isSelected()))) {
-						dia.add(data.getDay());
-						mes.add(data.getMonth()+1);
-						year.add(data.getYear());
+						GregorianCalendar cal = new GregorianCalendar();
+						cal.setTime(data);		
+						dia.add(cal.get(GregorianCalendar.DAY_OF_MONTH));
+						mes.add(cal.get(GregorianCalendar.MONTH)+1);
+						year.add(cal.get(GregorianCalendar.YEAR));
 						if(checkBox1.isSelected()) turno.add("manana");
 						else if (checkBox2.isSelected()) turno.add("tarde");
 						else if (checkBox3.isSelected()) turno.add("noche");
@@ -133,7 +135,7 @@ public class VistaXOR {
 						 ctrlPresentacion.addResXOR(dia, mes, year, turno);
 					} catch (IOException eX) {
 						System.out.printf("Restriccion no creada");
-						JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 
+						JOptionPane.showMessageDialog(null, eX, "Error",JOptionPane.ERROR_MESSAGE); 
 					}
 				}
 				else {
@@ -143,15 +145,16 @@ public class VistaXOR {
 		});	
 		
 		buttonSiguiente.addActionListener(new ActionListener() {
-			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				Date data = dataChooser.getDate();
 				if (data != null && ((checkBox1.isSelected() && !checkBox2.isSelected() && !checkBox3.isSelected()) ||
 				   (!checkBox1.isSelected() && checkBox2.isSelected() && !checkBox3.isSelected()) ||
 				   (!checkBox1.isSelected() && !checkBox2.isSelected() && checkBox3.isSelected()))) {
-						dia.add(data.getDay());
-						mes.add(data.getMonth()+1);
-						year.add(data.getYear());
+					    GregorianCalendar cal = new GregorianCalendar();
+					    cal.setTime(data);		
+					    dia.add(cal.get(GregorianCalendar.DAY_OF_MONTH));
+					    mes.add(cal.get(GregorianCalendar.MONTH)+1);
+					    year.add(cal.get(GregorianCalendar.YEAR));
 						if(checkBox1.isSelected()) turno.add("manana");
 						else if (checkBox2.isSelected()) turno.add("tarde");
 						else if (checkBox3.isSelected()) turno.add("noche");
