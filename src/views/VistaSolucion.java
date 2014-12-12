@@ -220,10 +220,9 @@ public class VistaSolucion {
 	}
 	
 	private void findSolution() {
-	/*	ctrlPresentacion.findSolution();
-		listAsig.setModel(ctrlPresentacion.getAsignaciones());
-		listAsig.setModel(ctrlPresentacion.getTurnosSinSol());
-		*/
+		//listAsig.setModel(ctrlPresentacion.getAsignaciones());
+		//listAsig.setModel(ctrlPresentacion.getTurnosSinSol());
+		
 	}
 	
 	private void reloadLists() {

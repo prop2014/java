@@ -1,3 +1,4 @@
+
 package views;
 
 import java.awt.*;
@@ -140,7 +141,12 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 
 		buttonGenerarFF.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				try {
+					ctrlPresentacion.findSolution(1);
+					ctrlPresentacion.changeView("vistaSolucion", panelContents);
+				} catch(IOException eX) {
+					JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 			
 			
@@ -150,7 +156,12 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 		
 		buttonGenerarED.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				try {
+					ctrlPresentacion.findSolution(2);
+					ctrlPresentacion.changeView("vistaSolucion", panelContents);
+				} catch(IOException eX) {
+					JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 			
 			
@@ -158,7 +169,12 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 		
 		buttonGenerarDI.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				try {
+					ctrlPresentacion.findSolution(3);
+					ctrlPresentacion.changeView("vistaSolucion", panelContents);
+				} catch(IOException eX) {
+					JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 			
 			

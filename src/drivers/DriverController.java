@@ -2,8 +2,10 @@ package drivers;
 
 import java.text.DateFormat;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Set;
 import java.io.IOException;
 
 import domain.*;
@@ -43,6 +45,10 @@ public static void main(String[] args) throws IOException{
 	    double fm, ft, fn;
 	    int year;
 	    ArrayList<Integer> docs;
+	    HashMap<Integer, ArrayList<String>> asign;
+	    Set<Integer> ids;
+	    
+	    
 		System.out.print("Introduce el ID del hospital: ");
 		id = teclado.nextInt();
 		System.out.print("Introduce el nombre del hospital: ");
@@ -263,29 +269,21 @@ public static void main(String[] args) throws IOException{
 					ini = 0;
 					fin = docs.size()+1;
 					CtrlAlg.findMaxFlowFulk(ini, fin);
-					if(CtrlAlg.findSolution(ini, fin)){
-						ArrayList<Integer> idDocs = CtrlDoct.getAllDoctors();
-						System.out.println("Hay solucion");
-						for (int i : idDocs) {
-							System.out.printf("Doctor %d\n", i);
-							ArrayList<String> fechasArray = CtrlAlg.getDatesAssigned(i);
-							ArrayList<String> turnosArray = CtrlAlg.getTurnosAssigned(i);
-							for(int j = 0; j < fechasArray.size(); ++j) {
-								System.out.printf("%s - %s \n",fechasArray.get(j), turnosArray.get(j));
-							}
-							System.out.printf("Sueldo: %f\n\n", CtrlAlg.getSueldoAssigned(i));
+					CtrlAlg.findSolution(ini, fin);
+					asign = CtrlAlg.getDatesAssigned();
+					ids = asign.keySet();
+					for (Integer idDoc : ids){
+						ArrayList<String> fechasAsignedDoc = asign.get(idDoc);
+						System.out.printf("Doctor %d\n", idDoc);
+						for(String st : fechasAsignedDoc){
+							System.out.printf("%s\n",st);
 						}
-					} else {
-						ArrayList<nodoTurno> turnosSinSol = CtrlAlg.getTurnosSinSol();
-						ArrayList<Integer> numSinSol = CtrlAlg.getNumSinSol();
-						System.out.println("No hay solucion.\nTurnos sin solucion:");
-						for(int i = 0; i < turnosSinSol.size(); ++i) {
-							nodoTurno t = turnosSinSol.get(i);
-							String tipo = t.getTipoTurno();
-							GregorianCalendar c1 = t.getFecha();
-							fecha = DateFormat.getDateInstance(DateFormat.SHORT).format(c1.getTime());
-							System.out.printf("Fecha:%s - %s, faltan %d doctor/es\n", fecha, tipo, numSinSol.get(i));
-						}
+						System.out.printf("Sueldo: %f\n\n", CtrlAlg.getSueldoAssigned(idDoc));
+					}
+					
+					System.out.println("Turnos sin solucion:");
+					for(String st : CtrlAlg.getTurnosSinSol()) {
+						System.out.println(st);
 					}
 					break;
 					
@@ -295,29 +293,21 @@ public static void main(String[] args) throws IOException{
 					ini = 0;
 					fin = docs.size()+1;
 					CtrlAlg.findMaxFlowEk(ini, fin);
-					if(CtrlAlg.findSolution(ini, fin)){
-						ArrayList<Integer> idDocs = CtrlDoct.getAllDoctors();
-						System.out.println("Hay solucion");
-						for (int i : idDocs) {
-							System.out.printf("Doctor %d\n", i);
-							ArrayList<String> fechasArray = CtrlAlg.getDatesAssigned(i);
-							ArrayList<String> turnosArray = CtrlAlg.getTurnosAssigned(i);
-							for(int j = 0; j < fechasArray.size(); ++j) {
-								System.out.printf("%s - %s \n",fechasArray.get(j), turnosArray.get(j));
-							}
-							System.out.printf("Sueldo: %f\n\n", CtrlAlg.getSueldoAssigned(i));
+					CtrlAlg.findSolution(ini, fin);
+					asign = CtrlAlg.getDatesAssigned();
+					ids = asign.keySet();
+					for (Integer idDoc : ids){
+						ArrayList<String> fechasAsignedDoc = asign.get(idDoc);
+						System.out.printf("Doctor %d\n", idDoc);
+						for(String st : fechasAsignedDoc){
+							System.out.printf("%s\n",st);
 						}
-					} else {
-						ArrayList<nodoTurno> turnosSinSol = CtrlAlg.getTurnosSinSol();
-						ArrayList<Integer> numSinSol = CtrlAlg.getNumSinSol();
-						System.out.println("No hay solucion.\nTurnos sin solucion:");
-						for(int i = 0; i < turnosSinSol.size(); ++i) {
-							nodoTurno t = turnosSinSol.get(i);
-							String tipo = t.getTipoTurno();
-							GregorianCalendar c1 = t.getFecha();
-							fecha = DateFormat.getDateInstance(DateFormat.SHORT).format(c1.getTime());
-							System.out.printf("Fecha:%s - %s, faltan %d doctor/es\n", fecha, tipo, numSinSol.get(i));
-						}
+						System.out.printf("Sueldo: %f\n\n", CtrlAlg.getSueldoAssigned(idDoc));
+					}
+					
+					System.out.println("Turnos sin solucion:");
+					for(String st : CtrlAlg.getTurnosSinSol()) {
+						System.out.println(st);
 					}
 					break;
 				case 14:
@@ -326,30 +316,23 @@ public static void main(String[] args) throws IOException{
 					ini = 0;
 					fin = docs.size()+1;
 					CtrlAlg.findMaxFlowDijk(ini, fin);
-					/*if(*/CtrlAlg.findSolution(ini, fin);//){
-						ArrayList<Integer> idDocs = CtrlDoct.getAllDoctors();
-						System.out.println("Hay solucion");
-						for (int i : idDocs) {
-							System.out.printf("Doctor %d\n", i);
-							ArrayList<String> fechasArray = CtrlAlg.getDatesAssigned(i);
-							ArrayList<String> turnosArray = CtrlAlg.getTurnosAssigned(i);
-							for(int j = 0; j < fechasArray.size(); ++j) {
-								System.out.printf("%s - %s \n",fechasArray.get(j), turnosArray.get(j));
-							}
-							System.out.printf("Sueldo: %f\n\n", CtrlAlg.getSueldoAssigned(i));
+					CtrlAlg.findSolution(ini, fin);
+					asign = CtrlAlg.getDatesAssigned();
+					ids = asign.keySet();
+					for (Integer idDoc : ids){
+						ArrayList<String> fechasAsignedDoc = asign.get(idDoc);
+						System.out.printf("Doctor %d\n", idDoc);
+						for(String st : fechasAsignedDoc){
+							System.out.printf("%s\n",st);
 						}
-					//} else {
-						ArrayList<nodoTurno> turnosSinSol = CtrlAlg.getTurnosSinSol();
-						ArrayList<Integer> numSinSol = CtrlAlg.getNumSinSol();
-						System.out.println("No hay solucion.\nTurnos sin solucion:");
-						for(int i = 0; i < turnosSinSol.size(); ++i) {
-							nodoTurno t = turnosSinSol.get(i);
-							String tipo = t.getTipoTurno();
-							GregorianCalendar c1 = t.getFecha();
-							fecha = DateFormat.getDateInstance(DateFormat.SHORT).format(c1.getTime());
-							System.out.printf("Fecha:%s - %s, faltan %d doctor/es\n", fecha, tipo, numSinSol.get(i));
-						}
-				//	}
+						System.out.printf("Sueldo: %f\n\n", CtrlAlg.getSueldoAssigned(idDoc));
+					}
+					
+					System.out.println("Turnos sin solucion:");
+					for(String st : CtrlAlg.getTurnosSinSol()) {
+						System.out.println(st);
+					}
+					
 					break;
 				default: break;
 			}

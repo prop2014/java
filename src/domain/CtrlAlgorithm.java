@@ -1,8 +1,12 @@
 package domain;
 
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
 
+import model.Doctor;
 import model.Hospital;
 import model.Asignaciones;
 
@@ -99,26 +103,41 @@ public class CtrlAlgorithm {
 		return gResidual;
 	}
 	
-	//Funcion devuelve las fechas asignadas de un doctor con id = id
-	public ArrayList<String> getDatesAssigned(int id){
-		return resMap.getFechasAsignaciones(id);
+	//Funcion devuelve las fechas y turnos asignados de un doctor con id = id
+	public HashMap<Integer,ArrayList<String>> getDatesAssigned(){
+		HashMap<Integer, ArrayList<String>> asignDoc = new HashMap<Integer, ArrayList<String>>();
+		ArrayList<Doctor> docs = hosp.getDoctors();
+		for(Doctor d : docs) {
+			ArrayList<String> asign = new ArrayList<String>();
+			ArrayList<String> fechasAsignadas = resMap.getFechasAsignaciones(d.getId());
+			ArrayList<String> turnosAsignados = resMap.getTipoTurnoAsignaciones(d.getId());
+			for(int i = 0; i < fechasAsignadas.size(); ++i) {
+				asign.add(fechasAsignadas.get(i) + " " + turnosAsignados.get(i));
+			}
+			asignDoc.put(d.getId(), asign);
+		}
+		
+		return asignDoc;
 	}
 	
-	//Funcion devuelve los turnos asignados de un doctor con id = id
-	public ArrayList<String> getTurnosAssigned(int id){
-		return resMap.getTipoTurnoAsignaciones(id);
-	}
 	
 	//Funcion devuelve el sueldo de un doctor con id = id
 	public double getSueldoAssigned(int id){
 		return resMap.getSueldoTotal(id);
 	}
 	
-	//Funcion que devuelve los turnos que se quedan sin solucion
-	public ArrayList<nodoTurno> getTurnosSinSol(){
-		return turnosSinSol;
+	
+	public ArrayList<String> getTurnosSinSol(){
+		ArrayList<String> tSinSol = new ArrayList<String>();
+		String fecha;
+		for(int i = 0; i < turnosSinSol.size(); ++i) {
+			nodoTurno n = turnosSinSol.get(i);
+			GregorianCalendar c1 = n.getFecha();
+			fecha = DateFormat.getDateInstance(DateFormat.SHORT).format(c1.getTime());
+			tSinSol.add(fecha + " " + n.getTipoTurno() + " (" + numSinSol.get(i) + ")");
+			
+		}
+		return tSinSol;
 	}
-	public ArrayList<Integer> getNumSinSol(){
-		return numSinSol;
-	}
+	
 }
