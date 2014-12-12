@@ -186,6 +186,7 @@ public class CtrlCalendario {
 				numDrsNoche=Integer.parseInt(alcale.get(j));
 				++j;
 				special=alcale.get(j);
+				if (special.equals("-")) special = "";
 				if(!addVacationDay(gc,numDrsManana,numDrsTarde,numDrsNoche,special)) throw new IOException("DIA no anyadido");
 				++j;
 			}
@@ -215,6 +216,9 @@ public class CtrlCalendario {
 					if(t.getShiftType().equals("manana")){
 						numDrsManana=t.getNumberOfDoctors();
 						especialm=t.getSpecialDate();
+						if (especialm.equals("")) {
+							especialm = "-";
+						}
 					}
 					else if(t.getShiftType().equals("tarde")){
 						numDrsTarde=t.getNumberOfDoctors();
