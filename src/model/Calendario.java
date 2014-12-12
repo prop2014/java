@@ -55,6 +55,15 @@ public class Calendario {
 
 	//-- Modificadoras --//
 	/**
+	 * Modificadora del anio del calendario vacacional
+	 * @param year Valor que se asignara al anio del calendario
+	 */
+	public void setCalendarYear(int year) {
+		vacationDates.clear(); //cabrones
+		calendarYear = year;
+	}
+	
+	/**
 	 * Modificadora que anade un nuevo dia vacacional al calendario
 	 * pre: El calendario ya tiene el anio definido
 	 * @param date Fecha del dia vacacional que se va a anadir
@@ -86,14 +95,6 @@ public class Calendario {
 		for (int i = 0; i < shiftsPerDay; ++i)
 			vacationDates.get(key)[i].setSpecialDate(specialDate);
 	}
-	
-	
-	public boolean isEmpty(){
-		if(vacationDates!=null){
-			return vacationDates.isEmpty();
-		}
-		return true;
-	}
 
 	/**
 	 * Modificadora del numero de doctores de un turno de un dia vacacional del calendario
@@ -116,6 +117,14 @@ public class Calendario {
 	public int getCalendarYear() {
 		return calendarYear;
 	}
+	
+	/**
+	 * Consultora del estado actual del calendario
+	 * @return True si el calendario esta vacio, False en caso contrario
+	 */
+	public boolean isEmpty(){
+		return vacationDates.isEmpty();
+}
 
 	/**
 	 * Consultora de un turno 
@@ -197,8 +206,4 @@ public class Calendario {
 		return 3*vacationDates.size();
 	}
 	
-	public void setCalendarYear(int year) {
-		vacationDates.clear(); //cabrones
-		calendarYear = year;
-	}
 }
