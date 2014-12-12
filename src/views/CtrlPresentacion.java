@@ -314,17 +314,17 @@ public class CtrlPresentacion {
 		
 	}
 	
-	public String[] getDocAtual(){
+	public String[] getDocActual(){
 		return docActual;	
 	
 	}
 	
-	public void setDocActual(int id, String name, double sueldo, int Maxturn){
+	public void setDocActual(String id, String name, String  sueldo, String  Maxturn){
 		
-		docActual[0] = Integer.toString(id);
+		docActual[0] = id;
 		docActual[1] = name;
-		docActual[2] = Double.toString(sueldo);
-		docActual[3] = Integer.toString(Maxturn);	
+		docActual[2] = sueldo;
+		docActual[3] = Maxturn;	
 	}
 	
 	public void clearDocActual(){
@@ -336,12 +336,14 @@ public class CtrlPresentacion {
 	}
 	
 	public boolean isEmptyDocActual(){
-		return (docActual[0] == "");
+		return (docActual[0].equals(""));
 	}
 	
 	public int getIdDocAc(){
 		 return Integer.parseInt(docActual[0]);
 	}
+	
+	
 	public String getNameDocAc(){
 		return docActual[1];
 	}
