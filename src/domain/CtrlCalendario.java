@@ -36,10 +36,10 @@ public class CtrlCalendario {
 		return calendar;
 	}
 
-	public void importarCalendario(String path,int id)throws IOException,ParseException{
-		ArrayList<String> alcale =new ArrayList<String>();
-		CtrlDatosFichero inOut= new CtrlDatosFichero();
-		alcale=inOut.getDataCale(id, path);
+	public void importCalendar(String path,int id) throws IOException, ParseException {
+		ArrayList<String> alcale = new ArrayList<String>();
+		CtrlDatosFichero inOut = new CtrlDatosFichero();
+		alcale = inOut.getDataCale(id, path);
 		inOut.saveDataCale(alcale, id);
 	}
 	

@@ -290,7 +290,7 @@ public class VistaCalendario extends Vista {
 			File file = fileChooser.getSelectedFile();
 			if(fileChooser.showOpenDialog(frameView) == JFileChooser.APPROVE_OPTION) {
 				try{
-					ctrlPresentacion.importarCalendar(file.getAbsolutePath());
+					ctrlPresentacion.importCalendar(file.getAbsolutePath());
 				}
 				catch(IOException e) {rejectedOperationDialog(e.getMessage());}
 				catch(ParseException e) {rejectedOperationDialog(e.getMessage());}
@@ -338,14 +338,14 @@ public class VistaCalendario extends Vista {
 					// llamada a dominio
 					if (ctrlPresentacion.addVacation(date, morningDrs, eveningDrs, nightDrs, especialDate)) {
 						update_listVacations();
-						successfulOperationDialog("Se ha anadido el dia vacacional " + simpleDateFormat.format(selectedDate) + " ! ");
 						ctrlPresentacion.saveCalendar();
+						successfulOperationDialog("Se ha anadido el dia vacacional " + simpleDateFormat.format(selectedDate) + " ! ");
 						dateChooser.setDate(null);
 					}
 				}
 				catch(NumberFormatException e) {rejectedOperationDialog("El numero de doctores de alguno de los turnos no es correcto ");}
 				catch(IOException e) {rejectedOperationDialog(e.getMessage());}
-				catch(Exception e) {rejectedOperationDialog("Se ha producido un error ");}
+				catch(Exception e) {rejectedOperationDialog("Se ha producido el siguiente error:\n" + e.getMessage());}
 			}
 		}
 		else {
@@ -353,20 +353,20 @@ public class VistaCalendario extends Vista {
 		}
 	}
 
-	public void actionPerformed_ModVacation(ActionEvent event) {
+	public void actionPerformed_ModVacation() {
 		if (!listVacations.isSelectionEmpty()) {
 			try {
-				GregorianCalendar date = getSelectedDate(listVacations.getSelectedValue());
-				ArrayList<String> vacation = ctrlPresentacion.getVacationDay(date);
-				textMorningDrs.setForeground(Color.red);
-				textEveningDrs.setForeground(Color.red);
-				textNightDrs.setForeground(Color.red);
-				textSpecialDate.setForeground(Color.red);
-				textMorningDrs.setText(vacation.get(0));
-				textEveningDrs.setText(vacation.get(1));
-				textNightDrs.setText(vacation.get(2));
-				textSpecialDate.setText(vacation.get(3));
+				GregorianCalendar date = getSelectedDate(listVacations.getSelectedValue()); // llamada a dominio
 				if (confirmationDialog("Modificar el dia vacacional " + simpleDateFormat.format(date.getTime()) + " ? ", "Modificar dia") == JOptionPane.YES_OPTION) {
+					ArrayList<String> vacation = ctrlPresentacion.getVacationDay(date);
+					textMorningDrs.setForeground(Color.red);
+					textEveningDrs.setForeground(Color.red);
+					textNightDrs.setForeground(Color.red);
+					textSpecialDate.setForeground(Color.red);
+					textMorningDrs.setText(vacation.get(0));
+					textEveningDrs.setText(vacation.get(1));
+					textNightDrs.setText(vacation.get(2));
+					textSpecialDate.setText(vacation.get(3));
 					Object[] dialogContents = {new JLabel("Introducir los nuevos datos para el dia vacacional " + simpleDateFormat.format(date.getTime()) + ": "), Box.createVerticalStrut(20), panelTxtFieldsDialog,Box.createVerticalStrut(20)};
 					if (JOptionPane.showConfirmDialog(null, dialogContents, "Modificar dia", JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION) {
 						int morningDrs = Integer.parseInt(textMorningDrs.getText());
@@ -376,6 +376,7 @@ public class VistaCalendario extends Vista {
 						// llamada a dominio
 						if (ctrlPresentacion.modifyVacation(date, morningDrs, eveningDrs, nightDrs, especialDate)) {
 							update_listVacations();
+							ctrlPresentacion.saveCalendar();
 							successfulOperationDialog("Se ha modificado el dia vacacional !");
 						}
 					}
@@ -386,46 +387,47 @@ public class VistaCalendario extends Vista {
 			catch(NumberFormatException e) {rejectedOperationDialog("El numero de doctores de alguno de los turnos no es correcto ");}
 			catch(ParseException e) {rejectedOperationDialog(e.getMessage());}
 			catch(IOException e) {rejectedOperationDialog(e.getMessage());}
-			catch(Exception e) {rejectedOperationDialog("Se ha producido un error ");}
+			catch(Exception e) {rejectedOperationDialog("Se ha producido el siguiente error:\n" + e.getMessage());}
 		}
 	}
 
-	public void actionPerformed_ModVacation(MouseEvent event) {
-		if (!listVacations.isSelectionEmpty()) {
-			try {
-				GregorianCalendar date = getSelectedDate(listVacations.getSelectedValue());
-				ArrayList<String> vacation = ctrlPresentacion.getVacationDay(date);
-				textMorningDrs.setForeground(Color.red);
-				textEveningDrs.setForeground(Color.red);
-				textNightDrs.setForeground(Color.red);
-				textSpecialDate.setForeground(Color.red);
-				textMorningDrs.setText(vacation.get(0));
-				textEveningDrs.setText(vacation.get(1));
-				textNightDrs.setText(vacation.get(2));
-				textSpecialDate.setText(vacation.get(3));
-				if (confirmationDialog("Modificar el dia vacacional " + simpleDateFormat.format(date.getTime()) + " ? ", "Modificar dia") == JOptionPane.YES_OPTION) {
-					Object[] dialogContents = {new JLabel("Introducir los nuevos datos para el dia vacacional " + simpleDateFormat.format(date.getTime()) + ": "), Box.createVerticalStrut(20), panelTxtFieldsDialog,Box.createVerticalStrut(20)};
-					if (JOptionPane.showConfirmDialog(null, dialogContents, "Modificar dia", JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION) {
-						int morningDrs = Integer.parseInt(textMorningDrs.getText());
-						int eveningDrs = Integer.parseInt(textEveningDrs.getText());
-						int nightDrs = Integer.parseInt(textNightDrs.getText());
-						String especialDate = textSpecialDate.getText();
-						// llamada a dominio
-						if (ctrlPresentacion.modifyVacation(date, morningDrs, eveningDrs, nightDrs, especialDate)) {
-							update_listVacations();
-							successfulOperationDialog("Se ha modificado el dia vacacional !");
-						}
-					}
-					else canceledOperationDialog("No se ha realizado ningun cambio !");
-				}
-
-			}
-			catch(NumberFormatException e) {rejectedOperationDialog("El numero de doctores de alguno de los turnos no es correcto ");}
-			catch(ParseException e) {rejectedOperationDialog(e.getMessage());}
-			catch(IOException e) {rejectedOperationDialog(e.getMessage());}
-			catch(Exception e) {rejectedOperationDialog("Se ha producido un error ");}
-		}
-	}
+//	public void actionPerformed_ModVacation(MouseEvent event) {
+//		if (!listVacations.isSelectionEmpty()) {
+//			try {
+//				GregorianCalendar date = getSelectedDate(listVacations.getSelectedValue());
+//				ArrayList<String> vacation = ctrlPresentacion.getVacationDay(date);
+//				textMorningDrs.setForeground(Color.red);
+//				textEveningDrs.setForeground(Color.red);
+//				textNightDrs.setForeground(Color.red);
+//				textSpecialDate.setForeground(Color.red);
+//				textMorningDrs.setText(vacation.get(0));
+//				textEveningDrs.setText(vacation.get(1));
+//				textNightDrs.setText(vacation.get(2));
+//				textSpecialDate.setText(vacation.get(3));
+//				if (confirmationDialog("Modificar el dia vacacional " + simpleDateFormat.format(date.getTime()) + " ? ", "Modificar dia") == JOptionPane.YES_OPTION) {
+//					Object[] dialogContents = {new JLabel("Introducir los nuevos datos para el dia vacacional " + simpleDateFormat.format(date.getTime()) + ": "), Box.createVerticalStrut(20), panelTxtFieldsDialog,Box.createVerticalStrut(20)};
+//					if (JOptionPane.showConfirmDialog(null, dialogContents, "Modificar dia", JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION) {
+//						int morningDrs = Integer.parseInt(textMorningDrs.getText());
+//						int eveningDrs = Integer.parseInt(textEveningDrs.getText());
+//						int nightDrs = Integer.parseInt(textNightDrs.getText());
+//						String especialDate = textSpecialDate.getText();
+//						// llamada a dominio
+//						if (ctrlPresentacion.modifyVacation(date, morningDrs, eveningDrs, nightDrs, especialDate)) {
+//							update_listVacations();
+//							successfulOperationDialog("Se ha modificado el dia vacacional !");
+//						}
+//					}
+//					else canceledOperationDialog("No se ha realizado ningun cambio !");
+//				}
+//
+//			}
+//			catch(NumberFormatException e) {rejectedOperationDialog("El numero de doctores de alguno de los turnos no es correcto ");}
+//			catch(ParseException e) {rejectedOperationDialog(e.getMessage());}
+//			catch(IOException e) {rejectedOperationDialog(e.getMessage());}
+//			catch(Exception e) {rejectedOperationDialog("Se ha producido un error ");}
+//		}
+//	}
+	
 	public void actionPerformed_buttonDelVacation(ActionEvent event) {
 		if (!listVacations.isSelectionEmpty()) {
 			try {
@@ -481,7 +483,7 @@ public class VistaCalendario extends Vista {
 
 		listVacations.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent event) {
-				if (event.getClickCount() == 2) actionPerformed_ModVacation (event);
+				if (event.getClickCount() == 2) actionPerformed_ModVacation ();
 			}
 		});
 
@@ -499,7 +501,7 @@ public class VistaCalendario extends Vista {
 
 		buttonModVacation.addActionListener(new ActionListener() {
 			public void actionPerformed (ActionEvent event) {
-				actionPerformed_ModVacation (event);
+				actionPerformed_ModVacation ();
 			}
 		});
 
