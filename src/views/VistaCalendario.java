@@ -65,11 +65,12 @@ public class VistaCalendario extends Vista {
 		buttonCreateCal.setFont(new Font("Arial", Font.BOLD, 11));
 		buttonDeleteCal.setBounds(325, 10, 170, 30);
 		buttonDeleteCal.setFont(new Font("Arial", Font.BOLD, 11));
-		buttonDeleteCal.setVisible(false);
+//		buttonDeleteCal.setVisible(false);
 		buttonImportCal.setBounds(505, 10, 170, 30);
 		buttonImportCal.setFont(new Font("Arial", Font.BOLD, 11));
-		labelCalendar = new JLabel("(No hay calendario vacacional)");
-		labelCalendar.setFont(new Font("Arial Italic", Font.TRUETYPE_FONT,16));
+//		labelCalendar = new JLabel("(No hay calendario vacacional)");
+//		labelCalendar.setFont(new Font("Arial Italic", Font.TRUETYPE_FONT,16));
+		labelCalendar = new JLabel();
 		labelCalendar.setBounds(20, 10, 325, 30);
 		labelVacationList1 = new JLabel(String.format("%36s", "Numero de doctores:"));
 		labelVacationList1.setFont(new Font("Courier", Font.BOLD,14));
