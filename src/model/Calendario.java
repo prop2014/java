@@ -196,4 +196,9 @@ public class Calendario {
 	public int getNumberOfShifts() {
 		return 3*vacationDates.size();
 	}
+	
+	public void setCalendarYear(int year) {
+		vacationDates.clear(); //cabrones
+		calendarYear = year;
+	}
 }

@@ -113,6 +113,10 @@ public class CtrlCalendario {
 		return calendar.getCalendarYear();
 	}
 	
+	public void setCalendarYear(int year) {
+		calendar.setCalendarYear(year);
+	}
+	
 	public ArrayList<String> getVacationDay(GregorianCalendar date) throws IOException {
 		ArrayList<String> vacation = new ArrayList<String>();
 		if (calendar.existsVacationDay(date)) {
@@ -185,7 +189,7 @@ public class CtrlCalendario {
 			String fecha;
 			String special;
 
-			calendar = new Calendario(year);
+			calendar.setCalendarYear(year);
 			int j=2;
 			for (int i = 0; i < size;++i){
 				fecha=alcale.get(j);
