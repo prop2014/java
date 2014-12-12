@@ -231,14 +231,19 @@ public class VistaDoctor {
 
 						try {
 							String nombre = textNombre.getText();
+							
 							nombre = nombre.replaceAll(" ", "%");
+							
 							int idDoc = Integer.parseInt(textID.getText());
-							int maxTurnos = Integer.parseInt(textMaxTurnos
-									.getText());
-							Double sueldo = Double.parseDouble(textSueldo
-									.getText());
-							ctrlPresentacion.setDoctor(idDoc, nombre,
-									maxTurnos, sueldo);
+							
+							int maxTurnos = Integer.parseInt(textMaxTurnos.getText());
+							
+							Double sueldo = Double.parseDouble(textSueldo.getText());
+							
+							
+							ctrlPresentacion.setDocActual(textID.getText(), nombre ,
+															textSueldo.getText(), textMaxTurnos.getText());
+							ctrlPresentacion.setDoctor(idDoc, nombre, maxTurnos, sueldo);
 
 							/*
 							 * if(nameDoc.isEmpty()) throw new
@@ -249,28 +254,23 @@ public class VistaDoctor {
 							 * maxTurnos, sueldo);
 							 */
 						} catch (IOException eX) {
-							JOptionPane.showMessageDialog(null, eX, "Error",
-									JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE);
 						} catch (NumberFormatException nE) {
-							JOptionPane
-									.showMessageDialog(
-											null,
-											"Alguno de los factores no es un valor correcto",
+							JOptionPane.showMessageDialog(
+											null,"Alguno de los factores no es un valor correcto",
 											"Error", JOptionPane.ERROR_MESSAGE);
 						}
-
 					}
-
 				}
 
-				ctrlPresentacion.changeView("vistaPlantillaDoctores",
-						panelContents);
+				ctrlPresentacion.changeView("vistaPlantillaDoctores", panelContents);
 			}
 
 		});
 
 		buttonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ctrlPresentacion.clearDocActual();
 				ctrlPresentacion.changeView("vistaPlantillaDoctores",
 						panelContents);
 			}
@@ -370,8 +370,6 @@ public class VistaDoctor {
 		inicializarComponents();
 
 	}
-
-	
 
 	public JPanel getPanel() {
 		return panelContents;

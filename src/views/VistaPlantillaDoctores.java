@@ -168,13 +168,13 @@ import javax.swing.table.DefaultTableModel;
 				public void actionPerformed(ActionEvent e) {
 					
 					int row = tabla.getSelectedRow();
+				
 					
-					String[] newDocInfo = { (String) tabla.getValueAt(row, 0),
-											(String) tabla.getValueAt(row, 1),
-											(String) tabla.getValueAt(row, 2),
-											(String) tabla.getValueAt(row, 3)};
+					ctrlPresentacion.setDocActual((String) tabla.getValueAt(row, 0), 
+													(String) tabla.getValueAt(row, 1),
+													(String) tabla.getValueAt(row, 2),
+													(String) tabla.getValueAt(row, 3));
 					
-					ctrlPresentacion.setDocInfo(newDocInfo);
 					ctrlPresentacion.changeView("vistaDoctor",panelContents);
 				}
 			});
@@ -182,8 +182,7 @@ import javax.swing.table.DefaultTableModel;
 			buttonCrear.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
-					String[] newDocInfo = { "","","", ""};
-					ctrlPresentacion.setDocInfo(newDocInfo);
+					ctrlPresentacion.clearDocActual();
 					ctrlPresentacion.changeView("vistaDoctor",panelContents);
 				}
 			});
