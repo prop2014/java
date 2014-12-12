@@ -171,6 +171,7 @@ public class CtrlPresentacion {
 		}
 		
 		case "vistaCalendario": {
+			vistaCalendario.update_view(ctrlHospital.existsCalendar());
 			contentPane.add(vistaCalendario.getPanel());
 			vistaCalendario.showPanel();
 			break;
@@ -270,7 +271,6 @@ public class CtrlPresentacion {
 		ctrlHospital.cargarHospital(idHosp);
 		ctrlHospital.getDataDoctors(idHosp);
 		ctrlCalendario.readCalendar(idHosp, null);
-		vistaCalendario.update_view(ctrlHospital.existsCalendar());
 		ctrlDoctor = new CtrlDoctor(ctrlHospital.getDoctors(), ctrlCalendario.getCalendarYear());
 		ctrlAlgorithm = new CtrlAlgorithm(ctrlHospital.getHospital());
 		

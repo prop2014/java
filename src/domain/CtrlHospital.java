@@ -70,7 +70,7 @@ public class CtrlHospital {
 	}
 	
 	public boolean existsCalendar(){
-		return hosp.isCaleEmpty();
+		return !hosp.isCaleEmpty();
 	}
 	
 	public void deleteCalendar(){
