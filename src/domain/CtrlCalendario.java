@@ -47,7 +47,7 @@ public class CtrlCalendario {
 		inOut.saveDataCale(alcale, id);
 	}
 	
-	public boolean addVacationDay2(GregorianCalendar date, int morningDrs, int eveningDrs, int nightDrs, String especialDate) throws IOException{
+	public boolean addVacationDay(GregorianCalendar date, int morningDrs, int eveningDrs, int nightDrs, String especialDate) throws IOException{
 //		try {
 			/*if(date.get(GregorianCalendar.YEAR) != calendar.getCalendarYear()) throw new IOException("La fecha del dia vacacional no corresponde al calendario actual ");
 			else */if (calendar.existsVacationDay(date)) throw new IOException("El dia vacacional ya existe");
@@ -141,7 +141,7 @@ public class CtrlCalendario {
 	}
 	
 	// ��� PROVISIONAL: SERA ELIMINADA Y SUSTITUIDA POR addVacationDay2 !!!
-	public void addVacationDay(int dia, int mes, int any, int numDrsManana, int numDrsTarde, int numDrsNoche, String especialManana, String especialTarde, String especialNoche) throws IOException{
+	public void addVacationDayDeprecated(int dia, int mes, int any, int numDrsManana, int numDrsTarde, int numDrsNoche, String especialManana, String especialTarde, String especialNoche) throws IOException{
 		GregorianCalendar date = new GregorianCalendar(any,mes-1,dia);
 		try {
 			if(date.get(GregorianCalendar.YEAR) != calendar.getCalendarYear()) throw new IOException("Anyo incorrecto");
@@ -169,7 +169,7 @@ public class CtrlCalendario {
 	 * @param id identificador del Hospital
 	 * @throws IOException fichero incorrecto
 	 */
-	public void readCalendar (int id,String path) throws IOException,ParseException{
+	public void readCalendar(int id,String path) throws IOException,ParseException{
 		ArrayList<String> alcale =new ArrayList<String>();
 		Integer num = id;
 		CtrlDatosFichero inOut = new CtrlDatosFichero();
@@ -199,7 +199,7 @@ public class CtrlCalendario {
 				numDrsNoche=Integer.parseInt(alcale.get(j));
 				++j;
 				special=alcale.get(j);
-				if(!addVacationDay2(gc,numDrsManana,numDrsTarde,numDrsNoche,special)) throw new IOException("DIA no anyadido");
+				if(!addVacationDay(gc,numDrsManana,numDrsTarde,numDrsNoche,special)) throw new IOException("DIA no anyadido");
 				++j;
 			}
 		}

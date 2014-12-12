@@ -183,7 +183,7 @@ public class VistaCalendario extends Vista {
 	 * Actualiza la vista
 	 * @param existsCalendar Indica si existe un calendario vacacional en el hospital actual
 	 */
-	private void update_view(boolean existsCalendar) {
+	public void update_view(boolean existsCalendar) {
 		if (existsCalendar) {
 			calendarYear = ctrlPresentacion.getCalendarYear();
 			labelCalendar.setText("Calendario vacacional " + calendarYear);

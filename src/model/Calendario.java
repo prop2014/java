@@ -6,7 +6,7 @@ import java.util.TreeMap;
 import java.util.Iterator;
 
 /**
- * Representa un calendario
+ * Representa un calendario vacacional
  * @author Felix Fernando Ramos Velazquez
  */
 public class Calendario {

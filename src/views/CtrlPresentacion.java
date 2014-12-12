@@ -270,6 +270,7 @@ public class CtrlPresentacion {
 		ctrlHospital.cargarHospital(idHosp);
 		ctrlHospital.getDataDoctors(idHosp);
 		ctrlCalendario.readCalendar(idHosp, null);
+		vistaCalendario.update_view(ctrlHospital.existsCalendar());
 		ctrlDoctor = new CtrlDoctor(ctrlHospital.getDoctors(), ctrlCalendario.getCalendarYear());
 		ctrlAlgorithm = new CtrlAlgorithm(ctrlHospital.getHospital());
 		
@@ -427,7 +428,7 @@ public class CtrlPresentacion {
 	
 	public boolean addVacation(GregorianCalendar date, int morningDrs, int eveningDrs, int nightDrs, String especialDate) throws IOException {
 		try {
-			return ctrlCalendario.addVacationDay2(date, morningDrs, eveningDrs, nightDrs, especialDate);
+			return ctrlCalendario.addVacationDay(date, morningDrs, eveningDrs, nightDrs, especialDate);
 		} catch (IOException e) {throw e;}
 	}
 
