@@ -335,6 +335,7 @@ public class VistaCalendario extends Vista {
 					if (ctrlPresentacion.addVacation(date, morningDrs, eveningDrs, nightDrs, especialDate)) {
 						update_listVacations();
 						successfulOperationDialog("Se ha anadido el dia vacacional " + simpleDateFormat.format(selectedDate) + " ! ");
+						ctrlPresentacion.saveCalendar();
 						dateChooser.setDate(null);
 					}
 				}

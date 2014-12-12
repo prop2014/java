@@ -473,6 +473,12 @@ public class CtrlPresentacion {
 		}
 	}
 	
+	public void saveCalendar() throws IOException {
+		try {
+		ctrlCalendario.writeCalendar(ctrlHospital.getID());
+		} catch(IOException e) {throw e;}
+	}
+	
 	public boolean addVacation(GregorianCalendar date, int morningDrs, int eveningDrs, int nightDrs, String especialDate) throws IOException {
 		try {
 			return ctrlCalendario.addVacationDay(date, morningDrs, eveningDrs, nightDrs, especialDate);
