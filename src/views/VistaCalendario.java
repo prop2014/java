@@ -220,7 +220,6 @@ public class VistaCalendario extends Vista {
 		JPanel options = new JPanel();
 		options.add(new JLabel("Introducir anyo del calendario:"));
 		options.add(textYear);
-//		Object[] options = {new JLabel("Introducir anyo del calendario: "),textYear};
 		if (JOptionPane.showConfirmDialog(null, options, "Crear calendario", JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION) {
 				try {
 					int year = Integer.parseInt(textYear.getText());
