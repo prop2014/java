@@ -459,4 +459,8 @@ public class CtrlPresentacion {
 	public ArrayList<ArrayList<String>> getALLVacations() {
 		return ctrlCalendario.getALLVacations();
 	}
+	
+	public boolean existsCalendar() {
+		return ctrlHospital.existsCalendar();
+	}
 }

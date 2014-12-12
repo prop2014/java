@@ -105,10 +105,6 @@ public class VistaCalendario extends Vista {
 		panelVacationList.add(scrollPanel);
 	}
 
-	private void init_panelInfo2() {
-
-	}
-
 	private void init_panelVacationHandler() {
 		// panel
 		panelVacationHandler.setLayout(null);
@@ -163,8 +159,12 @@ public class VistaCalendario extends Vista {
 		panelTxtFieldsDialog.add(textSpecialDate);
 	}
 
+	/**
+	 * Actualiza el contenido de la lista de dias vacacionales
+	 */
 	private void update_listVacations() {
 		dlm.clear();
+		// llamada a dominio
 		ArrayList<ArrayList<String>> vacations = ctrlPresentacion.getALLVacations();
 		if (!vacations.isEmpty()) {
 			for (ArrayList<String> vacationDay : vacations) {
@@ -178,6 +178,45 @@ public class VistaCalendario extends Vista {
 		}
 	}
 
+	/**
+	 * Actualiza la vista
+	 * @param existsCalendar Indica si existe un calendario vacacional en el hospital actual
+	 */
+	private void update_view(boolean existsCalendar) {
+		if (existsCalendar) {
+			calendarYear = ctrlPresentacion.getCalendarYear();
+			labelCalendar.setText("Calendario vacacional " + calendarYear);
+			labelCalendar.setFont(new Font("Arial", Font.BOLD, 16));
+			buttonDeleteCal.setVisible(true);
+			buttonCreateCal.setVisible(false);
+			GregorianCalendar minSelectDate, maxSelectDate;
+			minSelectDate = new GregorianCalendar(calendarYear,0,1,0,0,0);
+			maxSelectDate = new GregorianCalendar(calendarYear,11,31,23,59,59);
+			dateChooser.setSelectableDateRange(minSelectDate.getTime(), maxSelectDate.getTime());
+			dateChooser.setEnabled(true);
+			buttonAddVacation.setEnabled(true);
+			listVacations.setEnabled(true);
+			update_listVacations();
+		}
+		else {
+			calendarYear = -1;
+			labelCalendar.setText("(No hay calendario vacacional)");
+			labelCalendar.setFont(new Font("Arial", Font.ITALIC, 16));
+			dateChooser.setCalendar(null);
+			dateChooser.setEnabled(false);
+			buttonAddVacation.setEnabled(false);
+			buttonCreateCal.setVisible(true);
+			buttonDeleteCal.setVisible(false);
+			dlm.clear();
+			listVacations.setEnabled(false);
+		}
+	}
+	
+	/**
+	 * Obtiene la fecha del dia vacacional del objeto string pasado como parametro
+	 * @param strDate String con la info del dia vacacional
+	 * @return GregorianCalendar con la fecha del dia vacacional
+	 */
 	private GregorianCalendar getSelectedDate(String strDate) throws NumberFormatException, ParseException {
 		try {
 			int hyphenIndex = strDate.indexOf('-');
@@ -229,18 +268,7 @@ public class VistaCalendario extends Vista {
 				}
 				else {
 					ctrlPresentacion.createCalendar(year);
-					calendarYear = ctrlPresentacion.getCalendarYear();
-					labelCalendar.setText("Calendario vacacional " + calendarYear);
-					labelCalendar.setFont(new Font("Arial", Font.BOLD, 16));
-
-					buttonDeleteCal.setVisible(true);
-					buttonCreateCal.setVisible(false);
-					GregorianCalendar minSelectDate, maxSelectDate;
-					minSelectDate = new GregorianCalendar(calendarYear,0,1,0,0,0);
-					maxSelectDate = new GregorianCalendar(calendarYear,11,31,23,59,59);
-					dateChooser.setSelectableDateRange(minSelectDate.getTime(), maxSelectDate.getTime());
-					dateChooser.setEnabled(true);
-					buttonAddVacation.setEnabled(true);
+					update_view(true);
 					successfulOperationDialog("Se ha creado el calendario del anyo " + year + " ! ");
 				}
 			}
@@ -255,15 +283,7 @@ public class VistaCalendario extends Vista {
 	public void actionPerformed_buttonDeleteCal(ActionEvent event) {
 		if (confirmationDialog("Eliminar el calendario actual ? ", "Eliminar calendario") == JOptionPane.YES_OPTION) {
 			int year = calendarYear;
-			calendarYear = -1;
-			labelCalendar.setText("(No hay calendario vacacional)");
-			labelCalendar.setFont(new Font("Arial", Font.ITALIC, 16));
-			dateChooser.setCalendar(null);
-			dateChooser.setEnabled(false);
-			buttonAddVacation.setEnabled(false);
-			buttonCreateCal.setVisible(true);
-			buttonDeleteCal.setVisible(false);
-			dlm.clear();
+			update_view(false);
 			successfulOperationDialog("Se ha eliminado el calendario vacacional " + year + " ! ");
 		}
 	}
@@ -509,12 +529,12 @@ public class VistaCalendario extends Vista {
 	public void init() {
 		init_panelTop();
 		init_panelVacationInfo();
-		init_panelInfo2();
 		init_panelVacationHandler();
 		init_panelBottom();
 		init_panelTxtFieldsDialog();
 		init_frameView();
 		init_panelContents();
 		assign_listenersComponents();
+		update_view(ctrlPresentacion.existsCalendar());
 	}
 }
