@@ -379,7 +379,7 @@ public class CtrlPresentacion {
 		*/
 	
 	public void addResMAX_Turnos_por_Dia(int numD) throws IOException {
-		int idDoc = vistaDoctor.getDocId();
+		int idDoc = getIdDocAc();
 		int idRes = ctrlDoctor.getFDIRes(idDoc);
 		int idHosp = ctrlHospital.getID();
 		try {
@@ -389,7 +389,7 @@ public class CtrlPresentacion {
 	}
 	
 	public void addResMAX_Turnos_Rango(int d1, int m1, int a1, int d2, int m2, int a2, int numT) throws IOException {
-		int idDoc = vistaDoctor.getDocId();
+		int idDoc = getIdDocAc();
 		int idRes = ctrlDoctor.getFDIRes(idDoc);
 		int idHosp = ctrlHospital.getID();
 		try {
@@ -399,7 +399,7 @@ public class CtrlPresentacion {
 	}
 	
 	public void addResNOT_Dia_Mes(int diaMes) throws IOException {
-		int idDoc = vistaDoctor.getDocId();
+		int idDoc = getIdDocAc();
 		int idRes = ctrlDoctor.getFDIRes(idDoc);
 		int idHosp = ctrlHospital.getID();
 		try {
@@ -409,7 +409,7 @@ public class CtrlPresentacion {
 	}
 	
 	public void addResNOT_Dia_Semana(String diaSemana) throws IOException {
-		int idDoc = vistaDoctor.getDocId();
+		int idDoc = getIdDocAc();
 		int idRes = ctrlDoctor.getFDIRes(idDoc);
 		int idHosp = ctrlHospital.getID();
 		try {
@@ -419,7 +419,7 @@ public class CtrlPresentacion {
 	}
 	
 	public void addResNOT_Especial(String especial) throws IOException {
-		int idDoc = vistaDoctor.getDocId();
+		int idDoc = getIdDocAc();
 		int idRes = ctrlDoctor.getFDIRes(idDoc);
 		int idHosp = ctrlHospital.getID();
 		try {
@@ -429,7 +429,7 @@ public class CtrlPresentacion {
 	}
 	
 	public void addResNOT_Fecha(int d, int m, int a) throws IOException {
-		int idDoc = vistaDoctor.getDocId();
+		int idDoc = getIdDocAc();
 		int idRes = ctrlDoctor.getFDIRes(idDoc);
 		int idHosp = ctrlHospital.getID();
 		try {
@@ -439,7 +439,7 @@ public class CtrlPresentacion {
 	}
 	
 	public void addResNOT_Turno(String tipoTurno) throws IOException {
-		int idDoc = vistaDoctor.getDocId();
+		int idDoc = getIdDocAc();
 		int idRes = ctrlDoctor.getFDIRes(idDoc);
 		int idHosp = ctrlHospital.getID();
 		try {
@@ -449,7 +449,7 @@ public class CtrlPresentacion {
 	}
 	
 	public void addResXOR(ArrayList<Integer> diaXOR, ArrayList<Integer> mesXOR,  ArrayList<Integer> yearXOR, ArrayList<String> tipoTurnoXOR) throws IOException {
-		int idDoc = vistaDoctor.getDocId();
+		int idDoc = getIdDocAc();
 		int idRes = ctrlDoctor.getFDIRes(idDoc);
 		int idHosp = ctrlHospital.getID();
 		try {
