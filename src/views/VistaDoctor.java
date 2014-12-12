@@ -209,9 +209,7 @@ public class VistaDoctor {
 						JOptionPane.showMessageDialog(null, eX, "Error",
 								JOptionPane.ERROR_MESSAGE);
 					} catch (NumberFormatException nE) {
-						JOptionPane
-								.showMessageDialog(
-										null,
+						JOptionPane.showMessageDialog(null,
 										"Alguno de los factores no es un valor correcto",
 										"Error", JOptionPane.ERROR_MESSAGE);
 					}
@@ -262,7 +260,8 @@ public class VistaDoctor {
 						}
 					}
 				}
-
+					
+				ctrlPresentacion.clearDocActual();
 				ctrlPresentacion.changeView("vistaPlantillaDoctores", panelContents);
 			}
 
