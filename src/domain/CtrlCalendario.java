@@ -19,9 +19,7 @@ import data.CtrlDatosFichero;
  */
 public class CtrlCalendario {
 	private Calendario calendar;
-	private static final String[] shiftTypes = {"manana","tarde","noche"};
-	
-	
+	private static final String[] shiftTypes = {"manana","tarde","noche"};	
 	
 	//-- Constructora --//
 	/**
@@ -30,7 +28,6 @@ public class CtrlCalendario {
 	public CtrlCalendario(Calendario C) {
 		calendar = C;
 	}
-
 
 	/* Metodos publicos */
 	/** 
@@ -48,31 +45,25 @@ public class CtrlCalendario {
 	}
 	
 	public boolean addVacationDay2(GregorianCalendar date, int morningDrs, int eveningDrs, int nightDrs, String especialDate) throws IOException{
-//		try {
-			/*if(date.get(GregorianCalendar.YEAR) != calendar.getCalendarYear()) throw new IOException("La fecha del dia vacacional no corresponde al calendario actual ");
-			else */if (calendar.existsVacationDay(date)) throw new IOException("El dia vacacional ya existe");
-			else if (morningDrs < 0) throw new IOException("El numero de doctores del turno de manana no es correcto ");
-			else if (eveningDrs < 0) throw new IOException("El numero de doctores del turno de tarde no es correcto ");
-			else if (nightDrs < 0) throw new IOException("El numero de doctores del turno de noche no es correcto ");
-			// making changes
-			else {
-				calendar.addVacationDay(date);
-				calendar.getShift(date, shiftTypes[0]).setNumberOfDoctors(morningDrs);
-				calendar.getShift(date, shiftTypes[1]).setNumberOfDoctors(eveningDrs);
-				calendar.getShift(date, shiftTypes[2]).setNumberOfDoctors(nightDrs);
-				calendar.getShift(date, shiftTypes[0]).setSpecialDate(especialDate);
-				calendar.getShift(date, shiftTypes[1]).setSpecialDate(especialDate);
-				calendar.getShift(date, shiftTypes[2]).setSpecialDate(especialDate);
-				return true;
-			}
-//		}
-//		catch (IOException e) {
-//			throw new IOException(e);
-//		}
+		// checking input data
+		if (calendar.existsVacationDay(date)) throw new IOException("El dia vacacional ya existe");
+		else if (morningDrs < 0) throw new IOException("El numero de doctores del turno de manana no es correcto ");
+		else if (eveningDrs < 0) throw new IOException("El numero de doctores del turno de tarde no es correcto ");
+		else if (nightDrs < 0) throw new IOException("El numero de doctores del turno de noche no es correcto ");
+		// making changes
+		else {
+			calendar.addVacationDay(date);
+			calendar.getShift(date, shiftTypes[0]).setNumberOfDoctors(morningDrs);
+			calendar.getShift(date, shiftTypes[1]).setNumberOfDoctors(eveningDrs);
+			calendar.getShift(date, shiftTypes[2]).setNumberOfDoctors(nightDrs);
+			calendar.getShift(date, shiftTypes[0]).setSpecialDate(especialDate);
+			calendar.getShift(date, shiftTypes[1]).setSpecialDate(especialDate);
+			calendar.getShift(date, shiftTypes[2]).setSpecialDate(especialDate);
+			return true;
+		}
 	}
 	
 	public boolean modifyVacationDay(GregorianCalendar date, int morningDrs, int eveningDrs, int nightDrs, String especialDate) throws IOException{
-		try {
 			// checking input data
 			if (!calendar.existsVacationDay(date)) throw new IOException("La fecha no corresponde a ningun dia vacacional ");
 			else if (morningDrs < 0) throw new IOException("El numero de doctores del turno de manana no es correcto ");
@@ -88,14 +79,9 @@ public class CtrlCalendario {
 				calendar.getShift(date, shiftTypes[2]).setSpecialDate(especialDate);
 			}
 			return true;
-		}
-		catch (IOException e) {
-			throw new IOException(e);
-		}
 	}
 
 	public boolean deleteVacationDay(GregorianCalendar date) throws IOException {
-//		try {
 			// checking input data
 			if (!calendar.existsVacationDay(date))
 				throw new IOException("La fecha no corresponde a ningun dia vacacional ");
@@ -104,7 +90,6 @@ public class CtrlCalendario {
 				calendar.deleteVacationDay(date);
 				return true;
 			}
-//		} catch (Exception e) {throw new IOException("Se ha producido un error ");}
 	}
 
 	public int getCalendarYear() {

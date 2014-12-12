@@ -39,7 +39,7 @@ public class VistaCalendario extends Vista {
 	private JButton buttonGoBack = new JButton("Volver");
 	private JButton buttonHelp = new JButton("Ayuda");
 	//-- Labels --//
-	private JLabel labelCalendar, labelVacationList1, labelVacationHeaders;
+	private JLabel labelCalendar, labelVacationHeaders;
 	private JLabel labelMorningDrs, labelEveningDrs, labelNightDrs, labelSpecialDate;
 	//-- Text fields --//
 	private JTextField textMorningDrs = new JTextField(4);
@@ -65,16 +65,10 @@ public class VistaCalendario extends Vista {
 		buttonCreateCal.setFont(new Font("Arial", Font.BOLD, 11));
 		buttonDeleteCal.setBounds(325, 10, 170, 30);
 		buttonDeleteCal.setFont(new Font("Arial", Font.BOLD, 11));
-//		buttonDeleteCal.setVisible(false);
 		buttonImportCal.setBounds(505, 10, 170, 30);
 		buttonImportCal.setFont(new Font("Arial", Font.BOLD, 11));
-//		labelCalendar = new JLabel("(No hay calendario vacacional)");
-//		labelCalendar.setFont(new Font("Arial Italic", Font.TRUETYPE_FONT,16));
 		labelCalendar = new JLabel();
 		labelCalendar.setBounds(20, 10, 325, 30);
-		labelVacationList1 = new JLabel(String.format("%36s", "Numero de doctores:"));
-		labelVacationList1.setFont(new Font("Courier", Font.BOLD,14));
-		labelVacationList1.setBounds(20, 60, 495, 15);
 		labelVacationHeaders = new JLabel(String.format("%7s%9s%9s%9s%-7s%s", " Dia vac.","M","T","N","","Fecha espec."));
 		labelVacationHeaders.setFont(new Font("Courier", Font.BOLD,14));
 		labelVacationHeaders.setBounds(20, 75, 495, 15);
@@ -83,7 +77,6 @@ public class VistaCalendario extends Vista {
 		panelTop.add(buttonCreateCal);
 		panelTop.add(buttonImportCal);
 		panelTop.add(buttonDeleteCal);
-//		panelTop.add(labelVacationList1);
 		panelTop.add(labelVacationHeaders);
 
 		// tooltips
@@ -340,13 +333,14 @@ public class VistaCalendario extends Vista {
 					date.setTime(selectedDate);
 					// llamada a dominio
 					if (ctrlPresentacion.addVacation(date, morningDrs, eveningDrs, nightDrs, especialDate)) {
-						dateChooser.setDate(null);
 						update_listVacations();
 						successfulOperationDialog("Se ha anadido el dia vacacional " + simpleDateFormat.format(selectedDate) + " ! ");
+						dateChooser.setDate(null);
 					}
 				}
 				catch(NumberFormatException e) {rejectedOperationDialog("El numero de doctores de alguno de los turnos no es correcto ");}
 				catch(IOException e) {rejectedOperationDialog(e.getMessage());}
+				catch(Exception e) {rejectedOperationDialog("Se ha producido un error ");}
 			}
 		}
 		else {
@@ -387,6 +381,7 @@ public class VistaCalendario extends Vista {
 			catch(NumberFormatException e) {rejectedOperationDialog("El numero de doctores de alguno de los turnos no es correcto ");}
 			catch(ParseException e) {rejectedOperationDialog(e.getMessage());}
 			catch(IOException e) {rejectedOperationDialog(e.getMessage());}
+			catch(Exception e) {rejectedOperationDialog("Se ha producido un error ");}
 		}
 	}
 
@@ -423,6 +418,7 @@ public class VistaCalendario extends Vista {
 			catch(NumberFormatException e) {rejectedOperationDialog("El numero de doctores de alguno de los turnos no es correcto ");}
 			catch(ParseException e) {rejectedOperationDialog(e.getMessage());}
 			catch(IOException e) {rejectedOperationDialog(e.getMessage());}
+			catch(Exception e) {rejectedOperationDialog("Se ha producido un error ");}
 		}
 	}
 	public void actionPerformed_buttonDelVacation(ActionEvent event) {
@@ -440,7 +436,7 @@ public class VistaCalendario extends Vista {
 			catch(NumberFormatException e) {rejectedOperationDialog(e.getMessage());}
 			catch(ParseException e) {rejectedOperationDialog(e.getMessage());}
 			catch(IOException e) {rejectedOperationDialog(e.getMessage());}
-			//			catch(Exception e) {rejectedOperationDialog(e.getMessage());}
+			catch(Exception e) {rejectedOperationDialog("Se ha producido un error ");}
 		}
 		else rejectedOperationDialog("No se ha seleccionado ningun dia vacacional ");
 	}
