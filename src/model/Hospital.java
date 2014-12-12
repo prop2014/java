@@ -246,7 +246,7 @@ public class Hospital {
 	 * @param year anyo del calendario
 	 */
 	public void setCalendarYear(int year){
-		calendari = new Calendario(year);
+		calendari.setCalendarYear(year);
 	}
 	
 	/** 
@@ -296,7 +296,7 @@ public class Hospital {
 	}
 	
 	public void deleteCalendar(){
-		calendari = new Calendario();
+		calendari.setCalendarYear(-1);
 	}
 	
 	/** 

@@ -462,9 +462,12 @@ public class CtrlPresentacion {
 	//--------------------------------------------------------------------------//
 	public void createCalendar(int year) {
 		ctrlHospital.addCalendar(year);
-		ctrlCalendario = new CtrlCalendario(ctrlHospital.getCalendar());
 	}
 
+	public void deleteCalendar() {
+		ctrlHospital.deleteCalendar();
+	}
+	
 	public void saveCalendar() throws IOException {
 			ctrlCalendario.writeCalendar(ctrlHospital.getID());
 	}
@@ -494,10 +497,7 @@ public class CtrlPresentacion {
 	}
 
 	public ArrayList<String> getVacationDay(GregorianCalendar date) throws IOException {
-		try {
 			return ctrlCalendario.getVacationDay(date);
-		}
-		catch (IOException e) {throw e;}
 	}
 
 	public ArrayList<ArrayList<String>> getALLVacations() {
