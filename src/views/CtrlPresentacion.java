@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -429,4 +430,35 @@ public class CtrlPresentacion {
 	public ArrayList<ArrayList<String>> getALLVacations() {
 		return ctrlCalendario.getALLVacations();
 	}
+	
+	/** Solucion */
+	public void findSolution(int opt) throws IOException{
+		int ini = 0;
+		int fin = ctrlHospital.getDoctors().size()+1;
+		ctrlAlgorithm.generateGraf();
+		switch(opt) {
+				case 1:
+					ctrlAlgorithm.findMaxFlowFulk(ini, fin);
+					break;
+				case 2:
+					ctrlAlgorithm.findMaxFlowEk(ini, fin);
+					break;
+				case 3:
+					ctrlAlgorithm.findMaxFlowDijk(ini, fin);
+					break;
+		}
+		ctrlAlgorithm.findSolution(ini, fin);
+	}
+	public HashMap<Integer, ArrayList<String>> getAsignaciones(){
+		return ctrlAlgorithm.getDatesAssigned();
+	}
+	
+	public double getSueldoAsigned(int id) {
+		return ctrlAlgorithm.getSueldoAssigned(id);
+	}
+	
+	public ArrayList<String> getTurnosSinSol() {
+		return ctrlAlgorithm.getTurnosSinSol();
+	}
+	
 }
