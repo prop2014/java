@@ -53,7 +53,10 @@ public class CtrlDoctor {
 	public ArrayList<ArrayList<String>> loadRest(int id){
 		Doctor doct = new Doctor();
 		for(Doctor doc: Doctors){
-			if(doc.getId() == id) doct = doc;
+			if(doc.getId() == id){
+				doct = doc;
+				System.out.print("El Doctor Existe");
+			}
 		}
 		
 		return  doct.loadRest();

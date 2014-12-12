@@ -92,6 +92,8 @@ public class Doctor {
 
 			ArrayList<Restriccion> restr = new ArrayList<Restriccion>(Restricciones.size());
 			
+			restr = getRestrictions();
+			
 			ArrayList<String> Aux = new ArrayList<String>();
 			
 			int i = 0;
@@ -144,6 +146,7 @@ public class Doctor {
 				
 				case "NOT_Turno" :{
 					Aux.add(((NOT_Turno)RES).getTipoTurno()); 
+					System.out.print("Hay NOT TURNO");
 					break;
 				}
 				
@@ -174,7 +177,7 @@ public class Doctor {
 				}
 				++i;
 			}
-			return rest;
+			return  rest;
 		}
 		
 		

@@ -110,6 +110,8 @@ public class VistaNOTTurno {
 						if(checkBox1.isSelected()) ctrlPresentacion.addResNOT_Turno("manana");
 						else if (checkBox2.isSelected()) ctrlPresentacion.addResNOT_Turno("tarde");
 						else if (checkBox3.isSelected()) ctrlPresentacion.addResNOT_Turno("noche");
+						JOptionPane.showMessageDialog(null, "Restriccion creada correctamente", "Informacion",JOptionPane.INFORMATION_MESSAGE);
+						ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 					} catch (IOException eX) {
 						System.out.printf("Restriccion no creada");
 						JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 
