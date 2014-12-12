@@ -40,7 +40,7 @@ public class VistaDoctor {
 	private JScrollPane scrollPanel = new JScrollPane();
 	
 	
-	private String[] docInfo;
+	//private String[] docInfo;
 
 	// CENTER
 
@@ -192,7 +192,7 @@ public class VistaDoctor {
 
 			public void actionPerformed(ActionEvent e) {
 
-				if (docInfo[0].equals("")) {// Se a entrado para crear
+				if (ctrlPresentacion.isEmptyDocActual()) {// Se a entrado para crear
 
 					String nameDoc = textNombre.getText();
 					nameDoc = nameDoc.replaceAll(" ", "%");
@@ -219,11 +219,13 @@ public class VistaDoctor {
 				}
 
 				else {// Se a entrado para modificar
-
-					if (!docInfo[0].equals(textID.getText())
-							|| !docInfo[1].equals(textNombre.getText())
-							|| !docInfo[2].equals(textSueldo.getText())
-							|| !docInfo[3].equals(textMaxTurnos.getText())) {
+					
+					String[] docActual = ctrlPresentacion.getDocActual();
+					
+					if (!docActual.equals(textID.getText())
+							|| !docActual.equals(textNombre.getText())
+							|| !docActual.equals(textSueldo.getText())
+							|| !docActual.equals(textMaxTurnos.getText())) {
 						// Habra que comprobar si se han modificado las
 						// restricciones
 
@@ -277,21 +279,20 @@ public class VistaDoctor {
 		buttonAnadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (docInfo[0].equals("")) {// Se entra para CREAR
+				if (ctrlPresentacion.isEmptyDocActual()) {// Se entra para CREAR
 
-					String nameDoc = textNombre.getText();
-					docInfo[1] = nameDoc;
-					nameDoc = nameDoc.replaceAll(" ", "%");
+					
 					try {
-						int id = Integer.parseInt(textID.getText());
-						docInfo[0] = textID.getText();
-						int maxTurnos = Integer.parseInt(textMaxTurnos.getText());
-						docInfo[2] = textMaxTurnos.getText();
-						Double sueldo = Double.parseDouble(textSueldo.getText());
-						docInfo[3] = textSueldo.getText();
+						
+						String nameDoc = textNombre.getText();
+						nameDoc = nameDoc.replaceAll(" ", "%");
+						ctrlPresentacion.setDocActual(textID.getText(), nameDoc,  
+													textSueldo.getText(), textMaxTurnos.getText());
+						
 						if (nameDoc.isEmpty()) throw new IOException("El doctor no tiene nombre");
 						
-						ctrlPresentacion.crearDoctor(nameDoc, id, maxTurnos, sueldo);
+						ctrlPresentacion.crearDoctor(ctrlPresentacion.getNameDocAc(), ctrlPresentacion.getIdDocAc(),
+											ctrlPresentacion.getMaxTurnDocAc(), ctrlPresentacion.getSueldoDocAc());
 						ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 						
 					} catch (IOException eX) {
@@ -325,7 +326,8 @@ public class VistaDoctor {
 	
 	private void loadRest() {
 		ArrayList<ArrayList<String>> restricciones = new ArrayList<ArrayList<String>>() ;
-		if(! docInfo[0].equals(""))restricciones = ctrlPresentacion.loadRest(getDocId());
+		if(! ctrlPresentacion.isEmptyDocActual())restricciones = 
+				ctrlPresentacion.loadRest(ctrlPresentacion.getIdDocAc());
 		
 		DefaultTableModel dtm = new DefaultTableModel(datos,fila1){
 		    public boolean isCellEditable(int row, int column) {
@@ -353,9 +355,6 @@ public class VistaDoctor {
 	
 	// METODOS PUBLICOS
 
-	public int getDocId() {
-		return Integer.parseInt(docInfo[0]);
-	}
 
 	/**
 	 * @wbp.parser.entryPoint
@@ -372,9 +371,7 @@ public class VistaDoctor {
 
 	}
 
-	public void setDocInfo(String[] newDocInfo) {
-		docInfo = newDocInfo;
-	}
+	
 
 	public JPanel getPanel() {
 		return panelContents;
@@ -388,10 +385,12 @@ public class VistaDoctor {
 
 		loadRest();
 		
-		textID.setText(docInfo[0]);
-		textNombre.setText(docInfo[1]);
-		textSueldo.setText(docInfo[2]);
-		textMaxTurnos.setText(docInfo[3]);
+		String [] docAc = ctrlPresentacion.getDocActual();
+		
+		textID.setText(docAc[0]);
+		textNombre.setText(docAc[1]);
+		textSueldo.setText(docAc[2]);
+		textMaxTurnos.setText(docAc[3]);
 
 		panelContents.setVisible(true);
 	}
