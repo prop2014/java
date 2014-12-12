@@ -1,4 +1,5 @@
 package model;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -85,6 +86,97 @@ public class Doctor {
 			}
 			return restr;
 		}
+		
+		public ArrayList<ArrayList<String>> loadRest(){
+			ArrayList<ArrayList<String>> rest = new ArrayList<ArrayList<String>>();
+
+			ArrayList<Restriccion> restr = new ArrayList<Restriccion>(Restricciones.size());
+			
+			ArrayList<String> Aux = new ArrayList<String>();
+			
+			int i = 0;
+			for(Restriccion RES: restr){
+				
+				String tipo = RES.getTipo();
+				Aux.add(tipo);
+				
+				switch(tipo){
+				case "XOR":{
+					
+					/*ArrayList<Turno> listXOR = ((XOR) RES).getListTurnos();
+					for (Turno turno : listXOR){
+						GregorianCalendar fecha = turno.getDate();
+						System.out.print(fecha.get(fecha.DAY_OF_MONTH));
+						System.out.print("/" + (fecha.get(fecha.MONTH)+ 1) + "/");
+						System.out.print(fecha.get(fecha.YEAR)+ "\n");
+						//System.out.print("Full info: " + fecha + "\n");
+						System.out.print(turno.getShiftType()+"\n\n");
+						
+					}*/
+					break;
+				}
+				
+				case "NOT_Dia_Mes" :{ 
+					int  dia = ((NOT_Dia_Mes) RES).getDiaMes(); 
+					Aux.add( Integer.toString(dia));
+					break;
+				}
+				case "NOT_Dia_Semana" :{ 
+					Aux.add( ((NOT_Dia_Semana)RES).getDiaSemana());				
+					break;
+				}
+				
+				case "NOT_Especial" :{
+					Aux.add(((NOT_Especial)RES).getEspecial());	
+					break;
+				}
+				
+				case "NOT_Fecha" :{ 
+					
+					GregorianCalendar fecha = ((NOT_Fecha)RES).getFecha();
+					Aux.add( 
+							fecha.get(fecha.DAY_OF_MONTH) + "/" +
+							(fecha.get(fecha.MONTH)+1) + "/" +
+							fecha.get(fecha.YEAR)
+							);
+					break;
+				}
+				
+				case "NOT_Turno" :{
+					Aux.add(((NOT_Turno)RES).getTipoTurno()); 
+					break;
+				}
+				
+				case "MAX_Turnos_por_Dia" :{
+					int  numt = ((MAX_Turnos_por_Dia)RES).getNumTurnos(); 
+					Aux.add( Integer.toString(numt));
+					break;
+				}
+				
+				case "MAX_Dias_Rango"  :{
+					
+					MAX_Turnos_Rango N = ((MAX_Turnos_Rango)RES);
+					GregorianCalendar fechaIni = ((MAX_Turnos_Rango)RES).getFechaIni();
+					GregorianCalendar fechaFin = ((MAX_Turnos_Rango)RES).getFechaFin();
+					
+					int  numDias = ((MAX_Turnos_Rango)RES).getNumDias();
+					
+					Aux.add(  Integer.toString(numDias)+ " - " +		
+								fechaIni.get(fechaIni.DAY_OF_MONTH)+ "/" +
+								(fechaIni.get(fechaIni.MONTH) + 1) + "/" +
+								fechaIni.get(fechaIni.YEAR) + " - " +
+								fechaFin.get(fechaFin.DAY_OF_MONTH)+ "/" +
+								(fechaFin.get(fechaFin.MONTH) + 1) + "/" +
+								fechaFin.get(fechaFin.YEAR)
+								);
+					break;
+				}	
+				}
+				++i;
+			}
+			return rest;
+		}
+		
 		
 		/**
 		 * Consulta si el Doctor tiene restricciones

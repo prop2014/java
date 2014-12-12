@@ -172,6 +172,7 @@ public class CtrlPresentacion {
 		}
 		
 		case "vistaCalendario": {
+			vistaCalendario.update_view(ctrlHospital.existsCalendar());
 			contentPane.add(vistaCalendario.getPanel());
 			vistaCalendario.showPanel();
 			break;
@@ -250,6 +251,10 @@ public class CtrlPresentacion {
 		
 	}
 	
+	public ArrayList<ArrayList<String>> loadRest(int id){
+		return ctrlDoctor.loadRest(id);
+	}
+	
 	public void crearHospital(String nameHosp, Double factM, Double factT, Double factN, String pathDoc, String pathCal) throws IOException{
 		int idHosp = ctrlHospital.getFDI();
 		try {
@@ -300,7 +305,13 @@ public class CtrlPresentacion {
 	public void setDocInfo(String[] newDocInfo){
 		vistaDoctor.setDocInfo(newDocInfo);
 	}
-	  public void setId(int id, int idOld) throws IOException {
+	
+	public void setDoctor(int idDoc, String nombre, int numMax, double sueldo) throws IOException{
+		ctrlDoctor.setDoctor(idDoc, nombre, numMax, sueldo);
+		ctrlHospital.saveDataDoctors();
+		
+	}
+	 /* public void setId(int id, int idOld) throws IOException {
 	    	ctrlDoctor.setId(id, idOld);
 		    ctrlHospital.saveDataDoctors();
 		}
@@ -319,6 +330,7 @@ public class CtrlPresentacion {
 			ctrlDoctor.setSalaryTurn(sueldo, idOld);
 		    ctrlHospital.saveDataDoctors();
 		}
+		*/
 	
 	public void addResMAX_Turnos_por_Dia(int numD) throws IOException {
 		int idDoc = vistaDoctor.getDocId();
@@ -417,7 +429,7 @@ public class CtrlPresentacion {
 	
 	public boolean addVacation(GregorianCalendar date, int morningDrs, int eveningDrs, int nightDrs, String especialDate) throws IOException {
 		try {
-			return ctrlCalendario.addVacationDay2(date, morningDrs, eveningDrs, nightDrs, especialDate);
+			return ctrlCalendario.addVacationDay(date, morningDrs, eveningDrs, nightDrs, especialDate);
 		} catch (IOException e) {throw e;}
 	}
 
@@ -430,9 +442,7 @@ public class CtrlPresentacion {
 	public boolean deleteVacationDay(GregorianCalendar date) throws IOException {
 		try {
 			return ctrlCalendario.deleteVacationDay(date);
-		}
-		catch (IOException e) {throw e;}
-//		catch (Exception e) {throw e;}
+		} catch (IOException e) {throw e;}
 	}
 	
 	public int getCalendarYear() {
@@ -450,6 +460,7 @@ public class CtrlPresentacion {
 		return ctrlCalendario.getALLVacations();
 	}
 	
+
 	/** Solucion */
 	public void findSolution(int opt) throws IOException{
 		int ini = 0;
@@ -480,4 +491,7 @@ public class CtrlPresentacion {
 		return ctrlAlgorithm.getTurnosSinSol();
 	}
 	
+	public boolean existsCalendar() {
+		return ctrlHospital.existsCalendar();
+	}
 }

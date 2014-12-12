@@ -50,6 +50,15 @@ public class CtrlDoctor {
 	
 /* Metodos publicos */
 	
+	public ArrayList<ArrayList<String>> loadRest(int id){
+		Doctor doct = new Doctor();
+		for(Doctor doc: Doctors){
+			if(doc.getId() == id) doct = doc;
+		}
+		
+		return  doct.loadRest();
+	}
+	
 	/**
 	*Consultora de todos los identificadores dels doctores
 	* @return ids de los doctores
@@ -1061,7 +1070,7 @@ public class CtrlDoctor {
 		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
 	}
 
-
+ /*
 	public void setId(int id, int idOld) throws IOException {
 		int i = 0;
 		boolean done = false;
@@ -1069,8 +1078,9 @@ public class CtrlDoctor {
 			if(idOld == Doctors.get(i).getId()){
 				done = true;
 				Doctors.get(i).setId(id);
+				
 			}
-			
+			++i;
 		}
 		
 		if (!done) throw new IOException("No existe un Doctor con esta Id");
@@ -1084,8 +1094,9 @@ public class CtrlDoctor {
 			if(idOld == Doctors.get(i).getId()){
 				done = true;
 				Doctors.get(i).setName(nombre);
+				
 			}
-			
+			++i;
 		}
 		
 		if (!done) throw new IOException("No existe un Doctor con esta Id");
@@ -1099,7 +1110,9 @@ public class CtrlDoctor {
 			if(idOld == Doctors.get(i).getId()){
 				done = true;
 				Doctors.get(i).setNumMaxTurn(num);
+				
 			}
+			++i;
 			
 		}
 		
@@ -1114,11 +1127,13 @@ public class CtrlDoctor {
 			if(idOld == Doctors.get(i).getId()){
 				done = true;
 				Doctors.get(i).setSalaryTurn(sueldo);
+				
 			}
-			
+			++i;
 		}
 		
 		if (!done) throw new IOException("No existe un Doctor con esta Id");
 	    
 	}
+	*/
 }

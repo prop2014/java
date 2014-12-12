@@ -7,7 +7,6 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.text.ParseException;
 import java.io.IOException;
 import java.util.ArrayList;
 import data.CtrlDatosFichero;
@@ -19,9 +18,7 @@ import data.CtrlDatosFichero;
  */
 public class CtrlCalendario {
 	private Calendario calendar;
-	private static final String[] shiftTypes = {"manana","tarde","noche"};
-	
-	
+	private static final String[] shiftTypes = {"manana","tarde","noche"};	
 	
 	//-- Constructora --//
 	/**
@@ -30,7 +27,6 @@ public class CtrlCalendario {
 	public CtrlCalendario(Calendario C) {
 		calendar = C;
 	}
-
 
 	/* Metodos publicos */
 	/** 
@@ -47,10 +43,8 @@ public class CtrlCalendario {
 		inOut.saveDataCale(alcale, id);
 	}
 	
-	public boolean addVacationDay2(GregorianCalendar date, int morningDrs, int eveningDrs, int nightDrs, String especialDate) throws IOException{
-//		try {
-			/*if(date.get(GregorianCalendar.YEAR) != calendar.getCalendarYear()) throw new IOException("La fecha del dia vacacional no corresponde al calendario actual ");
-			else */if (calendar.existsVacationDay(date)) throw new IOException("El dia vacacional ya existe");
+	public boolean addVacationDay(GregorianCalendar date, int morningDrs, int eveningDrs, int nightDrs, String especialDate) throws IOException{
+		if (calendar.existsVacationDay(date)) throw new IOException("El dia vacacional ya existe");
 			else if (morningDrs < 0) throw new IOException("El numero de doctores del turno de manana no es correcto ");
 			else if (eveningDrs < 0) throw new IOException("El numero de doctores del turno de tarde no es correcto ");
 			else if (nightDrs < 0) throw new IOException("El numero de doctores del turno de noche no es correcto ");
@@ -65,14 +59,28 @@ public class CtrlCalendario {
 				calendar.getShift(date, shiftTypes[2]).setSpecialDate(especialDate);
 				return true;
 			}
-//		}
-//		catch (IOException e) {
-//			throw new IOException(e);
-//		}
+}
+
+	public boolean addVacationDay2(GregorianCalendar date, int morningDrs, int eveningDrs, int nightDrs, String especialDate) throws IOException{
+		// checking input data
+		if (calendar.existsVacationDay(date)) throw new IOException("El dia vacacional ya existe");
+		else if (morningDrs < 0) throw new IOException("El numero de doctores del turno de manana no es correcto ");
+		else if (eveningDrs < 0) throw new IOException("El numero de doctores del turno de tarde no es correcto ");
+		else if (nightDrs < 0) throw new IOException("El numero de doctores del turno de noche no es correcto ");
+		// making changes
+		else {
+			calendar.addVacationDay(date);
+			calendar.getShift(date, shiftTypes[0]).setNumberOfDoctors(morningDrs);
+			calendar.getShift(date, shiftTypes[1]).setNumberOfDoctors(eveningDrs);
+			calendar.getShift(date, shiftTypes[2]).setNumberOfDoctors(nightDrs);
+			calendar.getShift(date, shiftTypes[0]).setSpecialDate(especialDate);
+			calendar.getShift(date, shiftTypes[1]).setSpecialDate(especialDate);
+			calendar.getShift(date, shiftTypes[2]).setSpecialDate(especialDate);
+			return true;
+		}
 	}
 	
 	public boolean modifyVacationDay(GregorianCalendar date, int morningDrs, int eveningDrs, int nightDrs, String especialDate) throws IOException{
-		try {
 			// checking input data
 			if (!calendar.existsVacationDay(date)) throw new IOException("La fecha no corresponde a ningun dia vacacional ");
 			else if (morningDrs < 0) throw new IOException("El numero de doctores del turno de manana no es correcto ");
@@ -88,14 +96,9 @@ public class CtrlCalendario {
 				calendar.getShift(date, shiftTypes[2]).setSpecialDate(especialDate);
 			}
 			return true;
-		}
-		catch (IOException e) {
-			throw new IOException(e);
-		}
 	}
 
 	public boolean deleteVacationDay(GregorianCalendar date) throws IOException {
-//		try {
 			// checking input data
 			if (!calendar.existsVacationDay(date))
 				throw new IOException("La fecha no corresponde a ningun dia vacacional ");
@@ -104,11 +107,14 @@ public class CtrlCalendario {
 				calendar.deleteVacationDay(date);
 				return true;
 			}
-//		} catch (Exception e) {throw new IOException("Se ha producido un error ");}
 	}
 
 	public int getCalendarYear() {
 		return calendar.getCalendarYear();
+	}
+	
+	public void setCalendarYear(int year) {
+		calendar.setCalendarYear(year);
 	}
 	
 	public ArrayList<String> getVacationDay(GregorianCalendar date) throws IOException {
@@ -140,8 +146,8 @@ public class CtrlCalendario {
 		return listVacations;
 	}
 	
-	// ��� PROVISIONAL: SERA ELIMINADA Y SUSTITUIDA POR addVacationDay2 !!!
-	public void addVacationDay(int dia, int mes, int any, int numDrsManana, int numDrsTarde, int numDrsNoche, String especialManana, String especialTarde, String especialNoche) throws IOException{
+	@Deprecated
+	public void addVacationDayDeprecated(int dia, int mes, int any, int numDrsManana, int numDrsTarde, int numDrsNoche, String especialManana, String especialTarde, String especialNoche) throws IOException{
 		GregorianCalendar date = new GregorianCalendar(any,mes-1,dia);
 		try {
 			if(date.get(GregorianCalendar.YEAR) != calendar.getCalendarYear()) throw new IOException("Anyo incorrecto");
@@ -169,7 +175,7 @@ public class CtrlCalendario {
 	 * @param id identificador del Hospital
 	 * @throws IOException fichero incorrecto
 	 */
-	public void readCalendar (int id,String path) throws IOException,ParseException{
+	public void readCalendar(int id,String path) throws IOException,ParseException{
 		ArrayList<String> alcale =new ArrayList<String>();
 		Integer num = id;
 		CtrlDatosFichero inOut = new CtrlDatosFichero();
@@ -183,7 +189,7 @@ public class CtrlCalendario {
 			String fecha;
 			String special;
 
-			calendar = new Calendario(year);
+			calendar.setCalendarYear(year);
 			int j=2;
 			for (int i = 0; i < size;++i){
 				fecha=alcale.get(j);
@@ -199,7 +205,7 @@ public class CtrlCalendario {
 				numDrsNoche=Integer.parseInt(alcale.get(j));
 				++j;
 				special=alcale.get(j);
-				if(!addVacationDay2(gc,numDrsManana,numDrsTarde,numDrsNoche,special)) throw new IOException("DIA no anyadido");
+				if(!addVacationDay(gc,numDrsManana,numDrsTarde,numDrsNoche,special)) throw new IOException("DIA no anyadido");
 				++j;
 			}
 		}

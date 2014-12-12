@@ -6,7 +6,7 @@ import java.util.TreeMap;
 import java.util.Iterator;
 
 /**
- * Representa un calendario
+ * Representa un calendario vacacional
  * @author Felix Fernando Ramos Velazquez
  */
 public class Calendario {
@@ -195,5 +195,10 @@ public class Calendario {
 	 */
 	public int getNumberOfShifts() {
 		return 3*vacationDates.size();
+	}
+	
+	public void setCalendarYear(int year) {
+		vacationDates.clear(); //cabrones
+		calendarYear = year;
 	}
 }

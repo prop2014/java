@@ -70,7 +70,7 @@ public class CtrlHospital {
 	}
 	
 	public boolean existsCalendar(){
-		return hosp.isCaleEmpty();
+		return hosp.existsCalendar();
 	}
 	
 	public void deleteCalendar(){
@@ -227,7 +227,7 @@ public class CtrlHospital {
 	
 	public void saveDataCale() throws IOException{
 		ArrayList<String> alcal = new ArrayList<String>();
-		if(!hosp.isCaleEmpty()){	
+		if(hosp.existsCalendar()){	
 			Calendario calendar =hosp.getCalendario();
 			if(calendar.getNumberOfVacationDates()>0){	
 				alcal.add(Integer.toString(calendar.getCalendarYear()));
@@ -272,7 +272,7 @@ public class CtrlHospital {
 	public void guardarHospital()throws IOException{
 		saveDataHosp();
 		if(!hosp.isDocEmpty()) saveDataDoctors();
-		if(!hosp.isCaleEmpty()) saveDataCale();
+		if(hosp.existsCalendar()) saveDataCale();
 	}
 	
 	public void deleteHospital(int id) throws IOException {

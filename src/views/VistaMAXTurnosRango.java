@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 /**
@@ -110,18 +111,21 @@ public class VistaMAXTurnosRango {
 		});
 		
 		button.addActionListener(new ActionListener() {
-			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				Date data1 = dataChooser1.getDate();
 				Date data2 = dataChooser2.getDate();
 				Scanner sc1 = new Scanner(textArea.getText());
 				if (data1 != null && data2 != null && sc1.hasNextInt()) {
-					int dia1 = data1.getDay();
-					int mes1 = data1.getMonth()+1;
-					int year1 = data1.getYear();
-					int dia2 = data2.getDay();
-					int mes2 = data2.getMonth()+1;
-					int year2 = data2.getYear();
+					GregorianCalendar cal1 = new GregorianCalendar();
+				    cal1.setTime(data1);	
+					int dia1 = cal1.get(GregorianCalendar.DAY_OF_MONTH);
+					int mes1 = cal1.get(GregorianCalendar.MONTH)+1;
+					int year1 = cal1.get(GregorianCalendar.YEAR);
+					GregorianCalendar cal2 = new GregorianCalendar();
+				    cal2.setTime(data2);	
+				    int dia2 = cal2.get(GregorianCalendar.DAY_OF_MONTH);
+					int mes2 = cal2.get(GregorianCalendar.MONTH)+1;
+					int year2 = cal2.get(GregorianCalendar.YEAR);
 					int num = Integer.parseInt(textArea.getText());
 					try {
 						ctrlPresentacion.addResMAX_Turnos_Rango(dia1, mes1, year1, dia2, mes2, year2, num);

@@ -291,8 +291,8 @@ public class Hospital {
 			}
 		}
 	}
-	public boolean isCaleEmpty(){
-		return calendari.isEmpty();
+	public boolean existsCalendar(){
+		return calendari.getCalendarYear() != -1;
 	}
 	
 	public void deleteCalendar(){

@@ -346,7 +346,7 @@ public class DriverCtrlHospital {
 					System.out.print("se introduce un Turno para este ejemplo\n");
 					domain.addCalendar(2014);
 					CtrlCalendario calen= new CtrlCalendario(domain.getCalendar());
-					calen.addVacationDay(25, 12, 2014, 1, 1, 1, "navidad", "navidad","navidad");
+					calen.addVacationDayDeprecated(25, 12, 2014, 1, 1, 1, "navidad", "navidad","navidad");
 					Calendario cal = domain.getCalendar();
 					ArrayList<Turno> turns=cal.getALLShifts();
 						for(Turno t: turns){
