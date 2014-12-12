@@ -216,26 +216,31 @@ public class VistaCalendario extends Vista {
 	//******************************************************************************//
 	/* Methods of the listener interfaces */
 	public void actionPerformed_buttonCreateCal(ActionEvent event) {
-		String s = JOptionPane.showInputDialog(null, "Introducir anyo del calendario: ", "Crear calendario", JOptionPane.PLAIN_MESSAGE );
-		if ((s != null) && (s.length() > 0)) {
-			try {
-				int year = Integer.parseInt(s);
-				GregorianCalendar currentDate = new GregorianCalendar();
-				int minYear = currentDate.get(GregorianCalendar.YEAR);
-				int maxYear = currentDate.get(GregorianCalendar.YEAR) + 5;
-				if (year < minYear || year > maxYear) {
-					rejectedOperationDialog("El anyo ha de estar dentro del rango " + minYear + " - " + maxYear + " ");
+		JTextField textYear = new JTextField(6);
+		JPanel options = new JPanel();
+		options.add(new JLabel("Introducir anyo del calendario:"));
+		options.add(textYear);
+//		Object[] options = {new JLabel("Introducir anyo del calendario: "),textYear};
+		if (JOptionPane.showConfirmDialog(null, options, "Crear calendario", JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION) {
+				try {
+					int year = Integer.parseInt(textYear.getText());
+					GregorianCalendar currentDate = new GregorianCalendar();
+					int minYear = currentDate.get(GregorianCalendar.YEAR);
+					int maxYear = currentDate.get(GregorianCalendar.YEAR) + 5;
+					if (year < minYear || year > maxYear) {
+						rejectedOperationDialog("El anyo ha de estar dentro del rango " + minYear + " - " + maxYear + " ");
+					}
+					else {
+						ctrlPresentacion.createCalendar(year);
+						//					ctrlPresentacion.saveCalendar();
+						update_view(true);
+						successfulOperationDialog("Se ha creado el calendario del anyo " + year + " ! ");
+					}
 				}
-				else {
-					ctrlPresentacion.createCalendar(year);
-//					ctrlPresentacion.saveCalendar();
-					update_view(true);
-					successfulOperationDialog("Se ha creado el calendario del anyo " + year + " ! ");
-				}
-			}
-			catch(NumberFormatException e) {rejectedOperationDialog("El anyo introducido no es correcto ");}
-//			catch(IOException e) {rejectedOperationDialog("Se ha producido el siguiente error al guardar el calendario:\n" + e.getMessage());}
-			return;
+				catch(NumberFormatException e) {rejectedOperationDialog("El anyo introducido no es correcto ");}
+				//			catch(IOException e) {rejectedOperationDialog("Se ha producido el siguiente error al guardar el calendario:\n" + e.getMessage());}
+				return;
+
 		}
 		canceledOperationDialog("No se ha creado el calendario !");
 	}
@@ -296,8 +301,8 @@ public class VistaCalendario extends Vista {
 			textEveningDrs.setText("0");
 			textNightDrs.setText("0");
 			textSpecialDate.setText("");
-			Object[] dialogContents = {new JLabel("Anadir el dia vacacional " + simpleDateFormat.format(selectedDate) + " ? "), Box.createVerticalStrut(20), panelTxtFieldsDialog,Box.createVerticalStrut(20)};
-			if (JOptionPane.showConfirmDialog(null, dialogContents, "Anadir dia", JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE) == JOptionPane.OK_OPTION) {
+			Object[] options = {new JLabel("Anadir el dia vacacional " + simpleDateFormat.format(selectedDate) + " ? "), Box.createVerticalStrut(20), panelTxtFieldsDialog,Box.createVerticalStrut(20)};
+			if (JOptionPane.showConfirmDialog(null, options, "Anadir dia", JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE) == JOptionPane.OK_OPTION) {
 				try{
 					int morningDrs = Integer.parseInt(textMorningDrs.getText());
 					int eveningDrs = Integer.parseInt(textEveningDrs.getText());
@@ -337,8 +342,8 @@ public class VistaCalendario extends Vista {
 					textEveningDrs.setText(vacation.get(1));
 					textNightDrs.setText(vacation.get(2));
 					textSpecialDate.setText(vacation.get(3));
-					Object[] dialogContents = {new JLabel("Introducir los nuevos datos para el dia vacacional " + simpleDateFormat.format(date.getTime()) + ": "), Box.createVerticalStrut(20), panelTxtFieldsDialog,Box.createVerticalStrut(20)};
-					if (JOptionPane.showConfirmDialog(null, dialogContents, "Modificar dia", JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION) {
+					Object[] options = {new JLabel("Introducir los nuevos datos para el dia vacacional " + simpleDateFormat.format(date.getTime()) + ": "), Box.createVerticalStrut(20), panelTxtFieldsDialog,Box.createVerticalStrut(20)};
+					if (JOptionPane.showConfirmDialog(null, options, "Modificar dia", JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION) {
 						int morningDrs = Integer.parseInt(textMorningDrs.getText());
 						int eveningDrs = Integer.parseInt(textEveningDrs.getText());
 						int nightDrs = Integer.parseInt(textNightDrs.getText());
@@ -512,7 +517,7 @@ public class VistaCalendario extends Vista {
 		assign_listenersComponents();
 		update_view(ctrlPresentacion.existsCalendar());
 	}
-	
+
 	/**
 	 * Actualiza la vista
 	 * @param existsCalendar Indica si existe un calendario vacacional en el hospital actual
