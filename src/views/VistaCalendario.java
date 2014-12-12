@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.text.ParseException;
 import java.lang.NumberFormatException;
+import java.io.File;
 import java.io.IOException;
 
 import com.toedter.calendar.JDateChooser;
@@ -285,7 +286,21 @@ public class VistaCalendario extends Vista {
 	public void actionPerformed_buttonImportCal(ActionEvent event) {
 		if (calendarYear != -1) {
 			if (confirmationDialog("Importar un nuevo calendario y reemplazar el calendario actual ? ", "Importar calendario") == JOptionPane.CANCEL_OPTION) {
-				return;
+				JFileChooser chooser = new JFileChooser();
+				File f = chooser.getSelectedFile();
+				int returnVal = chooser.showOpenDialog(frameView);
+				if(returnVal == JFileChooser.APPROVE_OPTION) {
+					try{
+				       ctrlPresentacion.importarCalendar(f.getAbsolutePath());
+					} catch(IOException eX) {
+						JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
+
+					}
+					catch(ParseException eX) {
+						JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
+
+					}
+				 }
 			}
 		}
 		JFileChooser chooser = new JFileChooser();
