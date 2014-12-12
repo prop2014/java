@@ -87,15 +87,7 @@ public class VistaSolucion {
 		scrollDoc.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		
 		midPanel.add(scrollDoc);
-		listAsig.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Doctor Alex", "---------\t27/11/2014 M", "---------\t27/11/2014 M", "---------\t27/11/2014 M", "Doctor Oscar", "---------\t27/11/2014 M", "Doctor Axel", "---------\t27/11/2014 M", "---------\t27/11/2014 M", "Doctor Felix", "Doctor Sergi"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
+		
 		listAsig.setFont(new Font("Arial", Font.PLAIN, 13));
 		scrollDoc.setViewportView(listAsig);
 		mediumPanel.setBounds(254, 125, 150, 0);
@@ -107,17 +99,9 @@ public class VistaSolucion {
 		
 		scrollTurn.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollTurn.setPreferredSize(new Dimension(150, 10));
-		scrollTurn.setBounds(234, 35, 115, 128);
+		scrollTurn.setBounds(234, 35, 135, 128);
 		midPanel.add(scrollTurn);
-		listNoTurn.setModel(new AbstractListModel() {
-			String[] values = new String[] {"01/01/2014 M", "01/01/2014 T", "02/01/2014 M", "03/01/2014 M", "03/01/2014 N"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
+		
 		
 		
 		scrollTurn.setViewportView(listNoTurn);
@@ -126,12 +110,12 @@ public class VistaSolucion {
 		
 		
 		btnAnadirTurno.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnAnadirTurno.setBounds(234, 175, 117, 29);
+		btnAnadirTurno.setBounds(244, 175, 117, 29);
 		midPanel.add(btnAnadirTurno);
 		
 		
 		btnEliminarTurno.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnEliminarTurno.setBounds(234, 204, 117, 29);
+		btnEliminarTurno.setBounds(244, 204, 117, 29);
 		midPanel.add(btnEliminarTurno);
 		
 		JLabel lblNombreSolucin = new JLabel("Nombre Solucion:");
