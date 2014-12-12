@@ -42,6 +42,8 @@ public class CtrlPresentacion {
 	private VistaGestionSoluciones vistaGestionSoluciones;
 	private VistaSolucion vistaSolucion;
 	
+	private String[] docActual = {"","","",""};
+	
 	/* Constructora */
 	public CtrlPresentacion() {
 		init_frameView();
@@ -311,6 +313,48 @@ public class CtrlPresentacion {
 		ctrlHospital.saveDataDoctors();
 		
 	}
+	
+	public String[] getDocAtual(){
+		return docActual;	
+	
+	}
+	
+	public void setDocActual(int id, String name, double sueldo, int Maxturn){
+		
+		docActual[0] = Integer.toString(id);
+		docActual[1] = name;
+		docActual[2] = Double.toString(sueldo);
+		docActual[3] = Integer.toString(Maxturn);	
+	}
+	
+	public void clearDocActual(){
+		docActual[0] = "";
+		docActual[1] = "";
+		docActual[2] = "";
+		docActual[3] = "";			
+		
+	}
+	
+	public boolean isEmptyDocActual(){
+		return (docActual[0] == "");
+	}
+	
+	public int getIdDocAc(){
+		 return Integer.parseInt(docActual[0]);
+	}
+	public String getNameDocAc(){
+		return docActual[1];
+	}
+	
+	public double getSueldoDocAc(){
+		return Double.parseDouble(docActual[2]);
+	}
+	
+	public int getMaxTurnDocAc(){
+		return Integer.parseInt(docActual[3]);
+	}
+	
+	
 	 /* public void setId(int id, int idOld) throws IOException {
 	    	ctrlDoctor.setId(id, idOld);
 		    ctrlHospital.saveDataDoctors();
