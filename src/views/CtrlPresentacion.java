@@ -441,9 +441,7 @@ public class CtrlPresentacion {
 	public boolean deleteVacationDay(GregorianCalendar date) throws IOException {
 		try {
 			return ctrlCalendario.deleteVacationDay(date);
-		}
-		catch (IOException e) {throw e;}
-//		catch (Exception e) {throw e;}
+		} catch (IOException e) {throw e;}
 	}
 	
 	public int getCalendarYear() {
