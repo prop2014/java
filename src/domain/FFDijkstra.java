@@ -88,7 +88,7 @@ public class FFDijkstra<T> extends FordFulkerson<T> {
 			
 			Stack<Integer> cam = new Stack<Integer>();
 			int sig = t;
-			if(pred[sig] != -1) { 
+			if(size > 1 && pred[sig] != -1) { 
 				while(sig != s) {
 					cam.push(sig);
 					sig = pred[sig];

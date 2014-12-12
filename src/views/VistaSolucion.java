@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -20,7 +22,7 @@ public class VistaSolucion {
 	/* Atributos y metodos privados */
 	
 	private CtrlPresentacion ctrlPresentacion;
-	
+	private HashMap<Integer, ArrayList<String>> asign;
 
 	
 	//-- Components --//
@@ -218,11 +220,31 @@ public class VistaSolucion {
 		init_panelRightButtons();
 		assign_listenersComponents();
 	}
-	
-	private void findSolution() {
-		//listAsig.setModel(ctrlPresentacion.getAsignaciones());
-		//listAsig.setModel(ctrlPresentacion.getTurnosSinSol());
+	private void loadInformation() {
+		DefaultListModel<String> modelAsign = new DefaultListModel<String>(); 
+		DefaultListModel<String> modelNoSol = new DefaultListModel<String>(); 
+		asign = ctrlPresentacion.getAsignaciones();
+		Set<Integer> ids = asign.keySet();
+		for (Integer idDoc : ids){
+			ArrayList<String> fechasAsignedDoc = asign.get(idDoc);
+			String doctor = "Doctor " + idDoc + " Sueldo: " + ctrlPresentacion.getSueldoAsigned(idDoc);
+			modelAsign.addElement(doctor);
+			for(String st : fechasAsignedDoc){
+				modelAsign.addElement("------- " + st);
+				System.out.printf("%s\n",st);
+			}
+			//System.out.printf("Sueldo: %f\n\n", ctrlPresentacion.getSueldoAsigned(idDoc));
+		}
 		
+		listAsig.setModel(modelAsign);
+		
+		System.out.println("Turnos sin solucion:");
+		for(String st : ctrlPresentacion.getTurnosSinSol()) {
+			modelNoSol.addElement(st);
+			System.out.println(st);
+		}
+		listNoTurn.setModel(modelNoSol);
+		reloadLists();
 	}
 	
 	private void reloadLists() {
@@ -256,6 +278,8 @@ public class VistaSolucion {
 		panelContents.setVisible(false);
 	}
 	public void showPanel() {
+		loadInformation();
+		reloadLists();
 		panelContents.setVisible(true);
 	}
 	

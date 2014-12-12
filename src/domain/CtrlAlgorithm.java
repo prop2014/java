@@ -23,6 +23,8 @@ public class CtrlAlgorithm {
 	private Asignaciones resMap;
 	private ArrayList<nodoTurno> turnosSinSol;
 	private ArrayList<Integer> numSinSol;
+	private HashMap<Integer, ArrayList<String>> asignDoc;
+	private ArrayList<String> tSinSol;
 	
 	//Creadora por defecto
 	public CtrlAlgorithm(Hospital h) {
@@ -105,7 +107,7 @@ public class CtrlAlgorithm {
 	
 	//Funcion devuelve las fechas y turnos asignados de un doctor con id = id
 	public HashMap<Integer,ArrayList<String>> getDatesAssigned(){
-		HashMap<Integer, ArrayList<String>> asignDoc = new HashMap<Integer, ArrayList<String>>();
+		asignDoc = new HashMap<Integer, ArrayList<String>>();
 		ArrayList<Doctor> docs = hosp.getDoctors();
 		for(Doctor d : docs) {
 			ArrayList<String> asign = new ArrayList<String>();
@@ -128,7 +130,7 @@ public class CtrlAlgorithm {
 	
 	
 	public ArrayList<String> getTurnosSinSol(){
-		ArrayList<String> tSinSol = new ArrayList<String>();
+		tSinSol = new ArrayList<String>();
 		String fecha;
 		for(int i = 0; i < turnosSinSol.size(); ++i) {
 			nodoTurno n = turnosSinSol.get(i);
