@@ -47,13 +47,13 @@ public class VistaCalendario extends Vista {
 	private JTextField textNightDrs = new JTextField(4);
 	private JTextField textSpecialDate = new JTextField(7);
 
+	//-- Others private attributes--//
 	DefaultListModel<String> dlm = new DefaultListModel<String>();
 	private JList<String> listVacations;
 	private JScrollPane scrollPanel;
 	private JDateChooser dateChooser = new JDateChooser("dd/MM/yyyy", "##/##/##", '_');
-
-	//-- Others private attributes--//
-	private static final String pattern = "%7s%11s%9s%9s%-7s%s";	// patron formato lista dias vacacionales
+	private int calendarYear;
+	private final String pattern = "%7s%11s%9s%9s%-7s%s";	// patron formato lista dias vacacionales
 
 	/* Private Methods */
 	private void init_panelTop() {

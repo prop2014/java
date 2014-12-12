@@ -23,8 +23,6 @@ public class Vista {
 	protected static final int height = 378;	// panelContents height
 	protected static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("d 'de' MMMM 'de' yyyy", new Locale("es","ES"));
 	
-	protected static int calendarYear = -1;
-	
 	/* Constructors & protected methods */
 	protected Vista(CtrlPresentacion pCtrlPresentacion) {
 		ctrlPresentacion = pCtrlPresentacion;
