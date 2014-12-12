@@ -60,25 +60,6 @@ public class CtrlCalendario {
 				return true;
 			}
 }
-
-	public boolean addVacationDay2(GregorianCalendar date, int morningDrs, int eveningDrs, int nightDrs, String especialDate) throws IOException{
-		// checking input data
-		if (calendar.existsVacationDay(date)) throw new IOException("El dia vacacional ya existe");
-		else if (morningDrs < 0) throw new IOException("El numero de doctores del turno de manana no es correcto ");
-		else if (eveningDrs < 0) throw new IOException("El numero de doctores del turno de tarde no es correcto ");
-		else if (nightDrs < 0) throw new IOException("El numero de doctores del turno de noche no es correcto ");
-		// making changes
-		else {
-			calendar.addVacationDay(date);
-			calendar.getShift(date, shiftTypes[0]).setNumberOfDoctors(morningDrs);
-			calendar.getShift(date, shiftTypes[1]).setNumberOfDoctors(eveningDrs);
-			calendar.getShift(date, shiftTypes[2]).setNumberOfDoctors(nightDrs);
-			calendar.getShift(date, shiftTypes[0]).setSpecialDate(especialDate);
-			calendar.getShift(date, shiftTypes[1]).setSpecialDate(especialDate);
-			calendar.getShift(date, shiftTypes[2]).setSpecialDate(especialDate);
-			return true;
-		}
-	}
 	
 	public boolean modifyVacationDay(GregorianCalendar date, int morningDrs, int eveningDrs, int nightDrs, String especialDate) throws IOException{
 			// checking input data
