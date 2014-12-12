@@ -206,7 +206,7 @@ public class VistaCalendario extends Vista {
 			listVacations.setEnabled(false);
 		}
 	}
-	
+
 	/**
 	 * Obtiene la fecha del dia vacacional del objeto string pasado como parametro
 	 * @param strDate String con la info del dia vacacional
@@ -284,29 +284,18 @@ public class VistaCalendario extends Vista {
 	}
 
 	public void actionPerformed_buttonImportCal(ActionEvent event) {
-		if (calendarYear != -1) {
-			if (confirmationDialog("Importar un nuevo calendario y reemplazar el calendario actual ? ", "Importar calendario") == JOptionPane.CANCEL_OPTION) {
-				JFileChooser chooser = new JFileChooser();
-				File f = chooser.getSelectedFile();
-				int returnVal = chooser.showOpenDialog(frameView);
-				if(returnVal == JFileChooser.APPROVE_OPTION) {
-					try{
-				       ctrlPresentacion.importarCalendar(f.getAbsolutePath());
-					} catch(IOException eX) {
-						JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
-
-					}
-					catch(ParseException eX) {
-						JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
-
-					}
-				 }
+		if (!ctrlPresentacion.existsCalendar() ||
+				confirmationDialog("Importar un nuevo calendario y reemplazar el calendario actual ? ", "Importar calendario") == JOptionPane.OK_OPTION) {
+			JFileChooser fileChooser = new JFileChooser();
+			File file = fileChooser.getSelectedFile();
+			if(fileChooser.showOpenDialog(frameView) == JFileChooser.APPROVE_OPTION) {
+				try{
+					ctrlPresentacion.importarCalendar(file.getAbsolutePath());
+				}
+				catch(IOException e) {rejectedOperationDialog(e.getMessage());}
+				catch(ParseException e) {rejectedOperationDialog(e.getMessage());}
 			}
 		}
-		JFileChooser chooser = new JFileChooser();
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("Text File (.txt)", "txt");
-		chooser.setFileFilter(filter);
-		chooser.showOpenDialog(frameView);
 	}
 	//--------------------------------------------------------------------------//
 	public void actionPerformed_listVacations(ListSelectionEvent event) {
@@ -489,11 +478,11 @@ public class VistaCalendario extends Vista {
 				actionPerformed_listVacations(event);
 			}
 		});
-		
+
 		listVacations.addMouseListener(new MouseAdapter() {
-		    public void mouseClicked(MouseEvent event) {
-		    	if (event.getClickCount() == 2) actionPerformed_ModVacation (event);
-		    }
+			public void mouseClicked(MouseEvent event) {
+				if (event.getClickCount() == 2) actionPerformed_ModVacation (event);
+			}
 		});
 
 		dateChooser.getCalendarButton().addActionListener(new ActionListener() {

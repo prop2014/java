@@ -305,7 +305,8 @@ public class CtrlPresentacion {
 	}
 	
 	public void setDocInfo(String[] newDocInfo){
-		vistaDoctor.setDocInfo(newDocInfo);
+//		comento esto que da error (felix)
+//		vistaDoctor.setDocInfo(newDocInfo);
 	}
 	
 	public void setDoctor(int idDoc, String nombre, int numMax, double sueldo) throws IOException{
@@ -463,14 +464,13 @@ public class CtrlPresentacion {
 		ctrlHospital.addCalendar(year);
 		ctrlCalendario = new CtrlCalendario(ctrlHospital.getCalendar());
 	}
-	public void importarCalendar(String path){
+	
+	public void importarCalendar(String path) throws IOException, ParseException{
 		try {
 			ctrlCalendario.importarCalendario(path,ctrlHospital.getID());
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
 		}
+		catch (IOException e) {throw e;}
+		catch (ParseException e) {throw e;}
 	}
 	
 	public void saveCalendar() throws IOException {
@@ -495,6 +495,10 @@ public class CtrlPresentacion {
 		try {
 			return ctrlCalendario.deleteVacationDay(date);
 		} catch (IOException e) {throw e;}
+	}
+	
+	public boolean existsCalendar() {
+		return ctrlHospital.existsCalendar();
 	}
 	
 	public int getCalendarYear() {
@@ -541,9 +545,5 @@ public class CtrlPresentacion {
 	
 	public ArrayList<String> getTurnosSinSol() {
 		return ctrlAlgorithm.getTurnosSinSol();
-	}
-	
-	public boolean existsCalendar() {
-		return ctrlHospital.existsCalendar();
 	}
 }
