@@ -252,8 +252,8 @@ public class CtrlPresentacion {
 
 	}
 
-	public ArrayList<ArrayList<String>> loadRest(int id){
-		return ctrlDoctor.loadRest(id);
+	public ArrayList<ArrayList<String>> loadRest(){
+		return ctrlDoctor.loadRest(getIdDocAc());
 	}
 
 	public void crearHospital(String nameHosp, Double factM, Double factT, Double factN, String pathDoc, String pathCal) throws IOException{

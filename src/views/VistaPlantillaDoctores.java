@@ -209,6 +209,7 @@ import javax.swing.table.DefaultTableModel;
 						try {
 							
 							ctrlPresentacion.eliminarDoc(Integer.parseInt(id));
+							ctrlPresentacion.clearDocActual();
 						} catch (IOException e1) {
 							//Error
 						}

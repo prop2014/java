@@ -94,27 +94,28 @@ public class Doctor {
 			
 			restr = getRestrictions();
 			
-			ArrayList<String> Aux = new ArrayList<String>();
 			
-			int i = 0;
+			
+			
 			for(Restriccion RES: restr){
-				
+				ArrayList<String> Aux = new ArrayList<String>();
 				String tipo = RES.getTipo();
 				Aux.add(tipo);
 				
 				switch(tipo){
 				case "XOR":{
 					
-					/*ArrayList<Turno> listXOR = ((XOR) RES).getListTurnos();
+					ArrayList<Turno> listXOR = ((XOR) RES).getListTurnos();
+					String cadena = "* ";
 					for (Turno turno : listXOR){
 						GregorianCalendar fecha = turno.getDate();
-						System.out.print(fecha.get(fecha.DAY_OF_MONTH));
-						System.out.print("/" + (fecha.get(fecha.MONTH)+ 1) + "/");
-						System.out.print(fecha.get(fecha.YEAR)+ "\n");
-						//System.out.print("Full info: " + fecha + "\n");
-						System.out.print(turno.getShiftType()+"\n\n");
+						cadena = cadena + fecha.get(fecha.DAY_OF_MONTH) +"/" + 
+											(fecha.get(fecha.MONTH)+ 1) + "/" +
+											fecha.get(fecha.YEAR)+ " - " +
+											turno.getShiftType()+" |";
 						
-					}*/
+					}
+					
 					break;
 				}
 				
@@ -175,7 +176,7 @@ public class Doctor {
 					break;
 				}	
 				}
-				++i;
+				rest.add(Aux);
 			}
 			return  rest;
 		}

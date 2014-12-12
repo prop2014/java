@@ -325,8 +325,8 @@ public class VistaDoctor {
 	
 	private void loadRest() {
 		ArrayList<ArrayList<String>> restricciones = new ArrayList<ArrayList<String>>() ;
-		if(! ctrlPresentacion.isEmptyDocActual())restricciones = 
-				ctrlPresentacion.loadRest(ctrlPresentacion.getIdDocAc());
+		if(! ctrlPresentacion.isEmptyDocActual())
+			restricciones = ctrlPresentacion.loadRest();
 		
 		DefaultTableModel dtm = new DefaultTableModel(datos,fila1){
 		    public boolean isCellEditable(int row, int column) {
