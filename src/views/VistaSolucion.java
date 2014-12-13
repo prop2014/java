@@ -23,6 +23,7 @@ public class VistaSolucion {
 	
 	private CtrlPresentacion ctrlPresentacion;
 	private HashMap<Integer, ArrayList<String>> asign;
+	
 
 	
 	//-- Components --//
@@ -184,6 +185,52 @@ public class VistaSolucion {
 			}
 		});
 	
+		btnAnadirTurno.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					try {
+						if(listAsig.isSelectionEmpty()){ throw new IOException("Debe seleccionar un doctor"); }
+						if(listNoTurn.isSelectionEmpty()) { throw new IOException("Debe seleccionar un turno"); }
+						String selectionDoc = listAsig.getSelectedValue();
+						if(selectionDoc.contains("-")) {throw new IOException("Debe seleccionar un doctor");}
+						String selectionNoTurn = listNoTurn.getSelectedValue();
+						String[] splitDoc = selectionDoc.split(" ");
+						int idDoc = Integer.parseInt(splitDoc[1]);
+						ctrlPresentacion.addTurnToDoctor(idDoc, selectionNoTurn);
+					} catch (IOException eX) {
+						JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
+					}
+					loadInformation(2);
+				
+			}
+		});
+		
+		btnEliminarTurno.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					try {
+						if(listAsig.isSelectionEmpty()){ throw new IOException("Debe seleccionar un turno"); }
+						String selectionTurn = listAsig.getSelectedValue();
+						if(!selectionTurn.contains("-")) {throw new IOException("Debe seleccionar un turno");}
+						boolean doct = false;
+						int i = listAsig.getSelectedIndex();
+						ListModel<String> mod = listAsig.getModel();
+						String docRow = "-";
+						while(i > 0 && !doct) {
+							--i;
+							docRow= mod.getElementAt(i);
+							if(!docRow.contains("-")) {doct = true;}
+						}
+						if(!doct) throw new IOException("Doctor no encontrado");
+						String[] splitDoc = docRow.split(" ");
+						int idDoc = Integer.parseInt(splitDoc[1]);
+						ctrlPresentacion.deleteTurnFromDoctor(idDoc, selectionTurn);
+					} catch (IOException eX) {
+						JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
+					}
+					loadInformation(2);
+				
+			}
+		});
+		
 		listAsig.addListSelectionListener(new ListSelectionListener() {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
@@ -204,14 +251,15 @@ public class VistaSolucion {
 		init_panelRightButtons();
 		assign_listenersComponents();
 	}
-	private void loadInformation() {
+	private void loadInformation(int firstTime) {
 		DefaultListModel<String> modelAsign = new DefaultListModel<String>(); 
-		DefaultListModel<String> modelNoSol = new DefaultListModel<String>(); 
-		asign = ctrlPresentacion.getAsignaciones();
+		DefaultListModel<String> modelNoSol = new DefaultListModel<String>();
+		HashMap<Integer, Double> sueldos = ctrlPresentacion.getSueldoAsigned(firstTime);
+		asign = ctrlPresentacion.getAsignaciones(firstTime);
 		Set<Integer> ids = asign.keySet();
 		for (Integer idDoc : ids){
 			ArrayList<String> fechasAsignedDoc = asign.get(idDoc);
-			String doctor = "Doctor " + idDoc + " Sueldo: " + ctrlPresentacion.getSueldoAsigned(idDoc);
+			String doctor = "Doctor " + idDoc + " Sueldo: " + sueldos.get(idDoc);
 			modelAsign.addElement(doctor);
 			for(String st : fechasAsignedDoc){
 				modelAsign.addElement("------- " + st);
@@ -223,7 +271,7 @@ public class VistaSolucion {
 		listAsig.setModel(modelAsign);
 		
 		System.out.println("Turnos sin solucion:");
-		for(String st : ctrlPresentacion.getTurnosSinSol()) {
+		for(String st : ctrlPresentacion.getTurnosSinSol(firstTime)) {
 			modelNoSol.addElement(st);
 			System.out.println(st);
 		}
@@ -262,7 +310,7 @@ public class VistaSolucion {
 		panelContents.setVisible(false);
 	}
 	public void showPanel() {
-		loadInformation();
+		loadInformation(1);
 		reloadLists();
 		panelContents.setVisible(true);
 	}

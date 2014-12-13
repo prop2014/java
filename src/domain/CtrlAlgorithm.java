@@ -25,6 +25,7 @@ public class CtrlAlgorithm {
 	private ArrayList<Integer> numSinSol;
 	private HashMap<Integer, ArrayList<String>> asignDoc;
 	private ArrayList<String> tSinSol;
+	private HashMap<Integer, Double> sueldos;
 	
 	//Creadora por defecto
 	public CtrlAlgorithm(Hospital h) {
@@ -106,7 +107,7 @@ public class CtrlAlgorithm {
 	}
 	
 	//Funcion devuelve las fechas y turnos asignados de un doctor con id = id
-	public HashMap<Integer,ArrayList<String>> getDatesAssigned(){
+	public void generateDatesAsigned(){
 		asignDoc = new HashMap<Integer, ArrayList<String>>();
 		ArrayList<Doctor> docs = hosp.getDoctors();
 		for(Doctor d : docs) {
@@ -118,18 +119,20 @@ public class CtrlAlgorithm {
 			}
 			asignDoc.put(d.getId(), asign);
 		}
-		
-		return asignDoc;
 	}
 	
 	
 	//Funcion devuelve el sueldo de un doctor con id = id
-	public double getSueldoAssigned(int id){
-		return resMap.getSueldoTotal(id);
+	public void generateSueldoAsigned(){
+		sueldos = new HashMap<Integer, Double>();
+		ArrayList<Doctor> docs = hosp.getDoctors();
+		for(Doctor d : docs) {
+			sueldos.put(d.getId(), resMap.getSueldoTotal(d.getId()));
+		}
 	}
 	
 	
-	public ArrayList<String> getTurnosSinSol(){
+	public void generateTurnosSinSol(){
 		tSinSol = new ArrayList<String>();
 		String fecha;
 		for(int i = 0; i < turnosSinSol.size(); ++i) {
@@ -139,7 +142,108 @@ public class CtrlAlgorithm {
 			tSinSol.add(fecha + " " + n.getTipoTurno() + " (" + numSinSol.get(i) + ")");
 			
 		}
+	}
+	
+	public HashMap<Integer, ArrayList<String>> getDatesAsigned(){
+		return asignDoc;
+	}
+	
+	public ArrayList<String> getTurnosSinSol () {
 		return tSinSol;
+	}
+	
+	public HashMap<Integer, Double> getSueldoAsigned(){
+		return sueldos;
+	}
+	
+	public void addTurnToDoctor(int idDoc, String turnoConDoctors) throws IOException{
+		String[] parts = turnoConDoctors.split(" ");
+		String turno = parts[0]+" "+parts[1];
+		for(String t : asignDoc.get(idDoc)) {
+			if(t.equals(turno)) throw new IOException("Este doctor ya trabaja este turno");
+		}
+		/** EDIT SUELDO FROM sueldos*/
+		String tipoT = parts[1];
+		double sueldoBase = (hosp.getDoctor(idDoc)).getSalaryTurn();
+		double sueldoASumar = 0;
+		switch(tipoT) {
+			case "manana":
+				sueldoASumar = sueldoBase*hosp.getFactorM();
+				break;
+			case "tarde":
+				sueldoASumar = sueldoBase*hosp.getFactorT();
+				break;
+			case "noche":
+				sueldoASumar = sueldoBase*hosp.getFactorN();
+				break;
+		}
+		double oldSueldo = sueldos.get(idDoc);
+		sueldos.put(idDoc, oldSueldo+sueldoASumar);
+		/** ADD TO asignDoc*/
+		asignDoc.get(idDoc).add(turno);
+		/** REMOVE/EDIT FROM tSinSol*/
+		boolean modified = false;	
+		for(int i = 0; i < tSinSol.size() && !modified; ++i) {
+			String t = tSinSol.get(i);
+			if(t.equals(turnoConDoctors)) {
+				modified = true;
+				String[] parts2 = parts[2].split("[()]");
+				int numDocs = Integer.parseInt(parts2[1]);
+				tSinSol.remove(turnoConDoctors);
+				if(numDocs > 1) {
+					--numDocs;
+					tSinSol.add(turno+" "+"("+numDocs+")");
+				}
+			}
+		}
+	}
+	public void deleteTurnFromDoctor(int idDoc, String turno) throws IOException{
+		ArrayList<String> asignacionesDoc = asignDoc.get(idDoc);
+		turno = turno.replaceAll("-", "");
+		turno = turno.replaceFirst(" ", "");
+		String[] split = turno.split(" ");
+		/** EDIT SUELDO FROM sueldos*/
+		String tipoT = split[1];
+		double sueldoBase = (hosp.getDoctor(idDoc)).getSalaryTurn();
+		double sueldoADescontar = 0;
+		switch(tipoT) {
+			case "manana":
+				sueldoADescontar = sueldoBase*hosp.getFactorM();
+				break;
+			case "tarde":
+				sueldoADescontar = sueldoBase*hosp.getFactorT();
+				break;
+			case "noche":
+				sueldoADescontar = sueldoBase*hosp.getFactorN();
+				break;
+		}
+		double oldSueldo = sueldos.get(idDoc);
+		sueldos.put(idDoc, oldSueldo-sueldoADescontar);
+		/** REMOVE FROM asignDoc*/
+		boolean deleted = false;
+		for(int i = 0; i < asignacionesDoc.size() && !deleted; ++i){
+			String t = asignacionesDoc.get(i);
+			if(t.equals(turno)) {
+				asignacionesDoc.remove(t);
+				deleted = true;
+			}
+		}
+		/** ADD/EDIT TO tSinSol*/
+		boolean modified = false;
+		for(int i = 0; i < tSinSol.size() && !modified; ++i) {
+			String[] parts = (tSinSol.get(i)).split(" ");
+			String t = parts[0]+" "+parts[1];
+			if(t.equals(turno)) {
+				modified = true;
+				String[] parts2 = parts[2].split("[()]");
+				int numDocs = Integer.parseInt(parts2[1]);
+				tSinSol.remove(t);
+				++numDocs;
+				tSinSol.add(turno+" "+"("+numDocs+")");
+				
+			}
+		}
+		if(!modified) {tSinSol.add(turno+" "+"("+1+")");}
 	}
 	
 }
