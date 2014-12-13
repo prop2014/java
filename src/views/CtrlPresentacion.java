@@ -463,6 +463,7 @@ public class CtrlPresentacion {
 	//--------------------------------------------------------------------------//
 	public void createCalendar(int year) {
 		ctrlHospital.addCalendar(year);
+		ctrlDoctor.setCalendariYear(year);
 	}
 
 	public void deleteCalendar() {

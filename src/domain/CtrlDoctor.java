@@ -75,6 +75,14 @@ public class CtrlDoctor {
 	}
 	
 	/**
+	*Modificadora del year
+	* @param y: Year nuevo
+	*/	
+	public void setCalendariYear(int y) {
+		yearCalendario = y;
+	}
+	
+	/**
 	*Consultora del nombre del Doctor
 	* @param idDoc: Identificador del Doctor
 	* @return El nombre del Doctor
