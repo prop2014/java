@@ -100,7 +100,9 @@ public class CtrlCalendario {
 			for (Turno t : shifts) {
 				vacation.add(Integer.toString(t.getNumberOfDoctors())); // anade el numero de Drs. de cada turno
 			}
-			vacation.add(shifts.get(0).getSpecialDate()); // anade la fecha especial (la coge del turno de manana)
+			String special = shifts.get(0).getSpecialDate();
+			if (special.isEmpty()){ special = "-";}
+			vacation.add(special); // anade la fecha especial (la coge del turno de manana)
 			return vacation;
 		}
 		else throw new IOException("La fecha no corresponde a ningun dia vacacional ");	
@@ -196,8 +198,8 @@ public class CtrlCalendario {
 	 */
 	public void writeCalendar(int idHospital) throws IOException{
 		ArrayList<String> calendarData = new ArrayList<String>();
-		calendarData.add(Integer.toString(calendar.getNumberOfVacations()));
 		calendarData.add(Integer.toString(calendar.getCalendarYear()));
+		calendarData.add(Integer.toString(calendar.getNumberOfVacations()));	
 			if(!calendar.isEmpty()) {
 				ArrayList<GregorianCalendar> vacations = calendar.getALLVacations();
 //				ArrayList<GregorianCalendar> vacations = new ArrayList<GregorianCalendar>(calendar.getALLVacations());
