@@ -270,15 +270,14 @@ public class VistaDoctor {
 		buttonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ctrlPresentacion.clearDocActual();
-				ctrlPresentacion.changeView("vistaPlantillaDoctores",
-						panelContents);
+				ctrlPresentacion.changeView("vistaPlantillaDoctores", panelContents);
 			}
 		});
 
 		buttonAnadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (ctrlPresentacion.isEmptyDocActual()) {// Se entra para CREAR
+				//if (ctrlPresentacion.isEmptyDocActual()) {// Se entra para CREAR
 
 					
 					try {
@@ -290,8 +289,13 @@ public class VistaDoctor {
 						
 						if (nameDoc.isEmpty()) throw new IOException("El doctor no tiene nombre");
 						
-						ctrlPresentacion.crearDoctor(ctrlPresentacion.getNameDocAc(), ctrlPresentacion.getIdDocAc(),
-											ctrlPresentacion.getMaxTurnDocAc(), ctrlPresentacion.getSueldoDocAc());
+						if (ctrlPresentacion.isEmptyDocActual()){
+							ctrlPresentacion.crearDoctor(ctrlPresentacion.getNameDocAc(), ctrlPresentacion.getIdDocAc(),
+														ctrlPresentacion.getMaxTurnDocAc(), ctrlPresentacion.getSueldoDocAc());
+							
+						}
+						
+						
 						ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 						
 					} catch (IOException eX) {
@@ -302,7 +306,7 @@ public class VistaDoctor {
 										"Error", JOptionPane.ERROR_MESSAGE);
 					}
 
-				}
+				//}
 
 				
 			}
@@ -382,7 +386,7 @@ public class VistaDoctor {
 
 		loadRest();
 		
-		String [] docAc = ctrlPresentacion.getDocActual();
+		String[] docAc = ctrlPresentacion.getDocActual();
 		
 		textID.setText(docAc[0]);
 		textNombre.setText(docAc[1]);
