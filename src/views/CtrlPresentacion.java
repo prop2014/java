@@ -355,8 +355,8 @@ public class CtrlPresentacion {
 		return Integer.parseInt(docActual[3]);
 	}
 
-	public void eliminarRest(int id){
-		return ctrlDoctor.eliminarRest(id);
+	public void eliminarRest(int idRest,int idDoc) throws IOException{
+		ctrlDoctor.eliminarRestriccion(idRest,idDoc);
 	}
 	/* public void setId(int id, int idOld) throws IOException {
 	    	ctrlDoctor.setId(id, idOld);

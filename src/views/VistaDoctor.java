@@ -316,6 +316,7 @@ public class VistaDoctor {
 			public void actionPerformed(ActionEvent e) {
 				int row = tabla.getSelectedRow();
 				String id = (String) tabla.getValueAt(row, 0);
+				
 				Object[] options = {"Aceptar", "Cancelar"};
 				int option = JOptionPane.showOptionDialog(null,
 						"Esta seguro de que quiere eliminar la restriccion de id "
@@ -329,14 +330,11 @@ public class VistaDoctor {
 				
 				
 				if(option == JOptionPane.YES_OPTION){
-
-					 
 					try {
-						
-						ctrlPresentacion.eliminarRest(id);
-						
+						ctrlPresentacion.eliminarRest(Integer.parseInt(id),Integer.parseInt(ctrlPresentacion.getNameDocAc()));
 					} catch (IOException e1) {
-						//Error
+						
+						e1.printStackTrace();
 					}
 					loadRest();
 				}
@@ -346,7 +344,7 @@ public class VistaDoctor {
 
 	
 
-
+	}
 	
 	private void loadRest() {
 		ArrayList<ArrayList<String>> restricciones = new ArrayList<ArrayList<String>>() ;
