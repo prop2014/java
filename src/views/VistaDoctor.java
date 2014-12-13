@@ -58,7 +58,7 @@ public class VistaDoctor {
 	private JButton buttonEliminar = new JButton(
 			"<html><CENTER>Eliminar<br/>Restriccion</CENTER>");
 	private JButton buttonAnadir = new JButton(
-			"<html><CENTER>Añadir<br/>Restriccion</CENTER>");
+			"<html><CENTER>Anadir<br/>Restriccion</CENTER>");
 	private JButton buttonGuardar = new JButton(
 			"<html><CENTER>Guardar<br/>cambios</CENTER>");
 	private JButton buttonVolver = new JButton("Volver");
