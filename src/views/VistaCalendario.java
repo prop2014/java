@@ -236,13 +236,13 @@ public class VistaCalendario extends Vista {
 					}
 					else {
 						ctrlPresentacion.createCalendar(year);
-						//					ctrlPresentacion.saveCalendar();
+						ctrlPresentacion.saveCalendar();
 						update_view(true);
 						successfulOperationDialog("Se ha creado el calendario del anyo " + year + " ! ");
 					}
 				}
 				catch(NumberFormatException e) {rejectedOperationDialog("El anyo introducido no es correcto ");}
-				//			catch(IOException e) {rejectedOperationDialog("Se ha producido el siguiente error al guardar el calendario:\n" + e.getMessage());}
+				catch(IOException e) {rejectedOperationDialog("Se ha producido el siguiente error al guardar el calendario:\n" + e.getMessage());}
 				return;
 
 		}
