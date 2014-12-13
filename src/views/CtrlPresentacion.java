@@ -275,6 +275,7 @@ public class CtrlPresentacion {
 		ctrlCalendario = new CtrlCalendario(ctrlHospital.getCalendar());
 		ctrlCalendario.readCalendar(idHosp, null);
 		ctrlDoctor = new CtrlDoctor(ctrlHospital.getDoctors(), ctrlCalendario.getCalendarYear());
+		ctrlDoctor.addResData(idHosp, null);
 		ctrlAlgorithm = new CtrlAlgorithm(ctrlHospital.getHospital());
 
 	}
