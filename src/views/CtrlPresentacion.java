@@ -305,10 +305,7 @@ public class CtrlPresentacion {
 		ctrlHospital.saveDataDoctors();
 	}
 
-	public void setDocInfo(String[] newDocInfo){
-		//		comento esto que da error (felix)
-		//		vistaDoctor.setDocInfo(newDocInfo);
-	}
+	
 
 	public void setDoctor(int idDoc, String nombre, int numMax, double sueldo) throws IOException{
 		ctrlDoctor.setDoctor(idDoc, nombre, numMax, sueldo);
@@ -358,7 +355,9 @@ public class CtrlPresentacion {
 		return Integer.parseInt(docActual[3]);
 	}
 
-
+	public void eliminarRest(int id){
+		return ctrlDoctor.eliminarRest(id);
+	}
 	/* public void setId(int id, int idOld) throws IOException {
 	    	ctrlDoctor.setId(id, idOld);
 		    ctrlHospital.saveDataDoctors();

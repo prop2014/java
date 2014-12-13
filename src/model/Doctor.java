@@ -99,6 +99,8 @@ public class Doctor {
 			
 			for(Restriccion RES: restr){
 				ArrayList<String> Aux = new ArrayList<String>();
+				int id = RES.getIdRestriccion();
+				Aux.add( Integer.toString(id));
 				String tipo = RES.getTipo();
 				Aux.add(tipo);
 				
