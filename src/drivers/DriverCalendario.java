@@ -163,7 +163,7 @@ public class DriverCalendario {
 						printDate(date);
 						System.out.println(" al calendario c1!\n");
 						System.out.println("-- Dias vacacionales del calendario c1 --");
-						printVacationDayList(c1.getALLVacationDates());
+						printVacationDayList(c1.getALLVacations());
 					}
 					else {
 						System.out.print("\nEl dia vacacional ");
@@ -184,7 +184,7 @@ public class DriverCalendario {
 			case 5:{
 				System.out.println("5: deleteVacationDay(GregorianCalendar date)\n");
 				System.out.println("-- Dias vacacionales del calendario c1 --");
-				printVacationDayList(c1.getALLVacationDates());
+				printVacationDayList(c1.getALLVacations());
 				boolean gotoMainMenu = false;
 				while(!gotoMainMenu){
 					GregorianCalendar date = new GregorianCalendar();
@@ -201,7 +201,7 @@ public class DriverCalendario {
 						System.out.println(" no existe!\n");
 					}
 					System.out.println("-- Dias vacacionales del calendario c1 --");
-					printVacationDayList(c1.getALLVacationDates());
+					printVacationDayList(c1.getALLVacations());
 					System.out.println("Eliminar otro dia vacacional? {s|n}: \n");
 					answer = sc.next();
 					while (!(answer.equals("s") || answer.equals("n"))) {
@@ -318,15 +318,15 @@ public class DriverCalendario {
 			case 13:{
 				System.out.println("13: ArrayList<GregorianCalendar> getALLVacationDates()\n");
 				System.out.println("-- Dias vacacionales del calendario c1 --");
-				printVacationDayList(c1.getALLVacationDates());
+				printVacationDayList(c1.getALLVacations());
 				System.out.println("-- Dias vacacionales del calendario c2 --");
-				printVacationDayList(c2.getALLVacationDates());
+				printVacationDayList(c2.getALLVacations());
 				break;
 			}
 			case 14:{
 				System.out.println("14: getNumberOfVacationDays()\n");
-				System.out.println("Numero de dias vacacionales del calendario c1: " + c1.getNumberOfVacationDates());
-				System.out.println("Numero de dias vacacionales del calendario c2: " + c2.getNumberOfVacationDates() + "\n");
+				System.out.println("Numero de dias vacacionales del calendario c1: " + c1.getNumberOfVacations());
+				System.out.println("Numero de dias vacacionales del calendario c2: " + c2.getNumberOfVacations() + "\n");
 				break;
 			}
 			case 15:{

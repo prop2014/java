@@ -182,7 +182,7 @@ public class Calendario {
 	 * Consultora de todas las fechas del calendario vacacional
 	 * @return Lista con todas las fechas
 	 */
-	public ArrayList<GregorianCalendar> getALLVacationDates() {
+	public ArrayList<GregorianCalendar> getALLVacations() {
 		ArrayList<GregorianCalendar> datesList = new ArrayList<GregorianCalendar>();
 		Iterator<Integer> it = vacationDates.keySet().iterator();		
 		while (it.hasNext()) 
@@ -194,7 +194,7 @@ public class Calendario {
 	 * Consultora del numero total de dias vacacionales
 	 * @return El numero total de dias
 	 */
-	public int getNumberOfVacationDates() {
+	public int getNumberOfVacations() {
 		return vacationDates.size();
 	}
 

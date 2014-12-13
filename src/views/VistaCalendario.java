@@ -140,7 +140,7 @@ public class VistaCalendario extends Vista {
 		textMorningDrs.setHorizontalAlignment(JTextField.RIGHT);
 		textEveningDrs.setHorizontalAlignment(JTextField.RIGHT);
 		textNightDrs.setHorizontalAlignment(JTextField.RIGHT);
-		String[] specials = {"","navidad","noche buena", "noche vieja", "semana santa"};
+		String[] specials = {"","navidad","noche_buena", "noche_vieja", "semana_santa"};
 		comboSpecialDate = new JComboBox<String>(specials);
 		comboSpecialDate.setBackground(Color.white);
 
@@ -300,12 +300,10 @@ public class VistaCalendario extends Vista {
 			textMorningDrs.setForeground(Color.black);
 			textEveningDrs.setForeground(Color.black);
 			textNightDrs.setForeground(Color.black);
-//			textSpecialDate.setForeground(Color.black);
 			comboSpecialDate.setForeground(Color.black);
 			textMorningDrs.setText("0");
 			textEveningDrs.setText("0");
 			textNightDrs.setText("0");
-//			textSpecialDate.setText("");
 			comboSpecialDate.setSelectedIndex(0);
 			Object[] options = {new JLabel("Anadir el dia vacacional " + simpleDateFormat.format(selectedDate) + " ? "), Box.createVerticalStrut(20), panelTxtFieldsDialog,Box.createVerticalStrut(20)};
 			if (JOptionPane.showConfirmDialog(null, options, "Anadir dia", JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE) == JOptionPane.OK_OPTION) {
@@ -313,7 +311,7 @@ public class VistaCalendario extends Vista {
 					int morningDrs = Integer.parseInt(textMorningDrs.getText());
 					int eveningDrs = Integer.parseInt(textEveningDrs.getText());
 					int nightDrs = Integer.parseInt(textNightDrs.getText());
-					String especialDate = comboSpecialDate.getSelectedItem().toString().replace(' ', '_');
+					String especialDate = comboSpecialDate.getSelectedItem().toString();
 					GregorianCalendar date = new GregorianCalendar();
 					date.setTime(selectedDate);
 					// llamada a dominio
@@ -347,13 +345,13 @@ public class VistaCalendario extends Vista {
 					textMorningDrs.setText(vacation.get(0));
 					textEveningDrs.setText(vacation.get(1));
 					textNightDrs.setText(vacation.get(2));
-					comboSpecialDate.setSelectedItem(vacation.get(3).replace('_', ' '));
+					comboSpecialDate.setSelectedItem(vacation.get(3));
 					Object[] options = {new JLabel("Introducir los nuevos datos para el dia vacacional " + simpleDateFormat.format(date.getTime()) + ": "), Box.createVerticalStrut(20), panelTxtFieldsDialog,Box.createVerticalStrut(20)};
 					if (JOptionPane.showConfirmDialog(null, options, "Modificar dia", JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION) {
 						int morningDrs = Integer.parseInt(textMorningDrs.getText());
 						int eveningDrs = Integer.parseInt(textEveningDrs.getText());
 						int nightDrs = Integer.parseInt(textNightDrs.getText());
-						String especialDate = comboSpecialDate.getSelectedItem().toString().replace(' ', '_');
+						String especialDate = comboSpecialDate.getSelectedItem().toString();
 						// llamada a dominio
 						if (ctrlPresentacion.modifyVacation(date, morningDrs, eveningDrs, nightDrs, especialDate)) {
 							update_listVacations();

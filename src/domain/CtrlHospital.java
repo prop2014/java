@@ -229,10 +229,10 @@ public class CtrlHospital {
 		ArrayList<String> alcal = new ArrayList<String>();
 		if(hosp.existsCalendar()){	
 			Calendario calendar =hosp.getCalendario();
-			if(calendar.getNumberOfVacationDates()>0){	
+			if(calendar.getNumberOfVacations()>0){	
 				alcal.add(Integer.toString(calendar.getCalendarYear()));
-				alcal.add(Integer.toString(calendar.getNumberOfVacationDates()));
-				ArrayList<GregorianCalendar> cal = calendar.getALLVacationDates();
+				alcal.add(Integer.toString(calendar.getNumberOfVacations()));
+				ArrayList<GregorianCalendar> cal = calendar.getALLVacations();
 				ArrayList<Turno> turns =new ArrayList<Turno>();
 				for(int i=0;i<cal.size();++i){
 					turns=calendar.getShiftsOfADay(cal.get(i));
