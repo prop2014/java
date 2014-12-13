@@ -525,15 +525,27 @@ public class CtrlPresentacion {
 		}
 		ctrlAlgorithm.findSolution(ini, fin);
 	}
-	public HashMap<Integer, ArrayList<String>> getAsignaciones(){
-		return ctrlAlgorithm.getDatesAssigned();
+	
+	public HashMap<Integer, ArrayList<String>> getAsignaciones(int firstTime){
+		if(firstTime == 1) ctrlAlgorithm.generateDatesAsigned();
+		return ctrlAlgorithm.getDatesAsigned();
 	}
 
-	public double getSueldoAsigned(int id) {
-		return ctrlAlgorithm.getSueldoAssigned(id);
+	public HashMap<Integer, Double> getSueldoAsigned(int firstTime) {
+		if(firstTime == 1) ctrlAlgorithm.generateSueldoAsigned();
+		return ctrlAlgorithm.getSueldoAsigned();
 	}
 
-	public ArrayList<String> getTurnosSinSol() {
+	public ArrayList<String> getTurnosSinSol(int firstTime) {
+		if(firstTime == 1) ctrlAlgorithm.generateTurnosSinSol();
 		return ctrlAlgorithm.getTurnosSinSol();
+	}
+	
+	public void addTurnToDoctor(int idDoc, String selectionNoTurn) throws IOException{
+		ctrlAlgorithm.addTurnToDoctor(idDoc, selectionNoTurn);
+	}
+	
+	public void deleteTurnFromDoctor(int idDoc, String turno) throws IOException{
+		ctrlAlgorithm.deleteTurnFromDoctor(idDoc, turno);
 	}
 }
