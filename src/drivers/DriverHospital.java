@@ -69,7 +69,7 @@ public class DriverHospital {
 			}
 		}
 		Calendario cal = hosp.getCalendario();
-		if(cal.getNumberOfVacationDates()==0) System.out.printf("Actualment l'Hospital no te calendari\n");
+		if(cal.getNumberOfVacations()==0) System.out.printf("Actualment l'Hospital no te calendari\n");
 		else {
 			System.out.printf("El calendari te %d Turns Vacacionals\n",cal.getNumberOfShifts());
 			ArrayList<Turno> alturno = cal.getALLShifts();

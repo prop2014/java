@@ -18,7 +18,8 @@ import data.CtrlDatosFichero;
  */
 public class CtrlCalendario {
 	private Calendario calendar;
-	private static final String[] shiftTypes = {"manana","tarde","noche"};	
+	private static final String[] shiftTypes = {"manana","tarde","noche"};
+	private CtrlDatosFichero ctrlDatosFichero = new CtrlDatosFichero();
 
 	//-- Constructora --//
 	/**
@@ -106,7 +107,7 @@ public class CtrlCalendario {
 	}
 
 	public ArrayList<ArrayList<String>> getALLVacations() {
-		ArrayList<GregorianCalendar> vacations = calendar.getALLVacationDates();
+		ArrayList<GregorianCalendar> vacations = calendar.getALLVacations();
 		ArrayList<ArrayList<String>> listVacations = new ArrayList<ArrayList<String>>();
 		SimpleDateFormat sdf = new SimpleDateFormat("d-MMM", new Locale("es","ES"));
 		for (GregorianCalendar date : vacations) {
@@ -146,17 +147,8 @@ public class CtrlCalendario {
 		}
 	}
 	
-	public void importCalendar(String path,int id) throws IOException, ParseException {
-		ArrayList<String> listVacations = new ArrayList<String>();
-		CtrlDatosFichero inOut = new CtrlDatosFichero();
-		listVacations = inOut.getDataCale(id, path);
-		inOut.saveDataCale(listVacations, id);
-	}
-	
-	/** Crea un calendario comprobando errores de fechas
-	 * @param id identificador del Hospital
-	 * @throws IOException fichero incorrecto
-	 */
+	/* Reading and Writing */	
+
 	public void readCalendar(int id,String path) throws IOException,ParseException{
 		ArrayList<String> alcale =new ArrayList<String>();
 		Integer num = id;
@@ -197,47 +189,81 @@ public class CtrlCalendario {
 		}*/
 	}
 
-	public void writeCalendar(int id) throws IOException{
-		ArrayList<String> alcal = new ArrayList<String>();
-		if(calendar.getNumberOfVacationDates()>0){	
-			alcal.add(Integer.toString(calendar.getCalendarYear()));
-			alcal.add(Integer.toString(calendar.getNumberOfVacationDates()));
-			ArrayList<GregorianCalendar> cal = calendar.getALLVacationDates();
-			ArrayList<Turno> turns =new ArrayList<Turno>();
-			for(int i=0;i<cal.size();++i){
-				turns=calendar.getShiftsOfADay(cal.get(i));
-				int numDrsManana=0,numDrsTarde=0,numDrsNoche=0;
-				String especialm = null;
-				String fecha=null;
-				for(int j=0;j<turns.size();++j){
-					Turno t=turns.get(j);
-					GregorianCalendar gc=t.getDate();
-					SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-					fecha =sdf.format(gc.getTime());
-					if(t.getShiftType().equals("manana")){
-						numDrsManana=t.getNumberOfDoctors();
-						especialm=t.getSpecialDate();
-						if (especialm.equals("")) {
-							especialm = "-";
-						}
-					}
-					else if(t.getShiftType().equals("tarde")){
-						numDrsTarde=t.getNumberOfDoctors();
-
-					}
-					else if(t.getShiftType().equals("noche")){
-						numDrsNoche=t.getNumberOfDoctors();
-
-					}
+	/**
+	 * Guarda el contenido del  calendario en el fichero de texto del hospital correspondiente
+	 * @param idHospital Identificador del Hospital
+	 * @throws IOException fichero incorrecto
+	 */
+	public void writeCalendar(int idHospital) throws IOException{
+		ArrayList<String> calendarData = new ArrayList<String>();
+		calendarData.add(Integer.toString(calendar.getNumberOfVacations()));
+		calendarData.add(Integer.toString(calendar.getCalendarYear()));
+			if(!calendar.isEmpty()) {
+				ArrayList<GregorianCalendar> vacations = calendar.getALLVacations();
+//				ArrayList<GregorianCalendar> vacations = new ArrayList<GregorianCalendar>(calendar.getALLVacations());
+				SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+				for (GregorianCalendar date : vacations) {
+					calendarData.add(sdf.format(date.getTime()));
+					calendarData.addAll(getVacationDay(date));
+//					calendarData.addAll(new ArrayList<String>(getVacationDay(date)));
 				}
-				alcal.add(fecha);
-				alcal.add(Integer.toString(numDrsManana));
-				alcal.add(Integer.toString(numDrsTarde));
-				alcal.add(Integer.toString(numDrsNoche));
-				alcal.add(especialm);
 			}
-		}
+
+		ctrlDatosFichero.saveDataCale(calendarData, idHospital);
+	}
+	
+//	public void writeCalendar(int idHospital) throws IOException{
+//		ArrayList<String> alcal = new ArrayList<String>();
+//		if(calendar.getNumberOfVacationDates()>0){	
+//			alcal.add(Integer.toString(calendar.getCalendarYear()));
+//			alcal.add(Integer.toString(calendar.getNumberOfVacationDates()));
+//			ArrayList<GregorianCalendar> cal = calendar.getALLVacationDates();
+//			ArrayList<Turno> turns =new ArrayList<Turno>();
+//			for(int i=0;i<cal.size();++i){
+//				turns=calendar.getShiftsOfADay(cal.get(i));
+//				int numDrsManana=0,numDrsTarde=0,numDrsNoche=0;
+//				String especialm = null;
+//				String fecha=null;
+//				for(int j=0;j<turns.size();++j){
+//					Turno t=turns.get(j);
+//					GregorianCalendar gc=t.getDate();
+//					SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+//					fecha =sdf.format(gc.getTime());
+//					if(t.getShiftType().equals("manana")){
+//						numDrsManana=t.getNumberOfDoctors();
+//						especialm=t.getSpecialDate();
+//						if (especialm.equals("")) {
+//							especialm = "-";
+//						}
+//					}
+//					else if(t.getShiftType().equals("tarde")){
+//						numDrsTarde=t.getNumberOfDoctors();
+//
+//					}
+//					else if(t.getShiftType().equals("noche")){
+//						numDrsNoche=t.getNumberOfDoctors();
+//
+//					}
+//				}
+//				alcal.add(fecha);
+//				alcal.add(Integer.toString(numDrsManana));
+//				alcal.add(Integer.toString(numDrsTarde));
+//				alcal.add(Integer.toString(numDrsNoche));
+//				alcal.add(especialm);
+//			}
+//		}
+//		CtrlDatosFichero inOut = new CtrlDatosFichero();
+//		inOut.saveDataCale(alcal, idHospital);
+//	}
+	
+	/** Crea un calendario comprobando errores de fechas
+	 * @param id identificador del Hospital
+	 * @throws IOException fichero incorrecto
+	 */
+	public void importCalendar(String path,int id) throws IOException, ParseException {
+		ArrayList<String> listVacations = new ArrayList<String>();
 		CtrlDatosFichero inOut = new CtrlDatosFichero();
-		inOut.saveDataCale(alcal, id);
+		listVacations = inOut.getDataCale(id, path);
+		inOut.saveDataCale(listVacations, id);
 	}
 }
