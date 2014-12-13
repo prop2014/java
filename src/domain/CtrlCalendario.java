@@ -157,10 +157,10 @@ public class CtrlCalendario {
 	 * @throws IOException
 	 */
 	public void readCalendar(int idHospital, String path) throws IOException, ParseException{
+		// llamada a datos
 		if(ctrlDatosFichero.existsCalendar(idHospital)){
-			// llamada a datos
 			ArrayList<String> calendarData = ctrlDatosFichero.getDataCale(idHospital, path);
-			//			ArrayList<String> calendarData = new ArrayList<String>(ctrlDatosFichero.getDataCale(idHospital, path));
+//			ArrayList<String> calendarData = new ArrayList<String>(ctrlDatosFichero.getDataCale(idHospital, path));
 			int calendarYear = Integer.parseInt(calendarData.get(0));
 			if (calendarYear != -1) {
 				calendar.setCalendarYear(calendarYear);
@@ -168,16 +168,14 @@ public class CtrlCalendario {
 				for (int i=0,j=2; i<numberOfVacations; ++i) {
 					// getting date
 					String strDate = calendarData.get(j++);
-					int d, M, y;
-					d = Integer.parseInt(strDate.substring(0, 2));
-					M = Integer.parseInt(strDate.substring(3, 5));
-					y = Integer.parseInt(strDate.substring(6));
+					int d = Integer.parseInt(strDate.substring(0, 2));
+					int M = Integer.parseInt(strDate.substring(3, 5));
+					int y = Integer.parseInt(strDate.substring(6));
 					GregorianCalendar date = new GregorianCalendar(y,M-1,d,0,0,0);
 					// getting number of drs.
-					int morningDrs, eveningDrs, nightDrs;
-					morningDrs = Integer.parseInt(calendarData.get(j++));
-					eveningDrs = Integer.parseInt(calendarData.get(j++));
-					nightDrs = Integer.parseInt(calendarData.get(j++));
+					int morningDrs = Integer.parseInt(calendarData.get(j++));
+					int eveningDrs = Integer.parseInt(calendarData.get(j++));
+					int nightDrs = Integer.parseInt(calendarData.get(j++));
 					// getting special date
 					String specialDate = calendarData.get(j++);
 					if (specialDate.equals("-")) specialDate = "";
