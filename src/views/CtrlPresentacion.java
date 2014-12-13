@@ -356,8 +356,13 @@ public class CtrlPresentacion {
 	}
 
 	public void eliminarRest(int idRest,int idDoc) throws IOException{
+		int idHosp = ctrlHospital.getID();
 		ctrlDoctor.eliminarRestriccion(idRest,idDoc);
+		ctrlDoctor.saveDataRes(idHosp);
 	}
+	
+	
+	
 	/* public void setId(int id, int idOld) throws IOException {
 	    	ctrlDoctor.setId(id, idOld);
 		    ctrlHospital.saveDataDoctors();
