@@ -140,7 +140,7 @@ public class VistaCalendario extends Vista {
 		textMorningDrs.setHorizontalAlignment(JTextField.RIGHT);
 		textEveningDrs.setHorizontalAlignment(JTextField.RIGHT);
 		textNightDrs.setHorizontalAlignment(JTextField.RIGHT);
-		String[] specials = {"","navidad","noche_buena", "noche_vieja", "semana_santa"};
+		String[] specials = {"-","navidad","noche_buena", "noche_vieja", "semana_santa"};
 		comboSpecialDate = new JComboBox<String>(specials);
 		comboSpecialDate.setBackground(Color.white);
 
@@ -171,7 +171,7 @@ public class VistaCalendario extends Vista {
 				String morningDrs = vacationDay.get(1);
 				String eveningDrs = vacationDay.get(2);
 				String nightDrs = vacationDay.get(3);
-				String especialDate = vacationDay.get(4).replace('_', ' ');
+				String especialDate = (vacationDay.get(4).equals("-")) ? "" : vacationDay.get(4).replace('_', ' ');
 				dlm.addElement(String.format(pattern, date, morningDrs, eveningDrs, nightDrs,"", especialDate));
 			}
 		}
@@ -346,6 +346,9 @@ public class VistaCalendario extends Vista {
 					textEveningDrs.setText(vacation.get(1));
 					textNightDrs.setText(vacation.get(2));
 					comboSpecialDate.setSelectedItem(vacation.get(3));
+//					System.out.println("especial: " + vacation.get(3));
+//					if (!vacation.equals("-")) comboSpecialDate.setSelectedItem(vacation.get(3));				
+//					else comboSpecialDate.setSelectedIndex(0);
 					Object[] options = {new JLabel("Introducir los nuevos datos para el dia vacacional " + simpleDateFormat.format(date.getTime()) + ": "), Box.createVerticalStrut(20), panelTxtFieldsDialog,Box.createVerticalStrut(20)};
 					if (JOptionPane.showConfirmDialog(null, options, "Modificar dia", JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION) {
 						int morningDrs = Integer.parseInt(textMorningDrs.getText());
