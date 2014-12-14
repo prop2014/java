@@ -474,7 +474,7 @@ public class CtrlPresentacion {
 	}
 
 	public void importCalendar(String path) throws IOException, ParseException {
-		ctrlCalendario.importCalendar(path,ctrlHospital.getID());
+		ctrlCalendario.importCalendar(ctrlHospital.getID(), path);
 	}
 
 	public boolean addVacation(GregorianCalendar date, int morningDrs, int eveningDrs, int nightDrs, String especialDate) throws IOException {

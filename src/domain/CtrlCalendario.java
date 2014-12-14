@@ -39,7 +39,7 @@ public class CtrlCalendario {
 
 	public boolean addVacationDay(GregorianCalendar date, int morningDrs, int eveningDrs, int nightDrs, String especialDate) throws IOException{
 		// checking input data
-		if (calendar.existsVacationDay(date)) throw new IOException("El dia vacacional ya existe");
+		if (calendar.existsVacationDay(date)) throw new IOException("El dia vacacional ya existe ");
 		else if (morningDrs < 0) throw new IOException("El numero de doctores del turno de manana no es correcto ");
 		else if (eveningDrs < 0) throw new IOException("El numero de doctores del turno de tarde no es correcto ");
 		else if (nightDrs < 0) throw new IOException("El numero de doctores del turno de noche no es correcto ");
@@ -128,11 +128,11 @@ public class CtrlCalendario {
 	public void addVacationDayDeprecated(int dia, int mes, int any, int numDrsManana, int numDrsTarde, int numDrsNoche, String especialManana, String especialTarde, String especialNoche) throws IOException{
 		GregorianCalendar date = new GregorianCalendar(any,mes-1,dia);
 		try {
-			if(date.get(GregorianCalendar.YEAR) != calendar.getCalendarYear()) throw new IOException("Anyo incorrecto");
+			if(date.get(GregorianCalendar.YEAR) != calendar.getCalendarYear()) throw new IOException("Anyo incorrecto ");
 			else if (calendar.existsVacationDay(date)) throw new IOException("El dia vacacional ya existe");
-			else if (numDrsManana < 0) throw new IOException("El numero de doctores del turno de manana no es correcto");
-			else if (numDrsTarde < 0) throw new IOException("El numero de doctores del turno de tarde no es correcto");
-			else if (numDrsNoche < 0) throw new IOException("El numero de doctores del turno de noche no es correcto");
+			else if (numDrsManana < 0) throw new IOException("El numero de doctores del turno de manana no es correcto ");
+			else if (numDrsTarde < 0) throw new IOException("El numero de doctores del turno de tarde no es correcto ");
+			else if (numDrsNoche < 0) throw new IOException("El numero de doctores del turno de noche no es correcto ");
 			// making changes
 			else {
 				calendar.addVacationDay(date);
@@ -151,7 +151,7 @@ public class CtrlCalendario {
 
 	/* Reading and Writing */
 	/**
-	 * Crea un calendario con el contenido del fichero de texto y lo asigna al hospital actual
+	 * Lee el calendario contenido en el fichero de texto
 	 * @param idHospital Identificador del Hospital
 	 * @param path Ruta del fichero de texto
 	 * @throws IOException
@@ -172,7 +172,7 @@ public class CtrlCalendario {
 					int M = Integer.parseInt(strDate.substring(3, 5));
 					int y = Integer.parseInt(strDate.substring(6));
 					GregorianCalendar date = new GregorianCalendar(y,M-1,d,0,0,0);
-					// getting number of drs.
+					// getting number of doctors
 					int morningDrs = Integer.parseInt(calendarData.get(j++));
 					int eveningDrs = Integer.parseInt(calendarData.get(j++));
 					int nightDrs = Integer.parseInt(calendarData.get(j++));
@@ -207,6 +207,17 @@ public class CtrlCalendario {
 		}
 		// llamada a datos
 		ctrlDatosFichero.saveDataCale(calendarData, idHospital);
+	}
+	
+	/** Importa un calendario desde un fichero de texto externo
+	 * @param idHospital Identificador del hospital
+	 * @param path Ruta del fichero
+	 * @throws IOException
+	 */
+	public void importCalendar(int idHospital, String path) throws IOException, ParseException {
+		ArrayList<String> listVacations = new ArrayList<String>();
+		listVacations = ctrlDatosFichero.getDataCale(idHospital, path);
+		ctrlDatosFichero.saveDataCale(listVacations, idHospital);
 	}
 
 	//		public void readCalendar(int id, String path) throws IOException,ParseException{
@@ -293,15 +304,4 @@ public class CtrlCalendario {
 	//		CtrlDatosFichero inOut = new CtrlDatosFichero();
 	//		inOut.saveDataCale(alcal, idHospital);
 	//	}
-
-	/** Crea un calendario comprobando errores de fechas
-	 * @param id identificador del Hospital
-	 * @throws IOException fichero incorrecto
-	 */
-	public void importCalendar(String path,int id) throws IOException, ParseException {
-		ArrayList<String> listVacations = new ArrayList<String>();
-		CtrlDatosFichero inOut = new CtrlDatosFichero();
-		listVacations = inOut.getDataCale(id, path);
-		inOut.saveDataCale(listVacations, id);
-	}
 }
