@@ -184,7 +184,20 @@ public class VistaSolucion {
 				
 			}
 		});
-	
+		
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					ctrlPresentacion.saveSolution();
+					JOptionPane.showMessageDialog(null, "Solucion guardada!", "Error", JOptionPane.INFORMATION_MESSAGE);
+				} catch(IOException eX) {
+					JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
+				}
+				ctrlPresentacion.changeView("vistaGestionSoluciones", panelContents);
+				
+			}
+		});
+		
 		btnAnadirTurno.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					try {

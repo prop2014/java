@@ -558,4 +558,8 @@ public class CtrlPresentacion {
 	public void deleteTurnFromDoctor(int idDoc, String turno) throws IOException{
 		ctrlAlgorithm.deleteTurnFromDoctor(idDoc, turno);
 	}
+	
+	public void saveSolution() throws IOException {
+		ctrlAlgorithm.saveSol(ctrlHospital.getID());
+	}
 }
