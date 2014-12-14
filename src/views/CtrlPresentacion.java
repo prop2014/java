@@ -106,6 +106,8 @@ public class CtrlPresentacion {
 		vistaMAXTurnosRango.init();
 		vistaGestionSoluciones.init();
 		vistaSolucion.init();
+		
+		
 
 		vistaCjtHospitales.showView();
 		vistaGestion.hidePanel();
@@ -132,7 +134,6 @@ public class CtrlPresentacion {
 		JPanel contentPane = (JPanel) frameView.getContentPane();
 		contentPane.remove(panel);
 
-		ResetKeyListener();
 		
 		switch(nextView){
 
@@ -246,17 +247,7 @@ public class CtrlPresentacion {
 		contentPane.repaint();
 	}
 	
-	public void ResetKeyListener(){
-		frameView.addKeyListener(new KeyListener() {
-			@Override
-			public void keyPressed(KeyEvent e) {}
-			@Override
-			public void keyReleased(KeyEvent e) {}
-			@Override
-			public void keyTyped(KeyEvent e) {}
-		});
-	}
-	
+
 	/* Metodos de VistaCjtCalendario */
 	public ArrayList<String> loadHospitals() throws IOException {
 		return ctrlHospital.verHospitales();
