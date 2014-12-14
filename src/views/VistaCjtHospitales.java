@@ -34,7 +34,7 @@ public class VistaCjtHospitales {
 	private final JButton btnCrearHospital = new JButton("<html><CENTER>Crear Hospital<br/>[CTRL+N]</html></CENTER>");
 	private final JButton btnEliminarHospital = new JButton("<html><CENTER>Eliminar Hospital<br/>[CTRL+D]</html></CENTER>");
 	private final JButton btnImportarHospital = new JButton("<html><CENTER>Importar Hospital<br/>[CTRL+I]</html></CENTER>");
-	private final JButton btnSeleccionarHospital = new JButton("<html><CENTER>Seleccionar Hospital<br/>[CTRL+ENTER]</html></CENTER>");
+	private final JButton btnSeleccionarHospital = new JButton("<html><CENTER>Seleccionar Hospital<br/></html></CENTER>");
 	private final JList<String> list = new JList<String>();
 	private final JScrollPane scrollPanel = new JScrollPane();
 	private final JLabel titleLabel = new JLabel("Conjunto de Hospitales");
@@ -261,7 +261,7 @@ public class VistaCjtHospitales {
 			
 		});
 		
-		
+		btnSeleccionarHospital.setToolTipText("CTRL+ENTER");
 		btnCrearHospital.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ctrlPresentacion.changeView("vistaCrearHospital", panelContents);
