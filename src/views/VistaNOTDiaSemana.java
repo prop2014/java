@@ -20,7 +20,7 @@ public class VistaNOTDiaSemana {
 	private JPanel panelButtons = new JPanel();
 	private JPanel panelInfo = new JPanel();
 	
-	private JLabel labelPanel1 = new JLabel("<html><u>Crear Restriccion: Tipo NOT Dia Semana</u>");
+	private JLabel labelPanel1 = new JLabel("<html><u>Crear Restriccion:</u> Tipo NOT Dia Semana");
 	
 	private JLabel labelPanel3 = new JLabel("<html><CENTER>Seleccione dia de <br/>la semana:</CENTER>");
 	@SuppressWarnings("rawtypes")
@@ -66,6 +66,7 @@ public class VistaNOTDiaSemana {
 	
 	private void inicializar_panelInfo() {
 		panelInfo.setBorder(BorderFactory.createEmptyBorder(55, 75, 0, 75));
+		labelPanel1.setFont(new Font("Arial", Font.PLAIN, 18));
 		panelInfo.add(labelPanel1);
 	}
 	
@@ -73,16 +74,18 @@ public class VistaNOTDiaSemana {
 	private void inicializar_panelButtons() {
 	    // Layout
 		panelButtons.setBorder(new EmptyBorder(70, 20, 20, 0));
-		
+		labelPanel3.setFont(new Font("Arial", Font.PLAIN, 15));
 		labelPanel3.setBounds(100, 95, 150, 30);
 		comboboxInformacion1.setBounds(275, 95, 150, 30);
+		button.setFont(new Font("Arial", Font.PLAIN, 12));
 		button.setBounds(440, 95, 150, 30);
-		
+		buttonVolver.setFont(new Font("Arial", Font.PLAIN, 12));
 		buttonVolver.setBounds(40, 230, 150, 40);
 		panelButtons.setLayout(null);
 	    // Botones
 	    panelButtons.add(labelPanel3);
 	    panelButtons.add(comboboxInformacion1);
+	    comboboxInformacion1.setFont(new Font("Arial", Font.PLAIN, 12));
 	    comboboxInformacion1.addItem("lunes");
 	    comboboxInformacion1.addItem("martes");
 	    comboboxInformacion1.addItem("miercoles");

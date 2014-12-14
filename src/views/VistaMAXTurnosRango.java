@@ -25,10 +25,10 @@ public class VistaMAXTurnosRango {
 	private JPanel panelButtons = new JPanel();
 	private JPanel panelInfo = new JPanel();
 	
-	private JLabel labelPanel1 = new JLabel("<html><u>Crear Restriccion: Tipo MAX Turnos Rango</u>");
+	private JLabel labelPanel1 = new JLabel("<html><u>Crear Restriccion:</u> Tipo MAX Turnos Rango");
 	private JLabel labelPanel2 = new JLabel("<html><CENTER>Seleccione fecha inicial:</CENTER>");
 	private JLabel labelPanel3 = new JLabel("<html><CENTER>Seleccione fecha final:</CENTER>");
-	private JLabel labelPanel4 = new JLabel("<html>Escribe numero de turnos:<CENTER></CENTER>");
+	private JLabel labelPanel4 = new JLabel("<html><CENTER>Escribe numero de turnos:</CENTER>");
 	private JDateChooser dataChooser1 = new JDateChooser("dd/MM/yyyy", "##/##/##", '_');
 	private JDateChooser dataChooser2 = new JDateChooser("dd/MM/yyyy", "##/##/##", '_');
 	private JTextArea textArea = new JTextArea(1,1);
@@ -73,21 +73,25 @@ public class VistaMAXTurnosRango {
 	
 	private void inicializar_panelInfo() {
 		panelInfo.setBorder(BorderFactory.createEmptyBorder(55, 75, 0, 75));
+		labelPanel1.setFont(new Font("Arial", Font.PLAIN, 18));
 		panelInfo.add(labelPanel1);
 	}
 	
 	private void inicializar_panelButtons() {
 		//layout
 		panelButtons.setBorder(new EmptyBorder(70, 20, 20, 0));
-		
-		labelPanel2.setBounds(100, 75, 150, 30);
-		labelPanel3.setBounds(100, 110, 150, 30);
-		labelPanel4.setBounds(100, 145, 150, 30);
-		dataChooser1.setBounds(340, 75, 150, 30);
-		dataChooser2.setBounds(340, 110, 150, 30);
-		textArea.setBounds(340, 152, 50, 16);
-		button.setBounds(510, 110, 150, 30);
-		
+		labelPanel2.setFont(new Font("Arial", Font.PLAIN, 15));
+		labelPanel2.setBounds(75, 72, 175, 30);
+		labelPanel3.setFont(new Font("Arial", Font.PLAIN, 15));
+		labelPanel3.setBounds(75, 107, 175, 30);
+		labelPanel4.setFont(new Font("Arial", Font.PLAIN, 15));
+		labelPanel4.setBounds(75, 142, 175, 30);
+		dataChooser1.setBounds(300, 75, 150, 30);
+		dataChooser2.setBounds(300, 110, 150, 30);
+		textArea.setBounds(300, 152, 50, 16);
+		button.setFont(new Font("Arial", Font.PLAIN, 12));
+		button.setBounds(470, 110, 150, 30);
+		buttonVolver.setFont(new Font("Arial", Font.PLAIN, 12));
 		buttonVolver.setBounds(40, 230, 150, 40);
 		panelButtons.setLayout(null);
 	    // Botones

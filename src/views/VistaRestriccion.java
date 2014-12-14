@@ -25,7 +25,7 @@ public class VistaRestriccion {
 	private JPanel panelInfo = new JPanel();
 	
 	//Etiquetas
-	  private JLabel labelPanel = new JLabel("<html><u>Elije el tipo de restriccion para crear:</u>");
+	  private JLabel labelPanel = new JLabel("<html>Elije el tipo de restriccion para crear:");
 	
 	//Botones
 	private JButton buttonNOTFecha = new JButton("NOT Fecha");
@@ -75,6 +75,7 @@ public class VistaRestriccion {
 	
 	private void inicializar_panelInfo() {
 		panelInfo.setBorder(BorderFactory.createEmptyBorder(25, 50, 0, 300));
+		labelPanel.setFont(new Font("Arial", Font.PLAIN, 18));
 		panelInfo.add(labelPanel);
 	}
 	
@@ -90,14 +91,23 @@ public class VistaRestriccion {
 		//panelButtons.setBorder(BorderFactory.createEmptyBorder(20, 175, 80, 175));
 		
 		panelButtons.setBorder(new EmptyBorder(70, 20, 20, 0));
+		buttonNOTFecha.setFont(new Font("Arial", Font.PLAIN, 12));
 		buttonNOTFecha.setBounds(200, 50, 150, 40);
+		buttonNOTTurno.setFont(new Font("Arial", Font.PLAIN, 12));
 		buttonNOTTurno.setBounds(355, 50, 150, 40);
+		buttonNOTEspecial.setFont(new Font("Arial", Font.PLAIN, 12));
 		buttonNOTEspecial.setBounds(200, 95, 150, 40);
+		buttonNOTDiaMes.setFont(new Font("Arial", Font.PLAIN, 12));
 		buttonNOTDiaMes.setBounds(355, 95, 150, 40);
+		buttonNOTDiaSemana.setFont(new Font("Arial", Font.PLAIN, 12));
 		buttonNOTDiaSemana.setBounds(200, 140, 150, 40);
+		buttonMAXTurnosRango.setFont(new Font("Arial", Font.PLAIN, 12));
 		buttonMAXTurnosRango.setBounds(355, 140, 150, 40);
+		buttonMAXTurnosDia.setFont(new Font("Arial", Font.PLAIN, 12));
 		buttonMAXTurnosDia.setBounds(200, 185, 150, 40);
+		buttonXOR.setFont(new Font("Arial", Font.PLAIN, 12));
 		buttonXOR.setBounds(355, 185, 150, 40);
+		buttonVolver.setFont(new Font("Arial", Font.PLAIN, 12));
 		buttonVolver.setBounds(40, 260, 150, 40);
 		panelButtons.setLayout(null);
 		

@@ -20,9 +20,9 @@ public class VistaNOTEspecial {
 	private JPanel panelButtons = new JPanel();
 	private JPanel panelInfo = new JPanel();
 	
-	private JLabel labelPanel1 = new JLabel("<html><u>Crear Restriccion: Tipo NOT Especial</u>");
+	private JLabel labelPanel1 = new JLabel("<html><u>Crear Restriccion:</u> Tipo NOT Especial");
 	
-	private JLabel labelPanel3 = new JLabel("<html><CENTER>Seleccione dia <br/>especial:</CENTER>");
+	private JLabel labelPanel3 = new JLabel("<html><CENTER>Seleccione dia especial:</CENTER>");
 	@SuppressWarnings("rawtypes")
 	private JComboBox comboboxInformacion1 = new JComboBox();
 	private JButton button = new JButton("Aceptar");
@@ -66,6 +66,7 @@ public class VistaNOTEspecial {
 	
 	private void inicializar_panelInfo() {
 		panelInfo.setBorder(BorderFactory.createEmptyBorder(55, 75, 0, 75));
+		labelPanel1.setFont(new Font("Arial", Font.PLAIN, 18));
 		panelInfo.add(labelPanel1);
 	}
 	
@@ -73,11 +74,13 @@ public class VistaNOTEspecial {
 	private void inicializar_panelButtons() {
 		//layout
 		panelButtons.setBorder(new EmptyBorder(70, 20, 20, 0));
-		
-		labelPanel3.setBounds(100, 95, 150, 30);
+		labelPanel3.setFont(new Font("Arial", Font.PLAIN, 15));
+		labelPanel3.setBounds(75, 95, 200, 30);
+		comboboxInformacion1.setFont(new Font("Arial", Font.PLAIN, 12));
 		comboboxInformacion1.setBounds(275, 95, 150, 30);
+		button.setFont(new Font("Arial", Font.PLAIN, 12));
 		button.setBounds(440, 95, 150, 30);
-		
+		buttonVolver.setFont(new Font("Arial", Font.PLAIN, 12));
 		buttonVolver.setBounds(40, 230, 150, 40);
 		panelButtons.setLayout(null);
 	    // Botones

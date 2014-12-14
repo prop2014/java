@@ -20,7 +20,7 @@ public class VistaNOTTurno {
 	private JPanel panelButtons = new JPanel();
 	private JPanel panelInfo = new JPanel();
 	
-	private JLabel labelPanel1 = new JLabel("<html><u>Crear Restriccion: Tipo NOT Turno</u>");
+	private JLabel labelPanel1 = new JLabel("<html><u>Crear Restriccion:</u> Tipo NOT Turno");
 	
 	private JLabel labelPanel3 = new JLabel("<html><CENTER>Seleccione el tipo de turno:</CENTER>");
 	private JCheckBox checkBox1 = new JCheckBox("manana");
@@ -67,19 +67,24 @@ public class VistaNOTTurno {
 	
 	private void inicializar_panelInfo() {
 		panelInfo.setBorder(BorderFactory.createEmptyBorder(55, 75, 0, 75));
+		labelPanel1.setFont(new Font("Arial", Font.PLAIN, 18));
 		panelInfo.add(labelPanel1);
 	}
 	
 	private void inicializar_panelButtons() {
 		//layout
 		panelButtons.setBorder(new EmptyBorder(70, 20, 20, 0));
-		
-		labelPanel3.setBounds(130, 95, 200, 30);
+		labelPanel3.setFont(new Font("Arial", Font.PLAIN, 15));
+		labelPanel3.setBounds(110, 95, 200, 30);
+		checkBox1.setFont(new Font("Arial", Font.PLAIN, 12));
 		checkBox1.setBounds(305, 80, 100, 20);
+		checkBox2.setFont(new Font("Arial", Font.PLAIN, 12));
 		checkBox2.setBounds(305, 100, 100, 20);
+		checkBox3.setFont(new Font("Arial", Font.PLAIN, 12));
 		checkBox3.setBounds(305, 120, 100, 20);
+		button.setFont(new Font("Arial", Font.PLAIN, 12));
 		button.setBounds(410, 95, 150, 30);
-		
+		buttonVolver.setFont(new Font("Arial", Font.PLAIN, 12));
 		buttonVolver.setBounds(40, 230, 150, 40);
 		panelButtons.setLayout(null);
 	    // Botones

@@ -24,7 +24,7 @@ public class VistaNOTFecha {
 	private JPanel panelButtons = new JPanel();
 	private JPanel panelInfo = new JPanel();
 	
-	private JLabel labelPanel1 = new JLabel("<html><u>Crear Restriccion: Tipo NOT Fecha</u>");
+	private JLabel labelPanel1 = new JLabel("<html><u>Crear Restriccion:</u> Tipo NOT Fecha");
 	private JLabel labelPanel3 = new JLabel("<html><CENTER>Seleccione la fecha:</CENTER>");
 	private JDateChooser dataChooser = new JDateChooser("dd/MM/yyyy", "##/##/##", '_');
 	private JButton button = new JButton("Aceptar");
@@ -68,17 +68,19 @@ public class VistaNOTFecha {
 	
 	private void inicializar_panelInfo() {
 		panelInfo.setBorder(BorderFactory.createEmptyBorder(55, 75, 0, 75));
+		labelPanel1.setFont(new Font("Arial", Font.PLAIN, 18));
 		panelInfo.add(labelPanel1);
 	}
 	
 	private void inicializar_panelButtons() {
 		//layout
 		panelButtons.setBorder(new EmptyBorder(70, 20, 20, 0));
-		
+		labelPanel3.setFont(new Font("Arial", Font.PLAIN, 15));
 		labelPanel3.setBounds(100, 95, 150, 30);
 		dataChooser.setBounds(255, 95, 150, 30);
-		button.setBounds(410, 95, 150, 30);
-		
+		button.setFont(new Font("Arial", Font.PLAIN, 12));
+		button.setBounds(420, 95, 150, 30);
+		buttonVolver.setFont(new Font("Arial", Font.PLAIN, 12));
 		buttonVolver.setBounds(40, 230, 150, 40);
 		panelButtons.setLayout(null);
 	    // Botones

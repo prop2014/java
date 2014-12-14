@@ -22,7 +22,7 @@ public class VistaMAXTurnosporDia {
 	private JPanel panelButtons = new JPanel();
 	private JPanel panelInfo = new JPanel();
 	
-	private JLabel labelPanel1 = new JLabel("<html><u>Crear Restriccion: Tipo MAX Turnos por Dia</u>");
+	private JLabel labelPanel1 = new JLabel("<html><u>Crear Restriccion:</u> Tipo MAX Turnos por Dia");
 	
 	private JLabel labelPanel3 = new JLabel("<html><CENTER>Escribe el numero<br/> de turnos:</CENTER>");
 	private JTextArea textArea = new JTextArea(1,1);
@@ -67,17 +67,19 @@ public class VistaMAXTurnosporDia {
 	
 	private void inicializar_panelInfo() {
 		panelInfo.setBorder(BorderFactory.createEmptyBorder(55, 75, 0, 75));
+		labelPanel1.setFont(new Font("Arial", Font.PLAIN, 18));
 		panelInfo.add(labelPanel1);
 	}
 	
 	private void inicializar_panelButtons() {
 		//layout
 		panelButtons.setBorder(new EmptyBorder(70, 20, 20, 0));
-		
+		labelPanel3.setFont(new Font("Arial", Font.PLAIN, 15));
 		labelPanel3.setBounds(150, 95, 150, 30);
-		textArea.setBounds(305, 102, 50, 16);
-		button.setBounds(400, 95, 150, 30);
-		
+		textArea.setBounds(305, 102, 35, 16);
+		button.setFont(new Font("Arial", Font.PLAIN, 12));
+		button.setBounds(390, 95, 150, 30);
+		buttonVolver.setFont(new Font("Arial", Font.PLAIN, 12));
 		buttonVolver.setBounds(40, 230, 150, 40);
 		panelButtons.setLayout(null);
 	    // Botones

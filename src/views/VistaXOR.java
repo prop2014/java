@@ -25,7 +25,7 @@ public class VistaXOR {
 	private JPanel panelButtons = new JPanel();
 	private JPanel panelInfo = new JPanel();
 	
-	private JLabel labelPanel1 = new JLabel("<html><u>Crear Restriccion: Tipo XOR</u>");
+	private JLabel labelPanel1 = new JLabel("<html><u>Crear Restriccion:</u> Tipo XOR");
 	private JLabel labelPanel2 = new JLabel("<html><CENTER>Seleccione fecha:</CENTER>");
 	private JLabel labelPanel3 = new JLabel("<html><CENTER>Seleccione<br/> tipo del turno:</CENTER>");
 	private JDateChooser dataChooser = new JDateChooser("dd/MM/yyyy", "##/##/##", '_');
@@ -78,22 +78,29 @@ public class VistaXOR {
 	
 	private void inicializar_panelInfo() {
 		panelInfo.setBorder(BorderFactory.createEmptyBorder(55, 75, 0, 75));
+		labelPanel1.setFont(new Font("Arial", Font.PLAIN, 18));
 		panelInfo.add(labelPanel1);
 	}
 	
 	private void inicializar_panelButtons() {
 		//layout
 		panelButtons.setBorder(new EmptyBorder(70, 20, 20, 0));
-		
+		labelPanel2.setFont(new Font("Arial", Font.PLAIN, 15));
 		labelPanel2.setBounds(125, 50, 150, 30);
 		dataChooser.setBounds(280, 50, 150, 30);
+		labelPanel3.setFont(new Font("Arial", Font.PLAIN, 15));
 		labelPanel3.setBounds(125, 100, 150, 30);
+		checkBox1.setFont(new Font("Arial", Font.PLAIN, 12));
 		checkBox1.setBounds(280, 85, 100, 20);
+		checkBox2.setFont(new Font("Arial", Font.PLAIN, 12));
 		checkBox2.setBounds(280, 105, 100, 20);
+		checkBox3.setFont(new Font("Arial", Font.PLAIN, 12));
 		checkBox3.setBounds(280, 125, 100, 20);
+		button.setFont(new Font("Arial", Font.PLAIN, 12));
 		button.setBounds(510, 80, 150, 30);
+		buttonSiguiente.setFont(new Font("Arial", Font.PLAIN, 12));
 		buttonSiguiente.setBounds(225, 160, 150, 30);
-		
+		buttonVolver.setFont(new Font("Arial", Font.PLAIN, 12));
 		buttonVolver.setBounds(40, 230, 150, 40);
 		panelButtons.setLayout(null);
 	    // Botones
