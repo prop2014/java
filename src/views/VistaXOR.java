@@ -120,6 +120,10 @@ public class VistaXOR {
 	private void assignar_listenersComponents() {
 		buttonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dia.clear();
+				mes.clear();
+				year.clear();
+				turno.clear();
 				ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 			}
 		});
@@ -141,9 +145,17 @@ public class VistaXOR {
 					try {
 						 ctrlPresentacion.addResXOR(dia, mes, year, turno);
 						 JOptionPane.showMessageDialog(null, "Restriccion creada correctamente", "Informacion",JOptionPane.INFORMATION_MESSAGE);
+						 dia.clear();
+						 mes.clear();
+						 year.clear();
+						 turno.clear();
 						 ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 					} catch (IOException eX) {
 						JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 
+						dia.clear();
+						mes.clear();
+						year.clear();
+						turno.clear();
 						ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 					}
 				}
