@@ -2,6 +2,8 @@ package views;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -130,6 +132,8 @@ public class CtrlPresentacion {
 		JPanel contentPane = (JPanel) frameView.getContentPane();
 		contentPane.remove(panel);
 
+		ResetKeyListener();
+		
 		switch(nextView){
 
 		case "vistaGestionSoluciones":{
@@ -241,7 +245,18 @@ public class CtrlPresentacion {
 		contentPane.revalidate();
 		contentPane.repaint();
 	}
-
+	
+	public void ResetKeyListener(){
+		frameView.addKeyListener(new KeyListener() {
+			@Override
+			public void keyPressed(KeyEvent e) {}
+			@Override
+			public void keyReleased(KeyEvent e) {}
+			@Override
+			public void keyTyped(KeyEvent e) {}
+		});
+	}
+	
 	/* Metodos de VistaCjtCalendario */
 	public ArrayList<String> loadHospitals() throws IOException {
 		return ctrlHospital.verHospitales();
