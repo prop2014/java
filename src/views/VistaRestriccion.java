@@ -5,6 +5,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 /**
  * Vista principal de la gestion de restricciones
@@ -28,15 +29,15 @@ public class VistaRestriccion {
 	  private JLabel labelPanel = new JLabel("<html>Elije el tipo de restriccion para crear:");
 	
 	//Botones
-	private JButton buttonNOTFecha = new JButton("NOT Fecha");
-	private JButton buttonNOTTurno = new JButton("NOT Turno");
-	private JButton buttonNOTEspecial = new JButton("NOT Especial");
-	private JButton buttonNOTDiaMes = new JButton("NOT Dia Mes");
-	private JButton buttonNOTDiaSemana = new JButton("NOT Dia Semana");
-	private JButton buttonMAXTurnosRango = new JButton("MAX Turnos Rango");
-	private JButton buttonMAXTurnosDia = new JButton("MAX Turnos por Dia");
-	private JButton buttonXOR = new JButton("XOR");
-	private JButton buttonVolver = new JButton("Volver");
+	private JButton buttonNOTFecha = new JButton("NOT Fecha [CTRL+F]");
+	private JButton buttonNOTTurno = new JButton("NOT Turno [CTRL+T]");
+	private JButton buttonNOTEspecial = new JButton("NOT Especial [CTRL+E]");
+	private JButton buttonNOTDiaMes = new JButton("NOT Dia Mes [CTRL+M]");
+	private JButton buttonNOTDiaSemana = new JButton("NOT Dia Semana [CTRL+S]");
+	private JButton buttonMAXTurnosRango = new JButton("MAX Turnos Rango [CTRL+R]");
+	private JButton buttonMAXTurnosDia = new JButton("MAX Turnos por Dia [CTRL+D]");
+	private JButton buttonXOR = new JButton("XOR [CTRL+X]");
+	private JButton buttonVolver = new JButton("Volver [ESC]");
 	
 	//METODOS PRIVADOS
 	
@@ -49,7 +50,7 @@ public class VistaRestriccion {
 	  }
 	
 	private void inicializar_frameView() {
-		/*** DESCOMENTAR PARA EDITAR *
+		/*** DESCOMENTAR PARA EDITAR */
 		frameView =  new JFrame("Programador Guardias");
 		frameView.setMinimumSize(new Dimension(700, 400));
 		frameView.setPreferredSize(frameView.getMinimumSize());
@@ -92,23 +93,23 @@ public class VistaRestriccion {
 		
 		panelButtons.setBorder(new EmptyBorder(70, 20, 20, 0));
 		buttonNOTFecha.setFont(new Font("Arial", Font.PLAIN, 12));
-		buttonNOTFecha.setBounds(200, 50, 150, 40);
+		buttonNOTFecha.setBounds(101, 33, 249, 40);
 		buttonNOTTurno.setFont(new Font("Arial", Font.PLAIN, 12));
-		buttonNOTTurno.setBounds(355, 50, 150, 40);
+		buttonNOTTurno.setBounds(362, 33, 249, 40);
 		buttonNOTEspecial.setFont(new Font("Arial", Font.PLAIN, 12));
-		buttonNOTEspecial.setBounds(200, 95, 150, 40);
+		buttonNOTEspecial.setBounds(101, 85, 249, 40);
 		buttonNOTDiaMes.setFont(new Font("Arial", Font.PLAIN, 12));
-		buttonNOTDiaMes.setBounds(355, 95, 150, 40);
+		buttonNOTDiaMes.setBounds(362, 85, 249, 40);
 		buttonNOTDiaSemana.setFont(new Font("Arial", Font.PLAIN, 12));
-		buttonNOTDiaSemana.setBounds(200, 140, 150, 40);
+		buttonNOTDiaSemana.setBounds(101, 137, 249, 40);
 		buttonMAXTurnosRango.setFont(new Font("Arial", Font.PLAIN, 12));
-		buttonMAXTurnosRango.setBounds(355, 140, 150, 40);
+		buttonMAXTurnosRango.setBounds(362, 137, 249, 40);
 		buttonMAXTurnosDia.setFont(new Font("Arial", Font.PLAIN, 12));
-		buttonMAXTurnosDia.setBounds(200, 185, 150, 40);
+		buttonMAXTurnosDia.setBounds(101, 189, 249, 40);
 		buttonXOR.setFont(new Font("Arial", Font.PLAIN, 12));
-		buttonXOR.setBounds(355, 185, 150, 40);
+		buttonXOR.setBounds(362, 189, 249, 40);
 		buttonVolver.setFont(new Font("Arial", Font.PLAIN, 12));
-		buttonVolver.setBounds(40, 260, 150, 40);
+		buttonVolver.setBounds(49, 257, 221, 40);
 		panelButtons.setLayout(null);
 		
 	    // Botones
@@ -193,6 +194,64 @@ public class VistaRestriccion {
 			}
 		});
 		
+	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "buttonVolver");
+		 panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonNOTFecha");
+	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonXOR");
+	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonNOTEspecial");
+	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonNOTTurno");
+	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonNOTDiaMes");
+	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonNOTDiaSemana");
+	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonMAXTurnosRango");
+	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonMAXTurnosDia");
+
+	     panelContents.getActionMap().put("buttonNOTFecha", new AbstractAction() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	            	buttonNOTFecha.doClick();
+	            }
+	        });
+	        panelContents.getActionMap().put("buttonXOR", new AbstractAction() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	            	buttonXOR.doClick();
+	            }
+	        });
+	        panelContents.getActionMap().put("buttonNOTDiaSemana", new AbstractAction() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	            	buttonNOTDiaSemana.doClick();
+	            }
+	        });
+	        panelContents.getActionMap().put("buttonNOTEspecial", new AbstractAction() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	            	buttonNOTEspecial.doClick();
+	            }
+	        });
+	        panelContents.getActionMap().put("buttonNOTDiaMes", new AbstractAction() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	            	buttonNOTDiaMes.doClick();
+	            }
+	        });
+	        panelContents.getActionMap().put("buttonMAXTurnosRango", new AbstractAction() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	            	buttonMAXTurnosRango.doClick();
+	            }
+	        });
+	        panelContents.getActionMap().put("buttonMAXTurnosDia", new AbstractAction() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	            	buttonMAXTurnosDia.doClick();
+	            }
+	        });
+	        panelContents.getActionMap().put("buttonVolver", new AbstractAction() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	            	buttonVolver.doClick();
+	            }
+	        });
 		
 	}
 	
@@ -201,9 +260,9 @@ public class VistaRestriccion {
 	
 	public VistaRestriccion(CtrlPresentacion pCtrlPresentacion) {
 		ctrlPresentacion = pCtrlPresentacion;
-		/** DESCOMENTAR PARA EDITAR
-		 * inicializarComponents();
-		 */
+		/** DESCOMENTAR PARA EDITAR */
+		 inicializarComponents();
+		/**/
 	}
 	public void init() {
 		inicializarComponents();

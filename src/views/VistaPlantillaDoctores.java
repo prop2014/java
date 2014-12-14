@@ -48,9 +48,9 @@ import javax.swing.table.DefaultTableModel;
 		
 		//CENTER
 		private JLabel labelPanel1 = new JLabel();
-		private JButton buttonCrear = new JButton("<html><CENTER>Crear <br/>Doctor [ctrl+n]</CENTER>");
-		private JButton buttonEliminar = new JButton("<html><CENTER>Eliminar <br/>Doctor[ctrl+d]</CENTER>");
-		private JButton buttonModificar = new JButton("<html><CENTER>Modificar <br/>Doctor[ctrl+m]</CENTER>");
+		private JButton buttonCrear = new JButton("<html><CENTER>Crear <br/>Doctor [CTRL+N]</CENTER>");
+		private JButton buttonEliminar = new JButton("<html><CENTER>Eliminar <br/>Doctor[CTRL+D]</CENTER>");
+		private JButton buttonModificar = new JButton("<html><CENTER>Modificar <br/>Doctor[CTRL+M]</CENTER>");
 		private JButton buttonVolver = new JButton("Volver [ESC]");
 		
 		
@@ -106,7 +106,7 @@ import javax.swing.table.DefaultTableModel;
 			buttonEliminar.setBounds(442, 152, 173, 57);
 			buttonCrear.setFont(new Font("Arial", Font.PLAIN, 15));
 			buttonCrear.setBounds(442, 234, 173, 57);	
-			buttonVolver.setFont(new Font("Arial", Font.PLAIN, 15));
+			buttonVolver.setFont(new Font("Arial", Font.PLAIN, 12));
 			buttonVolver.setBounds(52, 323, 157, 25);
 	
 			labelPanel1.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -224,47 +224,36 @@ import javax.swing.table.DefaultTableModel;
 				}
 			});
 				
-
+			 panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonEliminar");
+		     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonCrear");
+		     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonModificar");
+		     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "buttonVolver");
+		     panelContents.getActionMap().put("buttonEliminar", new AbstractAction() {
+		            @Override
+		            public void actionPerformed(ActionEvent e) {
+		            	buttonEliminar.doClick();
+		            }
+		        });
+		        panelContents.getActionMap().put("buttonCrear", new AbstractAction() {
+		            @Override
+		            public void actionPerformed(ActionEvent e) {
+		            	buttonCrear.doClick();
+		            }
+		        });
+		        panelContents.getActionMap().put("buttonModificar", new AbstractAction() {
+		            @Override
+		            public void actionPerformed(ActionEvent e) {
+		            	buttonModificar.doClick();
+		            }
+		        });
+		        panelContents.getActionMap().put("buttonVolver", new AbstractAction() {
+		            @Override
+		            public void actionPerformed(ActionEvent e) {
+		            	buttonVolver.doClick();
+		            }
+		        });
 			
-			panelContents.addKeyListener(new KeyListener() {
-	            @Override
-	            public void keyPressed(KeyEvent e) {
-	            }
-				@Override
-				public void keyReleased(KeyEvent e) {
-					switch(e.getKeyCode()){
-	        	case KeyEvent.VK_N: {
-	        		if(e.isControlDown()){
-	        			buttonCrear.doClick();
-	        		}
-	        	break;
-	        	}
-	        	
-	        	case KeyEvent.VK_D: {
-	        		buttonEliminar.doClick();
-	        		
-	        	break;
-	        	}
-	        	case (KeyEvent.VK_M): {
-	        		if(e.isControlDown()){
-	        			buttonModificar.doClick();
-	        		}
-	        		
-	        	break;
-	        	}
-	        	case KeyEvent.VK_ESCAPE: {
-	        		buttonVolver.doClick();
-	        	break;
-	        	}
-	        	
-	    	}
-					}
-				@Override
-				public void keyTyped(KeyEvent e) {
-	      
-				}
-				
-	    });
+	
 			
 		}
 		

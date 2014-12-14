@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -56,12 +57,12 @@ public class VistaDoctor {
 	private JTextArea textSueldo = new JTextArea();
 
 	private JButton buttonEliminar = new JButton(
-			"<html><CENTER>Eliminar<br/>Restriccion</CENTER>");
+			"<html><CENTER>Eliminar<br/>Restriccion [CTRL+D]</CENTER>");
 	private JButton buttonAnadir = new JButton(
-			"<html><CENTER>Anadir<br/>Restriccion</CENTER>");
+			"<html><CENTER>Anadir<br/>Restriccion [CTRL+N]</CENTER>");
 	private JButton buttonGuardar = new JButton(
-			"<html><CENTER>Guardar<br/>cambios</CENTER>");
-	private JButton buttonVolver = new JButton("Volver");
+			"<html><CENTER>Guardar<br/>cambios [CTRL+S]</CENTER>");
+	private JButton buttonVolver = new JButton("Volver [ESC]");
 
 	// METODOS PRIVADOS
 
@@ -306,7 +307,7 @@ public class VistaDoctor {
 										"Error", JOptionPane.ERROR_MESSAGE);
 					}
 
-				//}
+				
 
 				
 			}
@@ -342,7 +343,34 @@ public class VistaDoctor {
 			
 		});
 
-	
+		panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonEliminar");
+	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonGuardar");
+	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonAnadir");
+	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "buttonVolver");
+	     panelContents.getActionMap().put("buttonEliminar", new AbstractAction() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	            	buttonEliminar.doClick();
+	            }
+	        });
+	        panelContents.getActionMap().put("buttonGuardar", new AbstractAction() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	            	buttonGuardar.doClick();
+	            }
+	        });
+	        panelContents.getActionMap().put("buttonAnadir", new AbstractAction() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	            	buttonAnadir.doClick();
+	            }
+	        });
+	        panelContents.getActionMap().put("buttonVolver", new AbstractAction() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	            	buttonVolver.doClick();
+	            }
+	        });
 
 	}
 	

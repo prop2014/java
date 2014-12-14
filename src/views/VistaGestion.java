@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.border.EmptyBorder;
 /**
@@ -29,10 +32,12 @@ public class VistaGestion {
 	private JPanel panelCenterButtons = new JPanel();
 	//CENTER
 	private JLabel labelPanel1 = new JLabel();
-	private JButton buttonCal = new JButton("<html><CENTER>Gestion de <br/>Calendario</CENTER>");
-	private JButton buttonDoc = new JButton("<html><CENTER>Gestion de <br/>Doctores</CENTER>");
-	private JButton buttonSol = new JButton("<html><CENTER>Gestion de <br/>Solucion</CENTER>");
-	private JButton buttonVolver = new JButton("Volver");
+	private JButton buttonCal = new JButton("<html><CENTER>Gestion de <br/>Calendario [C]</CENTER>");
+	private JButton buttonDoc = new JButton("<html><CENTER>Gestion de <br/>Doctores [D]</CENTER>");
+	private JButton buttonSol = new JButton("<html><CENTER>Gestion de <br/>Solucion [S]</CENTER>");
+	private JButton buttonVolver = new JButton("Volver [ESC]");
+	
+	
 	
 	
 	//METODOS PRIVADOS
@@ -50,13 +55,22 @@ public class VistaGestion {
 		JPanel contentPane = (JPanel) frameView.getContentPane();
 		contentPane.setLayout(null);
 		panelContents.setBounds(0,0,700,378);
+		
+		frameView.setFocusable(true);
+		frameView.requestFocusInWindow();
+		
 		contentPane.add(panelContents);
+		
+		
 	}
 	
 	private void inicializar_panelContents() {
 		panelContents.setLayout(new BorderLayout());
 		// Componentes
 		panelContents.add(panelCenterButtons, BorderLayout.CENTER);
+		
+		
+		
 	}
 	
 	private void inicializar_panelCenterButtons() {
@@ -122,10 +136,43 @@ public class VistaGestion {
 			}
 		});
 		
-		
+	
+
+		 panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_C, 0), "buttonCal");
+	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_S,0), "buttonSol");
+	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0), "buttonDoc");
+	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "buttonVolver");
+	    
+	     panelContents.getActionMap().put("buttonDoc", new AbstractAction() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	            	buttonDoc.doClick();
+	            }
+	        });
+	        panelContents.getActionMap().put("buttonSol", new AbstractAction() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	            	buttonSol.doClick();
+	            }
+	        });
+	        panelContents.getActionMap().put("buttonCal", new AbstractAction() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	            	buttonCal.doClick();
+	            }
+	        });
+	        panelContents.getActionMap().put("buttonVolver", new AbstractAction() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	            	buttonVolver.doClick();
+	            }
+	        });
+	      
+	   
 		
 		
 	}
+	
 	
 	
 	//METODOS PUBLICOS
