@@ -689,7 +689,7 @@ public class CtrlDoctor {
 						else if(Res.get(j).getTipo().equals("XOR")){
 							XOR N = (XOR)Res.get(j);
 							ArrayList<Turno> alTurn=N.getListTurnos();
-							SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+							SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
 							alRes.add(Integer.toString(alTurn.size()));
 							for(int k=0;k<alTurn.size();++k){
 								Turno t=alTurn.get(k);
@@ -776,24 +776,26 @@ public class CtrlDoctor {
 					addResMAX_Turnos_por_Dia(idDoc,idRes,numT);
 				}
 				else if(tipo.equals("XOR")){
-					int d1=0, m1=0, a1=0;
 					++i;
 					int numdays=Integer.parseInt(alRes.get(i));
 					ArrayList<Integer> diaXOR = new ArrayList<Integer>();
 					ArrayList<Integer> mesXOR = new ArrayList<Integer>();
 					ArrayList<Integer> yearXOR = new ArrayList<Integer>();
 					ArrayList<String> tipoTurnoXOR = new ArrayList<String>();
+					System.out.printf("numDays: %d\n", numdays);
 					for(int k=0;k<numdays;++k){
 						++i;
-						String fecha =  alRes.get(i);
-						try{
-							d1=Integer.parseInt(readDate(fecha,"dd"));
-							 m1=Integer.parseInt(readDate(fecha,"MM"));
-							 a1 =Integer.parseInt(readDate(fecha,"yyyy"));
-						}catch (ParseException e){System.out.print("ERROR");}
-						diaXOR.add(d1);
-						mesXOR.add(m1);
-						yearXOR.add(a1);
+						String strDate =  alRes.get(i);
+							System.out.printf("problems amb %s\n",strDate);
+							int d = Integer.parseInt(strDate.substring(0, 2));
+							System.out.printf("el dia es: %d\n", d);
+							int M = Integer.parseInt(strDate.substring(2, 4));
+							System.out.printf("el mes es: %d\n", M);
+							int year =Integer.parseInt(strDate.substring(4));
+							System.out.printf("el any es: %d\n", year);
+						diaXOR.add(d);
+						mesXOR.add(M);
+						yearXOR.add(year);
 						++i;
 						tipoTurnoXOR.add(alRes.get(i));
 					}

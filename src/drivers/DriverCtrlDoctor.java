@@ -31,6 +31,7 @@ public class DriverCtrlDoctor {
 		System.out.print("13: SaveDataRes\n");
 		System.out.print("14: getFDIdocs\n");
 		System.out.print("15: getFDIRes\n");
+		System.out.print("16 addResData\n");
 		System.out.print("-----------------------------------------------\n\n");
 	}
 	
@@ -58,17 +59,17 @@ public class DriverCtrlDoctor {
 		CtrlDoctor ctrlDoc = new CtrlDoctor(docs, 2014);
 		CtrlDatosFichero inOut1 = new CtrlDatosFichero();
 		CtrlHospital Hosp = new CtrlHospital();
-		Hosp.cargarHospital(12);
-		Hosp.getDataDoctors(12);
-		int year=inOut1.getYear(12,null);
+		Hosp.cargarHospital(0);
+		Hosp.getDataDoctors(0);
+		int year=inOut1.getYear(0,null);
 		Hosp.addCalendar(year);
 		System.out.print("HospitalCargat\n");
 		CtrlCalendario cal= new CtrlCalendario(Hosp.getCalendar());
 		System.out.print("cargu el calendari\n");
-		cal.readCalendar(12,null);
+		cal.readCalendar(0,null);
 		System.out.printf("cargu el calendar de data %d\n",cal.getCalendarYear());
 		CtrlDoctor s = new CtrlDoctor(Hosp.getDoctors(),cal.getCalendarYear());
-		if(inOut1.existsRes(12))s.addResData(12,null);
+		if(inOut1.existsRes(0))s.addResData(0,null);
 		
 		
 		mostrarOpciones();
@@ -116,7 +117,7 @@ public class DriverCtrlDoctor {
 					s.addResMAX_Turnos_por_Dia(idDoc, idRes, turnos);
 					//ctrlDoc.addResMAX_Turnos_por_Dia(idDoc, idRes, turnos);
 					System.out.println("Restriccion anadida correctamente\n");
-					s.saveDataRes(12);
+					s.saveDataRes(0);
 				} catch (IOException e) { System.out.println(e); }
 			}
 			else if (opcion == 4) {
@@ -139,7 +140,7 @@ public class DriverCtrlDoctor {
 				try {
 					s.addResMAX_Turnos_Rango(idDoc, idRes, d1, m1, a1, d2, m2, a2, turnos);
 					//ctrlDoc.addResMAX_Turnos_Rango(idDoc, idRes, d1, m1, a1, d2, m2, a2, turnos);
-					s.saveDataRes(12);
+					s.saveDataRes(0);
 					System.out.println("Restriccion anadida correctamente\n");
 				} catch (IOException e) { System.out.println(e); }
 			}
@@ -155,7 +156,7 @@ public class DriverCtrlDoctor {
 				try {
 					s.addResNOT_Dia_Mes(idDoc, idRes, dia);
 					//ctrlDoc.addResNOT_Dia_Mes(idDoc, idRes, dia);
-					s.saveDataRes(12);
+					s.saveDataRes(0);
 					System.out.println("Restriccion anadida correctamente\n");
 				} catch (IOException e) { System.out.println(e); }			
 			}
@@ -171,7 +172,7 @@ public class DriverCtrlDoctor {
 				try {
 					s.addResNOT_Dia_Semana(idDoc, idRes, dia);
 					//ctrlDoc.addResNOT_Dia_Semana(idDoc, idRes, dia);
-					s.saveDataRes(12);
+					s.saveDataRes(0);
 					System.out.println("Restriccion anadida correctamente\n");
 				} catch (IOException e) { System.out.println(e); }
 			}
@@ -187,7 +188,7 @@ public class DriverCtrlDoctor {
 				try {
 					s.addResNOT_Especial(idDoc, idRes, especial);
 					//ctrlDoc.addResNOT_Especial(idDoc, idRes, especial);
-					s.saveDataRes(12);
+					s.saveDataRes(0);
 					System.out.println("Restriccion anadida correctamente\n");
 				} catch (IOException e) { System.out.println(e); }
 			}
@@ -205,7 +206,7 @@ public class DriverCtrlDoctor {
 				try {
 					s.addResNOT_Fecha(idDoc, idRes, d1, m1, a1);
 					//ctrlDoc.addResNOT_Fecha(idDoc, idRes, d1, m1, a1);
-					s.saveDataRes(12);
+					s.saveDataRes(0);
 					System.out.println("Restriccion anadida correctamente\n");
 				} catch (IOException e) { System.out.println(e); }
 			}
@@ -221,7 +222,7 @@ public class DriverCtrlDoctor {
 				try {
 					s.addResNOT_Turno(idDoc, idRes, turno);
 					//ctrlDoc.addResNOT_Turno(idDoc, idRes, turno);
-					s.saveDataRes(12);
+					s.saveDataRes(0);
 					System.out.println("Restriccion anadida correctamente");
 				} catch (IOException e) { System.out.println(e); }
 			}			
@@ -255,7 +256,7 @@ public class DriverCtrlDoctor {
 				try {
 					s.addResXOR(idDoc, idRes, dia, mes, any, turnos);
 					//ctrlDoc.addResXOR(idDoc, idRes, dia, mes, any, turnos);
-					s.saveDataRes(12);
+					s.saveDataRes(0);
 					System.out.println("Restriccion anadida correctamente\n");
 				} catch (IOException e) { System.out.println(e); }
 			}
@@ -267,7 +268,7 @@ public class DriverCtrlDoctor {
 				try {
 					s.eliminarRestriccion(idRes, idDoc);
 					//ctrlDoc.eliminarRestriccion(idRes, idDoc);
-					s.saveDataRes(12);
+					s.saveDataRes(0);
 					System.out.println("Restriccion eliminada correctamente\n");
 				} catch (IOException e) { System.out.println(e); }
 			}
@@ -396,6 +397,28 @@ public class DriverCtrlDoctor {
 				System.out.print("ingrese el id del doctor:\n");
 				int ne=teclado.nextInt();
 				System.out.printf("la primera res lliure es: %d\n",s.getFDIRes(ne));
+				
+			}
+			else if(opcion == 16){
+				System.out.print("ingrese id hosp:\n");
+				int id = teclado.nextInt();
+				Integer num=id;
+				CtrlDatosFichero inOut = new CtrlDatosFichero();
+				CtrlHospital Ho = new CtrlHospital();
+				Ho.cargarHospital(num);
+				Ho.getDataDoctors(id);
+				year=inOut.getYear(id,null);
+				Ho.addCalendar(year);
+				System.out.print("HospitalCargat\n");
+				CtrlCalendario cal1= new CtrlCalendario(Ho.getCalendar());
+				System.out.print("cargu el calendari\n");
+				cal1.readCalendar(id,null);
+				System.out.printf("cargu el calendar de data %d\n",cal.getCalendarYear());
+				CtrlDoctor s1 = new CtrlDoctor(Ho.getDoctors(),cal1.getCalendarYear());
+				s1.addResData(id,null);
+				System.out.print("OOuyeah\n");
+				s1.saveDataRes(id);
+				System.out.print("Fet\n");
 				
 			}
 			mostrarOpciones();
