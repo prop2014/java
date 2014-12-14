@@ -512,7 +512,7 @@ public class CtrlPresentacion {
 			return ctrlCalendario.getVacationDay(date);
 	}
 
-	public ArrayList<ArrayList<String>> getALLVacations() {
+	public ArrayList<ArrayList<String>> getALLVacations() throws IOException {
 		return ctrlCalendario.getALLVacations();
 	}
 

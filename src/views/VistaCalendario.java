@@ -163,6 +163,7 @@ public class VistaCalendario extends Vista {
 	 */
 	private void update_listVacations() {
 		dlm.clear();
+		try {
 		// llamada a dominio
 		ArrayList<ArrayList<String>> vacations = ctrlPresentacion.getALLVacations();
 		if (!vacations.isEmpty()) {
@@ -175,6 +176,8 @@ public class VistaCalendario extends Vista {
 				dlm.addElement(String.format(pattern, date, morningDrs, eveningDrs, nightDrs,"", especialDate));
 			}
 		}
+		}
+		catch(IOException e) {rejectedOperationDialog("Se ha producido el siguiente error al actualizar la lista de dias vacacionales:\n" + e.getMessage());}
 	}
 
 	/**

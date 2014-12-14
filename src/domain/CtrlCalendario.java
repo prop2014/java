@@ -11,8 +11,6 @@ import java.text.SimpleDateFormat;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
 /**
  * Controladora de la clase Calendario
  * @author Felix Fernando Ramos Velazquez
@@ -150,17 +148,18 @@ public class CtrlCalendario {
 	 * Consultora de todos los dias vacacionales
 	 * @return ArrayList<ArrayList<String>> con la info de todos los dias vacacionales del calendario
 	 */
-	public ArrayList<ArrayList<String>> getALLVacations() {
+	public ArrayList<ArrayList<String>> getALLVacations() throws IOException {
 		ArrayList<GregorianCalendar> vacations = calendar.getALLVacations();
+//		ArrayList<GregorianCalendar> vacations = new ArrayList<GregorianCalendar>(calendar.getALLVacations());
 		ArrayList<ArrayList<String>> listVacations = new ArrayList<ArrayList<String>>();
 		SimpleDateFormat sdf = new SimpleDateFormat("d-MMM", new Locale("es","ES"));
 		for (GregorianCalendar date : vacations) {
 			ArrayList<String> vacationDay = new ArrayList<String>();
+			// adding date
 			vacationDay.add(sdf.format(date.getTime()));
-			vacationDay.add(Integer.toString(calendar.getShift(date, shiftTypes[0]).getNumberOfDoctors()));
-			vacationDay.add(Integer.toString(calendar.getShift(date, shiftTypes[1]).getNumberOfDoctors()));
-			vacationDay.add(Integer.toString(calendar.getShift(date, shiftTypes[2]).getNumberOfDoctors()));
-			vacationDay.add(calendar.getShift(date, shiftTypes[0]).getSpecialDate());
+			// adding number of doctors and special date
+			vacationDay.addAll(getVacationDay(date));
+			// adding vacation day
 			listVacations.add(vacationDay);
 		}
 		return listVacations;
