@@ -169,9 +169,8 @@ public class CtrlCalendario {
 					// getting date
 					String strDate = calendarData.get(j++);
 					int d = Integer.parseInt(strDate.substring(0, 2));
-					int M = Integer.parseInt(strDate.substring(3, 5));
-					int y = Integer.parseInt(strDate.substring(6));
-					GregorianCalendar date = new GregorianCalendar(y,M-1,d,0,0,0);
+					int M = Integer.parseInt(strDate.substring(2));
+					GregorianCalendar date = new GregorianCalendar(calendarYear,M-1,d,0,0,0);
 					// getting number of doctors
 					int morningDrs = Integer.parseInt(calendarData.get(j++));
 					int eveningDrs = Integer.parseInt(calendarData.get(j++));
@@ -198,7 +197,7 @@ public class CtrlCalendario {
 		if(!calendar.isEmpty()) {
 			ArrayList<GregorianCalendar> vacations = calendar.getALLVacations();
 			//			ArrayList<GregorianCalendar> vacations = new ArrayList<GregorianCalendar>(calendar.getALLVacations());
-			SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+			SimpleDateFormat sdf = new SimpleDateFormat("ddMM");
 			for (GregorianCalendar date : vacations) {
 				calendarData.add(sdf.format(date.getTime()));
 				calendarData.addAll(getVacationDay(date));
