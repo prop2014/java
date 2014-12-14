@@ -100,6 +100,7 @@ public class VistaNOTEspecial {
 		
 		buttonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				comboboxInformacion1.setSelectedItem("navidad");
 				ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 			}
 		});
@@ -110,9 +111,11 @@ public class VistaNOTEspecial {
 				try {
 					ctrlPresentacion.addResNOT_Especial(especial);
 					JOptionPane.showMessageDialog(null, "Restriccion creada correctamente", "Informacion",JOptionPane.INFORMATION_MESSAGE);
+					comboboxInformacion1.setSelectedItem("navidad");
 					ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 				} catch (IOException eX) {
 					JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 
+					comboboxInformacion1.setSelectedItem("navidad");
 					ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 				}
 			}

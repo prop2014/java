@@ -95,6 +95,7 @@ public class VistaMAXTurnosporDia {
 		
 		buttonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				textArea.setText(null);
 				ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 			}
 		});
@@ -108,14 +109,17 @@ public class VistaMAXTurnosporDia {
 					try {
 						ctrlPresentacion.addResMAX_Turnos_por_Dia(numT);
 						JOptionPane.showMessageDialog(null, "Restriccion creada correctamente", "Informacion",JOptionPane.INFORMATION_MESSAGE);
+						textArea.setText(null);
 						ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 					} catch (IOException eX) {
 						JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 
+						textArea.setText(null);
 						ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 					}
 				}
 				else {
-					JOptionPane.showMessageDialog(null, "Numero de turnos incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Valor incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
+					textArea.setText(null);
 				}
 				sc1.close();
 			}

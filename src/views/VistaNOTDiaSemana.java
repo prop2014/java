@@ -102,6 +102,7 @@ public class VistaNOTDiaSemana {
 	private void assignar_listenersComponents() {
 		buttonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				comboboxInformacion1.setSelectedItem("lunes");
 				ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 			}
 		});
@@ -112,9 +113,11 @@ public class VistaNOTDiaSemana {
 				try {
 					ctrlPresentacion.addResNOT_Dia_Semana(diaSemana);
 					JOptionPane.showMessageDialog(null, "Restriccion creada correctamente", "Informacion",JOptionPane.INFORMATION_MESSAGE);
+					comboboxInformacion1.setSelectedItem("lunes");
 					ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 				} catch (IOException eX) {
 					JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 
+					comboboxInformacion1.setSelectedItem("lunes");
 					ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 				}
 			}

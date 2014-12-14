@@ -110,6 +110,9 @@ public class VistaMAXTurnosRango {
 	private void assignar_listenersComponents() {
 		buttonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				textArea.setText(null);
+				dataChooser1.setCalendar(null);
+				dataChooser2.setCalendar(null);
 				ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 			}
 		});
@@ -134,14 +137,23 @@ public class VistaMAXTurnosRango {
 					try {
 						ctrlPresentacion.addResMAX_Turnos_Rango(dia1, mes1, year1, dia2, mes2, year2, num);
 						JOptionPane.showMessageDialog(null, "Restriccion creada correctamente", "Informacion",JOptionPane.INFORMATION_MESSAGE);
+						textArea.setText(null);
+						dataChooser1.setCalendar(null);
+						dataChooser2.setCalendar(null);
 						ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 					} catch (IOException eX) {
 						JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 
+						textArea.setText(null);
+						dataChooser1.setCalendar(null);
+						dataChooser2.setCalendar(null);
 						ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 					}
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Valores introducidos incorrectamente", "Error", JOptionPane.ERROR_MESSAGE);
+					textArea.setText(null);
+					dataChooser1.setCalendar(null);
+					dataChooser2.setCalendar(null);
 				}
 				sc1.close();
 			}

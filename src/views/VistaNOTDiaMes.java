@@ -93,6 +93,7 @@ public class VistaNOTDiaMes {
 	private void assignar_listenersComponents() {
 		buttonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				textArea.setText(null);
 				ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 			}
 		});
@@ -106,14 +107,17 @@ public class VistaNOTDiaMes {
 					try {
 						ctrlPresentacion.addResNOT_Dia_Mes(dia);
 						JOptionPane.showMessageDialog(null, "Restriccion creada correctamente", "Informacion",JOptionPane.INFORMATION_MESSAGE);
+						textArea.setText(null);
 						ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 					} catch (IOException eX) {
 						JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 
+						textArea.setText(null);
 						ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 					}
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Dia del mes incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
+					textArea.setText(null);
 				}
 				sc1.close();
 			}

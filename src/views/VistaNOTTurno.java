@@ -102,6 +102,9 @@ public class VistaNOTTurno {
 		
 		buttonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(checkBox1.isSelected()) checkBox1.setSelected(false);
+				if(checkBox2.isSelected()) checkBox2.setSelected(false);
+				if(checkBox3.isSelected()) checkBox3.setSelected(false);
 				ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 			}
 		});
@@ -116,14 +119,23 @@ public class VistaNOTTurno {
 						else if (checkBox2.isSelected()) ctrlPresentacion.addResNOT_Turno("tarde");
 						else if (checkBox3.isSelected()) ctrlPresentacion.addResNOT_Turno("noche");
 						JOptionPane.showMessageDialog(null, "Restriccion creada correctamente", "Informacion",JOptionPane.INFORMATION_MESSAGE);
+						if(checkBox1.isSelected()) checkBox1.setSelected(false);
+						else if(checkBox2.isSelected()) checkBox2.setSelected(false);
+						else if(checkBox3.isSelected()) checkBox3.setSelected(false);
 						ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 					} catch (IOException eX) {
 						JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 
+						if(checkBox1.isSelected()) checkBox1.setSelected(false);
+						else if(checkBox2.isSelected()) checkBox2.setSelected(false);
+						else if(checkBox3.isSelected()) checkBox3.setSelected(false);
 						ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 					}
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Turno seleccionado incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
+					if(checkBox1.isSelected()) checkBox1.setSelected(false);
+					if(checkBox2.isSelected()) checkBox2.setSelected(false);
+					if(checkBox3.isSelected()) checkBox3.setSelected(false);
 				}
 			}
 		});	

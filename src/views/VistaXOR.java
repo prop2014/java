@@ -124,6 +124,10 @@ public class VistaXOR {
 				mes.clear();
 				year.clear();
 				turno.clear();
+				if(checkBox1.isSelected()) checkBox1.setSelected(false);
+				if(checkBox2.isSelected()) checkBox2.setSelected(false);
+				if(checkBox3.isSelected()) checkBox3.setSelected(false);
+				dataChooser.setCalendar(null);
 				ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 			}
 		});
@@ -149,6 +153,10 @@ public class VistaXOR {
 						 mes.clear();
 						 year.clear();
 						 turno.clear();
+						 if(checkBox1.isSelected()) checkBox1.setSelected(false);
+						 else if(checkBox2.isSelected()) checkBox2.setSelected(false);
+						 else if(checkBox3.isSelected()) checkBox3.setSelected(false);
+						 dataChooser.setCalendar(null);
 						 ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 					} catch (IOException eX) {
 						JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 
@@ -156,11 +164,19 @@ public class VistaXOR {
 						mes.clear();
 						year.clear();
 						turno.clear();
+						if(checkBox1.isSelected()) checkBox1.setSelected(false);
+						else if(checkBox2.isSelected()) checkBox2.setSelected(false);
+						else if(checkBox3.isSelected()) checkBox3.setSelected(false);
+						dataChooser.setCalendar(null);
 						ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 					}
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Valores introducidos incorrectamente", "Error", JOptionPane.ERROR_MESSAGE);
+					if(checkBox1.isSelected()) checkBox1.setSelected(false);
+					if(checkBox2.isSelected()) checkBox2.setSelected(false);
+					if(checkBox3.isSelected()) checkBox3.setSelected(false);
+					dataChooser.setCalendar(null);
 				}
 			}
 		});	
@@ -180,9 +196,17 @@ public class VistaXOR {
 						else if (checkBox2.isSelected()) turno.add("tarde");
 						else if (checkBox3.isSelected()) turno.add("noche");
 						JOptionPane.showMessageDialog(null, "Fecha anadida correctamente, seleccione la siguiente", "Operacion realizada", JOptionPane.INFORMATION_MESSAGE);
+						if(checkBox1.isSelected()) checkBox1.setSelected(false);
+						else if(checkBox2.isSelected()) checkBox2.setSelected(false);
+						else if(checkBox3.isSelected()) checkBox3.setSelected(false);
+						dataChooser.setCalendar(null);
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Valores introducidos incorrectamente", "Error", JOptionPane.ERROR_MESSAGE);
+					if(checkBox1.isSelected()) checkBox1.setSelected(false);
+					if(checkBox2.isSelected()) checkBox2.setSelected(false);
+					if(checkBox3.isSelected()) checkBox3.setSelected(false);
+					dataChooser.setCalendar(null);
 				}
 			}
 		});	

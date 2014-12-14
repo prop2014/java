@@ -95,6 +95,7 @@ public class VistaNOTFecha {
 	private void assignar_listenersComponents() {
 		buttonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dataChooser.setCalendar(null);
 				ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 			}
 		});
@@ -111,14 +112,17 @@ public class VistaNOTFecha {
 					try {
 						ctrlPresentacion.addResNOT_Fecha(dia, mes, year);
 						JOptionPane.showMessageDialog(null, "Restriccion creada correctamente", "Informacion",JOptionPane.INFORMATION_MESSAGE);
+						dataChooser.setCalendar(null);
 						ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 					} catch (IOException eX) {
-						JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 
+						JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE);
+						dataChooser.setCalendar(null);
 						ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 					}
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "No se ha introducido una fecha correcta", "Error", JOptionPane.ERROR_MESSAGE);
+					dataChooser.setCalendar(null);
 				}
 			}
 		});	
