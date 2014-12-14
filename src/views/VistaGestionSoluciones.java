@@ -216,7 +216,7 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 	
 	public void cargarHospital() {
 		
-		String name = new String(ctrlPresentacion.getNameHospital());
+		String name = new String(ctrlPresentacion.getNameHospital().replaceAll("%", " "));
 		//name = name.replace("%", " ");
 		name = 	"Soluciones del Hospital: "	+ name;
 		

@@ -2,6 +2,7 @@ package views;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
@@ -30,10 +31,10 @@ public class VistaCjtHospitales {
 	private JFrame frameView;
 	private JPanel panelContents = new JPanel();
 	private JPanel topPanel = new JPanel();
-	private final JButton btnCrearHospital = new JButton("Crear Hospital");
-	private final JButton btnEliminarHospital = new JButton("Eliminar Hospital");
-	private final JButton btnImportarHospital = new JButton("Importar Hospital");
-	private final JButton btnSeleccionarHospital = new JButton("Seleccionar Hospital");
+	private final JButton btnCrearHospital = new JButton("<html><CENTER>Crear Hospital<br/>[CTRL+N]</html></CENTER>");
+	private final JButton btnEliminarHospital = new JButton("<html><CENTER>Eliminar Hospital<br/>[CTRL+D]</html></CENTER>");
+	private final JButton btnImportarHospital = new JButton("<html><CENTER>Importar Hospital<br/>[CTRL+I]</html></CENTER>");
+	private final JButton btnSeleccionarHospital = new JButton("<html><CENTER>Seleccionar Hospital<br/>[CTRL+ENTER]</html></CENTER>");
 	private final JList<String> list = new JList<String>();
 	private final JScrollPane scrollPanel = new JScrollPane();
 	private final JLabel titleLabel = new JLabel("Conjunto de Hospitales");
@@ -119,13 +120,13 @@ public class VistaCjtHospitales {
 	
 	private void assign_listenersComponents() {
 		btnCrearHospital.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnCrearHospital.setBounds(266, 186, 150, 30);
+		btnCrearHospital.setBounds(266, 161, 150, 42);
 		midPanel.add(btnCrearHospital);
 		btnSeleccionarHospital.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnSeleccionarHospital.setBounds(530, 221, 161, 30);
+		btnSeleccionarHospital.setBounds(530, 211, 161, 42);
 		midPanel.add(btnSeleccionarHospital);
 		btnImportarHospital.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnImportarHospital.setBounds(266, 221, 150, 30);
+		btnImportarHospital.setBounds(266, 211, 150, 42);
 		midPanel.add(btnImportarHospital);
 		
 		
@@ -214,7 +215,7 @@ public class VistaCjtHospitales {
 			}
 		});
 		btnEliminarHospital.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnEliminarHospital.setBounds(20, 323, 150, 30);
+		btnEliminarHospital.setBounds(20, 323, 150, 42);
 		panelContents.add(btnEliminarHospital);
 		
 		btnEliminarHospital.addActionListener(new ActionListener() {
@@ -292,11 +293,45 @@ public class VistaCjtHospitales {
 				
 			}
 		});
-			
-	
+		
+		// HERE ARE THE KEY BINDINGS
+        panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK), "newHospital");
+        panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_DOWN_MASK), "importHospital");
+        panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_DOWN_MASK), "delHospital");
+        panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, java.awt.event.InputEvent.CTRL_DOWN_MASK), "selHospital");
+        
+        panelContents.getActionMap().put("newHospital", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               	btnCrearHospital.doClick();
+            }
+        });
+        panelContents.getActionMap().put("importHospital", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               	btnImportarHospital.doClick();
+            }
+        });
+        panelContents.getActionMap().put("delHospital", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               	btnEliminarHospital.doClick();
+            }
+        });
+        panelContents.getActionMap().put("selHospital", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               	btnSeleccionarHospital.doClick();
+            }
+        });
+        // END OF KEY BINDINGS
+		
+		
 		
 	}
-
+	public void pressedAction(){
+		
+	}
 	
 	private void initComponents() {
 		init_frameView();
