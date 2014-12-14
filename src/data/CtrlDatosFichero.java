@@ -406,10 +406,8 @@ public class CtrlDatosFichero {
 						   							int size=sl1.nextInt();
 						   							alhosp.add(Integer.toString(size));
 						   							for(int l=0; l<size;++l){
-						   								alhosp.add(sl.next());
-						   								alhosp.add(sl.next());
-						   								alhosp.add(sl.next());
-						   								alhosp.add(sl.next());
+						   								alhosp.add(sl1.next());
+						   								alhosp.add(sl1.next());
 						   							}
 						   						}
 						   					}

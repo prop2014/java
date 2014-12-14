@@ -211,7 +211,7 @@ public class DriverCtrlCalendario {
 						Ho.cargarHospital(id);
 						Ho.addCalendar(-1);
 						cal = new CtrlCalendario(Ho.getCalendar());
-						cal.importCalendar(path, id);
+						cal.importCalendar(id,path);
 						}catch (IOException e){System.out.print("no year");}
 						
 				break;
