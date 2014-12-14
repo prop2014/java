@@ -174,10 +174,8 @@ public class CtrlCalendario {
 	 * Lee un calendario contenido en un fichero de texto
 	 * @param idHospital Identificador del hospital
 	 * @param path Ruta del fichero de texto
-	 * @throws IOException, ParseException
 	 */
-	public void readCalendar(int idHospital, String path) {
-		try {
+	public void readCalendar(int idHospital, String path) throws IOException, NumberFormatException, IndexOutOfBoundsException {
 		// llamada a datos
 		if(ctrlDatosFichero.existsCalendar(idHospital)){
 			ArrayList<String> calendarData = ctrlDatosFichero.getDataCale(idHospital, path);
@@ -204,17 +202,11 @@ public class CtrlCalendario {
 				}
 			}
 		}
-		}
-		catch(NumberFormatException e) {JOptionPane.showMessageDialog(null, "Alguno de los datos del fichero no es correcto ", "Error", JOptionPane.ERROR_MESSAGE);}
-		catch(IndexOutOfBoundsException e) {JOptionPane.showMessageDialog(null, "El formato del fichero no es correcto ", "Error", JOptionPane.ERROR_MESSAGE);}
-		catch(IOException e) {JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);}
-		catch(Exception e) {JOptionPane.showMessageDialog(null, "Se ha producido el siguiente error al leer del fichero:\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);}
 	}
 
 	/**
 	 * Escribe el contenido del calendario actual en el fichero de texto del hospital correspondiente
 	 * @param idHospital Identificador del Hospital
-	 * @throws IOException
 	 */
 	public void writeCalendar(int idHospital) throws IOException {
 		ArrayList<String> calendarData = new ArrayList<String>();
