@@ -2,6 +2,7 @@ package domain;
 
 import model.Calendario;
 import model.Turno;
+import data.CtrlDatosFichero;
 
 import java.util.GregorianCalendar;
 import java.util.Locale;
@@ -9,8 +10,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.io.IOException;
 import java.util.ArrayList;
-import data.CtrlDatosFichero;
 
+import javax.swing.JOptionPane;
 
 /**
  * Controladora de la clase Calendario
@@ -48,7 +49,7 @@ public class CtrlCalendario {
 	 * @param especialDate Fecha especial
 	 * @throws IOException
 	 */
-	public boolean addVacationDay(GregorianCalendar date, int morningDrs, int eveningDrs, int nightDrs, String especialDate) throws IOException{
+	public boolean addVacationDay(GregorianCalendar date, int morningDrs, int eveningDrs, int nightDrs, String especialDate) throws IOException {
 		// checking input data
 		if (calendar.existsVacationDay(date)) throw new IOException("El dia vacacional ya existe ");
 		else if (morningDrs < 0) throw new IOException("El numero de doctores del turno de manana no es correcto ");
@@ -173,9 +174,10 @@ public class CtrlCalendario {
 	 * Lee un calendario contenido en un fichero de texto
 	 * @param idHospital Identificador del hospital
 	 * @param path Ruta del fichero de texto
-	 * @throws IOException
+	 * @throws IOException, ParseException
 	 */
-	public void readCalendar(int idHospital, String path) throws IOException, ParseException{
+	public void readCalendar(int idHospital, String path) {
+		try {
 		// llamada a datos
 		if(ctrlDatosFichero.existsCalendar(idHospital)){
 			ArrayList<String> calendarData = ctrlDatosFichero.getDataCale(idHospital, path);
@@ -202,6 +204,11 @@ public class CtrlCalendario {
 				}
 			}
 		}
+		}
+		catch(NumberFormatException e) {JOptionPane.showMessageDialog(null, "Alguno de los datos del fichero no es correcto ", "Error", JOptionPane.ERROR_MESSAGE);}
+		catch(IndexOutOfBoundsException e) {JOptionPane.showMessageDialog(null, "El formato del fichero no es correcto ", "Error", JOptionPane.ERROR_MESSAGE);}
+		catch(IOException e) {JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);}
+		catch(Exception e) {JOptionPane.showMessageDialog(null, "Se ha producido el siguiente error al leer del fichero:\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);}
 	}
 
 	/**
@@ -209,18 +216,18 @@ public class CtrlCalendario {
 	 * @param idHospital Identificador del Hospital
 	 * @throws IOException
 	 */
-	public void writeCalendar(int idHospital) throws IOException{
+	public void writeCalendar(int idHospital) throws IOException {
 		ArrayList<String> calendarData = new ArrayList<String>();
 		calendarData.add(Integer.toString(calendar.getCalendarYear()));
 		calendarData.add(Integer.toString(calendar.getNumberOfVacations()));	
 		if(!calendar.isEmpty()) {
 			ArrayList<GregorianCalendar> vacations = calendar.getALLVacations();
-			//			ArrayList<GregorianCalendar> vacations = new ArrayList<GregorianCalendar>(calendar.getALLVacations());
+//			ArrayList<GregorianCalendar> vacations = new ArrayList<GregorianCalendar>(calendar.getALLVacations());
 			SimpleDateFormat sdf = new SimpleDateFormat("ddMM");
 			for (GregorianCalendar date : vacations) {
 				calendarData.add(sdf.format(date.getTime()));
 				calendarData.addAll(getVacationDay(date));
-				//				calendarData.addAll(new ArrayList<String>(getVacationDay(date)));
+//				calendarData.addAll(new ArrayList<String>(getVacationDay(date)));
 			}
 		}
 		// llamada a datos
@@ -230,7 +237,7 @@ public class CtrlCalendario {
 	/** Importa un calendario desde un fichero de texto externo
 	 * @param idHospital Identificador del hospital
 	 * @param path Ruta del fichero
-	 * @throws IOException
+	 * @throws IOException, ParseException
 	 */
 	public void importCalendar(int idHospital, String path) throws IOException, ParseException {
 		ArrayList<String> listVacations = new ArrayList<String>();

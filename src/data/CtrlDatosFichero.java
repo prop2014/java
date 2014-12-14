@@ -335,7 +335,9 @@ public class CtrlDatosFichero {
 			   		}
 			   	}
 		   		br.close();
-		   	}catch(Exception e) {e.printStackTrace();}
+		   	}
+//		 	catch(Exception e) {e.printStackTrace();}
+		 	catch(Exception e) {throw e;}
 	   return alhosp;
 	   }
 	 
