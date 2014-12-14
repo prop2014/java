@@ -5,6 +5,9 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Iterator;
+
+import data.CtrlDatosFichero;
 
 import model.Doctor;
 import model.Hospital;
@@ -154,6 +157,59 @@ public class CtrlAlgorithm {
 	
 	public HashMap<Integer, Double> getSueldoAsigned(){
 		return sueldos;
+	}
+	
+	public void getSol(int id) throws IOException{
+		CtrlDatosFichero inOut = new CtrlDatosFichero();
+		ArrayList<String> sol = inOut.getDataSol(id);
+		ArrayList<String> noSol = inOut.getDataNoSol(id);
+		if(!sol.isEmpty()){
+			int i = 0;
+			int doc=Integer.parseInt(sol.get(i)); //iddoc
+			ArrayList<String> asigsDoc = new ArrayList<String>();
+			++i;
+			int size = Integer.parseInt(sol.get(i));//numFechas
+			for(int j = 0; j<size;++j){
+				++i;
+				asigsDoc.add(sol.get(i));
+			}
+			if(asignDoc.containsKey(doc)){
+				asignDoc.remove(doc);
+			}
+			asignDoc.put(doc, asigsDoc); //ponemos las fechas en asigndoc
+			if(sueldos.containsKey(doc)){
+				sueldos.remove(doc);
+			}
+			++i;
+			sueldos.put(doc,Double.parseDouble(sol.get(i))); //ponemos el sueldo en sueldos
+		}
+			tSinSol.clear();
+		if(!noSol.isEmpty()){
+			for(int j=0;j<noSol.size();++j){
+				tSinSol.add(noSol.get(j));//llenamos tSinSol
+			}
+		}
+		
+	}
+	public void saveSol(int id) throws IOException{
+		CtrlDatosFichero inOut = new CtrlDatosFichero();
+		ArrayList<String> sol = new ArrayList<String>();
+		ArrayList<String> noSol = new ArrayList<String>();
+		Iterator<Integer> it = asignDoc.keySet().iterator();
+		while(it.hasNext()){
+		 Integer doc = it.next();
+		 ArrayList<String> assigs = asignDoc.get(doc);
+		 	sol.add(Integer.toString(doc)); //iddoc
+		 	sol.add(Integer.toString(assigs.size())); //numFechas
+		  for(int i=0;i<assigs.size();++i){
+			 sol.add(assigs.get(i)); //fechas
+		  }
+		  sol.add(Double.toString(sueldos.get(doc))); //sueldo
+		}
+		for(String s : tSinSol){
+			noSol.add(s);
+		}
+		inOut.saveDataSol(sol, noSol, id);
 	}
 	
 	public void addTurnToDoctor(int idDoc, String turnoConDoctors) throws IOException{

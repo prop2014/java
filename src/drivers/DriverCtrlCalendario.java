@@ -146,11 +146,9 @@ public class DriverCtrlCalendario {
 							Ho.cargarHospital(id);
 							Ho.addCalendar(inOut.getYear(id,null));
 							CtrlCalendario cal = new CtrlCalendario(Ho.getCalendar());
-							try{
+							
 							cal.readCalendar(id, null);
-							} catch (ParseException e) {
-								e.printStackTrace();
-							}
+							
 							Calendario cale = cal.getCalendar();
 							ArrayList<Turno> t = cale.getALLShifts();
 							for(Turno tu: t){
@@ -178,11 +176,9 @@ public class DriverCtrlCalendario {
 								Ho.cargarHospital(id);
 								Ho.addCalendar(inOut.getYear(id,null));
 								CtrlCalendario cal = new CtrlCalendario(Ho.getCalendar());
-								try{
+								
 								cal.readCalendar(id, null);
-								} catch (ParseException e) {
-									e.printStackTrace();
-								}
+								
 								Calendario cale = cal.getCalendar();
 								ArrayList<Turno> t = cale.getALLShifts();
 								for(Turno tu: t){
