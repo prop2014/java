@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -45,10 +48,10 @@ import javax.swing.table.DefaultTableModel;
 		
 		//CENTER
 		private JLabel labelPanel1 = new JLabel();
-		private JButton buttonCrear = new JButton("<html><CENTER>Crear <br/>Doctor</CENTER>");
-		private JButton buttonEliminar = new JButton("<html><CENTER>Eliminar <br/>Doctor</CENTER>");
-		private JButton buttonModificar = new JButton("<html><CENTER>Modificar <br/>Doctor</CENTER>");
-		private JButton buttonVolver = new JButton("Volver");
+		private JButton buttonCrear = new JButton("<html><CENTER>Crear <br/>Doctor [ctrl+n]</CENTER>");
+		private JButton buttonEliminar = new JButton("<html><CENTER>Eliminar <br/>Doctor[ctrl+d]</CENTER>");
+		private JButton buttonModificar = new JButton("<html><CENTER>Modificar <br/>Doctor[ctrl+m]</CENTER>");
+		private JButton buttonVolver = new JButton("Volver [ESC]");
 		
 		
 		
@@ -84,7 +87,8 @@ import javax.swing.table.DefaultTableModel;
 			// Componentes
 			
 			panelContents.add(panelCenterButtons);
-			
+			panelContents.setFocusable(true);
+			panelContents.requestFocusInWindow();
 		
 		}
 
@@ -132,6 +136,8 @@ import javax.swing.table.DefaultTableModel;
 			
 			buttonModificar.setEnabled(false); 
 	        buttonEliminar.setEnabled(false);
+	        
+	        
 		}
 		
 		
@@ -217,7 +223,48 @@ import javax.swing.table.DefaultTableModel;
 					}
 				}
 			});
-					
+				
+
+			
+			panelContents.addKeyListener(new KeyListener() {
+	            @Override
+	            public void keyPressed(KeyEvent e) {
+	            }
+				@Override
+				public void keyReleased(KeyEvent e) {
+					switch(e.getKeyCode()){
+	        	case KeyEvent.VK_N: {
+	        		if(e.isControlDown()){
+	        			buttonCrear.doClick();
+	        		}
+	        	break;
+	        	}
+	        	
+	        	case KeyEvent.VK_D: {
+	        		buttonEliminar.doClick();
+	        		
+	        	break;
+	        	}
+	        	case (KeyEvent.VK_M): {
+	        		if(e.isControlDown()){
+	        			buttonModificar.doClick();
+	        		}
+	        		
+	        	break;
+	        	}
+	        	case KeyEvent.VK_ESCAPE: {
+	        		buttonVolver.doClick();
+	        	break;
+	        	}
+	        	
+	    	}
+					}
+				@Override
+				public void keyTyped(KeyEvent e) {
+	      
+				}
+				
+	    });
 			
 		}
 		
