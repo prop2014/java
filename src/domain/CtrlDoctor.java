@@ -710,6 +710,7 @@ public class CtrlDoctor {
 	public void addResData(int id,String path)throws IOException{
 		CtrlDatosFichero inOut = new CtrlDatosFichero();
 		ArrayList<String> alRes = inOut.getDataRes(id,path);
+		for(int t=0;t<alRes.size();++t)System.out.print(" "+alRes.get(t));
 			int idDoc;
 		for(int i=0;i<alRes.size();++i){
 			int NumRes, idRes;
@@ -782,7 +783,6 @@ public class CtrlDoctor {
 					ArrayList<Integer> mesXOR = new ArrayList<Integer>();
 					ArrayList<Integer> yearXOR = new ArrayList<Integer>();
 					ArrayList<String> tipoTurnoXOR = new ArrayList<String>();
-					System.out.printf("numDays: %d\n", numdays);
 					for(int k=0;k<numdays;++k){
 						++i;
 						String strDate =  alRes.get(i);
@@ -799,7 +799,6 @@ public class CtrlDoctor {
 						++i;
 						tipoTurnoXOR.add(alRes.get(i));
 					}
-					++i;
 					addResXOR(idDoc,idRes,diaXOR,mesXOR,yearXOR,tipoTurnoXOR);
 				}
 			}
