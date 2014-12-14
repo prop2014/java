@@ -226,48 +226,51 @@ public class CtrlHospital {
 	}	
 	
 	public void saveDataCale() throws IOException{
-		ArrayList<String> alcal = new ArrayList<String>();
-		if(hosp.existsCalendar()){	
-			Calendario calendar =hosp.getCalendario();
-			if(calendar.getNumberOfVacations()>0){	
-				alcal.add(Integer.toString(calendar.getCalendarYear()));
-				alcal.add(Integer.toString(calendar.getNumberOfVacations()));
-				ArrayList<GregorianCalendar> cal = calendar.getALLVacations();
-				ArrayList<Turno> turns =new ArrayList<Turno>();
-				for(int i=0;i<cal.size();++i){
-					turns=calendar.getShiftsOfADay(cal.get(i));
-					int numDrsManana=0,numDrsTarde=0,numDrsNoche=0;
-					String especialm = null,especialt=null,especialn=null;
-					String fecha=null;
-					for(int j=0;j<turns.size();++j){
-						Turno t=turns.get(j);
-						GregorianCalendar gc=t.getDate();
-						SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-						fecha =sdf.format(gc.getTime());
-						if(t.getShiftType().equals("manana")){
-							numDrsManana=t.getNumberOfDoctors();
-							especialm=t.getSpecialDate();
-						}
-						else if(t.getShiftType().equals("tarde")){
-							numDrsTarde=t.getNumberOfDoctors();
-							especialt=t.getSpecialDate();
-						}
-						else if(t.getShiftType().equals("noche")){
-							numDrsNoche=t.getNumberOfDoctors();
-							especialn=t.getSpecialDate();
-						}
-					}
-					alcal.add(fecha);
-					alcal.add(Integer.toString(numDrsManana));
-					alcal.add(Integer.toString(numDrsTarde));
-					alcal.add(Integer.toString(numDrsNoche));
-					alcal.add(especialm);
-					alcal.add(especialt);
-					alcal.add(especialn);
-				}
-			}
-		}
-		inOut.saveDataCale(alcal,hosp.getId());
+		CtrlCalendario ctrlCalendario = new CtrlCalendario(hosp.getCalendario());
+		ctrlCalendario.writeCalendar(hosp.getId());
+		
+//		ArrayList<String> alcal = new ArrayList<String>();
+//		if(hosp.existsCalendar()){	
+//			Calendario calendar =hosp.getCalendario();
+//			if(calendar.getNumberOfVacations()>0){	
+//				alcal.add(Integer.toString(calendar.getCalendarYear()));
+//				alcal.add(Integer.toString(calendar.getNumberOfVacations()));
+//				ArrayList<GregorianCalendar> cal = calendar.getALLVacations();
+//				ArrayList<Turno> turns =new ArrayList<Turno>();
+//				for(int i=0;i<cal.size();++i){
+//					turns=calendar.getShiftsOfADay(cal.get(i));
+//					int numDrsManana=0,numDrsTarde=0,numDrsNoche=0;
+//					String especialm = null,especialt=null,especialn=null;
+//					String fecha=null;
+//					for(int j=0;j<turns.size();++j){
+//						Turno t=turns.get(j);
+//						GregorianCalendar gc=t.getDate();
+//						SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+//						fecha =sdf.format(gc.getTime());
+//						if(t.getShiftType().equals("manana")){
+//							numDrsManana=t.getNumberOfDoctors();
+//							especialm=t.getSpecialDate();
+//						}
+//						else if(t.getShiftType().equals("tarde")){
+//							numDrsTarde=t.getNumberOfDoctors();
+//							especialt=t.getSpecialDate();
+//						}
+//						else if(t.getShiftType().equals("noche")){
+//							numDrsNoche=t.getNumberOfDoctors();
+//							especialn=t.getSpecialDate();
+//						}
+//					}
+//					alcal.add(fecha);
+//					alcal.add(Integer.toString(numDrsManana));
+//					alcal.add(Integer.toString(numDrsTarde));
+//					alcal.add(Integer.toString(numDrsNoche));
+//					alcal.add(especialm);
+//					alcal.add(especialt);
+//					alcal.add(especialn);
+//				}
+//			}
+//		}
+//		inOut.saveDataCale(alcal,hosp.getId());
     }
 	public void guardarHospital()throws IOException{
 		saveDataHosp();
