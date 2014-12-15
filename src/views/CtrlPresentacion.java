@@ -307,8 +307,10 @@ public class CtrlPresentacion {
 	}
 
 	public void eliminarDoc(int id)throws IOException{
+		int idHosp = ctrlHospital.getID();
 		ctrlHospital.eliminarDoctor(id);
 		ctrlHospital.saveDataDoctors();
+		ctrlDoctor.saveDataRes(idHosp);
 	}
 
 	
