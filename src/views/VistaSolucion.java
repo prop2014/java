@@ -163,6 +163,14 @@ public class VistaSolucion {
 		btnCancelar.setFont(new Font("Arial", Font.PLAIN, 12));
 		btnCancelar.setBounds(222, 332, 117, 29);
 		panelContents.add(btnCancelar);
+		
+		
+		btnCancelar.setToolTipText("[ESC]");
+		btnGuardar.setToolTipText("[CTRL+S]");
+        btnEliminarTurno.setToolTipText("[CTRL+D]");
+		btnAnadirTurno.setToolTipText("[CTRL+N]");
+		
+		
 	}
 	private void init_panelTopButtons() {
 		topPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
@@ -250,8 +258,36 @@ public class VistaSolucion {
 				
 			}
 		});
-			
-	
+		
+		
+		 panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_DOWN_MASK), "btnEliminarTurno");
+	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK), "btnAnadirTurno");
+	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK), "btnGuardar");
+	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "btnCancelar");
+	     panelContents.getActionMap().put("buttonEliminar", new AbstractAction() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	            	btnEliminarTurno.doClick();
+	            }
+	        });
+	        panelContents.getActionMap().put("btnAnadirTurno", new AbstractAction() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	            	btnAnadirTurno.doClick();
+	            }
+	        });
+	        panelContents.getActionMap().put("btnGuardar", new AbstractAction() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	            	btnGuardar.doClick();
+	            }
+	        });
+	        panelContents.getActionMap().put("btnCancelar", new AbstractAction() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	            	btnCancelar.doClick();
+	            }
+	        });
 		
 	}
 

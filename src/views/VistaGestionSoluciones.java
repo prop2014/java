@@ -34,6 +34,7 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 	private JButton buttonGenerarED = new JButton("<html><CENTER>Generar Solucion <br/>[EdmondKarp]</CENTER>");
 	private JButton buttonGenerarDI = new JButton("<html><CENTER>Generar Solucion Optima <br/>[Dijkstra]</CENTER>");
 	private JButton buttonModSol = new JButton("<html><CENTER> Modificar Solucion</CENTER>");
+	private JButton buttonBorrarSol = new JButton("<html><CENTER> Borrar Solucion</CENTER>");
 	private JButton buttonVolver = new JButton("Volver");
 	
 	private final JList<String> list = new JList<String>();
@@ -63,8 +64,7 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 		panelContents.add(panelCenterButtons, BorderLayout.CENTER);
 		
 		list.setModel(new AbstractListModel() {
-			String[] values = new String[] { "Solucion Simple EK 1", "Solucion Simple FF 1",
-					"Solucion Simple EK 2", "Solucion Optima DI 1 " };
+			String[] values = new String[] {"AUN NO VA ESTA LISTA"};
 
 			public int getSize() {
 				return values.length;
@@ -94,6 +94,9 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 		buttonModSol.setFont(new Font("Arial", Font.PLAIN, 12));
 		buttonModSol.setBounds(426, 257, 173, 53);
 		
+		buttonBorrarSol.setFont(new Font("Arial", Font.PLAIN, 12));
+		buttonBorrarSol.setBounds(426, 257, 173, 53);
+		
 		buttonVolver.setFont(new Font("Arial", Font.PLAIN, 12));
 		buttonVolver.setBounds(40, 324, 157, 25);
 		
@@ -120,6 +123,14 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 		panelCenterButtons.add(buttonModSol);
 		
 		buttonModSol.setEnabled(false);
+		buttonBorrarSol.setEnabled(false);
+		
+		buttonVolver.setToolTipText("[ESC]");
+	    buttonGenerarFF.setToolTipText("[CTRL+F]");
+	    buttonGenerarED.setToolTipText("[CTRL+E]");
+	    buttonGenerarDI.setToolTipText("[CTRL+O]");
+	    buttonBorrarSol.setToolTipText("[CTRL+D]");
+	    buttonModSol.setToolTipText("[CTRL+M]");
 	}
 	private void inicializarComponents() {
 		inicializar_frameView();
@@ -135,6 +146,7 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 		        public void valueChanged(ListSelectionEvent e) { 
 		            ListSelectionModel lsm = (ListSelectionModel)e.getSource();
 		            buttonModSol.setEnabled(!lsm.isSelectionEmpty()); 
+		            buttonBorrarSol.setEnabled(!lsm.isSelectionEmpty()); 
 		       
 		        }
 		});
@@ -181,7 +193,6 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 		});
 		
 	
-		
 		buttonModSol.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ctrlPresentacion.changeView("vistaSolucion", panelContents);
@@ -194,12 +205,66 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 		buttonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ctrlPresentacion.changeView("vistaGestion", panelContents);
+				
+			}
+			
+			
+		});
+		
+		buttonBorrarSol.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
 			}
 		});
 		
-		
-		
+	      
+	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonGenerarFF");
+	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonGenerarED");
+	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonGenerarDI");
+	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonModSol");
+	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonBorrarSol");
+	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "buttonVolver");
+	    
+	     panelContents.getActionMap().put("buttonGenerarFF", new AbstractAction() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	            	buttonGenerarFF.doClick();
+	            }
+	        });
+	        panelContents.getActionMap().put("buttonGenerarED", new AbstractAction() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	            	buttonGenerarED.doClick();
+	            }
+	        });
+	        panelContents.getActionMap().put("buttonGenerarDI", new AbstractAction() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	            	buttonGenerarDI.doClick();
+	            }
+	        });
+	        panelContents.getActionMap().put("buttonModSol", new AbstractAction() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	            	buttonModSol.doClick();
+	            }
+	        });
+	        panelContents.getActionMap().put("buttonBorrarSol", new AbstractAction() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	            	buttonBorrarSol.doClick();
+	            }
+	        });
+	        panelContents.getActionMap().put("buttonVolver", new AbstractAction() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	            	buttonVolver.doClick();
+	            }
+	        });
 	}
+		
+		
+	
 	
 	
 	/* Constructoras y metodos publicos */

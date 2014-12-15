@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 
@@ -139,6 +140,14 @@ public class VistaCrearHospital {
 	
 		btnCrearHospital.setBounds(371, 322, 140, 25);
 		panelCenterButtons.add(btnCrearHospital);
+		
+		
+		btnCrearHospital.setToolTipText("[CTRL+N]");
+		btnImportCal.setToolTipText("[CTRL+Q]"); 
+		btnImportDoc.setToolTipText("[CTRL+W]");
+		btnCancel.setToolTipText("[ESC]");
+		
+		
 	}
 	private void inicializarComponents() {
 		inicializar_frameView();
@@ -195,6 +204,37 @@ public class VistaCrearHospital {
 				ctrlPresentacion.changeView("vistaCjtHospitales", panelContents);
 			}
 		});
+		
+		 panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_DOWN_MASK), "btnImportCal");
+	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK), "btnCrearHospital");
+	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_DOWN_MASK), "btnImportDoc");
+	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "btnCancel");
+	     panelContents.getActionMap().put("btnCrearHospital", new AbstractAction() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	            	btnCrearHospital.doClick();
+	            }
+	        });
+	        panelContents.getActionMap().put("btnImportCal", new AbstractAction() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	            	btnImportCal.doClick();
+	            }
+	        });
+	        panelContents.getActionMap().put("btnImportDoc", new AbstractAction() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	            	btnImportDoc.doClick();
+	            }
+	        });
+	        panelContents.getActionMap().put("btnCancel", new AbstractAction() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	            	btnCancel.doClick();
+	            }
+	        });
+		
+		
 		
 	}
 	
