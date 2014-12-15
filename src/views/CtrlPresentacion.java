@@ -561,7 +561,19 @@ public class CtrlPresentacion {
 		ctrlAlgorithm.deleteTurnFromDoctor(idDoc, turno);
 	}
 	
-	public void saveSolution() throws IOException {//provando 0
-		ctrlAlgorithm.saveSol(ctrlHospital.getID(),0);
+	public void saveSolution(String nameSol, String comment) throws IOException {//provando 0
+		
+		int idSol = ctrlAlgorithm.getFIDS();
+		
+		/*ctrlAlgorithm.saveSol(ctrlHospital.getID(), idSol);
+		*/String[] commentArray = comment.split(" ");
+		ArrayList<String> commentList = new ArrayList<String>();
+		for(String st : commentArray) {
+			commentList.add(st);
+		}
+		ctrlAlgorithm.makeSol(idSol, nameSol, commentList);
+		ctrlAlgorithm.saveAllSOlutions(ctrlHospital.getID());
+		//ctrlAlgorithm.setNameSol(idSol, nameSol);
+		//ctrlAlgorithm.setComent(idSol, commentList);
 	}
 }

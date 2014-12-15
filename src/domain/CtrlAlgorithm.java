@@ -39,6 +39,7 @@ public class CtrlAlgorithm {
 		turnosSinSol = new ArrayList<nodoTurno>();
 		numSinSol = new ArrayList<Integer>();
 		idActual = 0;
+		sols = new HashMap<Integer,Solutions>();
 	}
 	
 	
@@ -171,8 +172,8 @@ public class CtrlAlgorithm {
 	 * @param sinsol turnos sin solucion
 	 * @param suel sueldo de los doctores con todas sus asignaciones
 	 */
-	public void makeSol(int idSol,String name,ArrayList<String> comentari ,HashMap<Integer, ArrayList<String>> asign, ArrayList<String> sinsol, HashMap<Integer, Double> suel){
-		Solutions sol = new Solutions(idSol,name,comentari, asign,sinsol,suel);
+	public void makeSol(int idSol,String name,ArrayList<String> comentari){
+		Solutions sol = new Solutions(idSol,name,comentari, asignDoc,tSinSol,sueldos);
 		sols.put(idSol,sol);
 	}
 	
@@ -274,21 +275,25 @@ public class CtrlAlgorithm {
 		CtrlDatosFichero inOut = new CtrlDatosFichero();
 		ArrayList<String> sol = new ArrayList<String>();
 		ArrayList<String> noSol = new ArrayList<String>();
-		Iterator<Integer> it = asignDoc.keySet().iterator();
+		
+		HashMap<Integer, ArrayList<String>> asignDocTemp = (sols.get(idSol)).getDatesAsigned();
+		Iterator<Integer> it = asignDocTemp.keySet().iterator();
+		
 		
 		while(it.hasNext()){
 		 sol.add(Integer.toString(idSol));
 		 Integer doc = it.next();
-		 ArrayList<String> assigs = asignDoc.get(doc);
+		 ArrayList<String> assigs = asignDocTemp.get(doc);
 		 	sol.add(Integer.toString(doc)); //iddoc
 		 	sol.add(Integer.toString(assigs.size())); //numFechas
 		  for(int i=0;i<assigs.size();++i){
 			 sol.add(assigs.get(i)); //fechas
 		  }
-		  sol.add(Double.toString(sueldos.get(doc))); //sueldo
+		  sol.add(Double.toString(((sols.get(idSol)).getSueldoAsigned()).get(doc))); //sueldo
 		}
 		noSol.add(Integer.toString(idSol));
-		for(String s : tSinSol){
+		ArrayList<String> tSinSolTemp = tSinSol;
+		for(String s : tSinSolTemp){
 			noSol.add(s);
 		}
 		inOut.saveDataSol(idSol,sol, noSol, id);
@@ -388,7 +393,7 @@ public class CtrlAlgorithm {
 				modified = true;
 				String[] parts2 = parts[2].split("[()]");
 				int numDocs = Integer.parseInt(parts2[1]);
-				tSinSol.remove(t);
+				tSinSol.remove(tSinSol.get(i));
 				++numDocs;
 				tSinSol.add(turno+" "+"("+numDocs+")");
 				

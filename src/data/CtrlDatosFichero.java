@@ -138,40 +138,52 @@ public class CtrlDatosFichero {
 			   		boolean foundD = false;
 			   		boolean foundC = false;
 			   		sl.close();
-			   		linea=br.readLine();
-			   		if(linea != null) {
-				   		Scanner sl2 = new Scanner(linea);
-				   		while(sl2.hasNext() && !foundD) {
-				   			word = sl2.next();
-				   			if(word.equals(".D")){
+			   		if((linea=br.readLine())!=null) {
+			   			Scanner sl2 = new Scanner(linea);
+			   			word = sl2.next();
+			   			if(!foundD) {
+			   				if(word.equals(".D")) {
+			   					word = sl2.next(); //numDoc
+				   				alhosp.add(word);
 				   				foundD = true;
-				   				word = sl2.next(); //numDoc
-				   				alhosp.add(word);
-				   				break;
-				   			}
-				   		}
-				   		sl2.close();
+			   				} else {
+			   					alhosp.add("0");
+			   				}
+			   			}
+			   			if(!foundC) {
+			   				if(foundD) {
+			   					if((linea = br.readLine())!=null) {
+			   						Scanner sl3 = new Scanner(linea);
+			   						word = sl3.next();
+			   						if(word.equals(".C")) {
+			   							sl3.next();
+					   					word = sl3.next(); //numCal
+						   				alhosp.add(word);
+						   				foundC = true;
+					   				} else {
+					   					alhosp.add("0");
+					   				}
+			   						sl3.close();
+			   					}
+			   					
+			   				} else {
+			   					if(word.equals(".C")) {
+			   						sl2.next();
+				   					word = sl2.next(); //numCal
+					   				alhosp.add(word);
+					   				foundC = true;
+				   				} else {
+				   					alhosp.add("0");
+				   				}
+			   				}
+			   			}
+			   			sl2.close();
+			   		} else {
+			   			alhosp.add("0");
+			   			alhosp.add("0");
 			   		}
-			   		if(!foundD) alhosp.add("0");
 			   		
-			   		linea=br.readLine();
-			   		if(linea != null) {
-			   			Scanner sl3 = new Scanner(linea);
-				   		while(sl3.hasNext() && !foundC) {
-				   			word = sl3.next();
-				   			if(word.equals(".C")){
-				   				foundC = true;
-				   				word = sl3.next(); //anyo
-				   				word = sl3.next(); //nTurnos
-				   				alhosp.add(word);
-				   				break;
-				   			}
-				   		}
-				   		sl3.close();
-			   		}
-			   		if(!foundC) alhosp.add("0");
 		   		}
-		   		
 		   		fr.close();
 		   	}catch(Exception e) {e.printStackTrace();}
 	   return alhosp;
@@ -424,7 +436,6 @@ public class CtrlDatosFichero {
 		   		}
 		   		if(!exists){
 		   			br.close();
-		   			throw new IOException ("Datos No encontrados");
 		   		}
 		   		br.close();
 		   		fr.close();
@@ -1269,7 +1280,7 @@ public class CtrlDatosFichero {
 				   }
 				   size=howManySolutions(id);
 				   if(size == 0) size ++;
-				   for(int i = 0; i <size;++i){
+				   for(int i = 0; i <=size;++i){
 					   if(i==idsol){
 						   bufferSols.add(i,alsol);
 						   bufferNSols.add(i,alnosol);

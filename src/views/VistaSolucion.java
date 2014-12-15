@@ -196,7 +196,7 @@ public class VistaSolucion {
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					ctrlPresentacion.saveSolution();
+					ctrlPresentacion.saveSolution(txtNameSol.getText(), txtComent.getText());
 					JOptionPane.showMessageDialog(null, "Solucion guardada!", "Error", JOptionPane.INFORMATION_MESSAGE);
 				} catch(IOException eX) {
 					JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 

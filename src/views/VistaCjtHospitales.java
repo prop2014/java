@@ -126,10 +126,10 @@ public class VistaCjtHospitales {
 		btnCrearHospital.setBounds(266, 161, 150, 42);
 		midPanel.add(btnCrearHospital);
 		btnSeleccionarHospital.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnSeleccionarHospital.setBounds(530, 211, 161, 42);
+		btnSeleccionarHospital.setBounds(530, 208, 161, 42);
 		midPanel.add(btnSeleccionarHospital);
 		btnImportarHospital.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnImportarHospital.setBounds(266, 211, 150, 42);
+		btnImportarHospital.setBounds(266, 208, 150, 42);
 		midPanel.add(btnImportarHospital);
 		
 		btnCrearHospital.setToolTipText("[CTRL+N]");

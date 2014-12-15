@@ -23,7 +23,9 @@ public class Solutions {
 	/**
 	 * 
 	 */
-	public Solutions() {}
+	public Solutions() {
+		
+	}
 	
 	/**
 	 * 
@@ -34,6 +36,11 @@ public class Solutions {
 	 * @param suel sueldo que cobrara el doctor con esta solucion
 	 */
 	public Solutions(int idSol,String name,ArrayList<String> comentari ,HashMap<Integer, ArrayList<String>> asign, ArrayList<String> sinsol, HashMap<Integer, Double> suel){
+		Name = new String();
+		coment = new ArrayList<String>();
+		asignDoc = new HashMap<Integer, ArrayList<String>>();
+		sueldos = new HashMap<Integer, Double> ();
+		tSinSol = new ArrayList<String> ();
 		id=idSol;
 		Name=name;
 		for(int i=0;i<comentari.size();++i){
