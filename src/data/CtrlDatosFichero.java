@@ -1268,8 +1268,7 @@ public class CtrlDatosFichero {
 					   C=true;
 				   }
 				   size=howManySolutions(id);
-				   ++size;
-				   System.out.print("Pasu per aki\n");
+				   if(size == 0) size ++;
 				   for(int i = 0; i <size;++i){
 					   if(i==idsol){
 						   bufferSols.add(i,alsol);
@@ -1314,9 +1313,7 @@ public class CtrlDatosFichero {
 					  pw.print(" "+bufferR.get(i));
 				   }
 			   }
-			   System.out.print("apunt d'entrar\n");
 			   if(size>0){
-				   System.out.print("si ke entru\n");
 				   ArrayList<String>bufferS = new ArrayList<String>();
 				   ArrayList<String>bufferNS = new ArrayList<String>();
 				   for(int j=0;j<size;++j){
@@ -1361,7 +1358,8 @@ public class CtrlDatosFichero {
 	   		if(sl.hasNext()){
 		   		word=sl.next();
 		   		if(word.equals(".NS")){
-		   			if(sl.next().equals(Integer.toString(idsol))){
+		   			int Idsol =sl.nextInt();
+		   			if(Idsol==idsol){
 		   				alnosol.add(Integer.toString(idsol));
 			   			exists=true;
 			   			while(sl.hasNext()){
@@ -1394,7 +1392,8 @@ public class CtrlDatosFichero {
 	   		if(sl.hasNext()){
 		   		word=sl.next();
 		   		if(word.equals(".S")){
-		   			if(sl.next().equals(Integer.toString(idsol))){
+		   			int idSol = sl.nextInt();
+		   			if(idSol==idsol){
 		   				alsol.add(Integer.toString(idsol));
 			   			exists=true;
 			   			while(sl.hasNext()){
