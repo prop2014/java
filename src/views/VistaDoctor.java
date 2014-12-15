@@ -231,8 +231,7 @@ public class VistaDoctor {
 							|| !docActual.equals(textNombre.getText())
 							|| !docActual.equals(textSueldo.getText())
 							|| !docActual.equals(textMaxTurnos.getText())) {
-						// Habra que comprobar si se han modificado las
-						// restricciones
+					
 
 						try {
 							String nombre = textNombre.getText();

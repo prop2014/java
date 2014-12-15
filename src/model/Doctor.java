@@ -117,7 +117,7 @@ public class Doctor {
 											turno.getShiftType()+" |";
 						
 					}
-					
+					Aux.add(cadena);
 					break;
 				}
 				
@@ -159,7 +159,7 @@ public class Doctor {
 					break;
 				}
 				
-				case "MAX_Dias_Rango"  :{
+				case "MAX_Turnos_Rango"  :{
 					
 					MAX_Turnos_Rango N = ((MAX_Turnos_Rango)RES);
 					GregorianCalendar fechaIni = ((MAX_Turnos_Rango)RES).getFechaIni();
@@ -167,14 +167,15 @@ public class Doctor {
 					
 					int  numDias = ((MAX_Turnos_Rango)RES).getNumDias();
 					
-					Aux.add(  Integer.toString(numDias)+ " - " +		
+					Aux.add( Integer.toString(numDias) + " - " +		
 								fechaIni.get(fechaIni.DAY_OF_MONTH)+ "/" +
 								(fechaIni.get(fechaIni.MONTH) + 1) + "/" +
 								fechaIni.get(fechaIni.YEAR) + " - " +
 								fechaFin.get(fechaFin.DAY_OF_MONTH)+ "/" +
 								(fechaFin.get(fechaFin.MONTH) + 1) + "/" +
-								fechaFin.get(fechaFin.YEAR)
-								);
+								fechaFin.get(fechaFin.YEAR )
+							);
+					
 					break;
 				}	
 				}
