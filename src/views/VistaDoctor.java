@@ -57,12 +57,12 @@ public class VistaDoctor {
 	private JTextArea textSueldo = new JTextArea();
 
 	private JButton buttonEliminar = new JButton(
-			"<html><CENTER>Eliminar<br/>Restriccion [CTRL+D]</CENTER>");
+			"<html><CENTER>Eliminar<br/>Restriccion</CENTER>");
 	private JButton buttonAnadir = new JButton(
-			"<html><CENTER>Anadir<br/>Restriccion [CTRL+N]</CENTER>");
+			"<html><CENTER>Anadir<br/>Restriccion</CENTER>");
 	private JButton buttonGuardar = new JButton(
-			"<html><CENTER>Guardar<br/>cambios [CTRL+S]</CENTER>");
-	private JButton buttonVolver = new JButton("Volver [ESC]");
+			"<html><CENTER>Guardar<br/>cambios</CENTER>");
+	private JButton buttonVolver = new JButton("Volver");
 
 	// METODOS PRIVADOS
 
@@ -167,6 +167,11 @@ public class VistaDoctor {
 		panelCenterButtons.add(buttonVolver);
 		
 		buttonEliminar.setEnabled(false);
+		
+		buttonVolver.setToolTipText("[ESC]");
+		buttonGuardar.setToolTipText("[CTRL+S]");
+		buttonAnadir.setToolTipText("[CTRL+N]");
+		buttonEliminar.setToolTipText("[CTRL+D]");
 	}
 
 	private void inicializarComponents() {

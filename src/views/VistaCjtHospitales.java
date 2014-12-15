@@ -31,9 +31,9 @@ public class VistaCjtHospitales {
 	private JFrame frameView;
 	private JPanel panelContents = new JPanel();
 	private JPanel topPanel = new JPanel();
-	private final JButton btnCrearHospital = new JButton("<html><CENTER>Crear Hospital<br/>[CTRL+N]</html></CENTER>");
-	private final JButton btnEliminarHospital = new JButton("<html><CENTER>Eliminar Hospital<br/>[CTRL+D]</html></CENTER>");
-	private final JButton btnImportarHospital = new JButton("<html><CENTER>Importar Hospital<br/>[CTRL+I]</html></CENTER>");
+	private final JButton btnCrearHospital = new JButton("<html><CENTER>Crear Hospital<br/></html></CENTER>");
+	private final JButton btnEliminarHospital = new JButton("<html><CENTER>Eliminar Hospital<br/></html></CENTER>");
+	private final JButton btnImportarHospital = new JButton("<html><CENTER>Importar Hospital<br/></html></CENTER>");
 	private final JButton btnSeleccionarHospital = new JButton("<html><CENTER>Seleccionar Hospital<br/></html></CENTER>");
 	private final JList<String> list = new JList<String>();
 	private final JScrollPane scrollPanel = new JScrollPane();
@@ -104,6 +104,9 @@ public class VistaCjtHospitales {
 		
 		midPanel.add(mediumPanel);
 		mediumPanel.setLayout(new BoxLayout(mediumPanel, BoxLayout.X_AXIS));
+		
+		
+		
 	}
 	private void init_panelTopButtons() {
 		topPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
@@ -129,6 +132,10 @@ public class VistaCjtHospitales {
 		btnImportarHospital.setBounds(266, 211, 150, 42);
 		midPanel.add(btnImportarHospital);
 		
+		btnCrearHospital.setToolTipText("[CTRL+N]");
+		btnEliminarHospital.setToolTipText("[CTRL+D]");
+        btnImportarHospital.setToolTipText("[CTRL+I]");
+        btnSeleccionarHospital.setToolTipText("[ENTER]");
 		
 		panelInfo.setBackground(Color.WHITE);
 		panelInfo.setBounds(263, 0, 428, 123);
@@ -261,7 +268,7 @@ public class VistaCjtHospitales {
 			
 		});
 		
-		btnSeleccionarHospital.setToolTipText("CTRL+ENTER");
+		
 		btnCrearHospital.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ctrlPresentacion.changeView("vistaCrearHospital", panelContents);
@@ -298,7 +305,7 @@ public class VistaCjtHospitales {
         panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK), "newHospital");
         panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_DOWN_MASK), "importHospital");
         panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_DOWN_MASK), "delHospital");
-        panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, java.awt.event.InputEvent.CTRL_DOWN_MASK), "selHospital");
+        panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "selHospital");
         
         panelContents.getActionMap().put("newHospital", new AbstractAction() {
             @Override

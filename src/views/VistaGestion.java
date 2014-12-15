@@ -32,10 +32,10 @@ public class VistaGestion {
 	private JPanel panelCenterButtons = new JPanel();
 	//CENTER
 	private JLabel labelPanel1 = new JLabel();
-	private JButton buttonCal = new JButton("<html><CENTER>Gestion de <br/>Calendario [C]</CENTER>");
-	private JButton buttonDoc = new JButton("<html><CENTER>Gestion de <br/>Doctores [D]</CENTER>");
-	private JButton buttonSol = new JButton("<html><CENTER>Gestion de <br/>Solucion [S]</CENTER>");
-	private JButton buttonVolver = new JButton("Volver [ESC]");
+	private JButton buttonCal = new JButton("<html><CENTER>Gestion de <br/>Calendario</CENTER>");
+	private JButton buttonDoc = new JButton("<html><CENTER>Gestion de <br/>Doctores</CENTER>");
+	private JButton buttonSol = new JButton("<html><CENTER>Gestion de <br/>Solucion</CENTER>");
+	private JButton buttonVolver = new JButton("Volver");
 	
 	
 	
@@ -99,6 +99,11 @@ public class VistaGestion {
 		panelCenterButtons.add(buttonCal);
 		panelCenterButtons.add(buttonSol);
 		panelCenterButtons.add(buttonDoc);
+		
+		buttonVolver.setToolTipText("[ESC]");
+		buttonSol.setToolTipText("[S]");
+		buttonCal.setToolTipText("[C]");
+		buttonDoc.setToolTipText("[D]");
 	}
 	private void inicializarComponents() {
 		inicializar_frameView();

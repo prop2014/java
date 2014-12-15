@@ -48,10 +48,10 @@ import javax.swing.table.DefaultTableModel;
 		
 		//CENTER
 		private JLabel labelPanel1 = new JLabel();
-		private JButton buttonCrear = new JButton("<html><CENTER>Crear <br/>Doctor [CTRL+N]</CENTER>");
-		private JButton buttonEliminar = new JButton("<html><CENTER>Eliminar <br/>Doctor[CTRL+D]</CENTER>");
-		private JButton buttonModificar = new JButton("<html><CENTER>Modificar <br/>Doctor[CTRL+M]</CENTER>");
-		private JButton buttonVolver = new JButton("Volver [ESC]");
+		private JButton buttonCrear = new JButton("<html><CENTER>Crear <br/>Doctor</CENTER>");
+		private JButton buttonEliminar = new JButton("<html><CENTER>Eliminar <br/>Doctor</CENTER>");
+		private JButton buttonModificar = new JButton("<html><CENTER>Modificar <br/>Doctor</CENTER>");
+		private JButton buttonVolver = new JButton("Volver");
 		
 		
 		
@@ -137,6 +137,10 @@ import javax.swing.table.DefaultTableModel;
 			buttonModificar.setEnabled(false); 
 	        buttonEliminar.setEnabled(false);
 	        
+	        buttonVolver.setToolTipText("[ESC]");
+	        buttonCrear.setToolTipText("[CTRL+N]");
+	        buttonModificar.setToolTipText("[CTRL+E]");
+			buttonEliminar.setToolTipText("[CTRL+D]");
 	        
 		}
 		
