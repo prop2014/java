@@ -11,6 +11,7 @@ import java.util.GregorianCalendar;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 /**
  * Vista secundaria de gestion de restricciones tipo XOR
@@ -114,7 +115,10 @@ public class VistaXOR {
 	    panelButtons.add(buttonSiguiente);
 	    panelButtons.add(buttonVolver);
 	    // Tooltips
-	    button.setToolTipText("Aceptar");
+	    button.setToolTipText("[CTRL+ENTER]");
+	    buttonVolver.setToolTipText("[ESC]");
+	    buttonSiguiente.setToolTipText("[CTRL+S");
+	    
 	}
 
 	private void assignar_listenersComponents() {
@@ -211,6 +215,31 @@ public class VistaXOR {
 				}
 			}
 		});	
+		
+		panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "buttonVolver");
+		panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, java.awt.event.InputEvent.CTRL_DOWN_MASK), "button");
+		panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonSiguiente");
+		
+		panelContents.getActionMap().put("buttonVolver", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	buttonVolver.doClick();
+            }
+        });
+		
+		panelContents.getActionMap().put("buttonSiguiente", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	buttonSiguiente.doClick();
+            }
+        });
+		
+		panelContents.getActionMap().put("button", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	button.doClick();
+            }
+        });
 	}
 	
 	

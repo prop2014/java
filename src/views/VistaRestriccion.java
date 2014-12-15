@@ -29,15 +29,15 @@ public class VistaRestriccion {
 	  private JLabel labelPanel = new JLabel("<html>Elije el tipo de restriccion para crear:");
 	
 	//Botones
-	private JButton buttonNOTFecha = new JButton("NOT Fecha [CTRL+F]");
-	private JButton buttonNOTTurno = new JButton("NOT Turno [CTRL+T]");
-	private JButton buttonNOTEspecial = new JButton("NOT Especial [CTRL+E]");
-	private JButton buttonNOTDiaMes = new JButton("NOT Dia Mes [CTRL+M]");
-	private JButton buttonNOTDiaSemana = new JButton("NOT Dia Semana [CTRL+S]");
-	private JButton buttonMAXTurnosRango = new JButton("MAX Turnos Rango [CTRL+R]");
-	private JButton buttonMAXTurnosDia = new JButton("MAX Turnos por Dia [CTRL+D]");
-	private JButton buttonXOR = new JButton("XOR [CTRL+X]");
-	private JButton buttonVolver = new JButton("Volver [ESC]");
+	private JButton buttonNOTFecha = new JButton("NOT Fecha");
+	private JButton buttonNOTTurno = new JButton("NOT Turno");
+	private JButton buttonNOTEspecial = new JButton("NOT Especial");
+	private JButton buttonNOTDiaMes = new JButton("NOT Dia Mes");
+	private JButton buttonNOTDiaSemana = new JButton("NOT Dia Semana");
+	private JButton buttonMAXTurnosRango = new JButton("MAX Turnos Rango");
+	private JButton buttonMAXTurnosDia = new JButton("MAX Turnos por Dia");
+	private JButton buttonXOR = new JButton("XOR");
+	private JButton buttonVolver = new JButton("Volver");
 	
 	//METODOS PRIVADOS
 	
@@ -123,14 +123,15 @@ public class VistaRestriccion {
 	    panelButtons.add(buttonXOR);
 	    panelButtons.add(buttonVolver);
 	    // Tooltips
-	    buttonNOTFecha.setToolTipText("Crear Restriccion tipo NOT Fecha");
-	    buttonNOTTurno.setToolTipText("Crear Restriccion tipo NOT Turno");
-	    buttonNOTEspecial.setToolTipText("Crear Restriccion tipo NOT Especial");
-	    buttonNOTDiaMes.setToolTipText("Crear Restriccion tipo NOT Dia Mes");
-	    buttonNOTDiaSemana.setToolTipText("Crear Restriccion tipo NOT Dia Semana");
-	    buttonMAXTurnosRango.setToolTipText("Crear Restriccion tipo MAX Turnos en un Rango");
-	    buttonMAXTurnosDia.setToolTipText("Crear Restriccion tipo MAX Turnos por Dia");
-	    buttonXOR.setToolTipText("Crear Restriccion tipo XOR");
+	    buttonNOTFecha.setToolTipText("[CTRL+F]");
+	    buttonNOTTurno.setToolTipText("[CTRL+T]");
+	    buttonNOTEspecial.setToolTipText("[CTRL+E]");
+	    buttonNOTDiaMes.setToolTipText("[CTRL+M]");
+	    buttonNOTDiaSemana.setToolTipText("[CTRL+S]");
+	    buttonMAXTurnosRango.setToolTipText("[CTRL+R]");
+	    buttonMAXTurnosDia.setToolTipText("[CTRL+D]");
+	    buttonXOR.setToolTipText("[CTRL+X]");
+	    buttonVolver.setToolTipText("[CTRL+ESC]");
 	}
 
 	private void assignar_listenersComponents() {
@@ -214,6 +215,12 @@ public class VistaRestriccion {
 	            @Override
 	            public void actionPerformed(ActionEvent e) {
 	            	buttonXOR.doClick();
+	            }
+	        });
+	        panelContents.getActionMap().put("buttonNOTTurno", new AbstractAction() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	            	buttonNOTTurno.doClick();
 	            }
 	        });
 	        panelContents.getActionMap().put("buttonNOTDiaSemana", new AbstractAction() {

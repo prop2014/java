@@ -73,6 +73,10 @@ public class VistaCalendario extends Vista {
 		labelVacationHeaders.setFont(new Font("Courier", Font.BOLD,14));
 		labelVacationHeaders.setBounds(20, 75, 495, 15);
 
+		buttonCreateCal.setToolTipText("[CTRL+C]");
+		buttonDeleteCal.setToolTipText("[CTRL+E]");
+		buttonImportCal.setToolTipText("[CTRL+I]");
+		
 		panelTop.add(labelCalendar);
 		panelTop.add(buttonCreateCal);
 		panelTop.add(buttonImportCal);
@@ -114,6 +118,10 @@ public class VistaCalendario extends Vista {
 		buttonDelVacation.setBounds(0, 155, 150, 40);
 		buttonDelVacation.setEnabled(false);
 
+		buttonAddVacation.setToolTipText("[CTRL+A]");
+		buttonModVacation.setToolTipText("[CTRL+M]");
+		buttonDelVacation.setToolTipText("[CTRL+D]");
+		
 		panelVacationHandler.add(dateChooser);
 		panelVacationHandler.add(buttonAddVacation);
 		panelVacationHandler.add(buttonModVacation);
@@ -127,6 +135,9 @@ public class VistaCalendario extends Vista {
 		// components
 		buttonGoBack.setBounds(20, 10, 150, 30);
 		buttonHelp.setBounds(365, 10, 150, 30);
+		
+		buttonGoBack.setToolTipText("[ESC]");
+		buttonHelp.setToolTipText("[CTRL+H]");
 		
 		panelBottom.add(buttonGoBack);
 		panelBottom.add(buttonHelp);
@@ -471,6 +482,72 @@ public class VistaCalendario extends Vista {
 				//				actionPerformed_buttonHelp (event);
 			}
 		});
+		
+		panelVacationHandler.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonAddVacation");
+		panelVacationHandler.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonModVacation");
+		panelVacationHandler.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonDelVacation");
+	    panelBottom.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "buttonGoBack");
+	    panelBottom.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonHelp");
+	    panelTop.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonCreateCal");
+	    panelTop.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonDeleteCal");
+	    panelTop.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonImportCal");
+	    
+	    panelVacationHandler.getActionMap().put("buttonAddVacation", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	buttonAddVacation.doClick();
+            }
+        });
+	    
+	    panelVacationHandler.getActionMap().put("buttonModVacation", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	buttonModVacation.doClick();
+            }
+        });
+	    
+	    panelVacationHandler.getActionMap().put("buttonDelVacation", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	buttonDelVacation.doClick();
+            }
+        });
+	    
+	    panelBottom.getActionMap().put("buttonGoBack", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	buttonGoBack.doClick();
+            }
+        });
+	    
+	    panelBottom.getActionMap().put("buttonHelp", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	buttonHelp.doClick();
+            }
+        });
+	    
+	    panelTop.getActionMap().put("buttonCreateCal", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	buttonCreateCal.doClick();
+            }
+        });
+	    
+	    panelTop.getActionMap().put("buttonDeleteCal", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	buttonDeleteCal.doClick();
+            }
+        });
+	    
+	    panelTop.getActionMap().put("buttonImportCal", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	buttonImportCal.doClick();
+            }
+        });
+	
 	}
 	//******************************************************************************//
 
