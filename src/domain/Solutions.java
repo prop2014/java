@@ -163,7 +163,7 @@ public class Solutions {
 			noSol.add(Integer.toString(idSol));
 			noSol.add(s);
 		}
-		inOut.saveDataSol(sol, noSol, id);
+		inOut.saveDataSol(idSol,sol, noSol, id);
 	}
 	
 	/**
@@ -174,8 +174,8 @@ public class Solutions {
 	 */
 	public void getSol(int id, int idsol) throws IOException{
 		CtrlDatosFichero inOut = new CtrlDatosFichero();
-		ArrayList<String> sol = inOut.getDataSol(id);
-		ArrayList<String> noSol = inOut.getDataNoSol(id);
+		ArrayList<String> sol = inOut.getDataSol(id,idsol);
+		ArrayList<String> noSol = inOut.getDataNoSol(id,idsol);
 		if(!sol.isEmpty()){
 			int i = 0;
 			int idSol = Integer.parseInt(sol.get(i)); //idsol

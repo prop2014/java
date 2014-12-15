@@ -633,8 +633,8 @@ public class CtrlDatosFichero {
 			   for(int i=0;i<size;++i){
 				   ArrayList<String> bufferS = new  ArrayList<String>();
 				   ArrayList<String> bufferNS = new  ArrayList<String>();
-				   bufferS=getDataSol2(id,i);
-				   bufferNS=getDataNoSol2(id,i);
+				   bufferS=getDataSol(id,i);
+				   bufferNS=getDataNoSol(id,i);
 				   bufferSols.add(i,bufferS);
 				   bufferNSols.add(i,bufferNS);
 		   	   }
@@ -734,8 +734,8 @@ public class CtrlDatosFichero {
 			   for(int i=0;i<size;++i){
 				   ArrayList<String> bufferS = new  ArrayList<String>();
 				   ArrayList<String> bufferNS = new ArrayList<String>();
-				   bufferS=getDataSol2(id,i);
-				   bufferNS=getDataNoSol2(id,i);
+				   bufferS=getDataSol(id,i);
+				   bufferNS=getDataNoSol(id,i);
 				   bufferSols.add(i,bufferS);
 				   bufferNSols.add(i,bufferNS);
 		   	   }
@@ -823,8 +823,8 @@ public class CtrlDatosFichero {
 				   for(int i=0;i<size;++i){
 					   ArrayList<String> bufferS = new  ArrayList<String>();
 					   ArrayList<String> bufferNS = new ArrayList<String>();
-					   bufferS=getDataSol2(id,i);
-					   bufferNS=getDataNoSol2(id,i);
+					   bufferS=getDataSol(id,i);
+					   bufferNS=getDataNoSol(id,i);
 					   bufferSols.add(i,bufferS);
 					   bufferNSols.add(i,bufferNS);
 			   	   }
@@ -916,8 +916,8 @@ public class CtrlDatosFichero {
 				   for(int i=0;i<size;++i){
 					   ArrayList<String>bufferS = new ArrayList<String>();
 					   ArrayList<String>bufferNS = new ArrayList<String>();
-					   bufferS=getDataSol2(id,i);
-					   bufferNS=getDataNoSol2(id,i);
+					   bufferS=getDataSol(id,i);
+					   bufferNS=getDataNoSol(id,i);
 					   bufferSols.add(i,bufferS);
 					   bufferNSols.add(i,bufferNS);
 			   	   }
@@ -1014,8 +1014,8 @@ public class CtrlDatosFichero {
 			   for(int i=0;i<size;++i){
 				   ArrayList<String> bufferS = new  ArrayList<String>();
 				   ArrayList<String> bufferNS = new ArrayList<String>();
-				   bufferS=getDataSol2(id,i);
-				   bufferNS=getDataNoSol2(id,i);
+				   bufferS=getDataSol(id,i);
+				   bufferNS=getDataNoSol(id,i);
 				   bufferSols.add(i,bufferS);
 				   bufferNSols.add(i,bufferNS);
 		   	   }
@@ -1102,8 +1102,8 @@ public class CtrlDatosFichero {
 	   }
    }
    
-   
-   public ArrayList<String> getDataSol(int id)throws IOException{
+   @Deprecated
+   public ArrayList<String> getDataSol3(int id)throws IOException{
 	   ArrayList<String> alsol = new ArrayList<String>();
  		File archivo;
 		String num = Integer.toString(id);
@@ -1135,8 +1135,8 @@ public class CtrlDatosFichero {
   }
 	   
    
-   
-   public ArrayList<String> getDataNoSol(int id)throws IOException{
+   @Deprecated
+   public ArrayList<String> getDataNoSol3(int id)throws IOException{
 	   ArrayList<String> alnosol = new ArrayList<String>();
 		File archivo;
 		String num = Integer.toString(id);
@@ -1167,8 +1167,8 @@ public class CtrlDatosFichero {
   		return alnosol;
    }
    
-   
-   public void saveDataSol(ArrayList<String> alsol,ArrayList<String> alnosol,Integer id) throws IOException{
+   @Deprecated
+   public void saveDataSol3(ArrayList<String> alsol,ArrayList<String> alnosol,Integer id) throws IOException{
 	   ArrayList<String> bufferH = new  ArrayList<String>();
 	   ArrayList<String> bufferD = new  ArrayList<String>();
 	   ArrayList<String> bufferC = new  ArrayList<String>();
@@ -1241,7 +1241,7 @@ public class CtrlDatosFichero {
 	   }
 	   
    }
-   public void saveDataSol2(int idsol, ArrayList<String> alsol,ArrayList<String> alnosol,Integer id) throws IOException{
+   public void saveDataSol(int idsol, ArrayList<String> alsol,ArrayList<String> alnosol,Integer id) throws IOException{
 	   ArrayList<String> bufferH = new  ArrayList<String>();
 	   ArrayList<String> bufferD = new  ArrayList<String>();
 	   ArrayList<String> bufferC = new  ArrayList<String>();
@@ -1268,13 +1268,22 @@ public class CtrlDatosFichero {
 					   C=true;
 				   }
 				   size=howManySolutions(id);
+				   ++size;
+				   System.out.print("Pasu per aki\n");
 				   for(int i = 0; i <size;++i){
+					   if(i==idsol){
+						   bufferSols.add(i,alsol);
+						   bufferNSols.add(i,alnosol);
+					   }
+					   else{
 					   ArrayList<String>bufferS = new ArrayList<String>();
 					   ArrayList<String>bufferNS = new ArrayList<String>();
-					   bufferS=getDataSol2(id,i);
-					   bufferNS=getDataNoSol2(id,i);
+					   bufferS=getDataSol(id,i);
+					   bufferNS=getDataNoSol(id,i);
+					   
 					   bufferSols.add(i,bufferS);
 					   bufferNSols.add(i,bufferNS);
+					   }
 				   }
 			   }
 		   try{
@@ -1305,22 +1314,24 @@ public class CtrlDatosFichero {
 					  pw.print(" "+bufferR.get(i));
 				   }
 			   }
+			   System.out.print("apunt d'entrar\n");
 			   if(size>0){
+				   System.out.print("si ke entru\n");
 				   ArrayList<String>bufferS = new ArrayList<String>();
 				   ArrayList<String>bufferNS = new ArrayList<String>();
 				   for(int j=0;j<size;++j){
-					   bufferS=bufferSols.get(j);
-					   bufferNS=bufferNSols.get(j);
-					   pw.println();
-					   pw.print(".S");
-					   for (int i = 0; i < bufferS.size(); i++){
-							  pw.print(" "+bufferS.get(i));
-					   }
-					   pw.println();
-					   pw.print(".NS");
-					   for (int i = 0; i < bufferNS.size(); i++){
-							  pw.print(" "+bufferNS.get(i));
-					   }
+						   bufferS=bufferSols.get(j);
+						   bufferNS=bufferNSols.get(j);
+						   pw.println();
+						   pw.print(".S");
+						   for (int i = 0; i < bufferS.size(); i++){
+								  pw.print(" "+bufferS.get(i));
+						   }
+						   pw.println();
+						   pw.print(".NS");
+						   for (int i = 0; i < bufferNS.size(); i++){
+								  pw.print(" "+bufferNS.get(i));
+						   }
 				   }
 			   }
 			   pw.close();
@@ -1332,7 +1343,7 @@ public class CtrlDatosFichero {
 	   }
 	   
    }
-   public ArrayList<String> getDataNoSol2(int id,int idsol)throws IOException{
+   public ArrayList<String> getDataNoSol(int id,int idsol)throws IOException{
 	   ArrayList<String> alnosol = new ArrayList<String>();
 		File archivo;
 		String num = Integer.toString(id);
@@ -1365,7 +1376,7 @@ public class CtrlDatosFichero {
   		if(!exists)throw new IOException("No existe esta solucion");
   		return alnosol;
    }
-   public ArrayList<String> getDataSol2(int id,int idsol)throws IOException{
+   public ArrayList<String> getDataSol(int id,int idsol)throws IOException{
 	   ArrayList<String> alsol = new ArrayList<String>();
  		File archivo;
 		String num = Integer.toString(id);
@@ -1422,7 +1433,7 @@ public class CtrlDatosFichero {
 		 }catch(Exception e) {e.printStackTrace();}
 		  return exists;
 	 }
-   public boolean existsSol2(int id, int idSol) throws IOException{
+   public boolean existsSol(int id, int idSol) throws IOException{
 		 boolean exists=false;
 		 try{
 		   		String num = Integer.toString(id);

@@ -26,6 +26,7 @@ public class CtrlAlgorithm {
 	private Asignaciones resMap;
 	private ArrayList<nodoTurno> turnosSinSol;
 	private ArrayList<Integer> numSinSol;
+	private HashMap<Integer,Solutions> sols;
 	private HashMap<Integer, ArrayList<String>> asignDoc;
 	private ArrayList<String> tSinSol;
 	private HashMap<Integer, Double> sueldos;
@@ -159,10 +160,10 @@ public class CtrlAlgorithm {
 		return sueldos;
 	}
 	
-	public void getSol(int id) throws IOException{
+	public void getSol(int id,int idSol) throws IOException{
 		CtrlDatosFichero inOut = new CtrlDatosFichero();
-		ArrayList<String> sol = inOut.getDataSol(id);
-		ArrayList<String> noSol = inOut.getDataNoSol(id);
+		ArrayList<String> sol = inOut.getDataSol(id,idSol);
+		ArrayList<String> noSol = inOut.getDataNoSol(id,idSol);
 		if(!sol.isEmpty()){
 			int i = 0;
 			int doc=Integer.parseInt(sol.get(i)); //iddoc
@@ -191,12 +192,14 @@ public class CtrlAlgorithm {
 		}
 		
 	}
-	public void saveSol(int id) throws IOException{
+	public void saveSol(int id, int idSol) throws IOException{
 		CtrlDatosFichero inOut = new CtrlDatosFichero();
 		ArrayList<String> sol = new ArrayList<String>();
 		ArrayList<String> noSol = new ArrayList<String>();
 		Iterator<Integer> it = asignDoc.keySet().iterator();
+		
 		while(it.hasNext()){
+		 sol.add(Integer.toString(idSol));
 		 Integer doc = it.next();
 		 ArrayList<String> assigs = asignDoc.get(doc);
 		 	sol.add(Integer.toString(doc)); //iddoc
@@ -206,10 +209,11 @@ public class CtrlAlgorithm {
 		  }
 		  sol.add(Double.toString(sueldos.get(doc))); //sueldo
 		}
+		noSol.add(Integer.toString(idSol));
 		for(String s : tSinSol){
 			noSol.add(s);
 		}
-		inOut.saveDataSol(sol, noSol, id);
+		inOut.saveDataSol(idSol,sol, noSol, id);
 	}
 	
 	public void addTurnToDoctor(int idDoc, String turnoConDoctors) throws IOException{

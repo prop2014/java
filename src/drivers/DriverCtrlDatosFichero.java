@@ -274,7 +274,7 @@ public class DriverCtrlDatosFichero {
 				num=teclado.nextInt();
 				System.out.print("ingrese el id solucion:\n");
 				sols=teclado.nextInt();
-				if(inOut.existsSol2(num, sols)) System.out.printf("Si que existe\n");
+				if(inOut.existsSol(num, sols)) System.out.printf("Si que existe\n");
 				else System.out.printf("No existe\n");
 				
 				break;
@@ -283,7 +283,7 @@ public class DriverCtrlDatosFichero {
 				num=teclado.nextInt();
 				System.out.print("ingrese el id solucion para obtenerla:\n");
 				sols=teclado.nextInt();
-				ArrayList<String> sol = inOut.getDataSol2(num, sols);
+				ArrayList<String> sol = inOut.getDataSol(num, sols);
 				for(int i=0;i<sol.size();++i) System.out.print(" "+sol.get(i));
 				System.out.println();
 				break;
@@ -292,7 +292,7 @@ public class DriverCtrlDatosFichero {
 				num=teclado.nextInt();
 				System.out.print("ingrese el id solucion para obrener los turnos no asignados:\n");
 				sols=teclado.nextInt();
-				ArrayList<String> nosol = inOut.getDataNoSol2(num, sols);
+				ArrayList<String> nosol = inOut.getDataNoSol(num, sols);
 				for(int i=0;i<nosol.size();++i) System.out.print(" "+nosol.get(i));
 				System.out.println();
 				break;
