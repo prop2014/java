@@ -13,14 +13,15 @@ import data.CtrlDatosFichero;
  */
 public class Solutions {
 
-	private HashMap<Integer, ArrayList<String>> asignDoc;
-	private ArrayList<String> tSinSol;
-	private HashMap<Integer, Double> sueldos;
-	int id;
+	private int id;
+	private String Name;
 	private ArrayList<String> coment;
+	private HashMap<Integer, ArrayList<String>> asignDoc;
+	private HashMap<Integer, Double> sueldos;
+	private ArrayList<String> tSinSol;
 	
 	/**
-	 * Hace bonito
+	 * 
 	 */
 	public Solutions() {}
 	
@@ -32,8 +33,9 @@ public class Solutions {
 	 * @param sinsol turnos no asignados de la solucion
 	 * @param suel sueldo que cobrara el doctor con esta solucion
 	 */
-	public Solutions(int idSol,ArrayList<String> comentari ,HashMap<Integer, ArrayList<String>> asign, ArrayList<String> sinsol, HashMap<Integer, Double> suel){
+	public Solutions(int idSol,String name,ArrayList<String> comentari ,HashMap<Integer, ArrayList<String>> asign, ArrayList<String> sinsol, HashMap<Integer, Double> suel){
 		id=idSol;
+		Name=name;
 		for(int i=0;i<comentari.size();++i){
 			coment.add(comentari.get(i));
 		}
@@ -56,6 +58,14 @@ public class Solutions {
 	public int getId(){
 		return id;
 	}
+	/**
+	 * 
+	 * @return el nombre de la solucion
+	 */
+	public String getName(){
+		return Name;
+	}
+	
 	/**
 	 * 
 	 * @return el comentario de la solucion
@@ -100,6 +110,11 @@ public class Solutions {
 			 
 		}
 	}
+	
+	public void setName (String name){
+		Name = name;
+	}
+	
 	public void setSueldos (HashMap<Integer, Double>suel){
 		Iterator<Integer> it = suel.keySet().iterator();
 		while(it.hasNext()){

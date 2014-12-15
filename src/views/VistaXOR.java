@@ -147,6 +147,7 @@ public class VistaXOR {
 						else if (checkBox2.isSelected()) turno.add("tarde");
 						else if (checkBox3.isSelected()) turno.add("noche");
 					try {
+						 if (dia.size() <= 1) throw new IOException("Solo hay una fecha de XOR");
 						 ctrlPresentacion.addResXOR(dia, mes, year, turno);
 						 JOptionPane.showMessageDialog(null, "Restriccion creada correctamente", "Informacion",JOptionPane.INFORMATION_MESSAGE);
 						 dia.clear();

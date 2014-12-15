@@ -26,6 +26,7 @@ public class CtrlAlgorithm {
 	private ArrayList<nodoTurno> turnosSinSol;
 	private ArrayList<Integer> numSinSol;
 	private HashMap<Integer,Solutions> sols;
+	private int idActual;
 	private HashMap<Integer, ArrayList<String>> asignDoc;
 	private ArrayList<String> tSinSol;
 	private HashMap<Integer, Double> sueldos;
@@ -37,6 +38,7 @@ public class CtrlAlgorithm {
 		resMap = new Asignaciones();
 		turnosSinSol = new ArrayList<nodoTurno>();
 		numSinSol = new ArrayList<Integer>();
+		idActual = 0;
 	}
 	
 	
@@ -151,28 +153,92 @@ public class CtrlAlgorithm {
 		return asignDoc;
 	}
 	
+	
 	public ArrayList<String> getTurnosSinSol () {
 		return tSinSol;
 	}
+	
 	
 	public HashMap<Integer, Double> getSueldoAsigned(){
 		return sueldos;
 	}
 	
-	public void makeSol(int idSol,ArrayList<String> comentari ,HashMap<Integer, ArrayList<String>> asign, ArrayList<String> sinsol, HashMap<Integer, Double> suel){
-		Solutions sol = new Solutions(idSol,comentari, asign,sinsol,suel);
+	/** Anyade una solucion a sols
+	 * @param idSol identificador de la solucion
+	 * @param name nombre de la solucion
+	 * @param comentari comentario de la solucion
+	 * @param asign turnos asignados a cada doctor
+	 * @param sinsol turnos sin solucion
+	 * @param suel sueldo de los doctores con todas sus asignaciones
+	 */
+	public void makeSol(int idSol,String name,ArrayList<String> comentari ,HashMap<Integer, ArrayList<String>> asign, ArrayList<String> sinsol, HashMap<Integer, Double> suel){
+		Solutions sol = new Solutions(idSol,name,comentari, asign,sinsol,suel);
 		sols.put(idSol,sol);
 	}
 	
-	public void getsol(int idsol){
+	/**  carga una solucion de sols a ctrAlgoritm
+	 * @param idsol carga la solucion en CtrlAlgoritm
+	 */
+	public void cargarSol(int idsol){
 		Solutions sol = sols.get(idsol);
 		asignDoc=sol.getDatesAsigned();
 		tSinSol=sol.getTurnosSinSol();
 		sueldos=sol.getSueldoAsigned();
+		idActual=idsol;
+	}
+	
+	/**
+	 * @return la id de la solucion que estamos tratando en ctrAlgoritm
+	 */
+	public int getIdActual(){
+		return idActual;
+	}
+	
+	/**
+	 * @return los ids de las soluciones ya almacenadas
+	 */
+	public ArrayList<Integer> getallidSolutions(){
+		ArrayList<Integer> idssols = new ArrayList<Integer>();
+		for(int i=0;i<sols.size();++i){
+			idssols.add(i);
+		}
+		return idssols;
+	}
+	
+	
+	public void setNameSol(int idsol, String name){
+		sols.get(idsol).setName(name);
+	}
+	
+	public void setComent(int idsol, ArrayList<String> coment){
+		sols.get(idsol).setComent(coment);
+	}
+	
+	public void setAssigs(int idsol,HashMap<Integer, ArrayList<String>> asign){
+		sols.get(idsol).setDatesAsigned(asign);
+	}
+	
+	public void setsueldos(int idsol,HashMap<Integer, Double> sueldo){
+		sols.get(idsol).setSueldos(sueldo);
+	}
+	
+	public void setTsinsol(int idsol,ArrayList<String> tsin) {
+		sols.get(idsol).settSinSol(tsin);
+	}
+	
+	public int getFIDS(){
+		if(sols.isEmpty())return 0;
+		else {
+			for(int i =0; i<sols.size();++i){
+				if(!sols.containsKey(i)) return i;
+			}
+		}
+		return sols.size();
 	}
 	
 	
 	public void getSol(int id,int idSol) throws IOException{
+		idActual=idSol;
 		CtrlDatosFichero inOut = new CtrlDatosFichero();
 		ArrayList<String> sol = inOut.getDataSol(id,idSol);
 		ArrayList<String> noSol = inOut.getDataNoSol(id,idSol);
@@ -202,8 +268,8 @@ public class CtrlAlgorithm {
 				tSinSol.add(noSol.get(j));//llenamos tSinSol
 			}
 		}
-		
 	}
+	
 	public void saveSol(int id, int idSol) throws IOException{
 		CtrlDatosFichero inOut = new CtrlDatosFichero();
 		ArrayList<String> sol = new ArrayList<String>();
@@ -226,6 +292,19 @@ public class CtrlAlgorithm {
 			noSol.add(s);
 		}
 		inOut.saveDataSol(idSol,sol, noSol, id);
+	}
+	
+	
+	/**guarda todas las soluciones
+	 * 
+	 * @param id el id del hospital
+	 * @throws IOException errores de fichero
+	 */
+	public void saveAllSOlutions(int id) throws IOException{
+		for(int i=0;i<sols.size();++i){
+			Solutions sol = sols.get(i);
+			sol.saveSol(id, i);
+		}
 	}
 	
 	public void addTurnToDoctor(int idDoc, String turnoConDoctors) throws IOException{
