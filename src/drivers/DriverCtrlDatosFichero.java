@@ -25,6 +25,10 @@ public class DriverCtrlDatosFichero {
 		System.out.print("14: saveDataRes\n");
 		System.out.print("15: removepart\n");
 		System.out.print("16: getYear\n");
+		System.out.print("17: howManySolutions\n");
+		System.out.print("18: existsSol\n");
+		System.out.print("19: getsol\n");
+		System.out.print("20: getnosol\n");
 		System.out.print("0: Salir\n");
 	}
 
@@ -255,6 +259,44 @@ public class DriverCtrlDatosFichero {
 				num=teclado.nextInt();
 				int year=inOut.getYear(num,null);
 				System.out.printf("year: %d\n",year);
+				break;
+			case 17:
+				System.out.print("Ingrese el id del hospital para ver el numero de soluciones que tiene:\n");
+				num=teclado.nextInt();
+				int sols=inOut.howManySolutions(num);
+				System.out.printf("sols: %d\n",sols);
+				
+				
+				break;
+				
+			case 18:
+				System.out.print("Ingrese el id del hospital para ver si existe una solucion en un hospital:\n");
+				num=teclado.nextInt();
+				System.out.print("ingrese el id solucion:\n");
+				sols=teclado.nextInt();
+				if(inOut.existsSol2(num, sols)) System.out.printf("Si que existe\n");
+				else System.out.printf("No existe\n");
+				
+				break;
+			case 19:
+				System.out.print("Ingrese el id del hospital:\n");
+				num=teclado.nextInt();
+				System.out.print("ingrese el id solucion para obtenerla:\n");
+				sols=teclado.nextInt();
+				ArrayList<String> sol = inOut.getDataSol2(num, sols);
+				for(int i=0;i<sol.size();++i) System.out.print(" "+sol.get(i));
+				System.out.println();
+				break;
+			case 20:
+				System.out.print("Ingrese el id del hospital:\n");
+				num=teclado.nextInt();
+				System.out.print("ingrese el id solucion para obrener los turnos no asignados:\n");
+				sols=teclado.nextInt();
+				ArrayList<String> nosol = inOut.getDataNoSol2(num, sols);
+				for(int i=0;i<nosol.size();++i) System.out.print(" "+nosol.get(i));
+				System.out.println();
+				break;
+			
 				default:break;
 			}
 			muestraOpciones();
