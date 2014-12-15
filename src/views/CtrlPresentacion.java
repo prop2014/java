@@ -270,7 +270,22 @@ public class CtrlPresentacion {
 		} catch (IOException e) {throw new IOException(e);}
 		ctrlHospital.guardarHospital();
 	}
+	
+	public void modificarHospital(String nameHosp, Double factM, Double factT, Double factN) throws IOException{
+		try {
+			ctrlHospital.modificarHospital(nameHosp, factM, factT, factN);
 
+		} catch (IOException e) {throw new IOException(e);}
+		ctrlHospital.guardarHospital();
+	}
+	public void setHospEdit(int newVal) {
+		vistaCrearHospital.setEditing(newVal);
+	}
+	
+	public ArrayList<String> getInfoHosp() throws IOException{
+		return ctrlHospital.getInfoHospital(ctrlHospital.getID());
+	}
+	
 	public void importarHospital(String path) throws IOException{
 		ctrlHospital.importarHospital(path);
 	}

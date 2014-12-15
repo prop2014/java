@@ -35,6 +35,7 @@ public class VistaCjtHospitales {
 	private final JButton btnEliminarHospital = new JButton("<html><CENTER>Eliminar Hospital<br/></html></CENTER>");
 	private final JButton btnImportarHospital = new JButton("<html><CENTER>Importar Hospital<br/></html></CENTER>");
 	private final JButton btnSeleccionarHospital = new JButton("<html><CENTER>Seleccionar Hospital<br/></html></CENTER>");
+	private final JButton btnmodificarHospital = new JButton("<html><CENTER>Modificar Hospital</html></CENTER>");
 	private final JList<String> list = new JList<String>();
 	private final JScrollPane scrollPanel = new JScrollPane();
 	private final JLabel titleLabel = new JLabel("Conjunto de Hospitales");
@@ -86,6 +87,12 @@ public class VistaCjtHospitales {
 		titleLabel.setHorizontalTextPosition(SwingConstants.LEADING);
 		
 		topPanel.add(titleLabel);
+		
+		
+		btnmodificarHospital.setBounds(552, 14, 142, 29);
+		topPanel.add(btnmodificarHospital);
+		btnmodificarHospital.setToolTipText("[CTRL+N]");
+		btnmodificarHospital.setFont(new Font("Arial", Font.PLAIN, 12));
 		
 		midPanel = new JPanel();
 		midPanel.setBounds(0, 60, 700, 251);
@@ -271,10 +278,28 @@ public class VistaCjtHospitales {
 		
 		btnCrearHospital.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ctrlPresentacion.setHospEdit(0);
 				ctrlPresentacion.changeView("vistaCrearHospital", panelContents);
 			}
 		});
 		
+		btnmodificarHospital.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try{
+					if(list.isSelectionEmpty()) throw new IOException("Debe seleccionar un hospital");
+					String[] parts = (list.getSelectedValue()).split("-");
+					String idHosp = parts[0];
+					ctrlPresentacion.cargarHospital(Integer.parseInt(idHosp));
+					ctrlPresentacion.setHospEdit(1);
+					ctrlPresentacion.changeView("vistaCrearHospital", panelContents);
+				} catch (IOException eX){
+					JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
+				} catch (ParseException eX){
+					JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
+				}
+				
+			}
+		});
 	
 		list.addListSelectionListener(new ListSelectionListener() {
 			@Override

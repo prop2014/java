@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.border.EmptyBorder;
 /**
@@ -16,7 +17,7 @@ import javax.swing.border.EmptyBorder;
 public class VistaCrearHospital {
 	
 	private CtrlPresentacion ctrlPresentacion;
-	
+	private int editing;
 	//ID VISTA 13
 	
 	//Componentes interficie
@@ -167,7 +168,11 @@ public class VistaCrearHospital {
 					Double factT = Double.parseDouble(tTextField.getText());
 					Double factN = Double.parseDouble(nTextField.getText());
 					if(nameHosp.isEmpty()) throw new IOException("No le has puesto un nombre al hospital");
-					ctrlPresentacion.crearHospital(nameHosp, factM, factT, factN, pathDoctores, pathCalendario);
+					if(editing==1){
+						ctrlPresentacion.modificarHospital(nameHosp, factM, factT, factN);
+					}else {
+						ctrlPresentacion.crearHospital(nameHosp, factM, factT, factN, pathDoctores, pathCalendario);
+					}
 				} catch (IOException eX) {
 					JOptionPane.showMessageDialog(null, eX, "Error",JOptionPane.ERROR_MESSAGE); 
 				} catch (NumberFormatException nE){
@@ -260,6 +265,30 @@ public class VistaCrearHospital {
 		pathDoctores = null;
 	}
 	
+	public void setEditing(int newVal) {
+		editing = newVal;
+	}
+	
+	public void funcEditing() {
+		if(editing == 1) {
+			btnImportCal.setVisible(false);
+			btnImportDoc.setVisible(false);
+			btnCrearHospital.setText("Modificar Hospital");
+			try {
+				ArrayList<String> info = ctrlPresentacion.getInfoHosp();
+				nameHospTextField.setText(info.get(1));
+				mTextField.setText(info.get(2));
+				tTextField.setText(info.get(3));
+				nTextField.setText(info.get(4));
+			} catch(IOException eX) {
+				JOptionPane.showMessageDialog(null, eX, "Error",JOptionPane.ERROR_MESSAGE); 
+			}
+		} else {
+			btnImportCal.setVisible(true);
+			btnImportDoc.setVisible(true);
+			btnCrearHospital.setText("Crear Hospital");
+		}
+	}
 	public JPanel getPanel() {
 		return panelContents;
 	}
@@ -273,6 +302,7 @@ public class VistaCrearHospital {
 	}
 	public void showPanel() {
 		clearData();
+		funcEditing();
 		panelContents.setVisible(true);
 	}
 	
