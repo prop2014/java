@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import data.CtrlDatosFichero;
-
 import model.Doctor;
 import model.Hospital;
 import model.Asignaciones;
@@ -159,6 +158,19 @@ public class CtrlAlgorithm {
 	public HashMap<Integer, Double> getSueldoAsigned(){
 		return sueldos;
 	}
+	
+	public void makeSol(int idSol,ArrayList<String> comentari ,HashMap<Integer, ArrayList<String>> asign, ArrayList<String> sinsol, HashMap<Integer, Double> suel){
+		Solutions sol = new Solutions(idSol,comentari, asign,sinsol,suel);
+		sols.put(idSol,sol);
+	}
+	
+	public void getsol(int idsol){
+		Solutions sol = sols.get(idsol);
+		asignDoc=sol.getDatesAsigned();
+		tSinSol=sol.getTurnosSinSol();
+		sueldos=sol.getSueldoAsigned();
+	}
+	
 	
 	public void getSol(int id,int idSol) throws IOException{
 		CtrlDatosFichero inOut = new CtrlDatosFichero();
