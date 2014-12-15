@@ -195,24 +195,28 @@ public class VistaDoctor {
 
 				if (ctrlPresentacion.isEmptyDocActual()) {// Se a entrado para crear
 
-					String nameDoc = textNombre.getText();
-					nameDoc = nameDoc.replaceAll(" ", "%");
+					
 					try {
+						
+						if (textID.getText().isEmpty())throw new IOException("El doctor no tiene ID!");
+						if (textMaxTurnos.getText().isEmpty())throw new IOException("El doctor no tiene Maximo de Turnos!");
+						if (textSueldo.getText().isEmpty())throw new IOException("El doctor no tiene Sueldo!");
+						if (textNombre.getText().isEmpty())throw new IOException("El doctor no tiene Nombre!");
+						
+						String nameDoc = textNombre.getText();
+						nameDoc = nameDoc.replaceAll(" ", "%");
 						int id = Integer.parseInt(textID.getText());
-						int maxTurnos = Integer.parseInt(textMaxTurnos
-								.getText());
+						int maxTurnos = Integer.parseInt(textMaxTurnos.getText());
 						Double sueldo = Double.parseDouble(textSueldo.getText());
-						if (nameDoc.isEmpty())
-							throw new IOException("El doctor no tiene nombre");
-						ctrlPresentacion.crearDoctor(nameDoc, id, maxTurnos,
-								sueldo);
+						
+						
+						
+						ctrlPresentacion.crearDoctor(nameDoc, id, maxTurnos,sueldo);
 					} catch (IOException eX) {
-						JOptionPane.showMessageDialog(null, eX, "Error",
-								JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, eX, "Error",JOptionPane.ERROR_MESSAGE);
 					} catch (NumberFormatException nE) {
-						JOptionPane.showMessageDialog(null,
-										"Alguno de los factores no es un valor correcto",
-										"Error", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null,"Alguno de los factores no es un valor correcto",
+														"Error", JOptionPane.ERROR_MESSAGE);
 					}
 
 				}
@@ -278,39 +282,74 @@ public class VistaDoctor {
 		buttonAnadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				//if (ctrlPresentacion.isEmptyDocActual()) {// Se entra para CREAR
+				if (ctrlPresentacion.isEmptyDocActual()) {// Se a entrado para crear
 
-					
 					try {
+						if (textID.getText().isEmpty())throw new IOException("El doctor no tiene ID!");
+						if (textMaxTurnos.getText().isEmpty())throw new IOException("El doctor no tiene Maximo de Turnos!");
+						if (textSueldo.getText().isEmpty())throw new IOException("El doctor no tiene Sueldo!");
+						if (textNombre.getText().isEmpty())throw new IOException("El doctor no tiene Nombre!");
 						
 						String nameDoc = textNombre.getText();
 						nameDoc = nameDoc.replaceAll(" ", "%");
-						ctrlPresentacion.setDocActual(textID.getText(), nameDoc,  
-													textSueldo.getText(), textMaxTurnos.getText());
+						int id = Integer.parseInt(textID.getText());
+						int maxTurnos = Integer.parseInt(textMaxTurnos.getText());
+						Double sueldo = Double.parseDouble(textSueldo.getText());
+						if (nameDoc.isEmpty())throw new IOException("El doctor no tiene nombre");
 						
-						if (nameDoc.isEmpty()) throw new IOException("El doctor no tiene nombre");
-						
-						if (ctrlPresentacion.isEmptyDocActual()){
-							ctrlPresentacion.crearDoctor(ctrlPresentacion.getNameDocAc(), ctrlPresentacion.getIdDocAc(),
-														ctrlPresentacion.getMaxTurnDocAc(), ctrlPresentacion.getSueldoDocAc());
-							
-						}
-						
-						
+						ctrlPresentacion.crearDoctor(nameDoc, id, maxTurnos,sueldo);
 						ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 						
 					} catch (IOException eX) {
-						JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, eX, "Error",JOptionPane.ERROR_MESSAGE);
 					} catch (NumberFormatException nE) {
-						JOptionPane	.showMessageDialog(null,
-										"Alguno de los factores no es un valor correcto",
-										"Error", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null,"Alguno de los factores no es un valor correcto","Error", JOptionPane.ERROR_MESSAGE);
 					}
+					
 
+			}
+			else{ //He entrado para modificar
 				
+				
+				try {
+					
+					if (textID.getText().isEmpty())throw new IOException("El doctor no tiene ID!");
+					if (textMaxTurnos.getText().isEmpty())throw new IOException("El doctor no tiene Maximo de Turnos!");
+					if (textSueldo.getText().isEmpty())throw new IOException("El doctor no tiene Sueldo!");
+					if (textNombre.getText().isEmpty())throw new IOException("El doctor no tiene Nombre!");
+					
+					int id = Integer.parseInt(textID.getText());
+					String nameDoc = textNombre.getText();
+					nameDoc = nameDoc.replaceAll(" ", "%");
+					int maxTurnos = Integer.parseInt(textMaxTurnos.getText());
+					Double sueldo = Double.parseDouble(textSueldo.getText());
+					
+					String[] docActual = ctrlPresentacion.getDocActual();
 
+					if (!docActual.equals(textID.getText())
+							|| !docActual.equals(textNombre.getText())
+							|| !docActual.equals(textSueldo.getText())
+							|| !docActual.equals(textMaxTurnos.getText())) {
+						
+						ctrlPresentacion.setDocActual(textID.getText(), nameDoc , 
+														textSueldo.getText(), textMaxTurnos.getText());
+						
+						ctrlPresentacion.setDoctor(id, nameDoc, maxTurnos, sueldo);
+						
+
+					}
+					
+				ctrlPresentacion.changeView("vistaRestriccion", panelContents);
+				} catch (IOException eX) {
+					JOptionPane.showMessageDialog(null, eX, "Error",JOptionPane.ERROR_MESSAGE);
+				} catch (NumberFormatException nE) {
+					JOptionPane.showMessageDialog(null,"Alguno de los factores no es un valor correcto","Error", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+				
 				
 			}
+
 		});
 
 		buttonEliminar.addActionListener(new ActionListener() {
