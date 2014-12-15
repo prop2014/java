@@ -33,8 +33,8 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 	private JButton buttonGenerarFF = new JButton("<html><CENTER>Generar Solucion <br/>[FordFulkerson]</CENTER>");
 	private JButton buttonGenerarED = new JButton("<html><CENTER>Generar Solucion <br/>[EdmondKarp]</CENTER>");
 	private JButton buttonGenerarDI = new JButton("<html><CENTER>Generar Solucion Optima <br/>[Dijkstra]</CENTER>");
-	private JButton buttonModSol = new JButton("<html><CENTER> Modificar Solucion</CENTER>");
-	private JButton buttonBorrarSol = new JButton("<html><CENTER> Borrar Solucion</CENTER>");
+	private JButton buttonModSol = new JButton("<html><CENTER> Modificar <br/> Solucion</CENTER>");
+	private JButton buttonBorrarSol = new JButton("<html><CENTER> Borrar <br/> Solucion</CENTER>");
 	private JButton buttonVolver = new JButton("Volver");
 	
 	private final JList<String> list = new JList<String>();
@@ -42,7 +42,7 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 	
 	//METODOS PRIVADOS
 	private void inicializar_frameView() {
-		/** DESCOMENTAR PARA EDITAR *
+		/** DESCOMENTAR PARA EDITAR */
 		frameView =  new JFrame("Programador Guardias");
 		frameView.setMinimumSize(new Dimension(700, 400));
 		frameView.setPreferredSize(frameView.getMinimumSize());
@@ -82,20 +82,20 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 		////// START: GESTIONADO POR EL BUILDER NO TOCAR
 		panelCenterButtons.setBorder(new EmptyBorder(70, 20, 20, 0));
 		
-		buttonGenerarFF.setBounds(426, 63, 173, 53);
+		buttonGenerarFF.setBounds(301, 63, 298, 53);
 		buttonGenerarFF.setFont(new Font("Arial", Font.PLAIN, 12));
 		
 		buttonGenerarED.setFont(new Font("Arial", Font.PLAIN, 12));
-		buttonGenerarED.setBounds(426, 128, 173, 53);
+		buttonGenerarED.setBounds(301, 128, 298, 53);
 		
 		buttonGenerarDI.setFont(new Font("Arial", Font.PLAIN, 12));
-		buttonGenerarDI.setBounds(426, 193, 173, 53);
+		buttonGenerarDI.setBounds(301, 193, 298, 53);
 		
 		buttonModSol.setFont(new Font("Arial", Font.PLAIN, 12));
-		buttonModSol.setBounds(426, 257, 173, 53);
+		buttonModSol.setBounds(301, 257, 138, 53);
 		
 		buttonBorrarSol.setFont(new Font("Arial", Font.PLAIN, 12));
-		buttonBorrarSol.setBounds(426, 257, 173, 53);
+		buttonBorrarSol.setBounds(461, 257, 138, 53);
 		
 		buttonVolver.setFont(new Font("Arial", Font.PLAIN, 12));
 		buttonVolver.setBounds(40, 324, 157, 25);
@@ -106,7 +106,7 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 		panelCenterButtons.setLayout(null);
 		/// END: GESTIONADO POR EL BUILDER NO TOCAR
 		// Components
-		scrollPanel.setBounds(40, 57, 206, 253);
+		scrollPanel.setBounds(40, 57, 231, 253);
 		scrollPanel.setPreferredSize(new Dimension(150, 10));
 		scrollPanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		panelCenterButtons.add(scrollPanel);
@@ -121,6 +121,7 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 		panelCenterButtons.add(buttonGenerarDI);
 		panelCenterButtons.add(buttonGenerarED);
 		panelCenterButtons.add(buttonModSol);
+		panelCenterButtons.add(buttonBorrarSol);
 		
 		buttonModSol.setEnabled(false);
 		buttonBorrarSol.setEnabled(false);
@@ -213,8 +214,33 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 		
 		buttonBorrarSol.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				Object[] options = {"Aceptar", "Cancelar"};
+				int returnVal = JOptionPane.showOptionDialog(null,
+						"Esta seguro de que desea eliminar la Solucion: ?",
+					    "Alert",
+					    JOptionPane.YES_NO_CANCEL_OPTION,
+					    JOptionPane.WARNING_MESSAGE,
+					    null,
+					    options,
+					    options[1]);
+					if(returnVal == JOptionPane.YES_OPTION) {
+						try {
+						if(list.isSelectionEmpty()) throw new IOException("Debe seleccionar un Solucion!");
+						/*
+						String[] parts = (list.getSelectedValue()).split("-");
+						ctrlPresentacion.deleteHospital(Integer.parseInt(parts[0]));
+						loadHospitals();*/
+						
+						//get de lo seleccionado
+						// ctrlPresentacion.EliminarSol(idSol);
+						//loadSoluciones();
+						
+						} catch (IOException eX) {
+							JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
+						}
+					}
 			}
+			
 		});
 		
 	      
@@ -270,7 +296,7 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 	/* Constructoras y metodos publicos */
 	public VistaGestionSoluciones(CtrlPresentacion pCtrlVistaPrincipal) {
 		ctrlPresentacion = pCtrlVistaPrincipal;
-		/* DESCOMENTAR PARA EDITAR *
+		/* DESCOMENTAR PARA EDITAR */
 		 inicializarComponents();
 		/*  END DESCOMENTAR PARA EDITAR */
 	}
