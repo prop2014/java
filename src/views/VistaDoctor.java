@@ -212,6 +212,8 @@ public class VistaDoctor {
 						
 						
 						ctrlPresentacion.crearDoctor(nameDoc, id, maxTurnos,sueldo);
+						ctrlPresentacion.setDocActual(textID.getText(), nameDoc ,
+													textSueldo.getText(), textMaxTurnos.getText());
 					} catch (IOException eX) {
 						JOptionPane.showMessageDialog(null, eX, "Error",JOptionPane.ERROR_MESSAGE);
 					} catch (NumberFormatException nE) {
@@ -298,6 +300,10 @@ public class VistaDoctor {
 						if (nameDoc.isEmpty())throw new IOException("El doctor no tiene nombre");
 						
 						ctrlPresentacion.crearDoctor(nameDoc, id, maxTurnos,sueldo);
+						
+						ctrlPresentacion.setDocActual(textID.getText(), nameDoc , 
+													textSueldo.getText(), textMaxTurnos.getText());
+						
 						ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 						
 					} catch (IOException eX) {
