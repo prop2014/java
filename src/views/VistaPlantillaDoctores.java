@@ -17,6 +17,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
+import java.io.File;
 
 /**
  * Vista principal de la gestion de una plantilla de doctores de un hospital
@@ -240,10 +241,23 @@ import javax.swing.table.DefaultTableModel;
 			buttonImportar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
-						loadDoctores();
-					}
+					JFileChooser chooser = new JFileChooser();
+					int returnVal = chooser.showOpenDialog(frameView);
+					File f = chooser.getSelectedFile();
+					if(returnVal == JFileChooser.APPROVE_OPTION) {
+						try{
+					       ctrlPresentacion.importarDoctores(f.getAbsolutePath());
+					       
+					       loadDoctores();
+						} catch(IOException eX) {
+							JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
+
+						}
+					 }
+
 				
-			});
+			}
+		});
 			
 			
 			
