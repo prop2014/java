@@ -561,9 +561,8 @@ public class CtrlPresentacion {
 		ctrlAlgorithm.deleteTurnFromDoctor(idDoc, turno);
 	}
 	
-	public void saveSolution(String nameSol, String comment) throws IOException {//provando 0
-		
-		int idSol = ctrlAlgorithm.getFIDS();
+	public void saveSolution(int idSol, String nameSol, String comment) throws IOException {//provando 0
+		if(idSol == -1) idSol = ctrlAlgorithm.getFIDS();
 		String[] commentArray = comment.split(" ");
 		ArrayList<String> commentList = new ArrayList<String>();
 		for(String st : commentArray) {
@@ -574,5 +573,24 @@ public class CtrlPresentacion {
 	}
 	public ArrayList<String> getAllIdSolutions() {
 		return ctrlAlgorithm.getAllInfoSolutions();
+	}
+	
+	public void cargarSol(int idSol) {
+		ctrlAlgorithm.cargarSol(idSol);
+	}
+	public void setSolId(int idSol) {
+		vistaSolucion.setIdSol(idSol);
+	}
+	
+	public String getNameSol(int idSol) {
+		return ctrlAlgorithm.getNameSol(idSol);
+	}
+	public String getCommentSol(int idSol) {
+		return ctrlAlgorithm.getCommentSol(idSol);
+	}
+	
+	public void deleteSol(int idSol) throws IOException{
+		ctrlAlgorithm.deleteSol(ctrlHospital.getID(), idSol);
+		ctrlAlgorithm.saveAllSOlutions(ctrlHospital.getID());
 	}
 }

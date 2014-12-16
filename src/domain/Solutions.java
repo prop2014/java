@@ -168,24 +168,37 @@ public class Solutions {
 		CtrlDatosFichero inOut = new CtrlDatosFichero();
 		ArrayList<String> sol = new ArrayList<String>();
 		ArrayList<String> noSol = new ArrayList<String>();
-		Iterator<Integer> it = asignDoc.keySet().iterator();
 		
+		HashMap<Integer, ArrayList<String>> asignDocTemp = getDatesAsigned();
+		Iterator<Integer> it = asignDocTemp.keySet().iterator();
+		
+		sol.add(Integer.toString(idSol));
+		 sol.add(Name.replace(" ","%"));
+		 String comment = new String("");
+		 for(String t : coment) {
+			 if (!t.isEmpty()) {
+				 comment = comment+"%"+t;
+			 }
+		 }
+		 if(!comment.equals("")) sol.add(comment);
+		 else {sol.add("-");}
+		 
 		while(it.hasNext()){
-		 sol.add(Integer.toString(idSol));
 		 Integer doc = it.next();
-		 ArrayList<String> assigs = asignDoc.get(doc);
+		 ArrayList<String> assigs = asignDocTemp.get(doc);
 		 	sol.add(Integer.toString(doc)); //iddoc
 		 	sol.add(Integer.toString(assigs.size())); //numFechas
 		  for(int i=0;i<assigs.size();++i){
 			 sol.add(assigs.get(i)); //fechas
 		  }
-		  sol.add(Double.toString(sueldos.get(doc))); //sueldo
+		  sol.add(Double.toString((sueldos).get(doc))); //sueldo
 		}
-		for(String s : tSinSol){
-			noSol.add(Integer.toString(idSol));
+		noSol.add(Integer.toString(idSol));
+		ArrayList<String> tSinSolTemp = tSinSol;
+		for(String s : tSinSolTemp){
 			noSol.add(s);
 		}
-		inOut.saveDataSol(idSol,sol, noSol, id);
+		inOut.saveDataSol(idSol, sol, noSol, id);
 	}
 	
 	/**

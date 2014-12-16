@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -42,7 +43,7 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 	
 	//METODOS PRIVADOS
 	private void inicializar_frameView() {
-		/** DESCOMENTAR PARA EDITAR */
+		/** DESCOMENTAR PARA EDITAR *
 		frameView =  new JFrame("Programador Guardias");
 		frameView.setMinimumSize(new Dimension(700, 400));
 		frameView.setPreferredSize(frameView.getMinimumSize());
@@ -156,6 +157,7 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 			public void actionPerformed(ActionEvent e) {
 				try {
 					ctrlPresentacion.findSolution(1);
+					ctrlPresentacion.setSolId(-1);
 					ctrlPresentacion.changeView("vistaSolucion", panelContents);
 				} catch(IOException eX) {
 					JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE);
@@ -171,6 +173,7 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 			public void actionPerformed(ActionEvent e) {
 				try {
 					ctrlPresentacion.findSolution(2);
+					ctrlPresentacion.setSolId(-1);
 					ctrlPresentacion.changeView("vistaSolucion", panelContents);
 				} catch(IOException eX) {
 					JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE);
@@ -184,6 +187,7 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 			public void actionPerformed(ActionEvent e) {
 				try {
 					ctrlPresentacion.findSolution(3);
+					ctrlPresentacion.setSolId(-1);
 					ctrlPresentacion.changeView("vistaSolucion", panelContents);
 				} catch(IOException eX) {
 					JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE);
@@ -196,8 +200,16 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 	
 		buttonModSol.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ctrlPresentacion.changeView("vistaSolucion", panelContents);
-				
+				try{
+					if(list.isSelectionEmpty()) throw new IOException("Debe seleccionar un hospital");
+					String[] parts = list.getSelectedValue().split(" ");
+					int idSol = Integer.parseInt(parts[0]);
+					ctrlPresentacion.cargarSol(idSol);
+					ctrlPresentacion.setSolId(idSol);
+					ctrlPresentacion.changeView("vistaSolucion", panelContents);
+				} catch (IOException eX){
+					JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
+				}
 			}
 			
 			
@@ -226,14 +238,9 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 					if(returnVal == JOptionPane.YES_OPTION) {
 						try {
 						if(list.isSelectionEmpty()) throw new IOException("Debe seleccionar un Solucion!");
-						/*
-						String[] parts = (list.getSelectedValue()).split("-");
-						ctrlPresentacion.deleteHospital(Integer.parseInt(parts[0]));
-						loadHospitals();*/
-						
-						//get de lo seleccionado
-						// ctrlPresentacion.EliminarSol(idSol);
-						//loadSoluciones();
+						String[] parts = (list.getSelectedValue()).split(" ");
+						ctrlPresentacion.deleteSol(Integer.parseInt(parts[0]));
+						cargarSoluciones();
 						
 						} catch (IOException eX) {
 							JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
@@ -296,7 +303,7 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 	/* Constructoras y metodos publicos */
 	public VistaGestionSoluciones(CtrlPresentacion pCtrlVistaPrincipal) {
 		ctrlPresentacion = pCtrlVistaPrincipal;
-		/* DESCOMENTAR PARA EDITAR */
+		/* DESCOMENTAR PARA EDITAR *
 		 inicializarComponents();
 		/*  END DESCOMENTAR PARA EDITAR */
 	}

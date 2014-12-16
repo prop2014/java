@@ -23,7 +23,7 @@ public class VistaSolucion {
 	
 	private CtrlPresentacion ctrlPresentacion;
 	private HashMap<Integer, ArrayList<String>> asign;
-	
+	private int idSol;
 
 	
 	//-- Components --//
@@ -196,12 +196,13 @@ public class VistaSolucion {
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					ctrlPresentacion.saveSolution(txtNameSol.getText(), txtComent.getText());
+					if(txtNameSol.getText().equals("")) throw new IOException("Introduce un nombre a la solucion");
+					ctrlPresentacion.saveSolution(idSol, txtNameSol.getText(), txtComent.getText());
 					JOptionPane.showMessageDialog(null, "Solucion guardada!", "Error", JOptionPane.INFORMATION_MESSAGE);
+					ctrlPresentacion.changeView("vistaGestionSoluciones", panelContents);
 				} catch(IOException eX) {
 					JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
 				}
-				ctrlPresentacion.changeView("vistaGestionSoluciones", panelContents);
 				
 			}
 		});
@@ -301,6 +302,7 @@ public class VistaSolucion {
 		assign_listenersComponents();
 	}
 	private void loadInformation(int firstTime) {
+		if(idSol!=-1) firstTime = 0;
 		DefaultListModel<String> modelAsign = new DefaultListModel<String>(); 
 		DefaultListModel<String> modelNoSol = new DefaultListModel<String>();
 		HashMap<Integer, Double> sueldos = ctrlPresentacion.getSueldoAsigned(firstTime);
@@ -326,6 +328,15 @@ public class VistaSolucion {
 		}
 		listNoTurn.setModel(modelNoSol);
 		reloadLists();
+		
+		if(idSol!=-1 && (txtNameSol.getText()).equals("")) {
+			txtNameSol.setText(ctrlPresentacion.getNameSol(idSol));
+			txtComent.setText(ctrlPresentacion.getCommentSol(idSol));
+			
+		} else if (idSol==-1){
+			txtNameSol.setText("");
+			txtComent.setText("");
+		}
 	}
 	
 	private void reloadLists() {
@@ -359,9 +370,15 @@ public class VistaSolucion {
 		panelContents.setVisible(false);
 	}
 	public void showPanel() {
+		txtNameSol.setText("");
+		txtComent.setText("");
 		loadInformation(1);
 		reloadLists();
 		panelContents.setVisible(true);
+	}
+	
+	public void setIdSol(int id){
+		idSol = id;
 	}
 	
 	public void hideView() {
