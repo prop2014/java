@@ -27,14 +27,14 @@ import java.io.File;
 
 
 
-	public class VistaPlantillaDoctores {
+	public class VistaPlantillaDoctores extends Vista {
 		
-		private CtrlPresentacion ctrlPresentacion;
+//		private CtrlPresentacion ctrlPresentacion;
 		ArrayList<ArrayList<String>> doctores;
 		
 		//Componentes interficie
-		private JFrame frameView;
-		private JPanel panelContents = new JPanel();
+//		private JFrame frameView;
+//		private JPanel panelContents = new JPanel();
 		
 		private JPanel panelCenterButtons = new JPanel();
 		
@@ -62,28 +62,28 @@ import java.io.File;
 		
 	
 		
-		private void inicializar_frameView() {
-			
-			/** DESCOMENTAR PARA EDITAR *
-			frameView =  new JFrame("Programador Guardias");
-			frameView.setMinimumSize(new Dimension(700, 400));
-			frameView.setPreferredSize(frameView.getMinimumSize());
-			frameView.setResizable(false);
-			frameView.setLocationRelativeTo(null);
-			frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frameView.getContentPane().setBackground(Color.WHITE);
-			 //END DESCOMENTAR PARA EDITAR **/
-			
-			frameView = ctrlPresentacion.getFrame();
-			JPanel contentPane = (JPanel) frameView.getContentPane();
-			contentPane.setLayout(null);
-			panelContents.setBounds(0,0,700,378);
-			contentPane.add(panelContents);
-		}
+//		private void inicializar_frameView() {
+//			
+//			/** DESCOMENTAR PARA EDITAR *
+//			frameView =  new JFrame("Programador Guardias");
+//			frameView.setMinimumSize(new Dimension(700, 400));
+//			frameView.setPreferredSize(frameView.getMinimumSize());
+//			frameView.setResizable(false);
+//			frameView.setLocationRelativeTo(null);
+//			frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//			frameView.getContentPane().setBackground(Color.WHITE);
+//			 //END DESCOMENTAR PARA EDITAR **/
+//			
+//			frameView = ctrlPresentacion.getFrame();
+//			JPanel contentPane = (JPanel) frameView.getContentPane();
+//			contentPane.setLayout(null);
+//			panelContents.setBounds(0,0,700,378);
+//			contentPane.add(panelContents);
+//		}
 		
 	
 		
-		private void inicializar_panelContents() {
+		protected void init_panelContents() {
 			
 			panelContents.setLayout(null);
 			panelCenterButtons.setBounds(12, 0, 700, 372);
@@ -155,15 +155,15 @@ import java.io.File;
 		}
 		
 		
-		private void inicializarComponents() {
-		    inicializar_frameView();
-		    inicializar_panelContents();
-		    inicializar_panelCenterButtons();
-		    assignar_listenersComponents();
-		  }
+//		private void inicializarComponents() {
+//		    inicializar_frameView();
+//		    inicializar_panelContents();
+//		    inicializar_panelCenterButtons();
+//		    assignar_listenersComponents();
+//		  }
 
 
-		private void assignar_listenersComponents() {
+		protected void assign_listenersComponents() {
 			
 			
 			//OCULTAR los botones
@@ -250,7 +250,8 @@ import java.io.File;
 					       
 					       loadDoctores();
 						} catch(IOException eX) {
-							JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
+							rejectedOperationDialog(eX);
+//							JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
 
 						}
 					 }
@@ -355,13 +356,18 @@ import java.io.File;
 			  inicializarComponents();
 			  //*/
 			 
-			ctrlPresentacion = pCtrlPresentacion;
+//			ctrlPresentacion = pCtrlPresentacion;
+			super(pCtrlPresentacion);
 		}
 		
 		
 		public void init() {
 			loadDoctores();
-			inicializarComponents();
+//			inicializarComponents();
+			init_frameView();
+		    init_panelContents();
+		    inicializar_panelCenterButtons();
+		    assign_listenersComponents();
 		}
 		public void cargarHospital() {
 			String name = ctrlPresentacion.getNameHospital();
@@ -369,30 +375,30 @@ import java.io.File;
 			labelPanel1.setText(name);
 		}
 		
-		public JPanel getPanel() {
-			return panelContents;
-		}
+//		public JPanel getPanel() {
+//			return panelContents;
+//		}
 		
-		public void hidePanel() {
-			panelContents.setVisible(false);
-		}
+//		public void hidePanel() {
+//			panelContents.setVisible(false);
+//		}
 		public void showPanel() {
 			cargarHospital();
 			loadDoctores();
 			panelContents.setVisible(true);
 		}
 		
-		public void showView() {
-			panelContents.setVisible(true);
-		}
-		
-		public void enableView() {
-			frameView.setEnabled(true);
-		}
-		
-		public void disableView() {
-			frameView.setEnabled(false);
-		}
+//		public void showView() {
+//			panelContents.setVisible(true);
+//		}
+//		
+//		public void enableView() {
+//			frameView.setEnabled(true);
+//		}
+//		
+//		public void disableView() {
+//			frameView.setEnabled(false);
+//		}
 	}
 
 
