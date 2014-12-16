@@ -868,6 +868,30 @@ public class CtrlDoctor {
 							if (diaXOR <= lastDay && diaXOR >= firstDay) throw new IOException("Este doctor ya tiene una XOR que apunta una turno del rango de la MAX que se uqiere poner");
 						}
 					}
+					/* comprovo si hi ha algun max rango solapada */
+					if (alres.get(j).getTipo().equals("MAX_Turnos_Rango")) {
+						MAX_Turnos_Rango N = (MAX_Turnos_Rango)alres.get(j);
+						if (m1 > N.getFechaIni().get(GregorianCalendar.MONTH)+1 && (m1 < N.getFechaFin().get(GregorianCalendar.MONTH)+1)) throw new IOException("MAX Solapada con MAX1");
+						if (m2 > N.getFechaIni().get(GregorianCalendar.MONTH)+1 && (m2 < N.getFechaFin().get(GregorianCalendar.MONTH)+1)) throw new IOException("MAX Solapada con MAX2");
+						if (m1 == N.getFechaIni().get(GregorianCalendar.MONTH)+1 && (m1 < N.getFechaFin().get(GregorianCalendar.MONTH)+1)) {
+							if (a1 > N.getFechaIni().get(GregorianCalendar.DAY_OF_MONTH)) throw new IOException("MAX Solapada con MAX3");
+						}
+						if ((m2 == N.getFechaFin().get(GregorianCalendar.MONTH)+1) && (m2 > N.getFechaIni().get(GregorianCalendar.DAY_OF_MONTH))) {
+							if (a2 < N.getFechaFin().get(GregorianCalendar.DAY_OF_MONTH)) throw new IOException("MAX Solapada con MAX4");
+						}
+						if ((m2 == N.getFechaIni().get(GregorianCalendar.MONTH)+1) && (m1 < N.getFechaIni().get(GregorianCalendar.MONTH)+1)) {
+							if (a2 > N.getFechaIni().get(GregorianCalendar.DAY_OF_MONTH)) throw new IOException("MAX Solapada con MAX5");
+						}
+						if ((m1 == N.getFechaFin().get(GregorianCalendar.MONTH)+1) && (m2 > N.getFechaFin().get(GregorianCalendar.MONTH)+1)) {
+							if (a2 > N.getFechaIni().get(GregorianCalendar.DAY_OF_MONTH)) throw new IOException("MAX Solapada con MAX6");
+						}
+						if ((m1 < N.getFechaIni().get(GregorianCalendar.MONTH)+1) && (m2 > N.getFechaIni().get(GregorianCalendar.MONTH)+1)) throw new IOException("MAX Solapada con MAX7");
+						if ((m2 == N.getFechaFin().get(GregorianCalendar.MONTH)+1) && (m1 == N.getFechaIni().get(GregorianCalendar.DAY_OF_MONTH))) {
+							if ((a1 >= N.getFechaIni().get(GregorianCalendar.DAY_OF_MONTH)) && (a1 <= N.getFechaFin().get(GregorianCalendar.DAY_OF_MONTH))) throw new IOException("MAX Solapada con MAX8");
+							if ((a2 >= N.getFechaIni().get(GregorianCalendar.DAY_OF_MONTH)) && (a2 <= N.getFechaFin().get(GregorianCalendar.DAY_OF_MONTH))) throw new IOException("MAX Solapada con MAX9");
+							if ((a1 >= N.getFechaIni().get(GregorianCalendar.DAY_OF_MONTH)) && (a2 <= N.getFechaFin().get(GregorianCalendar.DAY_OF_MONTH))) throw new IOException("MAX Solapada con MAX10");
+						}
+					}
 				}
 				Restriccion res = new MAX_Turnos_Rango(idRes, d1, m1, a1, d2, m2, a2, numT);
 				boolean c = Doctors.get(i).addRestriction(res);
