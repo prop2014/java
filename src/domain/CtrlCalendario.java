@@ -150,7 +150,6 @@ public class CtrlCalendario {
 	 */
 	public ArrayList<ArrayList<String>> getALLVacations() throws IOException {
 		ArrayList<GregorianCalendar> vacations = calendar.getALLVacations();
-//		ArrayList<GregorianCalendar> vacations = new ArrayList<GregorianCalendar>(calendar.getALLVacations());
 		ArrayList<ArrayList<String>> listVacations = new ArrayList<ArrayList<String>>();
 		SimpleDateFormat sdf = new SimpleDateFormat("d-MMM", new Locale("es","ES"));
 		for (GregorianCalendar date : vacations) {
@@ -175,7 +174,6 @@ public class CtrlCalendario {
 		// llamada a datos
 		if(ctrlDatosFichero.existsCalendar(idHospital)){
 			ArrayList<String> calendarData = ctrlDatosFichero.getDataCale(idHospital, path);
-//			ArrayList<String> calendarData = new ArrayList<String>(ctrlDatosFichero.getDataCale(idHospital, path));
 			int calendarYear = Integer.parseInt(calendarData.get(0));
 			if (calendarYear != -1) {
 				calendar.setCalendarYear(calendarYear);
@@ -209,12 +207,10 @@ public class CtrlCalendario {
 		calendarData.add(Integer.toString(calendar.getNumberOfVacations()));	
 		if(!calendar.isEmpty()) {
 			ArrayList<GregorianCalendar> vacations = calendar.getALLVacations();
-//			ArrayList<GregorianCalendar> vacations = new ArrayList<GregorianCalendar>(calendar.getALLVacations());
 			SimpleDateFormat sdf = new SimpleDateFormat("ddMM");
 			for (GregorianCalendar date : vacations) {
 				calendarData.add(sdf.format(date.getTime()));
 				calendarData.addAll(getVacationDay(date));
-//				calendarData.addAll(new ArrayList<String>(getVacationDay(date)));
 			}
 		}
 		// llamada a datos
