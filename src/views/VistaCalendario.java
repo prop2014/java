@@ -72,7 +72,7 @@ public class VistaCalendario extends Vista {
 		labelVacationHeaders = new JLabel(String.format("%7s%9s%9s%9s%-7s%s", " Dia vac.","M","T","N","","Fecha espec."));
 		labelVacationHeaders.setFont(new Font("Courier", Font.BOLD,14));
 		labelVacationHeaders.setBounds(20, 75, 495, 15);
-
+		// tooltips
 		buttonCreateCal.setToolTipText("[CTRL+C]");
 		buttonDeleteCal.setToolTipText("[CTRL+E]");
 		buttonImportCal.setToolTipText("[CTRL+I]");
@@ -117,7 +117,7 @@ public class VistaCalendario extends Vista {
 		buttonModVacation.setEnabled(false);
 		buttonDelVacation.setBounds(0, 155, 150, 40);
 		buttonDelVacation.setEnabled(false);
-
+		// tooltips
 		buttonAddVacation.setToolTipText("[CTRL+A]");
 		buttonModVacation.setToolTipText("[CTRL+M]");
 		buttonDelVacation.setToolTipText("[CTRL+D]");
@@ -135,7 +135,7 @@ public class VistaCalendario extends Vista {
 		// components
 		buttonGoBack.setBounds(20, 10, 150, 30);
 		buttonHelp.setBounds(365, 10, 150, 30);
-		
+		// tooltips
 		buttonGoBack.setToolTipText("[ESC]");
 		buttonHelp.setToolTipText("[CTRL+H]");
 		
@@ -412,6 +412,18 @@ public class VistaCalendario extends Vista {
 		ctrlPresentacion.changeView("vistaGestion", panelContents);
 		listVacations.clearSelection();
 	}
+	
+	
+	public void actionPerformed_buttonHelp (ActionEvent event) {
+		Object[] options = {new JLabel("M:  Numero de Drs. del turno de manana"),
+				new JLabel("T:  Numero de Drs. del turno de tarde"),
+				new JLabel("N:  Numero de Drs. del turno de noche"),
+				new JLabel("Para anadir un dia vacacional: introducir la fecha o utilizar el selector de fechas y presionar 'Anadir dia'"),
+				new JLabel("Para modificar un dia vacacional: seleccionar la fecha de la lista y presionar 'Modificar dia' (o doble clic)"),
+				new JLabel("Para eliminar un dia vacacional: seleccionar la fecha de la lista y presionar 'Eliminar dia'")};
+		JOptionPane.showMessageDialog(null, options, "Ayuda",JOptionPane.INFORMATION_MESSAGE);
+		
+	}
 	//--------------------------------------------------------------------------//
 	/* Assigning listeners */
 	//--------------------------------------------------------------------------//
@@ -479,7 +491,7 @@ public class VistaCalendario extends Vista {
 
 		buttonHelp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				//				actionPerformed_buttonHelp (event);
+				actionPerformed_buttonHelp (event);
 			}
 		});
 		
