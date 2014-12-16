@@ -12,12 +12,12 @@ import java.io.IOException;
  * Vista secundaria de gestion de restricciones tipo NOT Turno
  * @author Sergi Orra Genero
  */
-public class VistaNOTTurno {
+public class VistaNOTTurno extends Vista {
 	
-	private CtrlPresentacion ctrlPresentacion;
-	
-	private JFrame frameView;
-	private JPanel panelContents = new JPanel();
+//	private CtrlPresentacion ctrlPresentacion;
+//	
+//	private JFrame frameView;
+//	private JPanel panelContents = new JPanel();
 	private JPanel panelButtons = new JPanel();
 	private JPanel panelInfo = new JPanel();
 	
@@ -31,34 +31,34 @@ public class VistaNOTTurno {
 	private JButton buttonVolver = new JButton("Volver");
 	
 	
-	private void inicializarComponents() {
-	    inicializar_frameView();
-	    inicializar_panelContents();
-	    inicializar_panelInfo();
-	    inicializar_panelButtons();
-	    assignar_listenersComponents();
-	  }
+//	private void inicializarComponents() {
+//	    inicializar_frameView();
+//	    inicializar_panelContents();
+//	    inicializar_panelInfo();
+//	    inicializar_panelButtons();
+//	    assignar_listenersComponents();
+//	  }
 	
 	// METODOS PRIVADOS
 	
-	private void inicializar_frameView() {
-		/*** DESCOMENTAR PARA EDITAR *
-		frameView =  new JFrame("Programador Guardias");
-		frameView.setMinimumSize(new Dimension(700, 400));
-		frameView.setPreferredSize(frameView.getMinimumSize());
-		frameView.setResizable(false);
-		frameView.setLocationRelativeTo(null);
-		frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frameView.getContentPane().setBackground(Color.WHITE);
-		/*** END DESCOMENTAR PARA EDITAR */
-		frameView = ctrlPresentacion.getFrame();
-		JPanel contentPane = (JPanel) frameView.getContentPane();
-		contentPane.setLayout(null);
-		panelContents.setBounds(0,0,700,378);
-		contentPane.add(panelContents);
-	}
+//	private void inicializar_frameView() {
+//		/*** DESCOMENTAR PARA EDITAR *
+//		frameView =  new JFrame("Programador Guardias");
+//		frameView.setMinimumSize(new Dimension(700, 400));
+//		frameView.setPreferredSize(frameView.getMinimumSize());
+//		frameView.setResizable(false);
+//		frameView.setLocationRelativeTo(null);
+//		frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frameView.getContentPane().setBackground(Color.WHITE);
+//		/*** END DESCOMENTAR PARA EDITAR */
+//		frameView = ctrlPresentacion.getFrame();
+//		JPanel contentPane = (JPanel) frameView.getContentPane();
+//		contentPane.setLayout(null);
+//		panelContents.setBounds(0,0,700,378);
+//		contentPane.add(panelContents);
+//	}
 	
-	private void inicializar_panelContents() {
+	protected void init_panelContents() {
 	    // Layout
 	    panelContents.setLayout(new BorderLayout());
 	    // Paneles
@@ -100,7 +100,7 @@ public class VistaNOTTurno {
 	    buttonVolver.setToolTipText("[ESC]");
 	}
 
-	private void assignar_listenersComponents() {
+	protected void assign_listenersComponents() {
 		
 		buttonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -120,13 +120,15 @@ public class VistaNOTTurno {
 						if(checkBox1.isSelected()) ctrlPresentacion.addResNOT_Turno("manana");
 						else if (checkBox2.isSelected()) ctrlPresentacion.addResNOT_Turno("tarde");
 						else if (checkBox3.isSelected()) ctrlPresentacion.addResNOT_Turno("noche");
-						JOptionPane.showMessageDialog(null, "Restriccion creada correctamente", "Informacion",JOptionPane.INFORMATION_MESSAGE);
+						successfulOperationDialog("Restriccion creada correctamente");
+//						JOptionPane.showMessageDialog(null, "Restriccion creada correctamente", "Informacion",JOptionPane.INFORMATION_MESSAGE);
 						if(checkBox1.isSelected()) checkBox1.setSelected(false);
 						else if(checkBox2.isSelected()) checkBox2.setSelected(false);
 						else if(checkBox3.isSelected()) checkBox3.setSelected(false);
 						ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 					} catch (IOException eX) {
-						JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 
+						rejectedOperationDialog("Restriccion no creada");
+//						JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 
 						if(checkBox1.isSelected()) checkBox1.setSelected(false);
 						else if(checkBox2.isSelected()) checkBox2.setSelected(false);
 						else if(checkBox3.isSelected()) checkBox3.setSelected(false);
@@ -134,7 +136,8 @@ public class VistaNOTTurno {
 					}
 				}
 				else {
-					JOptionPane.showMessageDialog(null, "Turno seleccionado incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
+					rejectedOperationDialog("Turno seleccionado incorrecto");
+//					JOptionPane.showMessageDialog(null, "Turno seleccionado incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
 					if(checkBox1.isSelected()) checkBox1.setSelected(false);
 					if(checkBox2.isSelected()) checkBox2.setSelected(false);
 					if(checkBox3.isSelected()) checkBox3.setSelected(false);
@@ -164,37 +167,43 @@ public class VistaNOTTurno {
 	//METODOS PUBLICOS
 	
 	public VistaNOTTurno(CtrlPresentacion pCtrlPresentacion) {
-		ctrlPresentacion = pCtrlPresentacion;
+//		ctrlPresentacion = pCtrlPresentacion;
+		super(pCtrlPresentacion);
 		/** DESCOMENTAR PARA EDITAR
 		 * inicializarComponents();
 		 */
 	}
 	
 	public void init() {
-		inicializarComponents();
+//		inicializarComponents();
+	    init_frameView();
+	    init_panelContents();
+	    inicializar_panelInfo();
+	    inicializar_panelButtons();
+	    assign_listenersComponents();
 	}
 	
-	public JPanel getPanel() {
-		return panelContents;
-	}
-	
-	public void hidePanel() {
-		panelContents.setVisible(false);
-	}
-	public void showPanel() {
-		panelContents.setVisible(true);
-	}
-	
-	public void showView() {
-		panelContents.setVisible(true);
-	}
-	
-	public void enableView() {
-		frameView.setEnabled(true);
-	}
-	
-	public void disableView() {
-		frameView.setEnabled(false);
-	}
+//	public JPanel getPanel() {
+//		return panelContents;
+//	}
+//	
+//	public void hidePanel() {
+//		panelContents.setVisible(false);
+//	}
+//	public void showPanel() {
+//		panelContents.setVisible(true);
+//	}
+//	
+//	public void showView() {
+//		panelContents.setVisible(true);
+//	}
+//	
+//	public void enableView() {
+//		frameView.setEnabled(true);
+//	}
+//	
+//	public void disableView() {
+//		frameView.setEnabled(false);
+//	}
 
 }

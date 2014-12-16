@@ -17,12 +17,12 @@ import java.awt.event.KeyEvent;
  * Vista secundaria de gestion de restricciones tipo XOR
  * @author Sergi Orra Genero
  */
-public class VistaXOR {
+public class VistaXOR extends Vista {
 	
-	private CtrlPresentacion ctrlPresentacion;
-	
-	private JFrame frameView;
-	private JPanel panelContents = new JPanel();
+//	private CtrlPresentacion ctrlPresentacion;
+//	
+//	private JFrame frameView;
+//	private JPanel panelContents = new JPanel();
 	private JPanel panelButtons = new JPanel();
 	private JPanel panelInfo = new JPanel();
 	
@@ -42,34 +42,34 @@ public class VistaXOR {
 	private ArrayList<Integer> year = new ArrayList<Integer>();
 	private ArrayList<String> turno = new ArrayList<String>();
 	
-	private void inicializarComponents() {
-	    inicializar_frameView();
-	    inicializar_panelContents();
-	    inicializar_panelInfo();
-	    inicializar_panelButtons();
-	    assignar_listenersComponents();
-	  }
+//	private void inicializarComponents() {
+//	    inicializar_frameView();
+//	    inicializar_panelContents();
+//	    inicializar_panelInfo();
+//	    inicializar_panelButtons();
+//	    assignar_listenersComponents();
+//	  }
 	
 	// METODOS PRIVADOS
 	
-	private void inicializar_frameView() {
-		/*** DESCOMENTAR PARA EDITAR *
-		frameView =  new JFrame("Programador Guardias");
-		frameView.setMinimumSize(new Dimension(700, 400));
-		frameView.setPreferredSize(frameView.getMinimumSize());
-		frameView.setResizable(false);
-		frameView.setLocationRelativeTo(null);
-		frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frameView.getContentPane().setBackground(Color.WHITE);
-		/*** END DESCOMENTAR PARA EDITAR */
-		frameView = ctrlPresentacion.getFrame();
-		JPanel contentPane = (JPanel) frameView.getContentPane();
-		contentPane.setLayout(null);
-		panelContents.setBounds(0,0,700,378);
-		contentPane.add(panelContents);
-	}
+//	private void inicializar_frameView() {
+//		/*** DESCOMENTAR PARA EDITAR *
+//		frameView =  new JFrame("Programador Guardias");
+//		frameView.setMinimumSize(new Dimension(700, 400));
+//		frameView.setPreferredSize(frameView.getMinimumSize());
+//		frameView.setResizable(false);
+//		frameView.setLocationRelativeTo(null);
+//		frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frameView.getContentPane().setBackground(Color.WHITE);
+//		/*** END DESCOMENTAR PARA EDITAR */
+//		frameView = ctrlPresentacion.getFrame();
+//		JPanel contentPane = (JPanel) frameView.getContentPane();
+//		contentPane.setLayout(null);
+//		panelContents.setBounds(0,0,700,378);
+//		contentPane.add(panelContents);
+//	}
 	
-	private void inicializar_panelContents() {
+	protected void init_panelContents() {
 	    // Layout
 	    panelContents.setLayout(new BorderLayout());
 	    // Paneles
@@ -121,7 +121,7 @@ public class VistaXOR {
 	    
 	}
 
-	private void assignar_listenersComponents() {
+	protected void assign_listenersComponents() {
 		buttonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dia.clear();
@@ -153,7 +153,8 @@ public class VistaXOR {
 					try {
 						 if (dia.size() <= 1) throw new IOException("Solo hay una fecha de XOR");
 						 ctrlPresentacion.addResXOR(dia, mes, year, turno);
-						 JOptionPane.showMessageDialog(null, "Restriccion creada correctamente", "Informacion",JOptionPane.INFORMATION_MESSAGE);
+						 successfulOperationDialog("Restriccion creada correctamente");
+//						 JOptionPane.showMessageDialog(null, "Restriccion creada correctamente", "Informacion",JOptionPane.INFORMATION_MESSAGE);
 						 dia.clear();
 						 mes.clear();
 						 year.clear();
@@ -164,7 +165,8 @@ public class VistaXOR {
 						 dataChooser.setCalendar(null);
 						 ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 					} catch (IOException eX) {
-						JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 
+						rejectedOperationDialog("Restriccion no creada");
+//						JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 
 						dia.clear();
 						mes.clear();
 						year.clear();
@@ -177,7 +179,8 @@ public class VistaXOR {
 					}
 				}
 				else {
-					JOptionPane.showMessageDialog(null, "Valores introducidos incorrectamente", "Error", JOptionPane.ERROR_MESSAGE);
+					rejectedOperationDialog("Valores introducidos incorrectamente");
+//					JOptionPane.showMessageDialog(null, "Valores introducidos incorrectamente", "Error", JOptionPane.ERROR_MESSAGE);
 					if(checkBox1.isSelected()) checkBox1.setSelected(false);
 					if(checkBox2.isSelected()) checkBox2.setSelected(false);
 					if(checkBox3.isSelected()) checkBox3.setSelected(false);
@@ -246,37 +249,43 @@ public class VistaXOR {
 	//METODOS PUBLICOS
 	
 	public VistaXOR(CtrlPresentacion pCtrlPresentacion) {
-		ctrlPresentacion = pCtrlPresentacion;
+//		ctrlPresentacion = pCtrlPresentacion;
+		super(pCtrlPresentacion);
 		/** DESCOMENTAR PARA EDITAR
 		 * inicializarComponents();
 		 */
 	}
 	
 	public void init() {
-		inicializarComponents();
+//		inicializarComponents();
+	    init_frameView();
+	    init_panelContents();
+	    inicializar_panelInfo();
+	    inicializar_panelButtons();
+	    assign_listenersComponents();
 	}
 	
-	public JPanel getPanel() {
-		return panelContents;
-	}
-	
-	public void hidePanel() {
-		panelContents.setVisible(false);
-	}
-	public void showPanel() {
-		panelContents.setVisible(true);
-	}
-	
-	public void showView() {
-		panelContents.setVisible(true);
-	}
-	
-	public void enableView() {
-		frameView.setEnabled(true);
-	}
-	
-	public void disableView() {
-		frameView.setEnabled(false);
-	}
+//	public JPanel getPanel() {
+//		return panelContents;
+//	}
+//	
+//	public void hidePanel() {
+//		panelContents.setVisible(false);
+//	}
+//	public void showPanel() {
+//		panelContents.setVisible(true);
+//	}
+//	
+//	public void showView() {
+//		panelContents.setVisible(true);
+//	}
+//	
+//	public void enableView() {
+//		frameView.setEnabled(true);
+//	}
+//	
+//	public void disableView() {
+//		frameView.setEnabled(false);
+//	}
 
 }

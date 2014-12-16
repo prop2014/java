@@ -13,12 +13,12 @@ import java.util.Scanner;
  * Vista secundaria de gestion de restricciones tipo NOT Dia Mes
  * @author Sergi Orra Genero
  */
-public class VistaNOTDiaMes {
+public class VistaNOTDiaMes extends Vista {
 	
-	private CtrlPresentacion ctrlPresentacion;
-	
-	private JFrame frameView;
-	private JPanel panelContents = new JPanel();
+//	private CtrlPresentacion ctrlPresentacion;
+//	
+//	private JFrame frameView;
+//	private JPanel panelContents = new JPanel();
 	private JPanel panelButtons = new JPanel();
 	private JPanel panelInfo = new JPanel();
 	
@@ -30,17 +30,17 @@ public class VistaNOTDiaMes {
 	private JButton buttonVolver = new JButton("Volver");
 	
 	
-	private void inicializarComponents() {
-	    inicializar_frameView();
-	    inicializar_panelContents();
-	    inicializar_panelInfo();
-	    inicializar_panelButtons();
-	    assignar_listenersComponents();
-	  }
+//	private void inicializarComponents() {
+//	    inicializar_frameView();
+//	    inicializar_panelContents();
+//	    inicializar_panelInfo();
+//	    inicializar_panelButtons();
+//	    assignar_listenersComponents();
+//	  }
 	
 	// METODOS PRIVADOS
 	
-	private void inicializar_frameView() {
+	protected void init_frameView() {
 		/*** DESCOMENTAR PARA EDITAR *
 		frameView =  new JFrame("Programador Guardias");
 		frameView.setMinimumSize(new Dimension(700, 400));
@@ -57,7 +57,7 @@ public class VistaNOTDiaMes {
 		contentPane.add(panelContents);
 	}
 	
-	private void inicializar_panelContents() {
+	protected void init_panelContents() {
 	    // Layout
 	    panelContents.setLayout(new BorderLayout());
 	    // Paneles
@@ -92,7 +92,7 @@ public class VistaNOTDiaMes {
 	    buttonVolver.setToolTipText("[ESC]");
 	}
 
-	private void assignar_listenersComponents() {
+	protected void assign_listenersComponents() {
 		buttonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				textArea.setText(null);
@@ -108,17 +108,20 @@ public class VistaNOTDiaMes {
 					dia = Integer.parseInt(textArea.getText());
 					try {
 						ctrlPresentacion.addResNOT_Dia_Mes(dia);
-						JOptionPane.showMessageDialog(null, "Restriccion creada correctamente", "Informacion",JOptionPane.INFORMATION_MESSAGE);
+						successfulOperationDialog("Restriccion creada correctamente");
+//						JOptionPane.showMessageDialog(null, "Restriccion creada correctamente", "Informacion",JOptionPane.INFORMATION_MESSAGE);
 						textArea.setText(null);
 						ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 					} catch (IOException eX) {
-						JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 
+						rejectedOperationDialog("Restriccion no creada");
+//						JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 
 						textArea.setText(null);
 						ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 					}
 				}
 				else {
-					JOptionPane.showMessageDialog(null, "Dia del mes incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
+					rejectedOperationDialog("Dia del mes incorrecto");
+//					JOptionPane.showMessageDialog(null, "Dia del mes incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
 					textArea.setText(null);
 				}
 				sc1.close();
@@ -146,36 +149,42 @@ public class VistaNOTDiaMes {
 	//METODOS PUBLICOS
 	
 	public VistaNOTDiaMes(CtrlPresentacion pCtrlPresentacion) {
-		ctrlPresentacion = pCtrlPresentacion;
+//		ctrlPresentacion = pCtrlPresentacion;
+		super(pCtrlPresentacion);
 		/* DESCOMENTAR PARA EDITAR
 		      inicializarComponents();
 		*/
 	}
 	
 	public void init() {
-		inicializarComponents();
+//		inicializarComponents();
+		init_frameView();
+	    init_panelContents();
+	    inicializar_panelInfo();
+	    inicializar_panelButtons();
+	    assign_listenersComponents();
 	}
 	
-	public JPanel getPanel() {
-		return panelContents;
-	}
-	
-	public void hidePanel() {
-		panelContents.setVisible(false);
-	}
-	public void showPanel() {
-		panelContents.setVisible(true);
-	}
-	
-	public void showView() {
-		panelContents.setVisible(true);
-	}
-	
-	public void enableView() {
-		frameView.setEnabled(true);
-	}
-	
-	public void disableView() {
-		frameView.setEnabled(false);
-	}
+//	public JPanel getPanel() {
+//		return panelContents;
+//	}
+//	
+//	public void hidePanel() {
+//		panelContents.setVisible(false);
+//	}
+//	public void showPanel() {
+//		panelContents.setVisible(true);
+//	}
+//	
+//	public void showView() {
+//		panelContents.setVisible(true);
+//	}
+//	
+//	public void enableView() {
+//		frameView.setEnabled(true);
+//	}
+//	
+//	public void disableView() {
+//		frameView.setEnabled(false);
+//	}
 }
