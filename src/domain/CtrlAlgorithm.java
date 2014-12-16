@@ -188,6 +188,17 @@ public class CtrlAlgorithm {
 		idActual=idsol;
 	}
 	
+	public void getAllSols() throws IOException{
+		CtrlDatosFichero inOut = new CtrlDatosFichero();
+		int nums=inOut.howManySolutions(hosp.getId());
+		for(int i = 0;i<nums;++i){
+			getSol(hosp.getId(),i);
+			ArrayList<String> pr = new ArrayList<String>();
+			makeSol(i,"name",pr);
+		}
+	}
+	
+	
 	/**
 	 * @return la id de la solucion que estamos tratando en ctrAlgoritm
 	 */
@@ -205,6 +216,8 @@ public class CtrlAlgorithm {
 		}
 		return idssols;
 	}
+	
+	
 	
 	
 	public void setNameSol(int idsol, String name){
