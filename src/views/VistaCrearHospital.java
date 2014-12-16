@@ -14,15 +14,15 @@ import javax.swing.border.EmptyBorder;
  * Vista para la creacion de un hospital
  * @author Alex Morral
  */
-public class VistaCrearHospital {
+public class VistaCrearHospital extends Vista {
 	
-	private CtrlPresentacion ctrlPresentacion;
+//	private CtrlPresentacion ctrlPresentacion;
 	private int editing;
 	//ID VISTA 13
 	
 	//Componentes interficie
-	private JFrame frameView;
-	private JPanel panelContents = new JPanel();
+//	private JFrame frameView;
+//	private JPanel panelContents = new JPanel();
 	private JPanel panelCenterButtons = new JPanel();
 	private String pathDoctores = new String();
 	private String pathCalendario = new String();
@@ -39,24 +39,24 @@ public class VistaCrearHospital {
 	
 	
 	//METODOS PRIVADOS
-	private void inicializar_frameView() {
-		/*** DESCOMENTAR PARA EDITAR *
-		frameView =  new JFrame("Programador Guardias");
-		frameView.setMinimumSize(new Dimension(700, 400));
-		frameView.setPreferredSize(frameView.getMinimumSize());
-		frameView.setResizable(false);
-		frameView.setLocationRelativeTo(null);
-		frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frameView.getContentPane().setBackground(Color.WHITE);
-		/*** END DESCOMENTAR PARA EDITAR */
-		frameView = ctrlPresentacion.getFrame();
-		JPanel contentPane = (JPanel) frameView.getContentPane();
-		contentPane.setLayout(null);
-		panelContents.setBounds(0,0,700,378);
-		contentPane.add(panelContents);
-	}
+//	private void inicializar_frameView() {
+//		/*** DESCOMENTAR PARA EDITAR *
+//		frameView =  new JFrame("Programador Guardias");
+//		frameView.setMinimumSize(new Dimension(700, 400));
+//		frameView.setPreferredSize(frameView.getMinimumSize());
+//		frameView.setResizable(false);
+//		frameView.setLocationRelativeTo(null);
+//		frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frameView.getContentPane().setBackground(Color.WHITE);
+//		/*** END DESCOMENTAR PARA EDITAR */
+//		frameView = ctrlPresentacion.getFrame();
+//		JPanel contentPane = (JPanel) frameView.getContentPane();
+//		contentPane.setLayout(null);
+//		panelContents.setBounds(0,0,700,378);
+//		contentPane.add(panelContents);
+//	}
 	
-	private void inicializar_panelContents() {
+	protected void init_panelContents() {
 		panelContents.setLayout(new BorderLayout());
 		// Componentes
 		panelContents.add(panelCenterButtons, BorderLayout.CENTER);
@@ -150,14 +150,14 @@ public class VistaCrearHospital {
 		
 		
 	}
-	private void inicializarComponents() {
-		inicializar_frameView();
-		inicializar_panelContents();
-		inicializar_panelCenterButtons();
-		assignar_listenersComponents();
-	}
+//	private void inicializarComponents() {
+//		inicializar_frameView();
+//		inicializar_panelContents();
+//		inicializar_panelCenterButtons();
+//		assignar_listenersComponents();
+//	}
 	
-	private void assignar_listenersComponents() {
+	protected void assign_listenersComponents() {
 		
 		btnCrearHospital.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -246,14 +246,19 @@ public class VistaCrearHospital {
 	
 	//METODOS PUBLICOS
 	public VistaCrearHospital(CtrlPresentacion pCtrlPresentacion) {
-		ctrlPresentacion = pCtrlPresentacion;
+//		ctrlPresentacion = pCtrlPresentacion;
+		super(pCtrlPresentacion);
 		/** DESCOMENTAR PARA EDITAR *
 		 inicializarComponents();
 		 /** END DESCOMENTAR PARA EDITAR*/
 	}
 	
 	public void init() {
-		inicializarComponents();
+//		inicializarComponents();
+		init_frameView();
+		init_panelContents();
+		inicializar_panelCenterButtons();
+		assign_listenersComponents();
 	}
 	
 	public void clearData() {
@@ -289,28 +294,28 @@ public class VistaCrearHospital {
 			btnCrearHospital.setText("Crear Hospital");
 		}
 	}
-	public JPanel getPanel() {
-		return panelContents;
-	}
-
-	public void showView() {
-		frameView.setVisible(true);
-	}
-	
-	public void hidePanel() {
-		panelContents.setVisible(false);
-	}
+//	public JPanel getPanel() {
+//		return panelContents;
+//	}
+//
+//	public void showView() {
+//		frameView.setVisible(true);
+//	}
+//	
+//	public void hidePanel() {
+//		panelContents.setVisible(false);
+//	}
 	public void showPanel() {
 		clearData();
 		funcEditing();
 		panelContents.setVisible(true);
 	}
 	
-	public void enableView() {
-		frameView.setEnabled(true);
-	}
-	
-	public void disableView() {
-		frameView.setEnabled(false);
-	}
+//	public void enableView() {
+//		frameView.setEnabled(true);
+//	}
+//	
+//	public void disableView() {
+//		frameView.setEnabled(false);
+//	}
 }
