@@ -336,6 +336,8 @@ public class Hospital {
 					Doc.add(Double.toString(doc.getSalaryTurn()));
 					Doc.add(Integer.toString(doc.getNumMaxTurn()));
 					
+					Doc.add(Integer.toString(doc.Rsize()));
+					
 					docInfo.add(Doc);
 					
 					Doc = new ArrayList<String>();

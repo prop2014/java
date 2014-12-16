@@ -40,8 +40,6 @@ public class VistaDoctor {
 	private JTable tabla = new JTable();
 	private JScrollPane scrollPanel = new JScrollPane();
 	
-	
-	//private String[] docInfo;
 
 	// CENTER
 

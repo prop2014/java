@@ -177,7 +177,8 @@ public class Doctor {
 							);
 					
 					break;
-				}	
+				}
+				
 				}
 				rest.add(Aux);
 			}
