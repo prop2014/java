@@ -870,10 +870,6 @@ public class CtrlDatosFichero {
 						   pw.print(" "+alhosp.get(i));
 				   		}
 				   }
-				   else{
-					   pw.close(); 
-					   throw new IOException("no hay datos a guardar\n");
-				   }
 				   if(size>0){
 					   ArrayList<String>bufferS = new ArrayList<String>();
 					   ArrayList<String>bufferNS = new ArrayList<String>();
@@ -1038,20 +1034,16 @@ public class CtrlDatosFichero {
 				   D=false;
 				   C=false;
 				   R=false;
-				   size=0;
 			   }
 			   if(part.equals(".D")){
 				   D=false;
 				   R=false;
-				   size=0;
 			   }
 			   if(part.equals(".C")){
 				   C=false;
-				   size=0;
 			   }
 			   if(part.equals(".R")){
 				   R=false;
-				   size=0;
 			   }
 			   if(part.equals(".S")){
 				   size=0;
@@ -1281,9 +1273,9 @@ public class CtrlDatosFichero {
 					   bufferC=getDataCale(id,null);
 					   C=true;
 				   }
-				   size=howManySolutions(id);
-				   if(size == 0) size ++;
-				   for(int i = 0; i <=size;++i){
+				   size=howManySolutions(id)+1;
+				
+				   for(int i = 0; i < size;++i){
 					   if(i==idsol){
 						   bufferSols.add(i,alsol);
 						   bufferNSols.add(i,alnosol);

@@ -298,6 +298,7 @@ public class CtrlPresentacion {
 		ctrlDoctor = new CtrlDoctor(ctrlHospital.getDoctors(), ctrlCalendario.getCalendarYear());
 		ctrlDoctor.addResData(idHosp, null);
 		ctrlAlgorithm = new CtrlAlgorithm(ctrlHospital.getHospital());
+		ctrlAlgorithm.getAllSols();
 
 	}
 
@@ -579,16 +580,15 @@ public class CtrlPresentacion {
 	public void saveSolution(String nameSol, String comment) throws IOException {//provando 0
 		
 		int idSol = ctrlAlgorithm.getFIDS();
-		
-		/*ctrlAlgorithm.saveSol(ctrlHospital.getID(), idSol);
-		*/String[] commentArray = comment.split(" ");
+		String[] commentArray = comment.split(" ");
 		ArrayList<String> commentList = new ArrayList<String>();
 		for(String st : commentArray) {
 			commentList.add(st);
 		}
 		ctrlAlgorithm.makeSol(idSol, nameSol, commentList);
-		ctrlAlgorithm.saveAllSOlutions(ctrlHospital.getID());
-		//ctrlAlgorithm.setNameSol(idSol, nameSol);
-		//ctrlAlgorithm.setComent(idSol, commentList);
+		ctrlAlgorithm.saveSol(ctrlHospital.getID(), idSol);
+	}
+	public ArrayList<String> getAllIdSolutions() {
+		return ctrlAlgorithm.getAllInfoSolutions();
 	}
 }

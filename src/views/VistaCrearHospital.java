@@ -276,7 +276,7 @@ public class VistaCrearHospital {
 			btnCrearHospital.setText("Modificar Hospital");
 			try {
 				ArrayList<String> info = ctrlPresentacion.getInfoHosp();
-				nameHospTextField.setText(info.get(1));
+				nameHospTextField.setText(info.get(1).replace("%", " "));
 				mTextField.setText(info.get(2));
 				tTextField.setText(info.get(3));
 				nTextField.setText(info.get(4));

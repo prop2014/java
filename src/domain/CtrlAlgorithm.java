@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Set;
 
 import data.CtrlDatosFichero;
 import model.Doctor;
@@ -27,6 +28,7 @@ public class CtrlAlgorithm {
 	private ArrayList<Integer> numSinSol;
 	private HashMap<Integer,Solutions> sols;
 	private int idActual;
+	
 	private HashMap<Integer, ArrayList<String>> asignDoc;
 	private ArrayList<String> tSinSol;
 	private HashMap<Integer, Double> sueldos;
@@ -40,6 +42,9 @@ public class CtrlAlgorithm {
 		numSinSol = new ArrayList<Integer>();
 		idActual = 0;
 		sols = new HashMap<Integer,Solutions>();
+		asignDoc = new HashMap<Integer, ArrayList<String>>();
+		tSinSol = new ArrayList<String>();
+		sueldos = new HashMap<Integer, Double>();
 	}
 	
 	
@@ -192,9 +197,9 @@ public class CtrlAlgorithm {
 		CtrlDatosFichero inOut = new CtrlDatosFichero();
 		int nums=inOut.howManySolutions(hosp.getId());
 		for(int i = 0;i<nums;++i){
-			getSol(hosp.getId(),i);
-			ArrayList<String> pr = new ArrayList<String>();
-			makeSol(i,"name",pr);
+			if(inOut.existsSol(hosp.getId(), i)) {
+				getSol(hosp.getId(),i);
+			}
 		}
 	}
 	
@@ -209,10 +214,11 @@ public class CtrlAlgorithm {
 	/**
 	 * @return los ids de las soluciones ya almacenadas
 	 */
-	public ArrayList<Integer> getallidSolutions(){
-		ArrayList<Integer> idssols = new ArrayList<Integer>();
-		for(int i=0;i<sols.size();++i){
-			idssols.add(i);
+	public ArrayList<String> getAllInfoSolutions(){
+		ArrayList<String> idssols = new ArrayList<String>();
+		Set<Integer> set = sols.keySet();
+		for(Integer i : set) {
+			idssols.add(i+" - " +(sols.get(i)).getName());
 		}
 		return idssols;
 	}
@@ -256,15 +262,24 @@ public class CtrlAlgorithm {
 		CtrlDatosFichero inOut = new CtrlDatosFichero();
 		ArrayList<String> sol = inOut.getDataSol(id,idSol);
 		ArrayList<String> noSol = inOut.getDataNoSol(id,idSol);
+		String name = "Noname";
+		String comment = "";
+		ArrayList<String> commentArray = new ArrayList<String>();
 		if(!sol.isEmpty()){
 			int i = 0;
+			sol.get(i);//idSol
+			++i;
+			name = sol.get(i);//nom
+			++i;
+			comment = sol.get(i); //coment
+			++i;
 			int doc=Integer.parseInt(sol.get(i)); //iddoc
 			ArrayList<String> asigsDoc = new ArrayList<String>();
 			++i;
 			int size = Integer.parseInt(sol.get(i));//numFechas
 			for(int j = 0; j<size;++j){
 				++i;
-				asigsDoc.add(sol.get(i));
+				asigsDoc.add(sol.get(i)+" "+sol.get(++i));
 			}
 			if(asignDoc.containsKey(doc)){
 				asignDoc.remove(doc);
@@ -278,10 +293,16 @@ public class CtrlAlgorithm {
 		}
 			tSinSol.clear();
 		if(!noSol.isEmpty()){
-			for(int j=0;j<noSol.size();++j){
-				tSinSol.add(noSol.get(j));//llenamos tSinSol
+			for(int j=1;j<noSol.size();j=j+3){
+				int i = j;
+				tSinSol.add(noSol.get(i)+" "+ noSol.get(i+1)+" "+noSol.get(i+2));//llenamos tSinSol
 			}
 		}
+		String[] com = comment.split("%");
+		for(String t : com) {
+			commentArray.add(t);
+		}
+		makeSol(idSol, name, commentArray);
 	}
 	
 	public void saveSol(int id, int idSol) throws IOException{
@@ -295,6 +316,12 @@ public class CtrlAlgorithm {
 		
 		while(it.hasNext()){
 		 sol.add(Integer.toString(idSol));
+		 sol.add(sols.get(idSol).getName());
+		 String comment = new String("");
+		 for(String t : sols.get(idSol).getComent()) {
+			 comment = comment+"%"+t;
+		 }
+		 sol.add(comment);
 		 Integer doc = it.next();
 		 ArrayList<String> assigs = asignDocTemp.get(doc);
 		 	sol.add(Integer.toString(doc)); //iddoc

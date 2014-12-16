@@ -315,6 +315,19 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 		
 	}
 	
+	private void cargarSoluciones() {
+		list.clearSelection();
+		ArrayList<String> lista = ctrlPresentacion.getAllIdSolutions();
+		
+		DefaultListModel<String> model = new DefaultListModel<String>();
+	    for(String st : lista){
+	         model.addElement(st);
+	    }    
+	    list.setModel(model);  
+	    list.revalidate();
+		list.repaint();
+	}
+	
 	public JPanel getPanel() {
 		return panelContents;
 	}
@@ -324,7 +337,7 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 	}
 	public void showPanel() {
 		cargarHospital();
-		//cargarSoluciones();
+		cargarSoluciones();
 		panelContents.setVisible(true);
 	}
 	
