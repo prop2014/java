@@ -18,11 +18,7 @@ import java.util.Scanner;
  * @author Sergi Orra Genero
  */
 public class VistaMAXTurnosRango extends Vista {
-	
-//	private CtrlPresentacion ctrlPresentacion;
-//	
-//	private JFrame frameView = new JFrame("Programador de Guardias");
-//	private JPanel panelContents = new JPanel();
+
 	private JPanel panelButtons = new JPanel();
 	private JPanel panelInfo = new JPanel();
 	
@@ -36,38 +32,8 @@ public class VistaMAXTurnosRango extends Vista {
 	private JButton button = new JButton("Aceptar");
 	private JButton buttonVolver = new JButton("Volver");
 	
-	
-//	private void inicializarComponents() {
-//	    inicializar_frameView();
-//	    inicializar_panelContents();
-//	    inicializar_panelInfo();
-//	    inicializar_panelButtons();
-//	    assignar_listenersComponents();
-//	  }
-	
-	// METODOS PRIVADOS
-	
-//	private void inicializar_frameView() {
-//		/*** DESCOMENTAR PARA EDITAR *
-//		frameView =  new JFrame("Programador Guardias");
-//		frameView.setMinimumSize(new Dimension(700, 400));
-//		frameView.setPreferredSize(frameView.getMinimumSize());
-//		frameView.setResizable(false);
-//		frameView.setLocationRelativeTo(null);
-//		frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		frameView.getContentPane().setBackground(Color.WHITE);
-//		/*** END DESCOMENTAR PARA EDITAR */
-//		frameView = ctrlPresentacion.getFrame();
-//		JPanel contentPane = (JPanel) frameView.getContentPane();
-//		contentPane.setLayout(null);
-//		panelContents.setBounds(0,0,700,378);
-//		contentPane.add(panelContents);
-//	}
-	
 	protected void init_panelContents() {
-	    // Layout
 	    panelContents.setLayout(new BorderLayout());
-	    // Paneles
 	    panelContents.add(panelInfo,BorderLayout.NORTH);
 	    panelContents.add(panelButtons,BorderLayout.CENTER);
 	}
@@ -79,7 +45,6 @@ public class VistaMAXTurnosRango extends Vista {
 	}
 	
 	private void inicializar_panelButtons() {
-		//layout
 		panelButtons.setBorder(new EmptyBorder(70, 20, 20, 0));
 		labelPanel2.setFont(new Font("Arial", Font.PLAIN, 15));
 		labelPanel2.setBounds(75, 72, 175, 30);
@@ -95,7 +60,6 @@ public class VistaMAXTurnosRango extends Vista {
 		buttonVolver.setFont(new Font("Arial", Font.PLAIN, 12));
 		buttonVolver.setBounds(40, 230, 150, 40);
 		panelButtons.setLayout(null);
-	    // Botones
 	    panelButtons.add(labelPanel2);
 	    panelButtons.add(labelPanel3);
 	    panelButtons.add(labelPanel4);
@@ -104,7 +68,6 @@ public class VistaMAXTurnosRango extends Vista {
 	    panelButtons.add(textArea);
 	    panelButtons.add(button);
 	    panelButtons.add(buttonVolver);
-	    // Tooltips
 	    button.setToolTipText("[CTRL+ENTER]");
 	    buttonVolver.setToolTipText("[ESC]");
 	}
@@ -139,14 +102,12 @@ public class VistaMAXTurnosRango extends Vista {
 					try {
 						ctrlPresentacion.addResMAX_Turnos_Rango(dia1, mes1, year1, dia2, mes2, year2, num);
 						successfulOperationDialog("Restriccion creada correctamente");
-//						JOptionPane.showMessageDialog(null, "Restriccion creada correctamente", "Informacion",JOptionPane.INFORMATION_MESSAGE);
 						textArea.setText(null);
 						dataChooser1.setCalendar(null);
 						dataChooser2.setCalendar(null);
 						ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 					} catch (IOException eX) {
 						rejectedOperationDialog("Restriccion no creada");
-//						JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 
 						textArea.setText(null);
 						dataChooser1.setCalendar(null);
 						dataChooser2.setCalendar(null);
@@ -155,7 +116,6 @@ public class VistaMAXTurnosRango extends Vista {
 				}
 				else {
 					rejectedOperationDialog("Valores introducidos incorrectamente");
-//					JOptionPane.showMessageDialog(null, "Valores introducidos incorrectamente", "Error", JOptionPane.ERROR_MESSAGE);
 					textArea.setText(null);
 					dataChooser1.setCalendar(null);
 					dataChooser2.setCalendar(null);
@@ -182,47 +142,16 @@ public class VistaMAXTurnosRango extends Vista {
         });
 	}
 	
-	
-	//METODOS PUBLICOS
-	
 	public VistaMAXTurnosRango(CtrlPresentacion pCtrlPresentacion) {
-//		ctrlPresentacion = pCtrlPresentacion;
 		super(pCtrlPresentacion);
-		/** DESCOMENTAR PARA EDITAR
-		 * inicializarComponents();
-		 */
 	}
 	
 	public void init() {
-//		inicializarComponents();
 		init_frameView();
 	    init_panelContents();
 	    inicializar_panelInfo();
 	    inicializar_panelButtons();
 	    assign_listenersComponents();
 	}
-	
-//	public JPanel getPanel() {
-//		return panelContents;
-//	}
-//	
-//	public void hidePanel() {
-//		panelContents.setVisible(false);
-//	}
-//	public void showPanel() {
-//		panelContents.setVisible(true);
-//	}
-//	
-//	public void showView() {
-//		panelContents.setVisible(true);
-//	}
-//	
-//	public void enableView() {
-//		frameView.setEnabled(true);
-//	}
-//	
-//	public void disableView() {
-//		frameView.setEnabled(false);
-//	}
 
 }

@@ -50,17 +50,6 @@ public class CtrlDoctor {
 	
 /* Metodos publicos */
 	
-	public ArrayList<ArrayList<String>> loadRest(int id){
-		Doctor doct = new Doctor();
-		for(Doctor doc: Doctors){
-			if(doc.getId() == id){
-				doct = doc;
-			}
-		}
-		
-		return  doct.loadRest();
-	}
-	
 	/**
 	*Consultora de todos los identificadores dels doctores
 	* @return ids de los doctores
@@ -142,8 +131,15 @@ public class CtrlDoctor {
 	}
 	
 	
-	
-	
+	public ArrayList<ArrayList<String>> loadRest(int id){
+		Doctor doct = new Doctor();
+		for(Doctor doc: Doctors){
+			if(doc.getId() == id){
+				doct = doc;
+			}
+		}
+		return  doct.loadRest();
+	}
 	
 	
 	/** 
@@ -202,7 +198,12 @@ public class CtrlDoctor {
 		return null;
 	}
 	
-	public ArrayList<Integer> getIdsDoctores(){
+	/**
+	* Consultora de los ids de los doctores
+	* @param 
+	* @return ArrayList con todos los ids de los doctores
+	*/
+	public ArrayList<Integer> getIdsDoctores() {
 		ArrayList<Integer> ids = new ArrayList<Integer>();
 		for(Doctor doc : Doctors){
 			ids.add(doc.getId());
@@ -210,6 +211,11 @@ public class CtrlDoctor {
 		return ids;
 	}
 	
+	/**
+	* Consultora de la primera posicion libre para asignar ID al doctor
+	* @param 
+	* @return Primera ID libre
+	*/
 	public Integer getFDIdocs() throws IOException {
 		ArrayList<Integer> ids = getIdsDoctores();
 		 Collections.sort(ids, new Comparator<Integer>() 
@@ -228,11 +234,12 @@ public class CtrlDoctor {
 		return ids.size();
 	}
 	
-	
-	
-	
-	
-	public ArrayList<Integer> getIdsRestrictions(int id){
+	/**
+	* Consultora de los ids de las restricciones
+	* @param id: id del doctor que consultar sus restricciones
+	* @return ArrayList con todas las ids de las restricciones
+	*/
+	public ArrayList<Integer> getIdsRestrictions(int id) {
 		ArrayList<Integer> ids = new ArrayList<Integer>();
 		for(Doctor doc : Doctors){
 			if(doc.getId()==id){
@@ -628,6 +635,13 @@ public class CtrlDoctor {
 		return null;
 	}
 	
+	
+	/**
+	* Guarda todos los datos de las restricciones en una ArrayList para luego, guardarlo en los datos.
+	* @param id: Id del hospital que guardar las restricciones
+	* @return
+	* @throws IOException
+	*/
 	public void saveDataRes(int id)throws IOException{
 		ArrayList<String> alRes = new ArrayList<String>();
 		
@@ -703,7 +717,12 @@ public class CtrlDoctor {
 		inOut.saveDataRes(alRes, id);
 	}
 	
-	
+	/**
+	* Carga todas las restricciones al hospital 
+	* @param id: Id del hospital donde cargar las restricciones 
+	* @return
+	* @throws IOException
+	*/
 	public void addResData(int id,String path)throws IOException{
 		CtrlDatosFichero inOut = new CtrlDatosFichero();
 		ArrayList<String> alRes = inOut.getDataRes(id,path);
@@ -868,7 +887,7 @@ public class CtrlDoctor {
 							if (diaXOR <= lastDay && diaXOR >= firstDay) throw new IOException("Este doctor ya tiene una XOR que apunta una turno del rango de la MAX que se uqiere poner");
 						}
 					}
-					/* comprovo si hi ha algun max rango solapada */
+					/* comprovo si hi ha alguna max rango solapada */
 					if (alres.get(j).getTipo().equals("MAX_Turnos_Rango")) {
 						MAX_Turnos_Rango N = (MAX_Turnos_Rango)alres.get(j);
 						if (m1 > N.getFechaIni().get(GregorianCalendar.MONTH)+1 && (m1 < N.getFechaFin().get(GregorianCalendar.MONTH)+1)) throw new IOException("MAX Solapada con MAX1");
@@ -1158,70 +1177,4 @@ public class CtrlDoctor {
 		if (!trobat) throw new IOException("No existe un Doctor con esta Id");
 	}
 
- /*
-	public void setId(int id, int idOld) throws IOException {
-		int i = 0;
-		boolean done = false;
-		while(!done ||  i < Doctors.size() ){
-			if(idOld == Doctors.get(i).getId()){
-				done = true;
-				Doctors.get(i).setId(id);
-				
-			}
-			++i;
-		}
-		
-		if (!done) throw new IOException("No existe un Doctor con esta Id");
-	    
-	}
-	
-	public void setName(String nombre, int idOld) throws IOException {
-		int i = 0;
-		boolean done = false;
-		while(!done ||  i < Doctors.size() ){
-			if(idOld == Doctors.get(i).getId()){
-				done = true;
-				Doctors.get(i).setName(nombre);
-				
-			}
-			++i;
-		}
-		
-		if (!done) throw new IOException("No existe un Doctor con esta Id");
-	    
-	}
-	
-	public void setNumMaxTurn(int num, int idOld) throws IOException {
-		int i = 0;
-		boolean done = false;
-		while(!done ||  i < Doctors.size() ){
-			if(idOld == Doctors.get(i).getId()){
-				done = true;
-				Doctors.get(i).setNumMaxTurn(num);
-				
-			}
-			++i;
-			
-		}
-		
-		if (!done) throw new IOException("No existe un Doctor con esta Id");
-	   
-	}
-	
-	public void setSalaryTurn(double sueldo, int idOld) throws IOException {
-		int i = 0;
-		boolean done = false;
-		while(!done ||  i < Doctors.size() ){
-			if(idOld == Doctors.get(i).getId()){
-				done = true;
-				Doctors.get(i).setSalaryTurn(sueldo);
-				
-			}
-			++i;
-		}
-		
-		if (!done) throw new IOException("No existe un Doctor con esta Id");
-	    
-	}
-	*/
 }

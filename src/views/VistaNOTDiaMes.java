@@ -15,10 +15,6 @@ import java.util.Scanner;
  */
 public class VistaNOTDiaMes extends Vista {
 	
-//	private CtrlPresentacion ctrlPresentacion;
-//	
-//	private JFrame frameView;
-//	private JPanel panelContents = new JPanel();
 	private JPanel panelButtons = new JPanel();
 	private JPanel panelInfo = new JPanel();
 	
@@ -28,17 +24,6 @@ public class VistaNOTDiaMes extends Vista {
 	private JTextArea textArea = new JTextArea(1,1);
 	private JButton button = new JButton("Aceptar");
 	private JButton buttonVolver = new JButton("Volver");
-	
-	
-//	private void inicializarComponents() {
-//	    inicializar_frameView();
-//	    inicializar_panelContents();
-//	    inicializar_panelInfo();
-//	    inicializar_panelButtons();
-//	    assignar_listenersComponents();
-//	  }
-	
-	// METODOS PRIVADOS
 	
 	protected void init_frameView() {
 		/*** DESCOMENTAR PARA EDITAR *
@@ -72,7 +57,6 @@ public class VistaNOTDiaMes extends Vista {
 	}
 	
 	private void inicializar_panelButtons() {
-		//layout
 		panelButtons.setBorder(new EmptyBorder(70, 20, 20, 0));
 		labelPanel3.setFont(new Font("Arial", Font.PLAIN, 15));
 		labelPanel3.setBounds(155, 92, 150, 30);
@@ -82,12 +66,10 @@ public class VistaNOTDiaMes extends Vista {
 		buttonVolver.setFont(new Font("Arial", Font.PLAIN, 12));
 		buttonVolver.setBounds(40, 230, 150, 40);
 		panelButtons.setLayout(null);
-	    // Botones
 	    panelButtons.add(labelPanel3);
 	    panelButtons.add(textArea);
 	    panelButtons.add(button);
 	    panelButtons.add(buttonVolver);
-	    // Tooltips
 	    button.setToolTipText("[CTRL+ENTER]");
 	    buttonVolver.setToolTipText("[ESC]");
 	}
@@ -109,19 +91,16 @@ public class VistaNOTDiaMes extends Vista {
 					try {
 						ctrlPresentacion.addResNOT_Dia_Mes(dia);
 						successfulOperationDialog("Restriccion creada correctamente");
-//						JOptionPane.showMessageDialog(null, "Restriccion creada correctamente", "Informacion",JOptionPane.INFORMATION_MESSAGE);
 						textArea.setText(null);
 						ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 					} catch (IOException eX) {
 						rejectedOperationDialog("Restriccion no creada");
-//						JOptionPane.showMessageDialog(null, "Restriccion no creada", "Error",JOptionPane.ERROR_MESSAGE); 
 						textArea.setText(null);
 						ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 					}
 				}
 				else {
 					rejectedOperationDialog("Dia del mes incorrecto");
-//					JOptionPane.showMessageDialog(null, "Dia del mes incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
 					textArea.setText(null);
 				}
 				sc1.close();
@@ -149,42 +128,15 @@ public class VistaNOTDiaMes extends Vista {
 	//METODOS PUBLICOS
 	
 	public VistaNOTDiaMes(CtrlPresentacion pCtrlPresentacion) {
-//		ctrlPresentacion = pCtrlPresentacion;
 		super(pCtrlPresentacion);
-		/* DESCOMENTAR PARA EDITAR
-		      inicializarComponents();
-		*/
 	}
 	
 	public void init() {
-//		inicializarComponents();
 		init_frameView();
 	    init_panelContents();
 	    inicializar_panelInfo();
 	    inicializar_panelButtons();
 	    assign_listenersComponents();
 	}
-	
-//	public JPanel getPanel() {
-//		return panelContents;
-//	}
-//	
-//	public void hidePanel() {
-//		panelContents.setVisible(false);
-//	}
-//	public void showPanel() {
-//		panelContents.setVisible(true);
-//	}
-//	
-//	public void showView() {
-//		panelContents.setVisible(true);
-//	}
-//	
-//	public void enableView() {
-//		frameView.setEnabled(true);
-//	}
-//	
-//	public void disableView() {
-//		frameView.setEnabled(false);
-//	}
+
 }

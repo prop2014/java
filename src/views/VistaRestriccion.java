@@ -39,37 +39,9 @@ public class VistaRestriccion extends Vista {
 	private JButton buttonXOR = new JButton("XOR");
 	private JButton buttonVolver = new JButton("Volver");
 	
-	//METODOS PRIVADOS
-	
-//	private void inicializarComponents() {
-//	    inicializar_frameView();
-//	    inicializar_panelContents();
-//	    inicializar_panelInfo();
-//	    inicializar_panelButtons();
-//	    assignar_listenersComponents();
-//	  }
-	
-//	private void inicializar_frameView() {
-//		/*** DESCOMENTAR PARA EDITAR */
-//		frameView =  new JFrame("Programador Guardias");
-//		frameView.setMinimumSize(new Dimension(700, 400));
-//		frameView.setPreferredSize(frameView.getMinimumSize());
-//		frameView.setResizable(false);
-//		frameView.setLocationRelativeTo(null);
-//		frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		frameView.getContentPane().setBackground(Color.WHITE);
-//		/*** END DESCOMENTAR PARA EDITAR */
-//		frameView = ctrlPresentacion.getFrame();
-//		JPanel contentPane = (JPanel) frameView.getContentPane();
-//		contentPane.setLayout(null);
-//		panelContents.setBounds(0,0,700,378);
-//		contentPane.add(panelContents);
-//	}
 	
 	protected void init_panelContents() {
-	    // Layout
 	    panelContents.setLayout(new BorderLayout());
-	    // Paneles
 	    panelContents.add(panelInfo,BorderLayout.NORTH);
 	    panelContents.add(panelButtons,BorderLayout.CENTER);
 	}
@@ -81,15 +53,6 @@ public class VistaRestriccion extends Vista {
 	}
 	
 	private void inicializar_panelButtons() {
-	    // Layout
-		//GridLayout gl = new GridLayout(4,0);
-		//gl.setVgap(5); //distancia entre botones (vertical)
-		//gl.setHgap(10); //distancia entre botones (horizontal)
-		//panelButtons.setLayout(gl); //mida de los botones iguales
-		//panelButtons.setBorder(BorderFactory.createEmptyBorder(20, 190, 80, 190)); 
-		
-		//panelButtons.setLayout(new GridLayout(4,4,10,5));
-		//panelButtons.setBorder(BorderFactory.createEmptyBorder(20, 175, 80, 175));
 		
 		panelButtons.setBorder(new EmptyBorder(70, 20, 20, 0));
 		buttonNOTFecha.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -266,14 +229,11 @@ public class VistaRestriccion extends Vista {
 	//METODOS PUBLICOS
 	
 	public VistaRestriccion(CtrlPresentacion pCtrlPresentacion) {
-//		ctrlPresentacion = pCtrlPresentacion;
 		super(pCtrlPresentacion);
-		/** DESCOMENTAR PARA EDITAR */
-//		 inicializarComponents();
-		/**/
+
 	}
+	
 	public void init() {
-//		inicializarComponents();
 		init_frameView();
 	    init_panelContents();
 	    inicializar_panelInfo();
@@ -281,26 +241,4 @@ public class VistaRestriccion extends Vista {
 	    assign_listenersComponents();
 	}
 	
-//	public JPanel getPanel() {
-//		return panelContents;
-//	}
-//	
-//	public void hidePanel() {
-//		panelContents.setVisible(false);
-//	}
-//	public void showPanel() {
-//		panelContents.setVisible(true);
-//	}
-//	
-//	public void showView() {
-//		panelContents.setVisible(true);
-//	}
-//	
-//	public void enableView() {
-//		frameView.setEnabled(true);
-//	}
-//	
-//	public void disableView() {
-//		frameView.setEnabled(false);
-//	}
 }
