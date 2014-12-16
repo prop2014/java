@@ -55,7 +55,6 @@ public class CtrlDoctor {
 		for(Doctor doc: Doctors){
 			if(doc.getId() == id){
 				doct = doc;
-				System.out.print("El Doctor Existe");
 			}
 		}
 		
@@ -240,7 +239,6 @@ public class CtrlDoctor {
 				ArrayList<Restriccion>Res=doc.getRestrictions();
 				for(Restriccion res: Res){
 					ids.add(res.getIdRestriccion());
-					System.out.printf("Restriccio: %d\n",res.getIdRestriccion());
 				}
 			}
 		}
@@ -646,7 +644,6 @@ public class CtrlDoctor {
 						if(Res.get(j).getTipo().equals("NOT_Turno")){
 							NOT_Turno N = (NOT_Turno)Res.get(j);
 							alRes.add(N.getTipoTurno());
-							System.out.printf("tipoturno: %s\n",N.getTipoTurno());
 						}
 						else if(Res.get(j).getTipo().equals("NOT_Fecha")){
 							NOT_Fecha N = (NOT_Fecha)Res.get(j);
@@ -710,7 +707,6 @@ public class CtrlDoctor {
 	public void addResData(int id,String path)throws IOException{
 		CtrlDatosFichero inOut = new CtrlDatosFichero();
 		ArrayList<String> alRes = inOut.getDataRes(id,path);
-		for(int t=0;t<alRes.size();++t)System.out.print(" "+alRes.get(t));
 			int idDoc;
 		for(int i=0;i<alRes.size();++i){
 			int NumRes, idRes;
@@ -786,13 +782,9 @@ public class CtrlDoctor {
 					for(int k=0;k<numdays;++k){
 						++i;
 						String strDate =  alRes.get(i);
-							System.out.printf("problems amb %s\n",strDate);
 							int d = Integer.parseInt(strDate.substring(0, 2));
-							System.out.printf("el dia es: %d\n", d);
 							int M = Integer.parseInt(strDate.substring(2, 4));
-							System.out.printf("el mes es: %d\n", M);
 							int year =Integer.parseInt(strDate.substring(4));
-							System.out.printf("el any es: %d\n", year);
 						diaXOR.add(d);
 						mesXOR.add(M);
 						yearXOR.add(year);
@@ -852,6 +844,10 @@ public class CtrlDoctor {
 		if (d1 < 1 || d1 > 31 || m1 < 1 || m1 > 12 || a1 < 1) throw new IOException("Valores de la fecha incorrecto");
 		if (d2 < 1 || d2 > 31 || m2 < 1 || m2 > 12 || a2 < 1) throw new IOException("Valores de la fecha incorrecto");
 		if(numT < 0) throw new IOException("Numero de turnos incorrecto");
+		if (m1 > m2) throw new IOException("Fecha final es anterior a la fecha inicial");
+		if (m1 == m2) {
+			if (d1 >= d2) throw new IOException("Fecha final es anterior a la fecha inicial");
+		}
 		GregorianCalendar fecha1 = new GregorianCalendar(a1,m1-1,d1);
 		GregorianCalendar fecha2 = new GregorianCalendar(a2,m2-1,d2);
 		if (!fecha1.isLenient() || !fecha2.isLenient()) throw new IOException("Fecha invalida");
