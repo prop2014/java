@@ -874,22 +874,23 @@ public class CtrlDoctor {
 						if (m1 > N.getFechaIni().get(GregorianCalendar.MONTH)+1 && (m1 < N.getFechaFin().get(GregorianCalendar.MONTH)+1)) throw new IOException("MAX Solapada con MAX1");
 						if (m2 > N.getFechaIni().get(GregorianCalendar.MONTH)+1 && (m2 < N.getFechaFin().get(GregorianCalendar.MONTH)+1)) throw new IOException("MAX Solapada con MAX2");
 						if (m1 == N.getFechaIni().get(GregorianCalendar.MONTH)+1 && (m1 < N.getFechaFin().get(GregorianCalendar.MONTH)+1)) {
-							if (a1 > N.getFechaIni().get(GregorianCalendar.DAY_OF_MONTH)) throw new IOException("MAX Solapada con MAX3");
+							if (d1 > N.getFechaIni().get(GregorianCalendar.DAY_OF_MONTH)) throw new IOException("MAX Solapada con MAX3");
 						}
-						if ((m2 == N.getFechaFin().get(GregorianCalendar.MONTH)+1) && (m2 > N.getFechaIni().get(GregorianCalendar.DAY_OF_MONTH))) {
-							if (a2 < N.getFechaFin().get(GregorianCalendar.DAY_OF_MONTH)) throw new IOException("MAX Solapada con MAX4");
+						if ((m2 == N.getFechaFin().get(GregorianCalendar.MONTH)+1) && (m2 > N.getFechaIni().get(GregorianCalendar.MONTH)+1)) {
+							if (d2 < N.getFechaFin().get(GregorianCalendar.DAY_OF_MONTH)) throw new IOException("MAX Solapada con MAX4");
 						}
 						if ((m2 == N.getFechaIni().get(GregorianCalendar.MONTH)+1) && (m1 < N.getFechaIni().get(GregorianCalendar.MONTH)+1)) {
-							if (a2 > N.getFechaIni().get(GregorianCalendar.DAY_OF_MONTH)) throw new IOException("MAX Solapada con MAX5");
+							if (d2 > N.getFechaIni().get(GregorianCalendar.DAY_OF_MONTH)) throw new IOException("MAX Solapada con MAX5");
 						}
 						if ((m1 == N.getFechaFin().get(GregorianCalendar.MONTH)+1) && (m2 > N.getFechaFin().get(GregorianCalendar.MONTH)+1)) {
-							if (a2 > N.getFechaIni().get(GregorianCalendar.DAY_OF_MONTH)) throw new IOException("MAX Solapada con MAX6");
+							if (d2 > N.getFechaIni().get(GregorianCalendar.DAY_OF_MONTH)) throw new IOException("MAX Solapada con MAX6");
 						}
 						if ((m1 < N.getFechaIni().get(GregorianCalendar.MONTH)+1) && (m2 > N.getFechaIni().get(GregorianCalendar.MONTH)+1)) throw new IOException("MAX Solapada con MAX7");
-						if ((m2 == N.getFechaFin().get(GregorianCalendar.MONTH)+1) && (m1 == N.getFechaIni().get(GregorianCalendar.DAY_OF_MONTH))) {
-							if ((a1 >= N.getFechaIni().get(GregorianCalendar.DAY_OF_MONTH)) && (a1 <= N.getFechaFin().get(GregorianCalendar.DAY_OF_MONTH))) throw new IOException("MAX Solapada con MAX8");
-							if ((a2 >= N.getFechaIni().get(GregorianCalendar.DAY_OF_MONTH)) && (a2 <= N.getFechaFin().get(GregorianCalendar.DAY_OF_MONTH))) throw new IOException("MAX Solapada con MAX9");
-							if ((a1 >= N.getFechaIni().get(GregorianCalendar.DAY_OF_MONTH)) && (a2 <= N.getFechaFin().get(GregorianCalendar.DAY_OF_MONTH))) throw new IOException("MAX Solapada con MAX10");
+						if ((m2 == N.getFechaFin().get(GregorianCalendar.MONTH)+1) && (m1 == N.getFechaIni().get(GregorianCalendar.MONTH)+1)) {
+							if ((d1 >= N.getFechaIni().get(GregorianCalendar.DAY_OF_MONTH)) && (d1 <= N.getFechaFin().get(GregorianCalendar.DAY_OF_MONTH))) throw new IOException("MAX Solapada con MAX8");
+							if ((d2 >= N.getFechaIni().get(GregorianCalendar.DAY_OF_MONTH)) && (d2 <= N.getFechaFin().get(GregorianCalendar.DAY_OF_MONTH))) throw new IOException("MAX Solapada con MAX9");
+							if ((d1 >= N.getFechaIni().get(GregorianCalendar.DAY_OF_MONTH)) && (d2 <= N.getFechaFin().get(GregorianCalendar.DAY_OF_MONTH))) throw new IOException("MAX Solapada con MAX10");
+							if ((d1 <= N.getFechaIni().get(GregorianCalendar.DAY_OF_MONTH)) && (d2 >= N.getFechaFin().get(GregorianCalendar.DAY_OF_MONTH))) throw new IOException("MAX Solapada con MAX10");
 						}
 					}
 				}
