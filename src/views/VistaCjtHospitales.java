@@ -31,10 +31,10 @@ public class VistaCjtHospitales {
 	private JFrame frameView;
 	private JPanel panelContents = new JPanel();
 	private JPanel topPanel = new JPanel();
-	private final JButton btnCrearHospital = new JButton("<html><CENTER>Crear Hospital<br/></html></CENTER>");
-	private final JButton btnEliminarHospital = new JButton("<html><CENTER>Eliminar Hospital<br/></html></CENTER>");
-	private final JButton btnImportarHospital = new JButton("<html><CENTER>Importar Hospital<br/></html></CENTER>");
-	private final JButton btnSeleccionarHospital = new JButton("<html><CENTER>Seleccionar Hospital<br/></html></CENTER>");
+	private final JButton btnCrearHospital = new JButton("<html><CENTER>Crear Hospital</html></CENTER>");
+	private final JButton btnEliminarHospital = new JButton("<html><CENTER>Eliminar Hospital</html></CENTER>");
+	private final JButton btnImportarHospital = new JButton("<html><CENTER>Importar Hospital</html></CENTER>");
+	private final JButton btnSeleccionarHospital = new JButton("<html><CENTER>Seleccionar Hospital</html></CENTER>");
 	private final JButton btnmodificarHospital = new JButton("<html><CENTER>Modificar Hospital</html></CENTER>");
 	private final JList<String> list = new JList<String>();
 	private final JScrollPane scrollPanel = new JScrollPane();
@@ -91,7 +91,6 @@ public class VistaCjtHospitales {
 		
 		btnmodificarHospital.setBounds(552, 14, 142, 29);
 		topPanel.add(btnmodificarHospital);
-		btnmodificarHospital.setToolTipText("[CTRL+N]");
 		btnmodificarHospital.setFont(new Font("Arial", Font.PLAIN, 12));
 		
 		midPanel = new JPanel();
@@ -143,6 +142,7 @@ public class VistaCjtHospitales {
 		btnEliminarHospital.setToolTipText("[CTRL+D]");
         btnImportarHospital.setToolTipText("[CTRL+I]");
         btnSeleccionarHospital.setToolTipText("[ENTER]");
+        btnmodificarHospital.setToolTipText("[CTRL+M]");
 		
 		panelInfo.setBackground(Color.WHITE);
 		panelInfo.setBounds(263, 0, 428, 123);
@@ -330,6 +330,7 @@ public class VistaCjtHospitales {
         panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK), "newHospital");
         panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_DOWN_MASK), "importHospital");
         panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_DOWN_MASK), "delHospital");
+        panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_DOWN_MASK), "modHospital");
         panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "selHospital");
         
         panelContents.getActionMap().put("newHospital", new AbstractAction() {
@@ -354,6 +355,12 @@ public class VistaCjtHospitales {
             @Override
             public void actionPerformed(ActionEvent e) {
                	btnSeleccionarHospital.doClick();
+            }
+        });
+        panelContents.getActionMap().put("modHospital", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               	btnmodificarHospital.doClick();
             }
         });
         // END OF KEY BINDINGS

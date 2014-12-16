@@ -165,6 +165,9 @@ public class CtrlDatosFichero {
 					   				}
 			   						sl3.close();
 			   					}
+			   					else {
+				   					alhosp.add("0");
+			   					}
 			   					
 			   				} else {
 			   					if(word.equals(".C")) {
