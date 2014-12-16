@@ -1273,7 +1273,8 @@ public class CtrlDatosFichero {
 					   bufferC=getDataCale(id,null);
 					   C=true;
 				   }
-				   size=howManySolutions(id)+1;
+				   size=howManySolutions(id);
+				   if(!existsSol(id, idsol)) ++size;
 				
 				   for(int i = 0; i < size;++i){
 					   if(i==idsol){
@@ -1377,7 +1378,7 @@ public class CtrlDatosFichero {
 	   		}
 	   	}
   		br.close();
-  		if(!exists)throw new IOException("No existe esta solucion");
+  		//if(!exists)throw new IOException("No existe esta solucion");
   		return alnosol;
    }
    public ArrayList<String> getDataSol(int id,int idsol)throws IOException{
@@ -1411,7 +1412,7 @@ public class CtrlDatosFichero {
 	   		}
 	   	}
    		br.close();
-   		if(!exists)throw new IOException("No existe esta solucion");
+   		//if(!exists)throw new IOException("No existe esta solucion");
    		return alsol;
   }
    

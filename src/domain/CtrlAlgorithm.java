@@ -203,6 +203,17 @@ public class CtrlAlgorithm {
 		}
 	}
 	
+	public String getNameSol(int id) {
+		return (sols.get(id)).getName();
+	}
+	public String getCommentSol(int id) {
+		ArrayList<String> comment = (sols.get(id)).getComent();
+		String comentario = new String();
+		for(String t : comment){
+			comentario = comentario +" "+ t;
+		}
+		return comentario;
+	}
 	
 	/**
 	 * @return la id de la solucion que estamos tratando en ctrAlgoritm
@@ -270,6 +281,7 @@ public class CtrlAlgorithm {
 			sol.get(i);//idSol
 			++i;
 			name = sol.get(i);//nom
+			name = name.replace("%", " ");
 			++i;
 			comment = sol.get(i); //coment
 			++i;
@@ -313,15 +325,18 @@ public class CtrlAlgorithm {
 		HashMap<Integer, ArrayList<String>> asignDocTemp = (sols.get(idSol)).getDatesAsigned();
 		Iterator<Integer> it = asignDocTemp.keySet().iterator();
 		
-		
-		while(it.hasNext()){
-		 sol.add(Integer.toString(idSol));
-		 sol.add(sols.get(idSol).getName());
+		sol.add(Integer.toString(idSol));
+		 sol.add((sols.get(idSol)).getName().replace(" ","%"));
 		 String comment = new String("");
 		 for(String t : sols.get(idSol).getComent()) {
-			 comment = comment+"%"+t;
+			 if (!t.isEmpty()) {
+				 comment = comment+"%"+t;
+			 }
 		 }
-		 sol.add(comment);
+		 if(!comment.equals("")) sol.add(comment);
+		 else {sol.add("-");}
+		 
+		while(it.hasNext()){
 		 Integer doc = it.next();
 		 ArrayList<String> assigs = asignDocTemp.get(doc);
 		 	sol.add(Integer.toString(doc)); //iddoc
@@ -339,6 +354,10 @@ public class CtrlAlgorithm {
 		inOut.saveDataSol(idSol,sol, noSol, id);
 	}
 	
+	public void deleteSol(int id, int idSol) throws IOException{
+		if(sols.containsKey(idSol)) sols.remove(idSol);
+		saveAllSOlutions(id);
+	}
 	
 	/**guarda todas las soluciones
 	 * 
@@ -346,7 +365,10 @@ public class CtrlAlgorithm {
 	 * @throws IOException errores de fichero
 	 */
 	public void saveAllSOlutions(int id) throws IOException{
-		for(int i=0;i<sols.size();++i){
+		CtrlDatosFichero inOut = new CtrlDatosFichero();
+		inOut.removePart(id, ".S");
+		Set<Integer> set = sols.keySet();
+		for(Integer i : set) {
 			Solutions sol = sols.get(i);
 			sol.saveSol(id, i);
 		}

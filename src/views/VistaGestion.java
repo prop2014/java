@@ -17,18 +17,18 @@ import javax.swing.border.EmptyBorder;
 
 //ID VISTA 2
 
-public class VistaGestion {
+public class VistaGestion extends Vista {
 	
 	private static final int CENTER = 0;
 	private static final int LEFT = 0;
 
 
-	private CtrlPresentacion ctrlPresentacion;
+//	private CtrlPresentacion ctrlPresentacion;
 	
 	
 	//Componentes interficie
-	private JFrame frameView;
-	private JPanel panelContents = new JPanel();
+//	private JFrame frameView;
+//	private JPanel panelContents = new JPanel();
 	private JPanel panelCenterButtons = new JPanel();
 	//CENTER
 	private JLabel labelPanel1 = new JLabel();
@@ -64,7 +64,7 @@ public class VistaGestion {
 		
 	}
 	
-	private void inicializar_panelContents() {
+	protected void init_panelContents() {
 		panelContents.setLayout(new BorderLayout());
 		// Componentes
 		panelContents.add(panelCenterButtons, BorderLayout.CENTER);
@@ -105,14 +105,14 @@ public class VistaGestion {
 		buttonCal.setToolTipText("[C]");
 		buttonDoc.setToolTipText("[D]");
 	}
-	private void inicializarComponents() {
-		inicializar_frameView();
-		inicializar_panelContents();
-		inicializar_panelCenterButtons();
-		assignar_listenersComponents();
-	}
+//	private void inicializarComponents() {
+//		inicializar_frameView();
+//		inicializar_panelContents();
+//		inicializar_panelCenterButtons();
+//		assignar_listenersComponents();
+//	}
 	
-	private void assignar_listenersComponents() {
+	protected void assign_listenersComponents() {
 		buttonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ctrlPresentacion.changeView("vistaCjtHospitales", panelContents);
@@ -182,14 +182,19 @@ public class VistaGestion {
 	
 	//METODOS PUBLICOS
 	public VistaGestion(CtrlPresentacion pCtrlPresentacion) {
-		ctrlPresentacion = pCtrlPresentacion;
+//		ctrlPresentacion = pCtrlPresentacion;
+		super(pCtrlPresentacion);
 		/** DESCOMENTAR PARA EDITAR *
 		  inicializarComponents();
 		 /**/
 	}
 	
 	public void init() {
-		inicializarComponents();
+//		inicializarComponents();
+		inicializar_frameView();
+		init_panelContents();
+		inicializar_panelCenterButtons();
+		assign_listenersComponents();
 	}
 	
 	public void cargarHospital() {
@@ -202,27 +207,27 @@ public class VistaGestion {
 		labelPanel1.setVerticalTextPosition(CENTER);
 	}
 	
-	public JPanel getPanel() {
-		return panelContents;
-	}
-	
-	public void hidePanel() {
-		panelContents.setVisible(false);
-	}
-	public void showPanel() {
-		cargarHospital();
-		panelContents.setVisible(true);
-	}
-	
-	public void showView() {
-		panelContents.setVisible(true);
-	}
-	
-	public void enableView() {
-		frameView.setEnabled(true);
-	}
-	
-	public void disableView() {
-		frameView.setEnabled(false);
-	}
+//	public JPanel getPanel() {
+//		return panelContents;
+//	}
+//	
+//	public void hidePanel() {
+//		panelContents.setVisible(false);
+//	}
+//	public void showPanel() {
+//		cargarHospital();
+//		panelContents.setVisible(true);
+//	}
+//	
+//	public void showView() {
+//		panelContents.setVisible(true);
+//	}
+//	
+//	public void enableView() {
+//		frameView.setEnabled(true);
+//	}
+//	
+//	public void disableView() {
+//		frameView.setEnabled(false);
+//	}
 }

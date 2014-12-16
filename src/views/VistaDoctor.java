@@ -21,13 +21,13 @@ import javax.swing.table.DefaultTableModel;
  * @author Axel Pelaez
  */
 
-public class VistaDoctor {
+public class VistaDoctor extends Vista{
 	// Componentes interficie
 
-	private CtrlPresentacion ctrlPresentacion;
-
-	private JFrame frameView;
-	private JPanel panelContents = new JPanel();
+//	private CtrlPresentacion ctrlPresentacion;
+//
+//	private JFrame frameView;
+//	private JPanel panelContents = new JPanel();
 	private JPanel panelCenterButtons = new JPanel();
 
 	
@@ -64,24 +64,24 @@ public class VistaDoctor {
 
 	// METODOS PRIVADOS
 
-	private void inicializar_frameView() {
-		/*** DESCOMENTAR PARA EDITAR *
-		 frameView = new
-		 JFrame("Programador Guardias"); frameView.setMinimumSize(new
-		 Dimension(700, 400));
-		 frameView.setPreferredSize(frameView.getMinimumSize());
-		 frameView.setResizable(false); frameView.setLocationRelativeTo(null);
-		 frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		 frameView.getContentPane().setBackground(Color.WHITE); 
-		 /*** END DESCOMENTAR PARA EDITAR */
-		frameView = ctrlPresentacion.getFrame();
-		JPanel contentPane = (JPanel) frameView.getContentPane();
-		contentPane.setLayout(null);
-		panelContents.setBounds(0, 0, 700, 378);
-		contentPane.add(panelContents);
-	}
+//	private void inicializar_frameView() {
+//		/*** DESCOMENTAR PARA EDITAR *
+//		 frameView = new
+//		 JFrame("Programador Guardias"); frameView.setMinimumSize(new
+//		 Dimension(700, 400));
+//		 frameView.setPreferredSize(frameView.getMinimumSize());
+//		 frameView.setResizable(false); frameView.setLocationRelativeTo(null);
+//		 frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		 frameView.getContentPane().setBackground(Color.WHITE); 
+//		 /*** END DESCOMENTAR PARA EDITAR */
+//		frameView = ctrlPresentacion.getFrame();
+//		JPanel contentPane = (JPanel) frameView.getContentPane();
+//		contentPane.setLayout(null);
+//		panelContents.setBounds(0, 0, 700, 378);
+//		contentPane.add(panelContents);
+//	}
 
-	private void inicializar_panelContents() {
+	protected void init_panelContents() {
 
 		panelContents.setLayout(new BorderLayout());
 		// Componentes
@@ -172,15 +172,15 @@ public class VistaDoctor {
 		buttonEliminar.setToolTipText("[CTRL+D]");
 	}
 
-	private void inicializarComponents() {
-		inicializar_frameView();
-		inicializar_panelContents();
-		inicializar_panelCenterButtons();
-		assignar_listenersComponents();
+//	private void inicializarComponents() {
+//		inicializar_frameView();
+//		inicializar_panelContents();
+//		inicializar_panelCenterButtons();
+//		assignar_listenersComponents();
+//
+//	}
 
-	}
-
-	private void assignar_listenersComponents() {
+	protected void assign_listenersComponents() {
 
 		ListSelectionModel listSelectionModel = tabla.getSelectionModel();
 		listSelectionModel.addListSelectionListener(new ListSelectionListener() {
@@ -221,10 +221,12 @@ public class VistaDoctor {
 						ctrlPresentacion.changeView("vistaPlantillaDoctores", panelContents);
 						
 					} catch (IOException eX) {
-						JOptionPane.showMessageDialog(null, eX, "Error",JOptionPane.ERROR_MESSAGE);
+						rejectedOperationDialog(eX);
+//						JOptionPane.showMessageDialog(null, eX, "Error",JOptionPane.ERROR_MESSAGE);
 					} catch (NumberFormatException nE) {
-						JOptionPane.showMessageDialog(null,"Alguno de los factores no es un valor correcto",
-														"Error", JOptionPane.ERROR_MESSAGE);
+						rejectedOperationDialog("Alguno de los factores no es un valor correcto");
+//						JOptionPane.showMessageDialog(null,"Alguno de los factores no es un valor correcto",
+//														"Error", JOptionPane.ERROR_MESSAGE);
 					}
 
 				}
@@ -272,11 +274,13 @@ public class VistaDoctor {
 							 * maxTurnos, sueldo);
 							 */
 						} catch (IOException eX) {
-							JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE);
+							rejectedOperationDialog(eX);
+//							JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE);
 						} catch (NumberFormatException nE) {
-							JOptionPane.showMessageDialog(
-											null,"Alguno de los factores no es un valor correcto",
-											"Error", JOptionPane.ERROR_MESSAGE);
+							rejectedOperationDialog("Alguno de los factores no es un valor correcto");
+//							JOptionPane.showMessageDialog(
+//											null,"Alguno de los factores no es un valor correcto",
+//											"Error", JOptionPane.ERROR_MESSAGE);
 						}
 					}
 				}
@@ -321,9 +325,11 @@ public class VistaDoctor {
 						ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 						
 					} catch (IOException eX) {
-						JOptionPane.showMessageDialog(null, eX, "Error",JOptionPane.ERROR_MESSAGE);
+						rejectedOperationDialog(eX);
+//						JOptionPane.showMessageDialog(null, eX, "Error",JOptionPane.ERROR_MESSAGE);
 					} catch (NumberFormatException nE) {
-						JOptionPane.showMessageDialog(null,"Alguno de los factores no es un valor correcto","Error", JOptionPane.ERROR_MESSAGE);
+						rejectedOperationDialog("Alguno de los factores no es un valor correcto");
+//						JOptionPane.showMessageDialog(null,"Alguno de los factores no es un valor correcto","Error", JOptionPane.ERROR_MESSAGE);
 					}
 					
 
@@ -361,9 +367,11 @@ public class VistaDoctor {
 					
 				ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 				} catch (IOException eX) {
-					JOptionPane.showMessageDialog(null, eX, "Error",JOptionPane.ERROR_MESSAGE);
+					rejectedOperationDialog(eX);
+//					JOptionPane.showMessageDialog(null, eX, "Error",JOptionPane.ERROR_MESSAGE);
 				} catch (NumberFormatException nE) {
-					JOptionPane.showMessageDialog(null,"Alguno de los factores no es un valor correcto","Error", JOptionPane.ERROR_MESSAGE);
+					rejectedOperationDialog("Alguno de los factores no es un valor correcto");
+//					JOptionPane.showMessageDialog(null,"Alguno de los factores no es un valor correcto","Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 				
@@ -482,24 +490,29 @@ public class VistaDoctor {
 	 * @wbp.parser.entryPoint
 	 */
 	public VistaDoctor(CtrlPresentacion pCtrlPresentacion) {
-		ctrlPresentacion = pCtrlPresentacion;
+//		ctrlPresentacion = pCtrlPresentacion;
+		super(pCtrlPresentacion);
 		/** DESCOMENTAR PARA EDITAR *
 		 inicializarComponents();
 		 //*/
 	}
 
 	public void init() {
-		inicializarComponents();
+//		inicializarComponents();
+		init_frameView();
+		init_panelContents();
+		inicializar_panelCenterButtons();
+		assign_listenersComponents();
 
 	}
 
-	public JPanel getPanel() {
-		return panelContents;
-	}
-
-	public void hidePanel() {
-		panelContents.setVisible(false);
-	}
+//	public JPanel getPanel() {
+//		return panelContents;
+//	}
+//
+//	public void hidePanel() {
+//		panelContents.setVisible(false);
+//	}
 
 	public void showPanel() {
 
@@ -515,16 +528,16 @@ public class VistaDoctor {
 		panelContents.setVisible(true);
 	}
 
-	public void showView() {
-		panelContents.setVisible(true);
-	}
-
-	public void enableView() {
-		frameView.setEnabled(true);
-	}
-
-	public void disableView() {
-		frameView.setEnabled(false);
-	}
+//	public void showView() {
+//		panelContents.setVisible(true);
+//	}
+//
+//	public void enableView() {
+//		frameView.setEnabled(true);
+//	}
+//
+//	public void disableView() {
+//		frameView.setEnabled(false);
+//	}
 
 }
