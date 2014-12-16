@@ -15,13 +15,13 @@ import java.awt.event.KeyEvent;
 
 //ID VISTA 9
 
-public class VistaRestriccion {
+public class VistaRestriccion extends Vista {
 	
-	private CtrlPresentacion ctrlPresentacion;
+//	private CtrlPresentacion ctrlPresentacion;
 	
 	//Componentes interficie
-	private JFrame frameView;
-	private JPanel panelContents = new JPanel();
+//	private JFrame frameView;
+//	private JPanel panelContents = new JPanel();
 	private JPanel panelButtons = new JPanel();
 	private JPanel panelInfo = new JPanel();
 	
@@ -41,32 +41,32 @@ public class VistaRestriccion {
 	
 	//METODOS PRIVADOS
 	
-	private void inicializarComponents() {
-	    inicializar_frameView();
-	    inicializar_panelContents();
-	    inicializar_panelInfo();
-	    inicializar_panelButtons();
-	    assignar_listenersComponents();
-	  }
+//	private void inicializarComponents() {
+//	    inicializar_frameView();
+//	    inicializar_panelContents();
+//	    inicializar_panelInfo();
+//	    inicializar_panelButtons();
+//	    assignar_listenersComponents();
+//	  }
 	
-	private void inicializar_frameView() {
-		/*** DESCOMENTAR PARA EDITAR */
-		frameView =  new JFrame("Programador Guardias");
-		frameView.setMinimumSize(new Dimension(700, 400));
-		frameView.setPreferredSize(frameView.getMinimumSize());
-		frameView.setResizable(false);
-		frameView.setLocationRelativeTo(null);
-		frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frameView.getContentPane().setBackground(Color.WHITE);
-		/*** END DESCOMENTAR PARA EDITAR */
-		frameView = ctrlPresentacion.getFrame();
-		JPanel contentPane = (JPanel) frameView.getContentPane();
-		contentPane.setLayout(null);
-		panelContents.setBounds(0,0,700,378);
-		contentPane.add(panelContents);
-	}
+//	private void inicializar_frameView() {
+//		/*** DESCOMENTAR PARA EDITAR */
+//		frameView =  new JFrame("Programador Guardias");
+//		frameView.setMinimumSize(new Dimension(700, 400));
+//		frameView.setPreferredSize(frameView.getMinimumSize());
+//		frameView.setResizable(false);
+//		frameView.setLocationRelativeTo(null);
+//		frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frameView.getContentPane().setBackground(Color.WHITE);
+//		/*** END DESCOMENTAR PARA EDITAR */
+//		frameView = ctrlPresentacion.getFrame();
+//		JPanel contentPane = (JPanel) frameView.getContentPane();
+//		contentPane.setLayout(null);
+//		panelContents.setBounds(0,0,700,378);
+//		contentPane.add(panelContents);
+//	}
 	
-	private void inicializar_panelContents() {
+	protected void init_panelContents() {
 	    // Layout
 	    panelContents.setLayout(new BorderLayout());
 	    // Paneles
@@ -134,7 +134,7 @@ public class VistaRestriccion {
 	    buttonVolver.setToolTipText("[CTRL+ESC]");
 	}
 
-	private void assignar_listenersComponents() {
+	protected void assign_listenersComponents() {
 		buttonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ctrlPresentacion.changeView("vistaDoctor", panelContents);
@@ -266,35 +266,41 @@ public class VistaRestriccion {
 	//METODOS PUBLICOS
 	
 	public VistaRestriccion(CtrlPresentacion pCtrlPresentacion) {
-		ctrlPresentacion = pCtrlPresentacion;
+//		ctrlPresentacion = pCtrlPresentacion;
+		super(pCtrlPresentacion);
 		/** DESCOMENTAR PARA EDITAR */
-		 inicializarComponents();
+//		 inicializarComponents();
 		/**/
 	}
 	public void init() {
-		inicializarComponents();
+//		inicializarComponents();
+		init_frameView();
+	    init_panelContents();
+	    inicializar_panelInfo();
+	    inicializar_panelButtons();
+	    assign_listenersComponents();
 	}
 	
-	public JPanel getPanel() {
-		return panelContents;
-	}
-	
-	public void hidePanel() {
-		panelContents.setVisible(false);
-	}
-	public void showPanel() {
-		panelContents.setVisible(true);
-	}
-	
-	public void showView() {
-		panelContents.setVisible(true);
-	}
-	
-	public void enableView() {
-		frameView.setEnabled(true);
-	}
-	
-	public void disableView() {
-		frameView.setEnabled(false);
-	}
+//	public JPanel getPanel() {
+//		return panelContents;
+//	}
+//	
+//	public void hidePanel() {
+//		panelContents.setVisible(false);
+//	}
+//	public void showPanel() {
+//		panelContents.setVisible(true);
+//	}
+//	
+//	public void showView() {
+//		panelContents.setVisible(true);
+//	}
+//	
+//	public void enableView() {
+//		frameView.setEnabled(true);
+//	}
+//	
+//	public void disableView() {
+//		frameView.setEnabled(false);
+//	}
 }

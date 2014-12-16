@@ -19,17 +19,17 @@ import javax.swing.event.ListSelectionListener;
 
 // ID VISTA 1
 
-public class VistaCjtHospitales {
+public class VistaCjtHospitales extends Vista {
 	/* Atributos y metodos privados */
 	
-	private CtrlPresentacion ctrlPresentacion;
+//	private CtrlPresentacion ctrlPresentacion;
 	private ArrayList<String> hospitales;
 	
 
 	
 	//-- Components --//
-	private JFrame frameView;
-	private JPanel panelContents = new JPanel();
+//	private JFrame frameView;
+//	private JPanel panelContents = new JPanel();
 	private JPanel topPanel = new JPanel();
 	private final JButton btnCrearHospital = new JButton("<html><CENTER>Crear Hospital</html></CENTER>");
 	private final JButton btnEliminarHospital = new JButton("<html><CENTER>Eliminar Hospital</html></CENTER>");
@@ -55,24 +55,24 @@ public class VistaCjtHospitales {
 	private final JLabel lblNo = new JLabel("No");
 
 	//-- Metodos privados --//
-	private void init_frameView() {
-		/*** DESCOMENTAR PARA EDITAR *
-		frameView =  new JFrame("Programador Guardias");
-		frameView.setMinimumSize(new Dimension(700, 400));
-		frameView.setPreferredSize(frameView.getMinimumSize());
-		frameView.setResizable(false);
-		frameView.setLocationRelativeTo(null);
-		frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frameView.getContentPane().setBackground(Color.WHITE);
-		/*** END DESCOMENTAR PARA EDITAR */
-		frameView = ctrlPresentacion.getFrame();
-		JPanel contentPane = (JPanel) frameView.getContentPane();
-		contentPane.setLayout(null);
-		panelContents.setBounds(0,0,700,378);
-		contentPane.add(panelContents);
-	}
+//	private void init_frameView() {
+//		/*** DESCOMENTAR PARA EDITAR *
+//		frameView =  new JFrame("Programador Guardias");
+//		frameView.setMinimumSize(new Dimension(700, 400));
+//		frameView.setPreferredSize(frameView.getMinimumSize());
+//		frameView.setResizable(false);
+//		frameView.setLocationRelativeTo(null);
+//		frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frameView.getContentPane().setBackground(Color.WHITE);
+//		/*** END DESCOMENTAR PARA EDITAR */
+//		frameView = ctrlPresentacion.getFrame();
+//		JPanel contentPane = (JPanel) frameView.getContentPane();
+//		contentPane.setLayout(null);
+//		panelContents.setBounds(0,0,700,378);
+//		contentPane.add(panelContents);
+//	}
 
-	private void init_panelContents() {
+	protected void init_panelContents() {
 		panelContents.setLayout(null);
 		topPanel.setBounds(0, 0, 700, 60);
 		topPanel.setMinimumSize(new Dimension(0, 10));
@@ -118,16 +118,16 @@ public class VistaCjtHospitales {
 		topPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
 	}
 
-	private void init_panelBottomButtons() {
-	}
-
-	private void init_panelRightButtons() {
-	}
+//	private void init_panelBottomButtons() {
+//	}
+//
+//	private void init_panelRightButtons() {
+//	}
 	
 	
 	/** Asignacion de listeners **/
 	
-	private void assign_listenersComponents() {
+	protected void assign_listenersComponents() {
 		btnCrearHospital.setFont(new Font("Arial", Font.PLAIN, 12));
 		btnCrearHospital.setBounds(266, 161, 150, 42);
 		midPanel.add(btnCrearHospital);
@@ -220,7 +220,8 @@ public class VistaCjtHospitales {
 					       ctrlPresentacion.importarHospital(f.getAbsolutePath());
 					       loadHospitals();
 						} catch(IOException eX) {
-							JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
+							rejectedOperationDialog(eX);
+//							JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
 
 						}
 					 }
@@ -252,7 +253,8 @@ public class VistaCjtHospitales {
 							ctrlPresentacion.deleteHospital(Integer.parseInt(parts[0]));
 							loadHospitals();
 							} catch (IOException eX) {
-								JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
+								rejectedOperationDialog(eX);
+//								JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
 							}
 						}
 				}
@@ -267,9 +269,11 @@ public class VistaCjtHospitales {
 					ctrlPresentacion.cargarHospital(Integer.parseInt(idHosp));
 					ctrlPresentacion.changeView("vistaGestion", panelContents);
 				} catch (IOException eX){
-					JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
+					rejectedOperationDialog(eX);
+//					JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
 				} catch (ParseException eX){
-					JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
+					rejectedOperationDialog(eX);
+//					JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
 				}
 			}
 			
@@ -293,9 +297,11 @@ public class VistaCjtHospitales {
 					ctrlPresentacion.setHospEdit(1);
 					ctrlPresentacion.changeView("vistaCrearHospital", panelContents);
 				} catch (IOException eX){
-					JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
+					rejectedOperationDialog(eX);
+//					JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
 				} catch (ParseException eX){
-					JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
+					rejectedOperationDialog(eX);
+//					JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
 				}
 				
 			}
@@ -368,18 +374,18 @@ public class VistaCjtHospitales {
 		
 		
 	}
-	public void pressedAction(){
-		
-	}
+//	public void pressedAction(){
+//		
+//	}
 	
-	private void initComponents() {
-		init_frameView();
-		init_panelContents();
-		init_panelTopButtons();
-		init_panelBottomButtons();
-		init_panelRightButtons();
-		assign_listenersComponents();
-	}
+//	private void initComponents() {
+//		init_frameView();
+//		init_panelContents();
+//		init_panelTopButtons();
+////		init_panelBottomButtons();
+////		init_panelRightButtons();
+//		assign_listenersComponents();
+//	}
 	
 
 	private void loadHospitals() {
@@ -409,7 +415,8 @@ public class VistaCjtHospitales {
 	
 	/* Constructoras y metodos publicos */
 	public VistaCjtHospitales(CtrlPresentacion pCtrlVistaPrincipal) {
-		ctrlPresentacion = pCtrlVistaPrincipal;
+//		ctrlPresentacion = pCtrlVistaPrincipal;
+		super(pCtrlVistaPrincipal);
 		/*** DESCOMENTAR PARA EDITAR *
 		 initComponents();
 		 /*** END DESCOMENTAR PARA EDITAR */
@@ -417,34 +424,38 @@ public class VistaCjtHospitales {
 	
 	public void init() {
 		loadHospitals();
-		initComponents();
+		init_frameView();
+		init_panelContents();
+		init_panelTopButtons();
+		assign_listenersComponents();
 	}
 	
-	public JPanel getPanel() {
-		return panelContents;
-	}
-
-	public void showView() {
-		frameView.setVisible(true);
-	}
+//	public JPanel getPanel() {
+//		return panelContents;
+//	}
+//
+//	public void showView() {
+//		frameView.setVisible(true);
+//	}
+//	
+//	public void hidePanel() {
+//		panelContents.setVisible(false);
+//	}
 	
-	public void hidePanel() {
-		panelContents.setVisible(false);
-	}
 	public void showPanel() {
 		loadHospitals();
 		panelContents.setVisible(true);
 	}
 	
-	public void hideView() {
-		frameView.setVisible(false);
-	}
-
-	public void enableView() {
-		frameView.setEnabled(true);
-	}
-
-	public void disableView() {
-		frameView.setEnabled(false);
-	}
+//	public void hideView() {
+//		frameView.setVisible(false);
+//	}
+//
+//	public void enableView() {
+//		frameView.setEnabled(true);
+//	}
+//
+//	public void disableView() {
+//		frameView.setEnabled(false);
+//	}
 }
