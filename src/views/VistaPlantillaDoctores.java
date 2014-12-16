@@ -40,7 +40,7 @@ import javax.swing.table.DefaultTableModel;
 		//SCROLL PANEL
 		
 		final String[] fila1 ={"<html><LEFT>Id</LEFT></html>","<html><LEFT>Nombre</LEFT></html>",
-								"<html><LEFT>Sueldo/Turnos</LEFT></html>", "<html><LEFT>Max turno</LEFT></html>"};
+								"<html><LEFT>Sueldo/Turnos</LEFT></html>", "<html><LEFT>Max.Turno</LEFT></html>"};
 		final Object[][] datos={};
 		
 		private JTable tabla = new JTable();
@@ -139,7 +139,7 @@ import javax.swing.table.DefaultTableModel;
 	        
 	        buttonVolver.setToolTipText("[ESC]");
 	        buttonCrear.setToolTipText("[CTRL+N]");
-	        buttonModificar.setToolTipText("[CTRL+E]");
+	        buttonModificar.setToolTipText("[CTRL+M]");
 			buttonEliminar.setToolTipText("[CTRL+D]");
 	        
 		}
@@ -293,7 +293,10 @@ import javax.swing.table.DefaultTableModel;
 			tabla.setModel(dtm);  
 			tabla.revalidate();
 			tabla.repaint();
-			
+			tabla.getColumnModel().getColumn(0).setPreferredWidth(85);
+			tabla.getColumnModel().getColumn(1).setPreferredWidth(125);
+			tabla.getColumnModel().getColumn(2).setPreferredWidth(105);
+			tabla.getColumnModel().getColumn(3).setPreferredWidth(95);
 		}
 		
 		

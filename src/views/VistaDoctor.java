@@ -67,7 +67,7 @@ public class VistaDoctor {
 	// METODOS PRIVADOS
 
 	private void inicializar_frameView() {
-		/*** DESCOMENTAR PARA EDITAR * 
+		/*** DESCOMENTAR PARA EDITAR *
 		 frameView = new
 		 JFrame("Programador Guardias"); frameView.setMinimumSize(new
 		 Dimension(700, 400));
@@ -219,6 +219,9 @@ public class VistaDoctor {
 						ctrlPresentacion.crearDoctor(nameDoc, id, maxTurnos,sueldo);
 						ctrlPresentacion.setDocActual(textID.getText(), nameDoc ,
 													textSueldo.getText(), textMaxTurnos.getText());
+						ctrlPresentacion.clearDocActual();
+						ctrlPresentacion.changeView("vistaPlantillaDoctores", panelContents);
+						
 					} catch (IOException eX) {
 						JOptionPane.showMessageDialog(null, eX, "Error",JOptionPane.ERROR_MESSAGE);
 					} catch (NumberFormatException nE) {
@@ -239,6 +242,12 @@ public class VistaDoctor {
 					
 
 						try {
+							
+							if (textID.getText().isEmpty())throw new IOException("El doctor no tiene ID!");
+							if (textMaxTurnos.getText().isEmpty())throw new IOException("El doctor no tiene Maximo de Turnos!");
+							if (textSueldo.getText().isEmpty())throw new IOException("El doctor no tiene Sueldo!");
+							if (textNombre.getText().isEmpty())throw new IOException("El doctor no tiene Nombre!");
+							
 							String nombre = textNombre.getText();
 							
 							nombre = nombre.replaceAll(" ", "%");
@@ -253,7 +262,9 @@ public class VistaDoctor {
 							ctrlPresentacion.setDocActual(textID.getText(), nombre ,
 															textSueldo.getText(), textMaxTurnos.getText());
 							ctrlPresentacion.setDoctor(idDoc, nombre, maxTurnos, sueldo);
-
+							
+							ctrlPresentacion.clearDocActual();
+							ctrlPresentacion.changeView("vistaPlantillaDoctores", panelContents);
 							/*
 							 * if(nameDoc.isEmpty()) throw new
 							 * IOException("El doctor no tiene nombre");
@@ -272,12 +283,13 @@ public class VistaDoctor {
 					}
 				}
 					
-				ctrlPresentacion.clearDocActual();
-				ctrlPresentacion.changeView("vistaPlantillaDoctores", panelContents);
+				
 			}
 
 		});
 
+		
+		
 		buttonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ctrlPresentacion.clearDocActual();
@@ -446,9 +458,18 @@ public class VistaDoctor {
 		
 		}
 		
+		//tabla.getColumnModel().getColumn(0).setPreferredWidth(180);
+		//tabla.getColumnModel().getColumn(1).setPreferredWidth(100);
+		//tabla.getColumnModel().getColumn(2).setPreferredWidth(100);
+		
 		tabla.setModel(dtm);  
 		tabla.revalidate();
 		tabla.repaint();
+		
+		tabla.getColumnModel().getColumn(0).setPreferredWidth(0);
+		tabla.getColumnModel().getColumn(1).setPreferredWidth(125);
+		tabla.getColumnModel().getColumn(2).setPreferredWidth(200);
+		
 		
 	}
 	
