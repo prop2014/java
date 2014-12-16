@@ -221,7 +221,8 @@ public class CtrlHospital {
 		inOut.saveDataDoctors(alhosp,hosp.getId());
 		}
 		else {
-			throw new IOException("No hay doctores a guardar");
+			inOut.removePart(getID(), ".D");
+			//throw new IOException("No hay doctores a guardar");
 		}
 	}	
 	
