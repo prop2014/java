@@ -55,7 +55,6 @@ public class CtrlDoctor {
 		for(Doctor doc: Doctors){
 			if(doc.getId() == id){
 				doct = doc;
-				System.out.print("El Doctor Existe");
 			}
 		}
 		
@@ -240,7 +239,6 @@ public class CtrlDoctor {
 				ArrayList<Restriccion>Res=doc.getRestrictions();
 				for(Restriccion res: Res){
 					ids.add(res.getIdRestriccion());
-					System.out.printf("Restriccio: %d\n",res.getIdRestriccion());
 				}
 			}
 		}
@@ -646,7 +644,6 @@ public class CtrlDoctor {
 						if(Res.get(j).getTipo().equals("NOT_Turno")){
 							NOT_Turno N = (NOT_Turno)Res.get(j);
 							alRes.add(N.getTipoTurno());
-							System.out.printf("tipoturno: %s\n",N.getTipoTurno());
 						}
 						else if(Res.get(j).getTipo().equals("NOT_Fecha")){
 							NOT_Fecha N = (NOT_Fecha)Res.get(j);
@@ -710,7 +707,6 @@ public class CtrlDoctor {
 	public void addResData(int id,String path)throws IOException{
 		CtrlDatosFichero inOut = new CtrlDatosFichero();
 		ArrayList<String> alRes = inOut.getDataRes(id,path);
-		for(int t=0;t<alRes.size();++t)System.out.print(" "+alRes.get(t));
 			int idDoc;
 		for(int i=0;i<alRes.size();++i){
 			int NumRes, idRes;
@@ -786,13 +782,9 @@ public class CtrlDoctor {
 					for(int k=0;k<numdays;++k){
 						++i;
 						String strDate =  alRes.get(i);
-							System.out.printf("problems amb %s\n",strDate);
 							int d = Integer.parseInt(strDate.substring(0, 2));
-							System.out.printf("el dia es: %d\n", d);
 							int M = Integer.parseInt(strDate.substring(2, 4));
-							System.out.printf("el mes es: %d\n", M);
 							int year =Integer.parseInt(strDate.substring(4));
-							System.out.printf("el any es: %d\n", year);
 						diaXOR.add(d);
 						mesXOR.add(M);
 						yearXOR.add(year);
@@ -818,6 +810,11 @@ public class CtrlDoctor {
 		boolean trobat = false;
 		for (int i = 0; i < Doctors.size(); ++i) {
 			if (Doctors.get(i).getId() == idDoc) {
+				ArrayList<Restriccion> alres = Doctors.get(i).getRestrictions();
+				/* Comprovar si ya hay una restriccion MAX_Turnos_por_Dia */
+				for (int z = 0; z < alres.size(); ++z) {
+					if (alres.get(z).getTipo().equals("MAX_Turnos_por_Dia")) throw new IOException("Este doctor ya tiene una restriccion MAX Turnos por Dia");
+				}
 				trobat = true;
 				Restriccion res = new MAX_Turnos_por_Dia(idRes, numT);
 				boolean c = Doctors.get(i).addRestriction(res);
@@ -847,6 +844,10 @@ public class CtrlDoctor {
 		if (d1 < 1 || d1 > 31 || m1 < 1 || m1 > 12 || a1 < 1) throw new IOException("Valores de la fecha incorrecto");
 		if (d2 < 1 || d2 > 31 || m2 < 1 || m2 > 12 || a2 < 1) throw new IOException("Valores de la fecha incorrecto");
 		if(numT < 0) throw new IOException("Numero de turnos incorrecto");
+		if (m1 > m2) throw new IOException("Fecha final es anterior a la fecha inicial");
+		if (m1 == m2) {
+			if (d1 >= d2) throw new IOException("Fecha final es anterior a la fecha inicial");
+		}
 		GregorianCalendar fecha1 = new GregorianCalendar(a1,m1-1,d1);
 		GregorianCalendar fecha2 = new GregorianCalendar(a2,m2-1,d2);
 		if (!fecha1.isLenient() || !fecha2.isLenient()) throw new IOException("Fecha invalida");
@@ -890,6 +891,15 @@ public class CtrlDoctor {
 		boolean trobat = false;
 		for (int i = 0; i < Doctors.size(); ++i) {
 			if (Doctors.get(i).getId() == idDoc) {
+				ArrayList<Restriccion> alres = Doctors.get(i).getRestrictions();
+				/* Comprovar si hay alguna otra NOT_Dia_MES con el mismo dia */
+				for (int z = 0; z < alres.size(); ++z) {
+					if (alres.get(z).getTipo().equals("NOT_Dia_Mes")) {
+						NOT_Dia_Mes N = (NOT_Dia_Mes)alres.get(z);
+						int dia2 = N.getDiaMes();
+						if (diaMes == dia2) throw new IOException("El doctor ya tiene una restriccion NOT Dia Mes igual");
+					}
+				}
 				trobat = true;
 				Restriccion res = new NOT_Dia_Mes(idRes, diaMes);
 				boolean c = Doctors.get(i).addRestriction(res);
@@ -914,6 +924,15 @@ public class CtrlDoctor {
 		boolean trobat = false;
 		for (int i = 0; i < Doctors.size(); ++i) {
 			if (Doctors.get(i).getId() == idDoc) {
+				ArrayList<Restriccion> alres = Doctors.get(i).getRestrictions();
+				/* Comprovar si hay alguna otra NOT_Dia_Semana con el mismo dia */
+				for (int z = 0; z < alres.size(); ++z) {
+					if (alres.get(z).getTipo().equals("NOT_Dia_Semana")) {
+						NOT_Dia_Semana N = (NOT_Dia_Semana)alres.get(z);
+						String dia2 = N.getDiaSemana();
+						if (dia == dia2) throw new IOException("El doctor ya tiene una restriccion NOT Dia Semana igual");
+					}
+				}
 				trobat = true;
 				Restriccion res = new NOT_Dia_Semana(idRes, dia);
 				boolean c = Doctors.get(i).addRestriction(res);
@@ -938,6 +957,15 @@ public class CtrlDoctor {
 		boolean trobat = false;
 		for (int i = 0; i < Doctors.size(); ++i) {
 			if (Doctors.get(i).getId() == idDoc) {
+				ArrayList<Restriccion> alres = Doctors.get(i).getRestrictions();
+				/* Comprovar si hay alguna otra NOT_Especial igual */
+				for (int z = 0; z < alres.size(); ++z) {
+					if (alres.get(z).getTipo().equals("NOT_Especial")) {
+						NOT_Especial N = (NOT_Especial)alres.get(z);
+						String dia2 = N.getEspecial();
+						if (especial == dia2) throw new IOException("El doctor ya tiene una restriccion NOT Especial igual");
+					}
+				}
 				trobat = true;
 				Restriccion res = new NOT_Especial(idRes, especial);
 				boolean c = Doctors.get(i).addRestriction(res);
@@ -966,6 +994,17 @@ public class CtrlDoctor {
 		boolean trobat = false;
 		for (int i = 0; i < Doctors.size(); ++i) {
 			if (Doctors.get(i).getId() == idDoc) {
+				ArrayList<Restriccion> alres = Doctors.get(i).getRestrictions();
+				/* Comprovar si hay alguna otra NOT_fecha con la misma fecha */
+				for (int z = 0; z < alres.size(); ++z) {
+					if (alres.get(z).getTipo().equals("NOT_Fecha")) {
+						NOT_Fecha N = (NOT_Fecha)alres.get(z);
+						GregorianCalendar dia2 = N.getFecha();
+						if ((dia2.get(GregorianCalendar.DAY_OF_MONTH) == d) &&
+							(dia2.get(GregorianCalendar.MONTH)+1 == m) &&
+							(dia2.get(GregorianCalendar.YEAR) == a)) throw new IOException("El doctor ya tiene una restriccion NOT Fecha igual");
+					}
+				}
 				trobat = true;
 				Restriccion res = new NOT_Fecha(idRes, d, m, a);
 				boolean c = Doctors.get(i).addRestriction(res);
@@ -989,6 +1028,15 @@ public class CtrlDoctor {
 		boolean trobat = false;
 		for (int i = 0; i < Doctors.size(); ++i) {
 			if (Doctors.get(i).getId() == idDoc) {
+				ArrayList<Restriccion> alres = Doctors.get(i).getRestrictions();
+				/* Comprovar si hay alguna otra NOT_Turno igual */
+				for (int z = 0; z < alres.size(); ++z) {
+					if (alres.get(z).getTipo().equals("NOT_Turno")) {
+						NOT_Turno N = (NOT_Turno)alres.get(z);
+						String turno2 = N.getTipoTurno();
+						if (turno == turno2) throw new IOException("El doctor ya tiene una restriccion NOT Turno igual");
+					}
+				}
 				trobat = true;
 				Restriccion res = new NOT_Turno(idRes, turno);
 				boolean c = Doctors.get(i).addRestriction(res);
@@ -1037,7 +1085,10 @@ public class CtrlDoctor {
 						ArrayList<Turno> listXOR2 = N.getListTurnos();
 						for (int j = 0; j < listXOR.size(); ++j) {
 							for (int k = 0; k < listXOR2.size(); ++k) {
-								if (listXOR.get(j) == listXOR2.get(k)) throw new IOException("Este doctor ya tiene una restriccion XOR apuntando a algun turno de la que quieres poner");
+								if (listXOR.get(j).getDate().get(GregorianCalendar.DAY_OF_YEAR) == listXOR2.get(k).getDate().get(GregorianCalendar.DAY_OF_YEAR) &&
+									listXOR.get(j).getDate().get(GregorianCalendar.MONTH) == listXOR2.get(k).getDate().get(GregorianCalendar.MONTH) &&
+									listXOR.get(j).getDate().get(GregorianCalendar.YEAR) == listXOR2.get(k).getDate().get(GregorianCalendar.YEAR) &&
+									listXOR.get(j).getShiftType() == listXOR2.get(k).getShiftType()) throw new IOException("Este doctor ya tiene una restriccion XOR apuntando a algun turno de la que quieres poner");			
 							}
 						}
 					}

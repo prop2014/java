@@ -39,6 +39,17 @@ public class CtrlHospital {
 		}
 	}
 	
+	public void importarDoctores(String path) throws IOException{
+		ArrayList<String> aldocs = new ArrayList<String>();
+		if(path!=null){
+			int id = getID();
+			aldocs=inOut.getDataDoctors(id,path);
+			inOut.saveDataDoctors(aldocs, id); //comprovarids
+			inOut.removePart(id, ".R");
+			getDataDoctors(id);
+		}
+	}
+	
 	public ArrayList<ArrayList<String>> verDoctores() throws IOException {
 		return hosp.verDoctores();
 	}

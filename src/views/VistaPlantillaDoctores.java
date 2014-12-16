@@ -17,6 +17,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
+import java.io.File;
 
 /**
  * Vista principal de la gestion de una plantilla de doctores de un hospital
@@ -52,6 +53,7 @@ import javax.swing.table.DefaultTableModel;
 		private JButton buttonCrear = new JButton("<html><CENTER>Crear <br/>Doctor</CENTER>");
 		private JButton buttonEliminar = new JButton("<html><CENTER>Eliminar <br/>Doctor</CENTER>");
 		private JButton buttonModificar = new JButton("<html><CENTER>Modificar <br/>Doctor</CENTER>");
+		private JButton buttonImportar = new JButton("<html><CENTER>Importar <br/>Doctores</CENTER>");
 		private JButton buttonVolver = new JButton("Volver");
 		
 		
@@ -101,15 +103,20 @@ import javax.swing.table.DefaultTableModel;
 			panelCenterButtons.setBorder(new EmptyBorder(70, 20, 20, 0));
 			panelCenterButtons.setLayout(null);
 			
-			buttonModificar.setFont(new Font("Arial", Font.PLAIN, 15));
-			buttonModificar.setBounds(442, 68, 173, 57);
-			buttonEliminar.setFont(new Font("Arial", Font.PLAIN, 15));
-			buttonEliminar.setBounds(442, 152, 173, 57);
 			buttonCrear.setFont(new Font("Arial", Font.PLAIN, 15));
-			buttonCrear.setBounds(442, 234, 173, 57);	
+			buttonCrear.setBounds(442, 66, 173, 57);
+			buttonModificar.setFont(new Font("Arial", Font.PLAIN, 15));
+			buttonModificar.setBounds(442, 141, 173, 57);
+			buttonImportar.setFont(new Font("Arial", Font.PLAIN, 15));
+			buttonImportar.setBounds(442,216, 173, 57);
+			buttonEliminar.setFont(new Font("Arial", Font.PLAIN, 15));
+			buttonEliminar.setBounds(442, 291, 173, 57);
+				
+			
+			
 			buttonVolver.setFont(new Font("Arial", Font.PLAIN, 12));
 			buttonVolver.setBounds(52, 323, 157, 25);
-	
+			
 			labelPanel1.setFont(new Font("Arial", Font.PLAIN, 18));
 			labelPanel1.setBounds(52, 29, 361, 25);
 			
@@ -134,6 +141,7 @@ import javax.swing.table.DefaultTableModel;
 			panelCenterButtons.add(buttonEliminar);
 			panelCenterButtons.add(buttonModificar);
 			panelCenterButtons.add(buttonCrear);
+			panelCenterButtons.add(buttonImportar);
 			
 			buttonModificar.setEnabled(false); 
 	        buttonEliminar.setEnabled(false);
@@ -142,6 +150,7 @@ import javax.swing.table.DefaultTableModel;
 	        buttonCrear.setToolTipText("[CTRL+N]");
 	        buttonModificar.setToolTipText("[CTRL+M]");
 			buttonEliminar.setToolTipText("[CTRL+D]");
+			buttonImportar.setToolTipText("[CTRL+I]");
 	        
 		}
 		
@@ -229,9 +238,33 @@ import javax.swing.table.DefaultTableModel;
 				}
 			});
 				
+			buttonImportar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					JFileChooser chooser = new JFileChooser();
+					int returnVal = chooser.showOpenDialog(frameView);
+					File f = chooser.getSelectedFile();
+					if(returnVal == JFileChooser.APPROVE_OPTION) {
+						try{
+					       ctrlPresentacion.importarDoctores(f.getAbsolutePath());
+					       
+					       loadDoctores();
+						} catch(IOException eX) {
+							JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
+
+						}
+					 }
+
+				
+			}
+		});
+			
+			
+			
 			 panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonEliminar");
 		     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonCrear");
 		     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonModificar");
+		     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonImportar");
 		     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "buttonVolver");
 		     panelContents.getActionMap().put("buttonEliminar", new AbstractAction() {
 		            @Override
@@ -257,7 +290,13 @@ import javax.swing.table.DefaultTableModel;
 		            	buttonVolver.doClick();
 		            }
 		        });
-			
+		        
+		        panelContents.getActionMap().put("buttonImportar", new AbstractAction() {
+		            @Override
+		            public void actionPerformed(ActionEvent e) {
+		            	buttonImportar.doClick();
+		            }
+		        });
 	
 			
 		}
@@ -313,7 +352,8 @@ import javax.swing.table.DefaultTableModel;
 		 */
 		public VistaPlantillaDoctores(CtrlPresentacion pCtrlPresentacion) {
 			/** DESCOMENTAR PARA EDITAR*
-			  //inicializarComponents(); */
+			  inicializarComponents();
+			  //*/
 			 
 			ctrlPresentacion = pCtrlPresentacion;
 		}

@@ -336,14 +336,17 @@ public class CtrlPresentacion {
 		ctrlHospital.saveDataDoctors();
 
 	}
-
+	
+	public void importarDoctores(String path) throws IOException{
+		ctrlHospital.importarDoctores(path);
+	}
+	
 	public String[] getDocActual(){
 		return docActual;	
 
 	}
 
 	public void setDocActual(String id, String name, String  sueldo, String  Maxturn){
-
 		docActual[0] = id;
 		docActual[1] = name;
 		docActual[2] = sueldo;
@@ -387,26 +390,7 @@ public class CtrlPresentacion {
 	
 	
 	
-	/* public void setId(int id, int idOld) throws IOException {
-	    	ctrlDoctor.setId(id, idOld);
-		    ctrlHospital.saveDataDoctors();
-		}
 
-		public void setName(String nombre, int idOld) throws IOException {
-			ctrlDoctor.setName(nombre, idOld);
-		    ctrlHospital.saveDataDoctors();
-		}
-
-		public void setNumMaxTurn(int num, int idOld) throws IOException {
-			ctrlDoctor.setNumMaxTurn(num, idOld);
-		    ctrlHospital.saveDataDoctors();
-		}
-
-		public void setSalaryTurn(double sueldo, int idOld) throws IOException {
-			ctrlDoctor.setSalaryTurn(sueldo, idOld);
-		    ctrlHospital.saveDataDoctors();
-		}
-	 */
 
 	public void addResMAX_Turnos_por_Dia(int numD) throws IOException {
 		int idDoc = getIdDocAc();
