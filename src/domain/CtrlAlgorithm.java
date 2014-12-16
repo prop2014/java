@@ -365,7 +365,10 @@ public class CtrlAlgorithm {
 	 * @throws IOException errores de fichero
 	 */
 	public void saveAllSOlutions(int id) throws IOException{
-		for(int i=0;i<sols.size();++i){
+		CtrlDatosFichero inOut = new CtrlDatosFichero();
+		inOut.removePart(id, ".S");
+		Set<Integer> set = sols.keySet();
+		for(Integer i : set) {
 			Solutions sol = sols.get(i);
 			sol.saveSol(id, i);
 		}
