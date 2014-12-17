@@ -25,13 +25,9 @@ public class VistaCrearHospital extends Vista {
 //	private JFrame frameView;
 //	private JPanel panelContents = new JPanel();
 	private JPanel panelCenterButtons = new JPanel();
-	private String pathDoctores = new String();
-	private String pathCalendario = new String();
 	//CENTER
 	private JLabel labelPanel1 = new JLabel("<html><u><b>Crear Hospital</b></u>");
 	JButton btnCrearHospital = new JButton("Crear Hospital");
-	private JButton btnImportCal = new JButton("<html><CENTER>Importar<br/>Calendario</CENTER>");
-	private JButton btnImportDoc = new JButton("<html><CENTER>Importar<br/>Doctores</CENTER>");
 	private JButton btnCancel = new JButton("Cancelar");
 	private JTextField nameHospTextField;
 	private JTextField mTextField;
@@ -66,10 +62,6 @@ public class VistaCrearHospital extends Vista {
 	private void inicializar_panelCenterButtons() {
 		////// START: GESTIONADO POR EL BUILDER NO TOCAR
 		panelCenterButtons.setBorder(new EmptyBorder(70, 20, 20, 0));
-		btnImportDoc.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnImportDoc.setBounds(371, 219, 140, 45);
-		btnImportCal.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnImportCal.setBounds(187, 219, 140, 45);
 		btnCancel.setFont(new Font("Arial", Font.PLAIN, 12));
 		btnCancel.setBounds(187, 322, 140, 25);
 		labelPanel1.setFont(new Font("Arial", Font.PLAIN, 14));
@@ -79,8 +71,6 @@ public class VistaCrearHospital extends Vista {
 		// Components
 		panelCenterButtons.add(labelPanel1);
 		panelCenterButtons.add(btnCancel);
-		panelCenterButtons.add(btnImportDoc);
-		panelCenterButtons.add(btnImportCal);
 		
 		JLabel lblNombreDelHospital = new JLabel("Nombre del Hospital: ");
 		lblNombreDelHospital.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -145,8 +135,6 @@ public class VistaCrearHospital extends Vista {
 		
 		
 		btnCrearHospital.setToolTipText("[CTRL+N]");
-		btnImportCal.setToolTipText("[CTRL+Q]"); 
-		btnImportDoc.setToolTipText("[CTRL+W]");
 		btnCancel.setToolTipText("[ESC]");
 		
 		
@@ -172,41 +160,18 @@ public class VistaCrearHospital extends Vista {
 					if(editing==1){
 						ctrlPresentacion.modificarHospital(nameHosp, factM, factT, factN);
 					}else {
-						ctrlPresentacion.crearHospital(nameHosp, factM, factT, factN, pathDoctores, pathCalendario);
+						ctrlPresentacion.crearHospital(nameHosp, factM, factT, factN);
 					}
 				} catch (IOException eX) {
 					JOptionPane.showMessageDialog(null, eX, "Error",JOptionPane.ERROR_MESSAGE); 
 				} catch (NumberFormatException nE){
 					JOptionPane.showMessageDialog(null, "Alguno de los factores no es un valor correcto", "Error", JOptionPane.ERROR_MESSAGE); 
 				}
-				catch (ParseException pE){
-					JOptionPane.showMessageDialog(null, pE, "Error", JOptionPane.ERROR_MESSAGE); 
-				}
 				ctrlPresentacion.changeView("vistaCjtHospitales", panelContents);
 			}
 		});
 		
-		btnImportCal.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JFileChooser chooser = new JFileChooser();
-				int returnVal = chooser.showOpenDialog(frameView);
-				File f = chooser.getSelectedFile();
-				if(returnVal == JFileChooser.APPROVE_OPTION) {
-					pathCalendario = f.getAbsolutePath();
-				 }
-			}
-		});
 		
-		btnImportDoc.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JFileChooser chooser = new JFileChooser();
-				int returnVal = chooser.showOpenDialog(frameView);
-				File f = chooser.getSelectedFile();
-				if(returnVal == JFileChooser.APPROVE_OPTION) {
-					pathDoctores = f.getAbsolutePath();
-				 }
-			}
-		});
 		
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -214,9 +179,7 @@ public class VistaCrearHospital extends Vista {
 			}
 		});
 		
-		 panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_DOWN_MASK), "btnImportCal");
 	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK), "btnCrearHospital");
-	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_DOWN_MASK), "btnImportDoc");
 	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "btnCancel");
 	     panelContents.getActionMap().put("btnCrearHospital", new AbstractAction() {
 			private static final long serialVersionUID = 1L;
@@ -226,20 +189,7 @@ public class VistaCrearHospital extends Vista {
 	            	btnCrearHospital.doClick();
 	            }
 	        });
-	        panelContents.getActionMap().put("btnImportCal", new AbstractAction() {
-	        	private static final long serialVersionUID = 1L;
-	            @Override
-	            public void actionPerformed(ActionEvent e) {
-	            	btnImportCal.doClick();
-	            }
-	        });
-	        panelContents.getActionMap().put("btnImportDoc", new AbstractAction() {
-	        	private static final long serialVersionUID = 1L;
-	            @Override
-	            public void actionPerformed(ActionEvent e) {
-	            	btnImportDoc.doClick();
-	            }
-	        });
+	       
 	        panelContents.getActionMap().put("btnCancel", new AbstractAction() {
 	        	private static final long serialVersionUID = 1L;
 	            @Override
@@ -275,8 +225,6 @@ public class VistaCrearHospital extends Vista {
 		mTextField.setText("1.0");
 		tTextField.setText("1.0");
 		nTextField.setText("1.0");
-		pathCalendario = null;
-		pathDoctores = null;
 	}
 	
 	public void setEditing(int newVal) {
@@ -285,8 +233,6 @@ public class VistaCrearHospital extends Vista {
 	
 	public void funcEditing() {
 		if(editing == 1) {
-			btnImportCal.setVisible(false);
-			btnImportDoc.setVisible(false);
 			btnCrearHospital.setText("Modificar Hospital");
 			try {
 				ArrayList<String> info = ctrlPresentacion.getInfoHosp();
@@ -298,8 +244,6 @@ public class VistaCrearHospital extends Vista {
 				JOptionPane.showMessageDialog(null, eX, "Error",JOptionPane.ERROR_MESSAGE); 
 			}
 		} else {
-			btnImportCal.setVisible(true);
-			btnImportDoc.setVisible(true);
 			btnCrearHospital.setText("Crear Hospital");
 		}
 	}

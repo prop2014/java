@@ -262,15 +262,13 @@ public class CtrlPresentacion {
 		return ctrlDoctor.loadRest(getIdDocAc());
 	}
 
-	public void crearHospital(String nameHosp, Double factM, Double factT, Double factN, String pathDoc, String pathCal) throws IOException, ParseException{
+	public void crearHospital(String nameHosp, Double factM, Double factT, Double factN) throws IOException{
 		int idHosp = ctrlHospital.getFDI();
 		try {
 			ctrlHospital.crearHospital(idHosp, nameHosp, factM, factT, factN);
 
 		} catch (IOException e) {throw new IOException(e);}
 		ctrlHospital.guardarHospital();
-		if(pathDoc!=null)ctrlHospital.importarDoctores(pathDoc);
-		if(pathCal!=null)ctrlCalendario.importCalendar(ctrlHospital.getID(), pathCal);
 	}
 	
 	public void modificarHospital(String nameHosp, Double factM, Double factT, Double factN) throws IOException{
