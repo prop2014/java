@@ -24,10 +24,7 @@ import javax.swing.table.DefaultTableModel;
 public class VistaDoctor extends Vista{
 	// Componentes interficie
 
-//	private CtrlPresentacion ctrlPresentacion;
-//
-//	private JFrame frameView;
-//	private JPanel panelContents = new JPanel();
+
 	private JPanel panelCenterButtons = new JPanel();
 
 	
@@ -64,22 +61,7 @@ public class VistaDoctor extends Vista{
 
 	// METODOS PRIVADOS
 
-//	private void inicializar_frameView() {
-//		/*** DESCOMENTAR PARA EDITAR *
-//		 frameView = new
-//		 JFrame("Programador Guardias"); frameView.setMinimumSize(new
-//		 Dimension(700, 400));
-//		 frameView.setPreferredSize(frameView.getMinimumSize());
-//		 frameView.setResizable(false); frameView.setLocationRelativeTo(null);
-//		 frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		 frameView.getContentPane().setBackground(Color.WHITE); 
-//		 /*** END DESCOMENTAR PARA EDITAR */
-//		frameView = ctrlPresentacion.getFrame();
-//		JPanel contentPane = (JPanel) frameView.getContentPane();
-//		contentPane.setLayout(null);
-//		panelContents.setBounds(0, 0, 700, 378);
-//		contentPane.add(panelContents);
-//	}
+
 
 	protected void init_panelContents() {
 
@@ -172,13 +154,6 @@ public class VistaDoctor extends Vista{
 		buttonEliminar.setToolTipText("[CTRL+D]");
 	}
 
-//	private void inicializarComponents() {
-//		inicializar_frameView();
-//		inicializar_panelContents();
-//		inicializar_panelCenterButtons();
-//		assignar_listenersComponents();
-//
-//	}
 
 	protected void assign_listenersComponents() {
 
@@ -222,11 +197,8 @@ public class VistaDoctor extends Vista{
 						
 					} catch (IOException eX) {
 						rejectedOperationDialog(eX);
-//						JOptionPane.showMessageDialog(null, eX, "Error",JOptionPane.ERROR_MESSAGE);
 					} catch (NumberFormatException nE) {
 						rejectedOperationDialog("Alguno de los factores no es un valor correcto");
-//						JOptionPane.showMessageDialog(null,"Alguno de los factores no es un valor correcto",
-//														"Error", JOptionPane.ERROR_MESSAGE);
 					}
 
 				}
@@ -264,23 +236,13 @@ public class VistaDoctor extends Vista{
 							ctrlPresentacion.setDoctor(idDoc, nombre, maxTurnos, sueldo);
 							
 							ctrlPresentacion.clearDocActual();
+							
 							ctrlPresentacion.changeView("vistaPlantillaDoctores", panelContents);
-							/*
-							 * if(nameDoc.isEmpty()) throw new
-							 * IOException("El doctor no tiene nombre");
-							 * 
-							 * //ctrlPresentacion.eliminarDoc(id);
-							 * //ctrlPresentacion.crearDoctor(nameDoc, id,
-							 * maxTurnos, sueldo);
-							 */
+							
 						} catch (IOException eX) {
 							rejectedOperationDialog(eX);
-//							JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE);
 						} catch (NumberFormatException nE) {
 							rejectedOperationDialog("Alguno de los factores no es un valor correcto");
-//							JOptionPane.showMessageDialog(
-//											null,"Alguno de los factores no es un valor correcto",
-//											"Error", JOptionPane.ERROR_MESSAGE);
 						}
 					}
 				}
@@ -326,10 +288,8 @@ public class VistaDoctor extends Vista{
 						
 					} catch (IOException eX) {
 						rejectedOperationDialog(eX);
-//						JOptionPane.showMessageDialog(null, eX, "Error",JOptionPane.ERROR_MESSAGE);
 					} catch (NumberFormatException nE) {
 						rejectedOperationDialog("Alguno de los factores no es un valor correcto");
-//						JOptionPane.showMessageDialog(null,"Alguno de los factores no es un valor correcto","Error", JOptionPane.ERROR_MESSAGE);
 					}
 					
 
@@ -368,10 +328,8 @@ public class VistaDoctor extends Vista{
 				ctrlPresentacion.changeView("vistaRestriccion", panelContents);
 				} catch (IOException eX) {
 					rejectedOperationDialog(eX);
-//					JOptionPane.showMessageDialog(null, eX, "Error",JOptionPane.ERROR_MESSAGE);
 				} catch (NumberFormatException nE) {
 					rejectedOperationDialog("Alguno de los factores no es un valor correcto");
-//					JOptionPane.showMessageDialog(null,"Alguno de los factores no es un valor correcto","Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 				
@@ -410,30 +368,50 @@ public class VistaDoctor extends Vista{
 			
 		});
 
-		panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonEliminar");
+		 panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonEliminar");
 	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonGuardar");
 	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonAnadir");
 	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "buttonVolver");
 	     panelContents.getActionMap().put("buttonEliminar", new AbstractAction() {
-	            @Override
+	            /**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+				@Override
 	            public void actionPerformed(ActionEvent e) {
 	            	buttonEliminar.doClick();
 	            }
 	        });
 	        panelContents.getActionMap().put("buttonGuardar", new AbstractAction() {
-	            @Override
+	            /**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				@Override
 	            public void actionPerformed(ActionEvent e) {
 	            	buttonGuardar.doClick();
 	            }
 	        });
 	        panelContents.getActionMap().put("buttonAnadir", new AbstractAction() {
-	            @Override
+	            /**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				@Override
 	            public void actionPerformed(ActionEvent e) {
 	            	buttonAnadir.doClick();
 	            }
 	        });
 	        panelContents.getActionMap().put("buttonVolver", new AbstractAction() {
-	            @Override
+	            /**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				@Override
 	            public void actionPerformed(ActionEvent e) {
 	            	buttonVolver.doClick();
 	            }
@@ -447,7 +425,12 @@ public class VistaDoctor extends Vista{
 			restricciones = ctrlPresentacion.loadRest();
 		
 		DefaultTableModel dtm = new DefaultTableModel(datos,fila1){
-		    public boolean isCellEditable(int row, int column) {
+		    /**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			public boolean isCellEditable(int row, int column) {
 		        return false;
 		    }
 		
@@ -464,9 +447,6 @@ public class VistaDoctor extends Vista{
 		
 		}
 		
-		//tabla.getColumnModel().getColumn(0).setPreferredWidth(180);
-		//tabla.getColumnModel().getColumn(1).setPreferredWidth(100);
-		//tabla.getColumnModel().getColumn(2).setPreferredWidth(100);
 		
 		tabla.setModel(dtm);  
 		tabla.revalidate();
@@ -486,19 +466,13 @@ public class VistaDoctor extends Vista{
 	// METODOS PUBLICOS
 
 
-	/**
-	 * @wbp.parser.entryPoint
-	 */
+	
 	public VistaDoctor(CtrlPresentacion pCtrlPresentacion) {
-//		ctrlPresentacion = pCtrlPresentacion;
 		super(pCtrlPresentacion);
-		/** DESCOMENTAR PARA EDITAR *
-		 inicializarComponents();
-		 //*/
+
 	}
 
 	public void init() {
-//		inicializarComponents();
 		init_frameView();
 		init_panelContents();
 		inicializar_panelCenterButtons();
@@ -506,13 +480,6 @@ public class VistaDoctor extends Vista{
 
 	}
 
-//	public JPanel getPanel() {
-//		return panelContents;
-//	}
-//
-//	public void hidePanel() {
-//		panelContents.setVisible(false);
-//	}
 
 	public void showPanel() {
 
@@ -528,16 +495,5 @@ public class VistaDoctor extends Vista{
 		panelContents.setVisible(true);
 	}
 
-//	public void showView() {
-//		panelContents.setVisible(true);
-//	}
-//
-//	public void enableView() {
-//		frameView.setEnabled(true);
-//	}
-//
-//	public void disableView() {
-//		frameView.setEnabled(false);
-//	}
 
 }
