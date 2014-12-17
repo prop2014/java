@@ -48,6 +48,7 @@ public class VistaGestion extends Vista {
 		contentPane.add(panelContents);
 		
 		
+		
 	}
 	
 	protected void init_panelContents() {
@@ -183,9 +184,6 @@ public class VistaGestion extends Vista {
 	//METODOS PUBLICOS
 	public VistaGestion(CtrlPresentacion pCtrlPresentacion) {
 		super(pCtrlPresentacion);
-		/** DESCOMENTAR PARA EDITAR *
-		  inicializarComponents();
-		 /**/
 	}
 	
 	public void init() {
@@ -193,6 +191,14 @@ public class VistaGestion extends Vista {
 		init_panelContents();
 		inicializar_panelCenterButtons();
 		assign_listenersComponents();
+		
+		
+	}
+	
+	@Override
+	public void showPanel() {
+		cargarHospital();
+		panelContents.setVisible(true);
 	}
 	
 	public void cargarHospital() {

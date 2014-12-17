@@ -8,8 +8,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
-
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -465,8 +463,6 @@ public class VistaDoctor extends Vista{
 	
 	// METODOS PUBLICOS
 
-
-	
 	public VistaDoctor(CtrlPresentacion pCtrlPresentacion) {
 		super(pCtrlPresentacion);
 
