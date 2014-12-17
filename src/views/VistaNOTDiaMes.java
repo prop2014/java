@@ -74,6 +74,7 @@ public class VistaNOTDiaMes extends Vista {
 	    buttonVolver.setToolTipText("[ESC]");
 	}
 
+	@SuppressWarnings("serial")
 	protected void assign_listenersComponents() {
 		buttonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -97,6 +97,7 @@ public class VistaRestriccion extends Vista {
 	    buttonVolver.setToolTipText("[CTRL+ESC]");
 	}
 
+	@SuppressWarnings("serial")
 	protected void assign_listenersComponents() {
 		buttonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
