@@ -487,9 +487,16 @@ public class CtrlPresentacion {
 	public void saveCalendar() throws IOException {
 			ctrlCalendario.writeCalendar(ctrlHospital.getID());
 	}
-
+	
 	public void importCalendar(String path) throws IOException, ParseException {
 		ctrlCalendario.importCalendar(ctrlHospital.getID(), path);
+	}
+	
+	public void cargarCale() throws IOException{
+		ctrlCalendario = new CtrlCalendario(ctrlHospital.getCalendar());
+		ctrlCalendario.readCalendar(ctrlHospital.getID(), null);
+		vistaCalendario.update_view(existsCalendar());
+		ctrlDoctor.setCalendariYear(ctrlCalendario.getCalendarYear());
 	}
 
 	public boolean addVacation(GregorianCalendar date, int morningDrs, int eveningDrs, int nightDrs, String especialDate) throws IOException {
@@ -515,6 +522,7 @@ public class CtrlPresentacion {
 	public ArrayList<String> getVacationDay(GregorianCalendar date) throws IOException {
 			return ctrlCalendario.getVacationDay(date);
 	}
+	
 
 	public ArrayList<ArrayList<String>> getALLVacations() throws IOException {
 		return ctrlCalendario.getALLVacations();

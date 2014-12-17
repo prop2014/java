@@ -276,18 +276,25 @@ public class VistaCalendario extends Vista {
 		}	
 	}
 
-	public void actionPerformed_buttonImportCal(ActionEvent event) {
+	public void actionPerformed_buttonImportCal(ActionEvent event) throws ParseException {
 		if (!ctrlPresentacion.existsCalendar() ||
 				confirmationDialog("Importar un nuevo calendario y reemplazar el calendario actual ? ", "Importar calendario") == JOptionPane.OK_OPTION) {
-			JFileChooser fileChooser = new JFileChooser();
-			File file = fileChooser.getSelectedFile();
-			if(fileChooser.showOpenDialog(frameView) == JFileChooser.APPROVE_OPTION) {
+			JFileChooser chooser = new JFileChooser();
+			/*FileNameExtensionFilter filter = new FileNameExtensionFilter(
+			        "Text File (.txt)", "txt");
+			  //  chooser.setFileFilter(filter);*/
+			int returnVal = chooser.showOpenDialog(frameView);
+			File f = chooser.getSelectedFile();
+			if(returnVal == JFileChooser.APPROVE_OPTION) {
 				try{
-					ctrlPresentacion.importCalendar(file.getAbsolutePath());
+			       ctrlPresentacion.importCalendar((f.getAbsolutePath()));
+			       ctrlPresentacion.cargarCale();
+				} catch(IOException eX) {
+					rejectedOperationDialog(eX);
+//					JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
+
 				}
-				catch(IOException e) {rejectedOperationDialog(e.getMessage());}
-				catch(ParseException e) {rejectedOperationDialog(e.getMessage());}
-			}
+			 }
 		}
 	}
 	//--------------------------------------------------------------------------//
@@ -443,7 +450,11 @@ public class VistaCalendario extends Vista {
 
 		buttonImportCal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				actionPerformed_buttonImportCal(event);
+				try {
+					actionPerformed_buttonImportCal(event);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 		//--------------------------------------------------------------------------//

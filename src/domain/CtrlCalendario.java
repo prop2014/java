@@ -222,10 +222,16 @@ public class CtrlCalendario {
 	 * @param path Ruta del fichero
 	 */
 	public void importCalendar(int idHospital, String path) throws IOException, ParseException {
-		ArrayList<String> listVacations = new ArrayList<String>();
-		listVacations = ctrlDatosFichero.getDataCale(idHospital, path);
-		ctrlDatosFichero.saveDataCale(listVacations, idHospital);
+		Calendario c = new Calendario();
+		CtrlCalendario cc = new CtrlCalendario(c);
+		cc.readCalendar(idHospital, path);
+		cc.writeCalendar(idHospital);
 	}
+		
+		//ArrayList<String> listVacations = new ArrayList<String>();
+		//listVacations = ctrlDatosFichero.getDataCale(idHospital, path);
+		//ctrlDatosFichero.saveDataCale(listVacations, idHospital);
+	//}
 	
 	//
 	@Deprecated
