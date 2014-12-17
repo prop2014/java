@@ -135,6 +135,7 @@ public class CtrlHospital {
 	
 	/*DOCTORES*/
 	public void crearDoctor(int id, String nombre, int numMax, double sueldo) throws IOException {
+		if (id<0) throw new IOException("Doctor con identificador negativo");
 		if(numMax < 0) throw new IOException("Número máximo de turnos incorrecto");
 		if(sueldo < 0) throw new IOException("Sueldo incorrecto");
 		Doctor doc = new Doctor(id, nombre, numMax, sueldo);
