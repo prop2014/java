@@ -980,7 +980,7 @@ public class CtrlDoctor {
 					if (alres.get(z).getTipo().equals("NOT_Dia_Semana")) {
 						NOT_Dia_Semana N = (NOT_Dia_Semana)alres.get(z);
 						String dia2 = N.getDiaSemana();
-						if (dia == dia2) throw new IOException("El doctor ya tiene una restriccion NOT Dia Semana igual");
+						if (dia.equals(dia2)) throw new IOException("El doctor ya tiene una restriccion NOT Dia Semana igual");
 					}
 				}
 				trobat = true;
@@ -1013,7 +1013,7 @@ public class CtrlDoctor {
 					if (alres.get(z).getTipo().equals("NOT_Especial")) {
 						NOT_Especial N = (NOT_Especial)alres.get(z);
 						String dia2 = N.getEspecial();
-						if (especial == dia2) throw new IOException("El doctor ya tiene una restriccion NOT Especial igual");
+						if (especial.equals(dia2)) throw new IOException("El doctor ya tiene una restriccion NOT Especial igual");
 					}
 				}
 				trobat = true;
@@ -1084,7 +1084,7 @@ public class CtrlDoctor {
 					if (alres.get(z).getTipo().equals("NOT_Turno")) {
 						NOT_Turno N = (NOT_Turno)alres.get(z);
 						String turno2 = N.getTipoTurno();
-						if (turno == turno2) throw new IOException("El doctor ya tiene una restriccion NOT Turno igual");
+						if (turno.equals(turno2)) throw new IOException("El doctor ya tiene una restriccion NOT Turno igual");
 					}
 				}
 				trobat = true;

@@ -223,7 +223,7 @@ public class CtrlGrafo {
 					if (restipe.equals("MAX_Turnos_por_Dia")){
 						MAX_Turnos_por_Dia N = (MAX_Turnos_por_Dia)res;
 						int max = N.getNumTurnos();	
-						if(max==0) for(int m=0;i<alturnos.size();++m) Turnos[m]=false;
+						if(max==0) for(int m=0;m<alturnos.size();++m) Turnos[m]=false;
 						else if(max == 1 | max ==2){
 							for(int m=0;m<alturnos.size();m=m+3){
 								boolean modif =false;
