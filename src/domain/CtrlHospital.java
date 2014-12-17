@@ -43,6 +43,8 @@ public class CtrlHospital {
 		ArrayList<String> aldocs = new ArrayList<String>();
 		if(path!=null){
 			int id = getID();
+			inOut.removePart(id,".D");
+			hosp.cleardoctors();
 			aldocs=inOut.getDataDoctors(id,path);
 			inOut.saveDataDoctors(aldocs, id); //comprovarids
 			inOut.removePart(id, ".R");

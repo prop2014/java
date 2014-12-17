@@ -212,13 +212,12 @@ import java.io.File;
 					File f = chooser.getSelectedFile();
 					if(returnVal == JFileChooser.APPROVE_OPTION) {
 						try{
+							
 					       ctrlPresentacion.importarDoctores(f.getAbsolutePath());
-					       
 					       loadDoctores();
+					       
 						} catch(IOException eX) {
 							rejectedOperationDialog(eX);
-//							JOptionPane.showMessageDialog(null, eX, "Error", JOptionPane.ERROR_MESSAGE); 
-
 						}
 					 }
 
