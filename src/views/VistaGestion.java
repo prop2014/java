@@ -4,9 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 import javax.swing.border.EmptyBorder;
 /**
@@ -15,7 +13,6 @@ import javax.swing.border.EmptyBorder;
  */
 
 
-//ID VISTA 2
 
 public class VistaGestion extends Vista {
 	
@@ -23,12 +20,9 @@ public class VistaGestion extends Vista {
 	private static final int LEFT = 0;
 
 
-//	private CtrlPresentacion ctrlPresentacion;
 	
 	
 	//Componentes interficie
-//	private JFrame frameView;
-//	private JPanel panelContents = new JPanel();
 	private JPanel panelCenterButtons = new JPanel();
 	//CENTER
 	private JLabel labelPanel1 = new JLabel();
@@ -42,15 +36,7 @@ public class VistaGestion extends Vista {
 	
 	//METODOS PRIVADOS
 	private void inicializar_frameView() {
-		/*** DESCOMENTAR PARA EDITAR *
-		frameView =  new JFrame("Programador Guardias");
-		frameView.setMinimumSize(new Dimension(700, 400));
-		frameView.setPreferredSize(frameView.getMinimumSize());
-		frameView.setResizable(false);
-		frameView.setLocationRelativeTo(null);
-		frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frameView.getContentPane().setBackground(Color.WHITE);
-		/*** END DESCOMENTAR PARA EDITAR */
+
 		frameView = ctrlPresentacion.getFrame();
 		JPanel contentPane = (JPanel) frameView.getContentPane();
 		contentPane.setLayout(null);
@@ -105,12 +91,6 @@ public class VistaGestion extends Vista {
 		buttonCal.setToolTipText("[C]");
 		buttonDoc.setToolTipText("[D]");
 	}
-//	private void inicializarComponents() {
-//		inicializar_frameView();
-//		inicializar_panelContents();
-//		inicializar_panelCenterButtons();
-//		assignar_listenersComponents();
-//	}
 	
 	protected void assign_listenersComponents() {
 		buttonVolver.addActionListener(new ActionListener() {
@@ -149,25 +129,45 @@ public class VistaGestion extends Vista {
 	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "buttonVolver");
 	    
 	     panelContents.getActionMap().put("buttonDoc", new AbstractAction() {
-	            @Override
+	            /**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+				@Override
 	            public void actionPerformed(ActionEvent e) {
 	            	buttonDoc.doClick();
 	            }
 	        });
 	        panelContents.getActionMap().put("buttonSol", new AbstractAction() {
-	            @Override
+	            /**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				@Override
 	            public void actionPerformed(ActionEvent e) {
 	            	buttonSol.doClick();
 	            }
 	        });
 	        panelContents.getActionMap().put("buttonCal", new AbstractAction() {
-	            @Override
+	            /**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				@Override
 	            public void actionPerformed(ActionEvent e) {
 	            	buttonCal.doClick();
 	            }
 	        });
 	        panelContents.getActionMap().put("buttonVolver", new AbstractAction() {
-	            @Override
+	            /**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				@Override
 	            public void actionPerformed(ActionEvent e) {
 	            	buttonVolver.doClick();
 	            }
@@ -182,7 +182,6 @@ public class VistaGestion extends Vista {
 	
 	//METODOS PUBLICOS
 	public VistaGestion(CtrlPresentacion pCtrlPresentacion) {
-//		ctrlPresentacion = pCtrlPresentacion;
 		super(pCtrlPresentacion);
 		/** DESCOMENTAR PARA EDITAR *
 		  inicializarComponents();
@@ -190,7 +189,6 @@ public class VistaGestion extends Vista {
 	}
 	
 	public void init() {
-//		inicializarComponents();
 		inicializar_frameView();
 		init_panelContents();
 		inicializar_panelCenterButtons();
@@ -207,27 +205,4 @@ public class VistaGestion extends Vista {
 		labelPanel1.setVerticalTextPosition(CENTER);
 	}
 	
-//	public JPanel getPanel() {
-//		return panelContents;
-//	}
-//	
-//	public void hidePanel() {
-//		panelContents.setVisible(false);
-//	}
-//	public void showPanel() {
-//		cargarHospital();
-//		panelContents.setVisible(true);
-//	}
-//	
-//	public void showView() {
-//		panelContents.setVisible(true);
-//	}
-//	
-//	public void enableView() {
-//		frameView.setEnabled(true);
-//	}
-//	
-//	public void disableView() {
-//		frameView.setEnabled(false);
-//	}
 }

@@ -4,9 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -14,8 +12,6 @@ import java.util.ArrayList;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
 
@@ -29,12 +25,9 @@ import java.io.File;
 
 	public class VistaPlantillaDoctores extends Vista {
 		
-//		private CtrlPresentacion ctrlPresentacion;
 		ArrayList<ArrayList<String>> doctores;
 		
 		//Componentes interficie
-//		private JFrame frameView;
-//		private JPanel panelContents = new JPanel();
 		
 		private JPanel panelCenterButtons = new JPanel();
 		
@@ -59,27 +52,6 @@ import java.io.File;
 		
 		
 		//METODOS PRIVADOS
-		
-	
-		
-//		private void inicializar_frameView() {
-//			
-//			/** DESCOMENTAR PARA EDITAR *
-//			frameView =  new JFrame("Programador Guardias");
-//			frameView.setMinimumSize(new Dimension(700, 400));
-//			frameView.setPreferredSize(frameView.getMinimumSize());
-//			frameView.setResizable(false);
-//			frameView.setLocationRelativeTo(null);
-//			frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//			frameView.getContentPane().setBackground(Color.WHITE);
-//			 //END DESCOMENTAR PARA EDITAR **/
-//			
-//			frameView = ctrlPresentacion.getFrame();
-//			JPanel contentPane = (JPanel) frameView.getContentPane();
-//			contentPane.setLayout(null);
-//			panelContents.setBounds(0,0,700,378);
-//			contentPane.add(panelContents);
-//		}
 		
 	
 		
@@ -155,12 +127,6 @@ import java.io.File;
 		}
 		
 		
-//		private void inicializarComponents() {
-//		    inicializar_frameView();
-//		    inicializar_panelContents();
-//		    inicializar_panelCenterButtons();
-//		    assignar_listenersComponents();
-//		  }
 
 
 		protected void assign_listenersComponents() {
@@ -268,32 +234,57 @@ import java.io.File;
 		     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_DOWN_MASK), "buttonImportar");
 		     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "buttonVolver");
 		     panelContents.getActionMap().put("buttonEliminar", new AbstractAction() {
-		            @Override
+		            /**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+					@Override
 		            public void actionPerformed(ActionEvent e) {
 		            	buttonEliminar.doClick();
 		            }
 		        });
 		        panelContents.getActionMap().put("buttonCrear", new AbstractAction() {
-		            @Override
+		            /**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
+
+					@Override
 		            public void actionPerformed(ActionEvent e) {
 		            	buttonCrear.doClick();
 		            }
 		        });
 		        panelContents.getActionMap().put("buttonModificar", new AbstractAction() {
-		            @Override
+		            /**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
+
+					@Override
 		            public void actionPerformed(ActionEvent e) {
 		            	buttonModificar.doClick();
 		            }
 		        });
 		        panelContents.getActionMap().put("buttonVolver", new AbstractAction() {
-		            @Override
+		            /**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
+
+					@Override
 		            public void actionPerformed(ActionEvent e) {
 		            	buttonVolver.doClick();
 		            }
 		        });
 		        
 		        panelContents.getActionMap().put("buttonImportar", new AbstractAction() {
-		            @Override
+		            /**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
+
+					@Override
 		            public void actionPerformed(ActionEvent e) {
 		            	buttonImportar.doClick();
 		            }
@@ -313,7 +304,12 @@ import java.io.File;
 			
 			
 			DefaultTableModel dtm = new DefaultTableModel(datos,fila1){
-			    public boolean isCellEditable(int row, int column) {
+			    /**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				public boolean isCellEditable(int row, int column) {
 			        return false;
 			    }
 			
