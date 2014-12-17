@@ -82,26 +82,25 @@ public class InterpretarResultado {
 	private void interpretarDFS(int idNodo, ArrayList<nodoTurno> turnos, int idDoctor) throws IOException{
 		if(idNodo != idSumidero){
 			ArrayList<Integer> vecinos = graf.getOutNodes(idNodo);
-			for(int vecino : vecinos){
-				//CONTROL DE FLUJO
-				int idArista = graf.getIDAresta(idNodo, vecino);
-				if(graf.getFlujoAresta(idArista) > 0){
-					Nodo veci = graf.getNode(vecino);
-					//Si es tipo turno lo guardamos y sumamos su sueldo
-					if(veci.getTipo().equals("Turno")){
-						turnos.add((nodoTurno)(veci));
-						//sueldo += graf.getCosteAresta(idArista);
-				
-						mapSol.SumaSueldo(idDoctor,graf.getCosteAresta(idArista));
-						
-						}
-						
-					//llamada recursiva
-					interpretarDFS(vecino, turnos,idDoctor);
+		for(int vecino : vecinos){
+			//CONTROL DE FLUJO
+			int idArista = graf.getIDAresta(idNodo, vecino);
+			if(graf.getFlujoAresta(idArista) > 0){
+				Nodo veci = graf.getNode(vecino);
+				//Si es tipo turno lo guardamos y sumamos su sueldo
+				if(veci.getTipo().equals("Turno")){
+					turnos.add((nodoTurno)(veci));
+			
+					mapSol.SumaSueldo(idDoctor,graf.getCosteAresta(idArista));
+					
 					}
 					
-					
+				//llamada recursiva
+				interpretarDFS(vecino, turnos,idDoctor);
 				}
+				
+				
+			}
 			}
 			
 			
@@ -136,48 +135,30 @@ public class InterpretarResultado {
 		else sol = true;
 	}
 	
-	/*
-	 * POST:
-	 * 		-Si hay solucion mapSol estara lleno con la id de los Doctores, 
-	 * 			sus turnos asignados y el sueldo total.
-	 * 		-Si NO hay solucion turnosSinSol estara lleno 
-	 * 			con los turnos que no han sido completamente cubiertos
-	 */
 	public void  InterpretarGrafo() throws IOException{
 		
 		haySolucion();
 
-	//	if(sol){
-			
-			//Obtener id de los vecinos de la fuente
-			//Los vecinos de la fuente siempre son doctores
-			ArrayList<Integer> vecinos = graf.getOutNodes(idFuente);
-			
-			for(int vecino:vecinos){
+		//Obtener id de los vecinos de la fuente
+		//Los vecinos de la fuente siempre son doctores
+		ArrayList<Integer> vecinos = graf.getOutNodes(idFuente);
+		
+		for(int vecino:vecinos){
 
-				int idArista = graf.getIDAresta(idFuente, vecino);
-				if(graf.getFlujoAresta(idArista) > 0){
-					ArrayList<nodoTurno> turnos = new ArrayList<nodoTurno>();
-					double sueldo = 0;
-					
-					nodoDoctor nD = (nodoDoctor)graf.getNode(vecino);
-					int idDoc = nD.getIdDoc();
-					
-					interpretarDFS(vecino,turnos,idDoc);
-					
-					//Almacenar datos
-					/*listAndSalary ls = new listAndSalary(); 
-					ls.listaTurnos = turnos;
-					ls.sueldoTotal = sueldo;
-					mapSol.put(vecino, ls);
-					*/
-					
-					
-					mapSol.addTurnos(idDoc,turnos);
+			int idArista = graf.getIDAresta(idFuente, vecino);
+			if(graf.getFlujoAresta(idArista) > 0){
+				ArrayList<nodoTurno> turnos = new ArrayList<nodoTurno>();
+				double sueldo = 0;
+				
+				nodoDoctor nD = (nodoDoctor)graf.getNode(vecino);
+				int idDoc = nD.getIdDoc();
+				
+				interpretarDFS(vecino,turnos,idDoc);
+				
+				mapSol.addTurnos(idDoc,turnos);
 					
 					
 				}
-			//}
 			
 		}
 		 
