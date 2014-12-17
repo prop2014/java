@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import javax.swing.border.EmptyBorder;
@@ -178,6 +179,9 @@ public class VistaCrearHospital extends Vista {
 				} catch (NumberFormatException nE){
 					JOptionPane.showMessageDialog(null, "Alguno de los factores no es un valor correcto", "Error", JOptionPane.ERROR_MESSAGE); 
 				}
+				catch (ParseException pE){
+					JOptionPane.showMessageDialog(null, pE, "Error", JOptionPane.ERROR_MESSAGE); 
+				}
 				ctrlPresentacion.changeView("vistaCjtHospitales", panelContents);
 			}
 		});
@@ -215,24 +219,29 @@ public class VistaCrearHospital extends Vista {
 	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_DOWN_MASK), "btnImportDoc");
 	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "btnCancel");
 	     panelContents.getActionMap().put("btnCrearHospital", new AbstractAction() {
-	            @Override
+			private static final long serialVersionUID = 1L;
+
+				@Override
 	            public void actionPerformed(ActionEvent e) {
 	            	btnCrearHospital.doClick();
 	            }
 	        });
 	        panelContents.getActionMap().put("btnImportCal", new AbstractAction() {
+	        	private static final long serialVersionUID = 1L;
 	            @Override
 	            public void actionPerformed(ActionEvent e) {
 	            	btnImportCal.doClick();
 	            }
 	        });
 	        panelContents.getActionMap().put("btnImportDoc", new AbstractAction() {
+	        	private static final long serialVersionUID = 1L;
 	            @Override
 	            public void actionPerformed(ActionEvent e) {
 	            	btnImportDoc.doClick();
 	            }
 	        });
 	        panelContents.getActionMap().put("btnCancel", new AbstractAction() {
+	        	private static final long serialVersionUID = 1L;
 	            @Override
 	            public void actionPerformed(ActionEvent e) {
 	            	btnCancel.doClick();

@@ -85,6 +85,7 @@ public class VistaXOR extends Vista {
 	    
 	}
 
+	@SuppressWarnings("serial")
 	protected void assign_listenersComponents() {
 		buttonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

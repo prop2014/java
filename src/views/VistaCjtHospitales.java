@@ -2,7 +2,6 @@ package views;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
@@ -21,7 +20,6 @@ import javax.swing.event.ListSelectionListener;
 
 public class VistaCjtHospitales extends Vista {
 	/* Atributos y metodos privados */
-	
 //	private CtrlPresentacion ctrlPresentacion;
 	private ArrayList<String> hospitales;
 	
@@ -47,30 +45,30 @@ public class VistaCjtHospitales extends Vista {
 	private final JLabel lblFactt = new JLabel("FactT:");
 	private final JLabel lblFactn = new JLabel("FactN:");
 	private final JLabel nDocField = new JLabel("");
-	private final JLabel solField = new JLabel("");
 	private final JLabel turnosField = new JLabel("");
 	private final JLabel factMField = new JLabel("");
 	private final JLabel factTField = new JLabel("");
 	private final JLabel factNField = new JLabel("");
-	private final JLabel lblNo = new JLabel("No");
+	private final JLabel solField = new JLabel("");
 
 	//-- Metodos privados --//
-//	private void init_frameView() {
-//		/*** DESCOMENTAR PARA EDITAR *
-//		frameView =  new JFrame("Programador Guardias");
-//		frameView.setMinimumSize(new Dimension(700, 400));
-//		frameView.setPreferredSize(frameView.getMinimumSize());
-//		frameView.setResizable(false);
-//		frameView.setLocationRelativeTo(null);
-//		frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		frameView.getContentPane().setBackground(Color.WHITE);
-//		/*** END DESCOMENTAR PARA EDITAR */
-//		frameView = ctrlPresentacion.getFrame();
-//		JPanel contentPane = (JPanel) frameView.getContentPane();
-//		contentPane.setLayout(null);
-//		panelContents.setBounds(0,0,700,378);
-//		contentPane.add(panelContents);
-//	}
+	/*private void init_frameView1() {
+		/*** DESCOMENTAR PARA EDITAR *
+		frameView =  new JFrame("Programador Guardias");
+		frameView.setMinimumSize(new Dimension(700, 400));
+		frameView.setPreferredSize(frameView.getMinimumSize());
+		frameView.setResizable(false);
+		frameView.setLocationRelativeTo(null);
+		frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frameView.getContentPane().setBackground(Color.WHITE);
+		
+		frameView = ctrlPresentacion.getFrame();
+		JPanel contentPane = (JPanel) frameView.getContentPane();
+		contentPane.setLayout(null);
+		panelContents.setBounds(0,0,700,378);
+		contentPane.add(panelContents);
+		/*** END DESCOMENTAR PARA EDITAR */
+	//}
 
 	protected void init_panelContents() {
 		panelContents.setLayout(null);
@@ -89,7 +87,7 @@ public class VistaCjtHospitales extends Vista {
 		topPanel.add(titleLabel);
 		
 		
-		btnmodificarHospital.setBounds(552, 14, 142, 29);
+		btnmodificarHospital.setBounds(547, 14, 142, 29);
 		topPanel.add(btnmodificarHospital);
 		btnmodificarHospital.setFont(new Font("Arial", Font.PLAIN, 12));
 		
@@ -118,11 +116,6 @@ public class VistaCjtHospitales extends Vista {
 		topPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
 	}
 
-//	private void init_panelBottomButtons() {
-//	}
-//
-//	private void init_panelRightButtons() {
-//	}
 	
 	
 	/** Asignacion de listeners **/
@@ -149,12 +142,12 @@ public class VistaCjtHospitales extends Vista {
 		midPanel.add(panelInfo);
 		panelInfo.setLayout(null);
 		
-		JLabel labelDoc = new JLabel("Nº de doctores:");
+		JLabel labelDoc = new JLabel("N de doctores:");
 		labelDoc.setFont(new Font("Arial", Font.BOLD, 12));
 		labelDoc.setBounds(23, 45, 88, 16);
 		panelInfo.add(labelDoc);
 		
-		JLabel lblNmeroDeTurnos = new JLabel("Nº de Turnos:");
+		JLabel lblNmeroDeTurnos = new JLabel("N de Turnos:");
 		lblNmeroDeTurnos.setFont(new Font("Arial", Font.BOLD, 12));
 		lblNmeroDeTurnos.setBounds(168, 45, 77, 16);
 		panelInfo.add(lblNmeroDeTurnos);
@@ -183,9 +176,6 @@ public class VistaCjtHospitales extends Vista {
 		nDocField.setBounds(115, 45, 22, 16);
 		
 		panelInfo.add(nDocField);
-		solField.setBounds(190, 86, 22, 16);
-		
-		panelInfo.add(solField);
 		turnosField.setFont(new Font("Arial", Font.PLAIN, 12));
 		turnosField.setBounds(250, 45, 20, 16);
 		
@@ -202,10 +192,10 @@ public class VistaCjtHospitales extends Vista {
 		factNField.setBounds(370, 86, 22, 16);
 		
 		panelInfo.add(factNField);
-		lblNo.setFont(new Font("Arial", Font.PLAIN, 12));
-		lblNo.setBounds(210, 86, 22, 16);
+		solField.setFont(new Font("Arial", Font.PLAIN, 12));
+		solField.setBounds(210, 86, 22, 16);
 		
-		panelInfo.add(lblNo);
+		panelInfo.add(solField);
 		
 		btnImportarHospital.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -323,6 +313,7 @@ public class VistaCjtHospitales extends Vista {
 							factMField.setText(info.get(2));
 							factTField.setText(info.get(3));
 							factNField.setText(info.get(4));
+							solField.setText(info.get(7));
 						} catch(IOException eX) {
 							
 						}
@@ -340,30 +331,36 @@ public class VistaCjtHospitales extends Vista {
         panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "selHospital");
         
         panelContents.getActionMap().put("newHospital", new AbstractAction() {
-            @Override
+			private static final long serialVersionUID = 1L;
+
+			@Override
             public void actionPerformed(ActionEvent e) {
                	btnCrearHospital.doClick();
             }
         });
         panelContents.getActionMap().put("importHospital", new AbstractAction() {
+        	private static final long serialVersionUID = 1L;
             @Override
             public void actionPerformed(ActionEvent e) {
                	btnImportarHospital.doClick();
             }
         });
         panelContents.getActionMap().put("delHospital", new AbstractAction() {
+        	private static final long serialVersionUID = 1L;
             @Override
             public void actionPerformed(ActionEvent e) {
                	btnEliminarHospital.doClick();
             }
         });
         panelContents.getActionMap().put("selHospital", new AbstractAction() {
+        	private static final long serialVersionUID = 1L;
             @Override
             public void actionPerformed(ActionEvent e) {
                	btnSeleccionarHospital.doClick();
             }
         });
         panelContents.getActionMap().put("modHospital", new AbstractAction() {
+        	private static final long serialVersionUID = 1L;
             @Override
             public void actionPerformed(ActionEvent e) {
                	btnmodificarHospital.doClick();
@@ -374,19 +371,14 @@ public class VistaCjtHospitales extends Vista {
 		
 		
 	}
-//	public void pressedAction(){
-//		
-//	}
 	
-//	private void initComponents() {
-//		init_frameView();
-//		init_panelContents();
-//		init_panelTopButtons();
-////		init_panelBottomButtons();
-////		init_panelRightButtons();
-//		assign_listenersComponents();
-//	}
-	
+	/*private void initComponents() {
+		init_frameView1();
+		init_panelContents();
+		init_panelTopButtons();
+		assign_listenersComponents();
+	}
+	*/
 
 	private void loadHospitals() {
 		panelInfo.setVisible(false);
@@ -429,33 +421,10 @@ public class VistaCjtHospitales extends Vista {
 		init_panelTopButtons();
 		assign_listenersComponents();
 	}
-	
-//	public JPanel getPanel() {
-//		return panelContents;
-//	}
-//
-//	public void showView() {
-//		frameView.setVisible(true);
-//	}
-//	
-//	public void hidePanel() {
-//		panelContents.setVisible(false);
-//	}
+
 	
 	public void showPanel() {
 		loadHospitals();
 		panelContents.setVisible(true);
 	}
-	
-//	public void hideView() {
-//		frameView.setVisible(false);
-//	}
-//
-//	public void enableView() {
-//		frameView.setEnabled(true);
-//	}
-//
-//	public void disableView() {
-//		frameView.setEnabled(false);
-//	}
 }

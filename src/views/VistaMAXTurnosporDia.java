@@ -22,7 +22,7 @@ public class VistaMAXTurnosporDia extends Vista {
 	private JLabel labelPanel1 = new JLabel("<html><u>Crear Restriccion:</u> Tipo MAX Turnos por Dia");
 	
 	private JLabel labelPanel3 = new JLabel("<html><CENTER>Escribe el numero<br/> de turnos:</CENTER>");
-	private JTextArea textArea = new JTextArea(1,1);
+	private JTextField textArea = new JTextField();
 	private JButton button = new JButton("Aceptar");
 	private JButton buttonVolver = new JButton("Volver");
 	
@@ -56,6 +56,7 @@ public class VistaMAXTurnosporDia extends Vista {
 	    buttonVolver.setToolTipText("[ESC]");
 	}
 
+	@SuppressWarnings("serial")
 	protected void assign_listenersComponents() {
 		
 		buttonVolver.addActionListener(new ActionListener() {

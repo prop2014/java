@@ -46,10 +46,10 @@ public class VistaDoctor extends Vista{
 	private JLabel labelPanelMaxTurnos = new JLabel("Max. Turnos:");
 	private JLabel labelPanelSueldo = new JLabel("Sueldo:");
 
-	private JTextArea textID = new JTextArea();
-	private JTextArea textNombre = new JTextArea();
-	private JTextArea textMaxTurnos = new JTextArea();
-	private JTextArea textSueldo = new JTextArea();
+	private JTextField textID = new JTextField();
+	private JTextField textNombre = new JTextField();
+	private JTextField textMaxTurnos = new JTextField();
+	private JTextField textSueldo = new JTextField();
 
 	private JButton buttonEliminar = new JButton(
 			"<html><CENTER>Eliminar<br/>Restriccion</CENTER>");
@@ -108,10 +108,10 @@ public class VistaDoctor extends Vista{
 		labelPanelSueldo.setBounds(340, 70, 88, 31);
 
 		// textArea
-		textID.setBounds(124, 53, 166, 15);
-		textNombre.setBounds(124, 78, 166, 15);
-		textMaxTurnos.setBounds(449, 53, 166, 15);
-		textSueldo.setBounds(449, 78, 166, 15);
+		textID.setBounds(124, 53, 166, 17);
+		textNombre.setBounds(124, 78, 166, 17);
+		textMaxTurnos.setBounds(449, 53, 166, 17);
+		textSueldo.setBounds(449, 78, 166, 17);
 
 		// Scroll
 		panelCenterButtons.add(scrollPanel);
