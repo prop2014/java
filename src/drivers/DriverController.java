@@ -270,7 +270,7 @@ public static void main(String[] args) throws IOException{
 					fin = docs.size()+1;
 					CtrlAlg.findMaxFlowFulk(ini, fin);
 					CtrlAlg.findSolution(ini, fin);
-					asign = CtrlAlg.getDatesAssigned();
+					asign = CtrlAlg.getDatesAsigned();
 					ids = asign.keySet();
 					for (Integer idDoc : ids){
 						ArrayList<String> fechasAsignedDoc = asign.get(idDoc);
@@ -278,7 +278,7 @@ public static void main(String[] args) throws IOException{
 						for(String st : fechasAsignedDoc){
 							System.out.printf("%s\n",st);
 						}
-						System.out.printf("Sueldo: %f\n\n", CtrlAlg.getSueldoAssigned(idDoc));
+						System.out.printf("Sueldo: %f\n\n", CtrlAlg.getSueldoAsigned().get(idDoc));
 					}
 					
 					System.out.println("Turnos sin solucion:");
@@ -294,7 +294,7 @@ public static void main(String[] args) throws IOException{
 					fin = docs.size()+1;
 					CtrlAlg.findMaxFlowEk(ini, fin);
 					CtrlAlg.findSolution(ini, fin);
-					asign = CtrlAlg.getDatesAssigned();
+					asign = CtrlAlg.getDatesAsigned();
 					ids = asign.keySet();
 					for (Integer idDoc : ids){
 						ArrayList<String> fechasAsignedDoc = asign.get(idDoc);
@@ -302,7 +302,7 @@ public static void main(String[] args) throws IOException{
 						for(String st : fechasAsignedDoc){
 							System.out.printf("%s\n",st);
 						}
-						System.out.printf("Sueldo: %f\n\n", CtrlAlg.getSueldoAssigned(idDoc));
+						System.out.printf("Sueldo: %f\n\n", CtrlAlg.getSueldoAsigned().get(idDoc));
 					}
 					
 					System.out.println("Turnos sin solucion:");
@@ -317,7 +317,7 @@ public static void main(String[] args) throws IOException{
 					fin = docs.size()+1;
 					CtrlAlg.findMaxFlowDijk(ini, fin);
 					CtrlAlg.findSolution(ini, fin);
-					asign = CtrlAlg.getDatesAssigned();
+					asign = CtrlAlg.getDatesAsigned();
 					ids = asign.keySet();
 					for (Integer idDoc : ids){
 						ArrayList<String> fechasAsignedDoc = asign.get(idDoc);
@@ -325,7 +325,7 @@ public static void main(String[] args) throws IOException{
 						for(String st : fechasAsignedDoc){
 							System.out.printf("%s\n",st);
 						}
-						System.out.printf("Sueldo: %f\n\n", CtrlAlg.getSueldoAssigned(idDoc));
+						System.out.printf("Sueldo: %f\n\n", CtrlAlg.getSueldoAsigned().get(idDoc));
 					}
 					
 					System.out.println("Turnos sin solucion:");

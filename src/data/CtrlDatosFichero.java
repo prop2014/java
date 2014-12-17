@@ -22,6 +22,7 @@ public class CtrlDatosFichero {
 		   String hosp = new String();
 		   String path = new File("").getAbsolutePath();
 		   String realpath = path+"/datos/";
+		   System.out.printf(realpath);
 		   File archivo = new File(realpath);
 		   File[] ficheros = archivo.listFiles();
 		   if(ficheros.length==0) throw new IOException("No contiene ficheros este directorio");
@@ -180,12 +181,15 @@ public class CtrlDatosFichero {
 				   				}
 			   				}
 			   			}
+			   			
 			   			sl2.close();
 			   		} else {
 			   			alhosp.add("0");
 			   			alhosp.add("0");
 			   		}
-			   		
+			   		br.close();
+			   		if(howManySolutions(id)>0) alhosp.add("Si");
+			   		else alhosp.add("No");
 		   		}
 		   		fr.close();
 		   	}catch(Exception e) {e.printStackTrace();}

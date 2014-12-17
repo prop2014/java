@@ -3,9 +3,7 @@ package views;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -15,13 +13,12 @@ import javax.swing.event.ListSelectionListener;
 
 /**
  * Vista principal del Conjunto soluciones para un Hospital
- * @author Axel Pelaez
+ * @author Alex Morral
  */
 
 public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 	
 	private CtrlPresentacion ctrlPresentacion;
-	private ArrayList<String> soluciones;
 	
 
 	//Componentes interficie
@@ -64,17 +61,7 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 		// Componentes
 		panelContents.add(panelCenterButtons, BorderLayout.CENTER);
 		
-		list.setModel(new AbstractListModel() {
-			String[] values = new String[] {"AUN NO VA ESTA LISTA"};
-
-			public int getSize() {
-				return values.length;
-			}
-
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
+		
 		
 		
 	}
@@ -259,36 +246,43 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 	     panelContents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "buttonVolver");
 	    
 	     panelContents.getActionMap().put("buttonGenerarFF", new AbstractAction() {
-	            @Override
+			private static final long serialVersionUID = 1L;
+
+				@Override
 	            public void actionPerformed(ActionEvent e) {
 	            	buttonGenerarFF.doClick();
 	            }
 	        });
 	        panelContents.getActionMap().put("buttonGenerarED", new AbstractAction() {
+	        	private static final long serialVersionUID = 1L;
 	            @Override
 	            public void actionPerformed(ActionEvent e) {
 	            	buttonGenerarED.doClick();
 	            }
 	        });
 	        panelContents.getActionMap().put("buttonGenerarDI", new AbstractAction() {
+	        	private static final long serialVersionUID = 1L;
 	            @Override
 	            public void actionPerformed(ActionEvent e) {
 	            	buttonGenerarDI.doClick();
 	            }
 	        });
 	        panelContents.getActionMap().put("buttonModSol", new AbstractAction() {
+	        	private static final long serialVersionUID = 1L;
 	            @Override
 	            public void actionPerformed(ActionEvent e) {
 	            	buttonModSol.doClick();
 	            }
 	        });
 	        panelContents.getActionMap().put("buttonBorrarSol", new AbstractAction() {
+	        	private static final long serialVersionUID = 1L;
 	            @Override
 	            public void actionPerformed(ActionEvent e) {
 	            	buttonBorrarSol.doClick();
 	            }
 	        });
 	        panelContents.getActionMap().put("buttonVolver", new AbstractAction() {
+	        	private static final long serialVersionUID = 1L;
 	            @Override
 	            public void actionPerformed(ActionEvent e) {
 	            	buttonVolver.doClick();
