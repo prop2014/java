@@ -28,7 +28,7 @@ public class VistaMAXTurnosRango extends Vista {
 	private JLabel labelPanel4 = new JLabel("<html><CENTER>Escribe numero de turnos:</CENTER>");
 	private JDateChooser dataChooser1 = new JDateChooser("dd/MM/yyyy", "##/##/##", '_');
 	private JDateChooser dataChooser2 = new JDateChooser("dd/MM/yyyy", "##/##/##", '_');
-	private JTextArea textArea = new JTextArea(1,1);
+	private JTextField textArea = new JTextField();
 	private JButton button = new JButton("Aceptar");
 	private JButton buttonVolver = new JButton("Volver");
 	
@@ -72,6 +72,7 @@ public class VistaMAXTurnosRango extends Vista {
 	    buttonVolver.setToolTipText("[ESC]");
 	}
 
+	@SuppressWarnings("serial")
 	protected void assign_listenersComponents() {
 		buttonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

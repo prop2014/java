@@ -21,7 +21,7 @@ public class VistaNOTDiaMes extends Vista {
 	private JLabel labelPanel1 = new JLabel("<html><u>Crear Restriccion:</u> Tipo NOT Dia Mes");
 	
 	private JLabel labelPanel3 = new JLabel("<html><CENTER>Escribe el dia del mes:</CENTER>");
-	private JTextArea textArea = new JTextArea(1,1);
+	private JTextField textArea = new JTextField();
 	private JButton button = new JButton("Aceptar");
 	private JButton buttonVolver = new JButton("Volver");
 	
@@ -74,6 +74,7 @@ public class VistaNOTDiaMes extends Vista {
 	    buttonVolver.setToolTipText("[ESC]");
 	}
 
+	@SuppressWarnings("serial")
 	protected void assign_listenersComponents() {
 		buttonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

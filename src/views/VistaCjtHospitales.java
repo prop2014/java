@@ -87,7 +87,7 @@ public class VistaCjtHospitales extends Vista {
 		topPanel.add(titleLabel);
 		
 		
-		btnmodificarHospital.setBounds(552, 14, 142, 29);
+		btnmodificarHospital.setBounds(547, 14, 142, 29);
 		topPanel.add(btnmodificarHospital);
 		btnmodificarHospital.setFont(new Font("Arial", Font.PLAIN, 12));
 		
@@ -142,12 +142,12 @@ public class VistaCjtHospitales extends Vista {
 		midPanel.add(panelInfo);
 		panelInfo.setLayout(null);
 		
-		JLabel labelDoc = new JLabel("Nº de doctores:");
+		JLabel labelDoc = new JLabel("N de doctores:");
 		labelDoc.setFont(new Font("Arial", Font.BOLD, 12));
 		labelDoc.setBounds(23, 45, 88, 16);
 		panelInfo.add(labelDoc);
 		
-		JLabel lblNmeroDeTurnos = new JLabel("Nº de Turnos:");
+		JLabel lblNmeroDeTurnos = new JLabel("N de Turnos:");
 		lblNmeroDeTurnos.setFont(new Font("Arial", Font.BOLD, 12));
 		lblNmeroDeTurnos.setBounds(168, 45, 77, 16);
 		panelInfo.add(lblNmeroDeTurnos);
