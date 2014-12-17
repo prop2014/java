@@ -89,7 +89,7 @@ public class VistaCjtHospitales extends Vista {
 		topPanel.add(titleLabel);
 		
 		
-		btnmodificarHospital.setBounds(552, 14, 142, 29);
+		btnmodificarHospital.setBounds(547, 14, 142, 29);
 		topPanel.add(btnmodificarHospital);
 		btnmodificarHospital.setFont(new Font("Arial", Font.PLAIN, 12));
 		
