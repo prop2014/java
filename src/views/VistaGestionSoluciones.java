@@ -29,7 +29,7 @@ public class VistaGestionSoluciones {	/* Atributos y metodos privados */
 	//Componentes
 	private JLabel labelPanel1 = new JLabel();
 	private JButton buttonGenerarFF = new JButton("<html><CENTER>Generar Solucion <br/>[FordFulkerson]</CENTER>");
-	private JButton buttonGenerarED = new JButton("<html><CENTER>Generar Solucion <br/>[EdmondKarp]</CENTER>");
+	private JButton buttonGenerarED = new JButton("<html><CENTER>Generar Solucion <br/>[EdmondsKarp]</CENTER>");
 	private JButton buttonGenerarDI = new JButton("<html><CENTER>Generar Solucion Optima <br/>[Dijkstra]</CENTER>");
 	private JButton buttonModSol = new JButton("<html><CENTER> Modificar <br/> Solucion</CENTER>");
 	private JButton buttonBorrarSol = new JButton("<html><CENTER> Eliminar <br/> Solucion</CENTER>");
