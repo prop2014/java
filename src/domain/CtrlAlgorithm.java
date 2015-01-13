@@ -285,24 +285,27 @@ public class CtrlAlgorithm {
 			++i;
 			comment = sol.get(i); //coment
 			++i;
-			int doc=Integer.parseInt(sol.get(i)); //iddoc
-			ArrayList<String> asigsDoc = new ArrayList<String>();
-			++i;
-			int size = Integer.parseInt(sol.get(i));//numFechas
-			for(int j = 0; j<size;++j){
-				++i;
-				asigsDoc.add(sol.get(i)+" "+sol.get(++i));
+			while(i < sol.size()){
+					int doc=Integer.parseInt(sol.get(i)); //iddoc
+					ArrayList<String> asigsDoc = new ArrayList<String>();
+					++i;
+					int size = Integer.parseInt(sol.get(i));//numFechas
+					for(int j = 0; j<size;++j){
+						++i;
+						asigsDoc.add(sol.get(i)+" "+sol.get(++i));
+					}
+					if(asignDoc.containsKey(doc)){
+						asignDoc.remove(doc);
+					}
+					asignDoc.put(doc, asigsDoc); //ponemos las fechas en asigndoc
+					if(sueldos.containsKey(doc)){
+						sueldos.remove(doc);
+					}
+					++i;
+					sueldos.put(doc,Double.parseDouble(sol.get(i))); //ponemos el sueldo en sueldos
+					++i;
+				}
 			}
-			if(asignDoc.containsKey(doc)){
-				asignDoc.remove(doc);
-			}
-			asignDoc.put(doc, asigsDoc); //ponemos las fechas en asigndoc
-			if(sueldos.containsKey(doc)){
-				sueldos.remove(doc);
-			}
-			++i;
-			sueldos.put(doc,Double.parseDouble(sol.get(i))); //ponemos el sueldo en sueldos
-		}
 			tSinSol.clear();
 		if(!noSol.isEmpty()){
 			for(int j=1;j<noSol.size();j=j+3){
